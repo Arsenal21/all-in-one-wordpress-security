@@ -1,0 +1,27 @@
+body{
+    background-color: #404040 !important;
+}
+.aiowps-site-lockout-body{
+    
+}
+
+.aiowps-site-lockout-body-content{
+    
+}
+
+.aiowps-site-lockout-box{
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+    margin-top: 100px;
+    padding: 30px;
+    border: 2px solid #FFE20A;
+}
+
+.aiowps-site-lockout-msg{
+    color: #FFE20A;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+}
+

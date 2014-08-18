@@ -1,0 +1,354 @@
+.aio_half_width{width: 50%;}
+.aio_one_third_width{width: 33%;}
+.aio_width_80{width: 80%;}
+.aio_max_500{max-width: 500px;}
+.aio_spacer_15{margin-top:15px;}
+.aio_spacer_10_tb{margin:10px 0;}
+.aio_spacer_10_tblr{margin:10px;}
+.aio_clear_float{clear: both;}
+.aio_float_left{float: left;}
+.aio_padding_10{padding: 10px !important;}
+.aio_section_separator_1{border-bottom: 1px solid #dedede; height: 10px;}
+
+.aiowps_admin_ul_grp1{
+    list-style: circle;
+    padding: 0 0 0 30px;
+}
+
+.aio_grey_box{
+    margin: 10px 0 15px;
+    background-color: #ECECEC;
+    border: 1px solid #CFCFCF;  
+    padding: 0 0 0 1em;
+}
+
+.aio_yellow_box{
+    margin: 10px 0 15px;
+    background-color: #FFFFE0;
+    border-color: #E6DB55;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;   
+    padding: 0 0 0 1em;
+}
+
+.aio_blue_box{
+    margin: 10px 0 15px;
+    background-color: #F0F9FF;
+    border-color: #1166BB;
+    color: #1166BB;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;   
+    padding: 0 0 0 1em;
+    line-height: 20px;
+}
+
+.aio_green_box {
+    margin: 10px 0 15px;
+    background-color: #CCF4D6;
+    border-color: #059B53;
+    color: #043B14;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;   
+    padding: 0 1em 0 1em;
+}
+
+.aio_red_box {
+    margin: 10px 0 15px;
+    background-color: #FFEBE8;
+    border-color: #CC0000;
+    color: #333333;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;   
+    padding: 0 1em 0 1em; 
+}
+
+.aio_success_with_icon {
+    background-image: url("../images/success.png");
+    background-repeat: no-repeat;
+    color: #529901;
+    padding-left: 20px;
+    font-size: 14px;
+}
+.aio_error_with_icon {
+    color: #ff0000;
+    background-image: url("../images/error.png");
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    font-size: 14px;
+}
+.aio_info_with_icon {
+    background-image: url("../images/info-icon.png");
+    background-repeat: no-repeat;
+    color: #1166BB;
+    padding-left: 20px;
+    font-size: 14px;
+}
+
+.file_permission_table{
+    margin: 20px 0;
+}
+.file_permission_table thead tr th{
+    background:#CCCCCC;
+}
+.file_permission_table td{
+    padding: 7px;
+    font-family: "Courier 10 Pitch",Courier,monospace;
+    color: #262626;
+    border-bottom: 1px solid #F2F2F2;
+    border-top:none;
+}
+.aio_table_row_red{
+    background-color:#FD6D73;
+}
+.aio_table_row_yellow{
+    background-color:#F5E679;    
+}
+.aio_table_row_green{
+    background-color:#C8F18B;    
+}
+
+.aiowps_loading_1{
+    margin:0 5px;
+}
+
+.aio_text_area_file_output{
+    background: none repeat scroll 0 0 #F9F9F9;
+    font-family: Consolas,Monaco,monospace;
+    font-size: 12px;
+    outline: 0 none;
+}
+
+.aiowps_more_info_anchor{
+    display: inline-block;
+    background-color: #D9D9D9;
+    color: #21759B;
+    font: 0.9em/1.455em "Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;
+    text-decoration: none;
+    padding: 3px 5px;
+}
+.aiowps_more_info_anchor:hover {
+    color: #333333;
+    cursor: pointer;
+}
+.aiowps_more_info_toggle_char {
+    display: inline-block;
+    margin-right: 3px;
+    padding: 0 3px;
+    text-align: center;
+    background-color: #EDEDED;
+    width: 10px;
+}
+.aiowps_more_info_body{
+    margin: 10px 0 15px;
+    background-color: #FFFFE0;
+    border-color: #E6DB55;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;   
+    padding: 0 0 0 1em;
+}
+
+.aiowps_spread_the_word_widget{
+}
+
+.aiowps_dashboard_box_small{
+    float:left;
+    max-width:350px;
+    margin-right:15px;
+}
+
+#security_strength_chart_div table{
+    margin-right: auto !important;
+    margin-left:auto !important;
+}
+.aiowps_dashboard_widget_footer{
+    background-color: #E6E6E6;
+    padding: 10px;
+}
+
+.aiowps_feature_status_container{
+    display:block;
+    margin: 10px 0;
+}
+.aiowps_feature_status_name{
+    width:50%;
+    font-weight: bold;
+    float:left;
+    padding: 5px 10px 5px 0;
+}
+.aiowps_feature_status_bar{
+    display:block;
+    float:left;
+    width: 120px;
+    height: 26px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);    
+}
+.aiowps_feature_status_label{
+    display: block;
+    float: left;
+    padding: 4px;
+    text-align: center;
+    width: 52px;
+    color:#F7F7F7;
+    font-weight:bold;
+    text-transform: uppercase;
+}
+.aiowps_feature_status_on{
+    color: #043B14;
+    background: #65bd63;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(top, #9dd993, #65bd63);
+    background-image: -moz-linear-gradient(top, #9dd993, #65bd63);
+    background-image: -o-linear-gradient(top, #9dd993, #65bd63);
+    background-image: linear-gradient(to bottom, #9dd993, #65bd63);
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);  
+}
+.aiowps_feature_status_off{
+    color: #4D0000;
+    background: #BD6363;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(top, #D99393, #BD6363);
+    background-image: -moz-linear-gradient(top, #D99393, #BD6363);
+    background-image: -o-linear-gradient(top, #D99393, #BD6363);
+    background-image: linear-gradient(top bottom, #D99393, #BD6363);
+    -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.aiowps_feature_details_badge{
+
+}
+.aiowps_feature_details_badge_difficulty{
+    display: inline-block;
+    background: url('../images/feature-difficulty-badge-bg.png') no-repeat;
+    width:150px;
+    height:65px;
+}
+.aiowps_feature_details_badge_difficulty_text{
+    display: inline-block;
+    height:36px;
+    width: 105px;
+    margin: 8px 0 0 36px;
+    color: #595170;
+    font-size:14px;
+    font-family: helvetica;
+    font-weight: bold;
+    text-align: center;
+    padding-top:7px;
+}
+.aiowps_feature_details_badge_points{
+    display: inline-block;
+    background: url('../images/feature-points-badge-bg.png') no-repeat;
+    width:150px;
+    height:65px;
+    margin-left: 10px;
+}
+.aiowps_feature_details_badge_points_text{
+    display: inline-block;
+    height:36px;
+    width: 105px;
+    margin: 8px 0 0 36px;
+    color: #545B5C;
+    font-size:20px;
+    font-family: georgia;
+    font-weight: bold;
+    text-align: center;
+    padding-top:5px;
+}
+
+#aiowps_pw_tool_main{
+    width:440px;
+    margin:40px auto 120px;
+    position:relative;
+    text-align:center;
+    background: url("../images/form_bg.png") no-repeat scroll 0 0 transparent;
+    height: 450px;
+    padding-top: 50px;
+}
+
+.aiowps_password_tool_field{
+    text-align:center;
+    padding-top: 40px;
+}
+
+#aiowps_pw_tool_main .meterText {
+    color: #575757;
+    font-size: 10px;
+    left: 189px;
+    line-height: 1.1;
+    position: absolute;
+    top: 485px;
+    width: 60px;
+}
+
+
+#aiowps_pw_tool_main .arrow{
+    background: url("../images/arrow.png") no-repeat -10px 0;
+    height: 120px;
+    left: 249px;
+    position: absolute;
+    top: 301px;
+    width: 11px;
+    
+   	/* Defining a smooth CSS3 animation for turning the arrow */
+    
+    -moz-transition:0.3s;
+    -webkit-transition:0.3s;
+    -o-transition:0.3s;
+    -ms-transition:0.3s;
+    transition:0.3s;
+    
+    /* Putting the arrow in its initial position */
+    
+	-moz-transform: rotate(-134deg);
+	-webkit-transform: rotate(-134deg);
+	-o-transform: rotate(-134deg);
+	-ms-transform: rotate(-134deg);
+	transform: rotate(-134deg);
+}
+
+#aiowps_pw_tool_main .arrowCap{
+	background: url("../images/arrow.png") no-repeat -43px 0;
+	height: 20px;
+	left: 208px;
+	position: absolute;
+	top: 351px;
+	width: 20px;
+	z-index: 10;
+}
+
+#aiowps_pw_tool_main .meterText{
+	color: #575757;
+	font-size: 10px;
+	left: 189px;
+	line-height: 1.1;
+	position: absolute;
+	top: 385px;
+	width: 60px;
+}
+
+.aiowps_password_crack_info_text{
+    font-size: 2.125em;
+    line-height: 1.16667em;
+    padding-left: 6.25%;
+    padding-right: 6.25%;
+    text-align: center;
+}
+
+#aiowps_password_crack_time_calculation{
+    font-size: 1.125em;
+    line-height: 1.16667em;
+    padding-left: 6.25%;
+    padding-right: 6.25%;
+    text-align: center;
+    color: darkorange;
+}

@@ -1,0 +1,2879 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: All In One WP Security & Firewall\n"
+"POT-Creation-Date: 2013-07-22 17:50+1000\n"
+"PO-Revision-Date: 2013-09-29 16:28+0200\n"
+"Last-Translator: Игорь Очеретный <znamensky98@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../admin/wp-security-admin-init.php:140
+msgid "WP Security"
+msgstr "WP Security"
+
+#: ../admin/wp-security-admin-init.php:141
+msgid "Dashboard"
+msgstr "Панель управления"
+
+#: ../admin/wp-security-admin-init.php:142
+msgid "Settings"
+msgstr "Настройки"
+
+#: ../admin/wp-security-admin-init.php:143
+msgid "User Accounts"
+msgstr "Администраторы"
+
+#: ../admin/wp-security-admin-init.php:144
+msgid "User Login"
+msgstr "Авторизация"
+
+#: ../admin/wp-security-admin-init.php:145
+msgid "Database Security"
+msgstr "База данных"
+
+#: ../admin/wp-security-admin-init.php:146
+msgid "Filesystem Security"
+msgstr "Файловая система"
+
+#: ../admin/wp-security-admin-init.php:147
+msgid "WHOIS Lookup"
+msgstr "WHOIS-поиск"
+
+#: ../admin/wp-security-admin-init.php:148
+msgid "Blacklist Manager"
+msgstr "Черный список"
+
+#: ../admin/wp-security-admin-init.php:149
+msgid "Firewall"
+msgstr "Файерволл"
+
+#: ../admin/wp-security-admin-init.php:150
+msgid "Maintenance"
+msgstr "Режим обслуживания"
+
+#: ../admin/wp-security-admin-menu.php:43
+msgid "Settings successfully updated."
+msgstr "Настройки успешно сохранены!"
+
+#: ../admin/wp-security-admin-menu.php:50
+msgid "The selected record(s) deleted successfully!"
+msgstr "Выбранные записи удалены!"
+
+#: ../admin/wp-security-blacklist-menu.php:77
+msgid "Nonce check failed for save blacklist settings!"
+msgstr "Настройки черного списка сохранить не удалось!"
+
+#: ../admin/wp-security-blacklist-menu.php:129
+#: ../admin/wp-security-list-comment-spammer-ip.php:137
+msgid ""
+"The plugin was unable to write to the .htaccess file. Please edit file "
+"manually."
+msgstr ""
+"Не удалось сделать записи в файле .htaccess file. Пожалуйста, отредактируйте "
+"файл вручную."
+
+#: ../admin/wp-security-blacklist-menu.php:136
+msgid "Ban IPs or User Agents"
+msgstr "Бан по IP-адресам или юзер-агентам"
+
+#: ../admin/wp-security-blacklist-menu.php:139
+msgid ""
+"The All In One WP Security Blacklist feature gives you the option of banning "
+"certain host IP addresses or ranges and also user agents."
+msgstr ""
+"Функция «Черный список» позволяет блокировать определенные IP-адреса, "
+"диапазоны и юзер-агенты,"
+
+#: ../admin/wp-security-blacklist-menu.php:140
+msgid ""
+"This feature will deny total site access for users which have IP addresses "
+"or user agents matching those which you have configured in the settings "
+"below."
+msgstr ""
+"отказывая в доступе к сайту тем пользователям и ботам, которые использовали "
+"эти IP-адреса для спама или по другим причинам."
+
+#: ../admin/wp-security-blacklist-menu.php:141
+msgid ""
+"The plugin achieves this by making appropriate modifications to your ."
+"htaccess file."
+msgstr ""
+"Данная функция реализуется добавлением в файл .htaccess определенных правил."
+
+#: ../admin/wp-security-blacklist-menu.php:142
+msgid ""
+"By blocking people via the .htaccess file your are using the most secure "
+"first line of defence which denies all access to blacklisted visitors as "
+"soon as they hit your hosting server."
+msgstr ""
+"Блокируя пользователей с помощью директив файла .htaccess Вы получаете "
+"первую линию обороны, которая отбросит нежелательных посетителей сразу же, "
+"как только они попытаются создать запрос к Вашему серверу."
+
+#: ../admin/wp-security-blacklist-menu.php:148
+msgid "IP Hosts and User Agent Blacklist Settings"
+msgstr "Настройки черного списка для блокировки IP-адресов и юзер-агентов"
+
+#: ../admin/wp-security-blacklist-menu.php:159
+msgid "Enable IP or User Agent Blacklisting"
+msgstr "Вести Черный список"
+
+#: ../admin/wp-security-blacklist-menu.php:162
+msgid ""
+"Check this if you want to enable the banning (or blacklisting) of selected "
+"IP addresses and/or user agents specified in the settings below"
+msgstr ""
+"Отметьте этот чекбокс, если Вы хотите иметь возможнось банить указанные IP-"
+"адреса или юзер-агенты"
+
+#: ../admin/wp-security-blacklist-menu.php:166
+msgid "Enter IP Addresses:"
+msgstr "Введите IP-адреса:"
+
+#: ../admin/wp-security-blacklist-menu.php:170
+msgid "Enter one or more IP addresses or IP ranges."
+msgstr "Введите один или более IP-адрес или диапазон адресов."
+
+#: ../admin/wp-security-blacklist-menu.php:171
+#: ../admin/wp-security-blacklist-menu.php:191
+#: ../admin/wp-security-blacklist-menu.php:276
+#: ../admin/wp-security-firewall-menu.php:148
+#: ../admin/wp-security-firewall-menu.php:178
+#: ../admin/wp-security-firewall-menu.php:309
+#: ../admin/wp-security-firewall-menu.php:339
+#: ../admin/wp-security-firewall-menu.php:370
+#: ../admin/wp-security-firewall-menu.php:398
+#: ../admin/wp-security-firewall-menu.php:427
+#: ../admin/wp-security-firewall-menu.php:515
+#: ../admin/wp-security-firewall-menu.php:651
+#: ../admin/wp-security-firewall-menu.php:685
+#: ../admin/wp-security-firewall-menu.php:708
+msgid "More Info"
+msgstr "Подробнее"
+
+#: ../admin/wp-security-blacklist-menu.php:174
+msgid "Each IP address must be on a new line."
+msgstr "Каждый IP-адрес должен находиться в отдельной строке."
+
+#: ../admin/wp-security-blacklist-menu.php:175
+msgid ""
+"To specify an IP range use a wildcard \"*\" character. Acceptable ways to "
+"use wildcards is shown in the examples below:"
+msgstr ""
+"Чтобы указать диапазон IP-адресов, используйте маску «*». Примеры приведены "
+"ниже:"
+
+#: ../admin/wp-security-blacklist-menu.php:176
+msgid "Example 1: 195.47.89.*"
+msgstr "Пример 1: 195.47.89.*"
+
+#: ../admin/wp-security-blacklist-menu.php:177
+msgid "Example 2: 195.47.*.*"
+msgstr "Пример 2: 195.47.*.*"
+
+#: ../admin/wp-security-blacklist-menu.php:178
+msgid "Example 3: 195.*.*.*"
+msgstr "Пример 3: 195.*.*.*"
+
+#: ../admin/wp-security-blacklist-menu.php:185
+msgid "Enter User Agents:"
+msgstr "Введите названия юзер-агентов:"
+
+#: ../admin/wp-security-blacklist-menu.php:190
+msgid "Enter one or more user agent strings."
+msgstr "Введите одну или более строк с названиями юзер-агентов."
+
+#: ../admin/wp-security-blacklist-menu.php:194
+msgid "Each user agent string must be on a new line."
+msgstr "Каждый юзер-агент прописывайте в отдельной строке."
+
+#: ../admin/wp-security-blacklist-menu.php:195
+msgid "Example 1 - A single user agent string to block:"
+msgstr "Пример 1: Одиночная строка с названием юзер-агента для блокировки:"
+
+#: ../admin/wp-security-blacklist-menu.php:197
+msgid "Example 2 - A list of more than 1 user agent strings to block"
+msgstr "Пример 2: Список нескольких юзер-агентов для блокировки"
+
+#: ../admin/wp-security-blacklist-menu.php:205
+#: ../admin/wp-security-database-menu.php:333
+#: ../admin/wp-security-filesystem-menu.php:220
+#: ../admin/wp-security-settings-menu.php:452
+#: ../admin/wp-security-user-login-menu.php:211
+#: ../admin/wp-security-user-login-menu.php:379
+msgid "Save Settings"
+msgstr "Сохранить настройки"
+
+#: ../admin/wp-security-blacklist-menu.php:224
+msgid "Nonce check failed for list SPAM comment IPs!"
+msgstr "Не удалось установить параметры для отображения списка IP-адресов!"
+
+#: ../admin/wp-security-blacklist-menu.php:230
+msgid ""
+"You entered a non numeric value for the minimum SPAM comments per IP field. "
+"It has been set to the default value."
+msgstr ""
+"Вы ввели нечисловое значение для указания минимального количества спам-"
+"комментариев. Принято значение по умолчанию."
+
+#: ../admin/wp-security-blacklist-menu.php:236
+#: ../admin/wp-security-database-menu.php:248
+#: ../admin/wp-security-user-login-menu.php:115
+#: ../admin/wp-security-user-login-menu.php:332
+msgid "Attention!"
+msgstr "Внимание!"
+
+#: ../admin/wp-security-blacklist-menu.php:242
+#, php-format
+msgid ""
+"Displaying results for IP addresses which have posted a minimum of %s SPAM "
+"comments"
+msgstr ""
+"Список IP-адресов, с которых было отправлено минимум %s спам-комментариев"
+
+#: ../admin/wp-security-blacklist-menu.php:258
+msgid ""
+"This tab displays a list of the IP addresses of the people or bots who have "
+"left SPAM comments on your site."
+msgstr ""
+"В этой вкладке отображается список IP-адресов тех пользователей или ботов, "
+"которые оставили спам-комментарии на Вашем сайте."
+
+#: ../admin/wp-security-blacklist-menu.php:259
+msgid ""
+"This information can be handy for identifying the most persistent IP "
+"addresses or ranges used by spammers."
+msgstr ""
+"Эта информация может быть полезна для определения наиболее стабильно "
+"использующихся спаммерами IP-адресов или их диапазонов. "
+
+#: ../admin/wp-security-blacklist-menu.php:260
+msgid ""
+"By inspecting the IP address data coming from spammers you will be in a "
+"better position to determine which addresses or address ranges you should "
+"block by adding them to your blacklist."
+msgstr ""
+"Анализ этой информации позволит Вам быстро определить, какие адреса или "
+"диапазоны следует заблокировать, добавив их в черный список."
+
+#: ../admin/wp-security-blacklist-menu.php:261
+msgid ""
+"To add one or more of the IP addresses displayed in the table below to your "
+"blacklist, simply click the \"Block\" link for the individual row or select "
+"more than one address \n"
+"                            using the checkboxes and then choose the \"block"
+"\" option from the Bulk Actions dropdown list and click the \"Apply\" button."
+msgstr ""
+"Для добавления одного или сразу нескольких адресов в черный список, кликните "
+"по ссылке «Block» в строке с выбранным адресом, или выберите несколько "
+"адресов, используя чекбоксы и установите вариант «Block» в выпадающем списке "
+"«Действия», после чего нажмите кнопку «Применить»."
+
+#: ../admin/wp-security-blacklist-menu.php:267
+msgid "List SPAMMER IP Addresses"
+msgstr "Список IP-адресов спаммеров"
+
+#: ../admin/wp-security-blacklist-menu.php:273
+msgid "Minimum number of SPAM comments per IP"
+msgstr "Минимальное количество спам-комментариев на каждый IP"
+
+#: ../admin/wp-security-blacklist-menu.php:275
+msgid ""
+"This field allows you to list only those IP addresses which have been used "
+"to post X or more SPAM comments."
+msgstr ""
+"Это поле позволяет фиксировать только те IP-адреса, с которых было загружено "
+"Х или более спам-комментариев."
+
+#: ../admin/wp-security-blacklist-menu.php:279
+msgid ""
+"Example 1: Setting this value to \"0\" or \"1\" will list ALL IP addresses "
+"which were used to submit SPAM comments."
+msgstr ""
+"Пример 1: Установка этого значения в «0» или «1» выведет список всех IP-"
+"адресов, уличенных в спаме хотя бы 1 раз."
+
+#: ../admin/wp-security-blacklist-menu.php:280
+msgid ""
+"Example 2: Setting this value to \"5\" will list only those IP addresses "
+"which were used to submit 5 SPAM comments or more on your site."
+msgstr ""
+"Пример 2: Установка значения в «5» выведет список IP-адресов, которые "
+"разместили на Вашем сайте 5 и более спам-комментариев."
+
+#: ../admin/wp-security-blacklist-menu.php:287
+msgid "Find IP Addresses"
+msgstr "Найти IP-адреса"
+
+#: ../admin/wp-security-blacklist-menu.php:291
+msgid "SPAMMER IP Address Results"
+msgstr "IP-адреса спаммеров"
+
+#: ../admin/wp-security-dashboard-menu.php:111
+msgid "Total Achievable Points: "
+msgstr "Максимально возможный балл:"
+
+#: ../admin/wp-security-dashboard-menu.php:113
+msgid "Current Score of Your Site: "
+msgstr "Текущий балл Вашего сайта:"
+
+#: ../admin/wp-security-dashboard-menu.php:168
+msgid ""
+"Below is the current status of the critical features that you should "
+"activate on your site to achieve a minimum level of recommended security"
+msgstr ""
+"Здесь показан текущий статус критически важных параметров, которые должны "
+"быть активированы для достижения минимального уровня рекомендуемой "
+"безопасности:"
+
+#: ../admin/wp-security-dashboard-menu.php:172
+msgid "Admin Username"
+msgstr "Логин Администратора"
+
+#: ../admin/wp-security-dashboard-menu.php:187
+msgid "Login Lockdown"
+msgstr "Блокировка авторизаций"
+
+#: ../admin/wp-security-dashboard-menu.php:202
+msgid "File Permission"
+msgstr "Права на файлы"
+
+#: ../admin/wp-security-dashboard-menu.php:217
+msgid "Basic Firewall"
+msgstr "Базовый файерволл"
+
+#: ../admin/wp-security-dashboard-menu.php:239
+msgid ""
+"Maintenance mode is currently enabled. Remember to turn it off when you are "
+"done"
+msgstr ""
+"Режим обслуживания включен. Не забудьте отключить его, когда захотите "
+"открыть его для посетителей."
+
+#: ../admin/wp-security-dashboard-menu.php:242
+msgid "Maintenance mode is currently off."
+msgstr "Режим обслуживания отключен."
+
+#: ../admin/wp-security-dashboard-menu.php:246
+msgid "Maintenance Mode"
+msgstr "Режим обслуживания"
+
+#: ../admin/wp-security-dashboard-menu.php:316
+#: ../admin/wp-security-filesystem-menu.php:124
+#: ../admin/wp-security-filesystem-menu.php:143
+msgid "Name"
+msgstr "Название"
+
+#: ../admin/wp-security-dashboard-menu.php:317
+msgid "Version"
+msgstr "Версия"
+
+#: ../admin/wp-security-dashboard-menu.php:318
+msgid "Plugin URL"
+msgstr "URL плагина"
+
+#: ../admin/wp-security-database-menu.php:78
+msgid "Nonce check failed for DB prefix change operation!"
+msgstr "Не удалось изменить префикс таблиц БД."
+
+#: ../admin/wp-security-database-menu.php:86
+msgid ""
+"The plugin has detected that it cannot write to the wp-config.php file. This "
+"feature can only be used if the plugin can successfully write to the wp-"
+"config.php file."
+msgstr ""
+"Плагину не удалось внести изменения в файл wp-config.php. Эта опция может "
+"быть использована только если на файл wp-config будут установлены права на "
+"запись."
+
+#: ../admin/wp-security-database-menu.php:99
+msgid "Please enter a value for the DB prefix."
+msgstr "Пожалуйста, введите значение для нового префикса."
+
+#: ../admin/wp-security-database-menu.php:108
+msgid ""
+"<strong>ERROR</strong>: The table prefix can only contain numbers, letters, "
+"and underscores."
+msgstr ""
+"<strong>ОШИБКА</strong>: Префикс может содержать только латинские буквы, "
+"цифры и символ подчеркивания."
+
+#: ../admin/wp-security-database-menu.php:116
+msgid "Change Database Prefix"
+msgstr "Изменение префикса таблиц базы данных"
+
+#: ../admin/wp-security-database-menu.php:119
+msgid ""
+"Your WordPress DB is the most important asset of your website because it "
+"contains a lot of your site's precious information."
+msgstr ""
+"Ваша база данных - это наиболее ценный актив, так как в ней находится весь "
+"контент и настройки."
+
+#: ../admin/wp-security-database-menu.php:120
+msgid ""
+"The DB is also a target for hackers via methods such as SQL injections and "
+"malicious and automated code which targets certain tables."
+msgstr ""
+"База данных также является мишенью для хакеров, пытающихся получить контроль "
+"над определенными таблицами методом SQL-инъекций и внедрением другого "
+"вредоносного кода."
+
+#: ../admin/wp-security-database-menu.php:121
+msgid ""
+"One way to add a layer of protection for your DB is to change the default "
+"WordPress table prefix from \"wp_\" to something else which will be "
+"difficult for hackers to guess."
+msgstr ""
+"Одним из способов усилить защиту от таких атак является изменение префикса "
+"таблиц базы данных с устанавливаемого по умолчанию («wp_») на какой-нибудь "
+"другой, который было бы тяжело угадать."
+
+#: ../admin/wp-security-database-menu.php:122
+msgid ""
+"This feature allows you to easily change the prefix to a value of your "
+"choice or to a random value set by this plugin."
+msgstr ""
+"Эти опции позволяют легко изменить префикс БД на любое введенное Вами "
+"значение или на сгенерированное плагином."
+
+#: ../admin/wp-security-database-menu.php:128
+msgid "DB Prefix Options"
+msgstr "Опции изменения префикса таблиц БД"
+
+#: ../admin/wp-security-database-menu.php:139
+#, php-format
+msgid "It is recommended that you perform a %s before using this feature"
+msgstr "Рекомендуется перед изменением префикса создать %s базы данных"
+
+#: ../admin/wp-security-database-menu.php:148
+msgid "Current DB Table Prefix"
+msgstr "Текущий префикс таблиц БД"
+
+#: ../admin/wp-security-database-menu.php:154
+msgid ""
+"Your site is currently using the default WordPress DB prefix value of \"wp_"
+"\". \n"
+"                            To increase your site's security you should "
+"consider changing the DB prefix value to another value."
+msgstr ""
+"На Вашем сайте используется префикс таблиц базы данных по умолчанию: «wp_».\n"
+"Для усиления безопасности, измените его на любое другое значение."
+
+#: ../admin/wp-security-database-menu.php:161
+msgid "Generate New DB Table Prefix"
+msgstr "Сгенерировать новый префикс таблиц БД"
+
+#: ../admin/wp-security-database-menu.php:164
+msgid ""
+"Check this if you want the plugin to generate a random 6 character string "
+"for the table prefix"
+msgstr ""
+"Отметьте, чтобы плагин сам сгенерировал префикс длиной в 6 случайных символов"
+
+#: ../admin/wp-security-database-menu.php:165
+msgid "OR"
+msgstr "ИЛИ"
+
+#: ../admin/wp-security-database-menu.php:167
+msgid ""
+"Choose your own DB prefix by specifying a string which contains letters and/"
+"or numbers and/or underscores. Example: xyz_"
+msgstr ""
+"Введите собственный вариант префикса, используя латинские буквы, цифры и "
+"символ подчеркивания. Например: xyz_"
+
+#: ../admin/wp-security-database-menu.php:171
+msgid "Change DB Prefix"
+msgstr "Изменить префикс таблиц"
+
+#: ../admin/wp-security-database-menu.php:192
+#: ../admin/wp-security-filesystem-menu.php:80
+msgid "Nonce check failed for manual DB backup operation!"
+msgstr "Создать бэкап базы данных не удалось!"
+
+#: ../admin/wp-security-database-menu.php:201
+msgid ""
+"DB Backup was successfully completed! Right click on the following file name "
+"and save the backup to your computer."
+msgstr ""
+"Резервная копия БД успешно создана! Кликните правой кнопкой мыши по имени "
+"файла, чтобы скачать его на компьютер."
+
+#: ../admin/wp-security-database-menu.php:203
+msgid "Your DB Backup File: "
+msgstr "Резервная копия базы данных:"
+
+#: ../admin/wp-security-database-menu.php:211
+msgid "DB Backup failed. Please check the permissions of the backup directory."
+msgstr ""
+"Создать резервную копию БД не удалось. Проверьте права на запись для бэкап-"
+"директории плагина."
+
+#: ../admin/wp-security-database-menu.php:228
+msgid ""
+"You entered a non numeric value for the \"backup time interval\" field. It "
+"has been set to the default value."
+msgstr ""
+"Вы ввели нечисловое значение в поле «Частота создания бэкапов». Сохранено "
+"значение по умолчанию."
+
+#: ../admin/wp-security-database-menu.php:235
+msgid ""
+"You entered a non numeric value for the \"number of backup files to keep\" "
+"field. It has been set to the default value."
+msgstr ""
+"Вы ввели нечисловое значение в поле «Количество бэкапов для хранения». "
+"Сохранено значение по умолчанию."
+
+#: ../admin/wp-security-database-menu.php:242
+#: ../admin/wp-security-user-login-menu.php:109
+msgid ""
+"You have entered an incorrect email address format. It has been set to your "
+"WordPress admin email as default."
+msgstr ""
+"Email-адрес введен неправильно. По умолчанию установлен Email администратора "
+"блога."
+
+#: ../admin/wp-security-database-menu.php:275
+msgid "Manual Backup"
+msgstr "Создание резервной копии базы данных вручную"
+
+#: ../admin/wp-security-database-menu.php:281
+msgid "To create a new DB backup just click on the button below."
+msgstr "Для немедленного создания резервной копии нажмите эту кнопку:"
+
+#: ../admin/wp-security-database-menu.php:284
+msgid "Create DB Backup Now"
+msgstr "Создать бэкап базы данных сейчас"
+
+#: ../admin/wp-security-database-menu.php:288
+msgid "Automated Scheduled Backups"
+msgstr "Автоматическое создание резервных копий"
+
+#: ../admin/wp-security-database-menu.php:300
+msgid "Enable Automated Scheduled Backups"
+msgstr "Включить автоматическое создание бэкапов"
+
+#: ../admin/wp-security-database-menu.php:303
+msgid ""
+"Check this if you want the system to automatically generate backups "
+"periodically based on the settings below"
+msgstr ""
+"Включите этот чекбокс, чтобы система автоматически создавала резервные копии "
+"базы данных по расписанию"
+
+#: ../admin/wp-security-database-menu.php:307
+msgid "Backup Time Interval"
+msgstr "Частота создания бэкапов"
+
+#: ../admin/wp-security-database-menu.php:310
+msgid "Hours"
+msgstr "Часов"
+
+#: ../admin/wp-security-database-menu.php:311
+msgid "Days"
+msgstr "Дней"
+
+#: ../admin/wp-security-database-menu.php:312
+msgid "Weeks"
+msgstr "Недель"
+
+#: ../admin/wp-security-database-menu.php:314
+msgid "Set the value for how often you would like an automated backup to occur"
+msgstr "Укажите периодичность создания резервных копий"
+
+#: ../admin/wp-security-database-menu.php:318
+msgid "Number of Backup Files To Keep"
+msgstr "Количество бэкапов для хранения"
+
+#: ../admin/wp-security-database-menu.php:320
+msgid ""
+"Thie field allows you to choose the number of backup files you would like to "
+"keep in the backup directory"
+msgstr ""
+"Укажите в этом поле количество резервных копий, которые должны храниться в "
+"бэкап-директории плагина"
+
+#: ../admin/wp-security-database-menu.php:324
+msgid "Send Backup File Via Email"
+msgstr "Пересылать бэкап на Email"
+
+#: ../admin/wp-security-database-menu.php:327
+msgid ""
+"Check this if you want the system to email you the backup file after a DB "
+"backup has been performed"
+msgstr ""
+"Включите этот чекбокс, если хотите получать бэкап базы данных на свой email"
+
+#: ../admin/wp-security-database-menu.php:329
+#: ../admin/wp-security-user-login-menu.php:207
+msgid "Enter an email address"
+msgstr "Введите Email-адрес"
+
+#: ../admin/wp-security-database-menu.php:359
+msgid "Starting DB prefix change operations....."
+msgstr "Начинаю процесс изменения префикса таблиц базы данных..."
+
+#: ../admin/wp-security-database-menu.php:361
+#, php-format
+msgid ""
+"Your WordPress system has a total of %s tables and your new DB prefix will "
+"be: %s"
+msgstr ""
+"Общее количество таблиц в базе данных WordPress %s и новый префикс таблиц "
+"будет установлен как: %s"
+
+#: ../admin/wp-security-database-menu.php:367
+#: ../admin/wp-security-filesystem-menu.php:458
+msgid ""
+"Failed to make a backup of the wp-config.php file. This operation will not "
+"go ahead."
+msgstr ""
+"Не удалось создать резервную копию файла wp-config.php. Операция прервана."
+
+#: ../admin/wp-security-database-menu.php:371
+msgid "A backup copy of your wp-config.php file was created successfully!"
+msgstr "Резервная копия Вашего файла wp-config.php успешно создана!"
+
+#: ../admin/wp-security-database-menu.php:394
+#, php-format
+msgid "%s table name update failed"
+msgstr "Не удалось переименовать таблицу %s"
+
+#: ../admin/wp-security-database-menu.php:406
+#, php-format
+msgid "Please change the prefix manually for the above tables to: %s"
+msgstr ""
+"Пожалуйста, измените префикс для вышеперечисленных таблиц на «%s» вручную"
+
+#: ../admin/wp-security-database-menu.php:409
+#, php-format
+msgid "%s tables had their prefix updated successfully!"
+msgstr "Префикс таблиц %s успешно изменен!"
+
+#: ../admin/wp-security-database-menu.php:424
+msgid "wp-config.php file was updated successfully!"
+msgstr "Файл wp-config.php успешно обновлен!"
+
+#: ../admin/wp-security-database-menu.php:427
+#, php-format
+msgid ""
+"The \"wp-config.php\" file was not able to be modified. Please modify this "
+"file manually using your favourite editor and search \n"
+"                    for variable \"$table_prefix\" and assign the following "
+"value to that variable: %s"
+msgstr ""
+"Не удалось внести корректировки в файл wp-config.php. Пожалуйста, "
+"отредактируйте его вручную, заменив значение переменной «$table_prefix» на "
+"значение %s"
+
+#: ../admin/wp-security-database-menu.php:448
+msgid "There was an error when updating the options table."
+msgstr "Не удалось скорректировать записи в таблице опций."
+
+#: ../admin/wp-security-database-menu.php:452
+msgid ""
+"The options table records which had references to the old DB prefix were "
+"updated successfully!"
+msgstr ""
+"Записи в таблице опций блога, имеющие ссылки на старый префикс таблиц базы "
+"данных успешно скорректированы!"
+
+#: ../admin/wp-security-database-menu.php:477
+#, php-format
+msgid ""
+"Error updating user_meta table where new meta_key = %s, old meta_key = %s "
+"and user_id = %s."
+msgstr ""
+"Не удалось скорректировать записи в таблице «user_meta», где новый meta_key "
+"= %s, old meta_key = %s и user_id = %s."
+
+#: ../admin/wp-security-database-menu.php:483
+msgid ""
+"The usermeta table records which had references to the old DB prefix were "
+"updated successfully!"
+msgstr ""
+"Записи в таблице «user_meta», имеющие ссылки на старый префикс таблиц базы "
+"данных успешно скорректированы!"
+
+#: ../admin/wp-security-database-menu.php:485
+msgid "DB prefix change tasks have been completed."
+msgstr "Префикс таблиц базы данных успешно изменен."
+
+#: ../admin/wp-security-filesystem-menu.php:90
+#, php-format
+msgid "The permissions for %s were succesfully changed to %s"
+msgstr "Разрешения для %s успешно изменены на %s"
+
+#: ../admin/wp-security-filesystem-menu.php:94
+#, php-format
+msgid "Unable to change permissions for %s!"
+msgstr "Невозможно изменить разрешения для %s!"
+
+#: ../admin/wp-security-filesystem-menu.php:100
+msgid "File Permissions Scan"
+msgstr "Сканирование разрешений на файлы и директории WordPress"
+
+#: ../admin/wp-security-filesystem-menu.php:103
+msgid ""
+"Your WordPress file and folder permission settings govern the accessability "
+"and read/write privileges of the files and folders which make up your WP "
+"installation."
+msgstr ""
+"Установки разрешений на файлы и папки WordPress, позволяющие управлять "
+"доступом к этим файлам."
+
+#: ../admin/wp-security-filesystem-menu.php:104
+msgid ""
+"Your WP installation already comes with reasonably secure file permission "
+"settings for the filesystem."
+msgstr ""
+"При первоначальной установке WordPress автоматически присваивает разумные "
+"права доступа к своей файловой системе."
+
+#: ../admin/wp-security-filesystem-menu.php:105
+msgid ""
+"However, sometimes people or other plugins modify the various permission "
+"settings of certain core WP folders or files such that they end up making "
+"their site less secure because they chose the wrong permission values."
+msgstr ""
+"Однако, иногда люди или плагины изменяют разрешения на определенные "
+"директории и файлы, снижая таким образом уровень безопасности своего сайта, "
+"установив неверные права доступа."
+
+#: ../admin/wp-security-filesystem-menu.php:106
+msgid ""
+"This feature will scan the critical WP core folders and files and will "
+"highlight any permission settings which are insecure."
+msgstr ""
+"Эта опция сканирует все важные директории и файлы ядра WordPress и "
+"подсвечивает все небезопасные настройки."
+
+#: ../admin/wp-security-filesystem-menu.php:112
+msgid "WP Directory and File Permissions Scan Results"
+msgstr "Результат сканирования разрешений на директории и файлы WordPress"
+
+#: ../admin/wp-security-filesystem-menu.php:125
+#: ../admin/wp-security-filesystem-menu.php:144
+msgid "File/Folder"
+msgstr "Файл/Папка"
+
+#: ../admin/wp-security-filesystem-menu.php:126
+#: ../admin/wp-security-filesystem-menu.php:145
+msgid "Current Permissions"
+msgstr "Текущие разрешения"
+
+#: ../admin/wp-security-filesystem-menu.php:127
+#: ../admin/wp-security-filesystem-menu.php:146
+msgid "Recommended Permissions"
+msgstr "Рекомендуемые разрешения"
+
+#: ../admin/wp-security-filesystem-menu.php:128
+#: ../admin/wp-security-filesystem-menu.php:147
+msgid "Recommended Action"
+msgstr "Рекомендуемое действие"
+
+#: ../admin/wp-security-filesystem-menu.php:190
+msgid "File Editing"
+msgstr "Редактирование файлов"
+
+#: ../admin/wp-security-filesystem-menu.php:193
+msgid ""
+"The Wordpress Dashboard by default allows administrators to edit PHP files, "
+"such as plugin and theme files."
+msgstr ""
+"По умолчанию из панели администрирования WordPress позволяется редактировать "
+"PHP-файлы плагинов и тем."
+
+#: ../admin/wp-security-filesystem-menu.php:194
+msgid ""
+"This is often the first tool an attacker will use if able to login, since it "
+"allows code execution."
+msgstr ""
+"Это первейшее подспорье хакеру, получившему доступ в консоль администратора, "
+"предоставляющее ему возможность выполнить любой код на Вашем сервере."
+
+#: ../admin/wp-security-filesystem-menu.php:195
+msgid ""
+"This feature will disable the ability for people to edit PHP files via the "
+"dashboard."
+msgstr ""
+"Данная опция отключает возможность редактирования файлов из панели "
+"администратора."
+
+#: ../admin/wp-security-filesystem-menu.php:201
+msgid "Disable PHP File Editing"
+msgstr "Отключение редактирования PHP-файлов"
+
+#: ../admin/wp-security-filesystem-menu.php:213
+msgid "Disable Ability To Edit PHP Files"
+msgstr "Отключить возможность редактирования PHP-файлов"
+
+#: ../admin/wp-security-filesystem-menu.php:216
+msgid ""
+"Check this if you want to remove the ability for people to edit PHP files "
+"via the WP dashboard"
+msgstr ""
+"Отметьте этот чекбокс, чтобы запретить редактирование PHP-файлов из админ-"
+"панели WordPress"
+
+#: ../admin/wp-security-filesystem-menu.php:260
+msgid ""
+"You have successfully saved the Prevent Access to Default WP Files "
+"configuration."
+msgstr "Запрет к информационным файлам WordPress установлен."
+
+#: ../admin/wp-security-filesystem-menu.php:264
+#: ../admin/wp-security-firewall-menu.php:116
+#: ../admin/wp-security-firewall-menu.php:270
+#: ../admin/wp-security-firewall-menu.php:481
+#: ../admin/wp-security-firewall-menu.php:611
+msgid ""
+"Could not write to the .htaccess file. Please check the file permissions."
+msgstr ""
+"Файл .htaccess недоступен для записи. Пожалуйста, проверьте разрешения на "
+"запись для этого файла. "
+
+#: ../admin/wp-security-filesystem-menu.php:269
+msgid "WordPress Files"
+msgstr "Информационные файлы WordPress"
+
+#: ../admin/wp-security-filesystem-menu.php:272
+#, php-format
+msgid ""
+"This feature allows you to prevent access to files such as %s, %s and %s "
+"which are delivered with all WP installations."
+msgstr ""
+"Данная опция запретит доступ к таким файлам как %s, %s и %s, которые "
+"создаются во время установки WordPress и не несут в себе системной нагрузки,"
+
+#: ../admin/wp-security-filesystem-menu.php:273
+msgid ""
+"By preventing access to these files you are hiding some key pieces of "
+"information (such as WordPress version info) from potential hackers."
+msgstr ""
+"но ограничение доступа к этим файлам позволит Вам скрыть от хакеров важную "
+"информацию (такую как версия WordPress)."
+
+#: ../admin/wp-security-filesystem-menu.php:278
+msgid "Prevent Access to Default WP Files"
+msgstr "Запрет доступа к информационным файлам WordPress"
+
+#: ../admin/wp-security-filesystem-menu.php:289
+msgid "Prevent Access to WP Default Install Files"
+msgstr ""
+"Запретить доступ к информационным файлам, создаваемых по умолчанию при "
+"установке WordPress."
+
+#: ../admin/wp-security-filesystem-menu.php:292
+msgid ""
+"Check this if you want to prevent access to readme.html, license.txt and wp-"
+"config-sample.php."
+msgstr ""
+"Отметьте этот чекбокс, чтобы запретить доступ к файлам readme.html, license."
+"txt и wp-config-sample.php."
+
+#: ../admin/wp-security-filesystem-menu.php:296
+msgid "Save Setting"
+msgstr "Сохранить настройки"
+
+#: ../admin/wp-security-filesystem-menu.php:307
+msgid "System Logs"
+msgstr "Системные журналы"
+
+#: ../admin/wp-security-filesystem-menu.php:310
+msgid ""
+"Sometimes your hosting platform will produce error or warning logs in a file "
+"called \"error_log\"."
+msgstr ""
+"Периодически Ваш сервер может публиковать отчеты об ошибках в специальных "
+"файлах, которые называются «error_log»."
+
+#: ../admin/wp-security-filesystem-menu.php:311
+msgid ""
+"Depending on the nature and cause of the error or warning, your hosting "
+"server can create multiple instances of this file in numerous directory "
+"locations of your WordPress installation."
+msgstr ""
+"В зависимости от характера и причин ошибки,  Ваш сервер может создать "
+"несколько файлов журналов в различных каталогах Вашей установки WordPress."
+
+#: ../admin/wp-security-filesystem-menu.php:312
+msgid ""
+"By occassionally viewing the contents of these logs files you can keep "
+"informed of any underlying problems on your system which you might need to "
+"address."
+msgstr ""
+"Просматривая время от времени эти журналы Вы будете в курсе любых основных "
+"проблем на Вашем сайте и сможете воспользоваться этой информацией для их "
+"решения."
+
+#: ../admin/wp-security-filesystem-menu.php:318
+msgid "View System Logs"
+msgstr "Просмотр системных журналов"
+
+#: ../admin/wp-security-filesystem-menu.php:323
+msgid "View Latest System Logs"
+msgstr "Просмотр последних записей в системных журналах"
+
+#: ../admin/wp-security-filesystem-menu.php:325
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: ../admin/wp-security-filesystem-menu.php:342
+msgid "No system logs were found!"
+msgstr "Записей в системных журналах не найдено!"
+
+#: ../admin/wp-security-filesystem-menu.php:395
+msgid "Set Recommended Permissions"
+msgstr "Установить рекомендуемые разрешения"
+
+#: ../admin/wp-security-filesystem-menu.php:401
+msgid "No Action Required"
+msgstr "Действие не требуется"
+
+#: ../admin/wp-security-filesystem-menu.php:434
+msgid ""
+"Your system config file is already configured to disallow PHP file editing."
+msgstr ""
+"Ваша система уже сконфигурирована с запретом на редактирование PHP-файлов."
+
+#: ../admin/wp-security-filesystem-menu.php:445
+#: ../admin/wp-security-filesystem-menu.php:472
+msgid ""
+"Settings Saved - Your system is now configured to not allow PHP file editing."
+msgstr ""
+"Настройки сохранены - Ваша система сконфигурирована с запретом на "
+"редактирование PHP-файлов."
+
+#: ../admin/wp-security-filesystem-menu.php:449
+#: ../admin/wp-security-filesystem-menu.php:475
+#: ../admin/wp-security-filesystem-menu.php:525
+msgid "Operation failed! Unable to modify wp-config.php file!"
+msgstr "Операция не удалась! Невозможно изменить файл wp-config.php!"
+
+#: ../admin/wp-security-filesystem-menu.php:463
+msgid "A backup copy of your wp-config.php file was created successfully...."
+msgstr "Резервная копия Вашего файла wp-config.php успешно создана..."
+
+#: ../admin/wp-security-filesystem-menu.php:506
+#: ../admin/wp-security-filesystem-menu.php:514
+msgid ""
+"Your system config file is already configured to allow PHP file editing."
+msgstr ""
+"В Вашем файле wp-config.php уже прописана константа, разрешающая "
+"редактирование PHP-файлов."
+
+#: ../admin/wp-security-filesystem-menu.php:521
+msgid ""
+"Settings Saved - Your system is now configured to allow PHP file editing."
+msgstr ""
+"Настройки сохранены - Ваша система сконфигурирована с разрешением "
+"редактировать PHP-файлы."
+
+#: ../admin/wp-security-filesystem-menu.php:565
+#, php-format
+msgid "Showing latest entries of error_log file: %s"
+msgstr "Последние записи об ошибках в журнале: %s"
+
+#: ../admin/wp-security-firewall-menu.php:112
+msgid "Settings were successfully saved"
+msgstr "Настройки успешно сохранены"
+
+#: ../admin/wp-security-firewall-menu.php:121
+#: ../admin/wp-security-firewall-menu.php:486
+msgid "Firewall Settings"
+msgstr "Настройки файерволл (брандмауэра)"
+
+#: ../admin/wp-security-firewall-menu.php:128
+#: ../admin/wp-security-firewall-menu.php:627
+#, php-format
+msgid ""
+"This should not have any impact on your site's general functionality but if "
+"you wish you can take a %s of your .htaccess file before proceeding."
+msgstr ""
+"Активация этих опций не должна иметь никакого влияния на общую "
+"функциональность Вашего сайта, но при желании Вы можете создать %s Вашего ."
+"htaccess-файла, перед тем, как включите эти настройки."
+
+#: ../admin/wp-security-firewall-menu.php:129
+msgid ""
+"The features in this tab allow you to activate some basic firewall security "
+"protection rules for your site."
+msgstr ""
+"Опции в этой вкладке позволяют применить некоторые базовые правила защиты "
+"для Вашего сайта."
+
+#: ../admin/wp-security-firewall-menu.php:130
+msgid ""
+"The firewall functionality is achieved via the insertion of special code "
+"into your currently active .htaccess file."
+msgstr ""
+"Данная функциональность брандмауэра достигается методом добавления в Ваш "
+"файл .htaccess некоторых специальных директив."
+
+#: ../admin/wp-security-firewall-menu.php:136
+msgid "Basic Firewall Settings"
+msgstr "Основные функции брандмауэра"
+
+#: ../admin/wp-security-firewall-menu.php:144
+msgid "Enable Basic Firewall Protection"
+msgstr "Активировать основные функции брандмауэра"
+
+#: ../admin/wp-security-firewall-menu.php:147
+msgid "Check this if you want to apply basic firewall protection to your site."
+msgstr ""
+"Отметьте этот чекбокс, чтобы активировать основные функции файерволл на "
+"Вашем сайте."
+
+#: ../admin/wp-security-firewall-menu.php:151
+msgid ""
+"This setting will implement the following basic firewall protection "
+"mechanisms on your site:"
+msgstr "Эта опция запустит следующий базовый механизм защиты на Вашем сайте:"
+
+#: ../admin/wp-security-firewall-menu.php:152
+msgid "1) Protect your htaccess file by denying access to it."
+msgstr "1) Защитит файл htaccess от несанкционированного доступа."
+
+#: ../admin/wp-security-firewall-menu.php:153
+msgid "2) Disable the server signature."
+msgstr "2) Отключит сигнатуру сервера в ответах на запросы."
+
+#: ../admin/wp-security-firewall-menu.php:154
+msgid "3) Limit file upload size (10MB)."
+msgstr "3) Ограничит лимит на размер загружаемых файлов до 10Мб."
+
+#: ../admin/wp-security-firewall-menu.php:155
+msgid "4) Protect your wp-config.php file by denying access to it."
+msgstr "4) Защитит Ваш файл wp-config.php от несанкционированного доступа."
+
+#: ../admin/wp-security-firewall-menu.php:156
+msgid ""
+"The above firewall features will be applied via your .htaccess file and "
+"should not affect your site's overall functionality."
+msgstr ""
+"Вышеперечисленная функциональность будет достигнута методом добавления в "
+"файл .htaccess определенных директив и не должна повлиять на общую "
+"работоспособность Вашего сайта."
+
+#: ../admin/wp-security-firewall-menu.php:157
+msgid ""
+"You are still advised to take a backup of your active .htaccess file just in "
+"case."
+msgstr ""
+"Однако, просто на всякий случай, рекомендуется предварительно сделать "
+"резервную копию файла .htaccess."
+
+#: ../admin/wp-security-firewall-menu.php:166
+msgid "WordPress Pingback Vulnerability Protection"
+msgstr "Защита от Пингбэк-уязвимостей"
+
+#: ../admin/wp-security-firewall-menu.php:174
+msgid "Enable Pingback Protection"
+msgstr "Активировать Пингбэк-защиту"
+
+#: ../admin/wp-security-firewall-menu.php:177
+msgid ""
+"Check this if you are not using the WP XML-RPC functionality and you want to "
+"enable protection against WordPress pingback vulnerabilities."
+msgstr ""
+"Включите этот чекбокс, если Вы хотите активировать защиту от пингбэк-"
+"уязвимостей и не используете в своем WordPress функциональность XML-RPC."
+
+#: ../admin/wp-security-firewall-menu.php:181
+msgid ""
+"This setting will add a directive in your .htaccess to disable access to the "
+"WordPress xmlrpc.php file which is responsible for the XML-RPC functionality "
+"such as pingbacks in WordPress."
+msgstr ""
+"Эта настройка добавит в файл .htaccess директиву, запрещающую доступ к файлу "
+"xmlrpc.php, который отвечает за функциональность XML-RPC и за пингбэки в "
+"Вашем WordPress."
+
+#: ../admin/wp-security-firewall-menu.php:182
+msgid ""
+"Hackers can exploit various pingback vulnerabilities in the WordPress XML-"
+"RPC API in a number of ways such as:"
+msgstr ""
+"Хакеры часто пользуются уязвимостями в этой функциональности, чтобы достичь "
+"следующих целей:"
+
+#: ../admin/wp-security-firewall-menu.php:183
+msgid "1) Denial of Service (DoS) attacks"
+msgstr ""
+"1) Перегрузить сервер запросами и вывести тем самым его из строя (DoS-атака)"
+
+#: ../admin/wp-security-firewall-menu.php:184
+msgid "2) Hacking internal routers."
+msgstr "2) Взломать внутренние маршрутизаторы"
+
+#: ../admin/wp-security-firewall-menu.php:185
+msgid "3) Scanning ports in internal networks to get info from various hosts."
+msgstr ""
+"3) Просканировать порты внутренней сети, чтобы получить информацию от "
+"различных хостов на сервере."
+
+#: ../admin/wp-security-firewall-menu.php:186
+msgid ""
+"Apart from the security protection benefit, this feature may also help "
+"reduce load on your server, particularly if your site currently has a lot of "
+"unwanted traffic hitting the XML-RPC API on your installation."
+msgstr ""
+"Помимо усиления защиты сайта, эта опция поможет значительно снизить нагрузку "
+"на Ваш сервер, особенно если Ваш сайт получает много нежелательного трафика, "
+"нацеленного на XML-RPC API."
+
+#: ../admin/wp-security-firewall-menu.php:187
+msgid ""
+"NOTE: You should only enable this feature if you are not currently using the "
+"XML-RPC functionality on your WordPress installation."
+msgstr ""
+"ВНИМАНИЕ: Эту опцию можно активировать только в том случае, если Вы в своей "
+"WordPress-установке не используете функциональность XML-RPC."
+
+#: ../admin/wp-security-firewall-menu.php:194
+msgid "Save Basic Firewall Settings"
+msgstr "Сохранить основные настройки брандмауэра"
+
+#: ../admin/wp-security-firewall-menu.php:266
+msgid ""
+"You have successfully saved the Additional Firewall Protection configuration"
+msgstr "Дополнительные настройки конфигурации брандмауэра успешно сохранены!"
+
+#: ../admin/wp-security-firewall-menu.php:280
+msgid "Additional Firewall Protection"
+msgstr "Дополнительные функции брандмауэра"
+
+#: ../admin/wp-security-firewall-menu.php:284
+#, php-format
+msgid ""
+"Due to the nature of the code being inserted to the .htaccess file, this "
+"feature may break some functionality for certain plugins and you are "
+"therefore advised to take a %s of .htaccess before applying this "
+"configuration."
+msgstr ""
+"В силу определенных особенностей, эти правила могут нарушить "
+"функциональность некоторых плагинов, поэтому рекомендуется до их включения "
+"сделать %s файла .htaccess."
+
+#: ../admin/wp-security-firewall-menu.php:286
+msgid ""
+"This feature allows you to activate more advanced firewall settings to your "
+"site."
+msgstr ""
+"В этой вкладке Вы можете активировать дополнительные настройки файерволл для "
+"защиты Вашего сайта."
+
+#: ../admin/wp-security-firewall-menu.php:287
+msgid ""
+"The advanced firewall rules are applied via the insertion of special code to "
+"your currently active .htaccess file."
+msgstr ""
+"Эти опции реализуются методом добавления определенных правил в Ваш файл ."
+"htaccess."
+
+#: ../admin/wp-security-firewall-menu.php:296
+msgid "Listing of Directory Contents"
+msgstr "Просмотр содержимого директорий"
+
+#: ../admin/wp-security-firewall-menu.php:305
+msgid "Disable Index Views"
+msgstr "Отключить возможность просмотра директорий"
+
+#: ../admin/wp-security-firewall-menu.php:308
+msgid "Check this if you want to disable directory and file listing."
+msgstr ""
+"Включите этот чекбокс, чтобы предотвратить свободный просмотр директорий на "
+"Вашем сайте"
+
+#: ../admin/wp-security-firewall-menu.php:313
+msgid ""
+"By default, an Apache server will allow the listing of the contents of a "
+"directory if it doesn't contain an index.php file."
+msgstr ""
+"По умолчанию сервер Apache позволяет видет содержимое директорий, если в них "
+"нет файла index.php или index.html."
+
+#: ../admin/wp-security-firewall-menu.php:315
+msgid "This feature will prevent the listing of contents for all directories."
+msgstr "Эта функция запрещает такую возможность."
+
+#: ../admin/wp-security-firewall-menu.php:317
+msgid ""
+"NOTE: In order for this feature to work \"AllowOverride\" must be enabled in "
+"your httpd.conf file. Ask your hosting provider to check this if you don't "
+"have access to httpd.conf"
+msgstr ""
+"ВНИМАНИЕ: Для того, чтобы эта функция работала, в Вашем файле httpd.conf "
+"должна быть включена директива «AllowOverride». Если у Вас нет доступа к "
+"файлу httpd.conf, обратитесь к своему хостинг-провайдеру."
+
+#: ../admin/wp-security-firewall-menu.php:326
+msgid "Trace and Track"
+msgstr "HTTP-трассировка"
+
+#: ../admin/wp-security-firewall-menu.php:335
+msgid "Disable Trace and Track"
+msgstr "Отключить http-трассировку"
+
+#: ../admin/wp-security-firewall-menu.php:338
+msgid "Check this if you want to disable trace and track."
+msgstr "Отметьте этот чекбокс, чтобы защититься от http-трассировки."
+
+#: ../admin/wp-security-firewall-menu.php:343
+msgid ""
+"HTTP Trace attack (XST) can be used to return header requests and grab "
+"cookies and other information."
+msgstr ""
+"Атаки на основе HTTP-трассировки (межсайтовой трассировки, или XST), "
+"применяются, чтобы получить информацию из возвращаемых сервером http-"
+"заголовков и похитить куки и другую информацию."
+
+#: ../admin/wp-security-firewall-menu.php:345
+msgid ""
+"This hacking technique is usually used together with cross site scripting "
+"attacks (XSS)."
+msgstr ""
+"Эта хакерская технология обычно применяется в сочетании с межсайтовым "
+"скриптингом (XSS)."
+
+#: ../admin/wp-security-firewall-menu.php:347
+msgid ""
+"Disabling trace and track on your site will help prevent HTTP Trace attacks."
+msgstr "Данная опция предназначена как раз для защиты от этого типа атак."
+
+#: ../admin/wp-security-firewall-menu.php:356
+msgid "Proxy Comment Posting"
+msgstr "Комментарии через Прокси-серверы"
+
+#: ../admin/wp-security-firewall-menu.php:366
+msgid "Forbid Proxy Comment Posting"
+msgstr "Запретить комментарии через прокси"
+
+#: ../admin/wp-security-firewall-menu.php:369
+msgid "Check this if you want to forbid proxy comment posting."
+msgstr "Отметьте этот чекбокс, чтобы запретить комментирование через прокси."
+
+#: ../admin/wp-security-firewall-menu.php:374
+msgid ""
+"This setting will deny any requests that use a proxy server when posting "
+"comments."
+msgstr ""
+"Эта опция отклонит любые запросы, использующие прокси-сервер при отправке "
+"комментариев."
+
+#: ../admin/wp-security-firewall-menu.php:375
+msgid ""
+"By forbidding proxy comments you are in effect eliminating some SPAM and "
+"other proxy requests."
+msgstr ""
+"Это усилит защиту от спама в комментариях и от других нежелательных прокси-"
+"запросов."
+
+#: ../admin/wp-security-firewall-menu.php:384
+msgid "Bad Query Strings"
+msgstr "Нежелательные строки в запросах"
+
+#: ../admin/wp-security-firewall-menu.php:394
+msgid "Deny Bad Query Strings"
+msgstr "Запретить вредоносные строки в запросах"
+
+#: ../admin/wp-security-firewall-menu.php:397
+msgid "This will help protect you against malicious queries via XSS."
+msgstr "Включите этот чекбокс, чтобы активировать защиту от XSS-атак."
+
+#: ../admin/wp-security-firewall-menu.php:402
+msgid ""
+"This feature will write rules in your .htaccess file to prevent malicious "
+"string attacks on your site using XSS."
+msgstr ""
+"Эта опция предназначена для защиты от ввода вредоносного кода при XSS-атаках."
+
+#: ../admin/wp-security-firewall-menu.php:403
+msgid ""
+"NOTE: Some of these strings might be used for plugins or themes and hence "
+"this might break some functionality."
+msgstr ""
+"ВНИМАНИЕ: Некоторые из блокируемых строк могут использоваться в каких-то "
+"плагинах или Вашей теме, и, следовательно, данная опция может нарушить их "
+"функциональность."
+
+#: ../admin/wp-security-firewall-menu.php:404
+#: ../admin/wp-security-firewall-menu.php:434
+msgid ""
+"You are therefore strongly advised to take a backup of your active .htaccess "
+"file before applying this feature."
+msgstr ""
+"ОБЯЗАТЕЛЬНО СДЕЛАЙТЕ РЕЗЕРВНУЮ КОПИЮ ВАШЕГО .HTACCESS-ФАЙЛА, ДО ТОГО, КАК ВЫ "
+"АКТИВИРУЕТЕ ЭТУ ФУНКЦИЮ! "
+
+#: ../admin/wp-security-firewall-menu.php:413
+msgid "Advanced Character String Filter"
+msgstr "Дополнительная фильтрация символов"
+
+#: ../admin/wp-security-firewall-menu.php:423
+msgid "Enable Advanced Character String Filter"
+msgstr "Активировать дополнительную фильтрацию символов"
+
+#: ../admin/wp-security-firewall-menu.php:426
+msgid "This will block bad character matches from XSS."
+msgstr "Включите этот чекбокс, чтобы защитить сайт от XSS-атак."
+
+#: ../admin/wp-security-firewall-menu.php:431
+msgid ""
+"This is an advanced character string filter to prevent malicious string "
+"attacks on your site coming from Cross Site Scripting (XSS)."
+msgstr ""
+"Это дополнительная фильтрация символов для блокировки вредоносных команд, "
+"используемых в XSS-атаках (межсайтовый скриптинг)."
+
+#: ../admin/wp-security-firewall-menu.php:432
+msgid ""
+"This setting matches for common malicious string patterns and exploits and "
+"will produce a 403 error for the hacker attempting the query."
+msgstr ""
+"Данная опция фиксирует распространенные образцы вредоносного кода и "
+"эксплойты и вернет хакеру сообщение об ошибке 403 (доступ запрещен)."
+
+#: ../admin/wp-security-firewall-menu.php:433
+msgid "NOTE: Some strings for this setting might break some functionality."
+msgstr ""
+"ВНИМАНИЕ: Некоторые директивы в этих установках могут нарушить "
+"функциональность сайта (это зависит от хостинг-провайдера)."
+
+#: ../admin/wp-security-firewall-menu.php:442
+msgid "Save Additional Firewall Settings"
+msgstr "Сохранить дополнительные настройки брандмауэра"
+
+#: ../admin/wp-security-firewall-menu.php:477
+msgid "You have successfully saved the 5G Firewall Protection configuration"
+msgstr "Вы успешно сохранили настройки 5G-защиты"
+
+#: ../admin/wp-security-firewall-menu.php:490
+#, php-format
+msgid ""
+"This feature allows you to activate the 5G  firewall security protection "
+"rules designed and produced by %s."
+msgstr ""
+"Эта опция позволяет включить функции защиты «5G», разработанные и "
+"произведенные %s."
+
+#: ../admin/wp-security-firewall-menu.php:491
+msgid ""
+"The 5G Blacklist is a simple, flexible blacklist that helps reduce the "
+"number of malicious URL requests that hit your website."
+msgstr ""
+"5G-брандмауэр (файерволл) - это простая и гибкая защита, помогающая "
+"уменьшить количество вредоносных запросов, добавляемых в URL Вашего сайта."
+
+#: ../admin/wp-security-firewall-menu.php:492
+msgid ""
+"The added advantage of applying the 5G firewall to your site is that it has "
+"been tested and confirmed by the people at PerishablePress.com to be an "
+"optimal and least disruptive set of .htaccess security rules for general WP "
+"sites running on an Apache server or similar."
+msgstr ""
+"Дополнительным преимуществом 5G-защиты является тот факт, что она была "
+"тщательно протестирована и подтверждена профессионалами из PerishablePress."
+"com, как наименее разрушительный набор директив безопасности для файла ."
+"htaccess, на сайтах, работающих на сервере Apache или аналогичных."
+
+#: ../admin/wp-security-firewall-menu.php:493
+#, php-format
+msgid ""
+"Therefore the 5G firewall rules should not have any impact on your site's "
+"general functionality but if you wish you can take a %s of your .htaccess "
+"file before proceeding."
+msgstr ""
+"Следовательно, данная защита не должна иметь никакого влияния на общую "
+"функциональность Вашего сайта, но, тем не менее, при желании Вы можете "
+"создать %s Вашего .htaccess-файла, до того, как активируете эту защиту."
+
+#: ../admin/wp-security-firewall-menu.php:499
+msgid "5G Blacklist/Firewall Settings"
+msgstr "Настройки 5G Файерволл"
+
+#: ../admin/wp-security-firewall-menu.php:511
+msgid "Enable 5G Firewall Protection"
+msgstr "Включить 5G Файерволл"
+
+#: ../admin/wp-security-firewall-menu.php:514
+msgid ""
+"Check this if you want to apply the 5G Blacklist firewall protection from "
+"perishablepress.com to your site."
+msgstr "Включите этот чекбокс, чтобы активировать 5G-защиту на Вашем сайте."
+
+#: ../admin/wp-security-firewall-menu.php:518
+msgid ""
+"This setting will implement the 5G security firewall protection mechanisms "
+"on your site which include the following things:"
+msgstr ""
+"Эта опция активирует 5G-защиту на Вашем сайте, которая включает следующее:"
+
+#: ../admin/wp-security-firewall-menu.php:519
+msgid "1) Block forbidden characters commonly used in exploitative attacks."
+msgstr ""
+"1) Блокировку запрещенных символов, обычно используемых в хакерских атаках."
+
+#: ../admin/wp-security-firewall-menu.php:520
+msgid "2) Block malicious encoded URL characters such as the \".css(\" string."
+msgstr ""
+"2) Блокировку вредоносных закодированных строк в URL, таких как «.css(» и т."
+"п."
+
+#: ../admin/wp-security-firewall-menu.php:521
+msgid ""
+"3) Guard against the common patterns and specific exploits in the root "
+"portion of targeted URLs."
+msgstr ""
+"3) Защиту от распространенных шаблонов вредоносного кода и специфических "
+"эксплойтов (последовательностей команд, использующих известные уязвимости) в "
+"URL."
+
+#: ../admin/wp-security-firewall-menu.php:522
+msgid ""
+"4) Stop attackers from manipulating query strings by disallowing illicit "
+"characters."
+msgstr "4) Блокировку запрещенных символов в параметрах запросов."
+
+#: ../admin/wp-security-firewall-menu.php:523
+msgid "....and much more."
+msgstr "...и многое другое."
+
+#: ../admin/wp-security-firewall-menu.php:529
+msgid "Save 5G Firewall Settings"
+msgstr "Сохранить настройки 5G Файерволл"
+
+#: ../admin/wp-security-firewall-menu.php:557
+msgid ""
+"Settings have not been saved - your secret word must consist only of "
+"alphanumeric characters, ie, letters and/or numbers only!"
+msgstr ""
+"Настройки не сохранились - секретное слово должно состоять только из "
+"латинских букв и/или цифр!"
+
+#: ../admin/wp-security-firewall-menu.php:575
+msgid ""
+"You have successfully enabled the cookie based brute force prevention feature"
+msgstr "Вы успешно активировали защиту от брутфорс-атак"
+
+#: ../admin/wp-security-firewall-menu.php:576
+msgid ""
+"From now on you will need to log into your WP Admin using the following URL:"
+msgstr "С этого момента заходите на Вашу страницу авторизации по этому адресу:"
+
+#: ../admin/wp-security-firewall-menu.php:578
+msgid ""
+"It is important that you save this URL value somewhere in case you forget "
+"it, OR,"
+msgstr ""
+"Очень важно, чтобы Вы сохранили этот URL где-нибудь в надежном месте, на "
+"случай, если Вы его забудете, или"
+
+#: ../admin/wp-security-firewall-menu.php:579
+#, php-format
+msgid "simply remember to add a \"?%s=1\" to your current site URL address."
+msgstr "просто запомните, что к адресу Вашего сайта надо добавить «?%s=1»."
+
+#: ../admin/wp-security-firewall-menu.php:585
+msgid ""
+"You have successfully saved cookie based brute force prevention feature "
+"settings."
+msgstr "Настройки сохранены!"
+
+#: ../admin/wp-security-firewall-menu.php:621
+msgid "Brute Force Prevention Firewall Settings"
+msgstr "Настройки Файерволла для защиты от Брутфорс-атак"
+
+#: ../admin/wp-security-firewall-menu.php:628
+msgid ""
+"A Brute Force Attack is when a hacker tries many combinations of usernames "
+"and passwords until they succeed in guessing the right combination."
+msgstr ""
+"Брутфорс-атакой называется многократный перебор различных сочетаний имен "
+"пользователей и паролей, до тех пор, пока не будет найдена их правильная "
+"комбинация."
+
+#: ../admin/wp-security-firewall-menu.php:629
+msgid ""
+"Due to the fact that at any one time there may be many concurrent login "
+"attempts occurring on your site via malicious automated robots, this also "
+"has a negative impact on your server's memory and performance."
+msgstr ""
+"В связи с тем, что в любой момент времени может происходить большое "
+"количество попыток входа на Ваш сайт, осуществляемых с помощью вредоносных "
+"программ-роботов, это также оказывает негативное влияние на Ваш сервер, так "
+"как отнимает ресурсы памяти и снижает его производительность."
+
+#: ../admin/wp-security-firewall-menu.php:630
+msgid ""
+"The features in this tab will stop the majority of Brute Force Login Attacks "
+"at the .htaccess level thus providing even better protection for your WP "
+"login page and also reducing the load on your server because the system does "
+"not have to run PHP code to process the login attempts."
+msgstr ""
+"Функции в этой вкладке остановят большинство брутфорс-атак на уровне файла ."
+"htaccess, обеспечивая тем самым усиленную защиту Вашей страницы авторизации "
+"и снижая нагрузку на сервер, так как система при этом не запускает PHP код "
+"для обработки попыток входа в систему."
+
+#: ../admin/wp-security-firewall-menu.php:636
+msgid "Cookie Based Brute Force Login Prevention"
+msgstr "Защита от брутфорс-атак, основанная на использовании куки"
+
+#: ../admin/wp-security-firewall-menu.php:647
+msgid "Enable Brute Force Attack Prevention"
+msgstr "Активировать защиту от брутфорс-атак"
+
+#: ../admin/wp-security-firewall-menu.php:650
+msgid ""
+"Check this if you want to protect your login page from Brute Force Attack."
+msgstr ""
+"Отметьте, если Вы хотите защитить Вашу форму авторизации от брутфорс-атак."
+
+#: ../admin/wp-security-firewall-menu.php:655
+msgid ""
+"This feature will deny access to your WordPress login page for all people "
+"except those who have a special cookie in their browser."
+msgstr ""
+"Эта функция запретит доступ к Вашей странице авторизации любому "
+"пользователю, у которого в браузере нет специального куки-файла."
+
+#: ../admin/wp-security-firewall-menu.php:657
+msgid "To use this feature do the following:"
+msgstr "Для активации этой опции сделайте следующее:"
+
+#: ../admin/wp-security-firewall-menu.php:659
+msgid "1) Enable the checkbox."
+msgstr "1) Включите этот чекбокс."
+
+#: ../admin/wp-security-firewall-menu.php:661
+msgid ""
+"2) Enter a secret word consisting of alphanumeric characters which will be "
+"difficult to guess. This secret word will be useful whenever you need to "
+"know the special URL which you will use to access the login page (see point "
+"below)."
+msgstr ""
+"2) Введите секретное слово, состоящее из буквенно-цифровых символов (буквы "
+"латинские), которое будет трудно разгадать. Это слово будет использовано, "
+"чтобы создать для Вас специальный URL для доступа к странице авторизации "
+"(смотрите следующий пункт)."
+
+#: ../admin/wp-security-firewall-menu.php:663
+msgid ""
+"3) You will then be provided with a special login URL. You will need to use "
+"this URL to login to your WordPress site instead of the usual login URL. "
+"NOTE: The system will deposit a special cookie in your browser which will "
+"allow you access to the WordPress administration login page."
+msgstr ""
+"3) После сохранения этих настроек Вы получите специальный URL для "
+"авторизации, о котором больше никто не будет знать. Этот URL Вы должны "
+"будете использовать вместо стандартного URL к странице авторизации. "
+"ВНИМАНИЕ: Плагин поместит в Ваш браузер специальный куки-файл, который будет "
+"служить Вашим персональным пропуском в админ-панель блога."
+
+#: ../admin/wp-security-firewall-menu.php:665
+msgid ""
+"Any person trying to access your login page who does not have the special "
+"cookie in their browser will be automatically blocked."
+msgstr ""
+"Любой, кто попытается попасть на Вашу страницу авторизации, не имея "
+"специального куки-файла в своем браузере, будет автоматически заблокирован."
+
+#: ../admin/wp-security-firewall-menu.php:672
+msgid "Secret Word"
+msgstr "Секретное слово"
+
+#: ../admin/wp-security-firewall-menu.php:674
+msgid ""
+"Choose a secret word consisting of alphanumeric characters which you can use "
+"to access your special URL. Your are highly encouraged to choose a word "
+"which will be difficult to guess."
+msgstr ""
+"Введите секретное слово (только латинские буквы и цифры). Подберите такое "
+"слово, чтобы его было трудно угадать."
+
+#: ../admin/wp-security-firewall-menu.php:678
+msgid "Re-direct URL"
+msgstr "URL перенаправления"
+
+#: ../admin/wp-security-firewall-menu.php:682
+msgid ""
+"Specify a URL to redirect a hacker to when they try to access your WordPress "
+"login page."
+msgstr ""
+"Введите URL, на который будет перенаправляться хакер при попытках получить "
+"доступ к Вашей форме авторизации."
+
+#: ../admin/wp-security-firewall-menu.php:689
+msgid ""
+"The URL specified here can be any site's URL and does not have to be your "
+"own. For example you can be as creative as you like and send hackers to the "
+"CIA or NSA home page."
+msgstr ""
+"URL, который должен быть в этом поле, может быть адресом любого сайта или "
+"страницы - не обязательно Вашего. Вы можете проявить фантазию и "
+"перенаправлять хакеров, например, на сайт ЦРУ или ФСБ."
+
+#: ../admin/wp-security-firewall-menu.php:691
+msgid ""
+"This field will default to: http://127.0.0.1 if you do not enter a value."
+msgstr ""
+"Если Вы ничего не будете вводить в это поле, будет использовано значение по "
+"умолчанию, т.е. «http://127.0.0.1»."
+
+#: ../admin/wp-security-firewall-menu.php:693
+msgid "Useful Tip:"
+msgstr "Полезная подсказка:"
+
+#: ../admin/wp-security-firewall-menu.php:695
+msgid ""
+"It's a good idea to not redirect attempted brute force login attempts to "
+"your site because it increases the load on your server."
+msgstr ""
+"Правильно будет не перенаправлять хакера при неудачных попытках брутфорс-"
+"атак на другие страницы Вашего сайта, так как это только увеличит нагрузку "
+"на Ваш сервер."
+
+#: ../admin/wp-security-firewall-menu.php:697
+msgid ""
+"Redirecting a hacker or malicious bot back to \"http://127.0.0.1\" is ideal "
+"because it deflects them back to their own local host and puts the load on "
+"their server instead of yours."
+msgstr ""
+"Переадресация хакера или вредоносного бота на «http://127.0.0.1» - идеальный "
+"вариант, т.к. возвращает его обратно на его собственный локальный хост и "
+"нагружает его сервер вместо Вашего."
+
+#: ../admin/wp-security-firewall-menu.php:704
+msgid "My Site Has Posts Or Pages Which Are Password Protected"
+msgstr ""
+"На моем сайте есть посты или страницы, закрытые встроенной функцией "
+"Wordpress для защиты контента паролем "
+
+#: ../admin/wp-security-firewall-menu.php:707
+msgid ""
+"Check this if you are using the native WordPress password protection feature "
+"for some or all of your blog posts or pages."
+msgstr ""
+"Включите эту опцию, если Вы используете встроенную функцию WordPress для "
+"защиты постов или страниц паролями."
+
+#: ../admin/wp-security-firewall-menu.php:712
+msgid ""
+"In the cases where you are protecting some of your posts or pages using the "
+"in-built WordPress password protection feature, a few extra lines of "
+"directives and exceptions need to be added to your .htacces file so that "
+"people trying to access pages are not automatically blocked."
+msgstr ""
+"В случае, если Вы защищаете свои посты и страницы паролями, используя "
+"соответствующую встроенную функцию WordPress, в файл .htacces необходимо "
+"добавить некоторые дополнительные директивы."
+
+#: ../admin/wp-security-firewall-menu.php:714
+msgid ""
+"By enabling this checkbox the plugin will add the necessary rules and "
+"exceptions to your .htacces file so that people trying to access these pages "
+"are not automatically blocked."
+msgstr ""
+"Включение этой опции добавит в файл .htacces необходимые правила, чтобы "
+"люди, пытающиеся получить доступ к этим страницам, не были автоматически "
+"заблокированы. "
+
+#: ../admin/wp-security-firewall-menu.php:716
+msgid "Helpful Tip:"
+msgstr "Полезная подсказка:"
+
+#: ../admin/wp-security-firewall-menu.php:718
+msgid ""
+"If you do not use the WordPress password protection feature for your posts "
+"or pages then it is highly recommended that you leave this checkbox disabled."
+msgstr ""
+"Если Вы не используете встроенную функцию WordPress для защиты постов или "
+"страниц паролями, крайне рекомендуется оставить этот чекбокс неотмеченным."
+
+#: ../admin/wp-security-firewall-menu.php:733
+msgid "The cookie test was successful. You can now enable this feature."
+msgstr "Куки-тест прошел успешно - можете активировать эту опцию."
+
+#: ../admin/wp-security-firewall-menu.php:736
+msgid "Save Feature Settings"
+msgstr "Сохранить настройки"
+
+#: ../admin/wp-security-firewall-menu.php:743
+msgid ""
+"The cookie test failed on this server. So this feature cannot be used on "
+"this site."
+msgstr "Куки-тест негативный - использование этой функции невозможно."
+
+#: ../admin/wp-security-firewall-menu.php:749
+msgid ""
+"Before using this feature you are required to perform a cookie test first. "
+"This is to make sure that your browser cookie is working correctly and that "
+"you won't lock yourself out."
+msgstr ""
+"Перед включением этой опции необходимо протестировать куки, чтобы убедиться "
+"в корректной обработке куки-файлов Вашим браузером и, тем самым, избежать "
+"блокировки Вашего собственного аккаунта."
+
+#: ../admin/wp-security-firewall-menu.php:751
+msgid "Perform Cookie Test"
+msgstr "Протестировать Куки"
+
+#: ../admin/wp-security-list-acct-activity.php:79
+#: ../admin/wp-security-list-comment-spammer-ip.php:76
+#: ../admin/wp-security-list-locked-ip.php:80
+#: ../admin/wp-security-list-locked-ip.php:91
+#: ../admin/wp-security-list-login-fails.php:78
+msgid "Please select some records using the checkboxes"
+msgstr "Пожалуйста, выберите записи, отметив соответствующие чекбоксы"
+
+#: ../admin/wp-security-list-acct-activity.php:107
+#: ../admin/wp-security-list-login-fails.php:107
+msgid "The selected entries were deleted successfully!"
+msgstr "Выбранные записи удалены!"
+
+#: ../admin/wp-security-list-acct-activity.php:120
+#: ../admin/wp-security-list-login-fails.php:119
+msgid "The selected entry was deleted successfully!"
+msgstr "Выбранная запись удалена!"
+
+#: ../admin/wp-security-list-comment-spammer-ip.php:129
+msgid ""
+"The selected IP addresses were saved in the blacklist configuration settings."
+msgstr "Указанные IP-адреса внесены в черный список."
+
+#: ../admin/wp-security-list-comment-spammer-ip.php:143
+msgid ""
+"The .htaccess file was successfully modified to include the selected IP "
+"addresses."
+msgstr "Файл .htaccess успешно изменен - в него внесены указанные IP-адреса."
+
+#: ../admin/wp-security-list-comment-spammer-ip.php:149
+msgid ""
+"NOTE: The .htaccess file was not modified because you have disabled the "
+"\"Enable IP or User Agent Blacklisting\" check box."
+msgstr ""
+"ВНИМАНИЕ: файл .htaccess не был изменен, так как опция «Вести Черный список» "
+"неактивна."
+
+#: ../admin/wp-security-list-comment-spammer-ip.php:150
+#, php-format
+msgid ""
+"To block these IP addresses you will need to enable the above flag in the %s "
+"menu"
+msgstr ""
+"Чтобы заблокировать эти IP-адреса, необходимо установить соответствующий "
+"флаг в %s меню"
+
+#: ../admin/wp-security-list-locked-ip.php:115
+#: ../admin/wp-security-user-login-menu.php:439
+msgid "The selected IP ranges were unlocked successfully!"
+msgstr "Указанный диапазон IP-адресов разблокирован!"
+
+#: ../admin/wp-security-list-locked-ip.php:124
+#: ../admin/wp-security-user-login-menu.php:448
+msgid "The selected IP range was unlocked successfully!"
+msgstr "Указанный диапазон IP-адресов разблокирован!"
+
+#: ../admin/wp-security-maintenance-menu.php:82
+msgid "Site lockout feature settings saved!"
+msgstr "Сайт переведен в режим обслуживания!"
+
+#: ../admin/wp-security-maintenance-menu.php:87
+msgid "General Visitor Lockout"
+msgstr "Блокирование доступа посетителей к сайту"
+
+#: ../admin/wp-security-maintenance-menu.php:93
+msgid ""
+"This feature allows you to put your site into \"maintenance mode\" by "
+"locking down the front-end to all visitors except logged in users with super "
+"admin privileges."
+msgstr ""
+"Эта опция позволяет перевести Ваш сайт в режим обслуживания, сделав "
+"невозможным просмотр сайта посетителями, за исключением администраторов."
+
+#: ../admin/wp-security-maintenance-menu.php:94
+msgid ""
+"Locking your site down to general visitors can be useful if you are "
+"investigating some issues on your site or perhaps you might be doing some "
+"maintenance and wish to keep out all traffic for security reasons."
+msgstr ""
+"Это может быть очень полезным, если Вы что-то настраиваете, меняете дизайн, "
+"проверяете работу плагинов и т.д. и т.п."
+
+#: ../admin/wp-security-maintenance-menu.php:99
+msgid "Enable Front-end Lockout"
+msgstr "Включить режим обслуживания"
+
+#: ../admin/wp-security-maintenance-menu.php:102
+msgid ""
+"Check this if you want all visitors except those who are logged in as "
+"administrator to be locked out of the front-end of your site."
+msgstr ""
+"Включите эту опцию, если Вы хотите, чтобы обычные посетители не могли "
+"просматривать Ваш сайт - это смогут делать только администраторы."
+
+#: ../admin/wp-security-maintenance-menu.php:106
+msgid "Enter a Message:"
+msgstr "Введите сообщение:"
+
+#: ../admin/wp-security-maintenance-menu.php:118
+msgid ""
+"Enter a message you wish to display to visitors when your site is in "
+"maintenance mode."
+msgstr "Введите сообщение"
+
+#: ../admin/wp-security-maintenance-menu.php:125
+msgid "Save Site Lockout Settings"
+msgstr "Сохранить настройки блокировки сайта"
+
+#: ../admin/wp-security-settings-menu.php:81
+msgid "All the security features have been disabled successfully!"
+msgstr "Все функции безопасности успешно деактивированы!"
+
+#: ../admin/wp-security-settings-menu.php:90
+msgid "WP Security Plugin"
+msgstr "Плагин WP Security"
+
+#: ../admin/wp-security-settings-menu.php:92
+msgid ""
+"Thank you for using our WordPress security plugin. There are a lot of "
+"security features in this plugin."
+msgstr "Спасибо, что используете плагин WordPress security!"
+
+#: ../admin/wp-security-settings-menu.php:93
+msgid ""
+"Go through each menu items and enable the security options to add more "
+"security to your site."
+msgstr ""
+"Воспользуйтесь меню плагина, чтобы активировать функции безопасности и "
+"защитить свой сайт."
+
+#: ../admin/wp-security-settings-menu.php:94
+msgid ""
+"It is a good practice to take a backup of your .htaccess file, database and "
+"wp-config.php file before activating the security features. This plugin has "
+"options that you can use to backup those resources easily."
+msgstr ""
+"Перед тем, как Вы активируете функции безопасности, будет разумно создать "
+"резервные копии важных файлов и базы данных. Вы легко можете это сделать, "
+"воспользовавшись соответствующими опциями данного плагина."
+
+#: ../admin/wp-security-settings-menu.php:97
+msgid "Backup your database"
+msgstr "Создать резервную копию базы данных"
+
+#: ../admin/wp-security-settings-menu.php:98
+msgid "Backup .htaccess file"
+msgstr "Создать резервную копию файла .htaccess"
+
+#: ../admin/wp-security-settings-menu.php:99
+msgid "Backup wp-config.php file"
+msgstr "Создать резервную копию файла wp-config.php"
+
+#: ../admin/wp-security-settings-menu.php:105
+msgid "Disable Security Features"
+msgstr "Отключение функции безопасности"
+
+#: ../admin/wp-security-settings-menu.php:111
+msgid ""
+"If you think that some plugin functionality on your site is broken due to a "
+"security feature you enabled in this plugin, then use the following option "
+"to turn off all the security features of this plugin."
+msgstr ""
+"Если Вы думаете, что какие-либо плагины перестали работать из-за "
+"активирования функций безопасности, воспользуйтесь этой кнопкой, чтобы все "
+"эти функции отключить."
+
+#: ../admin/wp-security-settings-menu.php:115
+msgid "Disable All Security Features"
+msgstr "Отключить все функции безопасности"
+
+#: ../admin/wp-security-settings-menu.php:143
+msgid ""
+"Your .htaccess file was successfully backed up! Right click on the following "
+"file name and save the backup to your computer."
+msgstr "Резервная копия файла .htaccess успшно создана!"
+
+#: ../admin/wp-security-settings-menu.php:145
+msgid "Your .htaccess File: "
+msgstr "Ваш файл .htaccess:"
+
+#: ../admin/wp-security-settings-menu.php:153
+msgid ""
+"htaccess file rename failed during backup. Please check your root directory "
+"for the backup file using FTP."
+msgstr ""
+"Не удалось переименовать файл .htaccess для создания резервной копии. "
+"Воспользуйтесь FTP, чтобы вручную просмотреть корневую директорию сайта на "
+"предмет наличия созданной резервной копии."
+
+#: ../admin/wp-security-settings-menu.php:159
+msgid "htaccess backup failed."
+msgstr "Создать резервную копию файла .htaccess не удалось."
+
+#: ../admin/wp-security-settings-menu.php:174
+msgid "Please choose a .htaccess to restore from."
+msgstr "Выберите резервную копию файла  .htaccess"
+
+#: ../admin/wp-security-settings-menu.php:190
+msgid ""
+"htaccess file restore failed. Please attempt to restore the .htaccess "
+"manually using FTP."
+msgstr ""
+"Восстановить файл .htaccess не удалось. Попробуйте сделать это вручную, "
+"используя FTP."
+
+#: ../admin/wp-security-settings-menu.php:194
+msgid "Your .htaccess file has successfully been restored!"
+msgstr "Файл .htaccess успешно восстановлен!"
+
+#: ../admin/wp-security-settings-menu.php:200
+msgid ""
+"htaccess Restore operation failed! Please check the contents of the file you "
+"are trying to restore from."
+msgstr ""
+"Операция восстановления файла .htaccess не удалась. Убедитесь, что с "
+"содержимым резервной копии все в порядке."
+
+#: ../admin/wp-security-settings-menu.php:206
+msgid ".htaccess File Operations"
+msgstr "Операции с файлом .htaccess"
+
+#: ../admin/wp-security-settings-menu.php:209
+msgid ""
+"Your \".htaccess\" file is a key component of your website's security and it "
+"can be modified to implement various levels of protection mechanisms."
+msgstr ""
+"Файл «.htaccess» - это ключевой компонент обеспечения безопасности сайта, "
+"который позволяет в значительной степени варьировать механизмы его защиты."
+
+#: ../admin/wp-security-settings-menu.php:210
+msgid ""
+"This feature allows you to backup and save your currently active .htaccess "
+"file should you need to re-use the the backed up file in the future."
+msgstr ""
+"В этом разделе Вы можете создать резервную копию файла .htaccess и, при "
+"необходимости,"
+
+#: ../admin/wp-security-settings-menu.php:211
+msgid ""
+"You can also restore your site's .htaccess settings using a backed up ."
+"htaccess file."
+msgstr "восстановить его из резервной копии в будущем."
+
+#: ../admin/wp-security-settings-menu.php:217
+msgid "Save the current .htaccess file"
+msgstr "Создание резервной копии файла .htaccess"
+
+#: ../admin/wp-security-settings-menu.php:221
+msgid ""
+"Click the button below to backup and save the currently active .htaccess "
+"file."
+msgstr "Для создания резервной копии файла .htaccess нажмите эту кнопку:"
+
+#: ../admin/wp-security-settings-menu.php:222
+msgid "Backup .htaccess File"
+msgstr "Создать и скачать резервную копию файла .htaccess"
+
+#: ../admin/wp-security-settings-menu.php:226
+msgid "Restore from a backed up .htaccess file"
+msgstr "Восстановление файл .htaccess из резервной копии"
+
+#: ../admin/wp-security-settings-menu.php:232
+msgid ".htaccess file to restore from"
+msgstr "Выберите файл резервной копии"
+
+#: ../admin/wp-security-settings-menu.php:238
+msgid ""
+"After selecting your file, click the button below to restore your site using "
+"the backed up htaccess file (htaccess_backup.txt)."
+msgstr ""
+"После того, как Вы выберите файл резервной копии (с именем htaccess_backup."
+"txt) на своем компьютере, чтобы заменить им текущий активный файл .htaccess, "
+"нажмите эту кнопку:"
+
+#: ../admin/wp-security-settings-menu.php:244
+msgid "Restore .htaccess File"
+msgstr "Восстановить файл .htaccess"
+
+#: ../admin/wp-security-settings-menu.php:248
+msgid "View Contents of the currently active .htaccess file"
+msgstr "Просмотр содержимого активного файла .htaccess"
+
+#: ../admin/wp-security-settings-menu.php:282
+msgid ""
+"Your wp-config.php file was successfully backed up! Right click on the "
+"following file name and save the backup to your computer."
+msgstr "Резервная копия файла wp-config.php успешно создана!"
+
+#: ../admin/wp-security-settings-menu.php:284
+msgid "Your wp-config.php File: "
+msgstr "Ваш файл wp-config.php:"
+
+#: ../admin/wp-security-settings-menu.php:292
+msgid ""
+"wp-config.php file rename failed during backup. Please check your root "
+"directory for the backup file using FTP."
+msgstr ""
+"Во время резервного копирования файла wp-config.php  не удалось его "
+"переименовать. Воспользуйтесь FTP, чтобы проверить наличие созданной "
+"резервной копии в корневой директории Вашего сайта."
+
+#: ../admin/wp-security-settings-menu.php:298
+msgid "wp-config.php backup failed."
+msgstr "Создать резервную копию файла wp-config.php не удалось."
+
+#: ../admin/wp-security-settings-menu.php:313
+msgid "Please choose a wp-config.php file to restore from."
+msgstr "Выберите файл резервной копии."
+
+#: ../admin/wp-security-settings-menu.php:329
+msgid ""
+"wp-config.php file restore failed. Please attempt to restore this file "
+"manually using FTP."
+msgstr ""
+"Операция по восстановлению файла wp-config.php не удалась! Попытайтесь "
+"сделать это вручную, используя FTP."
+
+#: ../admin/wp-security-settings-menu.php:333
+msgid "Your wp-config.php file has successfully been restored!"
+msgstr "Файл wp-config.php успешно восстановлен!"
+
+#: ../admin/wp-security-settings-menu.php:339
+msgid ""
+"wp-config.php Restore operation failed! Please check the contents of the "
+"file you are trying to restore from."
+msgstr ""
+"Операция по восстановлению файла wp-config.php не удалась! Проверьте "
+"содержимое файла резервной копии."
+
+#: ../admin/wp-security-settings-menu.php:345
+msgid "wp-config.php File Operations"
+msgstr "Операции с файлом wp-config.php"
+
+#: ../admin/wp-security-settings-menu.php:348
+msgid ""
+"Your \"wp-config.php\" file is one of the most important in your WordPress "
+"installation. It is a primary configuration file and contains crucial things "
+"such as details of your database and other critical components."
+msgstr ""
+"Файл wp-config.php - это один из наиболее важных файлов WordPress, "
+"содержащий данные доступа к Вашей базе данных и другие очень ценные "
+"настройки."
+
+#: ../admin/wp-security-settings-menu.php:349
+msgid ""
+"This feature allows you to backup and save your currently active wp-config."
+"php file should you need to re-use the the backed up file in the future."
+msgstr ""
+"В этом разделе Вы можете создать резервную копию этого файла и, при "
+"необходимости,"
+
+#: ../admin/wp-security-settings-menu.php:350
+msgid ""
+"You can also restore your site's wp-config.php settings using a backed up wp-"
+"config.php file."
+msgstr "восстановить его в будущем, используя эту резервную копию."
+
+#: ../admin/wp-security-settings-menu.php:356
+msgid "Save the current wp-config.php file"
+msgstr "Создание резервной копии файла wp-config.php"
+
+#: ../admin/wp-security-settings-menu.php:360
+msgid ""
+"Click the button below to backup and save the currently active wp-config.php "
+"file."
+msgstr "Для создания резервной копии файла wp-config.php нажмите эту кнопку:"
+
+#: ../admin/wp-security-settings-menu.php:361
+msgid "Backup wp-config.php File"
+msgstr "Создать и скачать резервную копию файла wp-config"
+
+#: ../admin/wp-security-settings-menu.php:365
+msgid "Restore from a backed up wp-config file"
+msgstr "Восстановление файла wp-config из резервной копии"
+
+#: ../admin/wp-security-settings-menu.php:371
+msgid "wp-config file to restore from"
+msgstr "Выберите резервную копию файла wp-config"
+
+#: ../admin/wp-security-settings-menu.php:377
+msgid ""
+"After selecting your file click the button below to restore your site using "
+"the backed up wp-config file (wp-config.php.backup.txt)."
+msgstr ""
+"После того, как Вы выберите файл резервной копии (с именем wp-config.php."
+"backup.txt) на своем компьютере, чтобы заменить им текущий активный файл wp-"
+"config, нажмите эту кнопку:"
+
+#: ../admin/wp-security-settings-menu.php:383
+msgid "Restore wp-config File"
+msgstr "Восстановить файл wp-config"
+
+#: ../admin/wp-security-settings-menu.php:387
+msgid "View Contents of the currently active wp-config.php file"
+msgstr "Просмотр содержимого файла wp-config.php"
+
+#: ../admin/wp-security-settings-menu.php:421
+msgid "WP Generator Meta Tag"
+msgstr "Мета-тег WP Generator"
+
+#: ../admin/wp-security-settings-menu.php:424
+msgid ""
+"Wordpress generator automatically adds some meta information inside the "
+"\"head\" tags of every page on your site's front end. Below is an example of "
+"this:"
+msgstr ""
+"WP Generator автоматически выводит информацию о текущей весии Wordpress в "
+"специальном мета-теге в секции «head» на всех страницах сайта. Вот пример "
+"такого вывода:"
+
+#: ../admin/wp-security-settings-menu.php:426
+msgid ""
+"The above meta information shows which version of WordPress your site is "
+"currently running and thus can help hackers or crawlers scan your site to "
+"see if you have an older version of WordPress or one with a known exploit."
+msgstr ""
+"Эта информация существенно помогает хакерам и их роботам-паукам определять, "
+"не используете ли Вы какую-нибудь устаревшую версию WordPress с уже "
+"известными уязвимостями."
+
+#: ../admin/wp-security-settings-menu.php:427
+msgid ""
+"This feature will allow you to remove the WP generator meta info from your "
+"site's pages."
+msgstr ""
+"Данная опция позволит Вам удалить этот мета-тег со всех страниц Вашего сайта."
+
+#: ../admin/wp-security-settings-menu.php:433
+msgid "WP Generator Meta Info"
+msgstr "Мета-данные WP Generator"
+
+#: ../admin/wp-security-settings-menu.php:445
+msgid "Remove WP Generator Meta Info"
+msgstr "Удаление мета-данных WP Generator"
+
+#: ../admin/wp-security-settings-menu.php:448
+msgid ""
+"Check this if you want to remove the meta info produced by WP Generator from "
+"all pages"
+msgstr "Включите эту опцию, чтобы удалить мета-тег WP Generator"
+
+#: ../admin/wp-security-user-accounts-menu.php:79
+msgid "Admin User Security"
+msgstr "Безопасность аккаунта Администратора"
+
+#: ../admin/wp-security-user-accounts-menu.php:82
+msgid ""
+"By default, WordPress sets the administrator username to \"admin\" at "
+"installation time."
+msgstr ""
+"При установке WordPress автоматически присваивает администратору имя "
+"пользователя «admin» (если Вы вручную не измените его)."
+
+#: ../admin/wp-security-user-accounts-menu.php:83
+msgid ""
+"A lot of hackers try to take advantage of this information by attempting "
+"\"Brute Force Login Attacks\" where they repeatedly try to guess the "
+"password by using \"admin\" for username."
+msgstr ""
+"Многие хакеры пытаются воспользоваться этой информацией, применяя для "
+"нападения «Брутфорс-атаку», когда они систематично подбирают пароль, "
+"используя слово «admin» в качестве имени пользователя."
+
+#: ../admin/wp-security-user-accounts-menu.php:84
+msgid ""
+"From a security perspective, changing the default \"admin\" user name is one "
+"of the first and smartest things you should do on your site."
+msgstr ""
+"По соображениям безопасности, одна из первых и наиболее разумных вещей, "
+"которую Вы должны сделать на своем сайте, это изменить имя пользователя по "
+"умолчанию, т.е. «admin»."
+
+#: ../admin/wp-security-user-accounts-menu.php:85
+msgid ""
+"This feature will allow you to change your default \"admin\" user name to a "
+"more secure name of your choosing."
+msgstr ""
+"Этот раздел как раз и предназначен для изменения имени пользователя «admin» "
+"на более безопасное, по Вашему выбору."
+
+#: ../admin/wp-security-user-accounts-menu.php:92
+msgid "List of Administrator Accounts"
+msgstr "Список Администраторов"
+
+#: ../admin/wp-security-user-accounts-menu.php:102
+msgid "Change Admin Username"
+msgstr "Изменение имени пользователя Админстратора"
+
+#: ../admin/wp-security-user-accounts-menu.php:110
+msgid ""
+"Your site currently has an account which uses the default \"admin\" "
+"username. \n"
+"                It is highly recommended that you change this name to "
+"something else. \n"
+"                Use the following field to change the admin username."
+msgstr ""
+"На Вашем сайте имеется аккаунт, в котором в качестве имени пользователя "
+"используется слово «admin».\n"
+"Крайне рекомендуется изменить его на какое-нибудь другое.\n"
+"Для этого воспользуйтесь следующим полем."
+
+#: ../admin/wp-security-user-accounts-menu.php:118
+msgid "New Admin Username"
+msgstr "Новое имя пользователя для администратора"
+
+#: ../admin/wp-security-user-accounts-menu.php:120
+msgid "Choose a new username for admin."
+msgstr "Выберите новое имя пользователя для администратора."
+
+#: ../admin/wp-security-user-accounts-menu.php:124
+msgid "Change Username"
+msgstr "Изменить имя пользователя"
+
+#: ../admin/wp-security-user-accounts-menu.php:126
+msgid ""
+"NOTE: If you are currently logged in as \"admin\" you will be automatically "
+"logged out after changing your username and will be required to log back in."
+msgstr ""
+"ВНИМАНИЕ: если сейчас Вы авторизованы как «admin», Ваша авторизационная "
+"сессия будет автоматически прекращена, после того, как Вы измените имя "
+"пользователя - надо будет снова авторизоваться, используя уже новый логин."
+
+#: ../admin/wp-security-user-accounts-menu.php:133
+msgid "No action required! "
+msgstr "Действие не требуется!"
+
+#: ../admin/wp-security-user-accounts-menu.php:135
+msgid ""
+"Your site does not have any account which uses the default \"admin\" "
+"username. "
+msgstr ""
+"На Вашем сайте нет аккаунтов, использующих в качестве имени пользователя имя "
+"пользователя по умолчанию, т.е. «admin» - "
+
+#: ../admin/wp-security-user-accounts-menu.php:136
+msgid "This is good security practice."
+msgstr "и это очень хорошо."
+
+#: ../admin/wp-security-user-accounts-menu.php:148
+msgid "Display Name Security"
+msgstr "Защита отображаемого имени"
+
+#: ../admin/wp-security-user-accounts-menu.php:151
+msgid ""
+"When you submit a post or answer a comment, WordPress will usually display "
+"your \"nickname\"."
+msgstr ""
+"Когда Вы публикуете пост или отвечаете на комментарий, WordPress обычно "
+"отображает Ваш «никнейм»."
+
+#: ../admin/wp-security-user-accounts-menu.php:152
+msgid ""
+"By default the nickname is set to the login (or user) name of your account."
+msgstr "По умолчанию отображаемое имя пользователя идентично логину аккаунта."
+
+#: ../admin/wp-security-user-accounts-menu.php:153
+msgid ""
+"From a security perspective, leaving your nickname the same as your user "
+"name is bad practice because it gives a hacker at least half of your "
+"account's login credentials."
+msgstr ""
+"Из соображений безопасности, этого допускать нельзя, так как это уже на "
+"половину облегчает хакеру работу - фактически, Вы сами сообщаете ему логин "
+"своего аккаунта."
+
+#: ../admin/wp-security-user-accounts-menu.php:154
+msgid ""
+"Therefore to further tighten your site's security you are advised to change "
+"your <strong>nickname</strong> and <strong>Display name</strong> to be "
+"different from your <strong>Username</strong>."
+msgstr ""
+"Поэтому, чтобы ужесточить безопасность сайта, мы рекомендуем вам изменить "
+"свой <strong>никнейм</strong> и <strong>отображаемое имя</strong>, чтобы они "
+"отличались от Вашего <strong>имени пользователя</strong>."
+
+#: ../admin/wp-security-user-accounts-menu.php:160
+msgid "Modify Accounts With Identical Login Name & Display Name"
+msgstr ""
+"Редактирование аккаунтов с совпадающими именем пользователя и отображаемым "
+"именем."
+
+#: ../admin/wp-security-user-accounts-menu.php:169
+msgid ""
+"Your site currently has the following accounts which have an identical login "
+"name and display name."
+msgstr ""
+"Следующие аккаунты на Вашем сайте имеют имя пользователя, совпадающее с "
+"отображаемым именем."
+
+#: ../admin/wp-security-user-accounts-menu.php:170
+msgid "Click on the link to edit the settings of that particular user account"
+msgstr "Перейдите по ссылке, чтобы внести изменения в соответствующий аккаунт"
+
+#: ../admin/wp-security-user-accounts-menu.php:185
+msgid "No action required."
+msgstr "Действие не требуется."
+
+#: ../admin/wp-security-user-accounts-menu.php:186
+msgid ""
+"Your site does not have a user account where the display name is identical "
+"to the username."
+msgstr ""
+"На Вашем сайте нет аккаунтов, в которых имя пользователя совпадает с "
+"отображаемым именем."
+
+#: ../admin/wp-security-user-accounts-menu.php:197
+msgid "Password Tool"
+msgstr "Проверка пароля"
+
+#: ../admin/wp-security-user-accounts-menu.php:200
+msgid ""
+"Poor password selection is one of the most common weak points of many sites "
+"and is usually the first thing a hacker will try to exploit when attempting "
+"to break into your site."
+msgstr ""
+"Плохой пароль - это наиболее распространенная уязвимость на большинстве "
+"сайтов, и, как правило, первое, что будет делать хакер, чтобы проникнуть на "
+"сайт - попытается подобрать пароль."
+
+#: ../admin/wp-security-user-accounts-menu.php:201
+msgid ""
+"Many people fall into the trap of using a simple word or series of numbers "
+"as their password. Such a predictable and simple password would take a "
+"competent hacker merely minutes to guess your password by using a simple "
+"script which cycles through the easy and most common combinations."
+msgstr ""
+"Многие люди сами себе ставят ловушку, используя в качестве пароля простое "
+"слово или ряд цифр. На подбор такого предсказуемого пароля у опытного хакера "
+"уйдет всего несколько минут, так как для этого используются специальные "
+"программы с большими базами наиболее распространенных сочетаний букв, слов и "
+"цифр."
+
+#: ../admin/wp-security-user-accounts-menu.php:202
+msgid ""
+"The longer and more complex your password is the harder it is for hackers to "
+"\"crack\" because more complex passwords require much greater computing "
+"power and time."
+msgstr ""
+"Чем длиннее и сложнее пароль, тем тяжелее будет хакеру его подобрать, потому "
+"что это требует гораздо больше вычислительных мощностей и времени."
+
+#: ../admin/wp-security-user-accounts-menu.php:203
+msgid ""
+"This section contains a useful password strength tool which you can use to "
+"check whether your password is sufficiently strong enough."
+msgstr "Здесь Вы можете проверить свой пароль на надежность."
+
+#: ../admin/wp-security-user-accounts-menu.php:208
+msgid "Password Strength Tool"
+msgstr "Проверка надежности пароля"
+
+#: ../admin/wp-security-user-accounts-menu.php:213
+msgid "Start typing a password."
+msgstr "Введите пароль."
+
+#: ../admin/wp-security-user-accounts-menu.php:238
+msgid "Nonce check failed on admin username change operation!"
+msgstr "Не удалось изменить имя пользователя!"
+
+#: ../admin/wp-security-user-accounts-menu.php:245
+msgid "Username "
+msgstr "Такое имя пользователя"
+
+#: ../admin/wp-security-user-accounts-menu.php:245
+msgid " already exists. Please enter another value. "
+msgstr "уже существует. Пожалуйста, введите другое значение."
+
+#: ../admin/wp-security-user-accounts-menu.php:261
+msgid "The database update operation of the user account failed!"
+msgstr "Обновление учетной записи не удалось!"
+
+#: ../admin/wp-security-user-accounts-menu.php:288
+msgid "You entered an invalid username. Please enter another value. "
+msgstr ""
+"Вы ввели неверное имя пользователя. Пожалуйста, введите другое значение."
+
+#: ../admin/wp-security-user-accounts-menu.php:292
+msgid "Please enter a value for your username. "
+msgstr "Пожалуйста, введите имя пользователя."
+
+#: ../admin/wp-security-user-accounts-menu.php:299
+msgid "Username Successfully Changed!"
+msgstr "Имя пользователя изменено!"
+
+#: ../admin/wp-security-user-accounts-menu.php:319
+msgid "Account Login Name"
+msgstr "Имя пользователя"
+
+#: ../admin/wp-security-user-login-menu.php:88
+msgid ""
+"You entered a non numeric value for the max login attempts field. It has "
+"been set to the default value."
+msgstr ""
+"Вы ввели нечисловое значение для максимального количества попыток "
+"авторизации. Установлено значение по умолчанию."
+
+#: ../admin/wp-security-user-login-menu.php:95
+msgid ""
+"You entered a non numeric value for the login retry time period field. It "
+"has been set to the default value."
+msgstr ""
+"Вы ввели нечисловое значение для ограничения времени попыток авторизации. "
+"Установлено значение по умолчанию."
+
+#: ../admin/wp-security-user-login-menu.php:102
+msgid ""
+"You entered a non numeric value for the lockout time length field. It has "
+"been set to the default value."
+msgstr ""
+"Вы ввели нечисловое значение для периода блокирования. Установлено значение "
+"по умолчанию."
+
+#: ../admin/wp-security-user-login-menu.php:146
+msgid "Login Lockdown Configuration"
+msgstr "Настройки опций блокировки процесса авторизации"
+
+#: ../admin/wp-security-user-login-menu.php:150
+msgid "One of the ways hackers try to compromise sites is via a "
+msgstr ""
+"Один из распространенных способов, используемых хакерами для проникновения "
+"на сайт, является "
+
+#: ../admin/wp-security-user-login-menu.php:150
+msgid "Brute Force Login Attack"
+msgstr "Брутфорс-атака"
+
+#: ../admin/wp-security-user-login-menu.php:151
+msgid ""
+"This is where attackers use repeated login attempts until they guess the "
+"password."
+msgstr "Так называются многократные попытки входа методом подбора паролей."
+
+#: ../admin/wp-security-user-login-menu.php:152
+msgid ""
+"Apart from choosing strong passwords, monitoring and blocking IP addresses "
+"which are involved in repeated login failures in a short period of time is a "
+"very effective way to stop these types of attacks."
+msgstr ""
+"Помимо выбора надежных паролей, мониторинга и блокирования IP-адресов, "
+"участвующих в повторных неудачных попытках входа в течение короткого периода "
+"времени, блокировка количества попыток авторизации и ограничение периода "
+"времени для таких попыток, является очень эффективным способом "
+"противодействия этим типам атак."
+
+#: ../admin/wp-security-user-login-menu.php:153
+#, php-format
+msgid ""
+"You may also want to checkout our %s feature for another secure way to "
+"protect against these types of attacks."
+msgstr ""
+"Вы также можете ознакомиться с другими %s опциями безопасности для защиты от "
+"такого типа атак."
+
+#: ../admin/wp-security-user-login-menu.php:158
+msgid "Login Lockdown Options"
+msgstr "Опции блокировки авторизации"
+
+#: ../admin/wp-security-user-login-menu.php:170
+msgid "Enable Login Lockdown Feature"
+msgstr "Включить опции блокировки попыток авторизации"
+
+#: ../admin/wp-security-user-login-menu.php:173
+msgid ""
+"Check this if you want to enable the login lockdown feature and apply the "
+"settings below"
+msgstr ""
+"Отметьте эту опцию, если Вы хотите включить функции контроля за процессом "
+"авторизации, установите необходимые параметры и сохраните настройки"
+
+#: ../admin/wp-security-user-login-menu.php:177
+msgid "Max Login Attempts"
+msgstr "Максимальное количество попыток входа"
+
+#: ../admin/wp-security-user-login-menu.php:179
+msgid ""
+"Set the value for the maximum login retries before IP address is locked out"
+msgstr ""
+"Установите значение для максимального количества попыток входа, после чего "
+"IP-адрес будет заблокирован"
+
+#: ../admin/wp-security-user-login-menu.php:183
+msgid "Login Retry Time Period (min)"
+msgstr "Ограничение времени попыток авторизации (минуты)"
+
+#: ../admin/wp-security-user-login-menu.php:185
+msgid ""
+"If the maximum number of failed login attempts for a particular IP address "
+"occur within this time period the plugin will lock out that address"
+msgstr ""
+"Если максимальное число неудачных попыток входа в систему для конкретного "
+"адреса IP произойдет в течение этого периода времени, плагин заблокирует "
+"этот адрес"
+
+#: ../admin/wp-security-user-login-menu.php:189
+msgid "Time Length of Lockout (min)"
+msgstr "Период блокирования (минуты)"
+
+#: ../admin/wp-security-user-login-menu.php:191
+msgid ""
+"Set the length of time for which a particular IP address will be prevented "
+"from logging in"
+msgstr "Укажите период времени, на который будут блокироваться IP-адреса"
+
+#: ../admin/wp-security-user-login-menu.php:195
+msgid "Display Generic Error Message"
+msgstr "Выводить сообщения об ошибках авторизации"
+
+#: ../admin/wp-security-user-login-menu.php:198
+msgid ""
+"Check this if you want to show a generic error message when a login attempt "
+"fails"
+msgstr ""
+"Отметьте эту опцию, если Вы хотите, чтобы при неудачных попытках авторизации "
+"отображалось сообщение об ошибке"
+
+#: ../admin/wp-security-user-login-menu.php:202
+msgid "Notify By Email"
+msgstr "Уведомлять по Email"
+
+#: ../admin/wp-security-user-login-menu.php:205
+msgid ""
+"Check this if you want to receive an email when someone has been locked out "
+"due to maximum failed login attempts"
+msgstr ""
+"Отметьте эту опцию, если Вы хотите получать отчет о неудачных попытках "
+"авторизации на свой почтовый ящик"
+
+#: ../admin/wp-security-user-login-menu.php:215
+msgid "Currently Locked Out IP Address Ranges"
+msgstr "Диапазон временно заблокированных IP-адресов"
+
+#: ../admin/wp-security-user-login-menu.php:242
+msgid "Nonce check failed for delete all failed login records operation!"
+msgstr "Записи об ошибочных попытках авторизации удалить не удалось!"
+
+#: ../admin/wp-security-user-login-menu.php:251
+msgid "User Login Feature - Delete all failed login records operation failed!"
+msgstr "Записи об ошибочных попытках авторизации удалить не удалось!"
+
+#: ../admin/wp-security-user-login-menu.php:255
+msgid "All records from the Failed Logins table were deleted successfully!"
+msgstr "Все записи об ошибочных попытках авторизации удалены!"
+
+#: ../admin/wp-security-user-login-menu.php:270
+msgid "This tab displays the failed login attempts for your site."
+msgstr "Здесь отображаются записи о безуспешных попытках входа на Ваш сайт."
+
+#: ../admin/wp-security-user-login-menu.php:271
+msgid ""
+"The information below can be handy if you need to do security investigations "
+"because it will show you the IP range, username and ID (if applicable) and "
+"the time/date of the failed login attempt."
+msgstr ""
+"Приведенная ниже информация может пригодиться, если вам нужно провести "
+"исследование попыток авторизации - здесь отображается диапазон IP, имя "
+"пользователя и ID (если возможно) и время / дата неуспешной попытки входа на "
+"сайт."
+
+#: ../admin/wp-security-user-login-menu.php:276
+msgid "Failed Login Records"
+msgstr "Ошибочные попытки авторизации"
+
+#: ../admin/wp-security-user-login-menu.php:292
+#: ../admin/wp-security-user-login-menu.php:301
+msgid "Delete All Failed Login Records"
+msgstr "Удалить записи"
+
+#: ../admin/wp-security-user-login-menu.php:298
+msgid ""
+"Click this button if you wish to delete all failed login records in one go."
+msgstr ""
+"Нажмите эту кнопку, если Вы хотите удалить все записи об ошибочных попытках "
+"авторизации."
+
+#: ../admin/wp-security-user-login-menu.php:326
+msgid ""
+"You entered a non numeric value for the logout time period field. It has "
+"been set to the default value."
+msgstr ""
+"Вы ввели нечисловое значение периода времени. Установка сброшена к значению "
+"по умолчанию."
+
+#: ../admin/wp-security-user-login-menu.php:348
+msgid ""
+"Setting an expiry period for your WP administration session is a simple way "
+"to protect against unauthorized access to your site from your computer."
+msgstr ""
+"Установка ограничения срока действия сессии администрирования - это простой "
+"способ защиты от несанкционированного доступа к вашему сайту с вашего "
+"компьютера."
+
+#: ../admin/wp-security-user-login-menu.php:349
+msgid ""
+"This feature allows you to specify a time period in minutes after which the "
+"admin session will expire and the user will be forced to log back in."
+msgstr ""
+"Эта опция позволяет установить временной период, после истечения которого "
+"сессия администратора истекает и пользователю надо будет авторизоваться "
+"заново."
+
+#: ../admin/wp-security-user-login-menu.php:354
+msgid "Force User Logout Options"
+msgstr "Опции автоматического разлогинивания пользователей"
+
+#: ../admin/wp-security-user-login-menu.php:366
+msgid "Enable Force WP User Logout"
+msgstr "Включить авторазлогинивание"
+
+#: ../admin/wp-security-user-login-menu.php:369
+msgid ""
+"Check this if you want to force a wp user to be logged out after a "
+"configured amount of time"
+msgstr ""
+"Отметьте эту опцию, чтобы автоматически прекращать авторизационную сессию "
+"пользователей по истечении определенного периода времени"
+
+#: ../admin/wp-security-user-login-menu.php:373
+msgid "Logout the WP User After XX Minutes"
+msgstr "Разлогинить пользователя через"
+
+#: ../admin/wp-security-user-login-menu.php:375
+msgid ""
+"(Minutes) The user will be forced to log back in after this time period has "
+"elapased."
+msgstr ""
+"(Минуты) Пользователь автоматически будет разлогинен по истечении этого "
+"периода времени."
+
+#: ../admin/wp-security-user-login-menu.php:399
+msgid ""
+"This tab displays the login activity for WordPress admin accounts registered "
+"with your site."
+msgstr "Здесь отображается активность администраторов на Вашем сайте."
+
+#: ../admin/wp-security-user-login-menu.php:400
+msgid ""
+"The information below can be handy if you need to do security investigations "
+"because it will show you the last 50 recent login events by username, IP "
+"address and time/date."
+msgstr ""
+"Приведенная ниже информация может пригодиться, если Вы будете проводить "
+"исследование пользовательской активности, так как здесь будут показаны "
+"последние 50 событий авторизации с данными имени пользователя, IP-адресом и "
+"временем входа."
+
+#: ../admin/wp-security-user-login-menu.php:405
+msgid "Account Activity Logs"
+msgstr "Журнал активности аккаунта"
+
+#: ../admin/wp-security-user-login-menu.php:470
+msgid "The selected records were deleted successfully!"
+msgstr "Выбранные записи успешно удалены!"
+
+#: ../admin/wp-security-user-login-menu.php:479
+msgid "The selected record was deleted successfully!"
+msgstr "Выбранная запись успешно удалена!"
+
+#: ../admin/wp-security-whois-menu.php:68
+msgid "WHOIS Lookup Information"
+msgstr "Результаты WHOIS-поиска"
+
+#: ../admin/wp-security-whois-menu.php:71
+msgid ""
+"This feature allows you to look up more detailed information about an IP "
+"address or domain name by querying the WHOIS API."
+msgstr ""
+"Эта функция позволяет получить детальную информацию об IP-адресе или домену."
+
+#: ../admin/wp-security-whois-menu.php:77
+msgid "Perform a WHOIS Lookup for an IP or Domain Name"
+msgstr "Выполнить WHOIS-поиск по IP или домену"
+
+#: ../admin/wp-security-whois-menu.php:84
+msgid "Enter IP Address or Domain Name"
+msgstr "Введите IP-адрес или доменное имя"
+
+#: ../admin/wp-security-whois-menu.php:86
+msgid ""
+"Enter an IP address or domain name. Example: 111.11.12.13 OR some-domain-"
+"name.com"
+msgstr ""
+"Введите IP-адрес или доменное имя. Пример: 111.11.12.13 или some-domain-name."
+"com"
+
+#: ../admin/wp-security-whois-menu.php:90
+msgid "Perform IP or Domain Lookup"
+msgstr "Выполнить поиск по IP или домену"
+
+#: ../admin/wp-security-whois-menu.php:110
+msgid "WHOIS lookup successfully completed. Please see the results below:"
+msgstr "WHOIS-поиск закончен. Результаты Вы можете видеть ниже:"
+
+#: ../admin/wp-security-whois-menu.php:122
+msgid ""
+"You have entered an incorrectly formatted IP address or domain name. Please "
+"try again."
+msgstr ""
+"Вы ввели некорректный IP-адрес или доменное имя. Пожалуйста, попробуйте еще "
+"раз."
+
+#: ../admin/general/wp-security-list-table.php:178
+msgid "No items found."
+msgstr "Ничего не найдено."
+
+#: ../admin/general/wp-security-list-table.php:281
+msgid "Bulk Actions"
+msgstr "Комплексные действия"
+
+#: ../admin/general/wp-security-list-table.php:291
+msgid "Apply"
+msgstr "Применить"
+
+#: ../admin/general/wp-security-list-table.php:365
+msgid "Show all dates"
+msgstr "Отобразить все даты"
+
+#: ../admin/general/wp-security-list-table.php:378
+#, php-format
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: ../admin/general/wp-security-list-table.php:394
+msgid "List View"
+msgstr "Список"
+
+#: ../admin/general/wp-security-list-table.php:395
+msgid "Excerpt View"
+msgstr "Краткий обзор"
+
+#: ../admin/general/wp-security-list-table.php:421
+#, php-format
+msgid "%s pending"
+msgstr "%s в ожидании"
+
+#: ../admin/general/wp-security-list-table.php:653
+msgid "Select All"
+msgstr "Выбрать все"
+
+#: ../classes/wp-security-backup.php:110
+msgid "All In One WP Security - Site Database Backup"
+msgstr "BAll In One WP Security - Резервное копирование базы данных"
+
+#: ../classes/wp-security-backup.php:112
+msgid "Attached is your latest DB backup file for site URL"
+msgstr "Прикреплена последняя резервная копия базы данных Вашего сайта"
+
+#: ../classes/wp-security-backup.php:112
+msgid " generated on"
+msgstr "создано по"
+
+#: ../classes/wp-security-user-login.php:39
+msgid ""
+"<strong>ERROR</strong>: Login failed because your IP address has been "
+"blocked due to too many failed login attempts.\n"
+"                                Please contact the administrator."
+msgstr ""
+"<strong>ОШИБКА</strong>: Авторизация не удалась, так как Ваш IP-адрес был "
+"заблокирован по причине слишком большого количества попыток авторизации.\n"
+"Пожалуйста, свяжитесь с администратором."
+
+#: ../classes/wp-security-user-login.php:48
+msgid "<strong>ERROR</strong>: The username field is empty."
+msgstr ""
+"<strong>ОШИБКА</strong>: Поле для указания имени пользователя незаполнено."
+
+#: ../classes/wp-security-user-login.php:52
+msgid "<strong>ERROR</strong>: The password field is empty."
+msgstr "<strong>ERROR</strong>: Поле для указания пароля незаполнено."
+
+#: ../classes/wp-security-user-login.php:64
+msgid "unknown"
+msgstr "неизвестно"
+
+#: ../classes/wp-security-user-login.php:69
+#: ../classes/wp-security-user-login.php:92
+msgid "<strong>ERROR</strong>: Invalid login credentials."
+msgstr "<strong>ОШИБКА</strong>: Неверные логин или пароль"
+
+#: ../classes/wp-security-user-login.php:72
+msgid "<strong>ERROR</strong>: Invalid username."
+msgstr "<strong>ОШИБКА</strong>: Неверное имя пользователя."
+
+#: ../classes/wp-security-user-login.php:95
+#, php-format
+msgid ""
+"<strong>ERROR</strong>: Incorrect password. <a href=\"%s\" title=\"Password "
+"Lost and Found\">Lost your password</a>?"
+msgstr ""
+"<strong>ОШИБКА</strong>: Неверный пароль. <a href=\"%s\" title="
+"\"Восстановление пароля\">Забыли свой пароль</a>?"
+
+#: ../classes/wp-security-user-login.php:217
+msgid "Site Lockout Notification"
+msgstr "Уведомления блокировки"
+
+#: ../classes/wp-security-user-login.php:218
+msgid ""
+"A lockdown event has occurred due to too many failed login attempts with the "
+"following user details"
+msgstr ""
+"Пользователь был заблокирован из-за слишком большого количества попыток "
+"неудачного входа со следующими данными"
+
+#: ../classes/wp-security-user-login.php:219
+msgid "Username: "
+msgstr "Имя пользователя:"
+
+#: ../classes/wp-security-user-login.php:220
+msgid "IP Range: "
+msgstr "Диапазон IP-адресов:"
+
+#: ../classes/wp-security-user-login.php:221
+msgid ""
+"Log into your site's WordPress administration panel to see the duration of "
+"the lockout or to unlock the user."
+msgstr ""
+"Авторизуйтесь в админ-панели блога, чтобы видеть продолжительность "
+"блокировки или чтобы разблокировать пользователя."
+
+#: ../classes/wp-security-user-login.php:336
+#, php-format
+msgid ""
+"Your session has expired because it has been over %d minutes since your last "
+"login."
+msgstr ""
+"Ваша сессия была прекращена, поскольку прошло уже более %d минут с тех пор, "
+"как Вы авторизовались последний раз."
+
+#: ../classes/wp-security-user-login.php:337
+#: ../classes/wp-security-user-login.php:341
+msgid "Please log back in to continue."
+msgstr "Для продолжения авторизуйтесь снова."
+
+#: ../classes/wp-security-user-login.php:340
+msgid "You were logged out because you just changed the \"admin\" username."
+msgstr ""
+"Ваша авторизационная сессия была прекращена, так как Вы только что изменили "
+"имя пользователя «admin»."
+
+#: ../classes/wp-security-utility-ip-address.php:79
+#: ../classes/wp-security-utility-ip-address.php:98
+#: ../classes/wp-security-utility-ip-address.php:113
+#: ../classes/wp-security-utility-ip-address.php:128
+msgid " is not a valid ip address format."
+msgstr "не является правильным форматом IP-адреса."
+
+#: ../classes/wp-security-utility-ip-address.php:136
+msgid "You cannot ban your own IP address: "
+msgstr "Свой собственный IP-адрес забанить нельзя:"

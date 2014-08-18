@@ -1,0 +1,4760 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: All In One WP Security vv3.7.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-04-16 20:01:12+0000\n"
+"Last-Translator: manuel <m@movemeta.org>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: admin/general/wp-security-list-table.php:178
+#@ default
+msgid "No items found."
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:281
+#@ default
+msgid "Bulk Actions"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:291
+#@ default
+msgid "Apply"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:365
+#@ default
+msgid "Show all dates"
+msgstr ""
+
+#. translators: 1: month name, 2: 4-digit year
+#: admin/general/wp-security-list-table.php:378
+#, php-format
+#@ default
+msgid "%1$s %2$d"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:394
+#@ default
+msgid "List View"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:395
+#@ default
+msgid "Excerpt View"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:421
+#, php-format
+#@ default
+msgid "%s pending"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:477
+#: admin/general/wp-security-list-table.php:881
+#, php-format
+#@ default
+msgid "1 item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/general/wp-security-list-table.php:495
+#@ default
+msgid "Go to the first page"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:502
+#@ default
+msgid "Go to the previous page"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:511
+#@ default
+msgid "Current page"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:517
+#, php-format
+#@ default
+msgctxt "paging"
+msgid "%1$s of %2$s"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:521
+#@ default
+msgid "Go to the next page"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:528
+#@ default
+msgid "Go to the last page"
+msgstr ""
+
+#: admin/general/wp-security-list-table.php:653
+#@ default
+msgid "Select All"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:157
+#@ aiowpsecurity
+msgid "WP Security"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:158
+#: admin/wp-security-dashboard-menu.php:23
+#@ aiowpsecurity
+msgid "Dashboard"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:159
+#@ aiowpsecurity
+msgid "Settings"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:160
+#@ aiowpsecurity
+msgid "User Accounts"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:161
+#@ aiowpsecurity
+msgid "User Login"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:162
+#@ aiowpsecurity
+msgid "User Registration"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:163
+#@ aiowpsecurity
+msgid "Database Security"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:167
+#@ aiowpsecurity
+msgid "Filesystem Security"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:169
+#@ aiowpsecurity
+msgid "WHOIS Lookup"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:173
+#@ aiowpsecurity
+msgid "Blacklist Manager"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:178
+#@ aiowpsecurity
+msgid "Firewall"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:183
+#@ aiowpsecurity
+msgid "Brute Force"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:185
+#@ aiowpsecurity
+msgid "SPAM Prevention"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:189
+#@ aiowpsecurity
+msgid "Scanner"
+msgstr ""
+
+#: admin/wp-security-admin-init.php:191
+#@ aiowpsecurity
+msgid "Maintenance"
+msgstr ""
+
+#: admin/wp-security-admin-menu.php:43
+#@ aiowpsecurity
+msgid "Settings successfully updated."
+msgstr ""
+
+#: admin/wp-security-admin-menu.php:50
+#@ aiowpsecurity
+msgid "The selected record(s) deleted successfully!"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:22
+#@ aiowpsecurity
+msgid "Ban Users"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:80
+#@ aiowpsecurity
+msgid "Nonce check failed for save blacklist settings!"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:132
+#: admin/wp-security-brute-force-menu.php:608
+#: admin/wp-security-list-comment-spammer-ip.php:147
+#@ aiowpsecurity
+msgid "The plugin was unable to write to the .htaccess file. Please edit file manually."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:139
+#@ aiowpsecurity
+msgid "Ban IPs or User Agents"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:142
+#@ aiowpsecurity
+msgid "The All In One WP Security Blacklist feature gives you the option of banning certain host IP addresses or ranges and also user agents."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:143
+#@ aiowpsecurity
+msgid "This feature will deny total site access for users which have IP addresses or user agents matching those which you have configured in the settings below."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:144
+#@ aiowpsecurity
+msgid "The plugin achieves this by making appropriate modifications to your .htaccess file."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:145
+#@ aiowpsecurity
+msgid "By blocking people via the .htaccess file your are using the most secure first line of defence which denies all access to blacklisted visitors as soon as they hit your hosting server."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:151
+#@ aiowpsecurity
+msgid "IP Hosts and User Agent Blacklist Settings"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:162
+#@ aiowpsecurity
+msgid "Enable IP or User Agent Blacklisting"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:165
+#@ aiowpsecurity
+msgid "Check this if you want to enable the banning (or blacklisting) of selected IP addresses and/or user agents specified in the settings below"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:169
+#@ aiowpsecurity
+msgid "Enter IP Addresses:"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:173
+#@ aiowpsecurity
+msgid "Enter one or more IP addresses or IP ranges."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:174
+#: admin/wp-security-blacklist-menu.php:194
+#: admin/wp-security-brute-force-menu.php:343
+#: admin/wp-security-brute-force-menu.php:377
+#: admin/wp-security-brute-force-menu.php:400
+#: admin/wp-security-brute-force-menu.php:421
+#: admin/wp-security-brute-force-menu.php:664
+#: admin/wp-security-filescan-menu.php:291
+#: admin/wp-security-filescan-menu.php:308
+#: admin/wp-security-firewall-menu.php:165
+#: admin/wp-security-firewall-menu.php:195
+#: admin/wp-security-firewall-menu.php:326
+#: admin/wp-security-firewall-menu.php:356
+#: admin/wp-security-firewall-menu.php:387
+#: admin/wp-security-firewall-menu.php:415
+#: admin/wp-security-firewall-menu.php:444
+#: admin/wp-security-firewall-menu.php:532
+#: admin/wp-security-firewall-menu.php:622
+#: admin/wp-security-firewall-menu.php:824
+#: admin/wp-security-firewall-menu.php:847
+#: admin/wp-security-spam-menu.php:174
+#: admin/wp-security-spam-menu.php:259
+#@ aiowpsecurity
+msgid "More Info"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:177
+#: admin/wp-security-brute-force-menu.php:667
+#@ aiowpsecurity
+msgid "Each IP address must be on a new line."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:178
+#: admin/wp-security-brute-force-menu.php:668
+#@ aiowpsecurity
+msgid "To specify an IP range use a wildcard \"*\" character. Acceptable ways to use wildcards is shown in the examples below:"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:179
+#: admin/wp-security-brute-force-menu.php:669
+#@ aiowpsecurity
+msgid "Example 1: 195.47.89.*"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:180
+#: admin/wp-security-brute-force-menu.php:670
+#@ aiowpsecurity
+msgid "Example 2: 195.47.*.*"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:181
+#: admin/wp-security-brute-force-menu.php:671
+#@ aiowpsecurity
+msgid "Example 3: 195.*.*.*"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:188
+#@ aiowpsecurity
+msgid "Enter User Agents:"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:193
+#@ aiowpsecurity
+msgid "Enter one or more user agent strings."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:197
+#@ aiowpsecurity
+msgid "Each user agent string must be on a new line."
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:198
+#@ aiowpsecurity
+msgid "Example 1 - A single user agent string to block:"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:200
+#@ aiowpsecurity
+msgid "Example 2 - A list of more than 1 user agent strings to block"
+msgstr ""
+
+#: admin/wp-security-blacklist-menu.php:208
+#: admin/wp-security-brute-force-menu.php:188
+#: admin/wp-security-brute-force-menu.php:544
+#: admin/wp-security-brute-force-menu.php:678
+#: admin/wp-security-database-menu.php:356
+#: admin/wp-security-filescan-menu.php:329
+#: admin/wp-security-filesystem-menu.php:231
+#: admin/wp-security-firewall-menu.php:700
+#: admin/wp-security-firewall-menu.php:866
+#: admin/wp-security-settings-menu.php:493
+#: admin/wp-security-spam-menu.php:189
+#: admin/wp-security-user-login-menu.php:239
+#: admin/wp-security-user-login-menu.php:407
+#: admin/wp-security-user-registration-menu.php:146
+#: admin/wp-security-user-registration-menu.php:221
+#@ aiowpsecurity
+msgid "Save Settings"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:25
+#: admin/wp-security-dashboard-menu.php:344
+#: admin/wp-security-dashboard-menu.php:353
+#@ aiowpsecurity
+msgid "Rename Login Page"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:26
+#@ aiowpsecurity
+msgid "Cookie Based Brute Force Prevention"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:27
+#: classes/grade-system/wp-security-feature-item-manager.php:44
+#@ aiowpsecurity
+msgid "Login Captcha"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:28
+#: admin/wp-security-brute-force-menu.php:615
+#@ aiowpsecurity
+msgid "Login Whitelist"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:99
+#@ aiowpsecurity
+msgid "Please enter a value for your login page slug."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:103
+#@ aiowpsecurity
+msgid "You cannot use the value \"wp-admin\" for your login page slug."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:108
+#: admin/wp-security-database-menu.php:271
+#: admin/wp-security-filescan-menu.php:169
+#: admin/wp-security-firewall-menu.php:769
+#: admin/wp-security-spam-menu.php:219
+#: admin/wp-security-user-login-menu.php:123
+#: admin/wp-security-user-login-menu.php:360
+#@ aiowpsecurity
+msgid "Attention!"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:127
+#@ aiowpsecurity
+msgid "Could not delete the Cookie-based directives from the .htaccess file. Please check the file permissions."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:137
+#@ aiowpsecurity
+msgid "An effective Brute Force prevention technique is to change the default WordPress login page URL."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:138
+#@ aiowpsecurity
+msgid "Normally if you wanted to login to WordPress you would type your site's home URL followed by wp-login.php."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:139
+#@ aiowpsecurity
+msgid "This feature allows you to change the login URL by setting your own slug and renaming the last portion of the login URL which contains the <strong>wp-login.php</strong> to any string that you like."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:140
+#@ aiowpsecurity
+msgid "By doing this, malicious bots and hackers will not be able to access your login page because they will not know the correct login page URL."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:142
+#@ aiowpsecurity
+msgid "You may also be interested in the following alternative brute force prevention features:"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:153
+#@ aiowpsecurity
+msgid "Your WordPress login page URL has been renamed."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:154
+#@ aiowpsecurity
+msgid "Your current login URL is:"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:156
+#@ aiowpsecurity
+msgid "NOTE: If you already had the Cookie-Based Brute Force Prevention feature active, the plugin has automatically deactivated it because only one of these features can be active at any one time."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:163
+#@ aiowpsecurity
+msgid "Rename Login Page Settings"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:175
+#@ aiowpsecurity
+msgid "Enable Rename Login Page Feature"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:178
+#@ aiowpsecurity
+msgid "Check this if you want to enable the rename login page feature"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:182
+#@ aiowpsecurity
+msgid "Login Page URL"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:184
+#@ aiowpsecurity
+msgid "Enter a string which will represent your secure login page slug. You are enouraged to choose something which is hard to guess and only you will remember."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:217
+#@ aiowpsecurity
+msgid "Settings have not been saved - your secret word must consist only of alphanumeric characters, ie, letters and/or numbers only!"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:236
+#@ aiowpsecurity
+msgid "You have successfully enabled the cookie based brute force prevention feature"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:237
+#@ aiowpsecurity
+msgid "From now on you will need to log into your WP Admin using the following URL:"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:239
+#@ aiowpsecurity
+msgid "It is important that you save this URL value somewhere in case you forget it, OR,"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:240
+#, php-format
+#@ aiowpsecurity
+msgid "simply remember to add a \"?%s=1\" to your current site URL address."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:246
+#@ aiowpsecurity
+msgid "You have successfully saved cookie based brute force prevention feature settings."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:281
+#: admin/wp-security-filesystem-menu.php:275
+#: admin/wp-security-firewall-menu.php:119
+#: admin/wp-security-firewall-menu.php:287
+#: admin/wp-security-firewall-menu.php:498
+#: admin/wp-security-firewall-menu.php:667
+#: admin/wp-security-spam-menu.php:106
+#@ aiowpsecurity
+msgid "Could not write to the .htaccess file. Please check the file permissions."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:291
+#@ aiowpsecurity
+msgid "Brute Force Prevention Firewall Settings"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:296
+#@ aiowpsecurity
+msgid "A Brute Force Attack is when a hacker tries many combinations of usernames and passwords until they succeed in guessing the right combination."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:297
+#@ aiowpsecurity
+msgid "Due to the fact that at any one time there may be many concurrent login attempts occurring on your site via malicious automated robots, this also has a negative impact on your server's memory and performance."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:298
+#@ aiowpsecurity
+msgid "The features in this tab will stop the majority of Brute Force Login Attacks at the .htaccess level thus providing even better protection for your WP login page and also reducing the load on your server because the system does not have to run PHP code to process the login attempts."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:305
+#, php-format
+#@ aiowpsecurity
+msgid "Even though this feature should not have any impact on your site's general functionality <strong>you are strongly encouraged to take a %s of your .htaccess file before proceeding</strong>."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:306
+#@ aiowpsecurity
+msgid "If this feature is not used correctly, you can get locked out of your site. A backed up .htaccess file will come in handy if that happens."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:307
+#, php-format
+#@ aiowpsecurity
+msgid "To learn more about how to use this feature please watch the following %s."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:320
+#@ aiowpsecurity
+msgid "NOTE: If you already had the Rename Login Page feature active, the plugin has automatically deactivated it because only one of these features can be active at any one time."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:328
+#@ aiowpsecurity
+msgid "Cookie Based Brute Force Login Prevention"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:339
+#: classes/grade-system/wp-security-feature-item-manager.php:87
+#@ aiowpsecurity
+msgid "Enable Brute Force Attack Prevention"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:342
+#@ aiowpsecurity
+msgid "Check this if you want to protect your login page from Brute Force Attack."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:347
+#@ aiowpsecurity
+msgid "This feature will deny access to your WordPress login page for all people except those who have a special cookie in their browser."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:349
+#@ aiowpsecurity
+msgid "To use this feature do the following:"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:351
+#@ aiowpsecurity
+msgid "1) Enable the checkbox."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:353
+#@ aiowpsecurity
+msgid "2) Enter a secret word consisting of alphanumeric characters which will be difficult to guess. This secret word will be useful whenever you need to know the special URL which you will use to access the login page (see point below)."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:355
+#@ aiowpsecurity
+msgid "3) You will then be provided with a special login URL. You will need to use this URL to login to your WordPress site instead of the usual login URL. NOTE: The system will deposit a special cookie in your browser which will allow you access to the WordPress administration login page."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:357
+#@ aiowpsecurity
+msgid "Any person trying to access your login page who does not have the special cookie in their browser will be automatically blocked."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:364
+#@ aiowpsecurity
+msgid "Secret Word"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:366
+#@ aiowpsecurity
+msgid "Choose a secret word consisting of alphanumeric characters which you can use to access your special URL. Your are highly encouraged to choose a word which will be difficult to guess."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:370
+#@ aiowpsecurity
+msgid "Re-direct URL"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:374
+#@ aiowpsecurity
+msgid "Specify a URL to redirect a hacker to when they try to access your WordPress login page."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:381
+#@ aiowpsecurity
+msgid "The URL specified here can be any site's URL and does not have to be your own. For example you can be as creative as you like and send hackers to the CIA or NSA home page."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:383
+#@ aiowpsecurity
+msgid "This field will default to: http://127.0.0.1 if you do not enter a value."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:385
+#@ aiowpsecurity
+msgid "Useful Tip:"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:387
+#@ aiowpsecurity
+msgid "It's a good idea to not redirect attempted brute force login attempts to your site because it increases the load on your server."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:389
+#@ aiowpsecurity
+msgid "Redirecting a hacker or malicious bot back to \"http://127.0.0.1\" is ideal because it deflects them back to their own local host and puts the load on their server instead of yours."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:396
+#@ aiowpsecurity
+msgid "My Site Has Posts Or Pages Which Are Password Protected"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:399
+#@ aiowpsecurity
+msgid "Check this if you are using the native WordPress password protection feature for some or all of your blog posts or pages."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:404
+#@ aiowpsecurity
+msgid "In the cases where you are protecting some of your posts or pages using the in-built WordPress password protection feature, a few extra lines of directives and exceptions need to be added to your .htacces file so that people trying to access pages are not automatically blocked."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:406
+#@ aiowpsecurity
+msgid "By enabling this checkbox the plugin will add the necessary rules and exceptions to your .htacces file so that people trying to access these pages are not automatically blocked."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:408
+#@ aiowpsecurity
+msgid "Helpful Tip:"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:410
+#@ aiowpsecurity
+msgid "If you do not use the WordPress password protection feature for your posts or pages then it is highly recommended that you leave this checkbox disabled."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:417
+#@ aiowpsecurity
+msgid "My Site Has a Theme or Plugins Which Use AJAX"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:420
+#@ aiowpsecurity
+msgid "Check this if your site uses AJAX functionality."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:425
+#@ aiowpsecurity
+msgid "In the cases where your WordPress installation has a theme or plugins which use AJAX, a few extra lines of directives and exceptions need to be added to your .htacces file to prevent AJAX requests from being automatically blocked by the brute force prevention feature."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:427
+#@ aiowpsecurity
+msgid "By enabling this checkbox the plugin will add the necessary rules and exceptions to your .htacces file so that AJAX operations will work as expected."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:442
+#@ aiowpsecurity
+msgid "The cookie test was successful. You can now enable this feature."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:445
+#@ aiowpsecurity
+msgid "Save Feature Settings"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:452
+#@ aiowpsecurity
+msgid "The cookie test failed on this server. So this feature cannot be used on this site."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:457
+#@ aiowpsecurity
+msgid "Before using this feature you are required to perform a cookie test first. This is to make sure that your browser cookie is working correctly and that you won't lock yourself out."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:459
+#@ aiowpsecurity
+msgid "Perform Cookie Test"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:498
+#@ aiowpsecurity
+msgid "This feature allows you to add a captcha form on the WordPress login page."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:499
+#@ aiowpsecurity
+msgid "Users who attempt to login will also need to enter the answer to a simple mathematical question - if they enter the wrong answer, the plugin will not allow them login even if they entered the correct username and password."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:500
+#@ aiowpsecurity
+msgid "Therefore, adding a captcha form on the login page is another effective yet simple \"Brute Force\" prevention technique."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:506
+#@ aiowpsecurity
+msgid "Login Form Captcha Settings"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:517
+#@ aiowpsecurity
+msgid "Enable Captcha On Login Page"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:520
+#@ aiowpsecurity
+msgid "Check this if you want to insert a captcha form on the login page"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:526
+#@ aiowpsecurity
+msgid "Lost Password Form Captcha Settings"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:536
+#@ aiowpsecurity
+msgid "Enable Captcha On Lost Password Page"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:539
+#@ aiowpsecurity
+msgid "Check this if you want to insert a captcha form on the lost password page"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:561
+#@ aiowpsecurity
+msgid "Nonce check failed for save whitelist settings!"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:618
+#@ aiowpsecurity
+msgid "The All In One WP Security Whitelist feature gives you the option of only allowing certain IP addresses or ranges to have access to your WordPress login page."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:619
+#@ aiowpsecurity
+msgid "This feature will deny login access for all IP addresses which are not in your whitelist as configured in the settings below."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:620
+#@ aiowpsecurity
+msgid "The plugin achieves this by writing the appropriate directives to your .htaccess file."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:621
+#@ aiowpsecurity
+msgid "By allowing/blocking IP addresses via the .htaccess file your are using the most secure first line of defence because login access will only be granted to whitelisted IP addresses and other addresses will be blocked as soon as they try to access your login page."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:628
+#, php-format
+#@ aiowpsecurity
+msgid "Attention: If in addition to enabling the white list feature, you also have the %s feature enabled, <strong>you will still need to use your secret word in the URL when trying to access your WordPress login page</strong>."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:629
+#@ aiowpsecurity
+msgid "These features are NOT functionally related. Having both of them enabled on your site means you are creating 2 layers of security."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:634
+#@ aiowpsecurity
+msgid "Login IP Whitelist Settings"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:645
+#@ aiowpsecurity
+msgid "Enable IP Whitelisting"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:648
+#@ aiowpsecurity
+msgid "Check this if you want to enable the whitelisting of selected IP addresses specified in the settings below"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:652
+#@ aiowpsecurity
+msgid "Your Current IP Address"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:655
+#@ aiowpsecurity
+msgid "You can copy and paste this address in the text box below if you want to include it in your login whitelist."
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:659
+#@ aiowpsecurity
+msgid "Enter Whitelisted IP Addresses:"
+msgstr ""
+
+#: admin/wp-security-brute-force-menu.php:663
+#@ aiowpsecurity
+msgid "Enter one or more IP addresses or IP ranges you wish to include in your whitelist. Only the addresses specified here will have access to the WordPress login page."
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:24
+#@ aiowpsecurity
+msgid "System Info"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:25
+#: admin/wp-security-dashboard-menu.php:436
+#@ aiowpsecurity
+msgid "Locked IP Addresses"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:75
+#@ aiowpsecurity
+msgid "For information, updates and documentation, please visit the"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:75
+#@ aiowpsecurity
+msgid "AIO WP Security & Firewall Plugin"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:75
+#@ aiowpsecurity
+msgid "Page"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:76
+#@ aiowpsecurity
+msgid "Follow us"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:76
+#@ aiowpsecurity
+msgid "Twitter, Google+ or via Email to stay up to date about the new security features of this plugin."
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:90
+#@ aiowpsecurity
+msgid "Security Strength Meter"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:119
+#@ aiowpsecurity
+msgid "Total Achievable Points: "
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:121
+#@ aiowpsecurity
+msgid "Current Score of Your Site: "
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:131
+#@ aiowpsecurity
+msgid "Security Points Breakdown"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:172
+#@ aiowpsecurity
+msgid "Critical Feature Status"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:176
+#@ aiowpsecurity
+msgid "Below is the current status of the critical features that you should activate on your site to achieve a minimum level of recommended security"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:180
+#@ aiowpsecurity
+msgid "Admin Username"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:195
+#: admin/wp-security-user-login-menu.php:25
+#: classes/grade-system/wp-security-feature-item-manager.php:42
+#@ aiowpsecurity
+msgid "Login Lockdown"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:210
+#@ aiowpsecurity
+msgid "File Permission"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:225
+#@ aiowpsecurity
+msgid "Basic Firewall"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:243
+#@ aiowpsecurity
+msgid "Last 5 Logins"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:257
+#@ aiowpsecurity
+msgid "No data found!"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:261
+#@ aiowpsecurity
+msgid "Last 5 logins summary:"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:265
+#@ aiowpsecurity
+msgid "User"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:266
+#@ aiowpsecurity
+msgid "Date"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:267
+#@ aiowpsecurity
+msgid "IP"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:288
+#@ aiowpsecurity
+msgid "Maintenance Mode Status"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:292
+#@ aiowpsecurity
+msgid "Maintenance mode is currently enabled. Remember to turn it off when you are done"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:295
+#@ aiowpsecurity
+msgid "Maintenance mode is currently off."
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:299
+#@ aiowpsecurity
+msgid "Maintenance Mode"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:321
+#@ aiowpsecurity
+msgid "Cookie Based Brute Prevention"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:324
+#@ aiowpsecurity
+msgid "Cookie-Based Brute Force"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:328
+#: admin/wp-security-dashboard-menu.php:356
+#, php-format
+#@ aiowpsecurity
+msgid "The %s feature is currently active."
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:329
+#: admin/wp-security-dashboard-menu.php:357
+#@ aiowpsecurity
+msgid "Your new WordPress login URL is now:"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:389
+#: admin/wp-security-user-login-menu.php:29
+#@ aiowpsecurity
+msgid "Logged In Users"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:399
+#@ aiowpsecurity
+msgid "Number of users currently logged in site-wide is:"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:400
+#: admin/wp-security-dashboard-menu.php:422
+#: admin/wp-security-dashboard-menu.php:450
+#, php-format
+#@ aiowpsecurity
+msgid "Go to the %s menu to see more details"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:405
+#@ aiowpsecurity
+msgid "There are no other site-wide users currently logged in."
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:421
+#@ aiowpsecurity
+msgid "Number of users currently logged into your site (including you) is:"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:427
+#@ aiowpsecurity
+msgid "There are no other users currently logged in."
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:444
+#@ aiowpsecurity
+msgid "There are no IP addresses currently locked out."
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:449
+#@ aiowpsecurity
+msgid "Number of temporarily locked out IP addresses: "
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:462
+#@ aiowpsecurity
+msgid "Spread the Word"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:465
+#@ aiowpsecurity
+msgid "We are working hard to make your WordPress site more secure. Please support us, here is how:"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:489
+#@ aiowpsecurity
+msgid "Site Info"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:491
+#@ aiowpsecurity
+msgid "Plugin Version"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:492
+#@ aiowpsecurity
+msgid "WP Version"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:494
+#: admin/wp-security-dashboard-menu.php:496
+#: admin/wp-security-dashboard-menu.php:592
+#@ aiowpsecurity
+msgid "Version"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:495
+#@ aiowpsecurity
+msgid "Table Prefix"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:497
+#@ aiowpsecurity
+msgid "Session Save Path"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:499
+#@ aiowpsecurity
+msgid "Server Name"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:500
+#@ aiowpsecurity
+msgid "Cookie Domain"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:501
+#@ aiowpsecurity
+msgid "Library Present"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:502
+#@ aiowpsecurity
+msgid "Debug File Write Permissions"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:506
+#@ aiowpsecurity
+msgid "PHP Info"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:508
+#@ aiowpsecurity
+msgid "PHP Version"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:509
+#@ aiowpsecurity
+msgid "PHP Memory Usage"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:510
+#@ aiowpsecurity
+msgid " MB"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:516
+#: admin/wp-security-dashboard-menu.php:524
+#: admin/wp-security-dashboard-menu.php:532
+#: admin/wp-security-dashboard-menu.php:574
+#@ aiowpsecurity
+msgid "N/A"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:519
+#@ aiowpsecurity
+msgid "PHP Memory Limit"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:527
+#@ aiowpsecurity
+msgid "PHP Max Upload Size"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:535
+#@ aiowpsecurity
+msgid "PHP Max Post Size"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:538
+#: admin/wp-security-dashboard-menu.php:546
+#: admin/wp-security-dashboard-menu.php:555
+#: admin/wp-security-dashboard-menu.php:563
+#@ aiowpsecurity
+msgid "On"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:540
+#: admin/wp-security-dashboard-menu.php:548
+#: admin/wp-security-dashboard-menu.php:557
+#: admin/wp-security-dashboard-menu.php:565
+#@ aiowpsecurity
+msgid "Off"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:543
+#@ aiowpsecurity
+msgid "PHP Safe Mode"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:551
+#@ aiowpsecurity
+msgid "PHP Allow URL fopen"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:560
+#@ default
+msgid "PHP Allow URL Include"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:568
+#@ aiowpsecurity
+msgid "PHP Display Errors"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:577
+#@ aiowpsecurity
+msgid "PHP Max Script Execution Time"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:577
+#@ default
+msgid "Seconds"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:581
+#@ aiowpsecurity
+msgid "Active Plugins"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:591
+#: admin/wp-security-filesystem-menu.php:130
+#: admin/wp-security-filesystem-menu.php:149
+#@ aiowpsecurity
+msgid "Name"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:593
+#@ aiowpsecurity
+msgid "Plugin URL"
+msgstr ""
+
+#: admin/wp-security-dashboard-menu.php:629
+#@ aiowpsecurity
+msgid "Currently Locked Out IP Addresses and Ranges"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:26
+#: admin/wp-security-database-menu.php:31
+#: classes/grade-system/wp-security-feature-item-manager.php:62
+#@ aiowpsecurity
+msgid "DB Backup"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:30
+#: classes/grade-system/wp-security-feature-item-manager.php:60
+#@ aiowpsecurity
+msgid "DB Prefix"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:93
+#@ aiowpsecurity
+msgid "Nonce check failed for DB prefix change operation!"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:101
+#@ aiowpsecurity
+msgid "The plugin has detected that it cannot write to the wp-config.php file. This feature can only be used if the plugin can successfully write to the wp-config.php file."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:114
+#@ aiowpsecurity
+msgid "Please enter a value for the DB prefix."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:123
+#@ aiowpsecurity
+msgid "<strong>ERROR</strong>: The table prefix can only contain numbers, letters, and underscores."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:131
+#@ aiowpsecurity
+msgid "Change Database Prefix"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:134
+#@ aiowpsecurity
+msgid "Your WordPress DB is the most important asset of your website because it contains a lot of your site's precious information."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:135
+#@ aiowpsecurity
+msgid "The DB is also a target for hackers via methods such as SQL injections and malicious and automated code which targets certain tables."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:136
+#@ aiowpsecurity
+msgid "One way to add a layer of protection for your DB is to change the default WordPress table prefix from \"wp_\" to something else which will be difficult for hackers to guess."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:137
+#@ aiowpsecurity
+msgid "This feature allows you to easily change the prefix to a value of your choice or to a random value set by this plugin."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:143
+#@ aiowpsecurity
+msgid "DB Prefix Options"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:154
+#, php-format
+#@ aiowpsecurity
+msgid "It is recommended that you perform a %s before using this feature"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:163
+#@ aiowpsecurity
+msgid "Current DB Table Prefix"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:169
+#@ aiowpsecurity
+msgid ""
+"Your site is currently using the default WordPress DB prefix value of \"wp_\". \n"
+"                            To increase your site's security you should consider changing the DB prefix value to another value."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:176
+#@ aiowpsecurity
+msgid "Generate New DB Table Prefix"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:179
+#@ aiowpsecurity
+msgid "Check this if you want the plugin to generate a random 6 character string for the table prefix"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:180
+#@ aiowpsecurity
+msgid "OR"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:182
+#@ aiowpsecurity
+msgid "Choose your own DB prefix by specifying a string which contains letters and/or numbers and/or underscores. Example: xyz_"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:186
+#@ aiowpsecurity
+msgid "Change DB Prefix"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:207
+#: admin/wp-security-filesystem-menu.php:86
+#@ aiowpsecurity
+msgid "Nonce check failed for manual DB backup operation!"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:224
+#@ aiowpsecurity
+msgid "DB Backup was successfully completed! You will receive the backup file via email if you have enabled \"Send Backup File Via Email\", otherwise you can retrieve it via FTP from the following directory:"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:226
+#@ default
+msgid "Your DB Backup File location: "
+msgstr ""
+
+#: admin/wp-security-database-menu.php:234
+#@ aiowpsecurity
+msgid "DB Backup failed. Please check the permissions of the backup directory."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:251
+#: admin/wp-security-filescan-menu.php:133
+#@ aiowpsecurity
+msgid "You entered a non numeric value for the \"backup time interval\" field. It has been set to the default value."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:258
+#@ aiowpsecurity
+msgid "You entered a non numeric value for the \"number of backup files to keep\" field. It has been set to the default value."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:265
+#: admin/wp-security-filescan-menu.php:163
+#: admin/wp-security-user-login-menu.php:117
+#@ aiowpsecurity
+msgid "You have entered an incorrect email address format. It has been set to your WordPress admin email as default."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:298
+#@ aiowpsecurity
+msgid "Manual Backup"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:304
+#@ aiowpsecurity
+msgid "To create a new DB backup just click on the button below."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:307
+#@ aiowpsecurity
+msgid "Create DB Backup Now"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:311
+#@ aiowpsecurity
+msgid "Automated Scheduled Backups"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:323
+#@ aiowpsecurity
+msgid "Enable Automated Scheduled Backups"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:326
+#@ aiowpsecurity
+msgid "Check this if you want the system to automatically generate backups periodically based on the settings below"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:330
+#@ aiowpsecurity
+msgid "Backup Time Interval"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:333
+#: admin/wp-security-filescan-menu.php:279
+#@ aiowpsecurity
+msgid "Hours"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:334
+#: admin/wp-security-filescan-menu.php:280
+#@ aiowpsecurity
+msgid "Days"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:335
+#: admin/wp-security-filescan-menu.php:281
+#@ aiowpsecurity
+msgid "Weeks"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:337
+#@ aiowpsecurity
+msgid "Set the value for how often you would like an automated backup to occur"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:341
+#@ aiowpsecurity
+msgid "Number of Backup Files To Keep"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:343
+#@ aiowpsecurity
+msgid "Thie field allows you to choose the number of backup files you would like to keep in the backup directory"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:347
+#@ aiowpsecurity
+msgid "Send Backup File Via Email"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:350
+#@ aiowpsecurity
+msgid "Check this if you want the system to email you the backup file after a DB backup has been performed"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:352
+#: admin/wp-security-filescan-menu.php:325
+#: admin/wp-security-user-login-menu.php:235
+#@ aiowpsecurity
+msgid "Enter an email address"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:383
+#@ aiowpsecurity
+msgid "Error - Could not get tables or no tables found!"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:388
+#@ aiowpsecurity
+msgid "Starting DB prefix change operations....."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:390
+#, php-format
+#@ aiowpsecurity
+msgid "Your WordPress system has a total of %s tables and your new DB prefix will be: %s"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:396
+#: classes/wp-security-utility.php:206
+#@ aiowpsecurity
+msgid "Failed to make a backup of the wp-config.php file. This operation will not go ahead."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:400
+#@ aiowpsecurity
+msgid "A backup copy of your wp-config.php file was created successfully!"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:422
+#, php-format
+#@ aiowpsecurity
+msgid "%s table name update failed"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:434
+#, php-format
+#@ aiowpsecurity
+msgid "Please change the prefix manually for the above tables to: %s"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:437
+#, php-format
+#@ aiowpsecurity
+msgid "%s tables had their prefix updated successfully!"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:452
+#@ aiowpsecurity
+msgid "wp-config.php file was updated successfully!"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:455
+#, php-format
+#@ aiowpsecurity
+msgid ""
+"The \"wp-config.php\" file was not able to be modified. Please modify this file manually using your favourite editor and search \n"
+"                    for variable \"$table_prefix\" and assign the following value to that variable: %s"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:476
+#@ aiowpsecurity
+msgid "There was an error when updating the options table."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:480
+#@ aiowpsecurity
+msgid "The options table records which had references to the old DB prefix were updated successfully!"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:505
+#, php-format
+#@ aiowpsecurity
+msgid "Error updating user_meta table where new meta_key = %s, old meta_key = %s and user_id = %s."
+msgstr ""
+
+#: admin/wp-security-database-menu.php:511
+#@ aiowpsecurity
+msgid "The usermeta table records which had references to the old DB prefix were updated successfully!"
+msgstr ""
+
+#: admin/wp-security-database-menu.php:513
+#@ aiowpsecurity
+msgid "DB prefix change tasks have been completed."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:23
+#: classes/grade-system/wp-security-feature-item-manager.php:102
+#@ aiowpsecurity
+msgid "File Change Detection"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:24
+#@ aiowpsecurity
+msgid "Malware Scan"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:93
+#@ aiowpsecurity
+msgid "There have been no file changes since the last scan."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:103
+#@ aiowpsecurity
+msgid "Nonce check failed for manual file change detection scan operation!"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:110
+#@ aiowpsecurity
+msgid "The plugin has detected that this is your first file change detection scan. The file details from this scan will be used to detect file changes for future scans!"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:112
+#@ aiowpsecurity
+msgid "Scan Complete - There were no file changes detected!"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:201
+#@ aiowpsecurity
+msgid ""
+"NEW SCAN COMPLETED: The plugin has detected that you have made changes to the \"File Types To Ignore\" or \"Files To Ignore\" fields.\n"
+"                    In order to ensure that future scan results are accurate, the old scan data has been refreshed."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:211
+#@ aiowpsecurity
+msgid "All In One WP Security & Firewall has detected that there was a change in your host's files."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:213
+#@ aiowpsecurity
+msgid "View Scan Details & Clear This Message"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:222
+#@ aiowpsecurity
+msgid "If given an opportunity hackers can insert their code or files into your system which they can then use to carry out malicious acts on your site."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:223
+#@ aiowpsecurity
+msgid "Being informed of any changes in your files can be a good way to quickly prevent a hacker from causing damage to your website."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:224
+#@ aiowpsecurity
+msgid "In general, WordPress core and plugin files and file types such as \".php\" or \".js\" should not change often and when they do, it is important that you are made aware when a change occurs and which file was affected."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:225
+#@ aiowpsecurity
+msgid "The \"File Change Detection Feature\" will notify you of any file change which occurs on your system, including the addition and deletion of files by performing a regular automated or manual scan of your system's files."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:226
+#@ aiowpsecurity
+msgid "This feature also allows you to exclude certain files or folders from the scan in cases where you know that they change often as part of their normal operation. (For example log files and certain caching plugin files may change often and hence you may choose to exclude such files from the file change detection scan)"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:231
+#@ aiowpsecurity
+msgid "Manual File Change Detection Scan"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:237
+#@ aiowpsecurity
+msgid "To perform a manual file change detection scan click on the button below."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:240
+#@ aiowpsecurity
+msgid "Perform Scan Now"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:244
+#@ aiowpsecurity
+msgid "View Last Saved File Change Results"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:250
+#@ aiowpsecurity
+msgid "Click the button below to view the saved file change results from the last scan."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:253
+#@ aiowpsecurity
+msgid "View Last File Change"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:257
+#@ aiowpsecurity
+msgid "File Change Detection Settings"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:269
+#@ aiowpsecurity
+msgid "Enable Automated File Change Detection Scan"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:272
+#@ aiowpsecurity
+msgid "Check this if you want the system to automatically/periodically scan your files to check for file changes based on the settings below"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:276
+#@ aiowpsecurity
+msgid "Scan Time Interval"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:283
+#@ aiowpsecurity
+msgid "Set the value for how often you would like a scan to occur"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:287
+#@ aiowpsecurity
+msgid "File Types To Ignore"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:290
+#@ aiowpsecurity
+msgid "Enter each file type or extension on a new line which you wish to exclude from the file change detection scan."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:294
+#@ aiowpsecurity
+msgid "You can exclude file types from the scan which would not normally pose any security threat if they were changed. These can include things such as image files."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:295
+#@ aiowpsecurity
+msgid "Example: If you want the scanner to ignore files of type jpg, png, and bmp, then you would enter the following:"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:296
+#@ aiowpsecurity
+msgid "jpg"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:297
+#@ aiowpsecurity
+msgid "png"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:298
+#@ aiowpsecurity
+msgid "bmp"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:304
+#@ aiowpsecurity
+msgid "Files/Directories To Ignore"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:307
+#@ aiowpsecurity
+msgid "Enter each file or directory on a new line which you wish to exclude from the file change detection scan."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:311
+#@ aiowpsecurity
+msgid "You can exclude specific files/directories from the scan which would not normally pose any security threat if they were changed. These can include things such as log files."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:312
+#@ aiowpsecurity
+msgid "Example: If you want the scanner to ignore certain files in different directories or whole directories, then you would enter the following:"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:313
+#@ aiowpsecurity
+msgid "cache/config/master.php"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:314
+#@ aiowpsecurity
+msgid "somedirectory"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:320
+#@ aiowpsecurity
+msgid "Send Email When Change Detected"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:323
+#@ aiowpsecurity
+msgid "Check this if you want the system to email you if a file change was detected"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:341
+#@ aiowpsecurity
+msgid "What is Malware?"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:342
+#@ aiowpsecurity
+msgid "The word Malware stands for Malicious Software. It can consist of things like trojan horses, adware, worms, spyware and any other undesirable code which a hacker will try to inject into your website."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:343
+#@ aiowpsecurity
+msgid "Often when malware code has been inserted into your site you will normally not notice anything out of the ordinary based on appearances, but it can have a dramatic effect on your site’s search ranking."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:344
+#@ aiowpsecurity
+msgid "This is because the bots and spiders from search engines such as Google have the capability to detect malware when they are indexing the pages on your site, and consequently they can blacklist your website which will in turn affect your search rankings."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:348
+#@ aiowpsecurity
+msgid "Scanning For Malware"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:349
+#@ aiowpsecurity
+msgid "Due to the constantly changing and complex nature of Malware, scanning for such things using a standalone plugin will not work reliably. This is something best done via an external scan of your site regularly."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:350
+#@ aiowpsecurity
+msgid "This is why we have created an easy-to-use scanning service which is hosted off our own server which will scan your site for malware once every day and notify you if it finds anything."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:351
+#@ aiowpsecurity
+msgid "When you sign up for this service you will get the following:"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:353
+#@ aiowpsecurity
+msgid "Automatic Daily Scan of 1 Website"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:354
+#@ aiowpsecurity
+msgid "Automatic Malware & Blacklist Monitoring"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:355
+#@ aiowpsecurity
+msgid "Automatic Email Alerting"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:356
+#@ aiowpsecurity
+msgid "Site uptime monitoring"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:357
+#@ aiowpsecurity
+msgid "Site response time monitoring"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:358
+#@ aiowpsecurity
+msgid "Malware Cleanup"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:359
+#@ aiowpsecurity
+msgid "Blacklist Removal"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:360
+#@ aiowpsecurity
+msgid "No Contract (Cancel Anytime)"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:362
+#, php-format
+#@ aiowpsecurity
+msgid "To learn more please %s."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:391
+#@ aiowpsecurity
+msgid "Latest File Change Scan Results"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:400
+#@ aiowpsecurity
+msgid "The following files were added to your host."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:403
+#: admin/wp-security-filescan-menu.php:424
+#: admin/wp-security-filescan-menu.php:448
+#: admin/wp-security-settings-menu.php:26
+#: admin/wp-security-settings-menu.php:27
+#@ aiowpsecurity
+msgid "File"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:404
+#: admin/wp-security-filescan-menu.php:425
+#: admin/wp-security-filescan-menu.php:449
+#@ aiowpsecurity
+msgid "File Size"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:405
+#: admin/wp-security-filescan-menu.php:426
+#: admin/wp-security-filescan-menu.php:450
+#@ aiowpsecurity
+msgid "File Modified"
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:421
+#@ aiowpsecurity
+msgid "The following files were removed from your host."
+msgstr ""
+
+#: admin/wp-security-filescan-menu.php:445
+#@ aiowpsecurity
+msgid "The following files were changed on your host."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:26
+#: classes/grade-system/wp-security-feature-item-manager.php:66
+#@ aiowpsecurity
+msgid "File Permissions"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:27
+#@ aiowpsecurity
+msgid "PHP File Editing"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:28
+#@ aiowpsecurity
+msgid "WP File Access"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:29
+#@ aiowpsecurity
+msgid "Host System Logs"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:96
+#, php-format
+#@ aiowpsecurity
+msgid "The permissions for %s were succesfully changed to %s"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:100
+#, php-format
+#@ aiowpsecurity
+msgid "Unable to change permissions for %s!"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:106
+#@ aiowpsecurity
+msgid "File Permissions Scan"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:109
+#@ aiowpsecurity
+msgid "Your WordPress file and folder permission settings govern the accessability and read/write privileges of the files and folders which make up your WP installation."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:110
+#@ aiowpsecurity
+msgid "Your WP installation already comes with reasonably secure file permission settings for the filesystem."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:111
+#@ aiowpsecurity
+msgid "However, sometimes people or other plugins modify the various permission settings of certain core WP folders or files such that they end up making their site less secure because they chose the wrong permission values."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:112
+#@ aiowpsecurity
+msgid "This feature will scan the critical WP core folders and files and will highlight any permission settings which are insecure."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:118
+#@ aiowpsecurity
+msgid "WP Directory and File Permissions Scan Results"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:131
+#: admin/wp-security-filesystem-menu.php:150
+#@ aiowpsecurity
+msgid "File/Folder"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:132
+#: admin/wp-security-filesystem-menu.php:151
+#@ aiowpsecurity
+msgid "Current Permissions"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:133
+#: admin/wp-security-filesystem-menu.php:152
+#@ aiowpsecurity
+msgid "Recommended Permissions"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:134
+#: admin/wp-security-filesystem-menu.php:153
+#@ aiowpsecurity
+msgid "Recommended Action"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:191
+#@ aiowpsecurity
+msgid "Your PHP file editing settings were saved successfully."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:195
+#@ aiowpsecurity
+msgid "Operation failed! Unable to modify or make a backup of wp-config.php file!"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:201
+#: classes/grade-system/wp-security-feature-item-manager.php:68
+#@ aiowpsecurity
+msgid "File Editing"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:204
+#@ aiowpsecurity
+msgid "The Wordpress Dashboard by default allows administrators to edit PHP files, such as plugin and theme files."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:205
+#@ aiowpsecurity
+msgid "This is often the first tool an attacker will use if able to login, since it allows code execution."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:206
+#@ aiowpsecurity
+msgid "This feature will disable the ability for people to edit PHP files via the dashboard."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:212
+#@ aiowpsecurity
+msgid "Disable PHP File Editing"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:224
+#@ aiowpsecurity
+msgid "Disable Ability To Edit PHP Files"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:227
+#@ aiowpsecurity
+msgid "Check this if you want to remove the ability for people to edit PHP files via the WP dashboard"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:271
+#@ aiowpsecurity
+msgid "You have successfully saved the Prevent Access to Default WP Files configuration."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:280
+#@ aiowpsecurity
+msgid "WordPress Files"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:283
+#, php-format
+#@ aiowpsecurity
+msgid "This feature allows you to prevent access to files such as %s, %s and %s which are delivered with all WP installations."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:284
+#@ aiowpsecurity
+msgid "By preventing access to these files you are hiding some key pieces of information (such as WordPress version info) from potential hackers."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:289
+#@ aiowpsecurity
+msgid "Prevent Access to Default WP Files"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:300
+#@ aiowpsecurity
+msgid "Prevent Access to WP Default Install Files"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:303
+#@ aiowpsecurity
+msgid "Check this if you want to prevent access to readme.html, license.txt and wp-config-sample.php."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:307
+#@ aiowpsecurity
+msgid "Save Setting"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:331
+#@ aiowpsecurity
+msgid "System Logs"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:334
+#@ aiowpsecurity
+msgid "Sometimes your hosting platform will produce error or warning logs in a file called \"error_log\"."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:335
+#@ aiowpsecurity
+msgid "Depending on the nature and cause of the error or warning, your hosting server can create multiple instances of this file in numerous directory locations of your WordPress installation."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:336
+#@ aiowpsecurity
+msgid "By occassionally viewing the contents of these logs files you can keep informed of any underlying problems on your system which you might need to address."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:342
+#@ aiowpsecurity
+msgid "View System Logs"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:347
+#@ aiowpsecurity
+msgid "Enter System Log File Name"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:349
+#@ aiowpsecurity
+msgid "Enter your system log file name. (Defaults to error_log)"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:352
+#@ aiowpsecurity
+msgid "View Latest System Logs"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:354
+#@ aiowpsecurity
+msgid "Loading..."
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:371
+#@ aiowpsecurity
+msgid "No system logs were found!"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:424
+#@ aiowpsecurity
+msgid "Set Recommended Permissions"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:430
+#@ aiowpsecurity
+msgid "No Action Required"
+msgstr ""
+
+#: admin/wp-security-filesystem-menu.php:470
+#, php-format
+#@ aiowpsecurity
+msgid "Showing latest entries of error_log file: %s"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:27
+#@ aiowpsecurity
+msgid "Basic Firewall Rules"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:28
+#@ aiowpsecurity
+msgid "Additional Firewall Rules"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:29
+#@ aiowpsecurity
+msgid "5G Blacklist Firewall Rules"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:30
+#@ aiowpsecurity
+msgid "Internet Bots"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:31
+#@ aiowpsecurity
+msgid "Prevent Hotlinks"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:32
+#@ aiowpsecurity
+msgid "404 Detection"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:115
+#: admin/wp-security-firewall-menu.php:663
+#: admin/wp-security-spam-menu.php:102
+#: admin/wp-security-user-registration-menu.php:96
+#@ aiowpsecurity
+msgid "Settings were successfully saved"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:124
+#: admin/wp-security-firewall-menu.php:503
+#@ aiowpsecurity
+msgid "Firewall Settings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:131
+#, php-format
+#@ aiowpsecurity
+msgid "This should not have any impact on your site's general functionality but if you wish you can take a %s of your .htaccess file before proceeding."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:132
+#@ aiowpsecurity
+msgid "The features in this tab allow you to activate some basic firewall security protection rules for your site."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:133
+#@ aiowpsecurity
+msgid "The firewall functionality is achieved via the insertion of special code into your currently active .htaccess file."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:143
+#@ aiowpsecurity
+msgid "Attention:"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:144
+#@ aiowpsecurity
+msgid "Currently the "
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:144
+#: admin/wp-security-firewall-menu.php:191
+#@ aiowpsecurity
+msgid "Enable Pingback Protection"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:144
+#@ aiowpsecurity
+msgid " is active."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:145
+#@ aiowpsecurity
+msgid "Please beware that if you are using the WordPress iOS App, then you will need to deactivate this feature in order for the app to work properly."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:153
+#@ aiowpsecurity
+msgid "Basic Firewall Settings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:161
+#@ aiowpsecurity
+msgid "Enable Basic Firewall Protection"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:164
+#@ aiowpsecurity
+msgid "Check this if you want to apply basic firewall protection to your site."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:168
+#@ aiowpsecurity
+msgid "This setting will implement the following basic firewall protection mechanisms on your site:"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:169
+#@ aiowpsecurity
+msgid "1) Protect your htaccess file by denying access to it."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:170
+#@ aiowpsecurity
+msgid "2) Disable the server signature."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:171
+#@ aiowpsecurity
+msgid "3) Limit file upload size (10MB)."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:172
+#@ aiowpsecurity
+msgid "4) Protect your wp-config.php file by denying access to it."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:173
+#@ aiowpsecurity
+msgid "The above firewall features will be applied via your .htaccess file and should not affect your site's overall functionality."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:174
+#@ aiowpsecurity
+msgid "You are still advised to take a backup of your active .htaccess file just in case."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:183
+#@ aiowpsecurity
+msgid "WordPress Pingback Vulnerability Protection"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:194
+#@ aiowpsecurity
+msgid "Check this if you are not using the WP XML-RPC functionality and you want to enable protection against WordPress pingback vulnerabilities."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:198
+#@ aiowpsecurity
+msgid "This setting will add a directive in your .htaccess to disable access to the WordPress xmlrpc.php file which is responsible for the XML-RPC functionality such as pingbacks in WordPress."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:199
+#@ aiowpsecurity
+msgid "Hackers can exploit various pingback vulnerabilities in the WordPress XML-RPC API in a number of ways such as:"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:200
+#@ aiowpsecurity
+msgid "1) Denial of Service (DoS) attacks"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:201
+#@ aiowpsecurity
+msgid "2) Hacking internal routers."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:202
+#@ aiowpsecurity
+msgid "3) Scanning ports in internal networks to get info from various hosts."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:203
+#@ aiowpsecurity
+msgid "Apart from the security protection benefit, this feature may also help reduce load on your server, particularly if your site currently has a lot of unwanted traffic hitting the XML-RPC API on your installation."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:204
+#@ aiowpsecurity
+msgid "NOTE: You should only enable this feature if you are not currently using the XML-RPC functionality on your WordPress installation."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:211
+#@ aiowpsecurity
+msgid "Save Basic Firewall Settings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:283
+#@ aiowpsecurity
+msgid "You have successfully saved the Additional Firewall Protection configuration"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:297
+#@ aiowpsecurity
+msgid "Additional Firewall Protection"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:301
+#, php-format
+#@ aiowpsecurity
+msgid "Due to the nature of the code being inserted to the .htaccess file, this feature may break some functionality for certain plugins and you are therefore advised to take a %s of .htaccess before applying this configuration."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:303
+#@ aiowpsecurity
+msgid "This feature allows you to activate more advanced firewall settings to your site."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:304
+#@ aiowpsecurity
+msgid "The advanced firewall rules are applied via the insertion of special code to your currently active .htaccess file."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:313
+#@ aiowpsecurity
+msgid "Listing of Directory Contents"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:322
+#: classes/grade-system/wp-security-feature-item-manager.php:88
+#@ aiowpsecurity
+msgid "Disable Index Views"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:325
+#@ aiowpsecurity
+msgid "Check this if you want to disable directory and file listing."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:330
+#@ aiowpsecurity
+msgid "By default, an Apache server will allow the listing of the contents of a directory if it doesn't contain an index.php file."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:332
+#@ aiowpsecurity
+msgid "This feature will prevent the listing of contents for all directories."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:334
+#@ aiowpsecurity
+msgid "NOTE: In order for this feature to work \"AllowOverride\" of the Indexes directive must be enabled in your httpd.conf file. Ask your hosting provider to check this if you don't have access to httpd.conf"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:343
+#@ aiowpsecurity
+msgid "Trace and Track"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:352
+#: classes/grade-system/wp-security-feature-item-manager.php:89
+#@ aiowpsecurity
+msgid "Disable Trace and Track"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:355
+#@ aiowpsecurity
+msgid "Check this if you want to disable trace and track."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:360
+#@ aiowpsecurity
+msgid "HTTP Trace attack (XST) can be used to return header requests and grab cookies and other information."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:362
+#@ aiowpsecurity
+msgid "This hacking technique is usually used together with cross site scripting attacks (XSS)."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:364
+#@ aiowpsecurity
+msgid "Disabling trace and track on your site will help prevent HTTP Trace attacks."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:373
+#@ aiowpsecurity
+msgid "Proxy Comment Posting"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:383
+#@ aiowpsecurity
+msgid "Forbid Proxy Comment Posting"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:386
+#@ aiowpsecurity
+msgid "Check this if you want to forbid proxy comment posting."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:391
+#@ aiowpsecurity
+msgid "This setting will deny any requests that use a proxy server when posting comments."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:392
+#@ aiowpsecurity
+msgid "By forbidding proxy comments you are in effect eliminating some SPAM and other proxy requests."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:401
+#@ aiowpsecurity
+msgid "Bad Query Strings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:411
+#@ aiowpsecurity
+msgid "Deny Bad Query Strings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:414
+#@ aiowpsecurity
+msgid "This will help protect you against malicious queries via XSS."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:419
+#@ aiowpsecurity
+msgid "This feature will write rules in your .htaccess file to prevent malicious string attacks on your site using XSS."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:420
+#@ aiowpsecurity
+msgid "NOTE: Some of these strings might be used for plugins or themes and hence this might break some functionality."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:421
+#: admin/wp-security-firewall-menu.php:451
+#@ aiowpsecurity
+msgid "You are therefore strongly advised to take a backup of your active .htaccess file before applying this feature."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:430
+#: classes/grade-system/wp-security-feature-item-manager.php:92
+#@ aiowpsecurity
+msgid "Advanced Character String Filter"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:440
+#@ aiowpsecurity
+msgid "Enable Advanced Character String Filter"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:443
+#@ aiowpsecurity
+msgid "This will block bad character matches from XSS."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:448
+#@ aiowpsecurity
+msgid "This is an advanced character string filter to prevent malicious string attacks on your site coming from Cross Site Scripting (XSS)."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:449
+#@ aiowpsecurity
+msgid "This setting matches for common malicious string patterns and exploits and will produce a 403 error for the hacker attempting the query."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:450
+#@ aiowpsecurity
+msgid "NOTE: Some strings for this setting might break some functionality."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:459
+#@ aiowpsecurity
+msgid "Save Additional Firewall Settings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:494
+#@ aiowpsecurity
+msgid "You have successfully saved the 5G Firewall Protection configuration"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:507
+#, php-format
+#@ aiowpsecurity
+msgid "This feature allows you to activate the 5G  firewall security protection rules designed and produced by %s."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:508
+#@ aiowpsecurity
+msgid "The 5G Blacklist is a simple, flexible blacklist that helps reduce the number of malicious URL requests that hit your website."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:509
+#@ aiowpsecurity
+msgid "The added advantage of applying the 5G firewall to your site is that it has been tested and confirmed by the people at PerishablePress.com to be an optimal and least disruptive set of .htaccess security rules for general WP sites running on an Apache server or similar."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:510
+#, php-format
+#@ aiowpsecurity
+msgid "Therefore the 5G firewall rules should not have any impact on your site's general functionality but if you wish you can take a %s of your .htaccess file before proceeding."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:516
+#@ aiowpsecurity
+msgid "5G Blacklist/Firewall Settings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:528
+#@ aiowpsecurity
+msgid "Enable 5G Firewall Protection"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:531
+#@ aiowpsecurity
+msgid "Check this if you want to apply the 5G Blacklist firewall protection from perishablepress.com to your site."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:535
+#@ aiowpsecurity
+msgid "This setting will implement the 5G security firewall protection mechanisms on your site which include the following things:"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:536
+#@ aiowpsecurity
+msgid "1) Block forbidden characters commonly used in exploitative attacks."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:537
+#@ aiowpsecurity
+msgid "2) Block malicious encoded URL characters such as the \".css(\" string."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:538
+#@ aiowpsecurity
+msgid "3) Guard against the common patterns and specific exploits in the root portion of targeted URLs."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:539
+#@ aiowpsecurity
+msgid "4) Stop attackers from manipulating query strings by disallowing illicit characters."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:540
+#@ aiowpsecurity
+msgid "....and much more."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:546
+#@ aiowpsecurity
+msgid "Save 5G Firewall Settings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:577
+#@ aiowpsecurity
+msgid "The Internet bot settings were successfully saved"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:581
+#@ aiowpsecurity
+msgid "Internet Bot Settings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:588
+#, php-format
+#@ aiowpsecurity
+msgid "%s?"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:590
+#@ aiowpsecurity
+msgid "A bot is a piece of software which runs on the Internet and performs automatic tasks. For example when Google indexes your pages it uses automatic bots to achieve this task."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:591
+#@ aiowpsecurity
+msgid "A lot of bots are legitimate and non-malicous but not all bots are good and often you will find some which try to impersonate legitimate bots such as \"Googlebot\" but in reality they have nohing to do with Google at all."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:592
+#@ aiowpsecurity
+msgid "Although most of the bots out there are relatively harmless sometimes website owners want to have more control over which bots they allow into their site."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:593
+#@ aiowpsecurity
+msgid "This feature allows you to block bots which are impersonating as a Googlebot but actually aren't. (In other words they are fake Google bots)"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:594
+#@ aiowpsecurity
+msgid "Googlebots have a unique indentity which cannot easily be forged and this feature will indentify any fake Google bots and block them from reading your site's pages."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:600
+#@ aiowpsecurity
+msgid "<strong>Attention</strong>: Sometimes non-malicious Internet organizations might have bots which impersonate as a \"Googlebot\"."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:601
+#@ aiowpsecurity
+msgid "Just be aware that if you activate this feature the plugin will block all bots which use the \"Googlebot\" string in their User Agent information but are NOT officially from Google (irrespective whether they are malicious or not)."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:602
+#@ aiowpsecurity
+msgid "All other bots from other organizations such as \"Yahoo\", \"Bing\" etc will not be affected by this feature."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:608
+#: admin/wp-security-firewall-menu.php:618
+#: classes/grade-system/wp-security-feature-item-manager.php:94
+#@ aiowpsecurity
+msgid "Block Fake Googlebots"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:621
+#@ aiowpsecurity
+msgid "Check this if you want to block all fake Googlebots."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:625
+#@ aiowpsecurity
+msgid "This feature will check if the User Agent information of a bot contains the string \"Googlebot\"."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:626
+#@ aiowpsecurity
+msgid "It will then perform a few tests to verify if the bot is legitimately from Google and if so it will allow the bot to proceed."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:627
+#@ aiowpsecurity
+msgid "If the bot fails the checks then the plugin will mark it as being a fake Googlebot and it will block it"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:634
+#@ aiowpsecurity
+msgid "Save Internet Bot Settings"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:671
+#: admin/wp-security-firewall-menu.php:693
+#: classes/grade-system/wp-security-feature-item-manager.php:32
+#@ aiowpsecurity
+msgid "Prevent Image Hotlinking"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:674
+#@ aiowpsecurity
+msgid "A Hotlink is where someone displays an image on their site which is actually located on your site by using a direct link to the source of the image on your server."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:675
+#@ aiowpsecurity
+msgid "Due to the fact that the image being displayed on the other person's site is coming from your server, this can cause leaking of bandwidth and resources for you because your server has to present this image for the people viewing it on someone elses's site."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:676
+#@ aiowpsecurity
+msgid "This feature will prevent people from directly hotlinking images from your site's pages by writing some directives in your .htaccess file."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:681
+#@ aiowpsecurity
+msgid "Prevent Hotlinking"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:696
+#@ aiowpsecurity
+msgid "Check this if you want to prevent hotlinking to images on your site."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:716
+#@ aiowpsecurity
+msgid "Nonce check failed for delete all 404 event logs operation!"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:727
+#@ aiowpsecurity
+msgid "404 Detection Feature - Delete all 404 event logs operation failed!"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:731
+#@ aiowpsecurity
+msgid "All 404 event logs were deleted from the DB successfully!"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:757
+#: admin/wp-security-user-login-menu.php:110
+#@ aiowpsecurity
+msgid "You entered a non numeric value for the lockout time length field. It has been set to the default value."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:763
+#@ aiowpsecurity
+msgid "You entered an incorrect format for the \"Redirect URL\" field. It has been set to the default value."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:795
+#@ aiowpsecurity
+msgid "404 Detection Configuration"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:798
+#@ aiowpsecurity
+msgid "A 404 or Not Found error occurs when somebody tries to access a non-existent page on your website."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:799
+#@ aiowpsecurity
+msgid "Typically, most 404 errors happen quite innocently when people have mis-typed a URL or used an old link to page which doesn't exist anymore."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:800
+#@ aiowpsecurity
+msgid "However, in some cases you may find many repeated 404 errors which occur in a relatively short space of time and from the same IP address which are all attempting to access a variety of non-existent page URLs."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:801
+#@ aiowpsecurity
+msgid "Such behaviour can mean that a hacker might be trying to find a particular page or URL for sinister reasons."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:802
+#@ aiowpsecurity
+msgid "This feature allows you to monitor all 404 events which occur on your site, and it also gives you the option of blocking IP addresses for a configured length of time."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:803
+#@ aiowpsecurity
+msgid "If you want to temporarily block an IP address, simply click the \"Temp Block\" link for the applicable IP entry in the \"404 Event Logs\" table below."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:808
+#@ aiowpsecurity
+msgid "404 Detection Options"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:820
+#@ aiowpsecurity
+msgid "Enable IP Lockout For 404 Events"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:823
+#@ aiowpsecurity
+msgid "Check this if you want to enable the lockout of selected IP addresses."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:828
+#@ aiowpsecurity
+msgid "When you enable this checkbox, all 404 events on your site will be logged in the table below. You can monitor these events and select some IP addresses to be blocked in the table. All IP addresses you select to be blocked from the \"404 Event Logs\" table section will be unable to access your site."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:836
+#@ aiowpsecurity
+msgid "Enable 404 Event Logging"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:839
+#@ aiowpsecurity
+msgid "Check this if you want to enable the logging of 404 events"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:844
+#@ aiowpsecurity
+msgid "Time Length of 404 Lockout (min)"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:846
+#@ aiowpsecurity
+msgid "Set the length of time for which a blocked IP address will be prevented from visiting your site"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:851
+#@ aiowpsecurity
+msgid "You can lock any IP address which is recorded in the \"404 Event Logs\" table section below."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:853
+#@ aiowpsecurity
+msgid "To temporarily lock an IP address, hover over the ID column and click the \"Temp Block\" link for the applicable IP entry."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:860
+#@ aiowpsecurity
+msgid "404 Lockout Redirect URL"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:862
+#@ aiowpsecurity
+msgid "A blocked visitor will be automatically redirected to this URL."
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:871
+#@ aiowpsecurity
+msgid "404 Event Logs"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:892
+#: admin/wp-security-firewall-menu.php:901
+#@ aiowpsecurity
+msgid "Delete All 404 Event Logs"
+msgstr ""
+
+#: admin/wp-security-firewall-menu.php:898
+#@ aiowpsecurity
+msgid "Click this button if you wish to purge all 404 event logs from the DB."
+msgstr ""
+
+#: admin/wp-security-list-404.php:108
+#: admin/wp-security-list-acct-activity.php:79
+#: admin/wp-security-list-comment-spammer-ip.php:86
+#: admin/wp-security-list-locked-ip.php:82
+#: admin/wp-security-list-locked-ip.php:93
+#: admin/wp-security-list-login-fails.php:78
+#: admin/wp-security-list-registered-users.php:82
+#: admin/wp-security-list-registered-users.php:93
+#@ aiowpsecurity
+msgid "Please select some records using the checkboxes"
+msgstr ""
+
+#: admin/wp-security-list-acct-activity.php:107
+#: admin/wp-security-list-login-fails.php:107
+#@ aiowpsecurity
+msgid "The selected entries were deleted successfully!"
+msgstr ""
+
+#: admin/wp-security-list-acct-activity.php:120
+#: admin/wp-security-list-login-fails.php:119
+#@ aiowpsecurity
+msgid "The selected entry was deleted successfully!"
+msgstr ""
+
+#: admin/wp-security-list-comment-spammer-ip.php:139
+#@ aiowpsecurity
+msgid "The selected IP addresses were saved in the blacklist configuration settings."
+msgstr ""
+
+#: admin/wp-security-list-comment-spammer-ip.php:153
+#@ aiowpsecurity
+msgid "The .htaccess file was successfully modified to include the selected IP addresses."
+msgstr ""
+
+#: admin/wp-security-list-comment-spammer-ip.php:159
+#@ aiowpsecurity
+msgid "NOTE: The .htaccess file was not modified because you have disabled the \"Enable IP or User Agent Blacklisting\" check box."
+msgstr ""
+
+#: admin/wp-security-list-comment-spammer-ip.php:160
+#, php-format
+#@ aiowpsecurity
+msgid "To block these IP addresses you will need to enable the above flag in the %s menu"
+msgstr ""
+
+#: admin/wp-security-list-locked-ip.php:117
+#: admin/wp-security-user-login-menu.php:527
+#@ aiowpsecurity
+msgid "The selected IP entries were unlocked successfully!"
+msgstr ""
+
+#: admin/wp-security-list-locked-ip.php:126
+#: admin/wp-security-user-login-menu.php:536
+#@ aiowpsecurity
+msgid "The selected IP entry was unlocked successfully!"
+msgstr ""
+
+#: admin/wp-security-list-registered-users.php:127
+#: admin/wp-security-list-registered-users.php:151
+#@ aiowpsecurity
+msgid "Your account is now active"
+msgstr ""
+
+#: admin/wp-security-list-registered-users.php:128
+#@ aiowpsecurity
+msgid "Your account with username:"
+msgstr ""
+
+#: admin/wp-security-list-registered-users.php:135
+#@ aiowpsecurity
+msgid "The selected accounts were approved successfully!"
+msgstr ""
+
+#: admin/wp-security-list-registered-users.php:139
+#@ aiowpsecurity
+msgid "The following accounts failed to update successfully: "
+msgstr ""
+
+#: admin/wp-security-list-registered-users.php:147
+#@ aiowpsecurity
+msgid "The selected account was approved successfully!"
+msgstr ""
+
+#: admin/wp-security-list-registered-users.php:152
+#@ aiowpsecurity
+msgid "Your account with username: "
+msgstr ""
+
+#: admin/wp-security-list-registered-users.php:176
+#@ aiowpsecurity
+msgid "The selected accounts were deleted successfully!"
+msgstr ""
+
+#: admin/wp-security-list-registered-users.php:184
+#@ aiowpsecurity
+msgid "The selected account was deleted successfully!"
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:22
+#@ aiowpsecurity
+msgid "Visitor Lockout"
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:88
+#@ aiowpsecurity
+msgid "Site lockout feature settings saved!"
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:93
+#@ aiowpsecurity
+msgid "General Visitor Lockout"
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:99
+#@ aiowpsecurity
+msgid "This feature allows you to put your site into \"maintenance mode\" by locking down the front-end to all visitors except logged in users with super admin privileges."
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:100
+#@ aiowpsecurity
+msgid "Locking your site down to general visitors can be useful if you are investigating some issues on your site or perhaps you might be doing some maintenance and wish to keep out all traffic for security reasons."
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:105
+#@ aiowpsecurity
+msgid "Enable Front-end Lockout"
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:108
+#@ aiowpsecurity
+msgid "Check this if you want all visitors except those who are logged in as administrator to be locked out of the front-end of your site."
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:112
+#@ aiowpsecurity
+msgid "Enter a Message:"
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:124
+#@ aiowpsecurity
+msgid "Enter a message you wish to display to visitors when your site is in maintenance mode."
+msgstr ""
+
+#: admin/wp-security-maintenance-menu.php:131
+#@ default
+msgid "Save Site Lockout Settings"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:25
+#@ aiowpsecurity
+msgid "General Settings"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:28
+#@ aiowpsecurity
+msgid "WP Meta Info"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:95
+#@ aiowpsecurity
+msgid "All the security features have been disabled successfully!"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:99
+#: admin/wp-security-settings-menu.php:126
+#@ aiowpsecurity
+msgid "Could not write to the .htaccess file. Please restore your .htaccess file manually using the restore functionality in the \".htaccess File\"."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:104
+#@ aiowpsecurity
+msgid "Could not write to the wp-config.php. Please restore your wp-config.php file manually using the restore functionality in the \"wp-config.php File\"."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:122
+#@ aiowpsecurity
+msgid "All firewall rules have been disabled successfully!"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:136
+#@ aiowpsecurity
+msgid "WP Security Plugin"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:138
+#@ aiowpsecurity
+msgid "Thank you for using our WordPress security plugin. There are a lot of security features in this plugin."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:139
+#@ aiowpsecurity
+msgid "Go through each menu items and enable the security options to add more security to your site. Start by activating the basic features first."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:140
+#@ aiowpsecurity
+msgid "It is a good practice to take a backup of your .htaccess file, database and wp-config.php file before activating the security features. This plugin has options that you can use to backup those resources easily."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:143
+#@ aiowpsecurity
+msgid "Backup your database"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:144
+#@ aiowpsecurity
+msgid "Backup .htaccess file"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:145
+#@ aiowpsecurity
+msgid "Backup wp-config.php file"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:151
+#@ aiowpsecurity
+msgid "Disable Security Features"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:157
+#@ aiowpsecurity
+msgid "If you think that some plugin functionality on your site is broken due to a security feature you enabled in this plugin, then use the following option to turn off all the security features of this plugin."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:161
+#@ default
+msgid "Disable All Security Features"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:167
+#: admin/wp-security-settings-menu.php:177
+#@ aiowpsecurity
+#@ default
+msgid "Disable All Firewall Rules"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:173
+#@ aiowpsecurity
+msgid "This feature will disable all firewall rules which are currently active in this plugin and it will also delete these rules from your .htacess file. Use it if you think one of the firewall rules is causing an issue on your site."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:206
+#@ aiowpsecurity
+msgid "Your .htaccess file was successfully backed up! Using an FTP program go to the \"/wp-content/aiowps_backups\" directory to save a copy of the file to your computer."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:212
+#@ aiowpsecurity
+msgid "htaccess file rename failed during backup. Please check your root directory for the backup file using FTP."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:218
+#@ aiowpsecurity
+msgid "htaccess backup failed."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:233
+#@ aiowpsecurity
+msgid "Please choose a .htaccess to restore from."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:249
+#@ aiowpsecurity
+msgid "htaccess file restore failed. Please attempt to restore the .htaccess manually using FTP."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:253
+#@ aiowpsecurity
+msgid "Your .htaccess file has successfully been restored!"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:259
+#@ aiowpsecurity
+msgid "htaccess Restore operation failed! Please check the contents of the file you are trying to restore from."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:265
+#@ aiowpsecurity
+msgid ".htaccess File Operations"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:268
+#@ aiowpsecurity
+msgid "Your \".htaccess\" file is a key component of your website's security and it can be modified to implement various levels of protection mechanisms."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:269
+#@ aiowpsecurity
+msgid "This feature allows you to backup and save your currently active .htaccess file should you need to re-use the the backed up file in the future."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:270
+#@ aiowpsecurity
+msgid "You can also restore your site's .htaccess settings using a backed up .htaccess file."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:284
+#@ aiowpsecurity
+msgid "Save the current .htaccess file"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:288
+#@ aiowpsecurity
+msgid "Click the button below to backup and save the currently active .htaccess file."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:289
+#@ aiowpsecurity
+msgid "Backup .htaccess File"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:293
+#@ aiowpsecurity
+msgid "Restore from a backed up .htaccess file"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:299
+#@ aiowpsecurity
+msgid ".htaccess file to restore from"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:305
+#@ aiowpsecurity
+msgid "After selecting your file, click the button below to restore your site using the backed up htaccess file (htaccess_backup.txt)."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:311
+#@ aiowpsecurity
+msgid "Restore .htaccess File"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:315
+#@ aiowpsecurity
+msgid "View Contents of the currently active .htaccess file"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:344
+#@ aiowpsecurity
+msgid "Please choose a wp-config.php file to restore from."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:360
+#@ aiowpsecurity
+msgid "wp-config.php file restore failed. Please attempt to restore this file manually using FTP."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:364
+#@ aiowpsecurity
+msgid "Your wp-config.php file has successfully been restored!"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:370
+#@ aiowpsecurity
+msgid "wp-config.php Restore operation failed! Please check the contents of the file you are trying to restore from."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:376
+#@ aiowpsecurity
+msgid "wp-config.php File Operations"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:379
+#@ aiowpsecurity
+msgid "Your \"wp-config.php\" file is one of the most important in your WordPress installation. It is a primary configuration file and contains crucial things such as details of your database and other critical components."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:380
+#@ aiowpsecurity
+msgid "This feature allows you to backup and save your currently active wp-config.php file should you need to re-use the the backed up file in the future."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:381
+#@ aiowpsecurity
+msgid "You can also restore your site's wp-config.php settings using a backed up wp-config.php file."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:395
+#@ aiowpsecurity
+msgid "Save the current wp-config.php file"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:399
+#@ aiowpsecurity
+msgid "Click the button below to backup and download the contents of the currently active wp-config.php file."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:400
+#@ aiowpsecurity
+msgid "Backup wp-config.php File"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:405
+#@ aiowpsecurity
+msgid "Restore from a backed up wp-config file"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:411
+#@ aiowpsecurity
+msgid "wp-config file to restore from"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:417
+#@ aiowpsecurity
+msgid "After selecting your file click the button below to restore your site using the backed up wp-config file (wp-config.php.backup.txt)."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:423
+#@ aiowpsecurity
+msgid "Restore wp-config File"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:427
+#@ aiowpsecurity
+msgid "View Contents of the currently active wp-config.php file"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:462
+#@ aiowpsecurity
+msgid "WP Generator Meta Tag"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:465
+#@ aiowpsecurity
+msgid "Wordpress generator automatically adds some meta information inside the \"head\" tags of every page on your site's front end. Below is an example of this:"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:467
+#@ aiowpsecurity
+msgid "The above meta information shows which version of WordPress your site is currently running and thus can help hackers or crawlers scan your site to see if you have an older version of WordPress or one with a known exploit."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:468
+#@ aiowpsecurity
+msgid "This feature will allow you to remove the WP generator meta info from your site's pages."
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:474
+#@ aiowpsecurity
+msgid "WP Generator Meta Info"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:486
+#@ aiowpsecurity
+msgid "Remove WP Generator Meta Info"
+msgstr ""
+
+#: admin/wp-security-settings-menu.php:489
+#@ aiowpsecurity
+msgid "Check this if you want to remove the meta info produced by WP Generator from all pages"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:23
+#@ aiowpsecurity
+msgid "Comment SPAM"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:24
+#@ aiowpsecurity
+msgid "Comment SPAM IP Monitoring"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:111
+#@ aiowpsecurity
+msgid "Comment SPAM Settings"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:116
+#@ aiowpsecurity
+msgid "Add Captcha To Comments Form"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:120
+#@ aiowpsecurity
+msgid "This feature will add a simple math captcha field in the WordPress comments form."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:121
+#@ aiowpsecurity
+msgid "Adding a captcha field in the comment form is a simple way of greatly reducing SPAM comments from bots without using .htaccess rules."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:137
+#@ aiowpsecurity
+msgid "Enable Captcha On Comment Forms"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:140
+#@ aiowpsecurity
+msgid "Check this if you want to insert a captcha field on the comment forms"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:148
+#@ aiowpsecurity
+msgid "Block Spambot Comments"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:152
+#@ aiowpsecurity
+msgid "A large portion of WordPress blog comment SPAM is mainly produced by automated bots and not necessarily by humans. "
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:153
+#@ aiowpsecurity
+msgid "This feature will greatly minimize the useless and unecessary traffic and load on your server resulting from SPAM comments by blocking all comment requests which do not originate from your domain."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:154
+#@ aiowpsecurity
+msgid "In other words, if the comment was not submitted by a human who physically submitted the comment on your site, the request will be blocked."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:170
+#@ aiowpsecurity
+msgid "Block Spambots From Posting Comments"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:173
+#@ aiowpsecurity
+msgid "Check this if you want to apply a firewall rule which will block comments originating from spambots."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:177
+#@ aiowpsecurity
+msgid "This feature will implement a firewall rule to block all comment attempts which do not originate from your domain."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:178
+#@ aiowpsecurity
+msgid "A legitimate comment is one which is submitted by a human who physically fills out the comment form and clicks the submit button. For such events, the HTTP_REFERRER is always set to your own domain."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:179
+#@ aiowpsecurity
+msgid "A comment submitted by a spambot is done by directly calling the comments.php file, which usually means that the HTTP_REFERRER value is not your domain and often times empty."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:180
+#@ aiowpsecurity
+msgid "This feature will check and block comment requests which are not referred by your domain thus greatly reducing your overall blog SPAM and PHP requests done by the server to process these comments."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:207
+#@ aiowpsecurity
+msgid "Nonce check failed for list SPAM comment IPs!"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:213
+#@ aiowpsecurity
+msgid "You entered a non numeric value for the minimum SPAM comments per IP field. It has been set to the default value."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:225
+#, php-format
+#@ aiowpsecurity
+msgid "Displaying results for IP addresses which have posted a minimum of %s SPAM comments"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:241
+#@ aiowpsecurity
+msgid "This tab displays a list of the IP addresses of the people or bots who have left SPAM comments on your site."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:242
+#@ aiowpsecurity
+msgid "This information can be handy for identifying the most persistent IP addresses or ranges used by spammers."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:243
+#@ aiowpsecurity
+msgid "By inspecting the IP address data coming from spammers you will be in a better position to determine which addresses or address ranges you should block by adding them to your blacklist."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:244
+#@ aiowpsecurity
+msgid ""
+"To add one or more of the IP addresses displayed in the table below to your blacklist, simply click the \"Block\" link for the individual row or select more than one address \n"
+"                            using the checkboxes and then choose the \"block\" option from the Bulk Actions dropdown list and click the \"Apply\" button."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:250
+#@ aiowpsecurity
+msgid "List SPAMMER IP Addresses"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:256
+#@ aiowpsecurity
+msgid "Minimum number of SPAM comments per IP"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:258
+#@ aiowpsecurity
+msgid "This field allows you to list only those IP addresses which have been used to post X or more SPAM comments."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:262
+#@ aiowpsecurity
+msgid "Example 1: Setting this value to \"0\" or \"1\" will list ALL IP addresses which were used to submit SPAM comments."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:263
+#@ aiowpsecurity
+msgid "Example 2: Setting this value to \"5\" will list only those IP addresses which were used to submit 5 SPAM comments or more on your site."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:270
+#@ aiowpsecurity
+msgid "Find IP Addresses"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:274
+#@ aiowpsecurity
+msgid "SPAMMER IP Address Results"
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:280
+#: classes/wp-security-utility.php:150
+#@ aiowpsecurity
+msgid "The plugin has detected that you are using a Multi-Site WordPress installation."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:281
+#@ aiowpsecurity
+msgid "Only the \"superadmin\" can block IP addresses from the main site."
+msgstr ""
+
+#: admin/wp-security-spam-menu.php:282
+#@ aiowpsecurity
+msgid "Take note of the IP addresses you want blocked and ask the superadmin to add these to the blacklist using the \"Blacklist Manager\" on the main site."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:29
+#@ aiowpsecurity
+msgid "WP Username"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:30
+#@ aiowpsecurity
+msgid "Display Name"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:31
+#: other-includes/wp-security-rename-login-feature.php:845
+#@ aiowpsecurity
+#@ default
+msgid "Password"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:85
+#@ aiowpsecurity
+msgid "Admin User Security"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:88
+#@ aiowpsecurity
+msgid "By default, WordPress sets the administrator username to \"admin\" at installation time."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:89
+#@ aiowpsecurity
+msgid "A lot of hackers try to take advantage of this information by attempting \"Brute Force Login Attacks\" where they repeatedly try to guess the password by using \"admin\" for username."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:90
+#@ aiowpsecurity
+msgid "From a security perspective, changing the default \"admin\" user name is one of the first and smartest things you should do on your site."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:91
+#@ aiowpsecurity
+msgid "This feature will allow you to change your default \"admin\" user name to a more secure name of your choosing."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:98
+#@ aiowpsecurity
+msgid "List of Administrator Accounts"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:107
+#: classes/grade-system/wp-security-feature-item-manager.php:36
+#@ aiowpsecurity
+msgid "Change Admin Username"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:115
+#@ aiowpsecurity
+msgid ""
+"Your site currently has an account which uses the default \"admin\" username. \n"
+"                It is highly recommended that you change this name to something else. \n"
+"                Use the following field to change the admin username."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:123
+#@ aiowpsecurity
+msgid "New Admin Username"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:125
+#@ aiowpsecurity
+msgid "Choose a new username for admin."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:129
+#@ aiowpsecurity
+msgid "Change Username"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:131
+#@ aiowpsecurity
+msgid "NOTE: If you are currently logged in as \"admin\" you will be automatically logged out after changing your username and will be required to log back in."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:138
+#@ aiowpsecurity
+msgid "No action required! "
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:140
+#@ aiowpsecurity
+msgid "Your site does not have any account which uses the default \"admin\" username. "
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:141
+#@ aiowpsecurity
+msgid "This is good security practice."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:153
+#@ aiowpsecurity
+msgid "Display Name Security"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:156
+#@ aiowpsecurity
+msgid "When you submit a post or answer a comment, WordPress will usually display your \"nickname\"."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:157
+#@ aiowpsecurity
+msgid "By default the nickname is set to the login (or user) name of your account."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:158
+#@ aiowpsecurity
+msgid "From a security perspective, leaving your nickname the same as your user name is bad practice because it gives a hacker at least half of your account's login credentials."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:159
+#@ aiowpsecurity
+msgid "Therefore to further tighten your site's security you are advised to change your <strong>nickname</strong> and <strong>Display name</strong> to be different from your <strong>Username</strong>."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:165
+#@ aiowpsecurity
+msgid "Modify Accounts With Identical Login Name & Display Name"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:174
+#@ aiowpsecurity
+msgid "Your site currently has the following accounts which have an identical login name and display name."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:175
+#@ aiowpsecurity
+msgid "Click on the link to edit the settings of that particular user account"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:190
+#@ aiowpsecurity
+msgid "No action required."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:191
+#@ aiowpsecurity
+msgid "Your site does not have a user account where the display name is identical to the username."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:202
+#@ aiowpsecurity
+msgid "Password Tool"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:205
+#@ aiowpsecurity
+msgid "Poor password selection is one of the most common weak points of many sites and is usually the first thing a hacker will try to exploit when attempting to break into your site."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:206
+#@ aiowpsecurity
+msgid "Many people fall into the trap of using a simple word or series of numbers as their password. Such a predictable and simple password would take a competent hacker merely minutes to guess your password by using a simple script which cycles through the easy and most common combinations."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:207
+#@ aiowpsecurity
+msgid "The longer and more complex your password is the harder it is for hackers to \"crack\" because more complex passwords require much greater computing power and time."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:208
+#@ aiowpsecurity
+msgid "This section contains a useful password strength tool which you can use to check whether your password is sufficiently strong enough."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:213
+#@ aiowpsecurity
+msgid "Password Strength Tool"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:218
+#@ aiowpsecurity
+msgid "Start typing a password."
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:221
+#@ aiowpsecurity
+msgid "It would take a desktop PC approximately"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:222
+#@ aiowpsecurity
+msgid "1 sec"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:222
+#@ aiowpsecurity
+msgid "to crack your password!"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:227
+#@ aiowpsecurity
+msgid "Password Strength"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:243
+#@ aiowpsecurity
+msgid "Nonce check failed on admin username change operation!"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:250
+#@ aiowpsecurity
+msgid "Username "
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:250
+#@ aiowpsecurity
+msgid " already exists. Please enter another value. "
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:266
+#@ aiowpsecurity
+msgid "The database update operation of the user account failed!"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:293
+#@ aiowpsecurity
+msgid "You entered an invalid username. Please enter another value. "
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:297
+#@ aiowpsecurity
+msgid "Please enter a value for your username. "
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:304
+#@ aiowpsecurity
+msgid "Username Successfully Changed!"
+msgstr ""
+
+#: admin/wp-security-user-accounts-menu.php:324
+#@ aiowpsecurity
+msgid "Account Login Name"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:26
+#: admin/wp-security-user-login-menu.php:298
+#@ aiowpsecurity
+msgid "Failed Login Records"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:27
+#: classes/grade-system/wp-security-feature-item-manager.php:50
+#@ aiowpsecurity
+msgid "Force Logout"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:28
+#: admin/wp-security-user-login-menu.php:432
+#@ aiowpsecurity
+msgid "Account Activity Logs"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:96
+#@ aiowpsecurity
+msgid "You entered a non numeric value for the max login attempts field. It has been set to the default value."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:103
+#@ aiowpsecurity
+msgid "You entered a non numeric value for the login retry time period field. It has been set to the default value."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:159
+#@ aiowpsecurity
+msgid "Login Lockdown Configuration"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:163
+#@ aiowpsecurity
+msgid "One of the ways hackers try to compromise sites is via a "
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:163
+#@ aiowpsecurity
+msgid "Brute Force Login Attack"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:164
+#@ aiowpsecurity
+msgid "This is where attackers use repeated login attempts until they guess the password."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:165
+#@ aiowpsecurity
+msgid "Apart from choosing strong passwords, monitoring and blocking IP addresses which are involved in repeated login failures in a short period of time is a very effective way to stop these types of attacks."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:166
+#, php-format
+#@ aiowpsecurity
+msgid "You may also want to checkout our %s feature for another secure way to protect against these types of attacks."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:171
+#@ aiowpsecurity
+msgid "Login Lockdown Options"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:183
+#@ aiowpsecurity
+msgid "Enable Login Lockdown Feature"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:186
+#@ aiowpsecurity
+msgid "Check this if you want to enable the login lockdown feature and apply the settings below"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:190
+#@ aiowpsecurity
+msgid "Allow Unlock Requests"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:193
+#@ aiowpsecurity
+msgid "Check this if you want to allow users to generate an automated unlock request link which will unlock their account"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:197
+#@ aiowpsecurity
+msgid "Max Login Attempts"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:199
+#@ aiowpsecurity
+msgid "Set the value for the maximum login retries before IP address is locked out"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:203
+#@ aiowpsecurity
+msgid "Login Retry Time Period (min)"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:205
+#@ aiowpsecurity
+msgid "If the maximum number of failed login attempts for a particular IP address occur within this time period the plugin will lock out that address"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:209
+#@ aiowpsecurity
+msgid "Time Length of Lockout (min)"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:211
+#@ aiowpsecurity
+msgid "Set the length of time for which a particular IP address will be prevented from logging in"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:215
+#@ aiowpsecurity
+msgid "Display Generic Error Message"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:218
+#@ aiowpsecurity
+msgid "Check this if you want to show a generic error message when a login attempt fails"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:222
+#@ aiowpsecurity
+msgid "Instantly Lockout Invalid Usernames"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:225
+#@ aiowpsecurity
+msgid "Check this if you want to instantly lockout login attempts with usernames which do not exist on your system"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:230
+#@ aiowpsecurity
+msgid "Notify By Email"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:233
+#@ aiowpsecurity
+msgid "Check this if you want to receive an email when someone has been locked out due to maximum failed login attempts"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:243
+#@ aiowpsecurity
+msgid "Currently Locked Out IP Address Ranges"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:248
+#, php-format
+#@ aiowpsecurity
+msgid "To see a list of all locked IP addresses and ranges go to the %s tab in the dashboard menu."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:264
+#@ aiowpsecurity
+msgid "Nonce check failed for delete all failed login records operation!"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:273
+#@ aiowpsecurity
+msgid "User Login Feature - Delete all failed login records operation failed!"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:277
+#@ aiowpsecurity
+msgid "All records from the Failed Logins table were deleted successfully!"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:292
+#@ aiowpsecurity
+msgid "This tab displays the failed login attempts for your site."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:293
+#@ aiowpsecurity
+msgid "The information below can be handy if you need to do security investigations because it will show you the IP range, username and ID (if applicable) and the time/date of the failed login attempt."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:314
+#: admin/wp-security-user-login-menu.php:323
+#@ aiowpsecurity
+msgid "Delete All Failed Login Records"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:320
+#@ aiowpsecurity
+msgid "Click this button if you wish to delete all failed login records in one go."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:348
+#@ aiowpsecurity
+msgid "You entered a non numeric value for the logout time period field. It has been set to the default value."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:376
+#@ aiowpsecurity
+msgid "Setting an expiry period for your WP administration session is a simple way to protect against unauthorized access to your site from your computer."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:377
+#@ aiowpsecurity
+msgid "This feature allows you to specify a time period in minutes after which the admin session will expire and the user will be forced to log back in."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:382
+#@ aiowpsecurity
+msgid "Force User Logout Options"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:394
+#@ aiowpsecurity
+msgid "Enable Force WP User Logout"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:397
+#@ aiowpsecurity
+msgid "Check this if you want to force a wp user to be logged out after a configured amount of time"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:401
+#@ aiowpsecurity
+msgid "Logout the WP User After XX Minutes"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:403
+#@ aiowpsecurity
+msgid "(Minutes) The user will be forced to log back in after this time period has elapased."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:426
+#@ aiowpsecurity
+msgid "This tab displays the login activity for WordPress admin accounts registered with your site."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:427
+#@ aiowpsecurity
+msgid "The information below can be handy if you need to do security investigations because it will show you the last 50 recent login events by username, IP address and time/date."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:464
+#@ aiowpsecurity
+msgid "Nonce check failed for users logged in list!"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:477
+#@ aiowpsecurity
+msgid "Refresh Logged In User Data"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:481
+#@ aiowpsecurity
+msgid "Refresh Data"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:487
+#@ aiowpsecurity
+msgid "This tab displays all users who are currently logged into your site."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:488
+#@ aiowpsecurity
+msgid "If you suspect there is a user or users who are logged in which should not be, you can block them by inspecting the IP addresses from the data below and adding them to your blacklist."
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:493
+#@ aiowpsecurity
+msgid "Currently Logged In Users"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:558
+#@ aiowpsecurity
+msgid "The selected records were deleted successfully!"
+msgstr ""
+
+#: admin/wp-security-user-login-menu.php:567
+#@ aiowpsecurity
+msgid "The selected record was deleted successfully!"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:23
+#@ aiowpsecurity
+msgid "Manual Approval"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:24
+#: classes/grade-system/wp-security-feature-item-manager.php:56
+#@ aiowpsecurity
+msgid "Registration Captcha"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:112
+#@ aiowpsecurity
+msgid "User Registration Settings"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:116
+#@ aiowpsecurity
+msgid "Manually Approve New Registrations"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:120
+#@ aiowpsecurity
+msgid "If your site allows people to create their own accounts via the WordPress registration form, then you can minimize SPAM or bogus registrations by manually approving each registration."
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:121
+#@ aiowpsecurity
+msgid "This feature will automatically set a newly registered account to \"pending\" until the administrator activates it. Therefore undesirable registrants will be unable to log in without your express approval."
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:122
+#@ aiowpsecurity
+msgid "You can view all accounts which have been newly registered via the handy table below and you can also perform bulk activation/deactivation/deletion tasks on each account."
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:138
+#@ aiowpsecurity
+msgid "Enable manual approval of new registrations"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:141
+#@ aiowpsecurity
+msgid "Check this if you want to automatically disable all newly registered accounts so that you can approve them manually."
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:150
+#@ aiowpsecurity
+msgid "Approve Registered Users"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:195
+#@ aiowpsecurity
+msgid "This feature allows you to add a captcha form on the WordPress registration page."
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:196
+#@ aiowpsecurity
+msgid "Users who attempt to register will also need to enter the answer to a simple mathematical question - if they enter the wrong answer, the plugin will not allow them to register."
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:197
+#@ aiowpsecurity
+msgid "Therefore, adding a captcha form on the registration page is another effective yet simple SPAM registration prevention technique."
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:202
+#@ aiowpsecurity
+msgid "Registration Page Captcha Settings"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:214
+#@ aiowpsecurity
+msgid "Enable Captcha On Registration Page"
+msgstr ""
+
+#: admin/wp-security-user-registration-menu.php:217
+#@ aiowpsecurity
+msgid "Check this if you want to insert a captcha form on the WordPress user registration page (if you allow user registration)."
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:22
+#@ aiowpsecurity
+msgid "WhoIS Lookup"
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:74
+#@ aiowpsecurity
+msgid "WHOIS Lookup Information"
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:77
+#@ aiowpsecurity
+msgid "This feature allows you to look up more detailed information about an IP address or domain name by querying the WHOIS API."
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:83
+#@ aiowpsecurity
+msgid "Perform a WHOIS Lookup for an IP or Domain Name"
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:89
+#@ aiowpsecurity
+msgid "Enter IP Address or Domain Name"
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:91
+#@ aiowpsecurity
+msgid "Enter an IP address or domain name. Example: 111.11.12.13 OR some-domain-name.com"
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:95
+#@ aiowpsecurity
+msgid "Perform IP or Domain Lookup"
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:115
+#@ aiowpsecurity
+msgid "WHOIS lookup successfully completed. Please see the results below:"
+msgstr ""
+
+#: admin/wp-security-whois-menu.php:127
+#@ aiowpsecurity
+msgid "You have entered an incorrectly formatted IP address or domain name. Please try again."
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:29
+#@ aiowpsecurity
+msgid "Remove WP Generatore Meta Tag"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:38
+#@ aiowpsecurity
+msgid "Change Display Name"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:46
+#@ aiowpsecurity
+msgid "Lost Password Captcha"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:48
+#@ aiowpsecurity
+msgid "Login IP Whitelisting"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:54
+#@ aiowpsecurity
+msgid "Registration Approval"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:70
+#@ aiowpsecurity
+msgid "WordPress Files Access"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:74
+#@ aiowpsecurity
+msgid "IP and User Agent Blacklisting"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:78
+#@ aiowpsecurity
+msgid "Enable Basic Firewall"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:79
+#@ aiowpsecurity
+msgid "Enable Pingback Vulnerability Protection"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:80
+#@ aiowpsecurity
+msgid "Enable IP blocking for 404 detection"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:84
+#@ aiowpsecurity
+msgid "Enable Rename Login Page"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:90
+#@ aiowpsecurity
+msgid "Forbid Proxy Comments"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:91
+#@ aiowpsecurity
+msgid "Deny Bad Queries"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:93
+#@ aiowpsecurity
+msgid "5G Blacklist"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:96
+#@ aiowpsecurity
+msgid "Block Spambots"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item-manager.php:98
+#@ aiowpsecurity
+msgid "Comment Captcha"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item.php:28
+#@ aiowpsecurity
+msgid "Basic"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item.php:31
+#@ aiowpsecurity
+msgid "Intermediate"
+msgstr ""
+
+#: classes/grade-system/wp-security-feature-item.php:34
+#@ aiowpsecurity
+msgid "Advanced"
+msgstr ""
+
+#: classes/wp-security-backup.php:177
+#@ aiowpsecurity
+msgid "All In One WP Security - Site Database Backup"
+msgstr ""
+
+#: classes/wp-security-backup.php:179
+#@ aiowpsecurity
+msgid "Attached is your latest DB backup file for site URL"
+msgstr ""
+
+#: classes/wp-security-backup.php:179
+#@ aiowpsecurity
+msgid " generated on"
+msgstr ""
+
+#: classes/wp-security-captcha.php:12
+#@ aiowpsecurity
+msgid "Please enter an answer in digits:"
+msgstr "Bitte löse zur Spamvermeidung diese Rechenaufgabe (in Zahlen):"
+
+#: classes/wp-security-captcha.php:91
+#@ aiowpsecurity
+msgid "one"
+msgstr "eins"
+
+#: classes/wp-security-captcha.php:92
+#@ aiowpsecurity
+msgid "two"
+msgstr "zwei"
+
+#: classes/wp-security-captcha.php:93
+#@ aiowpsecurity
+msgid "three"
+msgstr "drei"
+
+#: classes/wp-security-captcha.php:94
+#@ aiowpsecurity
+msgid "four"
+msgstr "vier"
+
+#: classes/wp-security-captcha.php:95
+#@ aiowpsecurity
+msgid "five"
+msgstr "fünf"
+
+#: classes/wp-security-captcha.php:96
+#@ aiowpsecurity
+msgid "six"
+msgstr "sechs"
+
+#: classes/wp-security-captcha.php:97
+#@ aiowpsecurity
+msgid "seven"
+msgstr "sieben"
+
+#: classes/wp-security-captcha.php:98
+#@ aiowpsecurity
+msgid "eight"
+msgstr "acht"
+
+#: classes/wp-security-captcha.php:99
+#@ aiowpsecurity
+msgid "nine"
+msgstr "neun"
+
+#: classes/wp-security-captcha.php:100
+#@ aiowpsecurity
+msgid "ten"
+msgstr "zehn"
+
+#: classes/wp-security-captcha.php:101
+#@ aiowpsecurity
+msgid "eleven"
+msgstr "elf"
+
+#: classes/wp-security-captcha.php:102
+#@ aiowpsecurity
+msgid "twelve"
+msgstr "zwölf"
+
+#: classes/wp-security-captcha.php:103
+#@ aiowpsecurity
+msgid "thirteen"
+msgstr "dreizehn"
+
+#: classes/wp-security-captcha.php:104
+#@ aiowpsecurity
+msgid "fourteen"
+msgstr "vierzehn"
+
+#: classes/wp-security-captcha.php:105
+#@ aiowpsecurity
+msgid "fifteen"
+msgstr "fünfzehn"
+
+#: classes/wp-security-captcha.php:106
+#@ aiowpsecurity
+msgid "sixteen"
+msgstr "sechzehn"
+
+#: classes/wp-security-captcha.php:107
+#@ aiowpsecurity
+msgid "seventeen"
+msgstr "siebzehn"
+
+#: classes/wp-security-captcha.php:108
+#@ aiowpsecurity
+msgid "eighteen"
+msgstr "achtzehn"
+
+#: classes/wp-security-captcha.php:109
+#@ aiowpsecurity
+msgid "nineteen"
+msgstr "neunzehn"
+
+#: classes/wp-security-captcha.php:110
+#@ aiowpsecurity
+msgid "twenty"
+msgstr "zwanzig"
+
+#: classes/wp-security-file-scan.php:62
+#@ aiowpsecurity
+msgid "All In One WP Security - File change detected!"
+msgstr ""
+
+#: classes/wp-security-file-scan.php:64
+#@ aiowpsecurity
+msgid "A file change was detected on your system for site URL"
+msgstr ""
+
+#: classes/wp-security-file-scan.php:64
+#@ aiowpsecurity
+msgid ". Scan was generated on"
+msgstr ""
+
+#: classes/wp-security-file-scan.php:65
+#@ aiowpsecurity
+msgid "Login to your site to view the scan details."
+msgstr ""
+
+#: classes/wp-security-general-init-tasks.php:214
+#@ aiowpsecurity
+msgid "Please enter an answer in the CAPTCHA field."
+msgstr ""
+
+#: classes/wp-security-general-init-tasks.php:224
+#@ aiowpsecurity
+msgid "Error: You entered an incorrect CAPTCHA answer. Please go back and try again."
+msgstr ""
+
+#: classes/wp-security-general-init-tasks.php:252
+#: classes/wp-security-user-login.php:70
+#: classes/wp-security-user-login.php:73
+#: classes/wp-security-user-registration.php:59
+#@ aiowpsecurity
+msgid "<strong>ERROR</strong>: Your answer was incorrect - please try again."
+msgstr ""
+
+#: classes/wp-security-process-renamed-login-page.php:68
+#@ aiowpsecurity
+msgid "Please log in to access the WordPress admin area."
+msgstr ""
+
+#: classes/wp-security-user-login.php:43
+#@ aiowpsecurity
+msgid ""
+"<strong>ERROR</strong>: Login failed because your IP address has been blocked.\n"
+"                                Please contact the administrator."
+msgstr ""
+
+#: classes/wp-security-user-login.php:83
+#@ aiowpsecurity
+msgid "<strong>ERROR</strong>: The username field is empty."
+msgstr ""
+
+#: classes/wp-security-user-login.php:87
+#@ aiowpsecurity
+msgid "<strong>ERROR</strong>: The password field is empty."
+msgstr ""
+
+#: classes/wp-security-user-login.php:107
+#: classes/wp-security-user-login.php:133
+#@ aiowpsecurity
+msgid "<strong>ERROR</strong>: Invalid login credentials."
+msgstr ""
+
+#: classes/wp-security-user-login.php:110
+#@ aiowpsecurity
+msgid "<strong>ERROR</strong>: Invalid username."
+msgstr ""
+
+#: classes/wp-security-user-login.php:136
+#, php-format
+#@ aiowpsecurity
+msgid "<strong>ERROR</strong>: Incorrect password. <a href=\"%s\" title=\"Password Lost and Found\">Lost your password</a>?"
+msgstr ""
+
+#: classes/wp-security-user-login.php:147
+#@ aiowpsecurity
+msgid "<strong>ACCOUNT PENDING</strong>: Your account is currently not active. An administrator needs to activate your account before you can login."
+msgstr ""
+
+#: classes/wp-security-user-login.php:270
+#@ aiowpsecurity
+msgid "Site Lockout Notification"
+msgstr ""
+
+#: classes/wp-security-user-login.php:271
+#@ aiowpsecurity
+msgid "A lockdown event has occurred due to too many failed login attempts or invalid username:"
+msgstr ""
+
+#: classes/wp-security-user-login.php:272
+#@ aiowpsecurity
+msgid "Username: Unknown"
+msgstr ""
+
+#: classes/wp-security-user-login.php:273
+#@ aiowpsecurity
+msgid "IP Address: "
+msgstr ""
+
+#: classes/wp-security-user-login.php:274
+#@ aiowpsecurity
+msgid "IP Range: .*"
+msgstr ""
+
+#: classes/wp-security-user-login.php:275
+#@ aiowpsecurity
+msgid "Log into your site's WordPress administration panel to see the duration of the lockout or to unlock the user."
+msgstr ""
+
+#: classes/wp-security-user-login.php:337
+#@ aiowpsecurity
+msgid "Unlock Request Notification"
+msgstr ""
+
+#: classes/wp-security-user-login.php:338
+#@ aiowpsecurity
+msgid "You have requested for the account with email address  to be unlocked. Please click the link below to unlock your account:"
+msgstr ""
+
+#: classes/wp-security-user-login.php:339
+#@ aiowpsecurity
+msgid "Unlock link: "
+msgstr ""
+
+#: classes/wp-security-user-login.php:340
+#@ aiowpsecurity
+msgid "After clicking the above link you will be able to login to the WordPress administration panel."
+msgstr ""
+
+#: classes/wp-security-user-login.php:504
+#, php-format
+#@ aiowpsecurity
+msgid "Your session has expired because it has been over %d minutes since your last login."
+msgstr ""
+
+#: classes/wp-security-user-login.php:505
+#: classes/wp-security-user-login.php:509
+#@ aiowpsecurity
+msgid "Please log back in to continue."
+msgstr ""
+
+#: classes/wp-security-user-login.php:508
+#@ aiowpsecurity
+msgid "You were logged out because you just changed the \"admin\" username."
+msgstr ""
+
+#: classes/wp-security-user-login.php:534
+#@ aiowpsecurity
+msgid "Request Unlock"
+msgstr ""
+
+#: classes/wp-security-utility-ip-address.php:82
+#: classes/wp-security-utility-ip-address.php:101
+#: classes/wp-security-utility-ip-address.php:116
+#: classes/wp-security-utility-ip-address.php:131
+#@ aiowpsecurity
+msgid " is not a valid ip address format."
+msgstr ""
+
+#: classes/wp-security-utility-ip-address.php:139
+#@ aiowpsecurity
+msgid "You cannot ban your own IP address: "
+msgstr ""
+
+#: classes/wp-security-utility.php:151
+#@ aiowpsecurity
+msgid "This feature can only be configured by the \"superadmin\" on the main site."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:98
+#: other-includes/wp-security-unlock-request.php:13
+#@ default
+msgid "http://wordpress.org/"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:99
+#: other-includes/wp-security-unlock-request.php:14
+#@ default
+msgid "Powered by WordPress"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:215
+#@ default
+msgid "Are you lost?"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:215
+#, php-format
+#@ default
+msgid "&larr; Back to %s"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:273
+#@ default
+msgid "<strong>ERROR</strong>: Enter a username or e-mail address."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:277
+#@ default
+msgid "<strong>ERROR</strong>: There is no user registered with that email address."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:294
+#@ default
+msgid "<strong>ERROR</strong>: Invalid username or e-mail."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:331
+#@ default
+msgid "Password reset is not allowed for this user"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:356
+#@ default
+msgid "Someone requested that the password be reset for the following account:"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:358
+#, php-format
+#@ default
+msgid "Username: %s"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:359
+#@ default
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:360
+#@ default
+msgid "To reset your password, visit the following address:"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:370
+#, php-format
+#@ default
+msgid "[%s] Password Reset"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:391
+#@ default
+msgid "The e-mail could not be sent."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:391
+#@ default
+msgid "Possible reason: your host may have disabled the mail() function."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:496
+#@ default
+msgid "Sorry, that key does not appear to be valid."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:498
+#@ default
+msgid "Sorry, that key has expired. Please try again."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:518
+#@ default
+msgid "Lost Password"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:518
+#@ default
+msgid "Please enter your username or email address. You will receive a link to create a new password via email."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:526
+#@ default
+msgid "Username or E-mail:"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:537
+#@ default
+msgid "Get New Password"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:541
+#: other-includes/wp-security-rename-login-feature.php:590
+#: other-includes/wp-security-rename-login-feature.php:621
+#: other-includes/wp-security-rename-login-feature.php:703
+#@ default
+msgid "Log in"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:544
+#: other-includes/wp-security-rename-login-feature.php:624
+#: other-includes/wp-security-rename-login-feature.php:699
+#: other-includes/wp-security-rename-login-feature.php:875
+#@ default
+msgid "Register"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:576
+#@ default
+msgid "The passwords do not match."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:590
+#@ default
+msgid "Password Reset"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:590
+#@ default
+msgid "Your password has been reset."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:598
+#: other-includes/wp-security-rename-login-feature.php:617
+#@ default
+msgid "Reset Password"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:598
+#@ default
+msgid "Enter your new password below."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:605
+#@ default
+msgid "New password"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:609
+#@ default
+msgid "Confirm new password"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:613
+#@ default
+msgid "Strength indicator"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:614
+#@ default
+msgid "Hint: The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! \" ? $ % ^ &amp; )."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:676
+#@ default
+msgid "Registration Form"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:676
+#@ default
+msgid "Register For This Site"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:681
+#: other-includes/wp-security-rename-login-feature.php:841
+#@ default
+msgid "Username"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:685
+#@ default
+msgid "E-mail"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:696
+#@ default
+msgid "A password will be e-mailed to you."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:704
+#: other-includes/wp-security-rename-login-feature.php:880
+#@ default
+msgid "Password Lost and Found"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:704
+#: other-includes/wp-security-rename-login-feature.php:880
+#@ default
+msgid "Lost your password?"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:748
+#@ default
+msgid "<strong>ERROR</strong>: Cookies are blocked or not supported by your browser. You must <a href='http://www.google.com/cookies.html'>enable cookies</a> to use WordPress."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:766
+#@ default
+msgid "You have logged in successfully."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:800
+#@ default
+msgid "Session expired. Please log in again. You will not move away from this page."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:804
+#@ default
+msgid "You are now logged out."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:806
+#@ default
+msgid "User registration is currently not allowed."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:808
+#@ default
+msgid "Check your e-mail for the confirmation link."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:810
+#@ default
+msgid "Check your e-mail for your new password."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:812
+#@ default
+msgid "Registration complete. Please check your e-mail."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:814
+#@ default
+msgid "<strong>You have successfully updated WordPress!</strong> Please log back in to experience the awesomeness."
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:831
+#: other-includes/wp-security-rename-login-feature.php:858
+#@ default
+msgid "Log In"
+msgstr ""
+
+#: other-includes/wp-security-rename-login-feature.php:856
+#@ default
+msgid "Remember Me"
+msgstr ""
+
+#: other-includes/wp-security-unlock-request.php:48
+#@ aiowpsecurity
+msgid "Please enter a valid email address"
+msgstr ""
+
+#: other-includes/wp-security-unlock-request.php:59
+#@ aiowpsecurity
+msgid "User account not found!"
+msgstr ""
+
+#: other-includes/wp-security-unlock-request.php:70
+#@ aiowpsecurity
+msgid "Error: No locked entry was found in the DB with your IP address range!"
+msgstr ""
+
+#: other-includes/wp-security-unlock-request.php:98
+#@ aiowpsecurity
+msgid "Email Address"
+msgstr ""
+
