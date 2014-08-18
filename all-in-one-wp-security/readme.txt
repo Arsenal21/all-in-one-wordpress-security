@@ -132,7 +132,7 @@ or malicious bots who do not have a special cookie in their browser. You (the si
 
 = Developers =
 * If you are a developer and you need some extra hooks or filters for this plugin then let us know.
-* Github repository - https://github.com/wp-plugins/all-in-one-wp-security-and-firewall
+* Github repository - https://github.com/Arsenal21/all-in-one-wordpress-security
 
 = Translations =
 * All In One WP Security plugin can be translated to any language.
