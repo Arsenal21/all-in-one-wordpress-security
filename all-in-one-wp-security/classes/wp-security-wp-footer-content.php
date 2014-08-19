@@ -21,13 +21,9 @@ class AIOWPSecurity_WP_Footer_Content {
     {
 ?>
 <meta http-equiv="imagetoolbar" content="no"><!-- disable image toolbar (if any) -->
-<script language="Javascript">
-/*<![CDATA[*/
-document.oncontextmenu = function(){return false;};
-/*]]>*/
-</script>
 <script type="text/javascript">
 /*<![CDATA[*/
+document.oncontextmenu = function(){return false;};
 document.onselectstart=function(){
 	if (event.srcElement.type != "text" && event.srcElement.type != "textarea" && event.srcElement.type != "password") {
 		return false;
@@ -50,16 +46,8 @@ if (window.sidebar) {
 		}
 	};
 }
-/*]]>*/
-</script>
-<script type="text/javascript">
-/*<![CDATA[*/
-if (parent.frames.length > 0) { top.location.replace(document.location); }
-/*]]>*/
-</script>
-<script language="Javascript">
-/*<![CDATA[*/
 document.ondragstart = function(){return false;};
+if (parent.frames.length > 0) { top.location.replace(document.location); }
 /*]]>*/
 </script>
 <?php
