@@ -26,6 +26,18 @@ class AIOWPSecurity_Utility_File
 
     }
     
+    static function get_wp_config_file_path()
+    {
+        $wp_config_file = ABSPATH . 'wp-config.php';
+        if(file_exists($wp_config_file)){
+            return $wp_config_file;
+        }
+        else if (file_exists(dirname( ABSPATH ) . '/wp-config.php')){       
+            return dirname( ABSPATH ) . '/wp-config.php';
+        }
+        return $wp_config_file;
+    }
+    
     static function write_content_to_file($file_path, $new_contents)
     {
         @chmod($file_path, 0777);

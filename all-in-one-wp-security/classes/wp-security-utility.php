@@ -165,7 +165,7 @@ class AIOWPSecurity_Utility
         $edit_file_config_entry_exists = false;
         
         //Config file path
-        $config_file = ABSPATH.'wp-config.php';
+        $config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
 
         //Get wp-config.php file contents so we can check if the "DISALLOW_FILE_EDIT" variable already exists
         $config_contents = file($config_file);
@@ -236,7 +236,7 @@ class AIOWPSecurity_Utility
         $edit_file_config_entry_exists = false;
         
         //Config file path
-        $config_file = ABSPATH.'wp-config.php';
+        $config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
 
         //Get wp-config.php file contents
         $config_contents = file($config_file);

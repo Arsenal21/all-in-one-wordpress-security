@@ -5,6 +5,22 @@ class AIOWPSecurity_General_Init_Tasks
     function __construct(){
         global $aio_wp_security;
         
+        add_action('admin_notices', array(&$this,'reapply_htaccess_rules_notice'));
+        if(isset($_REQUEST['aiowps_reapply_htaccess'])){
+            if(strip_tags($_REQUEST['aiowps_reapply_htaccess']) == 1){
+                include_once ('wp-security-installer.php');
+                if(AIOWPSecurity_Installer::reactivation_tasks()){
+                    echo '<div class="updated"><p>The AIOWPS .htaccess rules were successfully re-inserted.</p></div>';
+                }else{
+                    echo '<div class="error"><p>AIOWPS encountered an error when trying to write to your .htaccess file. Please check the logs.</p></div>';
+                }
+                
+            }elseif(strip_tags($_REQUEST['aiowps_reapply_htaccess']) == 2){
+                //Don't re-write the rules and just delete the temp config item
+                delete_option('aiowps_temp_configs');
+            }
+        }
+        
         if($aio_wp_security->configs->get_value('aiowps_prevent_site_display_inside_frame') == '1'){
             send_frame_options_header(); //send X-Frame-Options: SAMEORIGIN in HTTP header
         }
@@ -70,7 +86,7 @@ class AIOWPSecurity_General_Init_Tasks
         //For honeypot feature
         if($aio_wp_security->configs->get_value('aiowps_enable_login_honeypot') == '1'){
             if (!is_user_logged_in()) {
-                add_action( 'login_enqueue_scripts', array(&$this, 'login_enqueue_scripts'));
+                add_action( 'wp_enqueue_scripts', array(&$this, 'enqueue_front_scripts'));
                 add_action('login_form', array(&$this, 'insert_honeypot_hidden_field'));
             }
         }
@@ -346,7 +362,7 @@ class AIOWPSecurity_General_Init_Tasks
         
     }
     
-    function login_enqueue_scripts()
+    function enqueue_front_scripts()
     {
 //        echo '<link type="text/css" rel="stylesheet" href="'.AIO_WP_SECURITY_URL.'/css/wp-aiowps.css?ver='.AIO_WP_SECURITY_VERSION.'" />';//Load the CSS file
         wp_enqueue_style('aiowps-stylesheet', AIO_WP_SECURITY_URL.'/css/wp-aiowps.css');
@@ -370,5 +386,14 @@ class AIOWPSecurity_General_Init_Tasks
         }
 
         return;
-    }    
+    }
+    
+    //Displays a notice message if the plugin was reactivated after being initially deactivated.
+    //Notice message gives users option of re-applying the aiowps rules which were deleted from the .htaccess when deactivation occurred
+    function reapply_htaccess_rules_notice()
+    {
+        if (get_option('aiowps_temp_configs') !== FALSE){
+            echo '<div class="updated"><p>Would you like All In One WP Security & Firewall to re-insert the security rules in your .htaccess file which were cleared when you deactivated the plugin?&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=1" class="button-primary">Yes</a>&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=2" class="button-primary">No</a></p></div>';
+        }
+    }
 }

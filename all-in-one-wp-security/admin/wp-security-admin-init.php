@@ -176,7 +176,7 @@ class AIOWPSecurity_Admin_Init
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed on wp_config file save!",4);
                 die("Nonce check failed on wp_config file save!");
             }
-            $wp_config_path = ABSPATH . 'wp-config.php';
+            $wp_config_path = AIOWPSecurity_Utility_File::get_wp_config_file_path();
             $result = AIOWPSecurity_Utility_File::backup_and_rename_wp_config($wp_config_path); //Backup the wp_config.php file
             AIOWPSecurity_Utility_File::download_a_file_option1($wp_config_path, "wp-config-backup.txt");
         }

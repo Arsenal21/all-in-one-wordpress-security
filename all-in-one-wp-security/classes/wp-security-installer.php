@@ -135,6 +135,34 @@ deny from all' . PHP_EOL;
             $aio_wp_security->debug_logger->log_debug("Creation of .htaccess file in ".AIO_WP_SECURITY_BACKUPS_DIR_NAME." directory failed!",4);
         }
     }
+    
+    static function reactivation_tasks()
+    {
+        global $aio_wp_security;
+        $temp_cfgs = get_option('aiowps_temp_configs');
+        if($temp_cfgs !== FALSE){
+            //Case where previously installed plugin was reactivated
+            //Let's copy the original configs back to the options table
+            $updated = update_option('aio_wp_security_configs', $temp_cfgs);
+            if($updated === FALSE){
+                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Installer::run_installer() - Update of option settings failed upon plugin activation!",4);
+            }
+            $aio_wp_security->configs->configs = $temp_cfgs; //copy the original configs to memory
+            //Now let's write any rules to the .htaccess file if necessary
+            $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
+
+            if($res == -1)
+            {
+                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Deactivation::run_deactivation_tasks() - Could not write to the .htaccess file. Please check the file permissions.",4);
+                return false;
+            }
+            delete_option('aiowps_temp_configs');
+            return true;
+        }else{
+            $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Deactivation::run_deactivation_tasks() - Original config settings not found!",4);
+            return false;
+        }
+    }
 
 //    //Read entire contents of file at activation time and store serialized contents in our global_meta table
 //    static function backup_file_contents_to_db_at_activation($src_file, $key_description)

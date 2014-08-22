@@ -354,7 +354,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 $is_wp_config = $this->check_if_wp_config_contents($new_wp_config_file_path);
                 if ($is_wp_config == 1)
                 {
-                    $active_root_wp_config = ABSPATH.'wp-config.php';
+                    $active_root_wp_config = AIOWPSecurity_Utility_File::get_wp_config_file_path();
                     if (!copy($new_wp_config_file_path, $active_root_wp_config)) 
                     {
                         //Failed to make a backup copy
@@ -429,7 +429,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         <h3><label for="title"><?php _e('View Contents of the currently active wp-config.php file', 'aiowpsecurity'); ?></label></h3>
         <div class="inside">
             <?php
-            $wp_config_file = ABSPATH . 'wp-config.php';
+            $wp_config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
             $wp_config_contents = AIOWPSecurity_Utility_File::get_file_contents($wp_config_file); 
             ?>
             <textarea class="aio_text_area_file_output aio_width_80 aio_spacer_10_tb" rows="20" readonly><?php echo $wp_config_contents; ?></textarea>

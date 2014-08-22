@@ -2,13 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AIOWPS\n"
 "POT-Creation-Date: 2013-12-03 12:53+1000\n"
-"PO-Revision-Date: 2014-05-07 11:28-0300\n"
+"PO-Revision-Date: 2014-08-19 12:18-0300\n"
 "Last-Translator: Sms Lbr <smslbr@gmail.com>\n"
 "Language-Team: Li9 <suporte@li9.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.5\n"
+"X-Generator: Poedit 1.6.7\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -67,7 +67,7 @@ msgstr "Prevenção SPAM"
 
 #: all-in-one-wp-security/admin/wp-security-admin-init.php:183
 msgid "Scanner"
-msgstr ""
+msgstr "Verificador"
 
 #: all-in-one-wp-security/admin/wp-security-admin-init.php:185
 msgid "Maintenance"
@@ -269,7 +269,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:119
 msgid "Current Score of Your Site: "
-msgstr ""
+msgstr "Avaliação atual do seu Website"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:129
 msgid "Security Points Breakdown"
@@ -287,7 +287,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:178
 msgid "Admin Username"
-msgstr ""
+msgstr "Usuário Administrativo"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:193
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:27
@@ -324,7 +324,7 @@ msgstr ""
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:291
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:33
 msgid "Logged In Users"
-msgstr ""
+msgstr "Usuários Logados"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:301
 msgid "Number of users currently logged in site-wide is:"
@@ -334,7 +334,7 @@ msgstr ""
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:324
 #, php-format
 msgid "Go to the %s menu to see more details"
-msgstr ""
+msgstr "Vá para o %s menu para ver mais detalhes"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:307
 msgid "There are no other site-wide users currently logged in."
@@ -342,11 +342,11 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:323
 msgid "Number of users currently logged into your site is:"
-msgstr ""
+msgstr "O número de usuários logados em seu website é:"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:329
 msgid "There are no other users currently logged in."
-msgstr ""
+msgstr "Não há outros usuários atualmente logados."
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:340
 msgid "Spread the Word"
@@ -360,25 +360,25 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:367
 msgid "Site Info"
-msgstr ""
+msgstr "Informações Website"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:369
 msgid "Plugin Version"
-msgstr ""
+msgstr "Versão do Plugin"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:370
 msgid "WP Version"
-msgstr ""
+msgstr "Versão WP"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:372
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:374
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:395
 msgid "Version"
-msgstr ""
+msgstr "Versão"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:373
 msgid "Table Prefix"
-msgstr ""
+msgstr "Prefixo Tabela"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:375
 msgid "Session Save Path"
@@ -402,13 +402,13 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:384
 msgid "Active Plugins"
-msgstr ""
+msgstr "Plugins Ativos"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:394
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:130
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:149
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:396
 msgid "Plugin URL"
@@ -447,7 +447,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:122
 msgid "Change Database Prefix"
-msgstr ""
+msgstr "Alterar o Prefixo do Banco de Dados"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:125
 msgid ""
@@ -507,7 +507,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:171
 msgid "OR"
-msgstr ""
+msgstr "OU"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:173
 msgid ""
@@ -517,7 +517,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:177
 msgid "Change DB Prefix"
-msgstr ""
+msgstr "Alterar Prefixo B"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:198
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:86
@@ -578,7 +578,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:298
 msgid "Create DB Backup Now"
-msgstr ""
+msgstr "Criar Agora um Backup do DB"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:302
 msgid "Automated Scheduled Backups"
@@ -586,7 +586,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:314
 msgid "Enable Automated Scheduled Backups"
-msgstr ""
+msgstr "Permitir Agendar Backups Automáticos"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:317
 msgid ""
@@ -596,7 +596,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:321
 msgid "Backup Time Interval"
-msgstr ""
+msgstr "Intervalo do Tempo de Backup"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:324
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:259
@@ -629,7 +629,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:338
 msgid "Send Backup File Via Email"
-msgstr ""
+msgstr "Enviar Arquivo Backup via Email"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:341
 msgid ""
@@ -752,7 +752,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:206
 msgid "View Scan Details & Clear This Message"
-msgstr ""
+msgstr "Veja os Detalhes da Verificação & Apague esta Mensagem"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:215
 msgid ""
@@ -800,15 +800,15 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:233
 msgid "Perform Scan Now"
-msgstr ""
+msgstr "Efetue uma Verificação Agora"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:237
 msgid "File Change Detection Settings"
-msgstr ""
+msgstr "Configuração para Detecção de Arquivos Alterados"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:249
 msgid "Enable Automated File Change Detection Scan"
-msgstr ""
+msgstr "Permitir Detecção Automática de Arquivos Alterados"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:252
 msgid ""
@@ -818,7 +818,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:256
 msgid "Scan Time Interval"
-msgstr ""
+msgstr "Intervalo de Tempo para a Verificação"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:263
 msgid "Set the value for how often you would like a scan to occur"
@@ -826,7 +826,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:267
 msgid "File Types To Ignore"
-msgstr ""
+msgstr "Tipos de Arquivo para Ignorar"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:270
 msgid ""
@@ -861,7 +861,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:284
 msgid "Files/Directories To Ignore"
-msgstr ""
+msgstr "Arquivos/Diretórios para Ignorar"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:287
 msgid ""
@@ -913,27 +913,27 @@ msgstr "Os seguintes arquivos foram adicionados para o seu host."
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:26
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:27
 msgid "File"
-msgstr ""
+msgstr "Arquivo"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:348
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:369
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:393
 msgid "File Size"
-msgstr ""
+msgstr "Tamanho Arquivo"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:349
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:370
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:394
 msgid "File Modified"
-msgstr ""
+msgstr "Arquivo Modificado"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:365
 msgid "The following files were removed from your host."
-msgstr ""
+msgstr "Os seguintes arquivos foram removidos do seu provedor."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:389
 msgid "The following files were changed on your host."
-msgstr ""
+msgstr "Os seguintes arquivos foram alterados em seu provedor."
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:26
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:63
@@ -964,7 +964,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:106
 msgid "File Permissions Scan"
-msgstr ""
+msgstr "Verificação de Permissão de Arquivos"
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:109
 msgid ""
@@ -1167,7 +1167,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:430
 msgid "No Action Required"
-msgstr ""
+msgstr "Ação não Necessária"
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:470
 #, php-format
@@ -2667,11 +2667,11 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:297
 msgid "Please enter a value for your username. "
-msgstr ""
+msgstr "Por favor, digite o seu nome de usuário."
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:304
 msgid "Username Successfully Changed!"
-msgstr ""
+msgstr "Nome de usuário alterado com Sucesso!"
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:324
 msgid "Account Login Name"
@@ -2695,7 +2695,7 @@ msgstr ""
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:31
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:47
 msgid "Force Logout"
-msgstr ""
+msgstr "Forçar Logout"
 
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:32
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:653
@@ -3210,22 +3210,24 @@ msgid ""
 "You have entered an incorrectly formatted IP address or domain name. Please "
 "try again."
 msgstr ""
+"Você inseriu a forma incorreta de um endereço IP ou nome do domínio. Por "
+"favor, tente novamente."
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:178
 msgid "No items found."
-msgstr ""
+msgstr "Itens não encontrados."
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:281
 msgid "Bulk Actions"
-msgstr ""
+msgstr "Ações em Massa"
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:291
 msgid "Apply"
-msgstr ""
+msgstr "Ativar"
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:365
 msgid "Show all dates"
-msgstr ""
+msgstr "Mostrar todas Datas"
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:378
 #, php-format
@@ -3234,24 +3236,24 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:394
 msgid "List View"
-msgstr ""
+msgstr "Ver Lista"
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:395
 msgid "Excerpt View"
-msgstr ""
+msgstr "Ver Resumo"
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:421
 #, php-format
 msgid "%s pending"
-msgstr ""
+msgstr "%s pendente"
 
 #: all-in-one-wp-security/admin/general/wp-security-list-table.php:653
 msgid "Select All"
-msgstr ""
+msgstr "Selecione Tudo"
 
 #: all-in-one-wp-security/classes/wp-security-backup.php:177
 msgid "All In One WP Security - Site Database Backup"
-msgstr ""
+msgstr "All In One WP Security - Backup Banco de Dados do Website"
 
 #: all-in-one-wp-security/classes/wp-security-backup.php:179
 msgid "Attached is your latest DB backup file for site URL"
@@ -3355,11 +3357,11 @@ msgstr "Um arquivo substituido foi detectado em seu sistema do website URL "
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:60
 msgid ". Scan was generated on"
-msgstr ".Scan foi gerado em"
+msgstr ". Verificação foi gerada em"
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:61
 msgid "Login to your site to view the scan details."
-msgstr ""
+msgstr "Logue-se em seu website para ver os detalhes da verificação."
 
 #: all-in-one-wp-security/classes/wp-security-general-init-tasks.php:158
 msgid "Please enter an answer in the CAPTCHA field."
@@ -3492,7 +3494,7 @@ msgstr ""
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:29
 msgid "Remove WP Generatore Meta Tag"
-msgstr ""
+msgstr "Remover Gerador da Meta Tag WP "
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:35
 msgid "Change Display Name"
@@ -3512,7 +3514,7 @@ msgstr "Aprovação do Registro"
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:67
 msgid "WordPress Files Access"
-msgstr ""
+msgstr "Acesso Arquivos WordPress"
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:71
 msgid "IP and User Agent Blacklisting"
@@ -3524,7 +3526,7 @@ msgstr "Ativar Firewall Básico"
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:76
 msgid "Enable Pingback Vulnerability Protection"
-msgstr ""
+msgstr "Ativar Proteção Vulnerabilidade Pingback"
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:82
 msgid "Forbid Proxy Comments"

@@ -94,7 +94,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             }
             
             //Let's first check if user's system allows writing to wp-config.php file. If plugin cannot write to wp-config we will not do the prefix change.
-            $config_file = ABSPATH.'wp-config.php';
+            $config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
             $file_write = AIOWPSecurity_Utility_File::is_file_writable($config_file);
             if (!$file_write)
             {
@@ -369,7 +369,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         $old_prefix_length = strlen( $table_old_prefix );
 
         //Config file path
-        $config_file = ABSPATH.'wp-config.php';
+        $config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
 
         //Get the table resource
         //$result = mysql_list_tables(DB_NAME);

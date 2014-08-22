@@ -5,52 +5,19 @@ class AIOWPSecurity_Deactivation
     static function run_deactivation_tasks()
     {	
         global $wpdb;
-        if (function_exists('is_multisite') && is_multisite()) 
-        {
-            // check if it is a network activation - if so, run the activation function for each blog id
-            if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) 
-            {
-                $old_blog = $wpdb->blogid;
-                // Get all blog ids
-                $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
-                foreach ($blogids as $blog_id) {
-                    switch_to_blog($blog_id);
-                }
-                switch_to_blog($old_blog);
-                return;
-            }
-        }
-
-        //Let's backup .htaccess contents when AIOWPS was active
-        $ht_file = ABSPATH . '.htaccess';
-        $key_desc_ht_backup = 'aiowps_htaccess_backup'; //This will be the key to decribe the entry we are inserting into the global_meta table
-        AIOWPSecurity_Utility_File::backup_file_contents_to_db($ht_file, $key_desc_ht_backup); //Store the original htaccess contents in our global_meta table (ie, before AIOWPS was active) 
-
-        //Let's backup wp_config.php contents
-        $wp_config_file = ABSPATH . 'wp-config.php';
-        $key_desc_wp_config_backup = 'aiowps_wp_config_php_backup'; //This will be the key to decribe the entry we are inserting into the global_meta table
-        AIOWPSecurity_Utility_File::backup_file_contents_to_db($wp_config_file, $key_desc_wp_config_backup); //Store the original htaccess contents in our global_meta table (ie, before AIOWPS was active)
+        global $aio_wp_security;
         
-        //Restore original contents of .htaccess file upon deactivation
-        $htaccess_file_contents = AIOWPSecurity_Deactivation::get_original_file_contents('original_htaccess_backup');
-        if ($htaccess_file_contents)
-        {
-            if (file_put_contents($ht_file, $htaccess_file_contents) === false)
-            {
-                //File write failed
-                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Deactivation::run_deactivation_tasks() - Failed to write to .htaccess file",4);
-            }
-        }
+        //Let's first save the current aio_wp_security_configs options in a temp option
+        update_option('aiowps_temp_configs', $aio_wp_security->configs->configs);
         
-        //Restore original contents of wp-config.php file upon deactivation
-        $wp_config_file_contents = AIOWPSecurity_Deactivation::get_original_file_contents('original_wp_config_php_backup');
-        if ($wp_config_file_contents)
+        //Deactivate all firewall and other .htaccess rules
+        AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules();
+        //Remove any rules where aiowps writes to the .htaccess file
+        $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
+
+        if($res == -1)
         {
-            if (file_put_contents($wp_config_file, $wp_config_file_contents) === false)
-            {
-                //File write failed
-                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Deactivation::run_deactivation_tasks() - Failed to write to wp-config.php file",4);
-            }
+            $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Deactivation::run_deactivation_tasks() - Could not write to the .htaccess file. Please check the file permissions.",4);
         }
     }
     
