@@ -717,7 +717,6 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 die("Nonce check failed on honeypot settings save!");
             }
 
-
             //Save all the form values to the options
             $aio_wp_security->configs->set_value('aiowps_enable_login_honeypot',isset($_POST["aiowps_enable_login_honeypot"])?'1':'');
             $aio_wp_security->configs->save_config();

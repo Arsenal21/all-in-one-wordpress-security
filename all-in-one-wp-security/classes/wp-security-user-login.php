@@ -381,7 +381,7 @@ class AIOWPSecurity_User_Login
         return $last_login;
     }
 
-    function wp_login_action_handler($user_login, $user='') 
+    static function wp_login_action_handler($user_login, $user='') 
     {
         global $wpdb, $aio_wp_security;
         $login_activity_table = AIOWPSEC_TBL_USER_LOGIN_ACTIVITY;

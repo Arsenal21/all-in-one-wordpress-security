@@ -86,12 +86,9 @@ class AIOWPSecurity_General_Init_Tasks
         //For honeypot feature
         if($aio_wp_security->configs->get_value('aiowps_enable_login_honeypot') == '1'){
             if (!is_user_logged_in()) {
-                add_action( 'wp_enqueue_scripts', array(&$this, 'enqueue_front_scripts'));
-                add_action( 'login_enqueue_scripts', array(&$this, 'enqueue_front_scripts'), 10 );
                 add_action('login_form', array(&$this, 'insert_honeypot_hidden_field'));
             }
         }
-        
         
         //For lost password captcha feature
         if($aio_wp_security->configs->get_value('aiowps_enable_lost_password_captcha') == '1'){
@@ -121,7 +118,6 @@ class AIOWPSecurity_General_Init_Tasks
                 }
             }
         }
-        
 
         //For comment captcha feature
         if (AIOWPSecurity_Utility::is_multisite_install()){
@@ -192,7 +188,6 @@ class AIOWPSecurity_General_Init_Tasks
             $current_user_ip = AIOWPSecurity_Utility_IP::get_user_ip_address();
             // get the logged in users list from transients entry
             $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
-//            $logged_in_users = get_transient('users_online');
             $current_user = wp_get_current_user();
             $current_user = $current_user->ID;  
             $current_time = current_time('timestamp');
@@ -203,7 +198,6 @@ class AIOWPSecurity_General_Init_Tasks
                 $logged_in_users = array();
                 $logged_in_users[] = $current_user_info;
                 AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
-//                set_transient('users_online', $logged_in_users, 30 * 60); //Set transient with the data obtained above and also set the expire to 30min
             }
             else
             {
@@ -285,8 +279,7 @@ class AIOWPSecurity_General_Init_Tasks
     }
 
     function insert_honeypot_hidden_field(){
-        global $aio_wp_security;
-        $honey_input = '<p class="aio-special-field"><label>'.__('Enter something special:','aiowpsecurity').'</label>';
+        $honey_input = '<p style="display: none;"><label>'.__('Enter something special:','aiowpsecurity').'</label>';
         $honey_input .= '<input name="aio_special_field" type="text" id="aio_special_field" class="aio_special_field" /></p>';
         echo $honey_input;
     }
@@ -361,14 +354,7 @@ class AIOWPSecurity_General_Init_Tasks
             AIOWPSecurity_Utility::event_logger('404');
         }
         
-    }
-    
-    function enqueue_front_scripts()
-    {
-//        echo '<link type="text/css" rel="stylesheet" href="'.AIO_WP_SECURITY_URL.'/css/wp-aiowps.css?ver='.AIO_WP_SECURITY_VERSION.'" />';//Load the CSS file
-        wp_enqueue_style('aiowps-stylesheet', AIO_WP_SECURITY_URL.'/css/wp-aiowps.css');
-    }
-    
+    }   
     
     function buddy_press_signup_validate_captcha($errors)
     {
