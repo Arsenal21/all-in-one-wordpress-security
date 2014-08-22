@@ -87,6 +87,7 @@ class AIOWPSecurity_General_Init_Tasks
         if($aio_wp_security->configs->get_value('aiowps_enable_login_honeypot') == '1'){
             if (!is_user_logged_in()) {
                 add_action( 'wp_enqueue_scripts', array(&$this, 'enqueue_front_scripts'));
+                add_action( 'login_enqueue_scripts', array(&$this, 'enqueue_front_scripts'), 10 );
                 add_action('login_form', array(&$this, 'insert_honeypot_hidden_field'));
             }
         }

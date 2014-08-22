@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 3.8.0
+Stable tag: 3.8.1
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -163,6 +163,8 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+= 3.8.1 =
+- Minor bug fix for the honeypot feature - loading of css style sheet was not occurring when main login page rendered.
 
 = 3.8.0 =
 - Improved deactivation and re-activation tasks - AIOWPS will now gracefully clean up the .htaccess rules when the plugin is deactivated.

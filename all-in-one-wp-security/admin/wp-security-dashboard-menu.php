@@ -73,7 +73,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
     {
         echo '<div class="aio_grey_box">';
  	echo '<p>'.__('For information, updates and documentation, please visit the','aiowpsecurity').' <a href="http://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin" target="_blank">'.__('AIO WP Security & Firewall Plugin','aiowpsecurity').'</a> '.__('Page','aiowpsecurity').'</p>';
-        echo '<p><a href="http://www.tipsandtricks-hq.com/development-center" target="_blank">'.__('Follow us','aiowpsecurity').'</a> on '.__('Twitter, Google+ or via Email to stay up to date about the new security features of this plugin.','aiowpsecurity').'</p>';
+        echo '<p><a href="https://www.tipsandtricks-hq.com/development-center" target="_blank">'.__('Follow us','aiowpsecurity').'</a> on '.__('Twitter, Google+ or via Email to stay up to date about the new security features of this plugin.','aiowpsecurity').'</p>';
         echo '</div>';
 
         echo "<script type='text/javascript' src='https://www.google.com/jsapi'></script>";//Include the google chart library
