@@ -181,8 +181,11 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         }
         /* -- Ordering parameters -- */
 	//Parameters that are going to be used to order the result
-	$orderby = !empty($_GET["orderby"]) ? mysql_real_escape_string($_GET["orderby"]) : 'amount';
-	$order = !empty($_GET["order"]) ? mysql_real_escape_string($_GET["order"]) : 'DESC';
+        isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
+        isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
+        
+	$orderby = !empty($orderby) ? mysql_real_escape_string($orderby) : 'amount';
+	$order = !empty($order) ? mysql_real_escape_string($order) : 'DESC';
 
         $sql = "SELECT   comment_author_IP, COUNT(*) AS amount
                 FROM     $wpdb->comments 

@@ -5,6 +5,10 @@ class AIOWPSecurity_General_Init_Tasks
     function __construct(){
         global $aio_wp_security;
         
+        if ($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page') == '1') {
+            add_action( 'widgets_init', array(&$this, 'remove_standard_wp_meta_widget' ));
+        }
+
         add_action('admin_notices', array(&$this,'reapply_htaccess_rules_notice'));
         if(isset($_REQUEST['aiowps_reapply_htaccess'])){
             if(strip_tags($_REQUEST['aiowps_reapply_htaccess']) == 1){
@@ -30,11 +34,13 @@ class AIOWPSecurity_General_Init_Tasks
         }
         
         //For the cookie based brute force prevention feature
-        $bfcf_secret_word = $aio_wp_security->configs->get_value('aiowps_brute_force_secret_word');
-        if(isset($_GET[$bfcf_secret_word])){
-            //If URL contains secret word in query param then set cookie and then redirect to the login page
-            AIOWPSecurity_Utility::set_cookie_value($bfcf_secret_word, "1");
-            AIOWPSecurity_Utility::redirect_to_url(AIOWPSEC_WP_URL."/wp-admin");
+        if($aio_wp_security->configs->get_value('aiowps_enable_brute_force_attack_prevention') == 1){
+            $bfcf_secret_word = $aio_wp_security->configs->get_value('aiowps_brute_force_secret_word');
+            if(isset($_GET[$bfcf_secret_word])){
+                //If URL contains secret word in query param then set cookie and then redirect to the login page
+                AIOWPSecurity_Utility::set_cookie_value($bfcf_secret_word, "1");
+                AIOWPSecurity_Utility::redirect_to_url(AIOWPSEC_WP_URL."/wp-admin");
+            }
         }
         
         //For user unlock request feature
@@ -162,6 +168,11 @@ class AIOWPSecurity_General_Init_Tasks
         
     }
     
+    function remove_standard_wp_meta_widget()
+    {
+        unregister_widget('WP_Widget_Meta');
+    }    
+
     function remove_wp_generator_meta_info()
     {
         return '';

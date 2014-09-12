@@ -12,13 +12,6 @@ class AIOWPSecurity_Deactivation
         
         //Deactivate all firewall and other .htaccess rules
         AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules();
-        //Remove any rules where aiowps writes to the .htaccess file
-        $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
-
-        if($res == -1)
-        {
-            $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Deactivation::run_deactivation_tasks() - Could not write to the .htaccess file. Please check the file permissions.",4);
-        }
     }
     
     static function get_original_file_contents($key_description)

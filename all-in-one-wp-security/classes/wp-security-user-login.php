@@ -272,7 +272,9 @@ class AIOWPSecurity_User_Login
             $email_msg .= __('IP Address: '.$ip,'aiowpsecurity')."\n\n";
             $email_msg .= __('IP Range: '.$ip_range.'.*','aiowpsecurity')."\n\n";
             $email_msg .= __('Log into your site\'s WordPress administration panel to see the duration of the lockout or to unlock the user.','aiowpsecurity')."\n";
-            $email_header = 'From: '.get_bloginfo( 'name' ).' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
+            $site_title = get_bloginfo( 'name' );
+            $from_name = empty($site_title)?'WordPress':$site_title;
+            $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
             $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
         }
     }
@@ -337,7 +339,9 @@ class AIOWPSecurity_User_Login
         $email_msg .= __('You have requested for the account with email address '.$email.' to be unlocked. Please click the link below to unlock your account:','aiowpsecurity')."\n";
         $email_msg .= __('Unlock link: '.$unlock_link,'aiowpsecurity')."\n\n";
         $email_msg .= __('After clicking the above link you will be able to login to the WordPress administration panel.','aiowpsecurity')."\n";
-        $email_header = 'From: '.get_bloginfo( 'name' ).' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
+        $site_title = get_bloginfo( 'name' );
+        $from_name = empty($site_title)?'WordPress':$site_title;
+        $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
         $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
     }
     

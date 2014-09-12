@@ -411,4 +411,20 @@ class AIOWPSecurity_Utility
         }
     }
     
+    /*
+     * Returns an array of blog_ids for a multisite install
+     * If site is not multisite returns empty array
+     */
+    static function get_blog_ids()
+    {
+        global $wpdb, $aio_wp_security;
+        if (AIOWPSecurity_Utility::is_multisite_install()) {
+            global $wpdb;
+            $blog_ids = $wpdb->get_col("SELECT blog_id FROM ".$wpdb->prefix."blogs");
+        }else{
+            $blog_ids = array();
+        }
+        return $blog_ids;
+    }
+    
 }

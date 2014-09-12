@@ -31,6 +31,10 @@ class AIOWPSecurity_Backup
         {
             //get all of the tables
             $tables = $wpdb->get_results( 'SHOW TABLES', ARRAY_N );
+            if(empty($tables)){
+                $aio_wp_security->debug_logger->log_debug("execute_backup() - no tables found!",4);
+                return FALSE;
+            }
         }
 
         $return = '';
@@ -43,6 +47,9 @@ class AIOWPSecurity_Backup
 
             $return.= 'DROP TABLE IF EXISTS `' . $table[0] . '`;';
             $row2 = $wpdb->get_row( 'SHOW CREATE TABLE `' . $table[0] . '`;', ARRAY_N );
+            if(empty($row2)){
+                $aio_wp_security->debug_logger->log_debug("execute_backup() - get_row returned NULL for table: ".$table[0],4);
+            }
             $return.= PHP_EOL . PHP_EOL . $row2[1] . ";" . PHP_EOL . PHP_EOL;
 
             foreach( $result as $row ) 
@@ -83,7 +90,7 @@ class AIOWPSecurity_Backup
         }
 
         //Generate a random prefix for more secure filenames
-        $random_prefix = $random_prefix = AIOWPSecurity_Utility::generate_alpha_numeric_random_string(10);
+        $random_prefix = AIOWPSecurity_Utility::generate_alpha_numeric_random_string(10);
 
         if ($is_multi_site)
         {
@@ -127,6 +134,7 @@ class AIOWPSecurity_Backup
         $fw_res = @fwrite( $handle, $return );
         if (!$fw_res)
         {
+            $aio_wp_security->debug_logger->log_debug("execute_backup() - Write to DB backup file failed",4); 
             return false;
         }
         @fclose( $handle );
@@ -173,7 +181,10 @@ class AIOWPSecurity_Backup
             }
 
             $to = $toaddress;
-            $headers = 'From: ' . get_option( 'blogname' ) . ' <' . get_option('admin_email') . '>' . PHP_EOL;
+            $site_title = get_bloginfo( 'name' );
+            $from_name = empty($site_title)?'WordPress':$site_title;
+            
+            $headers = 'From: ' . $from_name . ' <' . get_option('admin_email') . '>' . PHP_EOL;
             $subject = __( 'All In One WP Security - Site Database Backup', 'aiowpsecurity' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
             $attachment = array( $this->last_backup_file_path );
             $message = __( 'Attached is your latest DB backup file for site URL', 'aiowpsecurity' ) . ' ' . get_option( 'siteurl' ) . __( ' generated on', 'aiowpsecurity' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );

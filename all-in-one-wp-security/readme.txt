@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 3.8.2
+Stable tag: 3.8.3
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -163,6 +163,22 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 3.8.3 = 
+- Modified "Pingback Protection" .htaccess rules to prevent xmlrpc login attacks and to be compatible with more servers.
+- Made improvements to ensure that the rename login and white list features can be used together.
+- Added a check to force user to enter alphanumeric string for renamed login slug.
+- Improved the turn_off_all_firewall_rules() and turn_off_all_security_features() functions so that they also handle the updating of the htaccess file.
+- Added an alternative way to import settings via a text box (Thanks to Dave McHale). This is for people who might have issues using the config settings file uploader. 
+- Added fix to properly update options tables when changing DB prefix in multisite system.
+- Greatly improved the Renamed Login Page feature by removing various potential vulnerabilities.
+- Added an if statement check to fix bug with rename login page feature - special case where user had non permalink structure was not working correctly in some rare scenarios.
+- Updated the Italian language file.
+- Fixed bug regarding wp_mail malformed header when "From" string was empty due to "site title" not being set.
+- Fixed bug in IP list validation function for blacklist feature.
+- Removed strict filtering of IP addresses so as to allow internal IP address ranges.
+- Added stripping of orderby and order query parameters in the plugin.
+- Added search capability by IP address, URL or referer for the 404 events list table. 
 
 = 3.8.2 = 
 - Fixed a CSS issue with the honeypot feature.

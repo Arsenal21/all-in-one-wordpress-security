@@ -12,12 +12,13 @@ class AIOWPSecurity_Utility_IP
             if (array_key_exists($key, $_SERVER) === true){
                 foreach (explode(',', $_SERVER[$key]) as $ip){
                     $userIP = trim($ip);
-                    if (filter_var($userIP, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+                    if (filter_var($userIP, FILTER_VALIDATE_IP) !== false){
                         return $userIP;
                     }
                 }
             }
         }
+        return ''; //if we get this far we have an invalid address - return empty string
     }
     
      /*
@@ -123,7 +124,7 @@ class AIOWPSecurity_Utility_IP
                     { //invalid ip 
                         $errors .= '<p>'.$item.__(' is not a valid ip address format.', 'aiowpsecurity').'</p>';
                     } 
-                    elseif (strlen($item > 4 && !in_array($item, $list))) 
+                    elseif (strlen($item) > 4 && !in_array($item, $list)) 
                     {
                         $current_user_ip = AIOWPSecurity_Utility_IP::get_user_ip_address();
                         if ($current_user_ip == $item && $list == 'blacklist')

@@ -875,9 +875,10 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             $event_list_404->prepare_items();
             //echo "put table of locked entries here"; 
             ?>
-            <form id="tables-filter" method="get" onSubmit="return confirm('Are you sure you want to perform this bulk operation on the selected entries?');">
+            <form id="tables-filter" method="post">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
             <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+            <?php $event_list_404->search_box('Search', 'search_404_events'); ?>
             <?php
             if(isset($_REQUEST["tab"]))
             {

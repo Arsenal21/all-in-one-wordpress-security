@@ -72,7 +72,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
     function render_tab1()
     {
         echo '<div class="aio_grey_box">';
- 	echo '<p>'.__('For information, updates and documentation, please visit the','aiowpsecurity').' <a href="http://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin" target="_blank">'.__('AIO WP Security & Firewall Plugin','aiowpsecurity').'</a> '.__('Page','aiowpsecurity').'</p>';
+ 	echo '<p>'.__('For information, updates and documentation, please visit the','aiowpsecurity').' <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin" target="_blank">'.__('AIO WP Security & Firewall Plugin','aiowpsecurity').'</a> '.__('Page','aiowpsecurity').'</p>';
         echo '<p><a href="https://www.tipsandtricks-hq.com/development-center" target="_blank">'.__('Follow us','aiowpsecurity').'</a> on '.__('Twitter, Google+ or via Email to stay up to date about the new security features of this plugin.','aiowpsecurity').'</p>';
         echo '</div>';
 
@@ -176,10 +176,10 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
         
         <p><?php _e('We are working hard to make your WordPress site more secure. Please support us, here is how:', 'aiowpsecurity');?></p>
         <p>
-            <a href="https://plus.google.com/102469783420435518783/" target="_blank">Follow us on Google+</a>
+            <a href="https://plus.google.com/+Tipsandtricks-hq/" target="_blank">Follow us on Google+</a>
         </p>
         <p>
-            <a href="http://twitter.com/intent/tweet?url=http://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin&text=I love the All In One WP Security and Firewall plugin!" target="_blank" class="aio_tweet_link">Post to Twitter</a>
+            <a href="http://twitter.com/intent/tweet?url=https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin&text=I love the All In One WP Security and Firewall plugin!" target="_blank" class="aio_tweet_link">Post to Twitter</a>
         </p>
         <p>
             <a href="http://wordpress.org/support/view/plugin-reviews/all-in-one-wp-security-and-firewall/" target="_blank" class="aio_rate_us_link">Give us a Good Rating</a>
@@ -268,9 +268,12 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
         $login_activity_table = AIOWPSEC_TBL_USER_LOGIN_ACTIVITY;
 
 	/* -- Ordering parameters -- */
-	    //Parameters that are going to be used to order the result
-	$orderby = !empty($_GET["orderby"]) ? mysql_real_escape_string($_GET["orderby"]) : 'login_date';
-	$order = !empty($_GET["order"]) ? mysql_real_escape_string($_GET["order"]) : 'DESC';
+	//Parameters that are going to be used to order the result
+        isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
+        isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
+
+	$orderby = !empty($orderby) ? mysql_real_escape_string($orderby) : 'login_date';
+	$order = !empty($order) ? mysql_real_escape_string($order) : 'DESC';
 
 	$data = $wpdb->get_results("SELECT * FROM $login_activity_table ORDER BY $orderby $order LIMIT 5", ARRAY_A); //Get the last 50 records
         

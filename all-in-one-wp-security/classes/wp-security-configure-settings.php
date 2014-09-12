@@ -249,6 +249,13 @@ class AIOWPSecurity_Configure_Settings
     static function turn_off_all_security_features()
     {
         AIOWPSecurity_Configure_Settings::set_default_settings();
+        
+        //Refresh the .htaccess file based on the new settings
+        $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
+        if($res == -1)
+        {
+            $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules() - Could not write to the .htaccess file. Please check the file permissions.",4);
+        }
     }
     
     static function turn_off_all_firewall_rules()
@@ -275,16 +282,18 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->set_value('aiowps_enable_404_logging','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_404_IP_lockout','');//Checkbox
         
+        //Prevent Image Hotlinks
+        $aio_wp_security->configs->set_value('aiowps_prevent_hotlinking','');//Checkbox
+        
         $aio_wp_security->configs->save_config();
+        
+        //Refresh the .htaccess file based on the new settings
+        $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
+
+        if($res == -1)
+        {
+            $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules() - Could not write to the .htaccess file. Please check the file permissions.",4);
+        }
     }
 
-    static function restore_to_factory_default()
-    {
-        //TOOD - complete the implementation
-        //restore wp_config_file();//TODO - //TODO - write implementation in the utility class
-        //restore site_htaccess_file();//TODO - write implementation in the utility class
-        //AIOWPSecurity_Configure_Settings::set_default_settings();
-        //Maybe allow them to revert the DB Prefix too?
-        //File permissions
-    }
 }

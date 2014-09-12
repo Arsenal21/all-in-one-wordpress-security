@@ -367,6 +367,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
     {
         global $wpdb, $aio_wp_security;
         $old_prefix_length = strlen( $table_old_prefix );
+        $error = 0;
 
         //Config file path
         $config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
@@ -376,7 +377,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         $result = $this->get_mysql_tables(DB_NAME); //Fix for deprecated php mysql_list_tables function
 
         //Count the number of tables
-        //$num_rows = mysql_num_rows( $result );
         if (is_array($result) && count($result) > 0){
             $num_rows = count($result);
         }else{
@@ -384,7 +384,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             return;
         }
         $table_count = 0;
-        //TODO - after reading up on internationalization mixed with html code I found that the WP experts say to do it as below. We will need to clean up other areas where we haven't used the following convention
         $info_msg_string = '<p class="aio_info_with_icon">'.__('Starting DB prefix change operations.....', 'aiowpsecurity').'</p>';
         
         $info_msg_string .= '<p class="aio_info_with_icon">'.sprintf( __('Your WordPress system has a total of %s tables and your new DB prefix will be: %s', 'aiowpsecurity'), '<strong>'.$num_rows.'</strong>', '<strong>'.$table_new_prefix.'</strong>').'</p>';
@@ -429,7 +428,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 continue;
             }
         }
-        if ( @$error == 1 )
+        if ( $error == 1 )
         {
             echo '<p class="aio_error_with_icon">'.sprintf( __('Please change the prefix manually for the above tables to: %s', 'aiowpsecurity'), '<strong>'.$table_new_prefix.'</strong>').'</p>';
         } else 
@@ -466,20 +465,39 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
 
         if ( false === $wpdb->query($update_option_table_query) ) 
         {
-            echo "<p class='error'>Changing value: ",
-                     $table_old_prefix,
-                     "user_roles in table ",
-                     $table_new_prefix,
-                     "options to  ",
-                     $table_new_prefix,
-                     "user_roles</p>";
-
-            echo '<p class="aio_error_with_icon">'.sprintf( __('There was an error when updating the options table.', 'aiowpsecurity')).'</p>';
+            echo '<p class="aio_error_with_icon">'.sprintf( __('Update of table %s failed: unable to change %s to %s', 'aiowpsecurity'),$table_new_prefix.'options', $table_old_prefix.'user_roles', $table_new_prefix.'user_roles').'</p>';
             $aio_wp_security->debug_logger->log_debug("DB Security Feature - Error when updating the options table",4);//Log the highly unlikely event of DB error
         } else 
         {
             echo '<p class="aio_success_with_icon">'.sprintf( __('The options table records which had references to the old DB prefix were updated successfully!', 'aiowpsecurity')).'</p>';
         }
+
+        //Now let's update the options tables for the multisite subsites if applicable
+        if (AIOWPSecurity_Utility::is_multisite_install()) {
+            $blog_ids = AIOWPSecurity_Utility::get_blog_ids();
+            
+            if(!empty($blog_ids)){
+                foreach ($blog_ids as $blog_id) {
+                    if ($blog_id == 1){continue;} //skip main site
+                    $new_pref_and_site_id = $table_new_prefix.$blog_id.'_';
+                    $old_pref_and_site_id = $table_old_prefix.$blog_id.'_';
+                    $update_ms_option_table_query = "UPDATE " . $new_pref_and_site_id . "options
+                                                                            SET option_name = '".$new_pref_and_site_id."user_roles'
+                                                                            WHERE option_name = '".$old_pref_and_site_id."user_roles'
+                                                                            LIMIT 1";
+                    if ( false === $wpdb->query($update_ms_option_table_query) ) 
+                    {
+                        echo '<p class="aio_error_with_icon">'.sprintf( __('Update of table %s failed: unable to change %s to %s', 'aiowpsecurity'),$new_pref_and_site_id.'options', $old_pref_and_site_id.'user_roles', $new_pref_and_site_id.'user_roles').'</p>';
+                        $aio_wp_security->debug_logger->log_debug("DB change prefix feature - Error when updating the subsite options table: ".$new_pref_and_site_id.'options',4);//Log the highly unlikely event of DB error
+                    } else 
+                    {
+                        echo '<p class="aio_success_with_icon">'.sprintf( __('The %s table records which had references to the old DB prefix were updated successfully!', 'aiowpsecurity'),$new_pref_and_site_id.'options').'</p>';
+                    }
+                }
+
+            }
+        }
+        
         //Now let's update the user meta table
         $custom_sql = "SELECT user_id, meta_key 
                         FROM " . $table_new_prefix . "usermeta 
@@ -492,22 +510,20 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
 
         //Update all meta_key field values which have the old table prefix in user_meta table
         foreach ($meta_keys as $meta_key ) {
+            //Create new meta key
+            $new_meta_key = $table_new_prefix . substr( $meta_key->meta_key, $old_prefix_length );
 
-                //Create new meta key
-                $new_meta_key = $table_new_prefix . substr( $meta_key->meta_key, $old_prefix_length );
+            $update_user_meta_sql = "UPDATE " . $table_new_prefix . "usermeta 
+                                                            SET meta_key='" . $new_meta_key . "' 
+                                                            WHERE meta_key='" . $meta_key->meta_key . "'
+                                                            AND user_id='" . $meta_key->user_id."'";
 
-                $update_user_meta_sql = "UPDATE " . $table_new_prefix . "usermeta 
-                                                                SET meta_key='" . $new_meta_key . "' 
-                                                                WHERE meta_key='" . $meta_key->meta_key . "'
-                                                                AND user_id='" . $meta_key->user_id."'";
-
-                if (false === $wpdb->query($update_user_meta_sql))
-                {
-                    $error_update_usermeta .= '<p class="aio_error_with_icon">'.sprintf( __('Error updating user_meta table where new meta_key = %s, old meta_key = %s and user_id = %s.', 'aiowpsecurity'),$new_meta_key,$meta_key->meta_key,$meta_key->user_id).'</p>';
-                    echo $error_update_usermeta;
-                    $aio_wp_security->debug_logger->log_debug("DB Security Feature - Error updating user_meta table where new meta_key = ".$new_meta_key." old meta_key = ".$meta_key->meta_key." and user_id = ".$meta_key->user_id,4);//Log the highly unlikely event of DB error
-                }
-
+            if (false === $wpdb->query($update_user_meta_sql))
+            {
+                $error_update_usermeta .= '<p class="aio_error_with_icon">'.sprintf( __('Error updating user_meta table where new meta_key = %s, old meta_key = %s and user_id = %s.', 'aiowpsecurity'),$new_meta_key,$meta_key->meta_key,$meta_key->user_id).'</p>';
+                echo $error_update_usermeta;
+                $aio_wp_security->debug_logger->log_debug("DB Security Feature - Error updating user_meta table where new meta_key = ".$new_meta_key." old meta_key = ".$meta_key->meta_key." and user_id = ".$meta_key->user_id,4);//Log the highly unlikely event of DB error
+            }
         }
         echo '<p class="aio_success_with_icon">'.__('The usermeta table records which had references to the old DB prefix were updated successfully!', 'aiowpsecurity').'</p>';
         //Display tasks finished message
@@ -532,20 +548,12 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         }
         
         if ($result = $mysqli->query($list_tables_sql, MYSQLI_USE_RESULT)) {
-            //$temp = $result->fetch_all();
-
             //Alternative way to get the tables
             while ($row = $result->fetch_assoc()) {
                 foreach( $row  AS $value ) {
                     $tables[] = $value;
                 }
-            //var_dump($row);
-                //$key = 'Tables_in_'.$database;
-
             }            
-//            foreach($temp as $res){
-//                $tables[] = $res[0];
-//            }
             $result->close();
         }
         $mysqli->close();        

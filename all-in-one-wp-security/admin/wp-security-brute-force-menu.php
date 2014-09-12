@@ -103,6 +103,8 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 $aiowps_login_page_slug = sanitize_text_field($_POST['aiowps_login_page_slug']);
                 if($aiowps_login_page_slug == 'wp-admin'){
                     $error .= '<br />'.__('You cannot use the value "wp-admin" for your login page slug.','aiowpsecurity');
+                }elseif(preg_match('/[^a-z_\-0-9]/i', $aiowps_login_page_slug)){
+                    $error .= '<br />'.__('You must alpha numeric characters for your login page slug.','aiowpsecurity');
                 }
             }
             

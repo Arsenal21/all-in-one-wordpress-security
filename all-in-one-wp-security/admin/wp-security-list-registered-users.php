@@ -126,7 +126,9 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                         $to_email_address = $user->user_email;
                         $subject = '['.get_option('siteurl').'] '. __('Your account is now active','aiowpsecurity');
                         $email_msg .= __('Your account with username:','aiowpsecurity').$user->ID." is now active.\n";
-                        $email_header = 'From: '.get_bloginfo( 'name' ).' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
+                        $site_title = get_bloginfo( 'name' );
+                        $from_name = empty($site_title)?'WordPress':$site_title;
+                        $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
                         $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
                     }
                 }
@@ -150,7 +152,9 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                 $to_email_address = $user->user_email;
                 $subject = '['.get_option('siteurl').'] '. __('Your account is now active','aiowpsecurity');
                 $email_msg .= __('Your account with username: ','aiowpsecurity').$user->user_login." is now active.\n";
-                $email_header = 'From: '.get_bloginfo( 'name' ).' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
+                $site_title = get_bloginfo( 'name' );
+                $from_name = empty($site_title)?'WordPress':$site_title;
+                $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
                 $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
                 
             }else if($result === false){
@@ -201,13 +205,6 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         
         $this->process_bulk_action();
     	
-    	global $wpdb;
-        global $aio_wp_security;
-        /* -- Ordering parameters -- */
-	//Parameters that are going to be used to order the result
-//	$orderby = !empty($_GET["orderby"]) ? mysql_real_escape_string($_GET["orderby"]) : 'user_id';
-//	$order = !empty($_GET["order"]) ? mysql_real_escape_string($_GET["order"]) : 'DESC';
-
         //Get registered users which have the special 'aiowps_account_status' meta key set to 'pending'
         $data = $this->get_registered_user_data('pending');
         

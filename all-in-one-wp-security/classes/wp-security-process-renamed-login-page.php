@@ -59,6 +59,9 @@ class AIOWPSecurity_Process_Renamed_Login_Page
         if (strpos($url, 'wp-login.php') !== false){
             $args = explode( '?', $url );
             if (isset($args[1])){
+                if (strpos($args[1], 'action=postpass') !== FALSE){
+                    return $url; //Don't reveal the secret URL in the post password action url 
+                }
                 parse_str($args[1], $args);
                 $url = add_query_arg($args, AIOWPSecurity_Process_Renamed_Login_Page::new_login_url());
             }else{
@@ -71,6 +74,31 @@ class AIOWPSecurity_Process_Renamed_Login_Page
     static function renamed_login_init_tasks()
     {
         global $aio_wp_security;
+        
+        //The following will process the native wordpress post password protection form
+        //Normally this is done by wp-login.php file but we cannot use that since the login page has been renamed 
+        $action = isset($_GET['action'])?strip_tags($_GET['action']):'';
+        if(isset($_POST['post_password']) && $action == 'postpass'){
+            require_once ABSPATH . 'wp-includes/class-phpass.php';
+            $hasher = new PasswordHash( 8, true );
+
+            /**
+             * Filter the life span of the post password cookie.
+             *
+             * By default, the cookie expires 10 days from creation. To turn this
+             * into a session cookie, return 0.
+             *
+             * @since 3.7.0
+             *
+             * @param int $expires The expiry time, as passed to setcookie().
+             */
+            $expire = apply_filters( 'post_password_expires', time() + 10 * DAY_IN_SECONDS );
+            setcookie( 'wp-postpass_' . COOKIEHASH, $hasher->HashPassword( wp_unslash( $_POST['post_password'] ) ), $expire, COOKIEPATH );
+
+            wp_safe_redirect( wp_get_referer() );
+            exit();
+        }
+        
         //case where someone attempting to reach wp-admin 
         if (is_admin() && !is_user_logged_in() && !defined('DOING_AJAX')){
             //Check if the maintenance (lockout) mode is active - if so prevent access to site by not displaying 404 page!

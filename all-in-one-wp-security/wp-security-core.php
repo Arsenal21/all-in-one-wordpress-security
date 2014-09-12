@@ -3,7 +3,7 @@
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '3.8.2';
+    var $version = '3.8.3';
     var $db_version = '1.6';
     var $plugin_url;
     var $plugin_path;
@@ -239,32 +239,7 @@ class AIO_WP_Security{
                 }
             }
         }
-    }
-    
-    //This function will dynamically change the upload directory if the user is uploading a file from an aiowps page
-    function aiowps_set_upload_dir($path_data)
-    {
-        $output = array();
-        $originating_url_parsed = parse_url($_SERVER['HTTP_REFERER']);
-        if(isset($originating_url_parsed['query'])){
-            parse_str($originating_url_parsed['query'], $output);
-            
-            if (isset($output['referer'])){
-                if ($output['referer'] == 'aiowpsec') {
-                    $path_data['path'] = WP_CONTENT_DIR . "/" . AIO_WP_SECURITY_BACKUPS_DIR_NAME;
-                    $path_data['url'] = content_url() . "/" . AIO_WP_SECURITY_BACKUPS_DIR_NAME;
-                }
-            }
-        }
-        return $path_data;
-    }
-    
-    function handle_upload( $fileinfo )
-    {
-        remove_filter('upload_dir', array( &$this, 'aiowps_set_upload_dir' ) );
-        return $fileinfo;
-    }
-    
+    }    
     
 }//End of class
 

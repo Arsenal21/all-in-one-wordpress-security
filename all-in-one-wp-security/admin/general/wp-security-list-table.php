@@ -288,7 +288,7 @@ class AIOWPSecurity_List_Table
 
 		echo "</select>\n";
 
-		submit_button( __( 'Apply' ), 'action', false, false, array( 'id' => "doaction$two" ) );
+		submit_button( __( 'Apply' ), 'action', false, false, array( 'id' => "doaction$two", 'onClick' => 'return confirm("Are you sure you want to perform this bulk operation on the selected entries?")' ) );
 		echo "\n";
 	}
 
