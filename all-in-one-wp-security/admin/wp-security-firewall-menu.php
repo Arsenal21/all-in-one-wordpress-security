@@ -1,5 +1,7 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) { exit; } // Prevent direct access to file
+
 class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_FIREWALL_MENU_SLUG;
