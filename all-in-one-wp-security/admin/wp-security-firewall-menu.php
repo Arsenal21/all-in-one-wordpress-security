@@ -858,7 +858,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('404 Lockout Redirect URL', 'aiowpsecurity')?>:</th>
-                <td><input type="text" size="50" name="aiowps_404_lock_redirect_url" value="<?php echo $aio_wp_security->configs->get_value('aiowps_404_lock_redirect_url'); ?>" />
+                <td><input type="text" size="50" name="aiowps_404_lock_redirect_url" value="<?php echo esc_url_raw( $aio_wp_security->configs->get_value('aiowps_404_lock_redirect_url'), array( 'http', 'https' ) ); ?>" />
                 <span class="description"><?php _e('A blocked visitor will be automatically redirected to this URL.', 'aiowpsecurity'); ?></span>
                 </td> 
             </tr>
@@ -875,9 +875,10 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             $event_list_404->prepare_items();
             //echo "put table of locked entries here"; 
             ?>
-            <form id="tables-filter" method="get" onSubmit="return confirm('Are you sure you want to perform this bulk operation on the selected entries?');">
+            <form id="tables-filter" method="post">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
             <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+            <?php $event_list_404->search_box('Search', 'search_404_events'); ?>
             <?php
             if(isset($_REQUEST["tab"]))
             {
