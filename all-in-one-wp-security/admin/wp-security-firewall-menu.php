@@ -1,5 +1,5 @@
 <?php
-
+if ( !defined( 'ABSPATH' ) ) { exit; } // Prevent direct access to file
 class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_FIREWALL_MENU_SLUG;
@@ -858,7 +858,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('404 Lockout Redirect URL', 'aiowpsecurity')?>:</th>
-                <td><input type="text" size="50" name="aiowps_404_lock_redirect_url" value="<?php echo $aio_wp_security->configs->get_value('aiowps_404_lock_redirect_url'); ?>" />
+                <td><input type="text" size="50" name="aiowps_404_lock_redirect_url" value="<?php echo esc_url_raw( $aio_wp_security->configs->get_value('aiowps_404_lock_redirect_url'), array( 'http', 'https' ) ); ?>" />
                 <span class="description"><?php _e('A blocked visitor will be automatically redirected to this URL.', 'aiowpsecurity'); ?></span>
                 </td> 
             </tr>

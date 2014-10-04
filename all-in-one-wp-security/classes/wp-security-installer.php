@@ -31,7 +31,7 @@ class AIOWPSecurity_Installer
     
     static function create_db_tables()
     {
-        //global $wpdb;
+        global $wpdb;
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         
         //"User Login" related tables
@@ -41,6 +41,16 @@ class AIOWPSecurity_Installer
         $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
         $aiowps_event_tbl_name = AIOWPSEC_TBL_EVENTS;
 
+        $charset_collate = '';
+        if (!empty($wpdb->charset)){
+            $charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
+        }else{
+            $charset_collate = "DEFAULT CHARSET=utf8";
+        }
+        if (!empty($wpdb->collate)){
+            $charset_collate .= " COLLATE $wpdb->collate";
+        }
+                
 	$ld_tbl_sql = "CREATE TABLE " . $lockdown_tbl_name . " (
         id bigint(20) NOT NULL AUTO_INCREMENT,
         user_id bigint(20) NOT NULL,
@@ -51,7 +61,7 @@ class AIOWPSecurity_Installer
         lock_reason varchar(128) NOT NULL DEFAULT '',
         unlock_key varchar(128) NOT NULL DEFAULT '',
         PRIMARY KEY  (id)
-        )ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        )" . $charset_collate . ";";
 	dbDelta($ld_tbl_sql);
 
 	$fl_tbl_sql = "CREATE TABLE " . $failed_login_tbl_name . " (
@@ -61,7 +71,7 @@ class AIOWPSecurity_Installer
         failed_login_date datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
         login_attempt_ip varchar(100) NOT NULL DEFAULT '',
         PRIMARY KEY  (id)
-        )ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        )" . $charset_collate . ";";
 	dbDelta($fl_tbl_sql);
         
         $ula_tbl_sql = "CREATE TABLE " . $user_login_activity_tbl_name . " (
@@ -74,7 +84,7 @@ class AIOWPSecurity_Installer
         login_country varchar(150) NOT NULL DEFAULT '',
         browser_type varchar(150) NOT NULL DEFAULT '',
         PRIMARY KEY  (id)
-        )ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        )" . $charset_collate . ";";
 	dbDelta($ula_tbl_sql);
 
         $gm_tbl_sql = "CREATE TABLE " . $aiowps_global_meta_tbl_name . " (
@@ -91,7 +101,7 @@ class AIOWPSecurity_Installer
         meta_value4 longtext NOT NULL,
         meta_value5 longtext NOT NULL,
         PRIMARY KEY  (meta_id)
-        )ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        )" . $charset_collate . ";";
         dbDelta($gm_tbl_sql);
                 
         $evt_tbl_sql = "CREATE TABLE " . $aiowps_event_tbl_name . " (
@@ -105,7 +115,7 @@ class AIOWPSecurity_Installer
         url varchar(255),
         event_data longtext,
         PRIMARY KEY  (id)
-        )ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+        )" . $charset_collate . ";";
         dbDelta($evt_tbl_sql);
 
         update_option("aiowpsec_db_version", AIO_WP_SECURITY_DB_VERSION);

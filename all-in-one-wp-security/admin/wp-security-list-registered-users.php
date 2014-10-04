@@ -125,7 +125,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                         //TODO send email to account holder
                         $to_email_address = $user->user_email;
                         $subject = '['.get_option('siteurl').'] '. __('Your account is now active','aiowpsecurity');
-                        $email_msg .= __('Your account with username:','aiowpsecurity').$user->ID." is now active.\n";
+                        $email_msg .= __('Your account with username:','aiowpsecurity').$user->ID.__(' is now active','aiowpsecurity')."\n";
                         $site_title = get_bloginfo( 'name' );
                         $from_name = empty($site_title)?'WordPress':$site_title;
                         $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
@@ -151,7 +151,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                 $user = get_user_by('id', $entries);
                 $to_email_address = $user->user_email;
                 $subject = '['.get_option('siteurl').'] '. __('Your account is now active','aiowpsecurity');
-                $email_msg .= __('Your account with username: ','aiowpsecurity').$user->user_login." is now active.\n";
+                $email_msg .= __('Your account with username: ','aiowpsecurity').$user->user_login.__(' is now active','aiowpsecurity')."\n";
                 $site_title = get_bloginfo( 'name' );
                 $from_name = empty($site_title)?'WordPress':$site_title;
                 $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";

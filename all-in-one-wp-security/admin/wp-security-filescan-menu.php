@@ -342,7 +342,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             <?php
             echo '<h2>'.__('What is Malware?', 'aiowpsecurity').'</h2>';
             echo '<p>'.__('The word Malware stands for Malicious Software. It can consist of things like trojan horses, adware, worms, spyware and any other undesirable code which a hacker will try to inject into your website.', 'aiowpsecurity').'</p>'.
-            '<p>'.__('Often when malware code has been inserted into your site you will normally not notice anything out of the ordinary based on appearances, but it can have a dramatic effect on your site’s search ranking.', 'aiowpsecurity').'</p>'.
+            '<p>'.__('Often when malware code has been inserted into your site you will normally not notice anything out of the ordinary based on appearances, but it can have a dramatic effect on your site\'s search ranking.', 'aiowpsecurity').'</p>'.
             '<p>'.__('This is because the bots and spiders from search engines such as Google have the capability to detect malware when they are indexing the pages on your site, and consequently they can blacklist your website which will in turn affect your search rankings.', 'aiowpsecurity').'</p>';
 
             $site_scanners_link = '<a href="http://www.site-scanners.com" target="_blank">CLICK HERE</a>';

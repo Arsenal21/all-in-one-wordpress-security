@@ -1,5 +1,5 @@
 <?php
-
+if ( !defined( 'ABSPATH' ) ) { exit; } // Prevent direct access to file
 class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_FILESYSTEM_MENU_SLUG;
@@ -345,7 +345,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             <form action="" method="POST">
                 <?php wp_nonce_field('aiowpsec-view-system-logs-nonce'); ?>
                 <div><?php _e('Enter System Log File Name', 'aiowpsecurity')?>:
-                <input type="text" size="25" name="aiowps_system_log_file" value="<?php echo $sys_log_file; ?>" />
+                <input type="text" size="25" name="aiowps_system_log_file" value="<?php echo sanitize_text_field($sys_log_file); ?>" />
                 <span class="description"><?php _e('Enter your system log file name. (Defaults to error_log)', 'aiowpsecurity'); ?></span>
                 </div>
                 <div class="aio_spacer_15"></div>
