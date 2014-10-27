@@ -323,7 +323,17 @@ class AIOWPSecurity_User_Login
         }
         else
         {
-            AIOWPSecurity_Utility::redirect_to_url(wp_login_url());
+            if($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page')=='1'){
+                if (get_option('permalink_structure')){
+                    $home_url = trailingslashit(home_url());
+                }else{
+                    $home_url = trailingslashit(home_url()) . '?';
+                }
+                $login_url = $home_url.$aio_wp_security->configs->get_value('aiowps_login_page_slug');
+                AIOWPSecurity_Utility::redirect_to_url($login_url);
+            }else{
+                AIOWPSecurity_Utility::redirect_to_url(wp_login_url());
+            }
         }
     }
     

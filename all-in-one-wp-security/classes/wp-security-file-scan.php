@@ -65,6 +65,15 @@ class AIOWPSecurity_Scan
             $subject = __( 'All In One WP Security - File change detected!', 'aiowpsecurity' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
             //$attachment = array();
             $message = __( 'A file change was detected on your system for site URL', 'aiowpsecurity' ) . ' ' . get_option( 'siteurl' ) . __( '. Scan was generated on', 'aiowpsecurity' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
+            $message .= "\r\n\r\n".__( 'A summary of the scan results is shown below:', 'aiowpsecurity' );
+            $scan_res_unserialized = self::get_file_change_data();
+            $scan_results_message = '';
+            if($scan_res_unserialized !== false){
+                $scan_results_message = self::get_file_change_summary($scan_res_unserialized);
+            }
+            
+            $message .= "\r\n\r\n";
+            $message .= $scan_results_message;
             $message .= "\r\n".__( 'Login to your site to view the scan details.', 'aiowpsecurity' );
 
             wp_mail( $to, $subject, $message, $headers );
@@ -665,4 +674,68 @@ class AIOWPSecurity_Scan
             return $scan_complete_msg.$disclaimer.$output;
         }
     }
+    
+    static function get_file_change_data()
+    {
+        global $wpdb, $aio_wp_security;
+        //Let's get the results array from the DB
+        $tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
+        $key = 'file_change_detection';
+        $sql_prep = $wpdb->prepare("SELECT * FROM $tbl_name WHERE meta_key1 = %s", $key);
+        $scan_db_data = $wpdb->get_row($sql_prep, ARRAY_A);
+        if ($scan_db_data === NULL)
+        {
+            $aio_wp_security->debug_logger->log_debug("display_last_scan_results() - DB query for scan results data from global meta table returned NULL!",4);
+            return FALSE;
+        }
+        $date_last_scan = $scan_db_data['date_time'];
+        $scan_results_unserialized = maybe_unserialize($scan_db_data['meta_value5']);
+        if (empty($scan_results_unserialized['files_added']) && empty($scan_results_unserialized['files_removed']) && empty($scan_results_unserialized['files_changed'])){
+            //No file change detected
+            return FALSE;
+        }else{
+            return $scan_results_unserialized;
+        }
+        
+    }
+    
+    static function get_file_change_summary($scan_results_unserialized)
+    {
+        $scan_summary = "";
+        $files_added_output = "";
+        $files_removed_output = "";
+        $files_changed_output = "";
+        if (!empty($scan_results_unserialized['files_added']))
+        {
+            //Output of files added
+            $files_added_output .= "\r\n".__('The following files were added to your host', 'aiowpsecurity').":\r\n";
+            foreach ($scan_results_unserialized['files_added'] as $key=>$value) {
+                $files_added_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';
+            }
+            $files_added_output .= "\r\n======================================";
+        }
+        if (!empty($scan_results_unserialized['files_removed']))
+        {
+            //Output of files removed
+            $files_removed_output .= "\r\n".__('The following files were removed from your host', 'aiowpsecurity').":\r\n";
+            foreach ($scan_results_unserialized['files_removed'] as $key=>$value) {
+                $files_removed_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';
+            }
+            $files_removed_output .= "\r\n======================================";
+        }
+
+        if (!empty($scan_results_unserialized['files_changed']))
+        {
+            //Output of files changed
+            $files_changed_output .= "\r\n".__('The following files were changed on your host', 'aiowpsecurity').":\r\n";
+            foreach ($scan_results_unserialized['files_changed'] as $key=>$value) {
+                $files_changed_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';            
+            }
+            $files_changed_output .= "\r\n======================================";
+        }
+        
+        $scan_summary .= $files_added_output . $files_removed_output . $files_changed_output;
+        return $scan_summary;
+    }
+    
 }

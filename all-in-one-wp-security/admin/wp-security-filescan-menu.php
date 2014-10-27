@@ -442,19 +442,9 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
      */
     function display_last_scan_results()
     {
-        global $wpdb, $aio_wp_security;
-        //Let's get the results array from the DB
-        $query = "SELECT * FROM ".AIOWPSEC_TBL_GLOBAL_META_DATA." WHERE meta_key1='file_change_detection'";
-        $scan_db_data = $wpdb->get_row($query, ARRAY_A);
-        if ($scan_db_data === NULL)
+        $scan_results_unserialized = AIOWPSecurity_Scan::get_file_change_data();
+        if (!$scan_results_unserialized)
         {
-            $aio_wp_security->debug_logger->log_debug("display_last_scan_results() - DB query for scan results data from global meta table returned NULL!",4);
-            return FALSE;
-        }
-        $date_last_scan = $scan_db_data['date_time'];
-        $scan_results_unserialized = maybe_unserialize($scan_db_data['meta_value5']);
-        if (empty($scan_results_unserialized['files_added']) && empty($scan_results_unserialized['files_removed']) && empty($scan_results_unserialized['files_changed'])){
-            //No file change detected
             return FALSE;
         }
         ?>

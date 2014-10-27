@@ -3,7 +3,7 @@
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '3.8.4';
+    var $version = '3.8.5';
     var $db_version = '1.6';
     var $plugin_url;
     var $plugin_path;
@@ -187,7 +187,7 @@ class AIO_WP_Security{
         $this->user_registration_obj = new AIOWPSecurity_User_Registration();//Do the user login operation tasks
         $this->captcha_obj = new AIOWPSecurity_Captcha();//Do the captcha tasks
         $this->backup_obj = new AIOWPSecurity_Backup();//Object to handle backup tasks
-        $this->scan_obj = new AIOWPSecurity_Scan();//Object to handle backup tasks 
+        $this->scan_obj = new AIOWPSecurity_Scan();//Object to handle scan tasks 
         $this->cron_handler = new AIOWPSecurity_Cronjob_Handler();
         
         add_action('wp_head',array(&$this, 'aiowps_header_content'));

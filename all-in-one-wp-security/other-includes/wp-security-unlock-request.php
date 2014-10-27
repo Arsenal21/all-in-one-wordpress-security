@@ -7,8 +7,8 @@
 global $aio_wp_security;
 $display_form = true;
 //Make this page look like the WP login page
-wp_head(); 
-wp_admin_css( 'wp-admin', true );
+wp_head();
+wp_admin_css( 'login', true );
 wp_admin_css( 'colors-fresh', true );
 $login_header_url   = __( 'http://wordpress.org/' );
 $login_header_title = __( 'Powered by WordPress' );
@@ -25,11 +25,13 @@ if (isset($_POST['aiowps_unlock_request']))
     //This catches the $_POST from the "Request Unlock" button on the main WP login page
     isset($_POST['aiowps-unlock-string-info'])?($unlock_encoded_info = strip_tags(trim($_POST['aiowps-unlock-string-info']))):($unlock_encoded_info = '');
     $unlock_secret_string = $aio_wp_security->configs->get_value('aiowps_unlock_request_secret_key');
-    $submitted_encoded_string = base64_encode($_POST['aiowps-unlock-temp-string'].$unlock_secret_string);
+    $unlock_temp_string = isset($_POST['aiowps-unlock-temp-string'])?strip_tags($_POST['aiowps-unlock-temp-string']):'';
+    $submitted_encoded_string = base64_encode($unlock_temp_string.$unlock_secret_string);
     if($submitted_encoded_string !== $unlock_encoded_info)
     {
         //Someone somehow landed on this page directly without clicking the unlock button on login form
-        echo '<div id="login_error"><strong>ERROR</strong>: Unable to process your request because you tried to access this page directly.</div>';
+        echo '<div id="login_error">'.__('ERROR: Unable to process your request!','aiowpsecurity').'</div>';
+        die();
     }
     else if($display_form)
     {

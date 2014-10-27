@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 3.8.4
+Stable tag: 3.8.5
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -163,6 +163,12 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 3.8.5 =
+- Added functionality to prevent the aiowps_events table from getting too large.
+- Added file change scan summary inside the alert email.
+- Fixed the unlock feature so that it works correctly when the Rename Login Page feature is active.
+- Added a check in the list logged in users file to prevent error when get_transient returns false.
 
 = 3.8.4 = 
 - Updated POT language file.

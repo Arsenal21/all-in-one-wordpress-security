@@ -66,13 +66,16 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
 	$order = !empty($order) ? mysql_real_escape_string($order) : 'DESC';
 
         $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
-        
-        foreach ($logged_in_users as $key=>$val)
-        {
-            $userdata = get_userdata($val['user_id']);
-            $username = $userdata->user_login;
-            $val['username'] = $username;
-            $logged_in_users[$key] = $val;
+        if($logged_in_users !== FALSE){
+            foreach ($logged_in_users as $key=>$val)
+            {
+                $userdata = get_userdata($val['user_id']);
+                $username = $userdata->user_login;
+                $val['username'] = $username;
+                $logged_in_users[$key] = $val;
+            }
+        }else{
+            $logged_in_users = array(); //If no transient found set to empty array
         }
         $data = $logged_in_users;
         $current_page = $this->get_pagenum();

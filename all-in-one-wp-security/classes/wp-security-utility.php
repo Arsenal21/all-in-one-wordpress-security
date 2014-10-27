@@ -427,4 +427,35 @@ class AIOWPSecurity_Utility
         return $blog_ids;
     }
     
+    
+    //This function will delete the oldest rows from a table which are over the max amount of rows specified 
+    static function cleanup_table($table_name, $max_rows = '10000')
+    {
+        global $wpdb, $aio_wp_security;
+
+        $num_rows = $wpdb->get_var("select count(*) from $table_name");
+        $result = true;
+        if($num_rows > $max_rows){
+            //if the table has more than max entries delete oldest rows
+            
+            $del_sql = "DELETE FROM $table_name
+                        WHERE id <= (
+                          SELECT id
+                          FROM (
+                            SELECT id
+                            FROM $table_name
+                            ORDER BY id DESC
+                            LIMIT 1 OFFSET $max_rows
+                          ) foo_tmp
+                        )";
+            
+            $result = $wpdb->query($del_sql);
+            if($result === false){
+                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Utility::cleanup_table failed for table name: ".$table_name,4);
+            }
+        }
+        return ($result === false)?false:true;
+    }
+
+    
 }
