@@ -1,10 +1,10 @@
 === All In One WP Security & Firewall ===
-Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, samuelaguilera
+Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, samuelaguilera
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 3.8.5
+Stable tag: 3.8.6
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -135,7 +135,20 @@ or malicious bots who do not have a special cookie in their browser. You (the si
 * Github repository - https://github.com/Arsenal21/all-in-one-wordpress-security
 
 = Translations =
-* All In One WP Security plugin can be translated to any language.
+* All In One WP Security plugin can be translated to any language. 
+
+Currently available translations:
+
+- English
+- German
+- Spanish
+- French
+- Hungarian
+- Italian
+- Swedish
+- Russian
+- Chinese
+- Portuguese (Brazil)
 
 Visit the [WordPress Security Plugin](https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin) page for more details.
 
@@ -163,6 +176,12 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 3.8.6 =
+- DB cleanup cron event bug fixed.
+- Added Swedish language translation. The translation was submitted by Tor-Björn Fjellner.
+- Updated the Russian language translation file. Update submitted by Tor-Björn Fjellner.
+- The events table will automatically be cleaned up so it only keeps the last 5000 entries. You can override it using a filter (if you wanted to).
 
 = 3.8.5 =
 - Added functionality to prevent the aiowps_events table from getting too large.
