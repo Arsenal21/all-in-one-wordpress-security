@@ -6,11 +6,7 @@ class AIOWPSecurity_User_Registration
     {
         global $aio_wp_security;
         add_action('user_register', array(&$this, 'aiowps_user_registration_action_handler'));
-        //Check if captcha enabled
-        if ($aio_wp_security->configs->get_value('aiowps_enable_registration_page_captcha') == '1')
-        {
-            add_filter('registration_errors', array(&$this, 'aiowps_validate_registration_with_captcha'), 10, 3);
-        }
+        add_filter('registration_errors', array(&$this, 'aiowps_validate_registration_with_captcha'), 10, 3);
     }
     
 
@@ -49,6 +45,15 @@ class AIOWPSecurity_User_Registration
     function aiowps_validate_registration_with_captcha($errors, $sanitized_user_login, $user_email)
     {
         global $aio_wp_security;
+
+        $locked = $aio_wp_security->user_login_obj->check_locked_user();
+        if($locked == null){
+            //user is not locked continue
+        }else{
+            $errors->add('authentication_failed', __('<strong>ERROR</strong>: You are not allowed to register because your IP address is currently locked!', 'aiowpsecurity'));
+            return $errors;
+        }
+        
         if (array_key_exists('aiowps-captcha-answer', $_POST)) //If the register form with captcha was submitted then do some processing
         {
             isset($_POST['aiowps-captcha-answer'])?$captcha_answer = strip_tags(trim($_POST['aiowps-captcha-answer'])): $captcha_answer = '';

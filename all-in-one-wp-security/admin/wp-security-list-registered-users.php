@@ -22,6 +22,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         //$tab = strip_tags($_REQUEST['tab']);
         //Build row actions
         $actions = array(
+            'view' => sprintf('<a href="user-edit.php?user_id=%s" target="_blank">View</a>',$item['ID']),
             'approve_acct' => sprintf('<a href="admin.php?page=%s&action=%s&user_id=%s" onclick="return confirm(\'Are you sure you want to approve this account?\')">Approve</a>',AIOWPSEC_USER_REGISTRATION_MENU_SLUG,'approve_acct',$item['ID']),
             'delete_acct' => sprintf('<a href="admin.php?page=%s&action=%s&user_id=%s" onclick="return confirm(\'Are you sure you want to delete this account?\')">Delete</a>',AIOWPSEC_USER_REGISTRATION_MENU_SLUG,'delete_acct',$item['ID']),
         );
@@ -122,7 +123,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                     if($user === false){
                         //don't send mail
                     }else{
-                        //TODO send email to account holder
+                        $email_msg = '';
                         $to_email_address = $user->user_email;
                         $subject = '['.get_option('siteurl').'] '. __('Your account is now active','aiowpsecurity');
                         $email_msg .= __('Your account with username:','aiowpsecurity').$user->ID.__(' is now active','aiowpsecurity')."\n";
@@ -147,9 +148,9 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
             if($result)
             {
                 AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected account was approved successfully!','aiowpsecurity'));
-                //TODO send email to account holder
                 $user = get_user_by('id', $entries);
                 $to_email_address = $user->user_email;
+                $email_msg = '';
                 $subject = '['.get_option('siteurl').'] '. __('Your account is now active','aiowpsecurity');
                 $email_msg .= __('Your account with username: ','aiowpsecurity').$user->user_login.__(' is now active','aiowpsecurity')."\n";
                 $site_title = get_bloginfo( 'name' );

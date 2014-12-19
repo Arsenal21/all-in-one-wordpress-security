@@ -49,7 +49,7 @@ class AIOWPSecurity_Utility_IP
         return $ip_list_array;
     }
     
-    static function validate_ip_list($ip_list_array, $list='blacklist')
+    static function validate_ip_list($ip_list_array, $list_type='')
     {
         @ini_set('auto_detect_line_endings', true);
         $errors = '';
@@ -127,7 +127,7 @@ class AIOWPSecurity_Utility_IP
                     elseif (strlen($item) > 4 && !in_array($item, $list)) 
                     {
                         $current_user_ip = AIOWPSecurity_Utility_IP::get_user_ip_address();
-                        if ($current_user_ip == $item && $list == 'blacklist')
+                        if ($current_user_ip == $item && $list_type == 'blacklist')
                         {
                             //You can't ban your own IP
                             $errors .= '<p>'.__('You cannot ban your own IP address: ', 'aiowpsecurity').$item.'</p>';

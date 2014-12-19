@@ -746,9 +746,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 die("Nonce check failed on 404 detection options save!");
             }
             
-            /*** Currently the aiowps_enable_404_IP_lockout option is automatically enabled when the aiowps_enable_404_IP_lockout option is enabled. ***/
-            //$aio_wp_security->configs->set_value('aiowps_enable_404_logging',isset($_POST["aiowps_enable_404_logging"])?'1':'');
-            $aio_wp_security->configs->set_value('aiowps_enable_404_logging',isset($_POST["aiowps_enable_404_logging"])?'1':'');
+            $aio_wp_security->configs->set_value('aiowps_enable_404_logging',isset($_POST["aiowps_enable_404_IP_lockout"])?'1':''); //the "aiowps_enable_404_IP_lockout" checkbox currently controls both the 404 lockout and 404 logging
             $aio_wp_security->configs->set_value('aiowps_enable_404_IP_lockout',isset($_POST["aiowps_enable_404_IP_lockout"])?'1':'');
             
             $lockout_time_length = isset($_POST['aiowps_404_lockout_time_length'])?sanitize_text_field($_POST['aiowps_404_lockout_time_length']):'';
@@ -783,8 +781,11 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         if(isset($_REQUEST['action'])) //Do list table form row action tasks
         {
             if($_REQUEST['action'] == 'temp_block'){ //Temp Block link was clicked for a row in list table
-                $username = isset($_REQUEST['username'])?strip_tags($_REQUEST['ip_address']):'';
-                $event_list_404->block_ip(strip_tags($_REQUEST['ip_address']), $username);
+                $event_list_404->block_ip(strip_tags($_REQUEST['ip_address']));
+            }
+
+            if($_REQUEST['action'] == 'blacklist_ip'){ //Blacklist IP link was clicked for a row in list table
+                $event_list_404->blacklist_ip_address(strip_tags($_REQUEST['ip_address']));
             }
             
             if($_REQUEST['action'] == 'delete_event_log'){ //Unlock link was clicked for a row in list table
