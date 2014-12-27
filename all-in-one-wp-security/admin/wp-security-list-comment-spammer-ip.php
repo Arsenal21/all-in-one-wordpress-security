@@ -184,16 +184,16 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
         isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
         
-	$orderby = !empty($orderby) ? mysql_real_escape_string($orderby) : 'amount';
-	$order = !empty($order) ? mysql_real_escape_string($order) : 'DESC';
+	$orderby = !empty($orderby) ? $orderby : 'amount';
+	$order = !empty($order) ? $order : 'DESC';
 
-        $sql = "SELECT   comment_author_IP, COUNT(*) AS amount
+        $sql = $wpdb->prepare("SELECT   comment_author_IP, COUNT(*) AS amount
                 FROM     $wpdb->comments 
                 WHERE    comment_approved = 'spam'
                 GROUP BY comment_author_IP
                 HAVING   amount >= $minimum_comments_per_ip
-                ORDER BY $orderby $order
-                ";
+                ORDER BY %s %s
+                ", $orderby, $order);
         $data = $wpdb->get_results($sql, ARRAY_A);
         $current_page = $this->get_pagenum();
         $total_items = count($data);

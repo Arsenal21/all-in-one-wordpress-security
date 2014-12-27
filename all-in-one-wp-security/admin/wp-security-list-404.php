@@ -222,6 +222,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         $events_table = AIOWPSEC_TBL_EVENTS;
         if (is_array($entries)) {
             //Delete multiple records
+            $entries = array_map( 'esc_sql', $entries); //escape every array element
             $id_list = "(" . implode(",", $entries) . ")"; //Create comma separate list for DB operation
             $delete_command = "DELETE FROM " . $events_table . " WHERE id IN " . $id_list;
             $result = $wpdb->query($delete_command);
@@ -231,6 +232,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         } elseif ($entries != NULL) {
             //Delete single record
             $delete_command = "DELETE FROM " . $events_table . " WHERE id = '" . absint($entries) . "'";
+            //$delete_command = $wpdb->prepare("DELETE FROM $events_table WHERE id = %s", absint($entries));
             $result = $wpdb->query($delete_command);
             if ($result != NULL) {
                 AIOWPSecurity_Admin_Menu::show_msg_record_deleted_st();
@@ -259,13 +261,13 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
         isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
 
-        $orderby = !empty($orderby) ? mysql_real_escape_string($orderby) : 'id';
-        $order = !empty($order) ? mysql_real_escape_string($order) : 'DESC';
+        $orderby = !empty($orderby) ? $orderby : 'id';
+        $order = !empty($order) ? $order : 'DESC';
         if (isset($_POST['s'])) {
             $search_term = trim($_POST['s']);
             $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $events_table_name . " WHERE `ip_or_host` LIKE '%%%s%%' OR `url` LIKE '%%%s%%' OR `referer_info` LIKE '%%%s%%'", $search_term, $search_term, $search_term), ARRAY_A);
         } else {
-            $data = $wpdb->get_results("SELECT * FROM $events_table_name ORDER BY $orderby $order", ARRAY_A);
+            $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $events_table_name ORDER BY %s %s", $orderby, $order), ARRAY_A);
         }
         $new_data = array();
         foreach ($data as $row) {

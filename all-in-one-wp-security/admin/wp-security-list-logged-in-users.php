@@ -57,13 +57,6 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
     	
     	global $wpdb;
         global $aio_wp_security;
-        /* -- Ordering parameters -- */
-	//Parameters that are going to be used to order the result
-        isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
-        isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
-
-	$orderby = !empty($orderby) ? mysql_real_escape_string($orderby) : 'user_id';
-	$order = !empty($order) ? mysql_real_escape_string($order) : 'DESC';
 
         $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
         if($logged_in_users !== FALSE){

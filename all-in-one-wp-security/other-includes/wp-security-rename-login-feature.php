@@ -919,7 +919,7 @@ d.select();
 }, 200);
 }
 
-<?php if ( !$error ) { ?>
+<?php if ( ! empty( $errors ) ) { ?>
 wp_attempt_focus();
 <?php } ?>
 if(typeof wpOnload=='function')wpOnload();

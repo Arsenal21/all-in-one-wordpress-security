@@ -144,10 +144,10 @@ class AIOWPSecurity_List_Login_Failed_Attempts extends AIOWPSecurity_List_Table 
         isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
         isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
 
-	$orderby = !empty($orderby) ? mysql_real_escape_string($orderby) : 'failed_login_date';
-	$order = !empty($order) ? mysql_real_escape_string($order) : 'DESC';
+	$orderby = !empty($orderby) ? $orderby : 'failed_login_date';
+	$order = !empty($order) ? $order : 'DESC';
 
-	$data = $wpdb->get_results("SELECT * FROM $failed_logins_table_name ORDER BY $orderby $order", ARRAY_A);
+	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $failed_logins_table_name ORDER BY %s %s", $orderby, $order), ARRAY_A);
         $current_page = $this->get_pagenum();
         $total_items = count($data);
         $data = array_slice($data,(($current_page-1)*$per_page),$per_page);
