@@ -275,7 +275,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 	$orderby = !empty($orderby) ? $orderby : 'login_date';
 	$order = !empty($order) ? $order : 'DESC';
 
-	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $login_activity_table ORDER BY %s %s LIMIT %d", $orderby, $order, 5), ARRAY_A); //Get the last 5 records
+	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $login_activity_table ORDER BY login_date DESC LIMIT %d", 5), ARRAY_A); //Get the last 5 records
         
         if ($data == NULL){
             echo '<p>'.__('No data found!','aiowpsecurity').'</p>';

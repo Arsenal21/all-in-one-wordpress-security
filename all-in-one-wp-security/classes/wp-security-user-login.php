@@ -379,10 +379,11 @@ class AIOWPSecurity_User_Login
                     $this->wp_logout_action_handler(); //this will register the logout time/date in the logout_date column
                     
                     $curr_page_url = AIOWPSecurity_Utility::get_current_page_url();
-                    $after_logout_payload = 'redirect_to='.$curr_page_url.'&msg='.$this->key_login_msg.'=session_expired';
-                    $encrypted_payload = base64_encode($after_logout_payload);
+                    $after_logout_payload = array('redirect_to'=>$curr_page_url, 'msg'=>$this->key_login_msg.'=session_expired');
+                    //Save some of the logout redirect data to a transient
+                    AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60) : set_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60);
                     $logout_url = AIOWPSEC_WP_URL.'?aiowpsec_do_log_out=1';
-                    $logout_url = AIOWPSecurity_Utility::add_query_data_to_url($logout_url, 'al_additional_data', $encrypted_payload);
+                    $logout_url = AIOWPSecurity_Utility::add_query_data_to_url($logout_url, 'al_additional_data', '1');
                     AIOWPSecurity_Utility::redirect_to_url($logout_url);
                 }
             }

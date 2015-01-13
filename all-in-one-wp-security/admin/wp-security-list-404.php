@@ -93,7 +93,6 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             'url' => array('url', false),
             'referer_info' => array('referer_info', false),
             'event_date' => array('event_date', false),
-            'status' => array('status', false),
         );
         return $sortable_columns;
     }
@@ -201,9 +200,18 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             $result = 1;
             $list = $payload[1];
             $banned_ip_data = implode(PHP_EOL, $list);
+            $aio_wp_security->configs->set_value('aiowps_enable_blacklisting','1'); //Force blacklist feature to be enabled
             $aio_wp_security->configs->set_value('aiowps_banned_ip_addresses',$banned_ip_data);
             $aio_wp_security->configs->save_config(); //Save the configuration
-            AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses have been added to the blacklist and will be permanently blocked!', 'WPS'));
+
+            $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
+            if ($write_result == -1)
+            {
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','aiowpsecurity'));
+                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
+            }else{
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses have been added to the blacklist and will be permanently blocked!', 'WPS'));
+            }
         }
         else{
             $result = -1;
@@ -261,13 +269,13 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
         isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
 
-        $orderby = !empty($orderby) ? $orderby : 'id';
-        $order = !empty($order) ? $order : 'DESC';
+        $orderby = !empty($orderby) ? esc_sql($orderby) : 'id';
+        $order = !empty($order) ? esc_sql($order) : 'DESC';
         if (isset($_POST['s'])) {
             $search_term = trim($_POST['s']);
             $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $events_table_name . " WHERE `ip_or_host` LIKE '%%%s%%' OR `url` LIKE '%%%s%%' OR `referer_info` LIKE '%%%s%%'", $search_term, $search_term, $search_term), ARRAY_A);
         } else {
-            $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $events_table_name ORDER BY %s %s", $orderby, $order), ARRAY_A);
+            $data = $wpdb->get_results("SELECT * FROM $events_table_name ORDER BY $orderby $order", ARRAY_A);
         }
         $new_data = array();
         foreach ($data as $row) {

@@ -507,15 +507,6 @@ function render_tab5()
 
         $events_table_name = AIOWPSEC_TBL_EVENTS;
         AIOWPSecurity_Utility::cleanup_table($events_table_name, 500);        
-//        $key = $fields['lic_key'];
-//        $sql_prep1 = $wpdb->prepare("SELECT * FROM $tbl_name WHERE license_key = %s", $key);
-        //$retLic = $wpdb->query("SELECT count(*) FROM $events_tbl_name");
-//        $rows = $wpdb->get_var("select count(*) from $events_tbl_name");
-//        
-//        echo '<br />test = '.$rows.'<br />';
-//        var_dump($rows);
-        
-
         if(isset($_POST['aiowps_import_settings']))//Do form submission tasks
         {
             $nonce=$_REQUEST['_wpnonce'];

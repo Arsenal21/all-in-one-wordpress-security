@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 3.8.8
+Stable tag: 3.8.9
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -176,6 +176,11 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 3.8.9 =
+- Fixed a possible open redirect vulnerability related to logout events. Thanks to Sucuri for pointing this out.
+- Fixed bug in the new feature which allows permanent blocking of IP addresses that create 404 events.
+- Fixed minor bug for all instances where wpdb "prepare" was being used with order/orderby parameters.
 
 = 3.8.8 =
 - Added extra robustness and security for wp list table db commands by using wpdb "prepare" command.

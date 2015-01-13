@@ -281,10 +281,12 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                         //Lets logout the user
                         $aio_wp_security->debug_logger->log_debug("Logging User Out with login ".$user_login. " because they changed their username.");
                         $after_logout_url = AIOWPSecurity_Utility::get_current_page_url();
-                        $after_logout_payload = 'redirect_to='.$after_logout_url.'&msg='.$aio_wp_security->user_login_obj->key_login_msg.'=admin_user_changed';//Place the handle for the login screen message in the URL
-                        $encrypted_payload = base64_encode($after_logout_payload);
+                        $after_logout_payload = array('redirect_to'=>$after_logout_url, 'msg'=>$aio_wp_security->user_login_obj->key_login_msg.'=admin_user_changed', );
+                        //Save some of the logout redirect data to a transient
+                        AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60) : set_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60);
+                        
                         $logout_url = AIOWPSEC_WP_URL.'?aiowpsec_do_log_out=1';
-                        $logout_url = AIOWPSecurity_Utility::add_query_data_to_url($logout_url, 'al_additional_data', $encrypted_payload);
+                        $logout_url = AIOWPSecurity_Utility::add_query_data_to_url($logout_url, 'al_additional_data', '1');
                         AIOWPSecurity_Utility::redirect_to_url($logout_url);
                     }
                 }
