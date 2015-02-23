@@ -24,18 +24,21 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         $blocked_ips_tab = 'tab3';
         //Check if this IP address is locked
         $is_locked = AIOWPSecurity_Utility::check_locked_ip($ip);
+        $delete_url = sprintf('admin.php?page=%s&tab=%s&action=%s&id=%s', AIOWPSEC_FIREWALL_MENU_SLUG, $tab, 'delete_event_log', $item['id']);
+        //Add nonce to delete URL
+        $delete_url_nonce = wp_nonce_url($delete_url, "delete_404_log", "aiowps_nonce");
         if ($is_locked) {
             //Build row actions
             $actions = array(
                 'unblock' => sprintf('<a href="admin.php?page=%s&tab=%s">Unblock</a>', AIOWPSEC_MAIN_MENU_SLUG, $blocked_ips_tab),
-                'delete' => sprintf('<a href="admin.php?page=%s&tab=%s&action=%s&id=%s" onclick="return confirm(\'Are you sure you want to delete this item?\')">Delete</a>', AIOWPSEC_FIREWALL_MENU_SLUG, $tab, 'delete_event_log', $item['id']),
+                'delete' => '<a href="'.$delete_url_nonce.'" onclick="return confirm(\'Are you sure you want to delete this item?\')">Delete</a>',
             );
         } else {
             //Build row actions
             $actions = array(
                 'temp_block' => sprintf('<a href="admin.php?page=%s&tab=%s&action=%s&ip_address=%s&username=%s" onclick="return confirm(\'Are you sure you want to block this IP address?\')">Temp Block</a>', AIOWPSEC_FIREWALL_MENU_SLUG, $tab, 'temp_block', $item['ip_or_host'], $item['username']),
                 'blacklist_ip' => sprintf('<a href="admin.php?page=%s&tab=%s&action=%s&ip_address=%s&username=%s" onclick="return confirm(\'Are you sure you want to permanently block this IP address?\')">Blacklist IP</a>', AIOWPSEC_FIREWALL_MENU_SLUG, $tab, 'blacklist_ip', $item['ip_or_host'], $item['username']),
-                'delete' => sprintf('<a href="admin.php?page=%s&tab=%s&action=%s&id=%s" onclick="return confirm(\'Are you sure you want to delete this item?\')">Delete</a>', AIOWPSEC_FIREWALL_MENU_SLUG, $tab, 'delete_event_log', $item['id']),
+                'delete' => '<a href="'.$delete_url_nonce.'" onclick="return confirm(\'Are you sure you want to delete this item?\')">Delete</a>',
             );
         }
 
@@ -226,18 +229,29 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
      */
 
     function delete_404_event_records($entries) {
-        global $wpdb;
+        global $wpdb, $aio_wp_security;
         $events_table = AIOWPSEC_TBL_EVENTS;
         if (is_array($entries)) {
-            //Delete multiple records
-            $entries = array_map( 'esc_sql', $entries); //escape every array element
-            $id_list = "(" . implode(",", $entries) . ")"; //Create comma separate list for DB operation
-            $delete_command = "DELETE FROM " . $events_table . " WHERE id IN " . $id_list;
-            $result = $wpdb->query($delete_command);
-            if ($result != NULL) {
-                AIOWPSecurity_Admin_Menu::show_msg_record_deleted_st();
+            if (isset($_REQUEST['_wp_http_referer']))
+            {
+                //Delete multiple records
+                $entries = array_map( 'esc_sql', $entries); //escape every array element
+                $id_list = "(" . implode(",", $entries) . ")"; //Create comma separate list for DB operation
+                $delete_command = "DELETE FROM " . $events_table . " WHERE id IN " . $id_list;
+                $result = $wpdb->query($delete_command);
+                if ($result != NULL) {
+                    AIOWPSecurity_Admin_Menu::show_msg_record_deleted_st();
+                }
             }
+
         } elseif ($entries != NULL) {
+            $nonce=isset($_GET['aiowps_nonce'])?$_GET['aiowps_nonce']:'';
+            if (!isset($nonce) ||!wp_verify_nonce($nonce, 'delete_404_log'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete selected 404 event logs operation!",4);
+                die(__('Nonce check failed for delete selected 404 event logs operation!','aiowpsecurity'));
+            }
+
             //Delete single record
             $delete_command = "DELETE FROM " . $events_table . " WHERE id = '" . absint($entries) . "'";
             //$delete_command = $wpdb->prepare("DELETE FROM $events_table WHERE id = %s", absint($entries));

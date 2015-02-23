@@ -114,6 +114,9 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                 if (!empty($_POST['aiowps_banned_user_agents']))
                 {
                     $result = $result * $this->validate_user_agent_list();
+                }else{
+                    //clear the user agent list
+                    $aio_wp_security->configs->set_value('aiowps_banned_user_agents','');
                 }
                 
                 if ($result == 1)

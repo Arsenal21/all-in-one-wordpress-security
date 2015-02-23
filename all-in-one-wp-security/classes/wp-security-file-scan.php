@@ -243,19 +243,21 @@ class AIOWPSecurity_Scan
         $old_scan_minus_deleted = @array_diff_key( $last_scan_data, $files_removed );  //Get all files in old scan which were not deleted
         $file_changes_detected = array();
 
-        //compare file hashes and mod dates
-        foreach ( $new_scan_minus_added as $entry => $key) {
-            if ( array_key_exists( $entry, $old_scan_minus_deleted ) ) 
-            {
-                //check filesize and last_modified values
-                if (strcmp($key['last_modified'], $old_scan_minus_deleted[$entry]['last_modified']) != 0 || 
-                                strcmp($key['filesize'], $old_scan_minus_deleted[$entry]['filesize']) != 0) 
+        if(!empty($new_scan_minus_added)){
+            //compare file hashes and mod dates
+            foreach ( $new_scan_minus_added as $entry => $key) {
+                if ( array_key_exists( $entry, $old_scan_minus_deleted ) ) 
                 {
-                    $file_changes_detected[$entry]['filesize'] = $key['filesize'];
-                    $file_changes_detected[$entry]['last_modified'] = $key['last_modified'];
+                    //check filesize and last_modified values
+                    if (strcmp($key['last_modified'], $old_scan_minus_deleted[$entry]['last_modified']) != 0 || 
+                                    strcmp($key['filesize'], $old_scan_minus_deleted[$entry]['filesize']) != 0) 
+                    {
+                        $file_changes_detected[$entry]['filesize'] = $key['filesize'];
+                        $file_changes_detected[$entry]['last_modified'] = $key['last_modified'];
+                    }
                 }
-            }
 
+            }
         }
 
         //create single array of all changes

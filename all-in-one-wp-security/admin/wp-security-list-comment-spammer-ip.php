@@ -25,8 +25,12 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
             //Suppress the block link if site is a multi site AND not the main site
             $actions = array(); //blank array
         }else{
+            $block_url = sprintf('admin.php?page=%s&tab=%s&action=%s&spammer_ip=%s', AIOWPSEC_SPAM_MENU_SLUG, $tab, 'block_spammer_ip', $item['comment_author_IP']);
+            //Add nonce to block URL
+            $block_url_nonce = wp_nonce_url($block_url, "block_spammer_ip", "aiowps_nonce");
+            
             $actions = array(
-                'block' => sprintf('<a href="admin.php?page=%s&tab=%s&action=%s&spammer_ip=%s" onclick="return confirm(\'Are you sure you want to add this IP address to your blacklist?\')">Block</a>',AIOWPSEC_SPAM_MENU_SLUG,$tab,'block_spammer_ip',$item['comment_author_IP']),
+                'block' => '<a href="'.$block_url_nonce.'" onclick="return confirm(\'Are you sure you want to add this IP address to your blacklist?\')">Block</a>',
             );
         }
         
@@ -105,26 +109,36 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         $currently_banned_ips = explode(PHP_EOL, $aio_wp_security->configs->get_value('aiowps_banned_ip_addresses'));
         if (is_array($entries))
         {
-            //Bulk selection using checkboxes were used
-            foreach ($entries as $ip_add)
+            if (isset($_REQUEST['_wp_http_referer']))
             {
-                if (!empty($currently_banned_ips) && !(sizeof($currently_banned_ips) == 1 && trim($currently_banned_ips[0]) == ''))
+                //Bulk selection using checkboxes were used
+                foreach ($entries as $ip_add)
                 {
-                    //Check if the IP address is already in the blacklist. If not add it to the list.
-                    if (!in_array($ip_add, $currently_banned_ips))
+                    if (!empty($currently_banned_ips) && !(sizeof($currently_banned_ips) == 1 && trim($currently_banned_ips[0]) == ''))
                     {
+                        //Check if the IP address is already in the blacklist. If not add it to the list.
+                        if (!in_array($ip_add, $currently_banned_ips))
+                        {
+                            $raw_banned_ip_list .= PHP_EOL.$ip_add;
+                        }
+                    }
+                    else
+                    {
+                        //if blacklist is currently empty just add all IP addresses to the list regardless 
                         $raw_banned_ip_list .= PHP_EOL.$ip_add;
                     }
-                }
-                else
-                {
-                    //if blacklist is currently empty just add all IP addresses to the list regardless 
-                    $raw_banned_ip_list .= PHP_EOL.$ip_add;
                 }
             }
         } 
         else if ($entries != NULL)
         {
+            $nonce=isset($_GET['aiowps_nonce'])?$_GET['aiowps_nonce']:'';
+            if (!isset($nonce) ||!wp_verify_nonce($nonce, 'block_spammer_ip'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete selected blocked IP operation!",4);
+                die(__('Nonce check failed for delete selected blocked IP operation!','aiowpsecurity'));
+            }
+            
             //individual entry where "block" link was clicked
             //Check if the IP address is already in the blacklist. If not add it to the list.
             if (!in_array($entries, $currently_banned_ips))

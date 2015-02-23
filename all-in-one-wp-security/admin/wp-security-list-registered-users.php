@@ -20,11 +20,15 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
 
     function column_ID($item){
         //$tab = strip_tags($_REQUEST['tab']);
+        $delete_url = sprintf('admin.php?page=%s&action=%s&user_id=%s', AIOWPSEC_USER_REGISTRATION_MENU_SLUG, 'delete_acct', $item['ID']);
+        //Add nonce to delete URL
+        $delete_url_nonce = wp_nonce_url($delete_url, "delete_user_acct", "aiowps_nonce");
+
         //Build row actions
         $actions = array(
             'view' => sprintf('<a href="user-edit.php?user_id=%s" target="_blank">View</a>',$item['ID']),
             'approve_acct' => sprintf('<a href="admin.php?page=%s&action=%s&user_id=%s" onclick="return confirm(\'Are you sure you want to approve this account?\')">Approve</a>',AIOWPSEC_USER_REGISTRATION_MENU_SLUG,'approve_acct',$item['ID']),
-            'delete_acct' => sprintf('<a href="admin.php?page=%s&action=%s&user_id=%s" onclick="return confirm(\'Are you sure you want to delete this account?\')">Delete</a>',AIOWPSEC_USER_REGISTRATION_MENU_SLUG,'delete_acct',$item['ID']),
+            'delete_acct' => '<a href="'.$delete_url_nonce.'" onclick="return confirm(\'Are you sure you want to delete this account?\')">Delete</a>',
         );
         
         //Return the user_login contents
@@ -169,18 +173,28 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         global $wpdb, $aio_wp_security;
         if (is_array($entries))
         {
-            //Let's go through each entry and delete account
-            foreach($entries as $user_id)
+            if (isset($_REQUEST['_wp_http_referer']))
             {
-                $result = wp_delete_user($user_id);
-                if($result !== true)
+                //Let's go through each entry and delete account
+                foreach($entries as $user_id)
                 {
-                    $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_List_Registered_Users::delete_selected_accounts() - could not delete account ID: $user_id",4);
+                    $result = wp_delete_user($user_id);
+                    if($result !== true)
+                    {
+                        $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_List_Registered_Users::delete_selected_accounts() - could not delete account ID: $user_id",4);
+                    }
                 }
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected accounts were deleted successfully!','aiowpsecurity'));
             }
-            AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected accounts were deleted successfully!','aiowpsecurity'));
         } elseif ($entries != NULL)
         {
+            $nonce=isset($_GET['aiowps_nonce'])?$_GET['aiowps_nonce']:'';
+            if (!isset($nonce) ||!wp_verify_nonce($nonce, 'delete_user_acct'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete registered user account operation!",4);
+                die(__('Nonce check failed for delete registered user account operation!','aiowpsecurity'));
+            }
+            
             //Delete single account
 
             $result = wp_delete_user($entries);
