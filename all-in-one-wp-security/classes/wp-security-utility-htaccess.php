@@ -55,34 +55,12 @@ class AIOWPSecurity_Utility_Htaccess
         //NOP
     }
     
-    //Gets server type. Returns -1 if server is not supported
-    static function get_server_type()
-    {
-        //figure out what server they're using
-        if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'apache'))
-        {
-            return 'apache';
-        } 
-        else if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'nginx'))
-        {
-            return 'nginx';
-        } 
-        else if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'litespeed'))
-        {
-            return 'litespeed';
-        }
-        else 
-        { //unsupported server
-            return -1;
-        }
-        
-    }
-    
+   
     static function write_to_htaccess()
     {
        global $aio_wp_security;
         //figure out what server is being used
-        if (AIOWPSecurity_Utility_Htaccess::get_server_type() == -1) 
+        if (AIOWPSecurity_Utility::get_server_type() == -1) 
         {
             $aio_wp_security->debug_logger->log_debug("Unable to write to .htaccess - server type not supported!",4);
             return -1; //unable to write to the file
@@ -272,7 +250,7 @@ class AIOWPSecurity_Utility_Htaccess
     static function getrules_blacklist()
     {
         global $aio_wp_security;
-	$aiowps_server = AIOWPSecurity_Utility_Htaccess::get_server_type();	
+	$aiowps_server = AIOWPSecurity_Utility::get_server_type();	
         $rules = '';
         if($aio_wp_security->configs->get_value('aiowps_enable_blacklisting')=='1') 
         {

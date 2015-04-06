@@ -162,7 +162,7 @@ class AIOWPSecurity_List_Account_Activity extends AIOWPSecurity_List_Table {
 	$orderby = !empty($orderby) ? esc_sql($orderby) : 'login_date';
 	$order = !empty($order) ? esc_sql($order) : 'DESC';
 
-	$data = $wpdb->get_results("SELECT * FROM $login_activity_table ORDER BY $orderby $order LIMIT 50", ARRAY_A); //Get the last 50 records
+	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $login_activity_table ORDER BY %s %s LIMIT 50",$orderby, $order), ARRAY_A); //Get the last 50 records
         $current_page = $this->get_pagenum();
         $total_items = count($data);
         $data = array_slice($data,(($current_page-1)*$per_page),$per_page);

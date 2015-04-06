@@ -210,7 +210,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
 	$orderby = !empty($orderby) ? esc_sql($orderby) : 'lockdown_date';
 	$order = !empty($order) ? esc_sql($order) : 'DESC';
 
-	$data = $wpdb->get_results("SELECT * FROM $lockdown_table_name WHERE release_date > now() ORDER BY $orderby $order", ARRAY_A);
+	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $lockdown_table_name WHERE release_date > now() ORDER BY %s %s", $orderby, $order), ARRAY_A);
         $current_page = $this->get_pagenum();
         $total_items = count($data);
         $data = array_slice($data,(($current_page-1)*$per_page),$per_page);

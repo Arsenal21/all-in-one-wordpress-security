@@ -457,5 +457,29 @@ class AIOWPSecurity_Utility
         return ($result === false)?false:true;
     }
 
+    //Gets server type. Returns -1 if server is not supported
+    static function get_server_type()
+    {
+        //figure out what server they're using
+        if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'apache'))
+        {
+            return 'apache';
+        } 
+        else if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'nginx'))
+        {
+            return 'nginx';
+        } 
+        else if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'litespeed'))
+        {
+            return 'litespeed';
+        }
+        else 
+        { //unsupported server
+            return -1;
+        }
+        
+    }
+    
+    
     
 }

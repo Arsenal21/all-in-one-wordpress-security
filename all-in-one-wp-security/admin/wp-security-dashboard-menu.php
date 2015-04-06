@@ -10,6 +10,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
         'tab1' => 'render_tab1', 
         'tab2' => 'render_tab2',
         'tab3' => 'render_tab3',
+        'tab4' => 'render_tab4',
         );
     
     function __construct() 
@@ -23,6 +24,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
         'tab1' => __('Dashboard','aiowpsecurity'), 
         'tab2' => __('System Info','aiowpsecurity'),
         'tab3' => __('Locked IP Addresses','aiowpsecurity'),
+        'tab4' => __('AIOWPS Logs','aiowpsecurity'),
         );
     }
 
@@ -673,6 +675,76 @@ var msnry = new Masonry( container, {
             <?php $locked_ip_list->display(); ?>
             </form>
         </div></div>
+        
+        <?php
+    }
+
+    function render_tab4()
+    {
+        global $wpdb;
+        $file_selected = isset($_POST["aiowps_log_file"])?$_POST["aiowps_log_file"]:'';
+        ?>
+        <div class="postbox">
+        <h3><label for="title"><?php _e('View Logs for All In WP Security & Firewall Plugin', 'aiowpsecurity');?></label></h3>
+        <div class="inside">
+        <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-dashboard-logs-nonce'); ?>
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Backup Time Interval', 'aiowpsecurity')?>:</th>
+                <td>
+                    <select id="aiowps_log_file" name="aiowps_log_file">
+                        <option value=""><?php _e('--Select a file--', 'aiowpsecurity')?></option>
+                        <option value="wp-security-log.txt" <?php selected($file_selected, 'wp-security-log.txt'); ?>>wp-security-log</option>
+                        <option value="wp-security-log-cron-job.txt" <?php selected($file_selected, 'wp-security-log-cron-job.txt'); ?>>wp-security-log-cron-job</option>
+                    </select>
+                <span class="description"><?php _e('Select one of the log files to view the contents', 'aiowpsecurity'); ?></span>
+                </td> 
+            </tr>
+        </table>
+        <input type="submit" name="aiowps_view_logs" value="<?php _e('View Logs', 'aiowpsecurity')?>" class="button-primary" />
+        </form>
+            
+        </div></div>
+        <?php
+        if(isset($_POST['aiowps_view_logs']))//Do form submission tasks
+        {
+            $error = '';
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-dashboard-logs-nonce'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed on dashboard view logs!",4);
+                die("Nonce check failed on dashboard view logs!");
+            }
+            
+            if(!empty($file_selected)){
+        ?>
+        <div class="postbox">
+        <h3><label for="title"><?php echo __('Log File Contents For', 'aiowpsecurity').': '.$file_selected;?></label></h3>
+        <div class="inside">
+            <?php
+            $aiowps_log_dir = AIO_WP_SECURITY_PATH.'/logs';
+            $log_file = $aiowps_log_dir .'/'.$file_selected;
+            if(file_exists($log_file)){
+                $log_contents = AIOWPSecurity_Utility_File::get_file_contents($log_file);
+            }else{
+                $log_contents = '';
+            }
+            
+            if(empty($log_contents)){$log_contents = $file_selected.': '.__('Log file is empty!','aiowpsecurity');}
+            ?>
+            <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly><?php echo $log_contents; ?></textarea>
+            
+        </div>
+        </div>
+            
+        <?php
+                
+            }
+        }
+        ?>
+
+
         
         <?php
     }

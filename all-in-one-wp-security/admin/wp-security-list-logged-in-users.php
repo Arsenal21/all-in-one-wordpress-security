@@ -18,6 +18,23 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
     	return $item[$column_name];
     }
         
+    function column_user_id($item){
+        $tab = strip_tags($_REQUEST['tab']);
+        $force_logout_url = sprintf('admin.php?page=%s&tab=%s&action=%s&logged_in_id=%s&ip_address=%s', AIOWPSEC_USER_LOGIN_MENU_SLUG, $tab, 'force_user_logout', $item['user_id'], $item['ip_address']);
+        //Add nonce to URL
+        $force_logout_nonce = wp_nonce_url($force_logout_url, "force_user_logout", "aiowps_nonce");
+        
+        //Build row actions
+        $actions = array(
+            'logout' => '<a href="'.$force_logout_nonce.'" onclick="return confirm(\'Are you sure you want to force this user to be logged out of this session?\')">Force Logout</a>',
+        );
+        
+        //Return the user_login contents
+        return sprintf('%1$s <span style="color:silver"></span>%2$s',
+            /*$1%s*/ $item['user_id'],
+            /*$2%s*/ $this->row_actions($actions)
+        );
+    }
    
     function get_columns(){
         $columns = array(
@@ -43,6 +60,45 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
 
     function process_bulk_action() {
     }
+    
+    /*
+     * This function will force a selected user to be logged out.
+     * The function accepts either an array of IDs or a single ID (TODO - bulk actions not implemented yet!)
+     */
+    function force_user_logout($user_id, $ip_addr)
+    {
+        global $wpdb, $aio_wp_security;
+        if (is_array($user_id))
+        {
+            if (isset($_REQUEST['_wp_http_referer']))
+            {
+                //TODO - implement bulk action in future release!
+            }
+        } 
+        elseif ($user_id != NULL)
+        {
+            $nonce=isset($_GET['aiowps_nonce'])?$_GET['aiowps_nonce']:'';
+            if (!isset($nonce) ||!wp_verify_nonce($nonce, 'force_user_logout'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for force user logout operation!",4);
+                die(__('Nonce check failed for force user logout operation!','aiowpsecurity'));
+            }
+            //Force single user logout
+            $user_id = absint($user_id);
+            $manager = WP_Session_Tokens::get_instance( $user_id );
+            $manager->destroy_all();
+            //
+            $aio_wp_security->user_login_obj->update_user_online_transient($user_id, $ip_addr);
+//            if($result != NULL)
+//            {
+                $success_msg = '<div id="message" class="updated fade"><p><strong>';
+                $success_msg .= __('The selected user was logged out successfully!','aiowpsecurity');
+                $success_msg .= '</strong></p></div>';
+                _e($success_msg);
+//            }
+        }
+    }
+    
     
     function prepare_items() {
         //First, lets decide how many records per page to show

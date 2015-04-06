@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.1.1
-Stable tag: 3.9.0
+Stable tag: 3.9.1
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -149,6 +149,7 @@ Currently available translations:
 - Russian
 - Chinese
 - Portuguese (Brazil)
+- Persian
 
 Visit the [WordPress Security Plugin](https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin) page for more details.
 
@@ -176,6 +177,12 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 3.9.1 =
+- Added protection against possible SQL injection attacks.
+- Added new "Force Logout" feature which will instantly force a certain user to be logged out of their session. (See the "Logged In Users" tab in User Login menu)
+- Added more security protection for aiowps log files by creating .htaccess file and rules. AIOWPS log files can now only be viewed via dashboard menu, in new tab called "AIOWPS Logs". (NOTE:This security currently applies only for apache or similar servers)
+- Added backticks to SQL statement for DB prefix change to help prevent errors.
 
 = 3.9.0 =
 - Added some robustness to the file-scan code.

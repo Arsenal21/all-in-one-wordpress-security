@@ -26,7 +26,7 @@ class AIOWPSecurity_Installer
         AIOWPSecurity_Installer::create_db_tables();
         AIOWPSecurity_Configure_Settings::add_option_values();
         AIOWPSecurity_Installer::create_db_backup_dir(); //Create a backup dir in the WP uploads directory
-        
+        AIOWPSecurity_Installer::miscellaneous_tasks();
     }
     
     static function create_db_tables()
@@ -133,16 +133,22 @@ class AIOWPSecurity_Installer
             $handle = fopen($index_file, 'w'); //or die('Cannot open file:  '.$index_file);
             fclose($handle);
         }
-        //Create an .htacces file
-        //Write some rules which will only allow people originating from wp admin page to download the DB backup
-        $rules = '';
-        $rules .= 'order deny,allow
-deny from all' . PHP_EOL;
-        $file = $aiowps_dir.'/.htaccess';
-        $write_result = file_put_contents($file, $rules);
-        if ($write_result === false)
-        {
-            $aio_wp_security->debug_logger->log_debug("Creation of .htaccess file in ".AIO_WP_SECURITY_BACKUPS_DIR_NAME." directory failed!",4);
+        $server_type = AIOWPSecurity_Utility::get_server_type();
+        //Only create .htaccess if server is the right type
+        if($server_type == 'apache' || $server_type == 'litespeed'){
+            $file = $aiowps_dir.'/.htaccess';
+            if(!file_exists($file)){
+                //Create an .htacces file
+                //Write some rules which will only allow people originating from wp admin page to download the DB backup
+                $rules = '';
+                $rules .= 'order deny,allow' . PHP_EOL;
+                $rules .= 'deny from all' . PHP_EOL;
+                $write_result = file_put_contents($file, $rules);
+                if ($write_result === false)
+                {
+                    $aio_wp_security->debug_logger->log_debug("Creation of .htaccess file in ".AIO_WP_SECURITY_BACKUPS_DIR_NAME." directory failed!",4);
+                }
+            }
         }
     }
     
@@ -173,6 +179,35 @@ deny from all' . PHP_EOL;
             return false;
         }
     }
+    
+    static function miscellaneous_tasks()
+    {
+        //Create .htaccess file to protect log files in "logs" dir
+        self::create_htaccess_logs_dir();
+    }
+    
+    static function create_htaccess_logs_dir()
+    {
+        global $aio_wp_security;
+        $aiowps_log_dir = AIO_WP_SECURITY_PATH.'/logs';
+        $server_type = AIOWPSecurity_Utility::get_server_type();
+        //Only create .htaccess if server is the right type
+        if($server_type == 'apache' || $server_type == 'litespeed'){
+            $file = $aiowps_log_dir.'/.htaccess';
+            if(!file_exists($file)){
+                //Write some rules which will stop people from viewing the log files publicly
+                $rules = '';
+                $rules .= 'order deny,allow' . PHP_EOL;
+                $rules .= 'deny from all' . PHP_EOL;
+                $write_result = file_put_contents($file, $rules);
+                if ($write_result === false)
+                {
+                    $aio_wp_security->debug_logger->log_debug("Creation of .htaccess file in ".$aiowps_log_dir." directory failed!",4);
+                }
+            }
+        }
+    }
+    
 
 //    //Read entire contents of file at activation time and store serialized contents in our global_meta table
 //    static function backup_file_contents_to_db_at_activation($src_file, $key_description)

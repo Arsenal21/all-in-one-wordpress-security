@@ -539,7 +539,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
     {
         global $aio_wp_security;
         $tables = array();
-        $list_tables_sql = "SHOW TABLES FROM {$database};";
+        $list_tables_sql = "SHOW TABLES FROM `{$database}`;";
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         
         if ($mysqli->connect_errno) {

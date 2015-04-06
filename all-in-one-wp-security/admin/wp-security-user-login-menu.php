@@ -454,6 +454,12 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         global $aio_wp_security;
         include_once 'wp-security-list-logged-in-users.php'; //For rendering the AIOWPSecurity_List_Table
         $user_list = new AIOWPSecurity_List_Logged_In_Users();
+        if(isset($_REQUEST['action'])) //Do row action tasks for list table form for login activity display
+        {
+            if($_REQUEST['action'] == 'force_user_logout'){ //Force Logout link was clicked for a row in list table
+                $user_list->force_user_logout(strip_tags($_REQUEST['logged_in_id']), strip_tags($_REQUEST['ip_address']));
+            }
+        }
         
         if (isset($_POST['aiowps_refresh_logged_in_user_list']))
         {
@@ -465,11 +471,6 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             }
             
             $user_list->prepare_items();
-        
-//        if(isset($_REQUEST['action'])) //Do list table form row action tasks
-//        {
-            //no actions for now
-//        }
         }
 
         ?>
@@ -486,6 +487,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             <?php
             echo '<p>'.__('This tab displays all users who are currently logged into your site.', 'aiowpsecurity').'
                 <br />'.__('If you suspect there is a user or users who are logged in which should not be, you can block them by inspecting the IP addresses from the data below and adding them to your blacklist.', 'aiowpsecurity').'
+                <br />'.__('You can also instantly log them out by clicking on the "Force Logout" link when you hover over the row in the User Id column.', 'aiowpsecurity').'                    
             </p>';
             ?>
         </div>
