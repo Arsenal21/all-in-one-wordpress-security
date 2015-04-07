@@ -135,9 +135,10 @@ class AIOWPSecurity_Scan
     function has_scan_data()
     {
         global $wpdb;
-        //For scanced data the meta_key1 column valu is 'file_change_detection', meta_value1 column value is 'file_scan_data'. Then the data is stored in meta_value4 column.
+        //For scanned data the meta_key1 column valu is 'file_change_detection', meta_value1 column value is 'file_scan_data'. Then the data is stored in meta_value4 column.
         $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
-        $resultset = $wpdb->get_row("SELECT * FROM $aiowps_global_meta_tbl_name WHERE meta_key1 = 'file_change_detection' AND meta_value1='file_scan_data'", OBJECT);
+        $sql = $wpdb->prepare("SELECT * FROM $aiowps_global_meta_tbl_name WHERE meta_key1=%s AND meta_value1=%s", 'file_change_detection', 'file_scan_data');
+        $resultset = $wpdb->get_row($sql, OBJECT);
         if($resultset){
             $scan_data = maybe_unserialize($resultset->meta_value4);
             if(!empty($scan_data)){
@@ -152,7 +153,8 @@ class AIOWPSecurity_Scan
         global $wpdb;
         //For scanned data the meta_key1 column valu is 'file_change_detection', meta_value1 column value is 'file_scan_data'. Then the data is stored in meta_value4 column.
         $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
-        $resultset = $wpdb->get_row("SELECT * FROM $aiowps_global_meta_tbl_name WHERE meta_key1 = 'file_change_detection' AND meta_value1='file_scan_data'", OBJECT);
+        $sql = $wpdb->prepare("SELECT * FROM $aiowps_global_meta_tbl_name WHERE meta_key1=%s AND meta_value1=%s", 'file_change_detection', 'file_scan_data');
+        $resultset = $wpdb->get_row($sql, OBJECT);
         if($resultset){
             $scan_data = maybe_unserialize($resultset->meta_value4);
             return $scan_data;

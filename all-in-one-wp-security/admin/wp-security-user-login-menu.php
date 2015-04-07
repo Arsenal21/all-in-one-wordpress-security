@@ -562,8 +562,9 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         } elseif ($entries != NULL)
         {
             //Delete single record
-            $delete_command = "DELETE FROM ".$lockdown_table." WHERE ID = '".absint($entries)."'";
-            $result = $wpdb->query($delete_command);
+//            $delete_command = "DELETE FROM ".$lockdown_table." WHERE ID = '".absint($entries)."'";
+//            $result = $wpdb->query($delete_command);
+            $result = $wpdb->delete($lockdown_table, array('ID' => absint($entries)));
             if($result != NULL)
             {
                 $this->show_msg_updated(__('The selected record was deleted successfully!','aiowpsecurity'));

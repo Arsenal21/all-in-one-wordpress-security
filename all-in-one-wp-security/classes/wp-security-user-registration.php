@@ -6,7 +6,9 @@ class AIOWPSecurity_User_Registration
     {
         global $aio_wp_security;
         add_action('user_register', array(&$this, 'aiowps_user_registration_action_handler'));
-        add_filter('registration_errors', array(&$this, 'aiowps_validate_registration_with_captcha'), 10, 3);
+        if($aio_wp_security->configs->get_value('aiowps_enable_registration_page_captcha') == '1'){
+            add_filter('registration_errors', array(&$this, 'aiowps_validate_registration_with_captcha'), 10, 3);
+        }
     }
     
 
