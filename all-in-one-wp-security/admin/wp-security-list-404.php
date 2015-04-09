@@ -285,11 +285,15 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
 
         $orderby = !empty($orderby) ? esc_sql($orderby) : 'id';
         $order = !empty($order) ? esc_sql($order) : 'DESC';
+        
+        $orderby = AIOWPSecurity_Utility::sanitize_value_by_array($orderby, $sortable);
+        $order = AIOWPSecurity_Utility::sanitize_value_by_array($order, array('DESC' => '1', 'ASC' => '1'));
+
         if (isset($_POST['s'])) {
             $search_term = trim($_POST['s']);
             $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $events_table_name . " WHERE `ip_or_host` LIKE '%%%s%%' OR `url` LIKE '%%%s%%' OR `referer_info` LIKE '%%%s%%'", $search_term, $search_term, $search_term), ARRAY_A);
         } else {
-            $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $events_table_name ORDER BY %s %s",$orderby, $order ), ARRAY_A);
+            $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $events_table_name WHERE event_type=%s ORDER BY $orderby $order",'404'), ARRAY_A);
         }
         $new_data = array();
         foreach ($data as $row) {

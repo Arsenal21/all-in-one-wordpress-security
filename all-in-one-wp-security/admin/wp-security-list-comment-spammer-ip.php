@@ -201,6 +201,9 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
 	$orderby = !empty($orderby) ? esc_sql($orderby) : 'amount';
 	$order = !empty($order) ? esc_sql($order) : 'DESC';
 
+        $orderby = AIOWPSecurity_Utility::sanitize_value_by_array($orderby, $sortable);
+        $order = AIOWPSecurity_Utility::sanitize_value_by_array($order, array('DESC' => '1', 'ASC' => '1'));
+        
         $sql = $wpdb->prepare("SELECT   comment_author_IP, COUNT(*) AS amount
                 FROM     $wpdb->comments 
                 WHERE    comment_approved = 'spam'

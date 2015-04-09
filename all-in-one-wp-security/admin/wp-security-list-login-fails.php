@@ -161,7 +161,10 @@ class AIOWPSecurity_List_Login_Failed_Attempts extends AIOWPSecurity_List_Table 
 	$orderby = !empty($orderby) ? esc_sql($orderby) : 'failed_login_date';
 	$order = !empty($order) ? esc_sql($order) : 'DESC';
 
-	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $failed_logins_table_name ORDER BY %s %s;", $orderby, $order), ARRAY_A);
+        $orderby = AIOWPSecurity_Utility::sanitize_value_by_array($orderby, $sortable);
+        $order = AIOWPSecurity_Utility::sanitize_value_by_array($order, array('DESC' => '1', 'ASC' => '1'));
+        
+	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $failed_logins_table_name WHERE id > %d ORDER BY $orderby $order", -1), ARRAY_A); //Note: had to deliberately introduce WHERE clause because you need at least 2 arguments in prepare statement. Cannot use order/orderby
         $current_page = $this->get_pagenum();
         $total_items = count($data);
         $data = array_slice($data,(($current_page-1)*$per_page),$per_page);
