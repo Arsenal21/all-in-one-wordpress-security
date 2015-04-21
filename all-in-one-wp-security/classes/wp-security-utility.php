@@ -120,6 +120,22 @@ class AIOWPSecurity_Utility
         return $string;
     }
     
+    
+    /*
+     * Generates a random number using a-z characters
+     */
+    static function generate_alpha_random_string($string_length)
+    {
+        //Charecters present in table prefix
+        $allowed_chars = 'abcdefghijklmnopqrstuvwxyz';
+        $string = '';
+        //Generate random string
+        for ($i = 0; $i < $string_length; $i++) {
+            $string .= $allowed_chars[rand(0, strlen($allowed_chars) - 1)];
+        }
+        return $string;
+    }
+    
     static function set_cookie_value($cookie_name, $cookie_value, $expiry_seconds = 86400, $path = '/', $cookie_domain = '')
     {
         $expiry_time = time() + intval($expiry_seconds);

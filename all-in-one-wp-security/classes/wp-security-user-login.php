@@ -300,7 +300,7 @@ class AIOWPSecurity_User_Login
         }else{
             $query_param = array('aiowps_auth_key'=>$secret_rand_key);
             $wp_site_url = AIOWPSEC_WP_URL;
-            $unlock_link = add_query_arg($query_param, $wp_site_url); 
+            $unlock_link = esc_url(add_query_arg($query_param, $wp_site_url)); 
         }
         return $unlock_link;
     }

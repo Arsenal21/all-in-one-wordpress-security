@@ -104,7 +104,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             {
                 if( isset($_POST['aiowps_enable_random_prefix'])) 
                 {//User has elected to generate a random DB prefix
-                    $string = AIOWPSecurity_Utility::generate_alpha_numeric_random_string('6');
+                    $string = AIOWPSecurity_Utility::generate_alpha_random_string('5');
                     $new_db_prefix = $string . '_';
                     $perform_db_change = true;
                 }else 

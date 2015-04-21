@@ -44,11 +44,11 @@ msgstr "Регистрация пользователя"
 
 #: all-in-one-wp-security/admin/wp-security-admin-init.php:209
 msgid "Database Security"
-msgstr "База данных"
+msgstr "Защита Базы данных"
 
 #: all-in-one-wp-security/admin/wp-security-admin-init.php:213
 msgid "Filesystem Security"
-msgstr "Файловая система"
+msgstr "Защита Файловой системы"
 
 #: all-in-one-wp-security/admin/wp-security-admin-init.php:215
 msgid "WHOIS Lookup"
@@ -60,7 +60,7 @@ msgstr "Черный список"
 
 #: all-in-one-wp-security/admin/wp-security-admin-init.php:224
 msgid "Firewall"
-msgstr "Файерволл"
+msgstr "Файрволл"
 
 #: all-in-one-wp-security/admin/wp-security-admin-init.php:229
 msgid "Brute Force"
@@ -105,7 +105,7 @@ msgid ""
 "The plugin was unable to write to the .htaccess file. Please edit file "
 "manually."
 msgstr ""
-"Не удалось сделать записи в файле .htaccess file. Пожалуйста, отредактируйте "
+"Не удалось сделать записи в файле .htaccess. Пожалуйста, отредактируйте "
 "файл вручную."
 
 #: all-in-one-wp-security/admin/wp-security-blacklist-menu.php:139
@@ -142,13 +142,13 @@ msgid ""
 "first line of defence which denies all access to blacklisted visitors as "
 "soon as they hit your hosting server."
 msgstr ""
-"Блокируя пользователей с помощью директив файла .htaccess Вы получаете "
+"Блокируя пользователей с помощью директив файла .htaccess, Вы получаете "
 "первую линию обороны, которая отбросит нежелательных посетителей сразу же, "
 "как только они попытаются создать запрос к Вашему серверу."
 
 #: all-in-one-wp-security/admin/wp-security-blacklist-menu.php:151
 msgid "IP Hosts and User Agent Blacklist Settings"
-msgstr "Настройки черного списка для блокировки IP-адресов и юзер-агентов"
+msgstr "Настройки Черного списка для блокировки IP-адресов и юзер-агентов"
 
 #: all-in-one-wp-security/admin/wp-security-blacklist-menu.php:162
 msgid "Enable IP or User Agent Blacklisting"
@@ -273,7 +273,7 @@ msgstr "Переименовать страницу логина"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:27
 msgid "Cookie Based Brute Force Prevention"
-msgstr "Защита от брутфорс-атак, основанная на использовании куки"
+msgstr "Защита от брутфорс-атак с помощью куки"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:28
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:44
@@ -292,7 +292,7 @@ msgstr "Бочка с медом (Honeypot)"
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:101
 msgid "Please enter a value for your login page slug."
 msgstr ""
-"Пожалуйста, введите значение, которое будет использовано в адресе вашей "
+"Пожалуйста, введите значение, которое будет использовано в адресе Вашей "
 "страницы логина."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:105
@@ -326,7 +326,7 @@ msgid ""
 "An effective Brute Force prevention technique is to change the default "
 "WordPress login page URL."
 msgstr ""
-"Эффективная мера защиты от того, чтобы роботы пытались догадаться паролей - "
+"Эффективная мера защиты от перебора паролей - "
 "изменение адреса страницы логина."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:142
@@ -334,8 +334,8 @@ msgid ""
 "Normally if you wanted to login to WordPress you would type your site's home "
 "URL followed by wp-login.php."
 msgstr ""
-"Обычно, для того, чтобы логиниться в WordPress, набираешь базовый адрес "
-"сайта, и затем wp-login.php."
+"Обычно, для того, чтобы логиниться в WordPress, Вы набираете базовый адрес "
+"сайта, и затем wp-login.php (или wp-admin)."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:143
 msgid ""
@@ -343,7 +343,7 @@ msgid ""
 "renaming the last portion of the login URL which contains the <strong>wp-"
 "login.php</strong> to any string that you like."
 msgstr ""
-"С этой функцией сможешь изменить адрес страницы логина, указав собственный "
+"С этой функцией Вы сможете изменить адрес страницы логина, указав собственный "
 "адрес, изменив последнюю часть адреса (URL) страницы, которая обычно "
 "пишется<strong>wp-login.php</strong> на что угодно. "
 
@@ -352,7 +352,7 @@ msgid ""
 "By doing this, malicious bots and hackers will not be able to access your "
 "login page because they will not know the correct login page URL."
 msgstr ""
-"Если сделать так, тогда злонамеренные роботы и хакеры не смогут найти вашу "
+"Если сделать так, тогда злонамеренные роботы и хакеры не смогут найти Вашу "
 "страницу логина, т.к. не будут знать ее верный адрес."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:146
@@ -364,7 +364,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:157
 msgid "Your WordPress login page URL has been renamed."
-msgstr "Адрес (URL) вашей страницы логина в WordPress изменен."
+msgstr "Адрес (URL) Вашей страницы логина в WordPress изменен."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:158
 msgid "Your current login URL is:"
@@ -403,8 +403,8 @@ msgid ""
 "enouraged to choose something which is hard to guess and only you will "
 "remember."
 msgstr ""
-"Введите текстоое значение, которое составит часть адреса вашей страницы "
-"логина. Предлагаем выбрать нечто, что сложно угадать, и только вы будете "
+"Введите текстовое значение, которое составит часть адреса Вашей страницы "
+"логина. Предлагаем выбрать нечто, что сложно угадать, и только Вы будете "
 "помнить."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:221
@@ -423,7 +423,7 @@ msgstr "Вы успешно активировали защиту от брут�
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:241
 msgid ""
 "From now on you will need to log into your WP Admin using the following URL:"
-msgstr "С этого момента заходите на Вашу страницу авторизации по этому адресу:"
+msgstr "С этого момента заходите на Вашу страницу авторизации по следующему адресу:"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:243
 msgid ""
@@ -442,7 +442,7 @@ msgstr "просто запомните, что к адресу Вашего с�
 msgid ""
 "You have successfully saved cookie based brute force prevention feature "
 "settings."
-msgstr "Настройки сохранены!"
+msgstr "Настройки защиты от брутфорс-атак на основе куки сохранены!"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:285
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:275
@@ -460,7 +460,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:295
 msgid "Brute Force Prevention Firewall Settings"
-msgstr "Настройки Файерволла для защиты от Брутфорс-атак"
+msgstr "Настройки Файрволла для защиты от Брутфорс-атак"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:300
 msgid ""
@@ -510,7 +510,7 @@ msgid ""
 "If this feature is not used correctly, you can get locked out of your site. "
 "A backed up .htaccess file will come in handy if that happens."
 msgstr ""
-"Если эта услуга используется неправильно есть риск, что вы потеряете доступ "
+"Если эта услуга используется неправильно, есть риск, что Вы потеряете доступ "
 "к своему сайту. В таком случае, резервная копия файла .htaccess может сильно "
 "помочь."
 
@@ -528,7 +528,7 @@ msgid ""
 "active at any one time."
 msgstr ""
 "Обратите внимание: Если была активна функция переименования страницы логина, "
-"тогда этот плагин автоматически отключила ее, т.к. эти две услуги не могут "
+"тогда она автоматически деактивирована, т.к. эти две функции не могут "
 "быть активны одновременно."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:332
@@ -682,7 +682,7 @@ msgid ""
 "people trying to access pages are not automatically blocked."
 msgstr ""
 "В случае, если Вы защищаете свои посты и страницы паролями, используя "
-"соответствующую встроенную функцию WordPress, в файл .htacces необходимо "
+"соответствующую встроенную функцию WordPress, в файл .htaccess необходимо "
 "добавить некоторые дополнительные директивы."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:410
@@ -691,7 +691,7 @@ msgid ""
 "exceptions to your .htacces file so that people trying to access these pages "
 "are not automatically blocked."
 msgstr ""
-"Включение этой опции добавит в файл .htacces необходимые правила, чтобы "
+"Включение этой опции добавит в файл .htaccess необходимые правила, чтобы "
 "люди, пытающиеся получить доступ к этим страницам, не были автоматически "
 "заблокированы. "
 
@@ -713,7 +713,7 @@ msgstr "На этом сайте есть тема или плагин, кото
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:424
 msgid "Check this if your site uses AJAX functionality."
-msgstr "Поставьте галочку, если ваш сайт использует функциональность AJAX."
+msgstr "Поставьте галочку, если Ваш сайт использует функциональность AJAX."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:429
 msgid ""
@@ -722,9 +722,9 @@ msgid ""
 "your .htacces file to prevent AJAX requests from being automatically blocked "
 "by the brute force prevention feature."
 msgstr ""
-"В случае, если на вашем сайте есть темы или плагины, которые используют "
+"В случае, если на Вашем сайте есть темы или плагины, которые используют "
 "AJAX, тогда несколько дополнительных строчек с командами и исключениями "
-"должны быть добавлены в файле .htaccess вашего сайта для того, чтобы запросы "
+"должны быть добавлены в файле .htaccess Вашего сайта для того, чтобы запросы "
 "AJAX не были бы заблокированы защитой от брутфорса."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:431
@@ -733,7 +733,7 @@ msgid ""
 "exceptions to your .htacces file so that AJAX operations will work as "
 "expected."
 msgstr ""
-"Включение этой опции добавит в файл .htacces необходимые правила, чтобы "
+"Включение этой опции добавит в файл .htaccess необходимые правила, чтобы "
 "процедуры AJAX работали правильно. "
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:446
@@ -748,7 +748,7 @@ msgstr "Сохранить настройки"
 msgid ""
 "The cookie test failed on this server. So this feature cannot be used on "
 "this site."
-msgstr "Куки-тест негативный - использование этой функции невозможно."
+msgstr "Результат Куки-теста негативный - использование этой функции невозможно."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:461
 msgid ""
@@ -762,13 +762,13 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:463
 msgid "Perform Cookie Test"
-msgstr "Протестировать Куки"
+msgstr "Протестировать куки"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:503
 msgid ""
 "This feature allows you to add a captcha form on the WordPress login page."
 msgstr ""
-"Данная функция позволяет вам добавить поле CAPTCHA на странице логин "
+"Данная функция позволяет Вам добавить поле CAPTCHA на странице логина "
 "WordPress."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:504
@@ -801,7 +801,7 @@ msgstr "Включить CAPTCHA на странице логина"
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:525
 msgid "Check this if you want to insert a captcha form on the login page"
 msgstr ""
-"Включите этот чекбокс, чтобы добавить CAPTCHA на странице логина вашего сайта"
+"Включите этот чекбокс, чтобы добавить CAPTCHA на странице логина Вашего сайта"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:531
 msgid "Custom Login Form Captcha Settings"
@@ -836,9 +836,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:584
 msgid "Nonce check failed for save whitelist settings!"
-msgstr ""
-"Не удалось сохранить новые настройки белого списка, т.к. произошла ошибка с "
-"одноразовым параметром nonce!"
+msgstr "Не удалось сохранить новые настройки белого списка!"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:641
 msgid ""
@@ -847,7 +845,7 @@ msgid ""
 "login page."
 msgstr ""
 "Функция белого списка All In One WP Security дает возможность открыть доступ "
-"на страницу логина WordPress только с определенных адресов или блоков IP."
+"на страницу логина WordPress только с определенных адресов или диапазонов IP."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:642
 msgid ""
@@ -855,13 +853,13 @@ msgid ""
 "your whitelist as configured in the settings below."
 msgstr ""
 "Эта функция запретит доступ на логин для всех адресов IP, которых нет в "
-"белом списке, ниже."
+"белом списке ниже."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:643
 msgid ""
 "The plugin achieves this by writing the appropriate directives to your ."
 "htaccess file."
-msgstr "Для этого, плагин пишет соответствующие правила в файл .htaccess."
+msgstr "Для этого плагин запишет соответствующие правила в файл .htaccess."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:644
 msgid ""
@@ -870,7 +868,7 @@ msgid ""
 "to whitelisted IP addresses and other addresses will be blocked as soon as "
 "they try to access your login page."
 msgstr ""
-"Пропуская / блокируя разные IP-адреса с помощью директив файла .htaccess Вы "
+"Пропуская / блокируя разные IP-адреса с помощью директив файла .htaccess, Вы "
 "используете первую линию обороны, т.к. доступ к странице логина будет открыт "
 "только IP-адресам из белого списка. Все остальные адреса будут "
 "заблокированы, как только пытаются открыть страницу логина."
@@ -882,21 +880,21 @@ msgid ""
 "the %s feature enabled, <strong>you will still need to use your secret word "
 "in the URL when trying to access your WordPress login page</strong>."
 msgstr ""
-"Внимание: Если, кроме функции Белого списка, вы еще активировали функцию %s, "
+"Внимание: Если, кроме функции Белого списка, Вы еще активировали функцию %s, "
 "тогда <strong>вам все равно приходится использовать адрес (URL) с секретным "
-"словом для доступа к вашей странице логин в WordPress</strong>"
+"словом для доступа к Вашей странице логин в WordPress</strong>"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:652
 msgid ""
 "These features are NOT functionally related. Having both of them enabled on "
 "your site means you are creating 2 layers of security."
 msgstr ""
-"Эти функции независимы друг от друга. Если обе активированы, тогда на вашем "
+"Эти функции независимы друг от друга. Если они обе активированы, тогда на Вашем "
 "сайте работают два уровня защиты одновременно."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:657
 msgid "Login IP Whitelist Settings"
-msgstr "Белый список адресов IP для логина"
+msgstr "Белый список IP-адресов для логина"
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:668
 msgid "Enable IP Whitelisting"
@@ -932,8 +930,8 @@ msgid ""
 "whitelist. Only the addresses specified here will have access to the "
 "WordPress login page."
 msgstr ""
-"Введите один или несколько адресов IP или блоки IP-адресов, которые хотите "
-"включить в ваш белый список. Доступ к странице логина в WordPress будет "
+"Введите один или несколько IP-адресов или диапазоны IP-адресов, которые хотите "
+"включить в Ваш белый список. Доступ к странице логина в WordPress будет "
 "открыт только с этих адресов."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:734
@@ -960,8 +958,8 @@ msgid ""
 "consquently dealt with."
 msgstr ""
 "Медовый боченок (honey pot) означает, что скрытое поле помещается внутри "
-"какой-то формы, и только роботы его заполняют. Если данное поле имеет "
-"значени, когда содержание формы передается на сервер, тогда форма, скорее "
+"какой-то формы, и его заполняют только роботы. Если данное поле имеет некое "
+"значение, когда содержание формы передается на сервер, тогда форма, скорее "
 "всего, была заполнена роботом, и сервер, следовательно, поведет себя "
 "соответственно."
 
@@ -972,7 +970,7 @@ msgid ""
 "will be redirected to its localhost address - http://127.0.0.1."
 msgstr ""
 "Поэтому, если плагин видит, что данное поле было заполнено, робот, который "
-"пытается логиниться на вашем сайте, будет перенаправлен на свой собственный "
+"пытается логиниться на Вашем сайте, будет перенаправлен на свой собственный "
 "адрес, а именно - http://127.0.0.1."
 
 #: all-in-one-wp-security/admin/wp-security-brute-force-menu.php:743
@@ -1021,7 +1019,7 @@ msgid ""
 "Twitter, Google+ or via Email to stay up to date about the new security "
 "features of this plugin."
 msgstr ""
-"Через Twitter, Google+ или по электронной почте вы можете всегда быть в "
+"Через Twitter, Google+ или по электронной почте Вы можете всегда быть в "
 "курсе последних новинок нашего плагина по безопасности."
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:92
@@ -1030,15 +1028,15 @@ msgstr "Измеритель уровня безопасности"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:121
 msgid "Total Achievable Points: "
-msgstr "Максимально возможный балл:"
+msgstr "Максимально возможный балл: "
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:123
 msgid "Current Score of Your Site: "
-msgstr "Текущий балл Вашего сайта:"
+msgstr "Текущий балл Вашего сайта: "
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:133
 msgid "Security Points Breakdown"
-msgstr "Подробная разборка очков безопасности"
+msgstr "Диаграмма безопасности Вашего сайта"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:174
 msgid "Spread the Word"
@@ -1049,8 +1047,8 @@ msgid ""
 "We are working hard to make your WordPress site more secure. Please support "
 "us, here is how:"
 msgstr ""
-"Мы стараемся делать ваш сайт WordPress более защищенным. Поддержите нас! Вот "
-"как это можете делать: "
+"Мы стараемся делать Ваш сайт WordPress более защищенным. Поддержите нас! Вот "
+"как это можно сделать: "
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:193
 msgid "Critical Feature Status"
@@ -1081,7 +1079,7 @@ msgstr "Права на файлы"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:246
 msgid "Basic Firewall"
-msgstr "Базовый файерволл"
+msgstr "Базовый файрволл"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:264
 msgid "Last 5 Logins"
@@ -1117,7 +1115,7 @@ msgid ""
 "done"
 msgstr ""
 "Режим обслуживания включен. Не забудьте отключить его, когда захотите "
-"открыть его для посетителей."
+"открыть сайт для посетителей."
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:319
 msgid "Maintenance mode is currently off."
@@ -1144,7 +1142,7 @@ msgstr "Функция %s сейчас активна."
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:353
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:381
 msgid "Your new WordPress login URL is now:"
-msgstr "Новый адрес вашей страницы логина сейчас:"
+msgstr "Новый адрес Вашей страницы логина сейчас:"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:413
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:29
@@ -1164,15 +1162,15 @@ msgstr "Выберите меню %s для более подробной инф
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:429
 msgid "There are no other site-wide users currently logged in."
-msgstr "Кроме вас нет ни одной активной сессии на сайте."
+msgstr "Кроме Вашей ни одной активной сессии на сайте нет."
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:445
 msgid "Number of users currently logged into your site (including you) is:"
-msgstr "Количество пользователей на вашем сайте сейчас (включая вас): "
+msgstr "Количество пользователей на Вашем сайте сейчас (включая Вас): "
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:451
 msgid "There are no other users currently logged in."
-msgstr "Сейчас нет активных пользователей, кроме вас."
+msgstr "Сейчас нет активных пользователей, кроме Вас."
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:468
 msgid "There are no IP addresses currently locked out."
@@ -1202,7 +1200,7 @@ msgstr "Версия"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:522
 msgid "Table Prefix"
-msgstr "Pрефикс таблиц БД"
+msgstr "Префикс таблиц БД"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:524
 msgid "Session Save Path"
@@ -1214,7 +1212,7 @@ msgstr "Название сервера"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:527
 msgid "Cookie Domain"
-msgstr "Домэн для cookies"
+msgstr "Домен для cookies"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:528
 msgid "Library Present"
@@ -1249,7 +1247,7 @@ msgstr "N/A"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:546
 msgid "PHP Memory Limit"
-msgstr "Максимальнyj oбъем памяти для PHP"
+msgstr "Максимальный oбъем памяти для PHP"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:554
 msgid "PHP Max Upload Size"
@@ -1275,19 +1273,19 @@ msgstr "Выкл."
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:570
 msgid "PHP Safe Mode"
-msgstr "PHP Безопасный режим/Safe Mode"
+msgstr "Безопасный режим PHP"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:578
 msgid "PHP Allow URL fopen"
-msgstr "PHP позволяет fopen URL"
+msgstr "PHP позволяет команду URL fopen"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:587
 msgid "PHP Allow URL Include"
-msgstr "PHP позволяет URL include"
+msgstr "PHP позволяет команду URL include"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:595
 msgid "PHP Display Errors"
-msgstr "PHP показывает ощибки"
+msgstr "PHP показывает ошибки"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:604
 msgid "PHP Max Script Execution Time"
@@ -1313,7 +1311,7 @@ msgstr "URL плагина"
 
 #: all-in-one-wp-security/admin/wp-security-dashboard-menu.php:656
 msgid "Currently Locked Out IP Addresses and Ranges"
-msgstr "В настоящий момент заблокированные IP-адреса и -блоки"
+msgstr "В настоящий момент заблокированны IP-адреса и диапазоны"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:26
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:31
@@ -1324,7 +1322,7 @@ msgstr "Резервное копирование БД"
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:30
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:61
 msgid "DB Prefix"
-msgstr "Префикс названий таблиц БД"
+msgstr "Префикс таблиц БД"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:93
 msgid "Nonce check failed for DB prefix change operation!"
@@ -1337,7 +1335,7 @@ msgid ""
 "config.php file."
 msgstr ""
 "Плагину не удалось внести изменения в файл wp-config.php. Эта опция может "
-"быть использована только если на файл wp-config будут установлены права на "
+"быть использована, только если на файл wp-config будут установлены права на "
 "запись."
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:114
@@ -1361,7 +1359,7 @@ msgid ""
 "Your WordPress DB is the most important asset of your website because it "
 "contains a lot of your site's precious information."
 msgstr ""
-"Ваша база данных - это наиболее ценный актив, так как в ней находится весь "
+"Ваша база данных - это наиболее ценная часть Вашего сайта, так как в ней находится весь "
 "контент и настройки."
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:135
@@ -1370,7 +1368,7 @@ msgid ""
 "malicious and automated code which targets certain tables."
 msgstr ""
 "База данных также является мишенью для хакеров, пытающихся получить контроль "
-"над определенными таблицами методом SQL-инъекций и внедрением другого "
+"над определенными таблицами методом SQL-инъекций и внедрением "
 "вредоносного кода."
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:136
@@ -1453,7 +1451,7 @@ msgid ""
 "retrieve it via FTP from the following directory:"
 msgstr ""
 "Резервное копирование БД успешно завершено! Вы получите резерную копию по "
-"электронной почте, если вы активировали эту опцию. В обратном случае, вы "
+"электронной почте, если Вы активировали эту опцию. В обратном случае, Вы "
 "можете загрузить копию по протоколу FTP из следующего каталога:"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:226
@@ -1491,7 +1489,7 @@ msgid ""
 "WordPress admin email as default."
 msgstr ""
 "Email-адрес введен неправильно. По умолчанию установлен Email администратора "
-"блога."
+"сайта."
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:298
 msgid "Manual Backup"
@@ -1565,7 +1563,7 @@ msgid ""
 "Check this if you want the system to email you the backup file after a DB "
 "backup has been performed"
 msgstr ""
-"Включите этот чекбокс, если хотите получать бэкап базы данных на свой email"
+"Включите этот чекбокс, если хотите получать бэкап базы данных на свой Email"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:352
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:327
@@ -1575,11 +1573,11 @@ msgstr "Введите Email-адрес"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:383
 msgid "Error - Could not get tables or no tables found!"
-msgstr "Ощибка - не удалось запросить таблицы, или таблцы не найдены!"
+msgstr "Ощибка - не удалось запросить таблицы, или таблицы не найдены!"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:387
 msgid "Starting DB prefix change operations....."
-msgstr "Начинаю процесс изменения префикса таблиц базы данных..."
+msgstr "Начинаем процесс изменения префикса таблиц базы данных..."
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:389
 #, php-format
@@ -1645,8 +1643,8 @@ msgid ""
 "The options table records which had references to the old DB prefix were "
 "updated successfully!"
 msgstr ""
-"Записи в таблице опций блога, имеющие ссылки на старый префикс таблиц базы "
-"данных успешно скорректированы!"
+"Записи в таблице опций сайта, имеющие ссылки на старый префикс таблиц базы "
+"данных, успешно обновлены!"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:494
 #, php-format
@@ -1654,8 +1652,8 @@ msgid ""
 "The %s table records which had references to the old DB prefix were updated "
 "successfully!"
 msgstr ""
-"Записи в таблице %s, имеющие ссылки на старый префикс таблиц базы данных "
-"успешно скорректированы!"
+"Записи в таблице %s, имеющие ссылки на старый префикс таблиц базы данных, "
+"успешно обновлены!"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:523
 #, php-format
@@ -1672,7 +1670,7 @@ msgid ""
 "updated successfully!"
 msgstr ""
 "Записи в таблице «user_meta», имеющие ссылки на старый префикс таблиц базы "
-"данных успешно скорректированы!"
+"данных, успешно обновлены!"
 
 #: all-in-one-wp-security/admin/wp-security-database-menu.php:530
 msgid "DB prefix change tasks have been completed."
@@ -1685,7 +1683,7 @@ msgstr "Отслеживание изменений в файлах"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:25
 msgid "Malware Scan"
-msgstr "Сканирование от вредных программ"
+msgstr "Сканирование от вредоносных программ"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:26
 msgid "DB Scan"
@@ -1693,13 +1691,11 @@ msgstr "Сканирование базы данных"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:95
 msgid "There have been no file changes since the last scan."
-msgstr "С прошлго сканирования не было никаких изменений в файлах."
+msgstr "С прошлого сканирования не было никаких изменений в файлах."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:105
 msgid "Nonce check failed for manual file change detection scan operation!"
-msgstr ""
-"Проверка одноразового параметра безопасности (nonce) для ручного запуска "
-"сканирования файлов не удалась!"
+msgstr "Не удалось выполнить ручное сканирование изменений в файлах!"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:112
 msgid ""
@@ -1707,13 +1703,13 @@ msgid ""
 "The file details from this scan will be used to detect file changes for "
 "future scans!"
 msgstr ""
-"Плагин заметил, что сейчас сканирование измененных файлов было сделано "
-"впервые. Результат данного сканирования будет сохранен для того,чтобы в "
-"будущем детектировать изменения в файлах!"
+"Плагин отметил, что сканирование измененных файлов было сделано "
+"впервые. Результат данного сканирования будет сохранен для того, чтобы в "
+"будущем детектировать изменения в файлах."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:114
 msgid "Scan Complete - There were no file changes detected!"
-msgstr "Сканирование закончено - Изменений файлов не было обнаружено!"
+msgstr "Сканирование закончено - изменений файлов не обнаружено!"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:203
 msgid ""
@@ -1722,7 +1718,7 @@ msgid ""
 "                    In order to ensure that future scan results are "
 "accurate, the old scan data has been refreshed."
 msgstr ""
-"НОВОЕ СКАНИРОВАНИЕ ЗАКОНЧЕНО: Плагин установило, что вы изменили настройки в "
+"НОВОЕ СКАНИРОВАНИЕ ЗАКОНЧЕНО: Плагин установил, что Вы изменили настройки в "
 "поле \"Игнорировать следующие типы файлов\" или \"Игнорировать следующие "
 "файлы\".\n"
 "                    Для того, чтобы будущие сканирования показывали верный "
@@ -1733,7 +1729,7 @@ msgid ""
 "All In One WP Security & Firewall has detected that there was a change in "
 "your host's files."
 msgstr ""
-"All In One WP Security & Firewall обнаружило изменения в файлах вашего сайта."
+"All In One WP Security & Firewall обнаружил изменения в файлах Вашего сайта."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:215
 msgid "View Scan Details & Clear This Message"
@@ -1744,8 +1740,8 @@ msgid ""
 "If given an opportunity hackers can insert their code or files into your "
 "system which they can then use to carry out malicious acts on your site."
 msgstr ""
-"Если для этого открывается возможность, хакеры могут вставить свой код или "
-"файлы в вашу систему, что потом позволит им выполнять вредные действия на "
+"Если для этого есть возможность, хакеры могут вставить свой код или "
+"файлы в Вашу систему, что потом позволит им выполнять вредные действия на "
 "вашем сайте."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:225
@@ -1753,8 +1749,8 @@ msgid ""
 "Being informed of any changes in your files can be a good way to quickly "
 "prevent a hacker from causing damage to your website."
 msgstr ""
-"Знание о любых изменениях ваших файлов может помочь вам быстро предотвратить "
-"вредние действия или разрушение на вашем сайте."
+"Знание о любых изменениях Ваших файлов может помочь Вам быстро предотвратить "
+"вредние действия или разрушение на Вашем сайте."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:226
 msgid ""
@@ -1763,8 +1759,8 @@ msgid ""
 "you are made aware when a change occurs and which file was affected."
 msgstr ""
 "В принципе, файлы системы WordPress и разных плагинов, такие как \".php\" or "
-"\".js\"  не должны меняться слишком часто. И когда они меняются важно об "
-"этом узнать, и какой файл был изменен.!"
+"\".js\"  не должны меняться слишком часто. А если они изменились, то важно об "
+"этом знать, и увидеть, какой файл был изменен."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:227
 msgid ""
@@ -1772,9 +1768,9 @@ msgid ""
 "which occurs on your system, including the addition and deletion of files by "
 "performing a regular automated or manual scan of your system's files."
 msgstr ""
-"Функция \"Детектирование изменений файлов\" вам сообщит о любых изменений "
-"файлов в вашей системе, включая появление и удаление файлов, путем "
-"регулярного автоматического или ручного сканирования файлов вашей системы."
+"Функция \"Детектирование изменений файлов\" сообщит Вам о любых изменениях "
+"файлов в Вашей системе, включая появление и удаление файлов, путем "
+"регулярного автоматического или ручного сканирования файлов Вашей системы."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:228
 msgid ""
@@ -1784,10 +1780,10 @@ msgid ""
 "change often and hence you may choose to exclude such files from the file "
 "change detection scan)"
 msgstr ""
-"Эта функция позволяет исключить определенные файлы или папки от "
-"сканирования, в случае, если вы знаете, что они часто меняются при обычной "
-"работе системы. (Например лог-файлы или определенные файлы кеширования могут "
-"меняться часто, и вы можете выбрать не включить их в сканирование измененных "
+"Эта функция позволяет исключить определенные файлы или папки из "
+"сканирования, в случае, если Вы знаете, что они часто меняются при обычной "
+"работе системы. (Например, лог-файлы или определенные файлы кеширования могут "
+"меняться часто, и Вы можете выбрать не включать их в сканирование изменений "
 "файлов)"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:233
@@ -1814,7 +1810,7 @@ msgid ""
 "scan."
 msgstr ""
 "Нажмите кнопку внизу, чтобы посмотреть сохраненный отчет об измененных "
-"файлов последнего сканирования."
+"файлах во время последнего сканирования."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:255
 msgid "View Last File Change"
@@ -1826,7 +1822,7 @@ msgstr "Настройки детектирования изменений фа�
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:271
 msgid "Enable Automated File Change Detection Scan"
-msgstr "Активировать автоматическое сканирование измененных файлов"
+msgstr "Активировать автоматическое сканирование изменений файлов"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:274
 msgid ""
@@ -1853,8 +1849,8 @@ msgid ""
 "Enter each file type or extension on a new line which you wish to exclude "
 "from the file change detection scan."
 msgstr ""
-"Введите каждый тип файла или окончание названия на отдельной строчке, "
-"которые вы хотите не включать в сканирование измененных файлов."
+"Введите каждый тип файла или его расширение на отдельной строчке, "
+"чтобы исключить их из сканирования изменений файлов."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:296
 msgid ""
@@ -1862,16 +1858,16 @@ msgid ""
 "security threat if they were changed. These can include things such as image "
 "files."
 msgstr ""
-"Вы можете исключить типы таких файлов, которые обычно не создавали бы "
-"никакую опасность, если они были изменены. Это может, например, касаться "
-"файлы с изображениями."
+"Вы можете исключить типы таких файлов, которые обычно не создают "
+"никакой опасности, если они были изменены. Это может, например, касаться "
+"файлов с изображениями."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:297
 msgid ""
 "Example: If you want the scanner to ignore files of type jpg, png, and bmp, "
 "then you would enter the following:"
 msgstr ""
-"Например, если вы хотите, чтобы сканирование не обращало внимания на файлы "
+"Например, если Вы хотите, чтобы сканирование не обращало внимания на файлы "
 "типов jpg, png или bmp, тогда следует ввести следующее:"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:298
@@ -1895,8 +1891,8 @@ msgid ""
 "Enter each file or directory on a new line which you wish to exclude from "
 "the file change detection scan."
 msgstr ""
-"Введите каждый файл или каждую папку на новой строчке, которые хотите "
-"исключить от сканирования измененных файлов."
+"Введите каждый файл или каждую папку на новой строчке, чтобы "
+"исключить их из сканирования изменений файлов."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:313
 msgid ""
@@ -1904,8 +1900,8 @@ msgid ""
 "normally pose any security threat if they were changed. These can include "
 "things such as log files."
 msgstr ""
-"Вы можете исключить определенные файлы/папки от сканирования, если они не "
-"создавали бы опасность, если бы они были изменены. Это может, например, "
+"Вы можете исключить определенные файлы/папки из сканирования, если они не "
+"создают опасность, когда будут изменены. Это может, например, "
 "касаться лог-файлов."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:314
@@ -1913,8 +1909,8 @@ msgid ""
 "Example: If you want the scanner to ignore certain files in different "
 "directories or whole directories, then you would enter the following:"
 msgstr ""
-"Например, если вы хотите, чтобы сканнер игнорировал определенные файлы в "
-"разных папках, или целые папки, тогда вы могли бы ввест следующее:"
+"Например, если Вы хотите, чтобы сканнер игнорировал определенные файлы в "
+"разных папках, или целые папки, тогда Вы могли бы ввести следующее:"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:315
 msgid "cache/config/master.php"
@@ -1926,18 +1922,18 @@ msgstr "somedirectory"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:322
 msgid "Send Email When Change Detected"
-msgstr "Отправить мейл когда найдено изменение"
+msgstr "Отправить Email когда найдено изменение"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:325
 msgid ""
 "Check this if you want the system to email you if a file change was detected"
 msgstr ""
 "Включите этот чекбокс, если хотите получать уведомление об измененных файлах "
-"на свой email"
+"на свой Email"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:343
 msgid "What is Malware?"
-msgstr "Что такое вредные программы (malware)?"
+msgstr "Что такое вредоносные программы (malware)?"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:344
 msgid ""
@@ -1945,10 +1941,10 @@ msgid ""
 "like trojan horses, adware, worms, spyware and any other undesirable code "
 "which a hacker will try to inject into your website."
 msgstr ""
-"Слово malware означает malicious software - опасные программы. Это может, "
+"Слово malware означает malicious software - опасные программы. Это могут, "
 "например, быть троянские кони, программы для подачи рекламы, программы-"
-"черви, шпионские программы или друие нежелательные программы, которые хакер "
-"старается разместить на вашем сайте."
+"черви, шпионские программы или другие нежелательные программы, которые хакер "
+"старается разместить на Вашем сайте."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:345
 msgid ""
@@ -1956,9 +1952,9 @@ msgid ""
 "not notice anything out of the ordinary based on appearances, but it can "
 "have a dramatic effect on your site's search ranking."
 msgstr ""
-"Часто, когда вредные программы размещены на вашем сайте, вы не заметите "
-"ничего странного, но этот факт может серьезно сказаться на позицию вашего "
-"сайта у поисковиков."
+"Часто, когда вредоносные программы размещены на Вашем сайте, Вы не заметите "
+"ничего странного, но этот факт может серьезно сказаться на позиции Вашего "
+"сайта в поисковых системах."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:346
 msgid ""
@@ -1967,14 +1963,14 @@ msgid ""
 "site, and consequently they can blacklist your website which will in turn "
 "affect your search rankings."
 msgstr ""
-"Дело в том, что роботы индексации от поисковиков, например от Google, "
-"способны распознать вредные программы когда индексируют страницы вашего "
-"сайта и в результате могут записать ваш сайт в черный список, что, в свою "
-"очередь, сильно испортит вашу позицию у поисковиков."
+"Дело в том, что роботы индексации поисковых систем, например Google, "
+"способны распознать вредоносные программы когда индексируют страницы Вашего "
+"сайта и в результате могут записать Ваш сайт в черный список, что, в свою "
+"очередь, сильно испортит Вашу позицию в поисковых системах."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:350
 msgid "Scanning For Malware"
-msgstr "Сканирование вредных программ"
+msgstr "Сканирование вредоносных программ"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:351
 msgid ""
@@ -1982,9 +1978,9 @@ msgid ""
 "such things using a standalone plugin will not work reliably. This is "
 "something best done via an external scan of your site regularly."
 msgstr ""
-"Т.к. вредные программы - постоянно меняющая и сложная тема, их невозможно "
+"Так как вредоносные программы - постоянно меняющийся и сложный предмет, их невозможно "
 "искать надежно с помощью самостоятельного плагина. Эта задача лучше решается "
-"регулярным внешним сканированием вашего сайта."
+"регулярным внешним сканированием Вашего сайта."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:352
 msgid ""
@@ -1993,24 +1989,24 @@ msgid ""
 "notify you if it finds anything."
 msgstr ""
 "Поэтому мы создали легкую в употреблении услугу, которая находится вне "
-"вашего сервера, и ищет на вашем сайте вредные программы каждый день и "
-"сообщит вам, если что-нибудь найдется."
+"вашего сервера, и ищет на Вашем сайте вредоносные программы каждый день и "
+"сообщит Вам, если что-нибудь найдется."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:353
 msgid "When you sign up for this service you will get the following:"
-msgstr "Когда заключите договор об этой услуге, вы получите следующее:"
+msgstr "Когда заключите договор об этой услуге, Вы получите следующее:"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:355
 msgid "Automatic Daily Scan of 1 Website"
-msgstr "Автоматическое сканирование одного сайта раз в день"
+msgstr "Автоматическое ежедневное сканирование одного сайта"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:356
 msgid "Automatic Malware & Blacklist Monitoring"
-msgstr "Автоматическое отслеживание вредных программ и черных списков"
+msgstr "Автоматическое отслеживание вредоносных программ и черных списков"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:357
 msgid "Automatic Email Alerting"
-msgstr "Автоматическое оповещение по мейлу"
+msgstr "Автоматическое оповещение по Email"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:358
 msgid "Site uptime monitoring"
@@ -2022,7 +2018,7 @@ msgstr "Отслеживание, как быстро отвечает сайт 
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:360
 msgid "Malware Cleanup"
-msgstr "Чистка от вредных программ"
+msgstr "Чистка от вредоносных программ"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:361
 msgid "Blacklist Removal"
@@ -2030,12 +2026,12 @@ msgstr "Удаление из черного списка"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:362
 msgid "No Contract (Cancel Anytime)"
-msgstr "Нет контракта (вы можете отменить в любое время)"
+msgstr "Нет контракта (вы можете отменить услугу в любое время)"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:364
 #, php-format
 msgid "To learn more please %s."
-msgstr "Узнайте больше, пожалуйста %s."
+msgstr "Чтобы узнать больше, пожалуйста %s."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:374
 msgid ""
@@ -2044,14 +2040,12 @@ msgid ""
 "Wordpress core tables."
 msgstr ""
 "Данная функция проводит простое сканирование базы данных в поисках типичных "
-"странных текстов, программ javascrip или html в некоторых основных траблицах "
+"странных текстов, программ javascript или html в некоторых основных траблицах "
 "WordPress."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:391
 msgid "Nonce check failed for manual db scan operation!"
-msgstr ""
-"Проверка одноразового параметра безопасности (nonce) для ручного запуска "
-"сканирования базы данных не удалась!"
+msgstr "Не удалось выполнить ручное сканирование базы данных!"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:402
 msgid ""
@@ -2060,7 +2054,7 @@ msgid ""
 "the Wordpress core tables."
 msgstr ""
 "Данная функция проводит простое сканирование базы данных в поисках типичных "
-"странных текстов, программ javascrip или html в некоторых основных траблицах "
+"странных текстов, программ javascript или html в некоторых основных траблицах "
 "WordPress."
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:403
@@ -2069,8 +2063,8 @@ msgid ""
 "results but it is up to you to verify whether a result is a genuine example "
 "of a hacking attack or a false positive."
 msgstr ""
-"Если при сканировании что-нибуд будет найдено, оно перечислит все  "
-"\"потенциально\" вредных результатов. Но вам следует проверять, "
+"Если при сканировании что-нибудь будет найдено, появится список  "
+"\"потенциально\" вредоносных результатов. Но Вам следует проверить, "
 "действительно ли данные строки являются результатом атаки хакеров, или это "
 "на самом деле безопасное вещи, которые случайно совпали с правилами поиска."
 
@@ -2080,7 +2074,7 @@ msgid ""
 "this feature will also scan for some of the known \"pharma\" hack entries "
 "and if it finds any it will automatically delete them."
 msgstr ""
-"Кроме поиска типичных строк, которые часто встречаются во вредних "
+"Кроме поиска типичных строк, которые часто встречаются во вредоносных "
 "программах, данная функция так же ищет некоторые известные записи взлома "
 "\"pharma\" и удаляет их, если их найдет."
 
@@ -2098,7 +2092,7 @@ msgstr "Сканирование базы данных"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:416
 msgid "To perform a database scan click on the button below."
-msgstr "Для немедленного сканирования базы данных, нажмите эту кнопку"
+msgstr "Для начала сканирования базы данных нажмите эту кнопку"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:419
 msgid "Perform DB Scan"
@@ -2106,11 +2100,27 @@ msgstr "Выполнить сканирование базы данных"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:462
 msgid "Latest File Change Scan Results"
-msgstr "Результаты последнего сканирования по измененным файлам"
+msgstr "Результаты последнего сканирования по изменениям файлов"
 
-#: all-in-one-wp-security/admin/wp-security-filescan-menu.php:471
+#: all-in-one-wp-security/admin/wp-security-filescan-menu.php:461
 msgid "The following files were added to your host."
-msgstr "Следующие новые файлы были добавлены на вашем сервере."
+msgstr "Следующие новые файлы были добавлены на Вашем сервере"
+
+#: all-in-one-wp-security/admin/wp-security-file-scan.php:715
+msgid "The following files were added to your host"
+msgstr "Следующие новые файлы были добавлены на Вашем сервере"
+
+#: all-in-one-wp-security/admin/wp-security-file-scan.php:724
+msgid "The following files were removed from your host"
+msgstr "Следующие новые файлы были удалены на Вашем сервере"
+
+#: all-in-one-wp-security/admin/wp-security-file-scan.php:734
+msgid "The following files were changed on your host"
+msgstr "Следующие новые файлы были изменены на Вашем сервере"
+
+#: all-in-one-wp-security/admin/wp-security-file-scan.php:68
+msgid "A summary of the scan results is shown below:"
+msgstr "Суммарный результат сканирования"
 
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:474
 #: all-in-one-wp-security/admin/wp-security-filescan-menu.php:495
@@ -2132,13 +2142,13 @@ msgstr "Размер"
 msgid "File Modified"
 msgstr "Файл изменен"
 
-#: all-in-one-wp-security/admin/wp-security-filescan-menu.php:492
+#: all-in-one-wp-security/admin/wp-security-filescan-menu.php:482
 msgid "The following files were removed from your host."
-msgstr "Следующие файлы исчезли с вашего сервера."
+msgstr "Следующие файлы были удалены на Вашем сервере"
 
-#: all-in-one-wp-security/admin/wp-security-filescan-menu.php:516
+#: all-in-one-wp-security/admin/wp-security-filescan-menu.php:506
 msgid "The following files were changed on your host."
-msgstr "Следующие файлы были изменены на вашем сервере."
+msgstr "Следующие файлы были изменены на Вашем сервере"
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:26
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:67
@@ -2151,7 +2161,7 @@ msgstr "Редактирование файлов PHP"
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:28
 msgid "WP File Access"
-msgstr "WP доступ к файлам"
+msgstr "доступ к файлам WP"
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:29
 msgid "Host System Logs"
@@ -2177,7 +2187,7 @@ msgid ""
 "and read/write privileges of the files and folders which make up your WP "
 "installation."
 msgstr ""
-"Установки разрешений на файлы и папки WordPress, позволяющие управлять "
+"Установки разрешений на чтение/запись для файлов и папок WordPress, позволяющие управлять "
 "доступом к этим файлам."
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:110
@@ -2290,7 +2300,7 @@ msgstr ""
 msgid ""
 "You have successfully saved the Prevent Access to Default WP Files "
 "configuration."
-msgstr "Запрет к информационным файлам WordPress установлен."
+msgstr "Запрет доступа к информационным файлам WordPress установлен."
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:280
 msgid "WordPress Files"
@@ -2303,7 +2313,7 @@ msgid ""
 "which are delivered with all WP installations."
 msgstr ""
 "Данная опция запретит доступ к таким файлам как %s, %s и %s, которые "
-"создаются во время установки WordPress и не несут в себе системной нагрузки,"
+"создаются во время установки WordPress и не несут в себе системной нагрузки, "
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:284
 msgid ""
@@ -2344,7 +2354,7 @@ msgid ""
 "Sometimes your hosting platform will produce error or warning logs in a file "
 "called \"error_log\"."
 msgstr ""
-"Периодически Ваш сервер может публиковать отчеты об ошибках в специальных "
+"Ваш сервер периодически может публиковать отчеты об ошибках в специальных "
 "файлах, которые называются «error_log»."
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:335
@@ -2353,7 +2363,7 @@ msgid ""
 "server can create multiple instances of this file in numerous directory "
 "locations of your WordPress installation."
 msgstr ""
-"В зависимости от характера и причин ошибки,  Ваш сервер может создать "
+"В зависимости от характера и причин ошибки, Ваш сервер может создать "
 "несколько файлов журналов в различных каталогах Вашей установки WordPress."
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:336
@@ -2362,7 +2372,7 @@ msgid ""
 "informed of any underlying problems on your system which you might need to "
 "address."
 msgstr ""
-"Просматривая время от времени эти журналы Вы будете в курсе любых основных "
+"Просматривая время от времени эти журналы, Вы будете в курсе любых основных "
 "проблем на Вашем сайте и сможете воспользоваться этой информацией для их "
 "решения."
 
@@ -2376,7 +2386,7 @@ msgstr "Введите название лог-файла системы"
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:349
 msgid "Enter your system log file name. (Defaults to error_log)"
-msgstr "Введите название лог-файла вашей системы. (по умольчанию: error_log)"
+msgstr "Введите название лог-файла Вашей системы. (по умольчанию: error_log)"
 
 #: all-in-one-wp-security/admin/wp-security-filesystem-menu.php:352
 msgid "View Latest System Logs"
@@ -2405,19 +2415,19 @@ msgstr "Последние записи об ошибках в журнале: %
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:27
 msgid "Basic Firewall Rules"
-msgstr "Базовые правила файерволла"
+msgstr "Базовые правила файрволла"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:28
 msgid "Additional Firewall Rules"
-msgstr "Дополнительные праивла файерволла"
+msgstr "Дополнительные правила файрволла"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:29
 msgid "5G Blacklist Firewall Rules"
-msgstr "Настройки 5G Файерволл"
+msgstr "Настройки 5G Файрволл"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:30
 msgid "Internet Bots"
-msgstr "Интернет-роботы"
+msgstr "Интернет-боты"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:31
 msgid "Prevent Hotlinks"
@@ -2438,7 +2448,7 @@ msgstr "Настройки успешно сохранены"
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:124
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:503
 msgid "Firewall Settings"
-msgstr "Настройки файерволл (брандмауэра)"
+msgstr "Настройки файрволла (брандмауэра)"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:131
 #, php-format
@@ -2448,7 +2458,7 @@ msgid ""
 msgstr ""
 "Активация этих опций не должна иметь никакого влияния на общую "
 "функциональность Вашего сайта, но при желании Вы можете создать %s Вашего ."
-"htaccess-файла, перед тем, как включите эти настройки."
+"htaccess файла, перед тем, как включите эти настройки."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:132
 msgid ""
@@ -2488,8 +2498,8 @@ msgid ""
 "Please beware that if you are using the WordPress iOS App, then you will "
 "need to deactivate this feature in order for the app to work properly."
 msgstr ""
-"Обратите внимание: если используете Апп iOS для WordPress, тогда для верной "
-"работы данного аппа необходимо выключить данной функции."
+"Обратите внимание: если Вы используете WordPress iOS App, тогда для верной "
+"работы этого приложения необходимо выключить данную функцию."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:153
 msgid "Basic Firewall Settings"
@@ -2502,7 +2512,7 @@ msgstr "Активировать основные функции брандма�
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:164
 msgid "Check this if you want to apply basic firewall protection to your site."
 msgstr ""
-"Отметьте этот чекбокс, чтобы активировать основные функции файерволл на "
+"Отметьте этот чекбокс, чтобы активировать основные функции файрволла на "
 "Вашем сайте."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:168
@@ -2637,7 +2647,7 @@ msgid ""
 "This feature allows you to activate more advanced firewall settings to your "
 "site."
 msgstr ""
-"В этой вкладке Вы можете активировать дополнительные настройки файерволл для "
+"В этой вкладке Вы можете активировать дополнительные настройки файрволлf для "
 "защиты Вашего сайта."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:304
@@ -2668,7 +2678,7 @@ msgid ""
 "By default, an Apache server will allow the listing of the contents of a "
 "directory if it doesn't contain an index.php file."
 msgstr ""
-"По умолчанию сервер Apache позволяет видет содержимое директорий, если в них "
+"По умолчанию сервер Apache позволяет увидеть содержимое директорий, если в них "
 "нет файла index.php или index.html."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:332
@@ -2692,11 +2702,11 @@ msgstr "HTTP-трассировка"
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:352
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:92
 msgid "Disable Trace and Track"
-msgstr "Отключить http-трассировку"
+msgstr "Отключить HTTP-трассировку"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:355
 msgid "Check this if you want to disable trace and track."
-msgstr "Отметьте этот чекбокс, чтобы защититься от http-трассировки."
+msgstr "Отметьте этот чекбокс, чтобы защититься от HTTP-трассировки."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:360
 msgid ""
@@ -2718,7 +2728,7 @@ msgstr ""
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:364
 msgid ""
 "Disabling trace and track on your site will help prevent HTTP Trace attacks."
-msgstr "Данная опция предназначена как раз для защиты от этого типа атак."
+msgstr "Данная опция предназначена для защиты от этого типа атак."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:373
 msgid "Proxy Comment Posting"
@@ -2842,7 +2852,7 @@ msgid ""
 "The 5G Blacklist is a simple, flexible blacklist that helps reduce the "
 "number of malicious URL requests that hit your website."
 msgstr ""
-"5G-брандмауэр (файерволл) - это простая и гибкая защита, помогающая "
+"5G-брандмауэр (файрволл) - это простая и гибкая защита, помогающая "
 "уменьшить количество вредоносных запросов, добавляемых в URL Вашего сайта."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:509
@@ -2870,11 +2880,11 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:516
 msgid "5G Blacklist/Firewall Settings"
-msgstr "Настройки 5G Файерволл"
+msgstr "Настройки 5G Файрволла"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:528
 msgid "Enable 5G Firewall Protection"
-msgstr "Включить 5G Файерволл"
+msgstr "Включить 5G Файрволл"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:531
 msgid ""
@@ -2925,11 +2935,11 @@ msgstr "Сохранить настройки 5G Файерволл"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:577
 msgid "The Internet bot settings were successfully saved"
-msgstr "Настройки по интернет-роботам успешно сохранены"
+msgstr "Настройки по интернет-ботам успешно сохранены"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:581
 msgid "Internet Bot Settings"
-msgstr "Настройки по интернет-роботам"
+msgstr "Настройки по интернет-ботам"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:588
 #, php-format
@@ -2942,9 +2952,9 @@ msgid ""
 "automatic tasks. For example when Google indexes your pages it uses "
 "automatic bots to achieve this task."
 msgstr ""
-"Робот - компьютерная программа, которая выполняется в интеренете и выполняет "
-"автоматические задачи. Google, например, использует автоматические роботы "
-"для того, чтобы каталогизировать страницы вашего сайта."
+"Бот - компьютерная программа, которая выполняется в интернете и выполняет "
+"автоматические задачи. Google, например, использует автоматические боты "
+"для того, чтобы каталогизировать страницы Вашего сайта."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:591
 msgid ""
@@ -2952,9 +2962,9 @@ msgid ""
 "often you will find some which try to impersonate legitimate bots such as "
 "\"Googlebot\" but in reality they have nohing to do with Google at all."
 msgstr ""
-"Много роботов безвредны и полезны, но не все роботы хорошие. Иногда можете "
-"заметить, что кто-то пытается делать вид, что он - робот от Google "
-"(Googlebot) когда он на самом деле никак с Google не связан."
+"Много ботов безвредны и полезны, но не все боты хорошие. Иногда Вы можете "
+"заметить, что кто-то пытается сделать вид, что он - бот от Google "
+"(Googlebot), хотя на самом деле никак с Google не связан."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:592
 msgid ""
@@ -2962,8 +2972,8 @@ msgid ""
 "website owners want to have more control over which bots they allow into "
 "their site."
 msgstr ""
-"Хотя большинство роботов в интернете относительно безвредны, иногда "
-"администраторы сайтов могут хотеть контролировать, каким роботам они "
+"Хотя большинство ботов в интернете относительно безвредны, иногда "
+"администраторы сайтов могут захотеть контролировать, каким ботам они "
 "позволяют ходить по их сайту."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:593
@@ -2971,8 +2981,8 @@ msgid ""
 "This feature allows you to block bots which are impersonating as a Googlebot "
 "but actually aren't. (In other words they are fake Google bots)"
 msgstr ""
-"Данная функция позволяет блокировать роботы, которые делают вид, что они - "
-"Googlebot, когда это неправда. (Другими словами, они - ложные роботы Google)"
+"Данная функция позволяет блокировать боты, которые делают вид, что они - "
+"Googlebot, когда это неправда. (Другими словами, они - ложные боты Google)"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:594
 msgid ""
@@ -2980,16 +2990,16 @@ msgid ""
 "feature will indentify any fake Google bots and block them from reading your "
 "site's pages."
 msgstr ""
-"У роботов Google - уникальные признаки, которые сложно подделать. Данная "
-"функция распознает любые ложные роботы Google и блокирует им доступ к "
-"страницам вашего сайта."
+"У ботов Google - уникальные признаки, которые сложно подделать. Данная "
+"функция распознает любые ложные боты Google и блокирует им доступ к "
+"страницам Вашего сайта."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:600
 msgid ""
 "<strong>Attention</strong>: Sometimes non-malicious Internet organizations "
 "might have bots which impersonate as a \"Googlebot\"."
 msgstr ""
-"<strong>Внимание</strong>: Бывает, что и роботы не злонамеренных организаций "
+"<strong>Внимание</strong>: Бывает, что боты и не злонамеренных организаций "
 "представляют себя как \"Googlebot\"."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:601
@@ -2999,9 +3009,9 @@ msgid ""
 "are NOT officially from Google (irrespective whether they are malicious or "
 "not)."
 msgstr ""
-"Просто имейте в виду, что если вы активируете данную функцию, тогда вы "
-"будете блокировать любые роботы, которые представляют себя строчкой "
-"\"Googlebot\" в поле User Agent information но при этом не от Google "
+"Просто имейте в виду, что если Вы активируете данную функцию, тогда Вы "
+"будете блокировать любые боты, которые представляют себя строчкой "
+"\"Googlebot\" в поле User Agent information, но при этом не от Google "
 "(независимо от того, злонамеренные они, или нет)."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:602
@@ -3009,7 +3019,7 @@ msgid ""
 "All other bots from other organizations such as \"Yahoo\", \"Bing\" etc will "
 "not be affected by this feature."
 msgstr ""
-"Это не влияет на работу любых роботов от других организаций, например \"Yahoo"
+"Это не влияет на работу любых ботов от других организаций, например \"Yahoo"
 "\", \"Bing\" и т.д."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:608
@@ -3021,7 +3031,7 @@ msgstr "Блокировать ложные Googlebots"
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:621
 msgid "Check this if you want to block all fake Googlebots."
 msgstr ""
-"Отметьте этот чекбокс, если хотите блокировать все ложные Google-роботы."
+"Отметьте этот чекбокс, если хотите блокировать все ложные Google-боты."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:625
 msgid ""
@@ -3037,7 +3047,7 @@ msgid ""
 "Google and if so it will allow the bot to proceed."
 msgstr ""
 "В таком случае, функция выполняет несколько тестов для того, чтобы убедится, "
-"действительно ли это - робот от Google. Если да, тогда позволяет роботу "
+"действительно ли это - бот от Google. Если да, тогда позволяет боту "
 "работать дальше."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:627
@@ -3045,12 +3055,12 @@ msgid ""
 "If the bot fails the checks then the plugin will mark it as being a fake "
 "Googlebot and it will block it"
 msgstr ""
-"Если робот не выдержит этот тест, функция пометит его, как ложный Googlebot "
+"Если бот не выдержит этот тест, функция пометит его, как ложный Googlebot "
 "и блокирует его"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:634
 msgid "Save Internet Bot Settings"
-msgstr "Сохранить настройки по интернет-роботам"
+msgstr "Сохранить настройки по интернет-ботам"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:671
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:693
@@ -3065,8 +3075,8 @@ msgid ""
 "your server."
 msgstr ""
 "Хотлинк - когда кто-то на своем сайте показывает изображение, которое, на "
-"самом деле, находится на вашем сайте, используя прямую ссылку на исходник "
-"изображения на ваш сайт."
+"самом деле, находится на Вашем сайте, используя прямую ссылку на исходник "
+"изображения на Вашем сервере."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:675
 msgid ""
@@ -3075,9 +3085,9 @@ msgid ""
 "for you because your server has to present this image for the people viewing "
 "it on someone elses's site."
 msgstr ""
-"Т.к. изображение, которое показывается на чужом сайте, предоставляется с "
-"вашего сайта, это может привести к потерям скорости и ресурсов для вас, т.к. "
-"вашему серверу приходится передавать эту картину людям, которые его видят на "
+"Так как изображение, которое показывается на чужом сайте, предоставляется с "
+"Вашего сайта, для Вас это может привести к потерям скорости и ресурсов, потому что "
+"Вашему серверу приходится передавать эту картину людям, которые видят ее на "
 "чужом сайте."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:676
@@ -3085,8 +3095,8 @@ msgid ""
 "This feature will prevent people from directly hotlinking images from your "
 "site's pages by writing some directives in your .htaccess file."
 msgstr ""
-"Данная функция предотвращает прямые хотлинки на изображения ваших страниц, "
-"добавив несколько инструкций в ваш файл .htaccess."
+"Данная функция предотвращает прямые хотлинки на изображения с Ваших страниц, "
+"добавив несколько инструкций в Ваш файл .htaccess."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:681
 msgid "Prevent Hotlinking"
@@ -3095,14 +3105,12 @@ msgstr "Предотвратить хотлинки"
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:696
 msgid "Check this if you want to prevent hotlinking to images on your site."
 msgstr ""
-"Отметьте этот чекбокс, чтобы предотвратить использование изображнеий этого "
+"Отметьте этот чекбокс, чтобы предотвратить использование изображений этого "
 "сайта на страницах чужих сайтов (хотлинкс)."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:716
 msgid "Nonce check failed for delete all 404 event logs operation!"
-msgstr ""
-"Не удалось удалить все записи ошибки 404, т.к. одноразовый параметр nonce не "
-"был верным!"
+msgstr "Не удалось удалить все записи о ошибках 404!"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:727
 msgid "404 Detection Feature - Delete all 404 event logs operation failed!"
@@ -3139,7 +3147,7 @@ msgid ""
 "page on your website."
 msgstr ""
 "Ошибка 404 или \"Страница не найдена\" возникает, когда кто-то запрашивает "
-"страницу, которой нет на вашем сайте. "
+"страницу, которой нет на Вашем сайте. "
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:799
 msgid ""
@@ -3155,8 +3163,8 @@ msgid ""
 "a relatively short space of time and from the same IP address which are all "
 "attempting to access a variety of non-existent page URLs."
 msgstr ""
-"Однако, в иногда можно заметить большое количество ошибок 404 подряд за "
-"относительно короткое время с одного и того же адреса IP, все запрашивая URL "
+"Однако, иногда можно заметить большое количество ошибок 404 подряд за "
+"относительно короткое время с одного и того же адреса IP, с запросами URL "
 "страниц, которых нет."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:801
@@ -3175,14 +3183,14 @@ msgid ""
 msgstr ""
 "Данная функция позволяет отслеживать все случаи 404, которые происходят на "
 "вашем сайте, а также дает возможность заблокировать соответствующие адреса "
-"IP на время, которое выбираете."
+"IP на время, которое Вы выбираете."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:803
 msgid ""
 "If you want to temporarily block an IP address, simply click the \"Temp Block"
 "\" link for the applicable IP entry in the \"404 Event Logs\" table below."
 msgstr ""
-"Если хотите временно заблокировать адрес IP, просто пометьте ссылку "
+"Если хотите временно заблокировать IP-адрес, просто пометьте ссылку "
 "\"Временно заблокировать\" в соответствующей строчке в таблице \"Логи ошибок "
 "404\" внизу."
 
@@ -3207,10 +3215,10 @@ msgid ""
 "to be blocked in the table. All IP addresses you select to be blocked from "
 "the \"404 Event Logs\" table section will be unable to access your site."
 msgstr ""
-"Когда ставите галочку тут, все случаи ошибок 404 на вашем сайте будете "
+"Если поставите галочку тут, все случаи ошибок 404 на Вашем сайте будете "
 "включены в лог внизу. Вы можете следить за этими случаями и выбрать "
-"некоторые адреса IP в таблице, которые вы желаете заблокировать из таблицы "
-"\"Логи ошибок 404\". Тогда эти адреса не будут иметь доступ к вашему сайту."
+"некоторые адреса IP в таблице, которые Вы желаете заблокировать из таблицы "
+"\"Логи ошибок 404\". Тогда эти адреса не будут иметь доступ к Вашему сайту."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:836
 msgid "Enable 404 Event Logging"
@@ -3218,7 +3226,7 @@ msgstr "Активировать отслеживание ошибок 404"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:839
 msgid "Check this if you want to enable the logging of 404 events"
-msgstr "Отметьте эту опцию, если Вы хотите включить отслежиание ошибок 404"
+msgstr "Отметьте эту опцию, если Вы хотите включить отслеживание ошибок 404"
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:844
 msgid "Time Length of 404 Lockout (min)"
@@ -3243,7 +3251,7 @@ msgid ""
 "To temporarily lock an IP address, hover over the ID column and click the "
 "\"Temp Block\" link for the applicable IP entry."
 msgstr ""
-"Для того, чтобы заблокировать адрес IP, наведите маркер на графу ID и "
+"Для того, чтобы заблокировать адрес IP, наведите мышь на графу ID и "
 "нажмите на ссылку \"Заблокировать временно\" для соответствующего адреса IP."
 
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:860
@@ -3268,7 +3276,7 @@ msgstr "Удалить все записи ошибок 404"
 #: all-in-one-wp-security/admin/wp-security-firewall-menu.php:899
 msgid "Click this button if you wish to purge all 404 event logs from the DB."
 msgstr ""
-"Нажмите эту кнопку, если Вы хотите удалить все записи об ошибках 202 из БД."
+"Нажмите эту кнопку, если Вы хотите удалить все записи об ошибках 404 из БД."
 
 #: all-in-one-wp-security/admin/wp-security-list-404.php:105
 #: all-in-one-wp-security/admin/wp-security-list-acct-activity.php:79
@@ -3341,7 +3349,7 @@ msgstr "Ваш аккаунт и пользовательское имя:"
 #: all-in-one-wp-security/admin/wp-security-list-registered-users.php:128
 #: all-in-one-wp-security/admin/wp-security-list-registered-users.php:154
 msgid " is now active"
-msgstr " сейчас активен"
+msgstr " сейчас активны"
 
 #: all-in-one-wp-security/admin/wp-security-list-registered-users.php:137
 msgid "The selected accounts were approved successfully!"
@@ -3417,7 +3425,9 @@ msgstr "Введите сообщение:"
 msgid ""
 "Enter a message you wish to display to visitors when your site is in "
 "maintenance mode."
-msgstr "Введите сообщение"
+msgstr ""
+"Введите сообщение, которое увидят посетители, пока Ваш сайт будет "
+"в режиме обслуживания"
 
 #: all-in-one-wp-security/admin/wp-security-maintenance-menu.php:131
 msgid "Save Site Lockout Settings"
@@ -3429,7 +3439,7 @@ msgstr "Защита от копирования"
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:24
 msgid "Frames"
-msgstr "Фрейму"
+msgstr "Фреймы"
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:88
 msgid "Copy Protection feature settings saved!"
@@ -3444,8 +3454,8 @@ msgid ""
 "This feature allows you to disable the ability to select and copy text from "
 "your front end."
 msgstr ""
-"Данная опция позволит вам закрыть возможность пометить и копировать текст в "
-"публичной части вашего сайта."
+"Данная опция позволит Вам закрыть возможность пометить и копировать текст в "
+"публичной части Вашего сайта."
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:104
 msgid "Enable Copy Protection"
@@ -3457,7 +3467,7 @@ msgid ""
 "and \"Copy\" option on the front end of your site."
 msgstr ""
 "Включите эту опцию, если Вы хотите блокировать функции \"Правая кнопка\", "
-"\"Пометка текста\" и \"Копировать\", на публичных страницах вашего сайта."
+"\"Пометка текста\" и \"Копировать\", на публичных страницах Вашего сайта."
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:114
 msgid "Save Copy Protection Settings"
@@ -3469,34 +3479,34 @@ msgstr "Настройки по защите от показа сайта вну
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:143
 msgid "Prevent Your Site From Being Displayed In a Frame"
-msgstr "Предотвратите показ вашего сайта внутри фрейма"
+msgstr "Предотвратите показ Вашего сайта внутри фрейма"
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:149
 msgid ""
 "This feature allows you to prevent other sites from displaying any of your "
 "content via a frame or iframe."
 msgstr ""
-"Эта функция позволяет предотвратить показ вашего сайта и его содержания "
-"внутри frame или iframe другого сайта."
+"Эта функция позволяет предотвратить показ Вашего сайта и его содержания "
+"внутри frame или iframe на другом сайте."
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:150
 msgid ""
 "When enabled, this feature will set the \"X-Frame-Options\" paramater to "
 "\"sameorigin\" in the HTTP header."
 msgstr ""
-"Когда активна, данная функция определяет параметр \"X-Frame-Options\" как "
-"\"sameorigin\" в загаловках HTTP."
+"Данная функция, когда активна, определяет параметр \"X-Frame-Options\" как "
+"\"sameorigin\" в заголовках HTTP."
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:155
 msgid "Enable iFrame Protection"
-msgstr "Активировать фрейм-защиту"
+msgstr "Активировать iframe-защиту"
 
 #: all-in-one-wp-security/admin/wp-security-misc-options-menu.php:158
 msgid ""
 "Check this if you want to stop other sites from displaying your content in a "
 "frame or iframe."
 msgstr ""
-"Отметьте, если Вы хотите, чтобы другие сайты не могли показывать ваш контент "
+"Отметьте, если Вы хотите, чтобы другие сайты не могли показывать Ваш контент "
 "внутри frame или iframe."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:26
@@ -3521,7 +3531,7 @@ msgid ""
 "Could not write to the .htaccess file. Please restore your .htaccess file "
 "manually using the restore functionality in the \".htaccess File\"."
 msgstr ""
-"Файл .htaccess недоступен для записи. Пожалуйста, исправьте ваш файл ."
+"Файл .htaccess недоступен для записи. Пожалуйста, исправьте Ваш файл ."
 "htaccess вручную, с помощью функции восстановления файла \".htaccess\"."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:106
@@ -3529,13 +3539,13 @@ msgid ""
 "Could not write to the wp-config.php. Please restore your wp-config.php file "
 "manually using the restore functionality in the \"wp-config.php File\"."
 msgstr ""
-"Не удалось записать изменения в файл wp-config.php. Пожалуйста обновите ваш "
+"Не удалось записать изменения в файл wp-config.php. Пожалуйста, обновите Ваш "
 "файл wp-config.php вручную, с помощью функции восстановления файла \"wp-"
 "config.php File\"."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:124
 msgid "All firewall rules have been disabled successfully!"
-msgstr "Все функции файерволла успешно деактивированы!"
+msgstr "Все функции файрволла успешно деактивированы!"
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:138
 msgid "WP Security Plugin"
@@ -3545,7 +3555,9 @@ msgstr "Плагин WP Security"
 msgid ""
 "Thank you for using our WordPress security plugin. There are a lot of "
 "security features in this plugin."
-msgstr "Спасибо, что используете плагин WordPress security!"
+msgstr ""
+"Спасибо, что используете плагин WordPress security! "
+"Мы предоставляем множество функций защиты."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:141
 msgid ""
@@ -3587,7 +3599,7 @@ msgid ""
 "security feature you enabled in this plugin, then use the following option "
 "to turn off all the security features of this plugin."
 msgstr ""
-"Если Вы думаете, что какие-либо плагины перестали работать из-за "
+"Если Вы видите, что какие-либо плагины перестали работать из-за "
 "активирования функций безопасности, воспользуйтесь этой кнопкой, чтобы все "
 "эти функции отключить."
 
@@ -3606,9 +3618,9 @@ msgid ""
 "this plugin and it will also delete these rules from your .htacess file. Use "
 "it if you think one of the firewall rules is causing an issue on your site."
 msgstr ""
-"Данная функция отключает все правила файрвола, которые сейчас активны в "
+"Данная функция отключает все правила файрволла, которые сейчас активны в "
 "данном плагине, а также удалит эти правила из файла .htaccess. Используйте "
-"ее если вам кажется, что какое-то из правил файрвола создает проблемы на "
+"её, если Вы считаете, что какое-то из правил файрволла создает проблемы на "
 "вашем сайте."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:208
@@ -3618,7 +3630,7 @@ msgid ""
 "your computer."
 msgstr ""
 "Резервная копия файла .htaccess успшно создана! Скопируйте копию на свой "
-"компьютер из папки \"/wp-content/aiowps_backups\" с помощью программы FTP."
+"компьютер из папки \"/wp-content/aiowps_backups\" с помощью FTP-клиента."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:214
 msgid ""
@@ -3675,7 +3687,7 @@ msgid ""
 "file should you need to re-use the the backed up file in the future."
 msgstr ""
 "В этом разделе Вы можете создать резервную копию файла .htaccess и, при "
-"необходимости,"
+"необходимости, "
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:272
 msgid ""
@@ -3699,7 +3711,7 @@ msgstr "Создать и скачать резервную копию файл�
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:295
 msgid "Restore from a backed up .htaccess file"
-msgstr "Восстановление файл .htaccess из резервной копии"
+msgstr "Восстановление файла .htaccess из резервной копии"
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:301
 msgid ".htaccess file to restore from"
@@ -3783,7 +3795,7 @@ msgid ""
 "Click the button below to backup and download the contents of the currently "
 "active wp-config.php file."
 msgstr ""
-"Для создания резервной копии файла wp-config.php и его загрузки на ваш "
+"Для создания резервной копии файла wp-config.php и его загрузки на Ваш "
 "компьютер нажмите эту кнопку:"
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:402
@@ -3875,7 +3887,7 @@ msgid ""
 "the media menu for security purposes."
 msgstr ""
 "Не удалось удалить файл импорта. Пожалуйста, удалите этот файл вручную, с "
-"помощью меню\"Медияфайлы\", в целях безопасности."
+"помощью меню\"Медиафайлы\", в целях безопасности."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:557
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:601
@@ -3883,7 +3895,7 @@ msgid ""
 "The file you uploaded was also deleted for security purposes because it "
 "contains security settings details."
 msgstr ""
-"Файл, который вы загрузили, тоже был удален, в целях безопасности, т.к. в "
+"Файл, который Вы загрузили, тоже был удален, в целях безопасности, т.к. в "
 "нем содержатся подробности настроек безопасности."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:572
@@ -3897,7 +3909,7 @@ msgid ""
 "details."
 msgstr ""
 "Не удалось удалить файл импорта. Пожалуйста, удалите этот файл вручную, с "
-"помощью меню\"Медияфайлы\", в целях безопасности."
+"помощью меню\"Медиафайлы\", в целях безопасности."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:575
 msgid ""
@@ -3905,7 +3917,7 @@ msgid ""
 "also deleted for security purposes because it contains security settings "
 "details."
 msgstr ""
-"Ваши настройки AIOWPS удачно импортированы. Кроме того, файл, который вы "
+"Ваши настройки AIOWPS удачно импортированы. Кроме того, файл, который Вы "
 "загрузили, тоже был удален, в целях безопасности, т.к. в нем содержатся "
 "подробности настроек безопасности."
 
@@ -3918,8 +3930,8 @@ msgid ""
 "The contents of your settings file appear invalid. Please check the contents "
 "of the file you are trying to import settings from."
 msgstr ""
-"Похоже, что формат вашего файла с настройками неверный. Пожалуйста, "
-"проверьте содержание файла, который вы пытаетесь импортировать."
+"Похоже, что формат Вашего файла с настройками неверный. Пожалуйста, "
+"проверьте содержание файла, который Вы пытаетесь импортировать."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:610
 msgid "Export or Import Your AIOWPS Settings"
@@ -3930,7 +3942,7 @@ msgid ""
 "This section allows you to export or import your All In One WP Security & "
 "Firewall settings."
 msgstr ""
-"Данная секция позволяет вам экспортировать или импортироать все настройки "
+"Данная секция позволяет Вам экспортировать или импортироать все настройки "
 "All In One WP Security & Firewall."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:614
@@ -3938,7 +3950,7 @@ msgid ""
 "This can be handy if you wanted to save time by applying the settings from "
 "one site to another site."
 msgstr ""
-"Это может быть удобно, если вы хотите использовать одинаковые настройки на "
+"Это может быть удобно, если Вы хотите использовать одинаковые настройки на "
 "нескольких сайтах."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:615
@@ -3947,17 +3959,17 @@ msgid ""
 "are trying to import. Importing settings blindly can cause you to be locked "
 "out of your site."
 msgstr ""
-"Внимание: До того, как импортировать, вы должны понимать, какие настройки вы "
-"пытаетесь импортировать. При слепом импорте настроек, есть риск, что вы "
-"потеряете доступ к вашему собственному сайту."
+"Внимание: До того, как импортировать, Вы должны понимать, какие настройки Вы "
+"пытаетесь импортировать. При слепом импорте настроек, есть риск, что Вы "
+"потеряете доступ к Вашему собственному сайту."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:616
 msgid ""
 "For Example: If a settings item relies on the domain URL then it may not "
 "work correctly when imported into a site with a different domain."
 msgstr ""
-"Например, если какая-нибудь настройка зависит от домэна URL, тогда она может "
-"не работать правильно, когда она внедряется в другой домэн."
+"Например, если какая-нибудь настройка зависит от URL домена, тогда она может "
+"не работать правильно при использовании сайта с другим доменом."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:622
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:631
@@ -3969,7 +3981,7 @@ msgid ""
 "To export your All In One WP Security & Firewall settings click the button "
 "below."
 msgstr ""
-"Для того, чтобы экспортировать все ваши настройки плагина All In One WP "
+"Для того, чтобы экспортировать все Ваши настройки плагина All In One WP "
 "Security & Firewall, нажмите на кнопку ниже."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:635
@@ -3983,7 +3995,7 @@ msgid ""
 "from a file. Alternatively, copy/paste the contents of your import file into "
 "the textarea below."
 msgstr ""
-"Используйте данную секцию для того,чтобы импортировать все ваши настройки "
+"Используйте данную секцию для того,чтобы импортировать все Ваши настройки "
 "плагина All In One WP Security & Firewall из файла. Также можете скопировать "
 "содержание экспортированного файла и вставить его в текстовое поле ниже."
 
@@ -3997,7 +4009,7 @@ msgid ""
 "your site."
 msgstr ""
 "После того, как Вы выберите файл, нажмите кнопку внизу для импорта настроек "
-"на вас сайт."
+"на Вас сайт."
 
 #: all-in-one-wp-security/admin/wp-security-settings-menu.php:654
 msgid "Copy/Paste Import Data"
@@ -4009,7 +4021,7 @@ msgstr "Спам в комментариях"
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:25
 msgid "Comment SPAM IP Monitoring"
-msgstr "Отслеживание IP-адресов по спаму в комментах"
+msgstr "Отслеживание IP-адресов по спаму в комментариях"
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:26
 msgid "BuddyPress"
@@ -4028,7 +4040,7 @@ msgid ""
 "This feature will add a simple math captcha field in the WordPress comments "
 "form."
 msgstr ""
-"Данная функция добавить поле с простым математичекой задачей в форму "
+"Данная функция добавить поле с простой математической задачей в форму "
 "комментариев WordPress."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:123
@@ -4051,7 +4063,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:142
 msgid "Block Spambot Comments"
-msgstr "Блокировка комментариев от спам-роботов"
+msgstr "Блокировка комментариев от спам-ботов"
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:146
 msgid ""
@@ -4059,7 +4071,7 @@ msgid ""
 "automated bots and not necessarily by humans. "
 msgstr ""
 "Значительная часть спама в комментариах WordPress приходит от автоматических "
-"роботов, а не вручную."
+"ботов, а не вручную."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:147
 msgid ""
@@ -4067,37 +4079,37 @@ msgid ""
 "load on your server resulting from SPAM comments by blocking all comment "
 "requests which do not originate from your domain."
 msgstr ""
-"Данная функция сильно снижает бесполезного и лишнего трафика, а так же "
+"Данная функция сильно снижает количество бесполезного и лишнего трафика, а так же "
 "лишнюю нагрузку на сервер из-за спам-комментариев, заблокировав все запросы "
-"на запись комментария, которые не пришли с вашего же домена."
+"на запись комментария, которые не пришли с Вашего же домена."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:148
 msgid ""
 "In other words, if the comment was not submitted by a human who physically "
 "submitted the comment on your site, the request will be blocked."
 msgstr ""
-"Другими словами, если коммент не был отправлен живым человеком, который сам "
-"отправил комментарий на вашем сайте, тогда запрос блокируется."
+"Другими словами, если комментарий не был отправлен живым человеком, который лично сам "
+"отправил комментарий на Вашем сайте, тогда запрос блокируется."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:164
 msgid "Block Spambots From Posting Comments"
-msgstr "Блокировать спам-роботов от комментирования"
+msgstr "Блокировать спам-ботов от комментирования"
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:167
 msgid ""
 "Check this if you want to apply a firewall rule which will block comments "
 "originating from spambots."
 msgstr ""
-"Отметьте этот чекбокс, чтобы активировать правила файерволла для блокировки "
-"комментарии от спам-роботов."
+"Отметьте этот чекбокс, чтобы активировать правила файрволла для блокировки "
+"комментарии от спам-ботов."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:171
 msgid ""
 "This feature will implement a firewall rule to block all comment attempts "
 "which do not originate from your domain."
 msgstr ""
-"Данная функция создаст правило файрвола, который блокирует попытки записать "
-"комментарий, если запрос не пришел со страницы вашего домена."
+"Данная функция создаст правило файрволла, который блокирует попытки записать "
+"комментарий, если запрос не пришел со страницы Вашего домена."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:172
 msgid ""
@@ -4105,9 +4117,9 @@ msgid ""
 "fills out the comment form and clicks the submit button. For such events, "
 "the HTTP_REFERRER is always set to your own domain."
 msgstr ""
-"Честный коммент всегда отправлен человеком, который заполняет форму "
+"Честный комментарий всегда отправлен человеком, который заполняет форму "
 "комментирования и кликает на кнопку \"Отправить\". В таком случае, поле "
-"HTTP_REFERRER всегда имеет значение, которые ссылается на ваш домен."
+"HTTP_REFERRER всегда имеет значение, которые ссылается на Ваш домен."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:173
 msgid ""
@@ -4115,7 +4127,7 @@ msgid ""
 "php file, which usually means that the HTTP_REFERRER value is not your "
 "domain and often times empty."
 msgstr ""
-"Комментарий от спам-робота отправляется сразу запросом на файл comments.php, "
+"Комментарий от спам-бота отправляется сразу запросом на файл comments.php, "
 "это обычно означает, что поле HTTP_REFERRER может быть пустым, или ссылается "
 "на чужой домен."
 
@@ -4125,9 +4137,9 @@ msgid ""
 "your domain thus greatly reducing your overall blog SPAM and PHP requests "
 "done by the server to process these comments."
 msgstr ""
-"Данная функция проверяет и блокирует комменты, которые не пришли с вашего "
-"домена. Это сильно снижает общее количество СПАМА и запросов со страниц PHP "
-"внутри вашего сервера, для обработки спам-запросов."
+"Данная функция проверяет и блокирует комментарии, которые не пришли с Вашего "
+"домена. Это сильно снижает общее количество СПАМА и PHP-запросов на "
+"Вашем сервера при обработке спам-запросов."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:201
 msgid "Nonce check failed for list SPAM comment IPs!"
@@ -4162,8 +4174,8 @@ msgid ""
 "This information can be handy for identifying the most persistent IP "
 "addresses or ranges used by spammers."
 msgstr ""
-"Эта информация может быть полезна для определения наиболее стабильно "
-"использующихся спаммерами IP-адресов или их диапазонов. "
+"Эта информация может быть полезна для определения IP-адресов или их диапазонов, "
+"наиболее стабильно использующихся спаммерами."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:237
 msgid ""
@@ -4232,7 +4244,7 @@ msgstr "IP-адреса спаммеров"
 msgid ""
 "The plugin has detected that you are using a Multi-Site WordPress "
 "installation."
-msgstr "Плагин заметил, что у вас WordPress инсталлирован как мульти-сайт."
+msgstr "Плагин заметил, что Ваш WordPress инсталлирован как мульти-сайт."
 
 #: all-in-one-wp-security/admin/wp-security-spam-menu.php:275
 msgid "Only the \"superadmin\" can block IP addresses from the main site."
@@ -4268,7 +4280,7 @@ msgid ""
 "Adding a captcha field in the registration form is a simple way of greatly "
 "reducing SPAM signups from bots without using .htaccess rules."
 msgstr ""
-"Добавление поле CAPTCHA в регистрационной форме - простой способ сильно "
+"Добавление поле CAPTCHA в регистрационной форме - простой способ значительно "
 "снизить количество спам-регистраций от роботов, без изменения правил в "
 "файле .htaccess."
 
@@ -4333,15 +4345,15 @@ msgid ""
 "of the first and smartest things you should do on your site."
 msgstr ""
 "По соображениям безопасности, одна из первых и наиболее разумных вещей, "
-"которую Вы должны сделать на своем сайте, это изменить имя пользователя по "
-"умолчанию, т.е. «admin»."
+"которую Вы должны сделать на своем сайте, это изменить имя пользователя «admin», "
+"установленное по умолчанию."
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:91
 msgid ""
 "This feature will allow you to change your default \"admin\" user name to a "
 "more secure name of your choosing."
 msgstr ""
-"Этот раздел как раз и предназначен для изменения имени пользователя «admin» "
+"Этот раздел предназначен для изменения имени пользователя «admin» "
 "на более безопасное, по Вашему выбору."
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:98
@@ -4384,8 +4396,8 @@ msgid ""
 "logged out after changing your username and will be required to log back in."
 msgstr ""
 "ВНИМАНИЕ: если сейчас Вы авторизованы как «admin», Ваша авторизационная "
-"сессия будет автоматически прекращена, после того, как Вы измените имя "
-"пользователя - надо будет снова авторизоваться, используя уже новый логин."
+"сессия будет автоматически прекращена. После того, как Вы измените имя "
+"пользователя, необходимо снова авторизоваться, используя уже новый логин."
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:138
 msgid "No action required! "
@@ -4436,7 +4448,7 @@ msgid ""
 "your <strong>nickname</strong> and <strong>Display name</strong> to be "
 "different from your <strong>Username</strong>."
 msgstr ""
-"Поэтому, чтобы ужесточить безопасность сайта, мы рекомендуем вам изменить "
+"Поэтому, чтобы усилить безопасность сайта, мы рекомендуем Вам изменить "
 "свой <strong>никнейм</strong> и <strong>отображаемое имя</strong>, чтобы они "
 "отличались от Вашего <strong>имени пользователя</strong>."
 
@@ -4530,11 +4542,11 @@ msgstr "одну секунду"
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:222
 msgid "to crack your password!"
-msgstr "сломать ваш пароль!"
+msgstr "сломать Ваш пароль!"
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:227
 msgid "Password Strength"
-msgstr "Надежности пароля"
+msgstr "Надежность пароля"
 
 #: all-in-one-wp-security/admin/wp-security-user-accounts-menu.php:243
 msgid "Nonce check failed on admin username change operation!"
@@ -4666,8 +4678,8 @@ msgid ""
 "Check this if you want to allow users to generate an automated unlock "
 "request link which will unlock their account"
 msgstr ""
-"Поставьте галочку, если хотите позволить пользователям сами создавать "
-"автоматические запросы на разблокирование своего аккаунта"
+"Поставьте галочку, если хотите позволить пользователям самим создавать "
+"автоматическую ссылку на разблокирование своего аккаунта"
 
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:197
 msgid "Max Login Attempts"
@@ -4725,7 +4737,7 @@ msgid ""
 "which do not exist on your system"
 msgstr ""
 "Поставьте галочку, если хотите сразу заблокировать попытки логина с "
-"пользовательским именем, которого нет в вашей системе"
+"пользовательским именем, которого нет в Вашей системе"
 
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:230
 msgid "Notify By Email"
@@ -4774,7 +4786,7 @@ msgid ""
 "because it will show you the IP range, username and ID (if applicable) and "
 "the time/date of the failed login attempt."
 msgstr ""
-"Приведенная ниже информация может пригодиться, если вам нужно провести "
+"Приведенная ниже информация может пригодиться, если Вам нужно провести "
 "исследование попыток авторизации - здесь отображается диапазон IP, имя "
 "пользователя и ID (если возможно) и время / дата неуспешной попытки входа на "
 "сайт."
@@ -4805,7 +4817,7 @@ msgid ""
 "to protect against unauthorized access to your site from your computer."
 msgstr ""
 "Установка ограничения срока действия сессии администрирования - это простой "
-"способ защиты от несанкционированного доступа к вашему сайту с вашего "
+"способ защиты от несанкционированного доступа к Вашему сайту с Вашего "
 "компьютера."
 
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:377
@@ -4864,8 +4876,7 @@ msgstr ""
 
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:464
 msgid "Nonce check failed for users logged in list!"
-msgstr ""
-"Одноразовый параметр (nonce) для списка пользователей в системе не совпал!"
+msgstr "Ошибка при отображении списка залогиненых пользователей!"
 
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:477
 msgid "Refresh Logged In User Data"
@@ -4879,7 +4890,7 @@ msgstr "Обновить данные"
 msgid "This tab displays all users who are currently logged into your site."
 msgstr ""
 "Здесь отображаются все пользователи, которые в настоящий момент авторизованы "
-"на вашем сайте."
+"на Вашем сайте."
 
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:488
 msgid ""
@@ -4887,8 +4898,8 @@ msgid ""
 "be, you can block them by inspecting the IP addresses from the data below "
 "and adding them to your blacklist."
 msgstr ""
-"Если вы подозреваете, что в системе есть активный пользователь, которого не "
-"должно быть, тогда вы можете их заблокировать, проверив их адрес IP в списке "
+"Если Вы подозреваете, что в системе есть активный пользователь, которого не "
+"должно быть, тогда Вы можете их заблокировать, проверив их адрес IP в списке "
 "внизу, и добавив их в черный список."
 
 #: all-in-one-wp-security/admin/wp-security-user-login-menu.php:493
@@ -4926,8 +4937,8 @@ msgid ""
 "registration form, then you can minimize SPAM or bogus registrations by "
 "manually approving each registration."
 msgstr ""
-"Если ваш сайт позволяет людям самим создавать свои аккаунты через "
-"регистрационную форму WordPress, тогда можете свести СПАМ и левых "
+"Если Ваш сайт позволяет людям самим создавать свои аккаунты через "
+"регистрационную форму WordPress, тогда можете свести количество СПАМ и левых "
 "регистраций до минимума, подтверждая каждую регистрацию вручную."
 
 #: all-in-one-wp-security/admin/wp-security-user-registration-menu.php:121
@@ -4936,9 +4947,9 @@ msgid ""
 "\" until the administrator activates it. Therefore undesirable registrants "
 "will be unable to log in without your express approval."
 msgstr ""
-"Данная функция автоматически метит аккаунты новых регистраций как \"pending/"
-"в ожидании\" пока администратор их не активирует. Тогда нежеланные "
-"регистрировавшиеся не могут логиниться, до того, как вы это подтверждаете."
+"Данная функция автоматически помечает аккаунты новых регистраций как \"pending/"
+"в ожидании\" пока администратор их не активирует. В этом случае нежеланные "
+"зарегистрировавшиеся не могут логиниться не имея Вашего подтверждения."
 
 #: all-in-one-wp-security/admin/wp-security-user-registration-menu.php:122
 msgid ""
@@ -4946,9 +4957,9 @@ msgid ""
 "table below and you can also perform bulk activation/deactivation/deletion "
 "tasks on each account."
 msgstr ""
-"Все недавно зарегистрированные аккаунты можете увидеть в удобной таблице "
-"внизу, а там также можно одновременно выполнить активацию, деактивацию или "
-"удалиение нескольких аккаунтов."
+"Все недавно зарегистрированные аккаунты Вы можете увидеть в удобной таблице "
+"внизу, и также там можно одновременно выполнить активацию, деактивацию или "
+"удаление нескольких аккаунтов."
 
 #: all-in-one-wp-security/admin/wp-security-user-registration-menu.php:138
 msgid "Enable manual approval of new registrations"
@@ -4960,7 +4971,7 @@ msgid ""
 "accounts so that you can approve them manually."
 msgstr ""
 "Поставьте галочку тут, если хотите, чтобы все новые аккаунты автоматически "
-"создавались неактивными и вы их могли подтверждать вручную."
+"создавались неактивными и Вы их могли подтверждать вручную."
 
 #: all-in-one-wp-security/admin/wp-security-user-registration-menu.php:150
 msgid "Approve Registered Users"
@@ -4971,7 +4982,7 @@ msgid ""
 "This feature allows you to add a captcha form on the WordPress registration "
 "page."
 msgstr ""
-"Данная функция позволяет вам добавить поле CAPTCHA на странице регистрации "
+"Данная функция позволяет Вам добавить поле CAPTCHA на странице регистрации "
 "WordPress."
 
 #: all-in-one-wp-security/admin/wp-security-user-registration-menu.php:196
@@ -5010,7 +5021,7 @@ msgid ""
 "for a Multi Site, please go to \"Registration Captcha\" settings on the main "
 "site."
 msgstr ""
-"Поэтому, если вы хотите добавить форму CAPTCHA на странице регистрации для "
+"Поэтому, если Вы хотите добавить форму CAPTCHA на странице регистрации для "
 "WordPress Multi Site, пойдите на  \"CAPTCHA при регистрации\" на основном "
 "сайте. "
 
@@ -5024,7 +5035,7 @@ msgid ""
 "registration page (if you allow user registration)."
 msgstr ""
 "Поставьте галочку, если хотите добавить форму CAPTCHA на странице WordPress "
-"для регистрации (если вы позволяете людям регистрироваться на вашем сайте)."
+"для регистрации (если Вы позволяете людям регистрироваться на Вашем сайте)."
 
 #: all-in-one-wp-security/admin/wp-security-whois-menu.php:22
 msgid "WhoIS Lookup"
@@ -5039,7 +5050,7 @@ msgid ""
 "This feature allows you to look up more detailed information about an IP "
 "address or domain name by querying the WHOIS API."
 msgstr ""
-"Эта функция позволяет получить детальную информацию об IP-адресе или домену."
+"Эта функция позволяет получить детальную информацию об IP-адресе или домене."
 
 #: all-in-one-wp-security/admin/wp-security-whois-menu.php:83
 msgid "Perform a WHOIS Lookup for an IP or Domain Name"
@@ -5126,7 +5137,7 @@ msgstr "создано по"
 #: all-in-one-wp-security/classes/wp-security-captcha.php:17
 #: all-in-one-wp-security/classes/wp-security-general-init-tasks.php:254
 msgid "Please enter an answer in digits:"
-msgstr "Пожалуйста, введите ответ цыфрами:"
+msgstr "Пожалуйста, введите ответ цифрами:"
 
 #: all-in-one-wp-security/classes/wp-security-captcha.php:96
 msgid "one"
@@ -5166,7 +5177,7 @@ msgstr "девять"
 
 #: all-in-one-wp-security/classes/wp-security-captcha.php:105
 msgid "ten"
-msgstr "10"
+msgstr "десять"
 
 #: all-in-one-wp-security/classes/wp-security-captcha.php:106
 msgid "eleven"
@@ -5182,7 +5193,7 @@ msgstr "тринадцать"
 
 #: all-in-one-wp-security/classes/wp-security-captcha.php:109
 msgid "fourteen"
-msgstr "четрынадцать"
+msgstr "четырнадцать"
 
 #: all-in-one-wp-security/classes/wp-security-captcha.php:110
 msgid "fifteen"
@@ -5214,7 +5225,7 @@ msgstr "All In One WP Security - Обнаружены изменения в фа
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:67
 msgid "A file change was detected on your system for site URL"
-msgstr "Изменение файла замечено на вашей системе по URL сайта"
+msgstr "Изменение файла замечено на Вашей системе по URL сайта"
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:67
 msgid ". Scan was generated on"
@@ -5228,7 +5239,7 @@ msgstr "Зайдите на свой сайт, чтобы увидеть под�
 msgid ""
 "Starting DB scan.....please wait while the plugin scans your database......."
 msgstr ""
-"Начинается сканирование базы данных......ждите, пока плагин сканирует вашу "
+"Начинается сканирование базы данных......ждите, пока плагин сканирует Вашу "
 "БД......."
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:273
@@ -5246,7 +5257,7 @@ msgid ""
 "Deletion of known pharma hack entry for option_name %s failed. Please delete "
 "this entry manually!"
 msgstr ""
-"Не удалось удалить параметр вируса pharma hack для настройки %s. Пожалуйста, "
+"Не удалось удалить использование вируса pharma hack для настройки %s. Пожалуйста, "
 "удалите эту строчку вручную!"
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:347
@@ -5335,20 +5346,20 @@ msgstr "Подозрительных строчек не найдено в та�
 msgid ""
 "The plugin has detected that there are some potentially suspicious entries "
 "in your database."
-msgstr "Плагин обнаружил подозрительные строчки в вашей базе данных."
+msgstr "Плагин обнаружил подозрительные строчки в Вашей базе данных."
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:639
 msgid ""
 "Please verify the results listed below to confirm whether the entries "
 "detected are genuinely suspicious or if they are false positives."
 msgstr ""
-"Пожалуйста, проверьте, действительно ли следующие строчки подозрительные, "
+"Пожалуйста, проверьте, действительно ли следующие строчки подозрительные "
 "или они безопасные."
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:644
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:659
 msgid "Disclaimer:"
-msgstr "Отговорка:"
+msgstr "Оговорка:"
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:645
 msgid ""
@@ -5357,7 +5368,7 @@ msgid ""
 "compromised."
 msgstr ""
 "Несмотря на то, что сканирование базы данных выявило несколько "
-"подозрительных строчек, это не означает, что другие части вашей БД не "
+"подозрительных строк, это не означает, что другие части Вашей БД не "
 "заражены."
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:646
@@ -5368,7 +5379,7 @@ msgid ""
 "methods this scan is not meant to be a guaranteed catch-all for malware."
 msgstr ""
 "Обратите внимание, что сканирование базы данных данного плагина - достаточно "
-"поверхностное и ищет часто встречающиеся злонамеренные строчки. Т.к. хакеры "
+"поверхностное и ищет часто встречающиеся злонамеренные строки. Т.к. хакеры "
 "постоянно развивают свои методы, данное сканирование не гарантирует, что все "
 "вирусы найдены."
 
@@ -5379,13 +5390,13 @@ msgid ""
 "It is your responsibility to do the due diligence and perform a robust %s on "
 "your site if you wish to be more certain that your site is clean."
 msgstr ""
-"Ваша ответственность провести внимательную проверку выполнить подробное %s "
-"вашего сайта если хотите быть более уверены, что ваш сайт не поврежденный."
+"Ваша ответственность - провести внимательную и подробную проверку %s "
+"вашего сайта если хотите быть более уверены, что Ваш сайт не поврежден."
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:654
 msgid "DB Scan was completed successfully. No suspicious entries found."
 msgstr ""
-"Сканирование базы данных успешно выполнено. Подозрительных строчек не "
+"Сканирование базы данных успешно выполнено. Подозрительных строк не "
 "найдено."
 
 #: all-in-one-wp-security/classes/wp-security-file-scan.php:660
@@ -5395,8 +5406,8 @@ msgid ""
 "compromised."
 msgstr ""
 "Несмотря на то, что сканирование базы данных не обнаружило злонамеренных "
-"строчек это не обязательно означает, что ваш сайт полностью чист и не "
-"зараженный никаким вирусом."
+"строк это не обязательно означает, что Ваш сайт полностью чист и не "
+"заражен никаким вирусом."
 
 #: all-in-one-wp-security/classes/wp-security-general-init-tasks.php:281
 #: all-in-one-wp-security/classes/wp-security-general-init-tasks.php:358
@@ -5408,7 +5419,7 @@ msgstr "<strong>ОШИБКА</strong>: Ваш ответ неверный - по
 
 #: all-in-one-wp-security/classes/wp-security-general-init-tasks.php:293
 msgid "Enter something special:"
-msgstr "Если вы - человек, тогда лучше оставить это поле пустым:"
+msgstr "Если Вы - человек, тогда лучше оставить это поле пустым:"
 
 #: all-in-one-wp-security/classes/wp-security-general-init-tasks.php:320
 msgid "Please enter an answer in the CAPTCHA field."
@@ -5467,7 +5478,7 @@ msgid ""
 "administrator needs to activate your account before you can login."
 msgstr ""
 "<strong>АККАУНТ В ОЖИДАНИИ ПРОВЕРКИ</strong>: Ваш аккаунт еще не активен. До "
-"того, как сможете войти, администратор должен активировать аккаунт."
+"того, как Вы сможете войти, администратор должен активировать аккаунт."
 
 #: all-in-one-wp-security/classes/wp-security-user-login.php:269
 msgid "Site Lockout Notification"
@@ -5479,7 +5490,7 @@ msgid ""
 "invalid username:"
 msgstr ""
 "Вы были заблокированы из-за слишком большого количества попыток неудачного "
-"входа или с неверным пользовательским именем: "
+"входа или неверного пользовательского имени: "
 
 #: all-in-one-wp-security/classes/wp-security-user-login.php:271
 msgid "Username: "
@@ -5498,7 +5509,7 @@ msgid ""
 "Log into your site's WordPress administration panel to see the duration of "
 "the lockout or to unlock the user."
 msgstr ""
-"Авторизуйтесь в админ-панели блога, чтобы видеть продолжительность "
+"Авторизуйтесь в админ-панели сайта, чтобы видеть продолжительность "
 "блокировки или чтобы разблокировать пользователя."
 
 #: all-in-one-wp-security/classes/wp-security-user-login.php:338
@@ -5507,7 +5518,7 @@ msgstr "Уведомление о просьбе разблокировки"
 
 #: all-in-one-wp-security/classes/wp-security-user-login.php:339
 msgid "You have requested for the account with email address "
-msgstr "Вы попросили аккаунт с мейл-адресом "
+msgstr "Вы попросили разблокировать аккаунт с Email-адресом "
 
 #: all-in-one-wp-security/classes/wp-security-user-login.php:340
 msgid "Unlock link: "
@@ -5518,7 +5529,7 @@ msgid ""
 "After clicking the above link you will be able to login to the WordPress "
 "administration panel."
 msgstr ""
-"После того, как кликните на эту ссылку, вы сможете логиниться в консоль "
+"После того, как кликните на эту ссылку, Вы сможете залогиниться в консоль "
 "WordPress."
 
 #: all-in-one-wp-security/classes/wp-security-user-login.php:507
@@ -5550,7 +5561,7 @@ msgstr "Попросить разблокировку"
 #: all-in-one-wp-security/classes/wp-security-utility-ip-address.php:110
 #: all-in-one-wp-security/classes/wp-security-utility-ip-address.php:125
 msgid " is not a valid ip address format."
-msgstr "не является правильным форматом IP-адреса."
+msgstr " не является правильным форматом IP-адреса."
 
 #: all-in-one-wp-security/classes/wp-security-utility-ip-address.php:133
 msgid "You cannot ban your own IP address: "
@@ -5597,7 +5608,7 @@ msgstr "Черного список для блокировки IP-адресо�
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:79
 msgid "Enable Basic Firewall"
-msgstr "Активировать базовый файерволл"
+msgstr "Активировать базовый файрволл"
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item-manager.php:80
 msgid "Enable Pingback Vulnerability Protection"
@@ -5649,7 +5660,7 @@ msgstr "Среднее"
 
 #: all-in-one-wp-security/classes/grade-system/wp-security-feature-item.php:34
 msgid "Advanced"
-msgstr "Для продвинутого"
+msgstr "Для продвинутых"
 
 #: all-in-one-wp-security/other-includes/wp-security-rename-login-feature.php:96
 msgid "https://wordpress.org/"
@@ -5733,7 +5744,7 @@ msgid ""
 "Please enter your username or email address. You will receive a link to "
 "create a new password via email."
 msgstr ""
-"Пожалуйста, введите ваше имя пользователя или e-mail. Вы получите письмо со "
+"Пожалуйста, введите Ваше имя пользователя или e-mail. Вы получите письмо со "
 "ссылкой для создания нового пароля."
 
 #: all-in-one-wp-security/other-includes/wp-security-rename-login-feature.php:525
@@ -5814,7 +5825,7 @@ msgstr "E-mail"
 
 #: all-in-one-wp-security/other-includes/wp-security-rename-login-feature.php:706
 msgid "A password will be e-mailed to you."
-msgstr "Пароль будет отправлен вам на e-mail."
+msgstr "Пароль будет отправлен Вам на e-mail."
 
 #: all-in-one-wp-security/other-includes/wp-security-rename-login-feature.php:714
 #: all-in-one-wp-security/other-includes/wp-security-rename-login-feature.php:897
@@ -5828,7 +5839,7 @@ msgid ""
 "help, please see <a href=\"%1$s\">this documentation</a> or try the <a href="
 "\"%2$s\">support forums</a>."
 msgstr ""
-"<strong>ОШИБКА</strong>: Выод куки заблокированы из-за преждевременного "
+"<strong>ОШИБКА</strong>: Куки заблокированы из-за преждевременного "
 "отправления данных к клиенту. Для помощи, смотрите <a href=\"%1$s\">эту "
 "документацию</a> или обратитесь в <a href=\"%2$s\">форумы поддержки</a>."
 
@@ -5847,7 +5858,7 @@ msgid ""
 "<strong>ERROR</strong>: Cookies are blocked or not supported by your "
 "browser. You must <a href=\"%s\">enable cookies</a> to use WordPress."
 msgstr ""
-"<strong>ОШИБКА</strong>: Куки либо заблокированы вашим браузером, либо ваш "
+"<strong>ОШИБКА</strong>: Куки либо заблокированы Вашим браузером, либо Ваш "
 "браузер их не поддерживает. Для пользования WordPress, необходимо <a href="
 "\"%s\">активировать куки</a>."
 
@@ -5859,7 +5870,7 @@ msgstr "Вы успешно вошли в систему."
 msgid ""
 "Session expired. Please log in again. You will not move away from this page."
 msgstr ""
-"Время вашей сессии истекло. Пожалуйста, авторизуйтесь снова. Вы останетесь "
+"Время Вашей сессии истекло. Пожалуйста, авторизуйтесь снова. Вы останетесь "
 "на этой же странице."
 
 #: all-in-one-wp-security/other-includes/wp-security-rename-login-feature.php:821
@@ -5880,7 +5891,7 @@ msgstr "Вам отправлено письмо с новым паролем."
 
 #: all-in-one-wp-security/other-includes/wp-security-rename-login-feature.php:829
 msgid "Registration complete. Please check your e-mail."
-msgstr "Регистрация завершена. Проверьте вашу почту."
+msgstr "Регистрация завершена. Проверьте Вашу почту."
 
 #: all-in-one-wp-security/other-includes/wp-security-rename-login-feature.php:831
 msgid ""
@@ -5909,7 +5920,7 @@ msgstr "Учетной записи пользователя нет!"
 #: all-in-one-wp-security/other-includes/wp-security-unlock-request.php:70
 msgid "Error: No locked entry was found in the DB with your IP address range!"
 msgstr ""
-"Ошибка: Никакой запертой записи не было найдено в БД с блоком вашего IP-"
+"Ошибка: Никакой залоченной записи не было найдено в БД с диапазоном Вашего IP-"
 "адреса!"
 
 #: all-in-one-wp-security/other-includes/wp-security-unlock-request.php:98
@@ -5946,7 +5957,7 @@ msgstr "Адрес электронной почты"
 #~ msgid ""
 #~ "Your system config file is already configured to allow PHP file editing."
 #~ msgstr ""
-#~ "В Вашем файле wp-config.php уже прописана константа, разрешающая "
+#~ "Ваш файл wp-config.php уже имеет настройки, разрешающие "
 #~ "редактирование PHP-файлов."
 
 #~ msgid ""

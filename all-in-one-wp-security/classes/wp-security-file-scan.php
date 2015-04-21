@@ -168,8 +168,8 @@ class AIOWPSecurity_Scan
         $result = '';
         //For scanned data the meta_key1 column value is 'file_change_detection', meta_value1 column value is 'file_scan_data'. Then the data is stored in meta_value4 column.
         $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
-        $payload = serialize($scanned_data);
-        $scan_result = serialize($scan_result);
+        $payload = maybe_serialize($scanned_data);
+        $scan_result = maybe_serialize($scan_result);
         $date_time = current_time('mysql');
         $data = array('date_time' => $date_time, 'meta_key1' => 'file_change_detection', 'meta_value1' => 'file_scan_data', 'meta_value4' => $payload, 'meta_key5' => 'last_scan_result', 'meta_value5' => $scan_result);
         if($save_type == 'insert'){
@@ -716,7 +716,7 @@ class AIOWPSecurity_Scan
             foreach ($scan_results_unserialized['files_added'] as $key=>$value) {
                 $files_added_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';
             }
-            $files_added_output .= "\r\n======================================";
+            $files_added_output .= "\r\n======================================\r\n";
         }
         if (!empty($scan_results_unserialized['files_removed']))
         {
@@ -725,7 +725,7 @@ class AIOWPSecurity_Scan
             foreach ($scan_results_unserialized['files_removed'] as $key=>$value) {
                 $files_removed_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';
             }
-            $files_removed_output .= "\r\n======================================";
+            $files_removed_output .= "\r\n======================================\r\n";
         }
 
         if (!empty($scan_results_unserialized['files_changed']))
@@ -735,7 +735,7 @@ class AIOWPSecurity_Scan
             foreach ($scan_results_unserialized['files_changed'] as $key=>$value) {
                 $files_changed_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';            
             }
-            $files_changed_output .= "\r\n======================================";
+            $files_changed_output .= "\r\n======================================\r\n";
         }
         
         $scan_summary .= $files_added_output . $files_removed_output . $files_changed_output;
