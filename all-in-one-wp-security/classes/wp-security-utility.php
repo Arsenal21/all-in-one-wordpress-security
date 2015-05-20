@@ -424,7 +424,7 @@ class AIOWPSecurity_Utility
         if ($result > 0)
         {
         }
-        else if ($result == FALSE)
+        else if ($result === FALSE)
         {
             $aio_wp_security->debug_logger->log_debug("lock_IP: Error inserting record into ".$login_lockdown_table,4);//Log the highly unlikely event of DB error
         }

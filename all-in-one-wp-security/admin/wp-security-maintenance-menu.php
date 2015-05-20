@@ -117,7 +117,7 @@ class AIOWPSecurity_Maintenance_Menu extends AIOWPSecurity_Admin_Menu
                         $aiowps_site_lockout_msg_raw = 'This site is currently not available. Please try again later.';
                     }
                     $aiowps_site_lockout_msg = html_entity_decode($aiowps_site_lockout_msg_raw, ENT_COMPAT, "UTF-8");
-                    $aiowps_site_lockout_msg_settings = array('textarea_name' => 'aiowps_site_lockout_msg', 'media_buttons' => false);
+                    $aiowps_site_lockout_msg_settings = array('textarea_name' => 'aiowps_site_lockout_msg');
                     wp_editor($aiowps_site_lockout_msg, "aiowps_site_lockout_msg_editor_content", $aiowps_site_lockout_msg_settings);                    
                     ?>
                     <br />

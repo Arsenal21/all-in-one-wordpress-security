@@ -11,7 +11,7 @@ class AIOWPSecurity_Cronjob_Handler {
     {
         //Do stuff that needs checking every hours
         global $aio_wp_security;
-        $aio_wp_security->debug_logger->log_debug_cron("Cronjob_Handler - Hourly cron handler got fired.");
+        //$aio_wp_security->debug_logger->log_debug_cron("Cronjob_Handler - Hourly cron handler got fired.");
         
         //do_action('aiowps_force_logout_check');
         //do_action('aiowps_check_password_stuff');   

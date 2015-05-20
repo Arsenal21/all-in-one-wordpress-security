@@ -384,8 +384,7 @@ function retrieve_password() {
 	 * @param string $message Default mail message.
 	 * @param string $key     The activation key.
 	 */
-	$message = apply_filters( 'retrieve_password_message', $message, $key );
-
+	$message = apply_filters( 'aiowps_retrieve_password_message', $message, $key );
 	if ( $message && !wp_mail( $user_email, wp_specialchars_decode( $title ), $message ) )
 		wp_die( __('The e-mail could not be sent.') . "<br />\n" . __('Possible reason: your host may have disabled the mail() function.') );
 

@@ -216,7 +216,7 @@ class AIOWPSecurity_User_Login
             $this->send_ip_lock_notification_email($username, $ip_range, $ip);
             $aio_wp_security->debug_logger->log_debug("The following IP address range has been locked out for exceeding the maximum login attempts: ".$ip_range,2);//Log the lockdown event
         }
-        else if ($result == FALSE)
+        else if ($result === FALSE)
         {
             $aio_wp_security->debug_logger->log_debug("Error inserting record into ".$login_lockdown_table,4);//Log the highly unlikely event of DB error
         }
@@ -248,7 +248,7 @@ class AIOWPSecurity_User_Login
         $insert = "INSERT INTO " . $login_fails_table . " (user_id, user_login, failed_login_date, login_attempt_ip) " .
                         "VALUES ('" . $user_id . "', '" . $username . "', now(), '" . $ip_range_str . "')";
         $result = $wpdb->query($insert);
-        if ($result == FALSE)
+        if ($result === FALSE)
         {
             $aio_wp_security->debug_logger->log_debug("Error inserting record into ".$login_fails_table,4);//Log the highly unlikely event of DB error
         }
@@ -415,7 +415,7 @@ class AIOWPSecurity_User_Login
         $insert = "INSERT INTO " . $login_activity_table . " (user_id, user_login, login_date, login_ip) " .
                         "VALUES ('" . $user->ID . "', '" . $user_login . "', '" . $login_date_time . "', '" . $curr_ip_address . "')";
         $result = $wpdb->query($insert);
-        if ($result == FALSE)
+        if ($result === FALSE)
         {
             $aio_wp_security->debug_logger->log_debug("Error inserting record into ".$login_activity_table,4);//Log the highly unlikely event of DB error
         }
@@ -457,7 +457,7 @@ class AIOWPSecurity_User_Login
                         'login_ip' => $ip_addr,
                         'logout_date' => '0000-00-00 00:00:00');
         $result = $wpdb->update($login_activity_table, $data, $where);
-        if ($result == FALSE)
+        if ($result === FALSE)
         {
             $aio_wp_security->debug_logger->log_debug("Error inserting record into ".$login_activity_table,4);//Log the highly unlikely event of DB error
         }

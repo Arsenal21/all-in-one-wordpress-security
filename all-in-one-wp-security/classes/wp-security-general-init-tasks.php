@@ -7,6 +7,7 @@ class AIOWPSecurity_General_Init_Tasks
         
         if ($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page') == '1') {
             add_action( 'widgets_init', array(&$this, 'remove_standard_wp_meta_widget' ));
+            add_filter( 'aiowps_retrieve_password_message', array(&$this, 'decode_reset_pw_msg'), 10, 2); //Fix for non decoded html entities in password reset link
         }
 
         add_action('admin_notices', array(&$this,'reapply_htaccess_rules_notice'));
@@ -394,4 +395,12 @@ class AIOWPSecurity_General_Init_Tasks
             echo '<div class="updated"><p>Would you like All In One WP Security & Firewall to re-insert the security rules in your .htaccess file which were cleared when you deactivated the plugin?&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=1" class="button-primary">Yes</a>&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=2" class="button-primary">No</a></p></div>';
         }
     }
+    
+    //This is a fix for cases when the password reset URL in the email was not decoding all html entities properly
+    function decode_reset_pw_msg($message, $key)
+    {
+        global $aio_wp_security;
+        $message = html_entity_decode($message);
+        return $message;
+    }   
 }
