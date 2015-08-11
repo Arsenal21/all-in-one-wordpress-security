@@ -282,8 +282,8 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
             ?>
             <form id="tables-filter" method="get" onSubmit="return confirm('Are you sure you want to perform this bulk operation on the selected entries?');">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-            <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
-            <input type="hidden" name="tab" value="<?php echo $_REQUEST['tab']; ?>" />
+            <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
+            <input type="hidden" name="tab" value="<?php echo esc_attr($_REQUEST['tab']); ?>" />
             <!-- Now we can render the completed list table -->
             <?php $spammer_ip_list->display(); ?>
             </form>

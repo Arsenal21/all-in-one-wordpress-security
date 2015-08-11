@@ -16,6 +16,9 @@ class AIOWPSecurity_Utility_Htaccess
     public static $pingback_htaccess_rules_marker_start = '#AIOWPS_PINGBACK_HTACCESS_RULES_START';
     public static $pingback_htaccess_rules_marker_end = '#AIOWPS_PINGBACK_HTACCESS_RULES_END';
 
+    public static $debug_log_block_htaccess_rules_marker_start = '#AIOWPS_DEBUG_LOG_BLOCK_HTACCESS_RULES_START';
+    public static $debug_log_block_htaccess_rules_marker_end = '#AIOWPS_DEBUG_LOG_BLOCK_HTACCESS_RULES_END';
+    
     public static $user_agent_blacklist_marker_start = '#AIOWPS_USER_AGENT_BLACKLIST_START';
     public static $user_agent_blacklist_marker_end = '#AIOWPS_USER_AGENT_BLACKLIST_END';
     
@@ -48,7 +51,10 @@ class AIOWPSecurity_Utility_Htaccess
     
     public static $prevent_image_hotlinks_marker_start = '#AIOWPS_PREVENT_IMAGE_HOTLINKS_START';
     public static $prevent_image_hotlinks_marker_end = '#AIOWPS_PREVENT_IMAGE_HOTLINKS_END';
-    
+
+    public static $custom_rules_marker_start = '#AIOWPS_CUSTOM_RULES_START';
+    public static $custom_rules_marker_end = '#AIOWPS_CUSTOM_RULES_END';
+
     // TODO - enter more markers as new .htaccess features are added
     
     function __construct(){
@@ -193,6 +199,7 @@ class AIOWPSecurity_Utility_Htaccess
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_block_wp_file_access();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_basic_htaccess();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_pingback_htaccess();
+        $rules .= AIOWPSecurity_Utility_Htaccess::getrules_block_debug_log_access_htaccess();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_disable_index_views();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_blacklist();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_disable_trace_and_track();
@@ -204,6 +211,7 @@ class AIOWPSecurity_Utility_Htaccess
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_block_spambots();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_enable_login_whitelist();
         $rules .= AIOWPSecurity_Utility_Htaccess::prevent_image_hotlinks();
+        $rules .= AIOWPSecurity_Utility_Htaccess::getrules_custom_rules();
         //TODO: The following utility functions are ready to use when we write the menu pages for these features
 
         //Add more functions for features as needed
@@ -423,7 +431,6 @@ class AIOWPSecurity_Utility_Htaccess
         if($aio_wp_security->configs->get_value('aiowps_enable_pingback_firewall')=='1') 
         {
             $rules .= AIOWPSecurity_Utility_Htaccess::$pingback_htaccess_rules_marker_start . PHP_EOL; //Add feature marker start
-            //protect the htaccess file - this is done by default with apache config file but we are including it here for good measure
             $rules .= '<Files xmlrpc.php>' . PHP_EOL;
             $rules .= 'order deny,allow' . PHP_EOL;
             $rules .= 'deny from all' . PHP_EOL;
@@ -434,6 +441,23 @@ class AIOWPSecurity_Utility_Htaccess
 	return $rules;
     }
 
+    static function getrules_block_debug_log_access_htaccess()
+    {
+        global $aio_wp_security;
+		
+        $rules = '';
+        if($aio_wp_security->configs->get_value('aiowps_block_debug_log_file_access')=='1') 
+        {
+            $rules .= AIOWPSecurity_Utility_Htaccess::$debug_log_block_htaccess_rules_marker_start . PHP_EOL; //Add feature marker start            
+            $rules .= '<Files debug.log>' . PHP_EOL;
+            $rules .= 'order deny,allow' . PHP_EOL;
+            $rules .= 'deny from all' . PHP_EOL;
+            $rules .= '</Files>' . PHP_EOL;
+            $rules .= AIOWPSecurity_Utility_Htaccess::$debug_log_block_htaccess_rules_marker_end . PHP_EOL; //Add feature marker end
+        }
+	return $rules;
+    }
+    
     /*
      * This function will write some drectives to block all people who do not have a cookie 
      * when trying to access the WP login page
@@ -932,6 +956,26 @@ class AIOWPSecurity_Utility_Htaccess
         
 	return $rules;
     }
+
+    /**
+     * This function will write any custom htaccess rules into the server's .htaccess file
+     * @return string
+     */
+    static function getrules_custom_rules()
+    {
+        global $aio_wp_security;
+        $rules = '';
+        if($aio_wp_security->configs->get_value('aiowps_enable_custom_rules')=='1')
+        {
+            $custom_rules = $aio_wp_security->configs->get_value('aiowps_custom_rules');
+            $rules .= AIOWPSecurity_Utility_Htaccess::$custom_rules_marker_start . PHP_EOL; //Add feature marker start
+            $rules .= $custom_rules . PHP_EOL;
+            $rules .= AIOWPSecurity_Utility_Htaccess::$custom_rules_marker_end . PHP_EOL; //Add feature marker end
+        }
+
+        return $rules;
+    }
+
 
     /*
      * This function will do a quick check to see if a file's contents are actually .htaccess specific.

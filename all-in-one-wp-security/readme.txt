@@ -3,8 +3,8 @@ Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrso
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
-Tested up to: 4.2
-Stable tag: 3.9.6
+Tested up to: 4.3
+Stable tag: 3.9.7
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -80,18 +80,20 @@ via email whenever somebody gets locked out due to too many login attempts.
 This plugin allows you to easily add a lot of firewall protection to your site via htaccess file. An htaccess file is processed by your web server before any other code on your site. 
 So these firewall rules will stop malicious script(s) before it gets a chance to reach the WordPress code on your site.
 
-* Access control facility
-* Instantly activate a selection of firewall settings ranging from basic, intermediate and advanced
+* Access control facility.
+* Instantly activate a selection of firewall settings ranging from basic, intermediate and advanced.
 * Enable the famous "5G Blacklist" Firewall rules courtesy of [Perishable Press](http://perishablepress.com/)
-* Forbid proxy comment posting
-* Disable trace and track
-* Deny bad or malicious query strings
+* Forbid proxy comment posting.
+* Block access to debug log file.
+* Disable trace and track.
+* Deny bad or malicious query strings.
 * Protect against Cross Site Scripting (XSS) by activating the comprehensive advanced character string filter.
 or malicious bots who do not have a special cookie in their browser. You (the site admin) will know how to set this special cookie and be able to log into your site.
 * WordPress PingBack Vulnerability Protection feature. This firewall feature allows the user to prohibit access to the xmlrpc.php file in order to protect against certain vulnerabilities in the pingback functionality. This is also helpful to block bots from constantly accessing the xmlrpc.php file and wasting your server resource.
 * Ability to block fake Googlebots from crawling your site.
 * Ability to prevent image hotlinking. Use this to prevent others from hotlinking your images.
 * Ability to log all 404 events on your site. You can also choose to automatically block IP addresses that are hitting too many 404s.
+* Ability to add custom rules to block access to various resources of your site.
 
 = Brute force login attack prevention =
 * Instantly block Brute Force Login Attacks via our special Cookie-Based Brute Force Login Prevention feature. This firewall functionality will block all login attempts from people and bots.
@@ -177,6 +179,13 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 3.9.7 =
+- Added new feature which allows custom .htaccess rules. (See "Custom Rules" tab in Firewall menu). You can now use this to add custom rules to block access to various resources on your site.
+- Added a new feature to block access to the wp-content/debug.log file (WordPress creates this file if you enabled debug loggin option in the config file).
+- Removed the "v" from version number of the plugin.
+- Completed testing with WordPress 4.3.
+
 = 3.9.6 =
 - Added Rename Login page feature from the "Brute Force" menu to multisite sub-sites.
 - Removed invalid "length" attribute from input element in captcha code.

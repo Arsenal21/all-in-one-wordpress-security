@@ -78,6 +78,7 @@ class AIOWPSecurity_Feature_Item_Manager
         //Basic firewall
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("firewall-basic-rules", __("Enable Basic Firewall", "aiowpsecurity"), $this->feature_point_3, $this->sec_level_basic);
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("firewall-pingback-rules", __("Enable Pingback Vulnerability Protection", "aiowpsecurity"), $this->feature_point_3, $this->sec_level_basic);
+        $this->feature_items[] = new AIOWPSecurity_Feature_Item("firewall-block-debug-file-access", __("Block Accesss to Debug Log File", "aiowpsecurity"), $this->feature_point_2, $this->sec_level_inter);
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("firewall-enable-404-blocking", __("Enable IP blocking for 404 detection", "aiowpsecurity"), $this->feature_point_1, $this->sec_level_inter);
 
         //Brute Force Menu Features
@@ -251,6 +252,11 @@ class AIOWPSecurity_Feature_Item_Manager
                 $this->check_enable_pingback_firewall_feature($item);
             }
 
+            if($item->feature_id == "firewall-block-debug-file-access")
+            {
+                $this->check_debug_file_access_block_firewall_feature($item);
+            }
+            
             if($item->feature_id == "firewall-enable-404-blocking")
             {
                 $this->check_enable_404_blocking_feature($item);
@@ -611,6 +617,17 @@ class AIOWPSecurity_Feature_Item_Manager
         }
     }
 
+    function check_debug_file_access_block_firewall_feature($item)
+    {
+        global $aio_wp_security;
+        if ($aio_wp_security->configs->get_value('aiowps_block_debug_log_file_access') == '1') {
+            $item->set_feature_status($this->feature_active);
+        }
+        else
+        {
+            $item->set_feature_status($this->feature_inactive);
+        }
+    }    
     
     function check_disable_trace_track_firewall_feature($item)
     {

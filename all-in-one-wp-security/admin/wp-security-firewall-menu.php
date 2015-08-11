@@ -14,6 +14,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         'tab4' => 'render_tab4',
         'tab5' => 'render_tab5',
         'tab6' => 'render_tab6',
+        'tab7' => 'render_tab7',
         );
     
     function __construct() 
@@ -29,7 +30,8 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         'tab3' => __('5G Blacklist Firewall Rules', 'aiowpsecurity'),
         'tab4' => __('Internet Bots', 'aiowpsecurity'),
         'tab5' => __('Prevent Hotlinks', 'aiowpsecurity'),    
-        'tab6' => __('404 Detection', 'aiowpsecurity'),    
+        'tab6' => __('404 Detection', 'aiowpsecurity'),
+        'tab7' => __('Custom Rules', 'aiowpsecurity'),
         );
     }
 
@@ -100,6 +102,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             }
 
             $aio_wp_security->configs->set_value('aiowps_enable_pingback_firewall',isset($_POST["aiowps_enable_pingback_firewall"])?'1':'');
+            $aio_wp_security->configs->set_value('aiowps_block_debug_log_file_access',isset($_POST["aiowps_block_debug_log_file_access"])?'1':'');
 
             //Commit the config settings
             $aio_wp_security->configs->save_config();
@@ -208,6 +211,32 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </tr>            
         </table>
         </div></div>
+            
+        <div class="postbox">
+        <h3><label for="title"><?php _e('Block Accesss to Debug Log File', 'aiowpsecurity'); ?></label></h3>
+        <div class="inside">
+        <?php
+        //Display security info badge
+        $aiowps_feature_mgr->output_feature_details_badge("firewall-block-debug-file-access");
+        ?>
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Block Access to debug.log File', 'aiowpsecurity')?>:</th>                
+                <td>
+                <input name="aiowps_block_debug_log_file_access" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_block_debug_log_file_access')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to block access to the debug.log file that WordPress creates when debug logging is enabled.', 'aiowpsecurity'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <div class="aiowps_more_info_body">
+                    <?php 
+                    echo '<p class="description">'.__('WordPress has an option to turn on the debug logging to a file located in wp-content/debug.log. This file may contain sensitive information.', 'aiowpsecurity').'</p>';
+                    echo '<p class="description">'.__('Using this optoin will block external access to this file. You can still access this file by logging into your site via FTP', 'aiowpsecurity').'</p>';
+                    ?>
+                </div>
+                </td>
+            </tr>            
+        </table>
+        </div></div>
+            
         <input type="submit" name="aiowps_apply_basic_firewall_settings" value="<?php _e('Save Basic Firewall Settings', 'aiowpsecurity')?>" class="button-primary" />
         </form>
         <?php
@@ -906,5 +935,100 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         
         <?php
     }
-    
+
+    function render_tab7()
+    {
+        global $aio_wp_security;
+        if(isset($_POST['aiowps_save_custom_rules_settings']))//Do form submission tasks
+        {
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-save-custom-rules-settings-nonce'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for save custom rules settings!",4);
+                die("Nonce check failed for save custom rules settings!");
+            }
+
+            //Save settings
+            if (isset($_POST["aiowps_enable_custom_rules"]) && empty($_POST['aiowps_custom_rules']))
+            {
+                $this->show_msg_error('You must enter some .htaccess directives code in the text box below','aiowpsecurity');
+            }
+            else
+            {
+                if (!empty($_POST['aiowps_custom_rules']))
+                {
+                    $custom_rules = $_POST['aiowps_custom_rules'];
+
+                }
+                else
+                {
+                    $aio_wp_security->configs->set_value('aiowps_custom_rules',''); //Clear the custom rules config value
+                }
+
+                $aio_wp_security->configs->set_value('aiowps_custom_rules',$custom_rules);
+                $aio_wp_security->configs->set_value('aiowps_enable_custom_rules',isset($_POST["aiowps_enable_custom_rules"])?'1':'');
+                $aio_wp_security->configs->save_config(); //Save the configuration
+
+                $this->show_msg_settings_updated();
+
+                $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
+                if ($write_result == -1)
+                {
+                    $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','aiowpsecurity'));
+                    $aio_wp_security->debug_logger->log_debug("Custom Rules feature - The plugin was unable to write to the .htaccess file.");
+                }
+            }
+
+        }
+
+        ?>
+        <h2><?php _e('Custom .htaccess Rules Settings', 'aiowpsecurity')?></h2>
+        <form action="" method="POST">
+            <?php wp_nonce_field('aiowpsec-save-custom-rules-settings-nonce'); ?>
+            <div class="aio_blue_box">
+                <?php
+                $info_msg = '';
+
+                $info_msg .= '<p>'. __('This feature can be used to apply your own custom .htaccess rules and directives.', 'aiowpsecurity').'</p>';
+                $info_msg .= '<p>'. __('It is useful for when you want to tweak our existing firewall rules or when you want to add your own.', 'aiowpsecurity').'</p>';
+                $info_msg .= '<p>'. __('NOTE: This feature can only used if your site is hosted in an apache or similar web server.', 'aiowpsecurity').'</p>';
+                echo $info_msg;
+                ?>
+            </div>
+            <div class="aio_yellow_box">
+                <?php
+                $info_msg_2 = '<p>'. __('<strong>Warning</strong>: Only use this feature if you know what you are doing.', 'aiowpsecurity').'</p>';
+                $info_msg_2 .= '<p>'.__('Incorrect .htaccess rules or directives can break or prevent access to your site.', 'aiowpsecurity').'</p>';
+                $info_msg_2 .= '<p>'.__('It is your responsibility to ensure that you are entering the correct code!', 'aiowpsecurity').'</p>';
+                $info_msg_2 .= '<p>'.__('If you break your site you will need to access your server via FTP or something similar and then edit your .htaccess file and delete the changes you made.', 'aiowpsecurity').'</p>';
+                echo $info_msg_2;
+                ?>
+            </div>
+
+            <div class="postbox">
+                <h3><label for="title"><?php _e('Custom .htaccess Rules', 'aiowpsecurity'); ?></label></h3>
+                <div class="inside">
+                    <table class="form-table">
+                        <tr valign="top">
+                            <th scope="row"><?php _e('Enable Custom .htaccess Rules', 'aiowpsecurity')?>:</th>
+                            <td>
+                                <input name="aiowps_enable_custom_rules" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_custom_rules')=='1') echo ' checked="checked"'; ?> value="1"/>
+                                <span class="description"><?php _e('Check this if you want to enable custom rules entered in the text box below', 'aiowpsecurity'); ?></span>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <th scope="row"><?php _e('Enter Custom .htaccess Rules:', 'aiowpsecurity')?></th>
+                            <td>
+                                <textarea name="aiowps_custom_rules" rows="35" cols="50"><?php echo $aio_wp_security->configs->get_value('aiowps_custom_rules'); ?></textarea>
+                                <br />
+                                <span class="description"><?php _e('Enter your custom .htaccess rules/directives.','aiowpsecurity');?></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div></div>
+            <input type="submit" name="aiowps_save_custom_rules_settings" value="<?php _e('Save Custom Rules', 'aiowpsecurity')?>" class="button-primary" />
+        </form>
+    <?php
+    }
+
 } //end class
