@@ -907,7 +907,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             ?>
             <form id="tables-filter" method="post">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-            <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+            <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
             <?php $event_list_404->search_box('Search', 'search_404_events'); ?>
             <?php
             if(isset($_REQUEST["tab"]))

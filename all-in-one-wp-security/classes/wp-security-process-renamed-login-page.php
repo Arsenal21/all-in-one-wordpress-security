@@ -64,6 +64,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
                 }
                 parse_str($args[1], $args);
                 $url = esc_url(add_query_arg($args, AIOWPSecurity_Process_Renamed_Login_Page::new_login_url()));
+                $url = html_entity_decode($url);
             }else{
                 $url = AIOWPSecurity_Process_Renamed_Login_Page::new_login_url();
             }

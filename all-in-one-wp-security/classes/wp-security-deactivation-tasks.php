@@ -1,5 +1,7 @@
 <?php
 
+include_once(dirname(__FILE__) . '/wp-security-configure-settings.php');//Allows activating via wp-cli
+
 class AIOWPSecurity_Deactivation
 {
     static function run_deactivation_tasks()

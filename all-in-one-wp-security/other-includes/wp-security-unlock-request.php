@@ -53,7 +53,8 @@ if (isset($_POST['aiowps_wp_submit_unlock_request']))
     if($errors){
         $display_form = true;
         echo '<div id="login_error">'.$errors.'</div>';
-        echo display_unlock_form($email);
+        $sanitized_email = sanitize_email($email);
+        echo display_unlock_form($sanitized_email);
     }else{
         $locked_user = get_user_by('email', $email);
         if(!$locked_user){

@@ -7,7 +7,7 @@ class AIOWPSecurity_General_Init_Tasks
         
         if ($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page') == '1') {
             add_action( 'widgets_init', array(&$this, 'remove_standard_wp_meta_widget' ));
-            add_filter( 'aiowps_retrieve_password_message', array(&$this, 'decode_reset_pw_msg'), 10, 2); //Fix for non decoded html entities in password reset link
+            add_filter( 'retrieve_password_message', array(&$this, 'decode_reset_pw_msg'), 10, 4); //Fix for non decoded html entities in password reset link
         }
 
         add_action('admin_notices', array(&$this,'reapply_htaccess_rules_notice'));
@@ -397,10 +397,10 @@ class AIOWPSecurity_General_Init_Tasks
     }
     
     //This is a fix for cases when the password reset URL in the email was not decoding all html entities properly
-    function decode_reset_pw_msg($message, $key)
+    function decode_reset_pw_msg($message, $key, $user_login, $user_data)
     {
         global $aio_wp_security;
         $message = html_entity_decode($message);
         return $message;
-    }   
+    }
 }
