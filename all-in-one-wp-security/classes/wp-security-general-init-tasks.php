@@ -252,7 +252,7 @@ class AIOWPSecurity_General_Init_Tasks
     function insert_captcha_custom_login($cust_html_code, $args)
     {
         global $aio_wp_security;
-        $cap_form = '<p class="aiowps-captcha"><label>'.__('Please enter an answer in digits:','aiowpsecurity').'</label>';
+        $cap_form = '<p class="aiowps-captcha"><label>'.__('Please enter an answer in digits:','all-in-one-wp-security-and-firewall').'</label>';
         $cap_form .= '<div class="aiowps-captcha-equation"><strong>';
         $maths_question_output = $aio_wp_security->captcha_obj->generate_maths_question();
         $cap_form .= $maths_question_output . '</strong></div></p>';
@@ -279,7 +279,7 @@ class AIOWPSecurity_General_Init_Tasks
             if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
             {
                 //This means a wrong answer was entered
-                $result['errors']->add('generic', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'aiowpsecurity'));                
+                $result['errors']->add('generic', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
             }
         }
         return $result;
@@ -291,7 +291,7 @@ class AIOWPSecurity_General_Init_Tasks
     }
 
     function insert_honeypot_hidden_field(){
-        $honey_input = '<p style="display: none;"><label>'.__('Enter something special:','aiowpsecurity').'</label>';
+        $honey_input = '<p style="display: none;"><label>'.__('Enter something special:','all-in-one-wp-security-and-firewall').'</label>';
         $honey_input .= '<input name="aio_special_field" type="text" id="aio_special_field" class="aio_special_field" /></p>';
         echo $honey_input;
     }
@@ -318,7 +318,7 @@ class AIOWPSecurity_General_Init_Tasks
         {
             // If answer is empty
             if ($_REQUEST['aiowps-captcha-answer'] == ''){
-                wp_die( __('Please enter an answer in the CAPTCHA field.', 'aiowpsecurity' ) );
+                wp_die( __('Please enter an answer in the CAPTCHA field.', 'all-in-one-wp-security-and-firewall' ) );
             }
             $captcha_answer = trim($_REQUEST['aiowps-captcha-answer']);
             $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
@@ -328,7 +328,7 @@ class AIOWPSecurity_General_Init_Tasks
                 return($comment);
             }else{
                 //Wrong answer
-                wp_die( __('Error: You entered an incorrect CAPTCHA answer. Please go back and try again.', 'aiowpsecurity'));
+                wp_die( __('Error: You entered an incorrect CAPTCHA answer. Please go back and try again.', 'all-in-one-wp-security-and-firewall'));
             }
         }
     }
@@ -356,7 +356,7 @@ class AIOWPSecurity_General_Init_Tasks
     function add_lostpassword_captcha_error_msg()
     {
         //Insert an error just before the password reset process kicks in
-        return new WP_Error('aiowps_captcha_error',__('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'aiowpsecurity'));
+        return new WP_Error('aiowps_captcha_error',__('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
     }
     
     function check_404_event()
@@ -380,7 +380,7 @@ class AIOWPSecurity_General_Init_Tasks
             if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
             {
                 //This means a wrong answer was entered
-                $bp->signup->errors['aiowps-captcha-answer'] = __('Your CAPTCHA answer was incorrect - please try again.', 'aiowpsecurity');
+                $bp->signup->errors['aiowps-captcha-answer'] = __('Your CAPTCHA answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall');
             }
         }
 

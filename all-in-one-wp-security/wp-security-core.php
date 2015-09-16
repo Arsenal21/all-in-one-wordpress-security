@@ -3,7 +3,7 @@
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '3.9.9';
+    var $version = '4.0.0';
     var $db_version = '1.6';
     var $plugin_url;
     var $plugin_path;
@@ -178,9 +178,9 @@ class AIO_WP_Security{
     function wp_security_plugin_init()
     {
         //Set up localisation. First loaded overrides strings present in later loaded file
-        $locale = apply_filters( 'plugin_locale', get_locale(), 'aiowpsecurity' );
-        load_textdomain( 'aiowpsecurity', WP_LANG_DIR . "/aiowpsecurity-$locale.mo" );
-	load_plugin_textdomain('aiowpsecurity', false, dirname(plugin_basename(__FILE__ )) . '/languages/');
+        $locale = apply_filters( 'plugin_locale', get_locale(), 'all-in-one-wp-security-and-firewall' );
+        load_textdomain( 'all-in-one-wp-security-and-firewall', WP_LANG_DIR . "/all-in-one-wp-security-and-firewall-$locale.mo" );
+	load_plugin_textdomain('all-in-one-wp-security-and-firewall', false, dirname(plugin_basename(__FILE__ )) . '/languages/');
 
         //Actions, filters, shortcodes goes here       
         $this->user_login_obj = new AIOWPSecurity_User_Login();//Do the user login operation tasks

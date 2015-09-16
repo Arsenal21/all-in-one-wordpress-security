@@ -14,7 +14,7 @@ class AIOWPSecurity_Captcha
             //if buddy press feature active add action hook so buddy press can display our errors properly on bp registration form
             do_action( 'bp_aiowps-captcha-answer_errors' );
         }
-        $cap_form = '<p class="aiowps-captcha"><label>'.__('Please enter an answer in digits:','aiowpsecurity').'</label>';
+        $cap_form = '<p class="aiowps-captcha"><label>'.__('Please enter an answer in digits:','all-in-one-wp-security-and-firewall').'</label>';
         $cap_form .= '<div class="aiowps-captcha-equation"><strong>';
         $maths_question_output = $this->generate_maths_question();
         $cap_form .= $maths_question_output . '</strong></div></p>';
@@ -93,26 +93,26 @@ class AIOWPSecurity_Captcha
     function number_word_mapping($num)
     {
         $number_map = array(
-            1 => __('one', 'aiowpsecurity'),
-            2 => __('two', 'aiowpsecurity'),
-            3 => __('three', 'aiowpsecurity'),
-            4 => __('four', 'aiowpsecurity'),
-            5 => __('five', 'aiowpsecurity'),
-            6 => __('six', 'aiowpsecurity'),
-            7 => __('seven', 'aiowpsecurity'),
-            8 => __('eight', 'aiowpsecurity'),
-            9 => __('nine', 'aiowpsecurity'),
-            10 => __('ten', 'aiowpsecurity'),
-            11 => __('eleven', 'aiowpsecurity'),
-            12 => __('twelve', 'aiowpsecurity'),
-            13 => __('thirteen', 'aiowpsecurity'),
-            14 => __('fourteen', 'aiowpsecurity'),
-            15 => __('fifteen', 'aiowpsecurity'),
-            16 => __('sixteen', 'aiowpsecurity'),
-            17 => __('seventeen', 'aiowpsecurity'),
-            18 => __('eighteen', 'aiowpsecurity'),
-            19 => __('nineteen', 'aiowpsecurity'),
-            20 => __('twenty', 'aiowpsecurity'),
+            1 => __('one', 'all-in-one-wp-security-and-firewall'),
+            2 => __('two', 'all-in-one-wp-security-and-firewall'),
+            3 => __('three', 'all-in-one-wp-security-and-firewall'),
+            4 => __('four', 'all-in-one-wp-security-and-firewall'),
+            5 => __('five', 'all-in-one-wp-security-and-firewall'),
+            6 => __('six', 'all-in-one-wp-security-and-firewall'),
+            7 => __('seven', 'all-in-one-wp-security-and-firewall'),
+            8 => __('eight', 'all-in-one-wp-security-and-firewall'),
+            9 => __('nine', 'all-in-one-wp-security-and-firewall'),
+            10 => __('ten', 'all-in-one-wp-security-and-firewall'),
+            11 => __('eleven', 'all-in-one-wp-security-and-firewall'),
+            12 => __('twelve', 'all-in-one-wp-security-and-firewall'),
+            13 => __('thirteen', 'all-in-one-wp-security-and-firewall'),
+            14 => __('fourteen', 'all-in-one-wp-security-and-firewall'),
+            15 => __('fifteen', 'all-in-one-wp-security-and-firewall'),
+            16 => __('sixteen', 'all-in-one-wp-security-and-firewall'),
+            17 => __('seventeen', 'all-in-one-wp-security-and-firewall'),
+            18 => __('eighteen', 'all-in-one-wp-security-and-firewall'),
+            19 => __('nineteen', 'all-in-one-wp-security-and-firewall'),
+            20 => __('twenty', 'all-in-one-wp-security-and-firewall'),
         ); 
         return $number_map[$num];
     }

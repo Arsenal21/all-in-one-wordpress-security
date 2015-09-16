@@ -166,8 +166,8 @@ class AIOWPSecurity_Utility
     static function display_multisite_message()
     {
         echo '<div class="aio_yellow_box">';
-        echo '<p>'.__('The plugin has detected that you are using a Multi-Site WordPress installation.', 'aiowpsecurity').'</p>
-              <p>'.__('This feature can only be configured by the "superadmin" on the main site.', 'aiowpsecurity').'</p>';
+        echo '<p>'.__('The plugin has detected that you are using a Multi-Site WordPress installation.', 'all-in-one-wp-security-and-firewall').'</p>
+              <p>'.__('This feature can only be configured by the "superadmin" on the main site.', 'all-in-one-wp-security-and-firewall').'</p>';
         echo '</div>';
     }
     
@@ -195,11 +195,11 @@ class AIOWPSecurity_Utility
             {
                 $config_contents[$line_num] = str_replace('false', 'true', $line);
                 $edit_file_config_entry_exists = true;
-                //$this->show_msg_updated(__('Settings Saved - The ability to edit PHP files via the admin the panel has been DISABLED.', 'aiowpsecurity'));
+                //$this->show_msg_updated(__('Settings Saved - The ability to edit PHP files via the admin the panel has been DISABLED.', 'all-in-one-wp-security-and-firewall'));
             } else if(strpos($line, "'DISALLOW_FILE_EDIT', true"))
             {
                 $edit_file_config_entry_exists = true;
-                //$this->show_msg_updated(__('Your system config file is already configured to disallow PHP file editing.', 'aiowpsecurity'));
+                //$this->show_msg_updated(__('Your system config file is already configured to disallow PHP file editing.', 'all-in-one-wp-security-and-firewall'));
                 return true;
                 
             }
@@ -222,22 +222,22 @@ class AIOWPSecurity_Utility
         //Make a backup of the config file
         if(!AIOWPSecurity_Utility_File::backup_and_rename_wp_config($config_file))
         {
-            $this->show_msg_error(__('Failed to make a backup of the wp-config.php file. This operation will not go ahead.', 'aiowpsecurity'));
+            $this->show_msg_error(__('Failed to make a backup of the wp-config.php file. This operation will not go ahead.', 'all-in-one-wp-security-and-firewall'));
             //$aio_wp_security->debug_logger->log_debug("Disable PHP File Edit - Failed to make a backup of the wp-config.php file.",4);
             return false;
         }
         else{
-            //$this->show_msg_updated(__('A backup copy of your wp-config.php file was created successfully....', 'aiowpsecurity'));
+            //$this->show_msg_updated(__('A backup copy of your wp-config.php file was created successfully....', 'all-in-one-wp-security-and-firewall'));
         }
 
         //Now let's modify the wp-config.php file
         if (AIOWPSecurity_Utility_File::write_content_to_file($config_file, $config_contents))
         {
-            //$this->show_msg_updated(__('Settings Saved - Your system is now configured to not allow PHP file editing.', 'aiowpsecurity'));
+            //$this->show_msg_updated(__('Settings Saved - Your system is now configured to not allow PHP file editing.', 'all-in-one-wp-security-and-firewall'));
             return true;
         }else
         {
-            //$this->show_msg_error(__('Operation failed! Unable to modify wp-config.php file!', 'aiowpsecurity'));
+            //$this->show_msg_error(__('Operation failed! Unable to modify wp-config.php file!', 'all-in-one-wp-security-and-firewall'));
             $aio_wp_security->debug_logger->log_debug("Disable PHP File Edit - Unable to modify wp-config.php",4);
             return false;
         }
@@ -268,7 +268,7 @@ class AIOWPSecurity_Utility
             } else if(strpos($line, "'DISALLOW_FILE_EDIT', false"))
             {
                 $edit_file_config_entry_exists = true;
-                //$this->show_msg_updated(__('Your system config file is already configured to allow PHP file editing.', 'aiowpsecurity'));
+                //$this->show_msg_updated(__('Your system config file is already configured to allow PHP file editing.', 'all-in-one-wp-security-and-firewall'));
                 return true;
             }
         }
@@ -276,18 +276,18 @@ class AIOWPSecurity_Utility
         if (!$edit_file_config_entry_exists)
         {
             //if the DISALLOW_FILE_EDIT settings don't exist in wp-config.php then we don't need to do anything
-            //$this->show_msg_updated(__('Your system config file is already configured to allow PHP file editing.', 'aiowpsecurity'));
+            //$this->show_msg_updated(__('Your system config file is already configured to allow PHP file editing.', 'all-in-one-wp-security-and-firewall'));
             return true;
         } else
         {
             //Now let's modify the wp-config.php file
             if (AIOWPSecurity_Utility_File::write_content_to_file($config_file, $config_contents))
             {
-                //$this->show_msg_updated(__('Settings Saved - Your system is now configured to allow PHP file editing.', 'aiowpsecurity'));
+                //$this->show_msg_updated(__('Settings Saved - Your system is now configured to allow PHP file editing.', 'all-in-one-wp-security-and-firewall'));
                 return true;
             }else
             {
-                //$this->show_msg_error(__('Operation failed! Unable to modify wp-config.php file!', 'aiowpsecurity'));
+                //$this->show_msg_error(__('Operation failed! Unable to modify wp-config.php file!', 'all-in-one-wp-security-and-firewall'));
                 //$aio_wp_security->debug_logger->log_debug("Disable PHP File Edit - Unable to modify wp-config.php",4);
                 return false;
             }

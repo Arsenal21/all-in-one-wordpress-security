@@ -20,8 +20,8 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
     function set_menu_tabs() 
     {
         $this->menu_tabs = array(
-        'tab1' => __('Copy Protection', 'aiowpsecurity'),
-        'tab2' => __('Frames', 'aiowpsecurity'),
+        'tab1' => __('Copy Protection', 'all-in-one-wp-security-and-firewall'),
+        'tab2' => __('Frames', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -85,26 +85,26 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
             $aio_wp_security->configs->set_value('aiowps_copy_protection',isset($_POST["aiowps_copy_protection"])?'1':'');
             $aio_wp_security->configs->save_config();
 
-            $this->show_msg_updated(__('Copy Protection feature settings saved!', 'aiowpsecurity'));
+            $this->show_msg_updated(__('Copy Protection feature settings saved!', 'all-in-one-wp-security-and-firewall'));
 
         }
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Disable The Ability To Copy Text', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Disable The Ability To Copy Text', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-copy-protection'); ?>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This feature allows you to disable the ability to select and copy text from your front end.', 'aiowpsecurity').'</p>';
+            echo '<p>'.__('This feature allows you to disable the ability to select and copy text from your front end.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Copy Protection', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Copy Protection', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_copy_protection" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_copy_protection')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to disable the "Right Click", "Text Selection" and "Copy" option on the front end of your site.', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to disable the "Right Click", "Text Selection" and "Copy" option on the front end of your site.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>
 
@@ -135,27 +135,27 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
             $aio_wp_security->configs->set_value('aiowps_prevent_site_display_inside_frame',isset($_POST["aiowps_prevent_site_display_inside_frame"])?'1':'');
             $aio_wp_security->configs->save_config();
 
-            $this->show_msg_updated(__('Frame Display Prevention feature settings saved!', 'aiowpsecurity'));
+            $this->show_msg_updated(__('Frame Display Prevention feature settings saved!', 'all-in-one-wp-security-and-firewall'));
 
         }
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Prevent Your Site From Being Displayed In a Frame', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Prevent Your Site From Being Displayed In a Frame', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-prevent-display-frame'); ?>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This feature allows you to prevent other sites from displaying any of your content via a frame or iframe.', 'aiowpsecurity').'</p>';
-            echo '<p>'.__('When enabled, this feature will set the "X-Frame-Options" paramater to "sameorigin" in the HTTP header.', 'aiowpsecurity').'</p>';
+            echo '<p>'.__('This feature allows you to prevent other sites from displaying any of your content via a frame or iframe.', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p>'.__('When enabled, this feature will set the "X-Frame-Options" paramater to "sameorigin" in the HTTP header.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable iFrame Protection', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable iFrame Protection', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_prevent_site_display_inside_frame" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_prevent_site_display_inside_frame')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to stop other sites from displaying your content in a frame or iframe.', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to stop other sites from displaying your content in a frame or iframe.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>
 

@@ -23,11 +23,11 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
     function set_menu_tabs() 
     {
         $this->menu_tabs = array(
-        'tab1' => __('Rename Login Page','aiowpsecurity'),
-        'tab2' => __('Cookie Based Brute Force Prevention', 'aiowpsecurity'),
-        'tab3' => __('Login Captcha', 'aiowpsecurity'),
-        'tab4' => __('Login Whitelist', 'aiowpsecurity'),
-        'tab5' => __('Honeypot', 'aiowpsecurity'),
+        'tab1' => __('Rename Login Page','all-in-one-wp-security-and-firewall'),
+        'tab2' => __('Cookie Based Brute Force Prevention', 'all-in-one-wp-security-and-firewall'),
+        'tab3' => __('Login Captcha', 'all-in-one-wp-security-and-firewall'),
+        'tab4' => __('Login Whitelist', 'all-in-one-wp-security-and-firewall'),
+        'tab5' => __('Honeypot', 'all-in-one-wp-security-and-firewall'),
             
         );
     }
@@ -102,18 +102,18 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             }
 
             if (empty($_POST['aiowps_login_page_slug']) && isset($_POST["aiowps_enable_rename_login_page"])){
-                $error .= '<br />'.__('Please enter a value for your login page slug.','aiowpsecurity');
+                $error .= '<br />'.__('Please enter a value for your login page slug.','all-in-one-wp-security-and-firewall');
             }else if (!empty($_POST['aiowps_login_page_slug'])){
                 $aiowps_login_page_slug = sanitize_text_field($_POST['aiowps_login_page_slug']);
                 if($aiowps_login_page_slug == 'wp-admin'){
-                    $error .= '<br />'.__('You cannot use the value "wp-admin" for your login page slug.','aiowpsecurity');
+                    $error .= '<br />'.__('You cannot use the value "wp-admin" for your login page slug.','all-in-one-wp-security-and-firewall');
                 }elseif(preg_match('/[^a-z_\-0-9]/i', $aiowps_login_page_slug)){
-                    $error .= '<br />'.__('You must alpha numeric characters for your login page slug.','aiowpsecurity');
+                    $error .= '<br />'.__('You must alpha numeric characters for your login page slug.','all-in-one-wp-security-and-firewall');
                 }
             }
             
             if($error){
-                $this->show_msg_error(__('Attention!','aiowpsecurity').$error);
+                $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall').$error);
             }else{
                 //Save all the form values to the options
                 if (isset($_POST["aiowps_enable_rename_login_page"])){
@@ -132,7 +132,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                     $this->show_msg_settings_updated();
                 }
                 else if($res == -1){
-                    $this->show_msg_error(__('Could not delete the Cookie-based directives from the .htaccess file. Please check the file permissions.', 'aiowpsecurity'));
+                    $this->show_msg_error(__('Could not delete the Cookie-based directives from the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
                 }
             }
         }
@@ -142,12 +142,12 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             <?php
             $cookie_based_feature_url = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab2" target="_blank">Cookie Based Brute Force Prevention</a>';
             $white_list_feature_url = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab4" target="_blank">Login Page White List</a>';
-            echo '<p>'.__('An effective Brute Force prevention technique is to change the default WordPress login page URL.', 'aiowpsecurity').'</p>'.
-            '<p>'.__('Normally if you wanted to login to WordPress you would type your site\'s home URL followed by wp-login.php.', 'aiowpsecurity').'</p>'.
-            '<p>'.__('This feature allows you to change the login URL by setting your own slug and renaming the last portion of the login URL which contains the <strong>wp-login.php</strong> to any string that you like.', 'aiowpsecurity').'</p>'.
-            '<p>'.__('By doing this, malicious bots and hackers will not be able to access your login page because they will not know the correct login page URL.', 'aiowpsecurity').'</p>'.
+            echo '<p>'.__('An effective Brute Force prevention technique is to change the default WordPress login page URL.', 'all-in-one-wp-security-and-firewall').'</p>'.
+            '<p>'.__('Normally if you wanted to login to WordPress you would type your site\'s home URL followed by wp-login.php.', 'all-in-one-wp-security-and-firewall').'</p>'.
+            '<p>'.__('This feature allows you to change the login URL by setting your own slug and renaming the last portion of the login URL which contains the <strong>wp-login.php</strong> to any string that you like.', 'all-in-one-wp-security-and-firewall').'</p>'.
+            '<p>'.__('By doing this, malicious bots and hackers will not be able to access your login page because they will not know the correct login page URL.', 'all-in-one-wp-security-and-firewall').'</p>'.
             '<div class="aio_section_separator_1"></div>'.
-            '<p>'.__('You may also be interested in the following alternative brute force prevention features:', 'aiowpsecurity').'</p>'.
+            '<p>'.__('You may also be interested in the following alternative brute force prevention features:', 'all-in-one-wp-security-and-firewall').'</p>'.
             '<p>'.$cookie_based_feature_url.'</p>'.
             '<p>'.$white_list_feature_url.'</p>';
             ?>
@@ -158,17 +158,17 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         {
         ?>
             <div class="aio_yellow_box">
-                <p><?php _e('Your WordPress login page URL has been renamed.', 'aiowpsecurity'); ?></p>
-                <p><?php _e('Your current login URL is:', 'aiowpsecurity'); ?></p>
+                <p><?php _e('Your WordPress login page URL has been renamed.', 'all-in-one-wp-security-and-firewall'); ?></p>
+                <p><?php _e('Your current login URL is:', 'all-in-one-wp-security-and-firewall'); ?></p>
                 <p><strong><?php echo $home_url.$aio_wp_security->configs->get_value('aiowps_login_page_slug'); ?></strong></p>
-                <p><strong><?php _e('NOTE: If you already had the Cookie-Based Brute Force Prevention feature active, the plugin has automatically deactivated it because only one of these features can be active at any one time.', 'aiowpsecurity'); ?></strong></p>
+                <p><strong><?php _e('NOTE: If you already had the Cookie-Based Brute Force Prevention feature active, the plugin has automatically deactivated it because only one of these features can be active at any one time.', 'all-in-one-wp-security-and-firewall'); ?></strong></p>
             </div>
             
         <?php
         }
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Rename Login Page Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Rename Login Page Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -180,20 +180,20 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-rename-login-page-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Rename Login Page Feature', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Rename Login Page Feature', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_rename_login_page" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the rename login page feature', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the rename login page feature', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
             <tr valign="top">
-                <th scope="row"><?php _e('Login Page URL', 'aiowpsecurity')?>:</th>
+                <th scope="row"><?php _e('Login Page URL', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><code><?php echo $home_url; ?></code><input type="text" size="5" name="aiowps_login_page_slug" value="<?php echo $aio_wp_security->configs->get_value('aiowps_login_page_slug'); ?>" />
-                <span class="description"><?php _e('Enter a string which will represent your secure login page slug. You are enouraged to choose something which is hard to guess and only you will remember.', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Enter a string which will represent your secure login page slug. You are enouraged to choose something which is hard to guess and only you will remember.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>
         </table>
-        <input type="submit" name="aiowps_save_rename_login_page_settings" value="<?php _e('Save Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_save_rename_login_page_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
         
@@ -222,7 +222,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 if(empty($brute_force_feature_secret_word)){
                     $brute_force_feature_secret_word = "aiowps_secret";
                 }else if(!ctype_alnum($brute_force_feature_secret_word)){
-                    $msg = '<p>'.__('Settings have not been saved - your secret word must consist only of alphanumeric characters, ie, letters and/or numbers only!', 'aiowpsecurity').'</p>';
+                    $msg = '<p>'.__('Settings have not been saved - your secret word must consist only of alphanumeric characters, ie, letters and/or numbers only!', 'all-in-one-wp-security-and-firewall').'</p>';
                     $error = true;
                 }
                 
@@ -241,17 +241,17 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 if (!$error)
                 {
                     $aio_wp_security->configs->set_value('aiowps_brute_force_secret_word',$brute_force_feature_secret_word);
-                    $msg = '<p>'.__('You have successfully enabled the cookie based brute force prevention feature', 'aiowpsecurity').'</p>';
-                    $msg .= '<p>'.__('From now on you will need to log into your WP Admin using the following URL:', 'aiowpsecurity').'</p>';
+                    $msg = '<p>'.__('You have successfully enabled the cookie based brute force prevention feature', 'all-in-one-wp-security-and-firewall').'</p>';
+                    $msg .= '<p>'.__('From now on you will need to log into your WP Admin using the following URL:', 'all-in-one-wp-security-and-firewall').'</p>';
                     $msg .= '<p><strong>'.AIOWPSEC_WP_URL.'/?'.$brute_force_feature_secret_word.'=1</strong></p>';
-                    $msg .= '<p>'.__('It is important that you save this URL value somewhere in case you forget it, OR,', 'aiowpsecurity').'</p>';
-                    $msg .= '<p>'.sprintf( __('simply remember to add a "?%s=1" to your current site URL address.', 'aiowpsecurity'), $brute_force_feature_secret_word).'</p>';
+                    $msg .= '<p>'.__('It is important that you save this URL value somewhere in case you forget it, OR,', 'all-in-one-wp-security-and-firewall').'</p>';
+                    $msg .= '<p>'.sprintf( __('simply remember to add a "?%s=1" to your current site URL address.', 'all-in-one-wp-security-and-firewall'), $brute_force_feature_secret_word).'</p>';
                 }
             }
             else
             {
                 $aio_wp_security->configs->set_value('aiowps_enable_brute_force_attack_prevention','');
-                $msg = __('You have successfully saved cookie based brute force prevention feature settings.', 'aiowpsecurity');
+                $msg = __('You have successfully saved cookie based brute force prevention feature settings.', 'all-in-one-wp-security-and-firewall');
             }
             
             if(isset($_POST['aiowps_brute_force_attack_prevention_pw_protected_exception']))
@@ -286,7 +286,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                     echo '</p></div>';
                 }
                 else if($res == -1){
-                    $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'aiowpsecurity'));
+                    $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
                 }
             }
             else
@@ -296,23 +296,23 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         }
 
         ?>
-        <h2><?php _e('Brute Force Prevention Firewall Settings', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Brute Force Prevention Firewall Settings', 'all-in-one-wp-security-and-firewall')?></h2>
         
         <div class="aio_blue_box">
             <?php
             //TODO - need to fix the following message
-            echo '<p>'.__('A Brute Force Attack is when a hacker tries many combinations of usernames and passwords until they succeed in guessing the right combination.', 'aiowpsecurity').
-            '<br />'.__('Due to the fact that at any one time there may be many concurrent login attempts occurring on your site via malicious automated robots, this also has a negative impact on your server\'s memory and performance.', 'aiowpsecurity').
-            '<br />'.__('The features in this tab will stop the majority of Brute Force Login Attacks at the .htaccess level thus providing even better protection for your WP login page and also reducing the load on your server because the system does not have to run PHP code to process the login attempts.', 'aiowpsecurity').'</p>';
+            echo '<p>'.__('A Brute Force Attack is when a hacker tries many combinations of usernames and passwords until they succeed in guessing the right combination.', 'all-in-one-wp-security-and-firewall').
+            '<br />'.__('Due to the fact that at any one time there may be many concurrent login attempts occurring on your site via malicious automated robots, this also has a negative impact on your server\'s memory and performance.', 'all-in-one-wp-security-and-firewall').
+            '<br />'.__('The features in this tab will stop the majority of Brute Force Login Attacks at the .htaccess level thus providing even better protection for your WP login page and also reducing the load on your server because the system does not have to run PHP code to process the login attempts.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
         <div class="aio_yellow_box">
             <?php
             $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_SETTINGS_MENU_SLUG.'&tab=tab2" target="_blank">backup</a>';
             $video_link = '<a href="http://www.tipsandtricks-hq.com/all-in-one-wp-security-plugin-cookie-based-brute-force-login-attack-prevention-feature-5994" target="_blank">video tutorial</a>';
-            $info_msg = sprintf( __('Even though this feature should not have any impact on your site\'s general functionality <strong>you are strongly encouraged to take a %s of your .htaccess file before proceeding</strong>.', 'aiowpsecurity'), $backup_tab_link);
-            $info_msg1 = __('If this feature is not used correctly, you can get locked out of your site. A backed up .htaccess file will come in handy if that happens.', 'aiowpsecurity');
-            $info_msg2 = sprintf( __('To learn more about how to use this feature please watch the following %s.', 'aiowpsecurity'), $video_link);
+            $info_msg = sprintf( __('Even though this feature should not have any impact on your site\'s general functionality <strong>you are strongly encouraged to take a %s of your .htaccess file before proceeding</strong>.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link);
+            $info_msg1 = __('If this feature is not used correctly, you can get locked out of your site. A backed up .htaccess file will come in handy if that happens.', 'all-in-one-wp-security-and-firewall');
+            $info_msg2 = sprintf( __('To learn more about how to use this feature please watch the following %s.', 'all-in-one-wp-security-and-firewall'), $video_link);
             $brute_force_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_FIREWALL_MENU_SLUG.'&tab=tab4" target="_blank">Cookie-Based Brute Force Login Prevention</a>';
             echo '<p>'.$info_msg.
             '<br />'.$info_msg1.
@@ -325,7 +325,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         {
         ?>
             <div class="aio_yellow_box">
-                <p><strong><?php _e('NOTE: If you already had the Rename Login Page feature active, the plugin has automatically deactivated it because only one of these features can be active at any one time.', 'aiowpsecurity'); ?></strong></p>
+                <p><strong><?php _e('NOTE: If you already had the Rename Login Page feature active, the plugin has automatically deactivated it because only one of these features can be active at any one time.', 'all-in-one-wp-security-and-firewall'); ?></strong></p>
             </div>
             
         <?php
@@ -333,7 +333,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         ?>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Cookie Based Brute Force Login Prevention', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Cookie Based Brute Force Login Prevention', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -344,95 +344,95 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-enable-cookie-based-brute-force-prevention'); ?>              
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Brute Force Attack Prevention', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Brute Force Attack Prevention', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_brute_force_attack_prevention" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_brute_force_attack_prevention')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to protect your login page from Brute Force Attack.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to protect your login page from Brute Force Attack.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('This feature will deny access to your WordPress login page for all people except those who have a special cookie in their browser.', 'aiowpsecurity');
+                        _e('This feature will deny access to your WordPress login page for all people except those who have a special cookie in their browser.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('To use this feature do the following:', 'aiowpsecurity');
+                        _e('To use this feature do the following:', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('1) Enable the checkbox.', 'aiowpsecurity');
+                        _e('1) Enable the checkbox.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('2) Enter a secret word consisting of alphanumeric characters which will be difficult to guess. This secret word will be useful whenever you need to know the special URL which you will use to access the login page (see point below).', 'aiowpsecurity');
+                        _e('2) Enter a secret word consisting of alphanumeric characters which will be difficult to guess. This secret word will be useful whenever you need to know the special URL which you will use to access the login page (see point below).', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('3) You will then be provided with a special login URL. You will need to use this URL to login to your WordPress site instead of the usual login URL. NOTE: The system will deposit a special cookie in your browser which will allow you access to the WordPress administration login page.', 'aiowpsecurity');
+                        _e('3) You will then be provided with a special login URL. You will need to use this URL to login to your WordPress site instead of the usual login URL. NOTE: The system will deposit a special cookie in your browser which will allow you access to the WordPress administration login page.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('Any person trying to access your login page who does not have the special cookie in their browser will be automatically blocked.', 'aiowpsecurity');
+                        _e('Any person trying to access your login page who does not have the special cookie in their browser will be automatically blocked.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
                 </td>
             </tr>
             <tr valign="top">
-                <th scope="row"><?php _e('Secret Word', 'aiowpsecurity')?>:</th>
+                <th scope="row"><?php _e('Secret Word', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><input type="text" size="40" name="aiowps_brute_force_secret_word" value="<?php echo $aio_wp_security->configs->get_value('aiowps_brute_force_secret_word'); ?>" />
-                <span class="description"><?php _e('Choose a secret word consisting of alphanumeric characters which you can use to access your special URL. Your are highly encouraged to choose a word which will be difficult to guess.', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Choose a secret word consisting of alphanumeric characters which you can use to access your special URL. Your are highly encouraged to choose a word which will be difficult to guess.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>
             <tr valign="top">
-                <th scope="row"><?php _e('Re-direct URL', 'aiowpsecurity')?>:</th>
+                <th scope="row"><?php _e('Re-direct URL', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><input type="text" size="40" name="aiowps_cookie_based_brute_force_redirect_url" value="<?php echo $aio_wp_security->configs->get_value('aiowps_cookie_based_brute_force_redirect_url'); ?>" />
                 <span class="description">
                     <?php 
-                    _e('Specify a URL to redirect a hacker to when they try to access your WordPress login page.', 'aiowpsecurity');
+                    _e('Specify a URL to redirect a hacker to when they try to access your WordPress login page.', 'all-in-one-wp-security-and-firewall');
                     ?>
                 </span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                    _e('The URL specified here can be any site\'s URL and does not have to be your own. For example you can be as creative as you like and send hackers to the CIA or NSA home page.', 'aiowpsecurity');
+                    _e('The URL specified here can be any site\'s URL and does not have to be your own. For example you can be as creative as you like and send hackers to the CIA or NSA home page.', 'all-in-one-wp-security-and-firewall');
                     echo '<br />';
-                    _e('This field will default to: http://127.0.0.1 if you do not enter a value.', 'aiowpsecurity');
+                    _e('This field will default to: http://127.0.0.1 if you do not enter a value.', 'all-in-one-wp-security-and-firewall');
                     echo '<br />';
-                    _e('Useful Tip:', 'aiowpsecurity');
+                    _e('Useful Tip:', 'all-in-one-wp-security-and-firewall');
                     echo '<br />';
-                    _e('It\'s a good idea to not redirect attempted brute force login attempts to your site because it increases the load on your server.', 'aiowpsecurity');
+                    _e('It\'s a good idea to not redirect attempted brute force login attempts to your site because it increases the load on your server.', 'all-in-one-wp-security-and-firewall');
                     echo '<br />';
-                    _e('Redirecting a hacker or malicious bot back to "http://127.0.0.1" is ideal because it deflects them back to their own local host and puts the load on their server instead of yours.', 'aiowpsecurity');
+                    _e('Redirecting a hacker or malicious bot back to "http://127.0.0.1" is ideal because it deflects them back to their own local host and puts the load on their server instead of yours.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
                 </td> 
             </tr>
             <tr valign="top">
-                <th scope="row"><?php _e('My Site Has Posts Or Pages Which Are Password Protected', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('My Site Has Posts Or Pages Which Are Password Protected', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_brute_force_attack_prevention_pw_protected_exception" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_brute_force_attack_prevention_pw_protected_exception')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you are using the native WordPress password protection feature for some or all of your blog posts or pages.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you are using the native WordPress password protection feature for some or all of your blog posts or pages.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('In the cases where you are protecting some of your posts or pages using the in-built WordPress password protection feature, a few extra lines of directives and exceptions need to be added to your .htacces file so that people trying to access pages are not automatically blocked.', 'aiowpsecurity');
+                        _e('In the cases where you are protecting some of your posts or pages using the in-built WordPress password protection feature, a few extra lines of directives and exceptions need to be added to your .htacces file so that people trying to access pages are not automatically blocked.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('By enabling this checkbox the plugin will add the necessary rules and exceptions to your .htacces file so that people trying to access these pages are not automatically blocked.', 'aiowpsecurity');
+                        _e('By enabling this checkbox the plugin will add the necessary rules and exceptions to your .htacces file so that people trying to access these pages are not automatically blocked.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        echo "<strong>".__('Helpful Tip:', 'aiowpsecurity')."</strong>";
+                        echo "<strong>".__('Helpful Tip:', 'all-in-one-wp-security-and-firewall')."</strong>";
                         echo '<br />';
-                        _e('If you do not use the WordPress password protection feature for your posts or pages then it is highly recommended that you leave this checkbox disabled.', 'aiowpsecurity');
+                        _e('If you do not use the WordPress password protection feature for your posts or pages then it is highly recommended that you leave this checkbox disabled.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
                 </td>
             </tr>
             <tr valign="top">
-                <th scope="row"><?php _e('My Site Has a Theme or Plugins Which Use AJAX', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('My Site Has a Theme or Plugins Which Use AJAX', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_brute_force_attack_prevention_ajax_exception" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_brute_force_attack_prevention_ajax_exception')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if your site uses AJAX functionality.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if your site uses AJAX functionality.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('In the cases where your WordPress installation has a theme or plugins which use AJAX, a few extra lines of directives and exceptions need to be added to your .htacces file to prevent AJAX requests from being automatically blocked by the brute force prevention feature.', 'aiowpsecurity');
+                        _e('In the cases where your WordPress installation has a theme or plugins which use AJAX, a few extra lines of directives and exceptions need to be added to your .htacces file to prevent AJAX requests from being automatically blocked by the brute force prevention feature.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('By enabling this checkbox the plugin will add the necessary rules and exceptions to your .htacces file so that AJAX operations will work as expected.', 'aiowpsecurity');
+                        _e('By enabling this checkbox the plugin will add the necessary rules and exceptions to your .htacces file so that AJAX operations will work as expected.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
@@ -447,24 +447,24 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             if (isset($_REQUEST['aiowps_cookie_test']))
             {//Cookie test was just performed and the test succeded
                 echo '<div class="aio_green_box"><p>';
-                _e('The cookie test was successful. You can now enable this feature.', 'aiowpsecurity');
+                _e('The cookie test was successful. You can now enable this feature.', 'all-in-one-wp-security-and-firewall');
                 echo '</p></div>';
             }            
-            echo '<input type="submit" name="aiowps_apply_cookie_based_bruteforce_firewall" value="'.__('Save Feature Settings', 'aiowpsecurity').'" class="button-primary" />';
+            echo '<input type="submit" name="aiowps_apply_cookie_based_bruteforce_firewall" value="'.__('Save Feature Settings', 'all-in-one-wp-security-and-firewall').'" class="button-primary" />';
         }
         else
         {
             //Cookie test needs to be performed
             if(isset($_REQUEST['aiowps_cookie_test']) && $cookie_test_value != '1'){//Test failed
                 echo '<div class="aio_red_box"><p>';
-                _e('The cookie test failed on this server. So this feature cannot be used on this site.', 'aiowpsecurity');
+                _e('The cookie test failed on this server. So this feature cannot be used on this site.', 'all-in-one-wp-security-and-firewall');
                 echo '</p></div>';
             }
             
             echo '<div class="aio_yellow_box"><p>';
-            _e("Before using this feature you are required to perform a cookie test first. This is to make sure that your browser cookie is working correctly and that you won't lock yourself out.", 'aiowpsecurity');
+            _e("Before using this feature you are required to perform a cookie test first. This is to make sure that your browser cookie is working correctly and that you won't lock yourself out.", 'all-in-one-wp-security-and-firewall');
             echo '</p></div>';
-            echo '<input type="submit" name="aiowps_do_cookie_test_for_bfla" value="'.__('Perform Cookie Test', 'aiowpsecurity').'" class="button-primary" />';
+            echo '<input type="submit" name="aiowps_do_cookie_test_for_bfla" value="'.__('Perform Cookie Test', 'all-in-one-wp-security-and-firewall').'" class="button-primary" />';
         }
         ?>
         </form>
@@ -504,15 +504,15 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This feature allows you to add a captcha form on the WordPress login page.', 'aiowpsecurity').'
-            <br />'.__('Users who attempt to login will also need to enter the answer to a simple mathematical question - if they enter the wrong answer, the plugin will not allow them login even if they entered the correct username and password.', 'aiowpsecurity').'
-                <br />'.__('Therefore, adding a captcha form on the login page is another effective yet simple "Brute Force" prevention technique.', 'aiowpsecurity').'
+            echo '<p>'.__('This feature allows you to add a captcha form on the WordPress login page.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('Users who attempt to login will also need to enter the answer to a simple mathematical question - if they enter the wrong answer, the plugin will not allow them login even if they entered the correct username and password.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('Therefore, adding a captcha form on the login page is another effective yet simple "Brute Force" prevention technique.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>
         </div>
         <form action="" method="POST">
         <div class="postbox">
-        <h3><label for="title"><?php _e('Login Form Captcha Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Login Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -523,16 +523,16 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-captcha-settings-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Captcha On Login Page', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Captcha On Login Page', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_login_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_login_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to insert a captcha form on the login page', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to insert a captcha form on the login page', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
         </div></div>        
         <div class="postbox">
-        <h3><label for="title"><?php _e('Custom Login Form Captcha Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Custom Login Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -541,16 +541,16 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Captcha On Custom Login Form', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Captcha On Custom Login Form', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_custom_login_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_custom_login_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to insert captcha on a custom login form generated by the following WP function: wp_login_form()', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to insert captcha on a custom login form generated by the following WP function: wp_login_form()', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
         </div></div>        
         <div class="postbox">
-        <h3><label for="title"><?php _e('Lost Password Form Captcha Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Lost Password Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -560,15 +560,15 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
 
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Captcha On Lost Password Page', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Captcha On Lost Password Page', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_lost_password_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_lost_password_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to insert a captcha form on the lost password page', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to insert a captcha form on the lost password page', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
         </div></div>        
-        <input type="submit" name="aiowpsec_save_captcha_settings" value="<?php _e('Save Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowpsec_save_captcha_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         <?php
     }
@@ -585,12 +585,12 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             if (!wp_verify_nonce($nonce, 'aiowpsec-whitelist-settings-nonce'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for save whitelist settings!",4);
-                die(__('Nonce check failed for save whitelist settings!','aiowpsecurity'));
+                die(__('Nonce check failed for save whitelist settings!','all-in-one-wp-security-and-firewall'));
             }
             
             if (isset($_POST["aiowps_enable_whitelisting"]) && empty($_POST['aiowps_allowed_ip_addresses']))
             {
-                $this->show_msg_error('You must submit at least one IP address!','aiowpsecurity');
+                $this->show_msg_error('You must submit at least one IP address!','all-in-one-wp-security-and-firewall');
             }
             else
             {
@@ -632,33 +632,34 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                     $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
                     if ($write_result == -1)
                     {
-                        $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','aiowpsecurity'));
+                        $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                         $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_whitelist_Menu - The plugin was unable to write to the .htaccess file.");
                     }
                 }
             }
         }
         ?>
-        <h2><?php _e('Login Whitelist', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Login Whitelist', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('The All In One WP Security Whitelist feature gives you the option of only allowing certain IP addresses or ranges to have access to your WordPress login page.', 'aiowpsecurity').'
-            <br />'.__('This feature will deny login access for all IP addresses which are not in your whitelist as configured in the settings below.', 'aiowpsecurity').'
-            <br />'.__('The plugin achieves this by writing the appropriate directives to your .htaccess file.', 'aiowpsecurity').'
-            <br />'.__('By allowing/blocking IP addresses via the .htaccess file your are using the most secure first line of defence because login access will only be granted to whitelisted IP addresses and other addresses will be blocked as soon as they try to access your login page.', 'aiowpsecurity').'    
+            echo '<p>'.__('The All In One WP Security Whitelist feature gives you the option of only allowing certain IP addresses or ranges to have access to your WordPress login page.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('This feature will deny login access for all IP addresses which are not in your whitelist as configured in the settings below.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('The plugin achieves this by writing the appropriate directives to your .htaccess file.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('By allowing/blocking IP addresses via the .htaccess file your are using the most secure first line of defence because login access will only be granted to whitelisted IP addresses and other addresses will be blocked as soon as they try to access your login page.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>
         </div>
         <div class="aio_yellow_box">
             <?php
             $brute_force_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab2" target="_blank">Cookie-Based Brute Force Login Prevention</a>';
-            echo '<p>'.sprintf( __('Attention: If in addition to enabling the white list feature, you also have the %s feature enabled, <strong>you will still need to use your secret word in the URL when trying to access your WordPress login page</strong>.', 'aiowpsecurity'), $brute_force_login_feature_link).'</p>            
-            <p>'.__('These features are NOT functionally related. Having both of them enabled on your site means you are creating 2 layers of security.', 'aiowpsecurity').'</p>';
+            $rename_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab1" target="_blank">Rename Login Page</a>';
+            echo '<p>'.sprintf( __('Attention: If in addition to enabling the white list feature, you also have one of the %s or %s features enabled, <strong>you will still need to use your secret word or special slug in the URL when trying to access your WordPress login page</strong>.', 'all-in-one-wp-security-and-firewall'), $brute_force_login_feature_link, $rename_login_feature_link).'</p>
+            <p>'.__('These features are NOT functionally related. Having both of them enabled on your site means you are creating 2 layers of security.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Login IP Whitelist Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Login IP Whitelist Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -669,40 +670,40 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-whitelist-settings-nonce'); ?>            
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable IP Whitelisting', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable IP Whitelisting', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_whitelisting" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_whitelisting')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the whitelisting of selected IP addresses specified in the settings below', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the whitelisting of selected IP addresses specified in the settings below', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
             <tr valign="top">
-                <th scope="row"><?php _e('Your Current IP Address', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Your Current IP Address', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input size="20" name="aiowps_user_ip" type="text" value="<?php echo $your_ip_address; ?>" readonly="readonly"/>
-                <span class="description"><?php _e('You can copy and paste this address in the text box below if you want to include it in your login whitelist.', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('You can copy and paste this address in the text box below if you want to include it in your login whitelist.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
             <tr valign="top">
-                <th scope="row"><?php _e('Enter Whitelisted IP Addresses:', 'aiowpsecurity')?></th>
+                <th scope="row"><?php _e('Enter Whitelisted IP Addresses:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
                     <textarea name="aiowps_allowed_ip_addresses" rows="5" cols="50"><?php echo ($result == -1)?$_POST['aiowps_allowed_ip_addresses']:$aio_wp_security->configs->get_value('aiowps_allowed_ip_addresses'); ?></textarea>
                     <br />
-                    <span class="description"><?php _e('Enter one or more IP addresses or IP ranges you wish to include in your whitelist. Only the addresses specified here will have access to the WordPress login page.','aiowpsecurity');?></span>
-                    <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                    <span class="description"><?php _e('Enter one or more IP addresses or IP ranges you wish to include in your whitelist. Only the addresses specified here will have access to the WordPress login page.','all-in-one-wp-security-and-firewall');?></span>
+                    <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                     <div class="aiowps_more_info_body">
                             <?php 
-                            echo '<p class="description">'.__('Each IP address must be on a new line.', 'aiowpsecurity').'</p>';
-                            echo '<p class="description">'.__('To specify an IP range use a wildcard "*" character. Acceptable ways to use wildcards is shown in the examples below:', 'aiowpsecurity').'</p>';
-                            echo '<p class="description">'.__('Example 1: 195.47.89.*', 'aiowpsecurity').'</p>';
-                            echo '<p class="description">'.__('Example 2: 195.47.*.*', 'aiowpsecurity').'</p>';
-                            echo '<p class="description">'.__('Example 3: 195.*.*.*', 'aiowpsecurity').'</p>';
+                            echo '<p class="description">'.__('Each IP address must be on a new line.', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('To specify an IP range use a wildcard "*" character. Acceptable ways to use wildcards is shown in the examples below:', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 1: 195.47.89.*', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 2: 195.47.*.*', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 3: 195.*.*.*', 'all-in-one-wp-security-and-firewall').'</p>';
                             ?>
                     </div>
 
                 </td>
             </tr>
         </table>
-        <input type="submit" name="aiowps_save_whitelist_settings" value="<?php _e('Save Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_save_whitelist_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
         <?php
@@ -735,16 +736,16 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This feature allows you to add a special hidden "honeypot" field on the WordPress login page. This will only be visible to robots and not humans.', 'aiowpsecurity').'
-            <br />'.__('Since robots usually fill in every input field from a login form, they will also submit a value for the special hidden honeypot field.', 'aiowpsecurity').'
-            <br />'.__('The way honeypots work is that a hidden field is placed somewhere inside a form which only robots will submit. If that field contains a value when the form is submitted then a robot has most likely submitted the form and it is consquently dealt with.', 'aiowpsecurity').'
-            <br />'.__('Therefore, if the plugin detects that this field has a value when the login form is submitted, then the robot which is attempting to login to your site will be redirected to its localhost address - http://127.0.0.1.', 'aiowpsecurity').'
+            echo '<p>'.__('This feature allows you to add a special hidden "honeypot" field on the WordPress login page. This will only be visible to robots and not humans.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('Since robots usually fill in every input field from a login form, they will also submit a value for the special hidden honeypot field.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('The way honeypots work is that a hidden field is placed somewhere inside a form which only robots will submit. If that field contains a value when the form is submitted then a robot has most likely submitted the form and it is consequently dealt with.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('Therefore, if the plugin detects that this field has a value when the login form is submitted, then the robot which is attempting to login to your site will be redirected to its localhost address - http://127.0.0.1.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>
         </div>
         <form action="" method="POST">
         <div class="postbox">
-        <h3><label for="title"><?php _e('Login Form Honeypot Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Login Form Honeypot Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -755,16 +756,16 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-honeypot-settings-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Honeypot On Login Page', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Honeypot On Login Page', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_login_honeypot" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_login_honeypot')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the honeypot feature for the login page', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the honeypot feature for the login page', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
         </div></div>        
      
-        <input type="submit" name="aiowpsec_save_honeypot_settings" value="<?php _e('Save Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowpsec_save_honeypot_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         <?php
     }

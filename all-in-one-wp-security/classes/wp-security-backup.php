@@ -186,9 +186,9 @@ class AIOWPSecurity_Backup
             $from_name = empty($site_title)?'WordPress':$site_title;
             
             $headers = 'From: ' . $from_name . ' <' . get_option('admin_email') . '>' . PHP_EOL;
-            $subject = __( 'All In One WP Security - Site Database Backup', 'aiowpsecurity' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
+            $subject = __( 'All In One WP Security - Site Database Backup', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
             $attachment = array( $this->last_backup_file_path );
-            $message = __( 'Attached is your latest DB backup file for site URL', 'aiowpsecurity' ) . ' ' . get_option( 'siteurl' ) . __( ' generated on', 'aiowpsecurity' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
+            $message = __( 'Attached is your latest DB backup file for site URL', 'all-in-one-wp-security-and-firewall' ) . ' ' . get_option( 'siteurl' ) . __( ' generated on', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
 
             wp_mail( $to, $subject, $message, $headers, $attachment );
         }

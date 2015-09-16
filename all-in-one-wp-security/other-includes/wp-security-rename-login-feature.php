@@ -888,7 +888,7 @@ switch ($action) {
          * @param string $redirect_to Redirect destination URL.
          */
         $errors = apply_filters( 'wp_login_errors', $errors, $redirect_to );
-
+        $user_login = '';
         // Clear any stale cookies.
         if ( $reauth )
             wp_clear_auth_cookie();

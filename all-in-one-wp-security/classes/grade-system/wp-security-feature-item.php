@@ -25,13 +25,13 @@ class AIOWPSecurity_Feature_Item
     {
         $level_string = "";
         if($level == "1"){
-            $level_string = __('Basic', 'aiowpsecurity');
+            $level_string = __('Basic', 'all-in-one-wp-security-and-firewall');
         }
         else if($level == "2"){
-            $level_string = __('Intermediate', 'aiowpsecurity');
+            $level_string = __('Intermediate', 'all-in-one-wp-security-and-firewall');
         }
         else if($level == "3"){
-            $level_string = __('Advanced', 'aiowpsecurity');
+            $level_string = __('Advanced', 'all-in-one-wp-security-and-firewall');
         }
         return $level_string;
     }

@@ -62,10 +62,10 @@ class AIOWPSecurity_Scan
             $from_name = empty($site_title)?'WordPress':$site_title;
             
             $headers = 'From: ' . $from_name . ' <' . get_option('admin_email') . '>' . PHP_EOL;
-            $subject = __( 'All In One WP Security - File change detected!', 'aiowpsecurity' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
+            $subject = __( 'All In One WP Security - File change detected!', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
             //$attachment = array();
-            $message = __( 'A file change was detected on your system for site URL', 'aiowpsecurity' ) . ' ' . get_option( 'siteurl' ) . __( '. Scan was generated on', 'aiowpsecurity' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
-            $message .= "\r\n\r\n".__( 'A summary of the scan results is shown below:', 'aiowpsecurity' );
+            $message = __( 'A file change was detected on your system for site URL', 'all-in-one-wp-security-and-firewall' ) . ' ' . get_option( 'siteurl' ) . __( '. Scan was generated on', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
+            $message .= "\r\n\r\n".__( 'A summary of the scan results is shown below:', 'all-in-one-wp-security-and-firewall' );
             $scan_res_unserialized = self::get_file_change_data();
             $scan_results_message = '';
             if($scan_res_unserialized !== false){
@@ -74,7 +74,7 @@ class AIOWPSecurity_Scan
             
             $message .= "\r\n\r\n";
             $message .= $scan_results_message;
-            $message .= "\r\n".__( 'Login to your site to view the scan details.', 'aiowpsecurity' );
+            $message .= "\r\n".__( 'Login to your site to view the scan details.', 'all-in-one-wp-security-and-firewall' );
 
             wp_mail( $to, $subject, $message, $headers );
         }
@@ -279,11 +279,11 @@ class AIOWPSecurity_Scan
         //$aio_wp_security->admin_init->filescan_menu->start_buffer();
         ob_start();
         
-        $info_msg_string = '<p class="aio_info_with_icon">'.__('Starting DB scan.....please wait while the plugin scans your database.......', 'aiowpsecurity').'</p>';
+        $info_msg_string = '<p class="aio_info_with_icon">'.__('Starting DB scan.....please wait while the plugin scans your database.......', 'all-in-one-wp-security-and-firewall').'</p>';
         echo $info_msg_string;
         
         //Options table
-        echo '<p class="aio_info_with_icon">'.__('Scanning options table.........', 'aiowpsecurity').'</p>';
+        echo '<p class="aio_info_with_icon">'.__('Scanning options table.........', 'all-in-one-wp-security-and-firewall').'</p>';
         $options_table = $wpdb->prefix . 'options';
         $sql= "SELECT option_id,option_value,option_name
         FROM $options_table WHERE 
@@ -352,12 +352,12 @@ class AIOWPSecurity_Scan
                 
                 //If known pharma hack entry was found delete it
                 if($known_pharma_hack){
-                    echo '<p class="aio_error_with_icon">'.sprintf( __('%s and option_id: %s', 'aiowpsecurity'), $found_options, $entry['option_id']).'</p>';
+                    echo '<p class="aio_error_with_icon">'.sprintf( __('%s and option_id: %s', 'all-in-one-wp-security-and-firewall'), $found_options, $entry['option_id']).'</p>';
                     $delete_sql = $wpdb->delete($options_table, array('option_name'=>$option_name));
                     if($delete_sql === FALSE){
-                        echo '<p class="aio_error_with_icon">'.sprintf( __('Deletion of known pharma hack entry for option_name %s failed. Please delete this entry manually!', 'aiowpsecurity'), $entry['option_name']).'</p>';
+                        echo '<p class="aio_error_with_icon">'.sprintf( __('Deletion of known pharma hack entry for option_name %s failed. Please delete this entry manually!', 'all-in-one-wp-security-and-firewall'), $entry['option_name']).'</p>';
                     }else{
-                        echo '<p class="aio_success_with_icon">'.sprintf( __('The options table entry with known pharma hack for option_id %s with option_name %s was successfully deleted', 'aiowpsecurity'), $entry['option_id'], $entry['option_name']).'</p>';
+                        echo '<p class="aio_success_with_icon">'.sprintf( __('The options table entry with known pharma hack for option_id %s with option_name %s was successfully deleted', 'all-in-one-wp-security-and-firewall'), $entry['option_id'], $entry['option_name']).'</p>';
                     }
                     
                 }
@@ -371,7 +371,7 @@ class AIOWPSecurity_Scan
                 if (strpos(strtolower($option_value),'networkads')!==false) $found_options.="networkads found in the option_value field for option_name: ".$option_name;
                 if (strpos(strtolower($option_value),'eval(')!==false) $found_options.="eval() statement found in the option_value field for option_name: ".$option_name;
                 if (strpos(strtolower($option_value),'javascript:')!==false) $found_options.="javascript statement found in the option_value field for option_name: ".$option_name;
-                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry found (for option_id: %s) - %s ', 'aiowpsecurity'), $entry['option_id'], $found_options).'</p>';
+                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry found (for option_id: %s) - %s ', 'all-in-one-wp-security-and-firewall'), $entry['option_id'], $found_options).'</p>';
 
                 if($found_options != ''){
                     $sus_options_entry_found = true;
@@ -380,11 +380,11 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_options_entry_found){
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in options table', 'aiowpsecurity').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in options table', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
         
         //Posts table
-        echo '<p class="aio_info_with_icon">'.__('Scanning posts table.........', 'aiowpsecurity').'</p>';
+        echo '<p class="aio_info_with_icon">'.__('Scanning posts table.........', 'all-in-one-wp-security-and-firewall').'</p>';
         $posts_table = $wpdb->prefix . 'posts';
         $sql= "SELECT ID,post_author,post_title,post_name,guid,post_content,post_mime_type
         FROM $posts_table WHERE 
@@ -424,7 +424,7 @@ class AIOWPSecurity_Scan
                 if (strpos(strtolower($entry['post_content']),'try{window.onload')!==false) $found_posts.="post_content: try{window.onload "; 
                 if (strpos(strtolower($entry['post_content']),"setAttribute('src'")!==false) $found_posts.="post_content: setAttribute('src' "; 
                 if (strpos(strtolower($entry['post_mime_type']),'script')!==false) $found_posts.="post_mime_type: script "; 
-                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry found (for Post ID: %s) in the following column - %s ', 'aiowpsecurity'), $entry['ID'], $found_posts).'</p>';
+                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry found (for Post ID: %s) in the following column - %s ', 'all-in-one-wp-security-and-firewall'), $entry['ID'], $found_posts).'</p>';
                 
                 if($found_options != ''){
                     $sus_posts_entry_found = true;
@@ -433,11 +433,11 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_posts_entry_found){
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in posts table', 'aiowpsecurity').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in posts table', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
         
         //Links table
-        echo '<p class="aio_info_with_icon">'.__('Scanning links table.........', 'aiowpsecurity').'</p>';
+        echo '<p class="aio_info_with_icon">'.__('Scanning links table.........', 'all-in-one-wp-security-and-firewall').'</p>';
         $links_table = $wpdb->prefix . 'links';
         $sql= "SELECT link_id,link_url,link_image,link_description,link_notes,link_rel,link_rss
         FROM $links_table WHERE 
@@ -476,7 +476,7 @@ class AIOWPSecurity_Scan
                 if (strpos(strtolower($entry['link_rel']),'eval(')!==false) $found_links.="eval() statement found in the link_rel field for link_id: ".$entry['link_id'];
                 if (strpos(strtolower($entry['link_rss']),'eval(')!==false) $found_links.="eval() statement found in the link_rss field for link_id: ".$entry['link_id'];
 
-                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'aiowpsecurity'), $found_links).'</p>';
+                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'all-in-one-wp-security-and-firewall'), $found_links).'</p>';
                 
                 if($found_options != ''){
                     $sus_links_entry_found = true;
@@ -485,11 +485,11 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_links_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in links table', 'aiowpsecurity').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in links table', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
 
         //Comments table
-        echo '<p class="aio_info_with_icon">'.__('Scanning comments table.........', 'aiowpsecurity').'</p>';
+        echo '<p class="aio_info_with_icon">'.__('Scanning comments table.........', 'all-in-one-wp-security-and-firewall').'</p>';
         $comments_table = $wpdb->prefix . 'comments';
         $sql= "SELECT comment_ID,comment_author_url,comment_agent,comment_author,comment_author_email,comment_content
         FROM $comments_table WHERE 
@@ -527,7 +527,7 @@ class AIOWPSecurity_Scan
                 if (strpos(strtolower($entry['comment_author_email']),'eval(')!==false) $found_comments.="eval() statement found in the comment_author_email field for link_id: ".$entry['comment_ID'];
                 if (strpos(strtolower($entry['comment_content']),'eval(')!==false) $found_comments.="eval() statement found in the comment_content field for link_id: ".$entry['comment_ID'];
 
-                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'aiowpsecurity'), $found_comments).'</p>';
+                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'all-in-one-wp-security-and-firewall'), $found_comments).'</p>';
                 
                 if($found_comments != ''){
                     $sus_comments_entry_found = true;
@@ -536,11 +536,11 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_comments_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in comments table', 'aiowpsecurity').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in comments table', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
         
         //postmeta table
-        echo '<p class="aio_info_with_icon">'.__('Scanning postmeta table.........', 'aiowpsecurity').'</p>';
+        echo '<p class="aio_info_with_icon">'.__('Scanning postmeta table.........', 'all-in-one-wp-security-and-firewall').'</p>';
         $postmeta_table = $wpdb->prefix . 'postmeta';
         $sql= "SELECT meta_id,meta_value
         FROM $postmeta_table WHERE 
@@ -555,7 +555,7 @@ class AIOWPSecurity_Scan
                 $found_postmeta = '';
                 if (strpos(strtolower($entry['meta_value']),'eval(')!==false) $found_postmeta.="eval() statement found in the meta_value field for meta_id: ".$entry['meta_id'];
 
-                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'aiowpsecurity'), $found_postmeta).'</p>';
+                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'all-in-one-wp-security-and-firewall'), $found_postmeta).'</p>';
                 
                 if($found_postmeta != ''){
                     $sus_postmeta_entry_found = true;
@@ -564,11 +564,11 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_postmeta_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in postmeta table', 'aiowpsecurity').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in postmeta table', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
 
         //usermeta table
-        echo '<p class="aio_info_with_icon">'.__('Scanning usermeta table.........', 'aiowpsecurity').'</p>';
+        echo '<p class="aio_info_with_icon">'.__('Scanning usermeta table.........', 'all-in-one-wp-security-and-firewall').'</p>';
         $usermeta_table = $wpdb->prefix . 'usermeta';
         $sql= "SELECT umeta_id,meta_value
         FROM $usermeta_table WHERE 
@@ -583,7 +583,7 @@ class AIOWPSecurity_Scan
                 $found_usermeta = '';
                 if (strpos(strtolower($entry['meta_value']),'eval(')!==false) $found_usermeta.="eval() statement found in the meta_value field for meta_id: ".$entry['umeta_id'];
 
-                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'aiowpsecurity'), $found_usermeta).'</p>';
+                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'all-in-one-wp-security-and-firewall'), $found_usermeta).'</p>';
                 
                 if($found_usermeta != ''){
                     $sus_usermeta_entry_found = true;
@@ -592,11 +592,11 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_usermeta_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in usermeta table', 'aiowpsecurity').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in usermeta table', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
 
         //users table
-        echo '<p class="aio_info_with_icon">'.__('Scanning users table.........', 'aiowpsecurity').'</p>';
+        echo '<p class="aio_info_with_icon">'.__('Scanning users table.........', 'all-in-one-wp-security-and-firewall').'</p>';
         $users_table = $wpdb->prefix . 'users';
         $sql= "SELECT ID,user_login,user_nicename,user_email,user_url,display_name
         FROM $users_table WHERE 
@@ -632,7 +632,7 @@ class AIOWPSecurity_Scan
                 if (strpos(strtolower($entry['user_url']),'eval(')!==false) $found_users.="eval() statement found in the user_url field for user ID: ".$entry['ID'];
                 if (strpos(strtolower($entry['display_name']),'eval(')!==false) $found_users.="eval() statement found in the display_name field for user ID: ".$entry['ID'];
 
-                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'aiowpsecurity'), $found_users).'</p>';
+                echo '<p class="aio_error_with_icon">'.sprintf( __('Possible suspicious entry - %s ', 'all-in-one-wp-security-and-firewall'), $found_users).'</p>';
                 
                 if($found_users != ''){
                     $sus_users_entry_found = true;
@@ -641,23 +641,23 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_users_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in users table', 'aiowpsecurity').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in users table', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
 
         $output = ob_get_contents();
         ob_end_clean();
 
         if($found_options != '' || $found_posts != '' || $found_links != '' || $found_comments != '' || $found_postmeta != '' || $found_usermeta != '' || $found_users != ''){
-            $error_msg = '<div id="message" class="error"><p><strong><p>'.__('The plugin has detected that there are some potentially suspicious entries in your database.', 'aiowpsecurity').'</p>';
-            $error_msg .= '<p>'.__('Please verify the results listed below to confirm whether the entries detected are genuinely suspicious or if they are false positives.', 'aiowpsecurity').'</p>';
+            $error_msg = '<div id="message" class="error"><p><strong><p>'.__('The plugin has detected that there are some potentially suspicious entries in your database.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $error_msg .= '<p>'.__('Please verify the results listed below to confirm whether the entries detected are genuinely suspicious or if they are false positives.', 'all-in-one-wp-security-and-firewall').'</p>';
             $error_msg .= '</strong></p></div>';
             
             //Display a yellow box disclaimer stating that if no suspicious entries found does not necessarily mean site is not currently hacked
             $malware_scan_tab_link = '<a href="admin.php?page='.AIOWPSEC_FILESCAN_MENU_SLUG.'&tab=tab2" target="_blank">Malware Scan</a>';
             $info_msg = '<strong>'.__('Disclaimer:').'</strong><br />';
-            $info_msg .= __('Even though this database scan has revealed some suspicious entries, this does not necessarily mean that other parts of your DB or site are also not compromised.', 'aiowpsecurity').'<br />';
-            $info_msg .= __('Please note that database scan performed by this feature is basic and looks for common malicious entries. Since hackers are continually evolving their methods this scan is not meant to be a guaranteed catch-all for malware.', 'aiowpsecurity').'<br />';
-            $info_msg .= sprintf( __('It is your responsibility to do the due diligence and perform a robust %s on your site if you wish to be more certain that your site is clean.', 'aiowpsecurity'), $malware_scan_tab_link);
+            $info_msg .= __('Even though this database scan has revealed some suspicious entries, this does not necessarily mean that other parts of your DB or site are also not compromised.', 'all-in-one-wp-security-and-firewall').'<br />';
+            $info_msg .= __('Please note that database scan performed by this feature is basic and looks for common malicious entries. Since hackers are continually evolving their methods this scan is not meant to be a guaranteed catch-all for malware.', 'all-in-one-wp-security-and-firewall').'<br />';
+            $info_msg .= sprintf( __('It is your responsibility to do the due diligence and perform a robust %s on your site if you wish to be more certain that your site is clean.', 'all-in-one-wp-security-and-firewall'), $malware_scan_tab_link);
             $disclaimer = '<div class="aio_yellow_box"><p>'.$info_msg.'</p></div>';
             
             return $error_msg.$disclaimer.$output;
@@ -670,9 +670,9 @@ class AIOWPSecurity_Scan
             //Display a yellow box disclaimer stating that if no suspicious entries found does not necessarily mean site is not currently hacked
             $malware_scan_tab_link = '<a href="admin.php?page='.AIOWPSEC_FILESCAN_MENU_SLUG.'&tab=tab2" target="_blank">Malware Scan</a>';
             $info_msg = '<strong>'.__('Disclaimer:').'</strong><br />';
-            $info_msg .= __('Even though the database scan has not revealed any suspicious entries, this does not necessarily mean that your site is actually completely clean or not compromised.', 'aiowpsecurity').'<br />';
-            $info_msg .= __('Please note that database scan performed by this feature is basic and looks for common malicious entries. Since hackers are continually evolving their methods this scan is not meant to be a guaranteed catch-all for malware.', 'aiowpsecurity').'<br />';
-            $info_msg .= sprintf( __('It is your responsibility to do the due diligence and perform a robust %s on your site if you wish to be more certain that your site is clean.', 'aiowpsecurity'), $malware_scan_tab_link);
+            $info_msg .= __('Even though the database scan has not revealed any suspicious entries, this does not necessarily mean that your site is actually completely clean or not compromised.', 'all-in-one-wp-security-and-firewall').'<br />';
+            $info_msg .= __('Please note that database scan performed by this feature is basic and looks for common malicious entries. Since hackers are continually evolving their methods this scan is not meant to be a guaranteed catch-all for malware.', 'all-in-one-wp-security-and-firewall').'<br />';
+            $info_msg .= sprintf( __('It is your responsibility to do the due diligence and perform a robust %s on your site if you wish to be more certain that your site is clean.', 'all-in-one-wp-security-and-firewall'), $malware_scan_tab_link);
             $disclaimer = '<div class="aio_yellow_box"><p>'.$info_msg.'</p></div>';
             
             return $scan_complete_msg.$disclaimer.$output;
@@ -712,18 +712,18 @@ class AIOWPSecurity_Scan
         if (!empty($scan_results_unserialized['files_added']))
         {
             //Output of files added
-            $files_added_output .= "\r\n".__('The following files were added to your host', 'aiowpsecurity').":\r\n";
+            $files_added_output .= "\r\n".__('The following files were added to your host', 'all-in-one-wp-security-and-firewall').":\r\n";
             foreach ($scan_results_unserialized['files_added'] as $key=>$value) {
-                $files_added_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';
+                $files_added_output .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
             }
             $files_added_output .= "\r\n======================================\r\n";
         }
         if (!empty($scan_results_unserialized['files_removed']))
         {
             //Output of files removed
-            $files_removed_output .= "\r\n".__('The following files were removed from your host', 'aiowpsecurity').":\r\n";
+            $files_removed_output .= "\r\n".__('The following files were removed from your host', 'all-in-one-wp-security-and-firewall').":\r\n";
             foreach ($scan_results_unserialized['files_removed'] as $key=>$value) {
-                $files_removed_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';
+                $files_removed_output .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
             }
             $files_removed_output .= "\r\n======================================\r\n";
         }
@@ -731,9 +731,9 @@ class AIOWPSecurity_Scan
         if (!empty($scan_results_unserialized['files_changed']))
         {
             //Output of files changed
-            $files_changed_output .= "\r\n".__('The following files were changed on your host', 'aiowpsecurity').":\r\n";
+            $files_changed_output .= "\r\n".__('The following files were changed on your host', 'all-in-one-wp-security-and-firewall').":\r\n";
             foreach ($scan_results_unserialized['files_changed'] as $key=>$value) {
-                $files_changed_output .= "\r\n".$key.' ('.__('modified on: ', 'aiowpsecurity').date('Y-m-d H:i:s',$value['last_modified']).')';            
+                $files_changed_output .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
             }
             $files_changed_output .= "\r\n======================================\r\n";
         }

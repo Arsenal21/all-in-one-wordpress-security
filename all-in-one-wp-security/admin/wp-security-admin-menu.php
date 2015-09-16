@@ -40,14 +40,14 @@ abstract class AIOWPSecurity_Admin_Menu
     function show_msg_settings_updated()
     {
         echo '<div id="message" class="updated fade"><p><strong>';
-        _e('Settings successfully updated.','aiowpsecurity');
+        _e('Settings successfully updated.','all-in-one-wp-security-and-firewall');
         echo '</strong></p></div>';
     }
     
     static function show_msg_record_deleted_st()
     {
         echo '<div id="message" class="updated fade"><p><strong>';
-        _e('The selected record(s) deleted successfully!','aiowpsecurity');
+        _e('The selected record(s) deleted successfully!','all-in-one-wp-security-and-firewall');
         echo '</strong></p></div>';
     }
     
