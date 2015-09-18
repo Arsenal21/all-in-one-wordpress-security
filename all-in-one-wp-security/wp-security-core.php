@@ -3,7 +3,7 @@
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '4.0.0';
+    var $version = '4.0.1';
     var $db_version = '1.6';
     var $plugin_url;
     var $plugin_path;
@@ -215,6 +215,7 @@ class AIO_WP_Security{
     
     function do_additional_plugins_loaded_tasks()
     {
+        global $aio_wp_security;
         if(isset($_GET['aiowpsec_do_log_out']))
         {
             wp_logout();
@@ -227,10 +228,22 @@ class AIO_WP_Security{
             if(isset($additional_data))
             {
                 $login_url = '';
+                //Check if rename login feature enabled
+                if($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page')=='1'){
+                    if (get_option('permalink_structure')){
+                        $home_url = trailingslashit(home_url());
+                    }else{
+                        $home_url = trailingslashit(home_url()) . '?';
+                    }
+                    $login_url = $home_url.$aio_wp_security->configs->get_value('aiowps_login_page_slug');
+                }else{
+                    $login_url = wp_login_url();
+                }
+
                 //Inspect the payload and do redirect to login page with a msg and redirect url
                 $logout_payload = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_logout_payload') : get_transient('aiowps_logout_payload'));
                 if(!empty($logout_payload['redirect_to'])){
-                    $login_url = AIOWPSecurity_Utility::add_query_data_to_url(wp_login_url(),'redirect_to',$logout_payload['redirect_to']);
+                    $login_url = AIOWPSecurity_Utility::add_query_data_to_url($login_url,'redirect_to',$logout_payload['redirect_to']);
                 }
                 if(!empty($logout_payload['msg'])){
                     $login_url .= '&'.$logout_payload['msg'];
