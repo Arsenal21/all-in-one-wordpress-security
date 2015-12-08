@@ -153,7 +153,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         ?>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Basic Firewall Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Basic Firewall Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -183,7 +183,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
         
         <div class="postbox">
-        <h3><label for="title"><?php _e('WordPress Pingback Vulnerability Protection', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('WordPress Pingback Vulnerability Protection', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -213,7 +213,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
             
         <div class="postbox">
-        <h3><label for="title"><?php _e('Block Accesss to Debug Log File', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Block Accesss to Debug Log File', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -339,7 +339,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-enable-additional-firewall-nonce'); ?>            
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Listing of Directory Contents', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Listing of Directory Contents', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -369,7 +369,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Trace and Track', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Trace and Track', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -399,7 +399,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Proxy Comment Posting', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Proxy Comment Posting', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -427,7 +427,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Bad Query Strings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Bad Query Strings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -456,7 +456,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Advanced Character String Filter', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Advanced Character String Filter', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -542,7 +542,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('5G Blacklist/Firewall Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('5G Blacklist/Firewall Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -634,7 +634,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Block Fake Googlebots', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Block Fake Googlebots', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -707,7 +707,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Prevent Hotlinking', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Prevent Hotlinking', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -835,7 +835,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('404 Detection Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('404 Detection Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -847,7 +847,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-404-detection-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable IP Lockout For 404 Events', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <th scope="row"><?php _e('Enable 404 IP Detection and Lockout', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_404_IP_lockout" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_404_IP_lockout')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want to enable the lockout of selected IP addresses.', 'all-in-one-wp-security-and-firewall'); ?></span>
@@ -855,13 +855,13 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('When you enable this checkbox, all 404 events on your site will be logged in the table below. You can monitor these events and select some IP addresses to be blocked in the table. All IP addresses you select to be blocked from the "404 Event Logs" table section will be unable to access your site.', 'all-in-one-wp-security-and-firewall');
+                        _e('When you enable this checkbox, all 404 events on your site will be logged in the table below. You can monitor these events and select some IP addresses listed in the table below and block them for a specified amount of time. All IP addresses you select to be blocked from the "404 Event Logs" table section will be unable to access your site during the time specified.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
                 </td>
             </tr>
-            <!-- currenty this option is automatically set when the aiowps_enable_404_IP_lockout feature is turned on
+            <!-- currently this option is automatically set when the aiowps_enable_404_IP_lockout feature is turned on
             <tr valign="top">
                 <th scope="row"><?php _e('Enable 404 Event Logging', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
@@ -898,7 +898,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('404 Event Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('404 Event Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php 
             //Fetch, prepare, sort, and filter our data...
@@ -920,7 +920,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Delete All 404 Event Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Delete All 404 Event Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-delete-404-event-records-nonce'); ?>
@@ -1006,7 +1006,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </div>
 
             <div class="postbox">
-                <h3><label for="title"><?php _e('Custom .htaccess Rules', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+                <h3 class="hndle"><label for="title"><?php _e('Custom .htaccess Rules', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
                 <div class="inside">
                     <table class="form-table">
                         <tr valign="top">

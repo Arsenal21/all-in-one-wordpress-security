@@ -140,7 +140,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('DB Prefix Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('DB Prefix Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -295,7 +295,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Manual Backup', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Manual Backup', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-db-manual-change-nonce'); ?>
@@ -308,7 +308,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Automated Scheduled Backups', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Automated Scheduled Backups', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge

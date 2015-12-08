@@ -168,7 +168,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Login Lockdown Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Login Lockdown Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -240,7 +240,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Currently Locked Out IP Address Ranges', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Currently Locked Out IP Address Ranges', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <div class="aio_blue_box aio_width_80">
                 <?php
@@ -295,7 +295,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             ?>
         </div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Failed Login Records', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Failed Login Records', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php 
             //Fetch, prepare, sort, and filter our data...
@@ -311,7 +311,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Delete All Failed Login Records', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Delete All Failed Login Records', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-delete-failed-login-records-nonce'); ?>
@@ -379,7 +379,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             ?>
         </div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Force User Logout Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Force User Logout Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -429,7 +429,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             ?>
         </div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Account Activity Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Account Activity Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php 
             //Fetch, prepare, sort, and filter our data...
@@ -475,7 +475,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
 
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Refresh Logged In User Data', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Refresh Logged In User Data', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-logged-in-users-nonce'); ?>
@@ -492,7 +492,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             ?>
         </div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Currently Logged In Users', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Currently Logged In Users', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php
             //Fetch, prepare, sort, and filter our data...

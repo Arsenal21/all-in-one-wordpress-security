@@ -276,6 +276,9 @@ class AIOWPSecurity_User_Login
             $from_name = empty($site_title)?'WordPress':$site_title;
             $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
             $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
+            if(FALSE === $sendMail){
+                $aio_wp_security->debug_logger->log_debug("Lockout notification email failed to send to ".$to_email_address." for IP ".$ip,4);
+            }
         }
     }
 
@@ -353,6 +356,9 @@ class AIOWPSecurity_User_Login
         $from_name = empty($site_title)?'WordPress':$site_title;
         $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
         $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
+        if(FALSE === $sendMail){
+            $aio_wp_security->debug_logger->log_debug("Unlock Request Notification email failed to send to ".$email,4);
+        }
     }
     
     /*

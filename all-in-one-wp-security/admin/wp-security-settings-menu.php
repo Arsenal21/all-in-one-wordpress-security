@@ -128,6 +128,21 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please restore your .htaccess file manually using the restore functionality in the ".htaccess File".', 'all-in-one-wp-security-and-firewall'));
             }
         }
+
+        if(isset($_POST['aiowps_save_debug_settings']))//Do form submission tasks
+        {
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-save-debug-settings'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed on save debug settings!",4);
+                die("Nonce check failed on save debug settings!");
+            }
+
+            $aio_wp_security->configs->set_value('aiowps_enable_debug',isset($_POST["aiowps_enable_debug"])?'1':'');
+            $aio_wp_security->configs->save_config();
+            $this->show_msg_settings_updated();
+        }
+
         ?>
         <div class="aio_grey_box">
  	<p>For information, updates and documentation, please visit the <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin" target="_blank">AIO WP Security & Firewall Plugin</a> Page.</p>
@@ -135,7 +150,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         </div>
         
         <div class="postbox">
-        <h3><label for="title"><?php _e('WP Security Plugin', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('WP Security Plugin', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <p><?php _e('Thank you for using our WordPress security plugin. There are a lot of security features in this plugin.', 'all-in-one-wp-security-and-firewall'); ?></p>
         <p><?php _e('Go through each menu items and enable the security options to add more security to your site. Start by activating the basic features first.', 'all-in-one-wp-security-and-firewall'); ?></p>
@@ -147,10 +162,11 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             <li><a href="admin.php?page=aiowpsec_settings&tab=tab3" target="_blank"><?php _e('Backup wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?></a></li>
         </ul>
         </p>
-        </div></div>
+        </div>
+        </div> <!-- end postbox-->
         
         <div class="postbox">
-        <h3><label for="title"><?php _e('Disable Security Features', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Disable Security Features', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
         <?php wp_nonce_field('aiowpsec-disable-all-features'); ?>
@@ -163,10 +179,11 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             <input type="submit" class="button" name="aiowpsec_disable_all_features" value="<?php _e('Disable All Security Features'); ?>" />
         </div>
         </form>   
-        </div></div>
+        </div>
+        </div> <!-- end postbox-->
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Disable All Firewall Rules', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Disable All Firewall Rules', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
         <?php wp_nonce_field('aiowpsec-disable-all-firewall-rules'); ?>
@@ -179,7 +196,33 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             <input type="submit" class="button" name="aiowpsec_disable_all_firewall_rules" value="<?php _e('Disable All Firewall Rules'); ?>" />
         </div>
         </form>   
-        </div></div>
+        </div>
+        </div> <!-- end postbox-->
+
+        <div class="postbox">
+            <h3 class="hndle"><label for="title"><?php _e('Debug Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+            <div class="inside">
+                <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
+                    <?php wp_nonce_field('aiowpsec-save-debug-settings'); ?>
+                    <div class="aio_blue_box">
+                        <?php
+                        echo '<p>'.__('This setting allows you to enable/disable debug for this plugin.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        ?>
+                    </div>
+
+                    <table class="form-table">
+                        <tr valign="top">
+                            <th scope="row"><?php _e('Enable Debug', 'all-in-one-wp-security-and-firewall')?>:</th>
+                            <td>
+                                <input name="aiowps_enable_debug" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_debug')=='1') echo ' checked="checked"'; ?> value="1"/>
+                                <span class="description"><?php _e('Check this if you want to enable debug', 'all-in-one-wp-security-and-firewall'); ?></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="submit" name="aiowps_save_debug_settings" value="<?php _e('Save Debug Settings', 'all-in-one-wp-security-and-firewall')?>" class="button" />
+                </form>
+            </div>
+        </div> <!-- end postbox-->
         <?php
     }
     
@@ -283,7 +326,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         {
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Save the current .htaccess file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Save the current .htaccess file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-save-htaccess-nonce'); ?>
@@ -292,7 +335,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Restore from a backed up .htaccess file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Restore from a backed up .htaccess file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-restore-htaccess-nonce'); ?>
@@ -314,7 +357,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('View Contents of the currently active .htaccess file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('View Contents of the currently active .htaccess file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php
             $ht_file = ABSPATH . '.htaccess';
@@ -394,7 +437,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         {
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Save the current wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Save the current wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-save-wp-config-nonce'); ?>
@@ -404,7 +447,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Restore from a backed up wp-config file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Restore from a backed up wp-config file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-restore-wp-config-nonce'); ?>
@@ -426,7 +469,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('View Contents of the currently active wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('View Contents of the currently active wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php
             $wp_config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
@@ -473,7 +516,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('WP Generator Meta Info', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('WP Generator Meta Info', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -623,7 +666,7 @@ function render_tab5()
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Export AIOWPS Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Export AIOWPS Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-export-settings-nonce'); ?>
@@ -636,7 +679,7 @@ function render_tab5()
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Import AIOWPS Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Import AIOWPS Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-import-settings-nonce'); ?>

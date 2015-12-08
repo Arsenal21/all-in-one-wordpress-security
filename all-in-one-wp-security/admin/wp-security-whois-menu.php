@@ -80,7 +80,7 @@ class AIOWPSecurity_WhoIs_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Perform a WHOIS Lookup for an IP or Domain Name', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Perform a WHOIS Lookup for an IP or Domain Name', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <form action="" method="POST">
                 <?php wp_nonce_field('aiowpsec-whois-lookup-nonce'); ?>
@@ -108,6 +108,7 @@ class AIOWPSecurity_WhoIs_Menu extends AIOWPSecurity_Admin_Menu
             require_once(AIO_WP_SECURITY_LIB_PATH.'/whois/whois.main.php');
             require_once(AIO_WP_SECURITY_LIB_PATH.'/whois/whois.utils.php');
             $input_val = trim($_POST['aiowps_whois_lookup_field']);
+            $input_val = preg_replace('#^https?://#', '', $input_val);
             if (filter_var($input_val, FILTER_VALIDATE_IP) || filter_var(gethostbyname($input_val), FILTER_VALIDATE_IP))
             {
                 //$info_msg_string = '<p class="aio_info_with_icon">'.sprintf( __('WHOIS lookup successfully completed. Please see the results below:', 'all-in-one-wp-security-and-firewall')).'</p>';

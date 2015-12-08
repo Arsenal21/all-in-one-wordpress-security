@@ -190,7 +190,10 @@ class AIOWPSecurity_Backup
             $attachment = array( $this->last_backup_file_path );
             $message = __( 'Attached is your latest DB backup file for site URL', 'all-in-one-wp-security-and-firewall' ) . ' ' . get_option( 'siteurl' ) . __( ' generated on', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
 
-            wp_mail( $to, $subject, $message, $headers, $attachment );
+            $sendMail = wp_mail( $to, $subject, $message, $headers, $attachment );
+            if(FALSE === $sendMail){
+                $aio_wp_security->debug_logger->log_debug("Backup notification email failed to send to ".$to,4);
+            }
         }
     }
     
@@ -201,8 +204,7 @@ class AIOWPSecurity_Backup
         {
             $path_parts = pathinfo($this->last_backup_file_path);
             $backups_path = $path_parts['dirname'];
-            $files = scandir( $backups_path . '/', 1 );
-
+            $files = AIOWPSecurity_Utility_File::scan_dir_sort_date( $backups_path );
             $count = 0;
 
             foreach ( $files as $file ) 
@@ -282,7 +284,19 @@ class AIOWPSecurity_Backup
         $max_rows_event_table = '5000'; //Keep a max of 5000 rows in the events table
         $max_rows_event_table = apply_filters( 'aiowps_max_rows_event_table', $max_rows_event_table );
         AIOWPSecurity_Utility::cleanup_table($events_table_name, $max_rows_event_table);
-        
+
+        //Check the failed logins table
+        $failed_logins_table_name = AIOWPSEC_TBL_FAILED_LOGINS;
+        $max_rows_failed_logins_table = '5000'; //Keep a max of 5000 rows in the events table
+        $max_rows_failed_logins_table = apply_filters( 'aiowps_max_rows_failed_logins_table', $max_rows_failed_logins_table );
+        AIOWPSecurity_Utility::cleanup_table($failed_logins_table_name, $max_rows_failed_logins_table);
+
+        //Check the login activity table
+        $login_activity_table_name = AIOWPSEC_TBL_USER_LOGIN_ACTIVITY;
+        $max_rows_login_activity_table = '5000'; //Keep a max of 5000 rows in the events table
+        $max_rows_login_activity_table = apply_filters( 'aiowps_max_rows_login_attempts_table', $max_rows_login_activity_table );
+        AIOWPSecurity_Utility::cleanup_table($login_activity_table_name, $max_rows_login_activity_table);
+
         //Keep adding other DB cleanup tasks as they arise...
     }
 }

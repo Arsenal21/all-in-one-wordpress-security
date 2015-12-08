@@ -29,7 +29,7 @@ abstract class AIOWPSecurity_Admin_Menu
         //Always send string with translation markers in it
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php echo $title; ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php echo $title; ?></label></h3>
         <div class="inside">
             <?php echo $content; ?>
         </div>

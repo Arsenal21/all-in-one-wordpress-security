@@ -11,6 +11,9 @@ class AIOWPSecurity_Configure_Settings
         global $aio_wp_security;
         $blog_email_address = get_bloginfo('admin_email'); //Get the blog admin email address - we will use as the default value
 
+        //Debug
+        $aio_wp_security->configs->set_value('aiowps_enable_debug','');//Checkbox
+
         //WP Generator Meta Tag feature
         $aio_wp_security->configs->set_value('aiowps_remove_wp_generator_meta_info','');//Checkbox
         
@@ -133,6 +136,9 @@ class AIOWPSecurity_Configure_Settings
     {
         global $aio_wp_security;
         $blog_email_address = get_bloginfo('admin_email'); //Get the blog admin email address - we will use as the default value
+
+        //Debug
+        $aio_wp_security->configs->add_value('aiowps_enable_debug','');//Checkbox
 
         //WP Generator Meta Tag feature
         $aio_wp_security->configs->add_value('aiowps_remove_wp_generator_meta_info','');//Checkbox

@@ -168,7 +168,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         }
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Rename Login Page Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Rename Login Page Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -333,7 +333,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         ?>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Cookie Based Brute Force Login Prevention', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Cookie Based Brute Force Login Prevention', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -512,7 +512,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         </div>
         <form action="" method="POST">
         <div class="postbox">
-        <h3><label for="title"><?php _e('Login Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Login Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -532,7 +532,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>        
         <div class="postbox">
-        <h3><label for="title"><?php _e('Custom Login Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Custom Login Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -550,7 +550,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>        
         <div class="postbox">
-        <h3><label for="title"><?php _e('Lost Password Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Lost Password Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -603,8 +603,8 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                         //success case
                         $result = 1;
                         $list = $payload[1];
-                        $banned_ip_data = implode(PHP_EOL, $list);
-                        $aio_wp_security->configs->set_value('aiowps_allowed_ip_addresses',$banned_ip_data);
+                        $whitelist_ip_data = implode(PHP_EOL, $list);
+                        $aio_wp_security->configs->set_value('aiowps_allowed_ip_addresses',$whitelist_ip_data);
                         $_POST['aiowps_allowed_ip_addresses'] = ''; //Clear the post variable for the banned address list
                     }
                     else{
@@ -659,7 +659,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Login IP Whitelist Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Login IP Whitelist Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -692,11 +692,14 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                     <div class="aiowps_more_info_body">
                             <?php 
-                            echo '<p class="description">'.__('Each IP address must be on a new line.', 'all-in-one-wp-security-and-firewall').'</p>';
-                            echo '<p class="description">'.__('To specify an IP range use a wildcard "*" character. Acceptable ways to use wildcards is shown in the examples below:', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description"><strong>'.__('Each IP address must be on a new line.', 'all-in-one-wp-security-and-firewall').'</strong></p>';
+                            echo '<p class="description">'.__('To specify an IPv4 range use a wildcard "*" character. Acceptable ways to use wildcards is shown in the examples below:', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 1: 195.47.89.*', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 2: 195.47.*.*', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 3: 195.*.*.*', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Or you can enter an IPv6 address (NOTE: ranges/wildcards are currently not supported for ipv6)', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 4: 4102:0:3ea6:79fd:b:46f8:230f:bb05', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 5: 2205:0:1ca2:810d::', 'all-in-one-wp-security-and-firewall').'</p>';
                             ?>
                     </div>
 
@@ -745,7 +748,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         </div>
         <form action="" method="POST">
         <div class="postbox">
-        <h3><label for="title"><?php _e('Login Form Honeypot Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Login Form Honeypot Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge

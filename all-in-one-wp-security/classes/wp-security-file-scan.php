@@ -76,7 +76,10 @@ class AIOWPSecurity_Scan
             $message .= $scan_results_message;
             $message .= "\r\n".__( 'Login to your site to view the scan details.', 'all-in-one-wp-security-and-firewall' );
 
-            wp_mail( $to, $subject, $message, $headers );
+            $sendMail = wp_mail( $to, $subject, $message, $headers );
+            if(FALSE === $sendMail){
+                $aio_wp_security->debug_logger->log_debug("File change notification email failed to send to ".$to,4);
+            }
         }
     }
     

@@ -90,7 +90,7 @@ class AIOWPSecurity_Maintenance_Menu extends AIOWPSecurity_Admin_Menu
         }
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('General Visitor Lockout', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('General Visitor Lockout', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-site-lockout'); ?>

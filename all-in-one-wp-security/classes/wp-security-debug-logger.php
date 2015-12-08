@@ -17,8 +17,6 @@ class AIOWPSecurity_Logger
     function __construct()
     {
         $this->log_folder_path = AIO_WP_SECURITY_PATH . '/logs';
-        //TODO - check config and if debug is enabled then set the enabled flag to true
-        $this->debug_enabled = true;
     }
     
     function get_debug_timestamp()
@@ -66,6 +64,10 @@ class AIOWPSecurity_Logger
     
     function log_debug($message,$level=0,$section_break=false,$file_name='')
     {
+        global $aio_wp_security;
+        $debug_config = $aio_wp_security->configs->get_value('aiowps_enable_debug');
+        $this->debug_enabled = empty($debug_config)?false:true;
+
         if (!$this->debug_enabled) return;
         $content = $this->get_debug_timestamp();//Timestamp
         $content .= $this->get_debug_status($level);//Debug status
@@ -77,6 +79,10 @@ class AIOWPSecurity_Logger
 
     function log_debug_cron($message,$level=0,$section_break=false)
     {
+        global $aio_wp_security;
+        $debug_config = $aio_wp_security->configs->get_value('aiowps_enable_debug');
+        $this->debug_enabled = empty($debug_config)?false:true;
+
         if (!$this->debug_enabled) return;
         $content = $this->get_debug_timestamp();//Timestamp
         $content .= $this->get_debug_status($level);//Debug status

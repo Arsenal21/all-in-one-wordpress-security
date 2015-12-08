@@ -175,8 +175,9 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
             AIOWPSecurity_Admin_Menu::show_msg_updated_st($info_msg);
         }
     }
-    
-    function prepare_items() {
+
+    function prepare_items()
+    {
         //First, lets decide how many records per page to show
         $per_page = 20;
         $columns = $this->get_columns();
@@ -184,26 +185,26 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         $sortable = $this->get_sortable_columns();
 
         $this->_column_headers = array($columns, $hidden, $sortable);
-        
+
         $this->process_bulk_action();
-    	
-    	global $wpdb;
+
+        global $wpdb;
         global $aio_wp_security;
         $minimum_comments_per_ip = $aio_wp_security->configs->get_value('aiowps_spam_ip_min_comments');
-        if(empty($minimum_comments_per_ip)){
+        if (empty($minimum_comments_per_ip)) {
             $minimum_comments_per_ip = 5;
         }
         /* -- Ordering parameters -- */
-	//Parameters that are going to be used to order the result
-        isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
-        isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
-        
-	$orderby = !empty($orderby) ? esc_sql($orderby) : 'amount';
-	$order = !empty($order) ? esc_sql($order) : 'DESC';
+        //Parameters that are going to be used to order the result
+        isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]) : $orderby = '';
+        isset($_GET["order"]) ? $order = strip_tags($_GET["order"]) : $order = '';
+
+        $orderby = !empty($orderby) ? esc_sql($orderby) : 'amount';
+        $order = !empty($order) ? esc_sql($order) : 'DESC';
 
         $orderby = AIOWPSecurity_Utility::sanitize_value_by_array($orderby, $sortable);
         $order = AIOWPSecurity_Utility::sanitize_value_by_array($order, array('DESC' => '1', 'ASC' => '1'));
-        
+
         $sql = $wpdb->prepare("SELECT   comment_author_IP, COUNT(*) AS amount
                 FROM     $wpdb->comments 
                 WHERE    comment_approved = 'spam'
@@ -214,12 +215,12 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         $data = $wpdb->get_results($sql, ARRAY_A);
         $current_page = $this->get_pagenum();
         $total_items = count($data);
-        $data = array_slice($data,(($current_page-1)*$per_page),$per_page);
+        $data = array_slice($data, (($current_page - 1) * $per_page), $per_page);
         $this->items = $data;
-        $this->set_pagination_args( array(
+        $this->set_pagination_args(array(
             'total_items' => $total_items,                  //WE have to calculate the total number of items
-            'per_page'    => $per_page,                     //WE have to determine how many items to show on a page
-            'total_pages' => ceil($total_items/$per_page)   //WE have to calculate the total number of pages
+            'per_page' => $per_page,                     //WE have to determine how many items to show on a page
+            'total_pages' => ceil($total_items / $per_page)   //WE have to calculate the total number of pages
         ));
     }
 }

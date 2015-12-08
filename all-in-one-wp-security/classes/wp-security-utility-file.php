@@ -10,7 +10,11 @@ class AIOWPSecurity_Utility_File
          /* Let's initiliaze our class variable array with all of the files and/or directories we wish to check permissions for.
          * NOTE: we can add to this list in future if we wish
          */
-         $this->files_and_dirs_to_check = array(
+
+        //Get wp-config.php file path
+        $wp_config_path = AIOWPSecurity_Utility_File::get_wp_config_file_path();
+
+        $this->files_and_dirs_to_check = array(
             array('name'=>'root directory','path'=>ABSPATH,'permissions'=>'0755'),
             array('name'=>'wp-includes/','path'=>ABSPATH."wp-includes",'permissions'=>'0755'),
             array('name'=>'.htaccess','path'=>ABSPATH.".htaccess",'permissions'=>'0644'),
@@ -20,7 +24,7 @@ class AIOWPSecurity_Utility_File
             array('name'=>'wp-content/plugins/','path'=>ABSPATH."wp-content/plugins",'permissions'=>'0755'),
             array('name'=>'wp-admin/','path'=>ABSPATH."wp-admin",'permissions'=>'0755'),
             array('name'=>'wp-content/','path'=>ABSPATH."wp-content",'permissions'=>'0755'),
-            array('name'=>'wp-config.php','path'=>ABSPATH."wp-config.php",'permissions'=>'0644')
+            array('name'=>'wp-config.php','path'=>$wp_config_path,'permissions'=>'0644')
             //Add as many files or dirs as needed by following the convention above
         );
 
@@ -408,6 +412,29 @@ class AIOWPSecurity_Utility_File
             $attachment_id = $wpdb->get_var( $wpdb->prepare( "SELECT wposts.ID FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta WHERE wposts.ID = wpostmeta.post_id AND wpostmeta.meta_key = '_wp_attached_file' AND wpostmeta.meta_value = '%s' AND wposts.post_type = 'attachment'", $attachment_url ) );
         }
         return $attachment_id;
-    }    
-    
+    }
+
+
+    /**
+     * Will return an indexed array of files sorted by last modified timestamp
+     * @param $dir
+     * @param string $sort (ASC, DESC)
+     * @return array|bool
+     */
+    static function scan_dir_sort_date($dir, $sort='DESC') {
+        $files = array();
+        foreach (scandir($dir) as $file) {
+            $files[$file] = filemtime($dir . '/' . $file);
+        }
+
+        arsort($files);
+        $files = array_keys($files);
+        if($sort == 'ASC'){
+            $files = array_reverse($files);
+        }
+        return ($files) ? $files : false;
+    }
+
+
+
 }

@@ -135,6 +135,10 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                         $from_name = empty($site_title)?'WordPress':$site_title;
                         $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
                         $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
+                        if(FALSE === $sendMail){
+                            $aio_wp_security->debug_logger->log_debug("Manual account approval notification email failed to send to ".$to_email_address,4);
+                        }
+
                     }
                 }
             }
@@ -161,6 +165,10 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                 $from_name = empty($site_title)?'WordPress':$site_title;
                 $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
                 $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
+                if(FALSE === $sendMail){
+                    $aio_wp_security->debug_logger->log_debug("Manual account approval notification email failed to send to ".$to_email_address,4);
+                }
+
                 
             }else if($result === false){
                 $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_List_Registered_Users::approve_selected_accounts() - could not approve account ID: $user_id",4);

@@ -65,6 +65,18 @@ class AIOWPSecurity_Utility_IP
                 $item = filter_var($item, FILTER_SANITIZE_STRING);
                 if (strlen( $item ) > 0) 
                 {
+                    //ipv6 - for now we will support only whole ipv6 addresses, NOT ranges
+                    if(strpos($item, ':') !== false){
+                        //possible ipv6 addr
+                        $res = WP_Http::is_ip_address($item);
+                        if(FALSE === $res){
+                            $errors .= '<p>'.$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        }else if($res == '6'){
+                            $list[] = trim($item);
+                        }
+                        continue;
+                    }
+
                     $ipParts = explode('.', $item);
                     $isIP = 0;
                     $partcount = 1;

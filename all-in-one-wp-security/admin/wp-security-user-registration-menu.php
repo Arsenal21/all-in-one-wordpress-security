@@ -113,7 +113,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-user-registration-settings-nonce'); ?>            
         <div class="postbox">
-        <h3><label for="title"><?php _e('Manually Approve New Registrations', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Manually Approve New Registrations', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <div class="aio_blue_box">
             <?php
@@ -147,7 +147,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
         </form>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Approve Registered Users', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Approve Registered Users', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php
             //Fetch, prepare, sort, and filter our data...
@@ -199,7 +199,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
             ?>
         </div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Registration Page Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('Registration Page Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
