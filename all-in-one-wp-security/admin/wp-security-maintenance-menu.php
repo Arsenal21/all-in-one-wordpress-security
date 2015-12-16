@@ -19,7 +19,7 @@ class AIOWPSecurity_Maintenance_Menu extends AIOWPSecurity_Admin_Menu
     function set_menu_tabs() 
     {
         $this->menu_tabs = array(
-        'tab1' => __('Visitor Lockout', 'aiowpsecurity'), 
+        'tab1' => __('Visitor Lockout', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -85,31 +85,31 @@ class AIOWPSecurity_Maintenance_Menu extends AIOWPSecurity_Admin_Menu
             $aio_wp_security->configs->set_value('aiowps_site_lockout_msg',$maint_msg);//Text area/msg box
             $aio_wp_security->configs->save_config();
 
-            $this->show_msg_updated(__('Site lockout feature settings saved!', 'aiowpsecurity'));
+            $this->show_msg_updated(__('Site lockout feature settings saved!', 'all-in-one-wp-security-and-firewall'));
 
         }
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('General Visitor Lockout', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('General Visitor Lockout', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-site-lockout'); ?>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This feature allows you to put your site into "maintenance mode" by locking down the front-end to all visitors except logged in users with super admin privileges.', 'aiowpsecurity').'</p>';
-            echo '<p>'.__('Locking your site down to general visitors can be useful if you are investigating some issues on your site or perhaps you might be doing some maintenance and wish to keep out all traffic for security reasons.', 'aiowpsecurity').'</p>';
+            echo '<p>'.__('This feature allows you to put your site into "maintenance mode" by locking down the front-end to all visitors except logged in users with super admin privileges.', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p>'.__('Locking your site down to general visitors can be useful if you are investigating some issues on your site or perhaps you might be doing some maintenance and wish to keep out all traffic for security reasons.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Front-end Lockout', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Front-end Lockout', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_site_lockout" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_site_lockout')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want all visitors except those who are logged in as administrator to be locked out of the front-end of your site.', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want all visitors except those who are logged in as administrator to be locked out of the front-end of your site.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>
             <tr valign="top">
-                <th scope="row"><?php _e('Enter a Message:', 'aiowpsecurity')?></th>
+                <th scope="row"><?php _e('Enter a Message:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
                     <?php
                     $aiowps_site_lockout_msg_raw = $aio_wp_security->configs->get_value('aiowps_site_lockout_msg');
@@ -121,7 +121,7 @@ class AIOWPSecurity_Maintenance_Menu extends AIOWPSecurity_Admin_Menu
                     wp_editor($aiowps_site_lockout_msg, "aiowps_site_lockout_msg_editor_content", $aiowps_site_lockout_msg_settings);                    
                     ?>
                     <br />
-                    <span class="description"><?php _e('Enter a message you wish to display to visitors when your site is in maintenance mode.','aiowpsecurity');?></span>
+                    <span class="description"><?php _e('Enter a message you wish to display to visitors when your site is in maintenance mode.','all-in-one-wp-security-and-firewall');?></span>
                 </td>
             </tr>
 

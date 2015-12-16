@@ -25,13 +25,13 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
     function set_menu_tabs() 
     {
         $this->menu_tabs = array(
-        'tab1' => __('Basic Firewall Rules', 'aiowpsecurity'),
-        'tab2' => __('Additional Firewall Rules', 'aiowpsecurity'),
-        'tab3' => __('5G Blacklist Firewall Rules', 'aiowpsecurity'),
-        'tab4' => __('Internet Bots', 'aiowpsecurity'),
-        'tab5' => __('Prevent Hotlinks', 'aiowpsecurity'),    
-        'tab6' => __('404 Detection', 'aiowpsecurity'),
-        'tab7' => __('Custom Rules', 'aiowpsecurity'),
+        'tab1' => __('Basic Firewall Rules', 'all-in-one-wp-security-and-firewall'),
+        'tab2' => __('Additional Firewall Rules', 'all-in-one-wp-security-and-firewall'),
+        'tab3' => __('5G Blacklist Firewall Rules', 'all-in-one-wp-security-and-firewall'),
+        'tab4' => __('Internet Bots', 'all-in-one-wp-security-and-firewall'),
+        'tab5' => __('Prevent Hotlinks', 'all-in-one-wp-security-and-firewall'),
+        'tab6' => __('404 Detection', 'all-in-one-wp-security-and-firewall'),
+        'tab7' => __('Custom Rules', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -115,25 +115,25 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('Settings were successfully saved', 'aiowpsecurity'));
+                $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
             }
             else if($res == -1)
             {
-                $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'aiowpsecurity'));
+                $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
         }
 
         ?>
-        <h2><?php _e('Firewall Settings', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Firewall Settings', 'all-in-one-wp-security-and-firewall')?></h2>
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-enable-basic-firewall-nonce'); ?>            
 
         <div class="aio_blue_box">
             <?php
             $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_SETTINGS_MENU_SLUG.'&tab=tab2" target="_blank">backup</a>';
-            $info_msg = sprintf( __('This should not have any impact on your site\'s general functionality but if you wish you can take a %s of your .htaccess file before proceeding.', 'aiowpsecurity'), $backup_tab_link);
-            echo '<p>'.__('The features in this tab allow you to activate some basic firewall security protection rules for your site.', 'aiowpsecurity').
-            '<br />'.__('The firewall functionality is achieved via the insertion of special code into your currently active .htaccess file.', 'aiowpsecurity').
+            $info_msg = sprintf( __('This should not have any impact on your site\'s general functionality but if you wish you can take a %s of your .htaccess file before proceeding.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link);
+            echo '<p>'.__('The features in this tab allow you to activate some basic firewall security protection rules for your site.', 'all-in-one-wp-security-and-firewall').
+            '<br />'.__('The firewall functionality is achieved via the insertion of special code into your currently active .htaccess file.', 'all-in-one-wp-security-and-firewall').
             '<br />'.$info_msg.'</p>';
             ?>
         </div>
@@ -143,9 +143,9 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         {
         ?>
             <div class="aio_yellow_box">
-                <p><?php _e('Attention:', 'aiowpsecurity'); ?>
-                <br /><?php _e('Currently the ', 'aiowpsecurity'); ?><strong><?php _e('Enable Pingback Protection', 'aiowpsecurity'); ?></strong><?php _e(' is active.', 'aiowpsecurity'); ?></p>
-                <p><strong><?php _e('Please beware that if you are using the WordPress iOS App, then you will need to deactivate this feature in order for the app to work properly.', 'aiowpsecurity'); ?></strong></p>
+                <p><?php _e('Attention:', 'all-in-one-wp-security-and-firewall'); ?>
+                <br /><?php _e('Currently the ', 'all-in-one-wp-security-and-firewall'); ?><strong><?php _e('Enable Pingback Protection', 'all-in-one-wp-security-and-firewall'); ?></strong><?php _e(' is active.', 'all-in-one-wp-security-and-firewall'); ?></p>
+                <p><strong><?php _e('Please beware that if you are using the WordPress iOS App, then you will need to deactivate this feature in order for the app to work properly.', 'all-in-one-wp-security-and-firewall'); ?></strong></p>
             </div>
             
         <?php
@@ -153,7 +153,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         ?>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Basic Firewall Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Basic Firewall Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -161,20 +161,20 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Basic Firewall Protection', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Basic Firewall Protection', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_basic_firewall" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_basic_firewall')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to apply basic firewall protection to your site.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to apply basic firewall protection to your site.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                         <?php 
-                        echo '<p class="description">'.__('This setting will implement the following basic firewall protection mechanisms on your site:', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('1) Protect your htaccess file by denying access to it.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('2) Disable the server signature.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('3) Limit file upload size (10MB).', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('4) Protect your wp-config.php file by denying access to it.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('The above firewall features will be applied via your .htaccess file and should not affect your site\'s overall functionality.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('You are still advised to take a backup of your active .htaccess file just in case.', 'aiowpsecurity').'</p>';
+                        echo '<p class="description">'.__('This setting will implement the following basic firewall protection mechanisms on your site:', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('1) Protect your htaccess file by denying access to it.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('2) Disable the server signature.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('3) Limit file upload size (10MB).', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('4) Protect your wp-config.php file by denying access to it.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('The above firewall features will be applied via your .htaccess file and should not affect your site\'s overall functionality.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('You are still advised to take a backup of your active .htaccess file just in case.', 'all-in-one-wp-security-and-firewall').'</p>';
                         ?>
                 </div>
                 </td>
@@ -183,7 +183,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
         
         <div class="postbox">
-        <h3><label for="title"><?php _e('WordPress Pingback Vulnerability Protection', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('WordPress Pingback Vulnerability Protection', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -191,20 +191,20 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Pingback Protection', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Pingback Protection', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_pingback_firewall" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_pingback_firewall')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you are not using the WP XML-RPC functionality and you want to enable protection against WordPress pingback vulnerabilities.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you are not using the WP XML-RPC functionality and you want to enable protection against WordPress pingback vulnerabilities.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                         <?php 
-                        echo '<p class="description">'.__('This setting will add a directive in your .htaccess to disable access to the WordPress xmlrpc.php file which is responsible for the XML-RPC functionality such as pingbacks in WordPress.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('Hackers can exploit various pingback vulnerabilities in the WordPress XML-RPC API in a number of ways such as:', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('1) Denial of Service (DoS) attacks', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('2) Hacking internal routers.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('3) Scanning ports in internal networks to get info from various hosts.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('Apart from the security protection benefit, this feature may also help reduce load on your server, particularly if your site currently has a lot of unwanted traffic hitting the XML-RPC API on your installation.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('NOTE: You should only enable this feature if you are not currently using the XML-RPC functionality on your WordPress installation.', 'aiowpsecurity').'</p>';
+                        echo '<p class="description">'.__('This setting will add a directive in your .htaccess to disable access to the WordPress xmlrpc.php file which is responsible for the XML-RPC functionality such as pingbacks in WordPress.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('Hackers can exploit various pingback vulnerabilities in the WordPress XML-RPC API in a number of ways such as:', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('1) Denial of Service (DoS) attacks', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('2) Hacking internal routers.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('3) Scanning ports in internal networks to get info from various hosts.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('Apart from the security protection benefit, this feature may also help reduce load on your server, particularly if your site currently has a lot of unwanted traffic hitting the XML-RPC API on your installation.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('NOTE: You should only enable this feature if you are not currently using the XML-RPC functionality on your WordPress installation.', 'all-in-one-wp-security-and-firewall').'</p>';
                         ?>
                 </div>
                 </td>
@@ -213,7 +213,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
             
         <div class="postbox">
-        <h3><label for="title"><?php _e('Block Accesss to Debug Log File', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Block Accesss to Debug Log File', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -221,15 +221,15 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Block Access to debug.log File', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Block Access to debug.log File', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_block_debug_log_file_access" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_block_debug_log_file_access')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to block access to the debug.log file that WordPress creates when debug logging is enabled.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to block access to the debug.log file that WordPress creates when debug logging is enabled.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <?php 
-                    echo '<p class="description">'.__('WordPress has an option to turn on the debug logging to a file located in wp-content/debug.log. This file may contain sensitive information.', 'aiowpsecurity').'</p>';
-                    echo '<p class="description">'.__('Using this optoin will block external access to this file. You can still access this file by logging into your site via FTP', 'aiowpsecurity').'</p>';
+                    echo '<p class="description">'.__('WordPress has an option to turn on the debug logging to a file located in wp-content/debug.log. This file may contain sensitive information.', 'all-in-one-wp-security-and-firewall').'</p>';
+                    echo '<p class="description">'.__('Using this optoin will block external access to this file. You can still access this file by logging into your site via FTP', 'all-in-one-wp-security-and-firewall').'</p>';
                     ?>
                 </div>
                 </td>
@@ -237,7 +237,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
             
-        <input type="submit" name="aiowps_apply_basic_firewall_settings" value="<?php _e('Save Basic Firewall Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_apply_basic_firewall_settings" value="<?php _e('Save Basic Firewall Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         <?php
     }
@@ -309,11 +309,11 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('You have successfully saved the Additional Firewall Protection configuration', 'aiowpsecurity'));
+                $this->show_msg_updated(__('You have successfully saved the Additional Firewall Protection configuration', 'all-in-one-wp-security-and-firewall'));
             }
             else if($res == -1)
             {
-                $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'aiowpsecurity'));
+                $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
             
             if($error)
@@ -323,14 +323,14 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
         }
         ?>
-        <h2><?php _e('Additional Firewall Protection', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Additional Firewall Protection', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
             $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_SETTINGS_MENU_SLUG.'&tab=tab2" target="_blank">backup</a>';
-            $info_msg = sprintf( __('Due to the nature of the code being inserted to the .htaccess file, this feature may break some functionality for certain plugins and you are therefore advised to take a %s of .htaccess before applying this configuration.', 'aiowpsecurity'), $backup_tab_link);
+            $info_msg = sprintf( __('Due to the nature of the code being inserted to the .htaccess file, this feature may break some functionality for certain plugins and you are therefore advised to take a %s of .htaccess before applying this configuration.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link);
 
-            echo '<p>'.__('This feature allows you to activate more advanced firewall settings to your site.', 'aiowpsecurity').
-            '<br />'.__('The advanced firewall rules are applied via the insertion of special code to your currently active .htaccess file.', 'aiowpsecurity').
+            echo '<p>'.__('This feature allows you to activate more advanced firewall settings to your site.', 'all-in-one-wp-security-and-firewall').
+            '<br />'.__('The advanced firewall rules are applied via the insertion of special code to your currently active .htaccess file.', 'all-in-one-wp-security-and-firewall').
             '<br />'.$info_msg.'</p>';
             ?>
         </div>
@@ -339,7 +339,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-enable-additional-firewall-nonce'); ?>            
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Listing of Directory Contents', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Listing of Directory Contents', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -348,19 +348,19 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Disable Index Views', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Disable Index Views', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_disable_index_views" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_disable_index_views')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to disable directory and file listing.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to disable directory and file listing.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('By default, an Apache server will allow the listing of the contents of a directory if it doesn\'t contain an index.php file.', 'aiowpsecurity');
+                        _e('By default, an Apache server will allow the listing of the contents of a directory if it doesn\'t contain an index.php file.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('This feature will prevent the listing of contents for all directories.', 'aiowpsecurity');
+                        _e('This feature will prevent the listing of contents for all directories.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('NOTE: In order for this feature to work "AllowOverride" of the Indexes directive must be enabled in your httpd.conf file. Ask your hosting provider to check this if you don\'t have access to httpd.conf', 'aiowpsecurity');
+                        _e('NOTE: In order for this feature to work "AllowOverride" of the Indexes directive must be enabled in your httpd.conf file. Ask your hosting provider to check this if you don\'t have access to httpd.conf', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
@@ -369,7 +369,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Trace and Track', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Trace and Track', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -378,19 +378,19 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Disable Trace and Track', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Disable Trace and Track', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_disable_trace_and_track" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_disable_trace_and_track')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to disable trace and track.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to disable trace and track.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('HTTP Trace attack (XST) can be used to return header requests and grab cookies and other information.', 'aiowpsecurity');
+                        _e('HTTP Trace attack (XST) can be used to return header requests and grab cookies and other information.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('This hacking technique is usually used together with cross site scripting attacks (XSS).', 'aiowpsecurity');
+                        _e('This hacking technique is usually used together with cross site scripting attacks (XSS).', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('Disabling trace and track on your site will help prevent HTTP Trace attacks.', 'aiowpsecurity');
+                        _e('Disabling trace and track on your site will help prevent HTTP Trace attacks.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
@@ -399,7 +399,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Proxy Comment Posting', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Proxy Comment Posting', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -409,16 +409,16 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Forbid Proxy Comment Posting', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Forbid Proxy Comment Posting', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_forbid_proxy_comments" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_forbid_proxy_comments')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to forbid proxy comment posting.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to forbid proxy comment posting.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('This setting will deny any requests that use a proxy server when posting comments.', 'aiowpsecurity');
-                        echo '<br />'.__('By forbidding proxy comments you are in effect eliminating some SPAM and other proxy requests.', 'aiowpsecurity');
+                        _e('This setting will deny any requests that use a proxy server when posting comments.', 'all-in-one-wp-security-and-firewall');
+                        echo '<br />'.__('By forbidding proxy comments you are in effect eliminating some SPAM and other proxy requests.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
@@ -427,7 +427,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Bad Query Strings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Bad Query Strings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -437,17 +437,17 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Deny Bad Query Strings', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Deny Bad Query Strings', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_deny_bad_query_strings" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_deny_bad_query_strings')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('This will help protect you against malicious queries via XSS.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('This will help protect you against malicious queries via XSS.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('This feature will write rules in your .htaccess file to prevent malicious string attacks on your site using XSS.', 'aiowpsecurity');
-                        echo '<br />'.__('NOTE: Some of these strings might be used for plugins or themes and hence this might break some functionality.', 'aiowpsecurity');
-                        echo '<br /><strong>'.__('You are therefore strongly advised to take a backup of your active .htaccess file before applying this feature.', 'aiowpsecurity').'<strong>';
+                        _e('This feature will write rules in your .htaccess file to prevent malicious string attacks on your site using XSS.', 'all-in-one-wp-security-and-firewall');
+                        echo '<br />'.__('NOTE: Some of these strings might be used for plugins or themes and hence this might break some functionality.', 'all-in-one-wp-security-and-firewall');
+                        echo '<br /><strong>'.__('You are therefore strongly advised to take a backup of your active .htaccess file before applying this feature.', 'all-in-one-wp-security-and-firewall').'<strong>';
                         ?>
                     </p>
                 </div>
@@ -456,7 +456,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         </table>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Advanced Character String Filter', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Advanced Character String Filter', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -466,18 +466,18 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable Advanced Character String Filter', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable Advanced Character String Filter', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_advanced_char_string_filter" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_advanced_char_string_filter')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('This will block bad character matches from XSS.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('This will block bad character matches from XSS.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('This is an advanced character string filter to prevent malicious string attacks on your site coming from Cross Site Scripting (XSS).', 'aiowpsecurity');
-                        echo '<br />'.__('This setting matches for common malicious string patterns and exploits and will produce a 403 error for the hacker attempting the query.', 'aiowpsecurity');
-                        echo '<br />'.__('NOTE: Some strings for this setting might break some functionality.', 'aiowpsecurity');
-                        echo '<br /><strong>'.__('You are therefore strongly advised to take a backup of your active .htaccess file before applying this feature.', 'aiowpsecurity').'<strong>';
+                        _e('This is an advanced character string filter to prevent malicious string attacks on your site coming from Cross Site Scripting (XSS).', 'all-in-one-wp-security-and-firewall');
+                        echo '<br />'.__('This setting matches for common malicious string patterns and exploits and will produce a 403 error for the hacker attempting the query.', 'all-in-one-wp-security-and-firewall');
+                        echo '<br />'.__('NOTE: Some strings for this setting might break some functionality.', 'all-in-one-wp-security-and-firewall');
+                        echo '<br /><strong>'.__('You are therefore strongly advised to take a backup of your active .htaccess file before applying this feature.', 'all-in-one-wp-security-and-firewall').'<strong>';
                         ?>
                     </p>
                 </div>
@@ -485,7 +485,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </tr>            
         </table>
         </div></div>
-        <input type="submit" name="aiowps_apply_additional_firewall_settings" value="<?php _e('Save Additional Firewall Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_apply_additional_firewall_settings" value="<?php _e('Save Additional Firewall Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         <?php
     }
@@ -520,29 +520,29 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('You have successfully saved the 5G Firewall Protection configuration', 'aiowpsecurity'));
+                $this->show_msg_updated(__('You have successfully saved the 5G Firewall Protection configuration', 'all-in-one-wp-security-and-firewall'));
             }
             else if($res == -1)
             {
-                $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'aiowpsecurity'));
+                $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
         }
 
         ?>
-        <h2><?php _e('Firewall Settings', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Firewall Settings', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
             $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_SETTINGS_MENU_SLUG.'&tab=tab2" target="_blank">backup</a>';
-            $info_msg = '<p>'.sprintf( __('This feature allows you to activate the 5G  firewall security protection rules designed and produced by %s.', 'aiowpsecurity'), '<a href="http://perishablepress.com/5g-blacklist-2013/" target="_blank">Perishable Press</a>').'</p>';
-            $info_msg .= '<p>'.__('The 5G Blacklist is a simple, flexible blacklist that helps reduce the number of malicious URL requests that hit your website.', 'aiowpsecurity').'</p>';
-            $info_msg .= '<p>'.__('The added advantage of applying the 5G firewall to your site is that it has been tested and confirmed by the people at PerishablePress.com to be an optimal and least disruptive set of .htaccess security rules for general WP sites running on an Apache server or similar.', 'aiowpsecurity').'</p>';
-            $info_msg .= '<p>'.sprintf( __('Therefore the 5G firewall rules should not have any impact on your site\'s general functionality but if you wish you can take a %s of your .htaccess file before proceeding.', 'aiowpsecurity'), $backup_tab_link).'</p>';
+            $info_msg = '<p>'.sprintf( __('This feature allows you to activate the 5G  firewall security protection rules designed and produced by %s.', 'all-in-one-wp-security-and-firewall'), '<a href="http://perishablepress.com/5g-blacklist-2013/" target="_blank">Perishable Press</a>').'</p>';
+            $info_msg .= '<p>'.__('The 5G Blacklist is a simple, flexible blacklist that helps reduce the number of malicious URL requests that hit your website.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'.__('The added advantage of applying the 5G firewall to your site is that it has been tested and confirmed by the people at PerishablePress.com to be an optimal and least disruptive set of .htaccess security rules for general WP sites running on an Apache server or similar.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'.sprintf( __('Therefore the 5G firewall rules should not have any impact on your site\'s general functionality but if you wish you can take a %s of your .htaccess file before proceeding.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link).'</p>';
             echo $info_msg;
             ?>
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('5G Blacklist/Firewall Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('5G Blacklist/Firewall Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -554,25 +554,25 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-enable-5g-firewall-nonce'); ?>            
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable 5G Firewall Protection', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable 5G Firewall Protection', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_5g_firewall" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_5g_firewall')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to apply the 5G Blacklist firewall protection from perishablepress.com to your site.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to apply the 5G Blacklist firewall protection from perishablepress.com to your site.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                         <?php 
-                        echo '<p class="description">'.__('This setting will implement the 5G security firewall protection mechanisms on your site which include the following things:', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('1) Block forbidden characters commonly used in exploitative attacks.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('2) Block malicious encoded URL characters such as the ".css(" string.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('3) Guard against the common patterns and specific exploits in the root portion of targeted URLs.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('4) Stop attackers from manipulating query strings by disallowing illicit characters.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('....and much more.', 'aiowpsecurity').'</p>';
+                        echo '<p class="description">'.__('This setting will implement the 5G security firewall protection mechanisms on your site which include the following things:', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('1) Block forbidden characters commonly used in exploitative attacks.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('2) Block malicious encoded URL characters such as the ".css(" string.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('3) Guard against the common patterns and specific exploits in the root portion of targeted URLs.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('4) Stop attackers from manipulating query strings by disallowing illicit characters.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('....and much more.', 'all-in-one-wp-security-and-firewall').'</p>';
                         ?>
                 </div>
                 </td>
             </tr>            
         </table>
-        <input type="submit" name="aiowps_apply_5g_firewall_settings" value="<?php _e('Save 5G Firewall Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_apply_5g_firewall_settings" value="<?php _e('Save 5G Firewall Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
         <?php
@@ -603,38 +603,38 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             //Commit the config settings
             $aio_wp_security->configs->save_config();
 
-            $this->show_msg_updated(__('The Internet bot settings were successfully saved', 'aiowpsecurity'));
+            $this->show_msg_updated(__('The Internet bot settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
         }
 
         ?>
-        <h2><?php _e('Internet Bot Settings', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Internet Bot Settings', 'all-in-one-wp-security-and-firewall')?></h2>
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-save-internet-bot-settings-nonce'); ?>            
         <div class="aio_blue_box">
             <?php
             $info_msg = '';
             $wiki_link = '<a href="http://en.wikipedia.org/wiki/Internet_bot" target="_blank">What is an Internet Bot</a>';
-            $info_msg .= '<p><strong>'.sprintf( __('%s?', 'aiowpsecurity'), $wiki_link).'</strong></p>';
+            $info_msg .= '<p><strong>'.sprintf( __('%s?', 'all-in-one-wp-security-and-firewall'), $wiki_link).'</strong></p>';
             
-            $info_msg .= '<p>'. __('A bot is a piece of software which runs on the Internet and performs automatic tasks. For example when Google indexes your pages it uses automatic bots to achieve this task.', 'aiowpsecurity').'</p>';
-            $info_msg .= '<p>'. __('A lot of bots are legitimate and non-malicous but not all bots are good and often you will find some which try to impersonate legitimate bots such as "Googlebot" but in reality they have nohing to do with Google at all.', 'aiowpsecurity').'</p>';
-            $info_msg .= '<p>'. __('Although most of the bots out there are relatively harmless sometimes website owners want to have more control over which bots they allow into their site.', 'aiowpsecurity').'</p>';
-            $info_msg .= '<p>'. __('This feature allows you to block bots which are impersonating as a Googlebot but actually aren\'t. (In other words they are fake Google bots)', 'aiowpsecurity').'</p>';
-            $info_msg .= '<p>'.__('Googlebots have a unique indentity which cannot easily be forged and this feature will indentify any fake Google bots and block them from reading your site\'s pages.', 'aiowpsecurity').'</p>';
+            $info_msg .= '<p>'. __('A bot is a piece of software which runs on the Internet and performs automatic tasks. For example when Google indexes your pages it uses automatic bots to achieve this task.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'. __('A lot of bots are legitimate and non-malicous but not all bots are good and often you will find some which try to impersonate legitimate bots such as "Googlebot" but in reality they have nohing to do with Google at all.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'. __('Although most of the bots out there are relatively harmless sometimes website owners want to have more control over which bots they allow into their site.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'. __('This feature allows you to block bots which are impersonating as a Googlebot but actually aren\'t. (In other words they are fake Google bots)', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'.__('Googlebots have a unique indentity which cannot easily be forged and this feature will indentify any fake Google bots and block them from reading your site\'s pages.', 'all-in-one-wp-security-and-firewall').'</p>';
             echo $info_msg;
             ?>
         </div>
         <div class="aio_yellow_box">
             <?php
-            $info_msg_2 = '<p>'. __('<strong>Attention</strong>: Sometimes non-malicious Internet organizations might have bots which impersonate as a "Googlebot".', 'aiowpsecurity').'</p>';
-            $info_msg_2 .= '<p>'.__('Just be aware that if you activate this feature the plugin will block all bots which use the "Googlebot" string in their User Agent information but are NOT officially from Google (irrespective whether they are malicious or not).', 'aiowpsecurity').'</p>';
-            $info_msg_2 .= '<p>'.__('All other bots from other organizations such as "Yahoo", "Bing" etc will not be affected by this feature.', 'aiowpsecurity').'</p>';
+            $info_msg_2 = '<p>'. __('<strong>Attention</strong>: Sometimes non-malicious Internet organizations might have bots which impersonate as a "Googlebot".', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg_2 .= '<p>'.__('Just be aware that if you activate this feature the plugin will block all bots which use the "Googlebot" string in their User Agent information but are NOT officially from Google (irrespective whether they are malicious or not).', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg_2 .= '<p>'.__('All other bots from other organizations such as "Yahoo", "Bing" etc will not be affected by this feature.', 'all-in-one-wp-security-and-firewall').'</p>';
             echo $info_msg_2;
             ?>
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Block Fake Googlebots', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Block Fake Googlebots', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -644,23 +644,23 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Block Fake Googlebots', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Block Fake Googlebots', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_block_fake_googlebots" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_block_fake_googlebots')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to block all fake Googlebots.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to block all fake Googlebots.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                         <?php 
-                        echo '<p class="description">'.__('This feature will check if the User Agent information of a bot contains the string "Googlebot".', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('It will then perform a few tests to verify if the bot is legitimately from Google and if so it will allow the bot to proceed.', 'aiowpsecurity').'</p>';
-                        echo '<p class="description">'.__('If the bot fails the checks then the plugin will mark it as being a fake Googlebot and it will block it', 'aiowpsecurity').'</p>';
+                        echo '<p class="description">'.__('This feature will check if the User Agent information of a bot contains the string "Googlebot".', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('It will then perform a few tests to verify if the bot is legitimately from Google and if so it will allow the bot to proceed.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('If the bot fails the checks then the plugin will mark it as being a fake Googlebot and it will block it', 'all-in-one-wp-security-and-firewall').'</p>';
                         ?>
                 </div>
                 </td>
             </tr>            
         </table>
         </div></div>
-        <input type="submit" name="aiowps_save_internet_bot_settings" value="<?php _e('Save Internet Bot Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_save_internet_bot_settings" value="<?php _e('Save Internet Bot Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         <?php
     }
@@ -689,25 +689,25 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('Settings were successfully saved', 'aiowpsecurity'));
+                $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
             }
             else if($res == -1)
             {
-                $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'aiowpsecurity'));
+                $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
     }
         ?>
-        <h2><?php _e('Prevent Image Hotlinking', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Prevent Image Hotlinking', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('A Hotlink is where someone displays an image on their site which is actually located on your site by using a direct link to the source of the image on your server.', 'aiowpsecurity');
-            echo '<br />'.__('Due to the fact that the image being displayed on the other person\'s site is coming from your server, this can cause leaking of bandwidth and resources for you because your server has to present this image for the people viewing it on someone elses\'s site.','aiowpsecurity');
-            echo '<br />'.__('This feature will prevent people from directly hotlinking images from your site\'s pages by writing some directives in your .htaccess file.', 'aiowpsecurity').'</p>';
+            echo '<p>'.__('A Hotlink is where someone displays an image on their site which is actually located on your site by using a direct link to the source of the image on your server.', 'all-in-one-wp-security-and-firewall');
+            echo '<br />'.__('Due to the fact that the image being displayed on the other person\'s site is coming from your server, this can cause leaking of bandwidth and resources for you because your server has to present this image for the people viewing it on someone elses\'s site.','all-in-one-wp-security-and-firewall');
+            echo '<br />'.__('This feature will prevent people from directly hotlinking images from your site\'s pages by writing some directives in your .htaccess file.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Prevent Hotlinking', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Prevent Hotlinking', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -719,14 +719,14 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-prevent-hotlinking-nonce'); ?>            
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Prevent Image Hotlinking', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Prevent Image Hotlinking', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_prevent_hotlinking" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_prevent_hotlinking')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to prevent hotlinking to images on your site.', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to prevent hotlinking to images on your site.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
-        <input type="submit" name="aiowps_save_prevent_hotlinking" value="<?php _e('Save Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_save_prevent_hotlinking" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
     <?php
@@ -742,7 +742,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             if (!wp_verify_nonce($nonce, 'aiowpsec-delete-404-event-records-nonce'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete all 404 event logs operation!",4);
-                die(__('Nonce check failed for delete all 404 event logs operation!','aiowpsecurity'));
+                die(__('Nonce check failed for delete all 404 event logs operation!','all-in-one-wp-security-and-firewall'));
             }
             global $wpdb;
             $events_table_name = AIOWPSEC_TBL_EVENTS;
@@ -753,11 +753,11 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             if ($result === FALSE)
             {
                 $aio_wp_security->debug_logger->log_debug("404 Detection Feature - Delete all 404 event logs operation failed!",4);
-                $this->show_msg_error(__('404 Detection Feature - Delete all 404 event logs operation failed!','aiowpsecurity'));
+                $this->show_msg_error(__('404 Detection Feature - Delete all 404 event logs operation failed!','all-in-one-wp-security-and-firewall'));
             } 
             else
             {
-                $this->show_msg_updated(__('All 404 event logs were deleted from the DB successfully!','aiowpsecurity'));
+                $this->show_msg_updated(__('All 404 event logs were deleted from the DB successfully!','all-in-one-wp-security-and-firewall'));
             }
         }
         
@@ -781,19 +781,19 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             $lockout_time_length = isset($_POST['aiowps_404_lockout_time_length'])?sanitize_text_field($_POST['aiowps_404_lockout_time_length']):'';
             if(!is_numeric($lockout_time_length))
             {
-                $error .= '<br />'.__('You entered a non numeric value for the lockout time length field. It has been set to the default value.','aiowpsecurity');
+                $error .= '<br />'.__('You entered a non numeric value for the lockout time length field. It has been set to the default value.','all-in-one-wp-security-and-firewall');
                 $lockout_time_length = '60';//Set it to the default value for this field
             }
 
             $redirect_url = isset($_POST['aiowps_404_lock_redirect_url'])?trim($_POST['aiowps_404_lock_redirect_url']):'';
             if ($redirect_url == '' || esc_url($redirect_url, array('http', 'https')) == ''){
-                $error .= '<br />'.__('You entered an incorrect format for the "Redirect URL" field. It has been set to the default value.','aiowpsecurity');
+                $error .= '<br />'.__('You entered an incorrect format for the "Redirect URL" field. It has been set to the default value.','all-in-one-wp-security-and-firewall');
                 $redirect_url = 'http://127.0.0.1';
             }
             
             if($error)
             {
-                $this->show_msg_error(__('Attention!','aiowpsecurity').$error);
+                $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall').$error);
             }
             
             $aio_wp_security->configs->set_value('aiowps_404_lockout_time_length',absint($lockout_time_length));
@@ -822,20 +822,20 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             }
         }
         ?>
-        <h2><?php _e('404 Detection Configuration', 'aiowpsecurity')?></h2>
+        <h2><?php _e('404 Detection Configuration', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('A 404 or Not Found error occurs when somebody tries to access a non-existent page on your website.', 'aiowpsecurity').'
-                <br />'.__('Typically, most 404 errors happen quite innocently when people have mis-typed a URL or used an old link to page which doesn\'t exist anymore.', 'aiowpsecurity').'
-                <br />'.__('However, in some cases you may find many repeated 404 errors which occur in a relatively short space of time and from the same IP address which are all attempting to access a variety of non-existent page URLs.', 'aiowpsecurity').'
-                <br />'.__('Such behaviour can mean that a hacker might be trying to find a particular page or URL for sinister reasons.', 'aiowpsecurity').'
-                <br /><br />'.__('This feature allows you to monitor all 404 events which occur on your site, and it also gives you the option of blocking IP addresses for a configured length of time.', 'aiowpsecurity').'
-                <br />'.__('If you want to temporarily block an IP address, simply click the "Temp Block" link for the applicable IP entry in the "404 Event Logs" table below.', 'aiowpsecurity').'</p>';
+            echo '<p>'.__('A 404 or Not Found error occurs when somebody tries to access a non-existent page on your website.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('Typically, most 404 errors happen quite innocently when people have mis-typed a URL or used an old link to page which doesn\'t exist anymore.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('However, in some cases you may find many repeated 404 errors which occur in a relatively short space of time and from the same IP address which are all attempting to access a variety of non-existent page URLs.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('Such behaviour can mean that a hacker might be trying to find a particular page or URL for sinister reasons.', 'all-in-one-wp-security-and-firewall').'
+                <br /><br />'.__('This feature allows you to monitor all 404 events which occur on your site, and it also gives you the option of blocking IP addresses for a configured length of time.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('If you want to temporarily block an IP address, simply click the "Temp Block" link for the applicable IP entry in the "404 Event Logs" table below.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('404 Detection Options', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('404 Detection Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
@@ -847,15 +847,15 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-404-detection-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable IP Lockout For 404 Events', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable IP Lockout For 404 Events', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_404_IP_lockout" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_404_IP_lockout')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the lockout of selected IP addresses.', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Check this if you want to enable the lockout of selected IP addresses.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('When you enable this checkbox, all 404 events on your site will be logged in the table below. You can monitor these events and select some IP addresses to be blocked in the table. All IP addresses you select to be blocked from the "404 Event Logs" table section will be unable to access your site.', 'aiowpsecurity');
+                        _e('When you enable this checkbox, all 404 events on your site will be logged in the table below. You can monitor these events and select some IP addresses to be blocked in the table. All IP addresses you select to be blocked from the "404 Event Logs" table section will be unable to access your site.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
@@ -863,42 +863,42 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </tr>
             <!-- currenty this option is automatically set when the aiowps_enable_404_IP_lockout feature is turned on
             <tr valign="top">
-                <th scope="row"><?php _e('Enable 404 Event Logging', 'aiowpsecurity')?>:</th>                
+                <th scope="row"><?php _e('Enable 404 Event Logging', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_404_logging" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_404_logging')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the logging of 404 events', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the logging of 404 events', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>
             -->
             <tr valign="top">
-                <th scope="row"><?php _e('Time Length of 404 Lockout (min)', 'aiowpsecurity')?>:</th>
+                <th scope="row"><?php _e('Time Length of 404 Lockout (min)', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><input type="text" size="5" name="aiowps_404_lockout_time_length" value="<?php echo $aio_wp_security->configs->get_value('aiowps_404_lockout_time_length'); ?>" />
-                <span class="description"><?php _e('Set the length of time for which a blocked IP address will be prevented from visiting your site', 'aiowpsecurity'); ?></span>
-                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'aiowpsecurity'); ?></span></span>
+                <span class="description"><?php _e('Set the length of time for which a blocked IP address will be prevented from visiting your site', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
                         <?php 
-                        _e('You can lock any IP address which is recorded in the "404 Event Logs" table section below.', 'aiowpsecurity');
+                        _e('You can lock any IP address which is recorded in the "404 Event Logs" table section below.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('To temporarily lock an IP address, hover over the ID column and click the "Temp Block" link for the applicable IP entry.', 'aiowpsecurity');
+                        _e('To temporarily lock an IP address, hover over the ID column and click the "Temp Block" link for the applicable IP entry.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
                 </td> 
             </tr>
             <tr valign="top">
-                <th scope="row"><?php _e('404 Lockout Redirect URL', 'aiowpsecurity')?>:</th>
+                <th scope="row"><?php _e('404 Lockout Redirect URL', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><input type="text" size="50" name="aiowps_404_lock_redirect_url" value="<?php echo esc_url_raw( $aio_wp_security->configs->get_value('aiowps_404_lock_redirect_url'), array( 'http', 'https' ) ); ?>" />
-                <span class="description"><?php _e('A blocked visitor will be automatically redirected to this URL.', 'aiowpsecurity'); ?></span>
+                <span class="description"><?php _e('A blocked visitor will be automatically redirected to this URL.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>
         </table>
-        <input type="submit" name="aiowps_save_404_detect_options" value="<?php _e('Save Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_save_404_detect_options" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
             
         </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('404 Event Logs', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('404 Event Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php 
             //Fetch, prepare, sort, and filter our data...
@@ -920,16 +920,16 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </form>
         </div></div>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Delete All 404 Event Logs', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Delete All 404 Event Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-delete-404-event-records-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
-            <span class="description"><?php _e('Click this button if you wish to purge all 404 event logs from the DB.', 'aiowpsecurity'); ?></span>                
+            <span class="description"><?php _e('Click this button if you wish to purge all 404 event logs from the DB.', 'all-in-one-wp-security-and-firewall'); ?></span>
             </tr>            
         </table>
-        <input type="submit" name="aiowps_delete_404_event_records" value="<?php _e('Delete All 404 Event Logs', 'aiowpsecurity')?>" class="button-primary" onclick="return confirm('Are you sure you want to delete all records?')"/>
+        <input type="submit" name="aiowps_delete_404_event_records" value="<?php _e('Delete All 404 Event Logs', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" onclick="return confirm('Are you sure you want to delete all records?')"/>
         </form>
         </div></div>
         
@@ -951,7 +951,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             //Save settings
             if (isset($_POST["aiowps_enable_custom_rules"]) && empty($_POST['aiowps_custom_rules']))
             {
-                $this->show_msg_error('You must enter some .htaccess directives code in the text box below','aiowpsecurity');
+                $this->show_msg_error('You must enter some .htaccess directives code in the text box below','all-in-one-wp-security-and-firewall');
             }
             else
             {
@@ -974,7 +974,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
                 if ($write_result == -1)
                 {
-                    $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','aiowpsecurity'));
+                    $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                     $aio_wp_security->debug_logger->log_debug("Custom Rules feature - The plugin was unable to write to the .htaccess file.");
                 }
             }
@@ -982,51 +982,51 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         }
 
         ?>
-        <h2><?php _e('Custom .htaccess Rules Settings', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Custom .htaccess Rules Settings', 'all-in-one-wp-security-and-firewall')?></h2>
         <form action="" method="POST">
             <?php wp_nonce_field('aiowpsec-save-custom-rules-settings-nonce'); ?>
             <div class="aio_blue_box">
                 <?php
                 $info_msg = '';
 
-                $info_msg .= '<p>'. __('This feature can be used to apply your own custom .htaccess rules and directives.', 'aiowpsecurity').'</p>';
-                $info_msg .= '<p>'. __('It is useful for when you want to tweak our existing firewall rules or when you want to add your own.', 'aiowpsecurity').'</p>';
-                $info_msg .= '<p>'. __('NOTE: This feature can only used if your site is hosted in an apache or similar web server.', 'aiowpsecurity').'</p>';
+                $info_msg .= '<p>'. __('This feature can be used to apply your own custom .htaccess rules and directives.', 'all-in-one-wp-security-and-firewall').'</p>';
+                $info_msg .= '<p>'. __('It is useful for when you want to tweak our existing firewall rules or when you want to add your own.', 'all-in-one-wp-security-and-firewall').'</p>';
+                $info_msg .= '<p>'. __('NOTE: This feature can only used if your site is hosted in an apache or similar web server.', 'all-in-one-wp-security-and-firewall').'</p>';
                 echo $info_msg;
                 ?>
             </div>
             <div class="aio_yellow_box">
                 <?php
-                $info_msg_2 = '<p>'. __('<strong>Warning</strong>: Only use this feature if you know what you are doing.', 'aiowpsecurity').'</p>';
-                $info_msg_2 .= '<p>'.__('Incorrect .htaccess rules or directives can break or prevent access to your site.', 'aiowpsecurity').'</p>';
-                $info_msg_2 .= '<p>'.__('It is your responsibility to ensure that you are entering the correct code!', 'aiowpsecurity').'</p>';
-                $info_msg_2 .= '<p>'.__('If you break your site you will need to access your server via FTP or something similar and then edit your .htaccess file and delete the changes you made.', 'aiowpsecurity').'</p>';
+                $info_msg_2 = '<p>'. __('<strong>Warning</strong>: Only use this feature if you know what you are doing.', 'all-in-one-wp-security-and-firewall').'</p>';
+                $info_msg_2 .= '<p>'.__('Incorrect .htaccess rules or directives can break or prevent access to your site.', 'all-in-one-wp-security-and-firewall').'</p>';
+                $info_msg_2 .= '<p>'.__('It is your responsibility to ensure that you are entering the correct code!', 'all-in-one-wp-security-and-firewall').'</p>';
+                $info_msg_2 .= '<p>'.__('If you break your site you will need to access your server via FTP or something similar and then edit your .htaccess file and delete the changes you made.', 'all-in-one-wp-security-and-firewall').'</p>';
                 echo $info_msg_2;
                 ?>
             </div>
 
             <div class="postbox">
-                <h3><label for="title"><?php _e('Custom .htaccess Rules', 'aiowpsecurity'); ?></label></h3>
+                <h3><label for="title"><?php _e('Custom .htaccess Rules', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
                 <div class="inside">
                     <table class="form-table">
                         <tr valign="top">
-                            <th scope="row"><?php _e('Enable Custom .htaccess Rules', 'aiowpsecurity')?>:</th>
+                            <th scope="row"><?php _e('Enable Custom .htaccess Rules', 'all-in-one-wp-security-and-firewall')?>:</th>
                             <td>
                                 <input name="aiowps_enable_custom_rules" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_custom_rules')=='1') echo ' checked="checked"'; ?> value="1"/>
-                                <span class="description"><?php _e('Check this if you want to enable custom rules entered in the text box below', 'aiowpsecurity'); ?></span>
+                                <span class="description"><?php _e('Check this if you want to enable custom rules entered in the text box below', 'all-in-one-wp-security-and-firewall'); ?></span>
                             </td>
                         </tr>
                         <tr valign="top">
-                            <th scope="row"><?php _e('Enter Custom .htaccess Rules:', 'aiowpsecurity')?></th>
+                            <th scope="row"><?php _e('Enter Custom .htaccess Rules:', 'all-in-one-wp-security-and-firewall')?></th>
                             <td>
                                 <textarea name="aiowps_custom_rules" rows="35" cols="50"><?php echo $aio_wp_security->configs->get_value('aiowps_custom_rules'); ?></textarea>
                                 <br />
-                                <span class="description"><?php _e('Enter your custom .htaccess rules/directives.','aiowpsecurity');?></span>
+                                <span class="description"><?php _e('Enter your custom .htaccess rules/directives.','all-in-one-wp-security-and-firewall');?></span>
                             </td>
                         </tr>
                     </table>
                 </div></div>
-            <input type="submit" name="aiowps_save_custom_rules_settings" value="<?php _e('Save Custom Rules', 'aiowpsecurity')?>" class="button-primary" />
+            <input type="submit" name="aiowps_save_custom_rules_settings" value="<?php _e('Save Custom Rules', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
     <?php
     }

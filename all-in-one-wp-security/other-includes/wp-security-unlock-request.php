@@ -30,7 +30,7 @@ if (isset($_POST['aiowps_unlock_request']))
     if($submitted_encoded_string !== $unlock_encoded_info)
     {
         //Someone somehow landed on this page directly without clicking the unlock button on login form
-        echo '<div id="login_error">'.__('ERROR: Unable to process your request!','aiowpsecurity').'</div>';
+        echo '<div id="login_error">'.__('ERROR: Unable to process your request!','all-in-one-wp-security-and-firewall').'</div>';
         die();
     }
     else if($display_form)
@@ -47,7 +47,7 @@ if (isset($_POST['aiowps_wp_submit_unlock_request']))
     $email = trim($_POST['aiowps_unlock_request_email']);
     if (empty($email) || !is_email($email))
     {
-        $errors .= '<p>'.__('Please enter a valid email address','aiowpsecurity').'</p>';
+        $errors .= '<p>'.__('Please enter a valid email address','all-in-one-wp-security-and-firewall').'</p>';
     }
     
     if($errors){
@@ -59,7 +59,7 @@ if (isset($_POST['aiowps_wp_submit_unlock_request']))
         $locked_user = get_user_by('email', $email);
         if(!$locked_user){
             //user with this email does not exist in the system
-            $errors .= '<p>'.__('User account not found!','aiowpsecurity').'</p>';
+            $errors .= '<p>'.__('User account not found!','all-in-one-wp-security-and-firewall').'</p>';
             echo '<div id="login_error">'.$errors.'</div>';
         }else{
             //Process unlock request
@@ -70,7 +70,7 @@ if (isset($_POST['aiowps_wp_submit_unlock_request']))
             $unlock_url = AIOWPSecurity_User_Login::generate_unlock_request_link($ip_range);
             if (!$unlock_url){
                 //No entry found in lockdown table with this IP range
-                $error_msg = '<p>'.__('Error: No locked entry was found in the DB with your IP address range!','aiowpsecurity').'</p>';
+                $error_msg = '<p>'.__('Error: No locked entry was found in the DB with your IP address range!','all-in-one-wp-security-and-firewall').'</p>';
                 echo '<div id="login_error">'.$error_msg.'</div>';
             }else{
                 //Send an email to the user
@@ -98,7 +98,7 @@ function display_unlock_form($email='')
 <div class="message"><?php echo $unlock_form_msg; ?></div>
 <form name="loginform" id="loginform" action="<?php echo wp_login_url(); ?>" method="post">
 	<p>
-		<label for="aiowps_unlock_request_email"><?php _e('Email Address', 'aiowpsecurity'); ?><br>
+		<label for="aiowps_unlock_request_email"><?php _e('Email Address', 'all-in-one-wp-security-and-firewall'); ?><br>
 		<input type="text" name="aiowps_unlock_request_email" id="aiowps_unlock_request_email" class="input" value="<?php echo $email; ?>" size="20"></label>
 	</p>
         <p class="submit">

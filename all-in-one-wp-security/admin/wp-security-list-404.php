@@ -113,7 +113,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
     function process_bulk_action() {
         if ('bulk_block_ip' === $this->current_action()) {//Process delete bulk actions
             if (!isset($_REQUEST['item'])) {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'all-in-one-wp-security-and-firewall'));
             } else {
                 $this->block_ip(($_REQUEST['item']));
             }
@@ -121,14 +121,14 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
 
         if ('bulk_blacklist_ip' === $this->current_action()) {//Process delete bulk actions
             if (!isset($_REQUEST['item'])) {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'all-in-one-wp-security-and-firewall'));
             } else {
                 $this->blacklist_ip_address(($_REQUEST['item']));
             }
         }
         if ('delete' === $this->current_action()) {//Process delete bulk actions
             if (!isset($_REQUEST['item'])) {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'all-in-one-wp-security-and-firewall'));
             } else {
                 $this->delete_404_event_records(($_REQUEST['item']));
             }
@@ -210,7 +210,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
             if ($write_result == -1)
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                 $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
             }else{
                 AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses have been added to the blacklist and will be permanently blocked!', 'WPS'));
@@ -249,7 +249,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             if (!isset($nonce) ||!wp_verify_nonce($nonce, 'delete_404_log'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete selected 404 event logs operation!",4);
-                die(__('Nonce check failed for delete selected 404 event logs operation!','aiowpsecurity'));
+                die(__('Nonce check failed for delete selected 404 event logs operation!','all-in-one-wp-security-and-firewall'));
             }
 
             //Delete single record

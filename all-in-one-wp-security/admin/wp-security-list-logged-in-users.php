@@ -81,7 +81,7 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
             if (!isset($nonce) ||!wp_verify_nonce($nonce, 'force_user_logout'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for force user logout operation!",4);
-                die(__('Nonce check failed for force user logout operation!','aiowpsecurity'));
+                die(__('Nonce check failed for force user logout operation!','all-in-one-wp-security-and-firewall'));
             }
             //Force single user logout
             $user_id = absint($user_id);
@@ -92,7 +92,7 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
 //            if($result != NULL)
 //            {
                 $success_msg = '<div id="message" class="updated fade"><p><strong>';
-                $success_msg .= __('The selected user was logged out successfully!','aiowpsecurity');
+                $success_msg .= __('The selected user was logged out successfully!','all-in-one-wp-security-and-firewall');
                 $success_msg .= '</strong></p></div>';
                 _e($success_msg);
 //            }

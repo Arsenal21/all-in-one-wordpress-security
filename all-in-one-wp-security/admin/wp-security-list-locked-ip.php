@@ -87,7 +87,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
         {//Process delete bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
             }else 
             {            
                 $this->delete_lockdown_records(($_REQUEST['item']));
@@ -98,7 +98,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
         {//Process unlock bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
             }else 
             {            
                 $this->unlock_ip_range(($_REQUEST['item']));
@@ -124,7 +124,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
                 $result = $wpdb->query($unlock_command);
                 if($result != NULL)
                 {
-                    AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP entries were unlocked successfully!','aiowpsecurity'));
+                    AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP entries were unlocked successfully!','all-in-one-wp-security-and-firewall'));
                 }
             }
         } elseif ($entries != NULL)
@@ -133,7 +133,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
             if (!isset($nonce) ||!wp_verify_nonce($nonce, 'unlock_ip'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for unlock IP operation!",4);
-                die(__('Nonce check failed for unlock IP operation!','aiowpsecurity'));
+                die(__('Nonce check failed for unlock IP operation!','all-in-one-wp-security-and-firewall'));
             }
             
             //Unlock single record
@@ -141,7 +141,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
             $result = $wpdb->query($unlock_command);
             if($result != NULL)
             {
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP entry was unlocked successfully!','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP entry was unlocked successfully!','all-in-one-wp-security-and-firewall'));
             }
         }
     }
@@ -174,7 +174,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
             if (!isset($nonce) ||!wp_verify_nonce($nonce, 'delete_lockdown_record'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete lockdown record operation!",4);
-                die(__('Nonce check failed for delete lockdown record operation!','aiowpsecurity'));
+                die(__('Nonce check failed for delete lockdown record operation!','all-in-one-wp-security-and-firewall'));
             }
             //Delete single record
             $delete_command = "DELETE FROM ".$lockdown_table." WHERE id = '".absint($entries)."'";

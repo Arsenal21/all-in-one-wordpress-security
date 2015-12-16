@@ -87,7 +87,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
                 if(!isset($_REQUEST['item']))
                 {
                     $error_msg = '<div id="message" class="error"><p><strong>';
-                    $error_msg .= __('Please select some records using the checkboxes','aiowpsecurity');
+                    $error_msg .= __('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall');
                     $error_msg .= '</strong></p></div>';
                     _e($error_msg);
                 } else {
@@ -136,7 +136,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
             if (!isset($nonce) ||!wp_verify_nonce($nonce, 'block_spammer_ip'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete selected blocked IP operation!",4);
-                die(__('Nonce check failed for delete selected blocked IP operation!','aiowpsecurity'));
+                die(__('Nonce check failed for delete selected blocked IP operation!','all-in-one-wp-security-and-firewall'));
             }
             
             //individual entry where "block" link was clicked
@@ -150,7 +150,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         //Let's save the selected IP addresses to the blacklist config
         $aio_wp_security->configs->set_value('aiowps_banned_ip_addresses',$raw_banned_ip_list); //Save the blocked IP address config variable with the newly added addresses
         $aio_wp_security->configs->save_config();
-        AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses were saved in the blacklist configuration settings.','aiowpsecurity'));
+        AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses were saved in the blacklist configuration settings.','all-in-one-wp-security-and-firewall'));
 
         //Let's check if the Enable Blacklisting flag has been set - If so, we will write the new data to the .htaccess file.
         if($aio_wp_security->configs->get_value('aiowps_enable_blacklisting')=='1')
@@ -158,20 +158,20 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
             $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
             if ($write_result == -1)
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                 $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
             }
             else
             {
                 
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The .htaccess file was successfully modified to include the selected IP addresses.','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The .htaccess file was successfully modified to include the selected IP addresses.','all-in-one-wp-security-and-firewall'));
             }
         }
         else
         {
             $blacklist_settings_link = '<a href="admin.php?page='.AIOWPSEC_BLACKLIST_MENU_SLUG.'">Ban Users</a>';
-            $info_msg = '<p>'.__('NOTE: The .htaccess file was not modified because you have disabled the "Enable IP or User Agent Blacklisting" check box.', 'aiowpsecurity').
-                        '<br />'.sprintf( __('To block these IP addresses you will need to enable the above flag in the %s menu', 'aiowpsecurity'), $blacklist_settings_link).'</p>';
+            $info_msg = '<p>'.__('NOTE: The .htaccess file was not modified because you have disabled the "Enable IP or User Agent Blacklisting" check box.', 'all-in-one-wp-security-and-firewall').
+                        '<br />'.sprintf( __('To block these IP addresses you will need to enable the above flag in the %s menu', 'all-in-one-wp-security-and-firewall'), $blacklist_settings_link).'</p>';
             AIOWPSecurity_Admin_Menu::show_msg_updated_st($info_msg);
         }
     }

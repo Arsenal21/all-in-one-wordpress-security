@@ -19,7 +19,7 @@ class AIOWPSecurity_WhoIs_Menu extends AIOWPSecurity_Admin_Menu
     function set_menu_tabs() 
     {
         $this->menu_tabs = array(
-        'tab1' => __('WhoIS Lookup', 'aiowpsecurity'),
+        'tab1' => __('WhoIS Lookup', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -71,28 +71,28 @@ class AIOWPSecurity_WhoIs_Menu extends AIOWPSecurity_Admin_Menu
         global $aio_wp_security;
 
         ?>
-        <h2><?php _e('WHOIS Lookup Information', 'aiowpsecurity')?></h2>
+        <h2><?php _e('WHOIS Lookup Information', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This feature allows you to look up more detailed information about an IP address or domain name by querying the WHOIS API.', 'aiowpsecurity').'
+            echo '<p>'.__('This feature allows you to look up more detailed information about an IP address or domain name by querying the WHOIS API.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>
         </div>
 
         <div class="postbox">
-        <h3><label for="title"><?php _e('Perform a WHOIS Lookup for an IP or Domain Name', 'aiowpsecurity'); ?></label></h3>
+        <h3><label for="title"><?php _e('Perform a WHOIS Lookup for an IP or Domain Name', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <form action="" method="POST">
                 <?php wp_nonce_field('aiowpsec-whois-lookup-nonce'); ?>
                 <table class="form-table">
                 <tr valign="top">
-                    <th scope="row"><?php _e('Enter IP Address or Domain Name', 'aiowpsecurity')?>:</th>
+                    <th scope="row"><?php _e('Enter IP Address or Domain Name', 'all-in-one-wp-security-and-firewall')?>:</th>
                     <td><input type="text" size="20" name="aiowps_whois_lookup_field" value="<?php //echo $aio_wp_security->configs->get_value('aiowps_whois_lookup_field'); ?>" />
-                    <span class="description"><?php _e('Enter an IP address or domain name. Example: 111.11.12.13 OR some-domain-name.com', 'aiowpsecurity'); ?></span>
+                    <span class="description"><?php _e('Enter an IP address or domain name. Example: 111.11.12.13 OR some-domain-name.com', 'all-in-one-wp-security-and-firewall'); ?></span>
                     </td> 
                 </tr>
                 </table>
-                <input type="submit" name="aiowps_whois_lookup" value="<?php _e('Perform IP or Domain Lookup', 'aiowpsecurity')?>" class="button-primary ip-domain-lookup" />
+                <input type="submit" name="aiowps_whois_lookup" value="<?php _e('Perform IP or Domain Lookup', 'all-in-one-wp-security-and-firewall')?>" class="button-primary ip-domain-lookup" />
             </form>
         </div></div>
     <?php
@@ -110,9 +110,9 @@ class AIOWPSecurity_WhoIs_Menu extends AIOWPSecurity_Admin_Menu
             $input_val = trim($_POST['aiowps_whois_lookup_field']);
             if (filter_var($input_val, FILTER_VALIDATE_IP) || filter_var(gethostbyname($input_val), FILTER_VALIDATE_IP))
             {
-                //$info_msg_string = '<p class="aio_info_with_icon">'.sprintf( __('WHOIS lookup successfully completed. Please see the results below:', 'aiowpsecurity')).'</p>';
+                //$info_msg_string = '<p class="aio_info_with_icon">'.sprintf( __('WHOIS lookup successfully completed. Please see the results below:', 'all-in-one-wp-security-and-firewall')).'</p>';
                 //echo ($info_msg_string);
-                $this->show_msg_updated(__('WHOIS lookup successfully completed. Please see the results below:', 'aiowpsecurity'));
+                $this->show_msg_updated(__('WHOIS lookup successfully completed. Please see the results below:', 'all-in-one-wp-security-and-firewall'));
                 $whois = new Whois();
                 $result = $whois->Lookup($input_val);
                 if (!empty($result['rawdata']))
@@ -124,7 +124,7 @@ class AIOWPSecurity_WhoIs_Menu extends AIOWPSecurity_Admin_Menu
             }
             else
             {
-                $this->show_msg_error(__('You have entered an incorrectly formatted IP address or domain name. Please try again.','aiowpsecurity'));
+                $this->show_msg_error(__('You have entered an incorrectly formatted IP address or domain name. Please try again.','all-in-one-wp-security-and-firewall'));
             }
         }
     }

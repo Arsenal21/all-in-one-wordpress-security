@@ -26,9 +26,9 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
     function set_menu_tabs() 
     {
         $this->menu_tabs = array(
-        'tab1' => __('WP Username', 'aiowpsecurity'), 
-        'tab2' => __('Display Name', 'aiowpsecurity'),
-        'tab3' => __('Password', 'aiowpsecurity')
+        'tab1' => __('WP Username', 'all-in-one-wp-security-and-firewall'),
+        'tab2' => __('Display Name', 'all-in-one-wp-security-and-firewall'),
+        'tab3' => __('Password', 'all-in-one-wp-security-and-firewall')
         );
     }
 
@@ -82,20 +82,20 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
             echo $this->validate_change_username_form();
         }
         ?>
-        <h2><?php _e('Admin User Security', 'aiowpsecurity')?></h2>
+        <h2><?php _e('Admin User Security', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('By default, WordPress sets the administrator username to "admin" at installation time.', 'aiowpsecurity').'
-            <br />'.__('A lot of hackers try to take advantage of this information by attempting "Brute Force Login Attacks" where they repeatedly try to guess the password by using "admin" for username.', 'aiowpsecurity').'
-            <br />'.__('From a security perspective, changing the default "admin" user name is one of the first and smartest things you should do on your site.', 'aiowpsecurity').'
-            <br /><br />'.__('This feature will allow you to change your default "admin" user name to a more secure name of your choosing.', 'aiowpsecurity').'
+            echo '<p>'.__('By default, WordPress sets the administrator username to "admin" at installation time.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('A lot of hackers try to take advantage of this information by attempting "Brute Force Login Attacks" where they repeatedly try to guess the password by using "admin" for username.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('From a security perspective, changing the default "admin" user name is one of the first and smartest things you should do on your site.', 'all-in-one-wp-security-and-firewall').'
+            <br /><br />'.__('This feature will allow you to change your default "admin" user name to a more secure name of your choosing.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>
         </div>
         
         <?php
         //display a list of all administrator accounts for this site
-        $postbox_title = __('List of Administrator Accounts', 'aiowpsecurity');
+        $postbox_title = __('List of Administrator Accounts', 'all-in-one-wp-security-and-firewall');
         if (AIOWPSecurity_Utility::is_multisite_install()) { //Multi-site: get admin accounts for current site
           $blog_id = get_current_blog_id();
           $this->postbox($postbox_title, $this->get_all_admin_accounts($blog_id));
@@ -104,7 +104,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
         }
         ?>
         <div class="postbox">
-        <h3><label for="title"><?php _e('Change Admin Username', 'aiowpsecurity')?></label></h3>
+        <h3><label for="title"><?php _e('Change Admin Username', 'all-in-one-wp-security-and-firewall')?></label></h3>
         <div class="inside">
         <?php
         global $aiowps_feature_mgr;
@@ -114,31 +114,31 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
         {
             echo '<div class="aio_red_box"><p>'.__('Your site currently has an account which uses the default "admin" username. 
                 It is highly recommended that you change this name to something else. 
-                Use the following field to change the admin username.', 'aiowpsecurity').'</p></div>';
+                Use the following field to change the admin username.', 'all-in-one-wp-security-and-firewall').'</p></div>';
             ?>
             <form action="" method="POST">
             <?php wp_nonce_field('aiowpsec-change-admin-nonce'); ?>
             <table class="form-table">
                 <tr valign="top">
-                    <th scope="row"><label for="NewUserName"> <?php _e('New Admin Username', 'aiowpsecurity')?>:</label></th>
+                    <th scope="row"><label for="NewUserName"> <?php _e('New Admin Username', 'all-in-one-wp-security-and-firewall')?>:</label></th>
                     <td><input type="text" size="16" name="aiowps_new_user_name" />
-                    <p class="description"><?php _e('Choose a new username for admin.', 'aiowpsecurity'); ?></p>
+                    <p class="description"><?php _e('Choose a new username for admin.', 'all-in-one-wp-security-and-firewall'); ?></p>
                     </td> 
                 </tr>
             </table>
-            <input type="submit" name="aiowps_change_admin_username" value="<?php _e('Change Username', 'aiowpsecurity')?>" class="button-primary" />
+            <input type="submit" name="aiowps_change_admin_username" value="<?php _e('Change Username', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
             <div class="aio_spacer_15"></div>
-            <p class="description"><?php _e('NOTE: If you are currently logged in as "admin" you will be automatically logged out after changing your username and will be required to log back in.', 'aiowpsecurity')?></p>
+            <p class="description"><?php _e('NOTE: If you are currently logged in as "admin" you will be automatically logged out after changing your username and will be required to log back in.', 'all-in-one-wp-security-and-firewall')?></p>
             </form>          
             <?php 
         }
         else 
         {
             echo '<div id="aios_message" class="aio_green_box"><p><strong>';
-            _e ('No action required! ', 'aiowpsecurity');
+            _e ('No action required! ', 'all-in-one-wp-security-and-firewall');
             echo '</strong><br />';
-            _e ('Your site does not have any account which uses the default "admin" username. ', 'aiowpsecurity');
-            _e ('This is good security practice.', 'aiowpsecurity');
+            _e ('Your site does not have any account which uses the default "admin" username. ', 'all-in-one-wp-security-and-firewall');
+            _e ('This is good security practice.', 'all-in-one-wp-security-and-firewall');
             echo '</p></div>';
         }
         ?>
@@ -150,19 +150,19 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
     function render_tab2()
     {
         ?>
-            <h2><?php _e('Display Name Security', 'aiowpsecurity')?></h2>
+            <h2><?php _e('Display Name Security', 'all-in-one-wp-security-and-firewall')?></h2>
             <div class="aio_blue_box">
                 <?php
-                echo '<p>'.__('When you submit a post or answer a comment, WordPress will usually display your "nickname".', 'aiowpsecurity').'
-                <br />'.__('By default the nickname is set to the login (or user) name of your account.', 'aiowpsecurity').'
-                <br />'.__('From a security perspective, leaving your nickname the same as your user name is bad practice because it gives a hacker at least half of your account\'s login credentials.', 'aiowpsecurity').'
-                <br /><br />'.__('Therefore to further tighten your site\'s security you are advised to change your <strong>nickname</strong> and <strong>Display name</strong> to be different from your <strong>Username</strong>.', 'aiowpsecurity').'
+                echo '<p>'.__('When you submit a post or answer a comment, WordPress will usually display your "nickname".', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('By default the nickname is set to the login (or user) name of your account.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('From a security perspective, leaving your nickname the same as your user name is bad practice because it gives a hacker at least half of your account\'s login credentials.', 'all-in-one-wp-security-and-firewall').'
+                <br /><br />'.__('Therefore to further tighten your site\'s security you are advised to change your <strong>nickname</strong> and <strong>Display name</strong> to be different from your <strong>Username</strong>.', 'all-in-one-wp-security-and-firewall').'
                 </p>';
                 ?>
             </div>
 
             <div class="postbox">
-            <h3><label for="title"><?php _e('Modify Accounts With Identical Login Name & Display Name', 'aiowpsecurity')?></label></h3>
+            <h3><label for="title"><?php _e('Modify Accounts With Identical Login Name & Display Name', 'all-in-one-wp-security-and-firewall')?></label></h3>
             <div class="inside">
             <?php
             global $aiowps_feature_mgr;
@@ -171,8 +171,8 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
             //now let's find any accounts which have login name same as display name
             $login_nick_name_accounts = AIOWPSecurity_Utility::check_identical_login_and_nick_names();
             if ($login_nick_name_accounts) {
-                echo '<div class="aio_red_box"><p>'.__('Your site currently has the following accounts which have an identical login name and display name.', 'aiowpsecurity').'
-                         <span class="description">('.__('Click on the link to edit the settings of that particular user account', 'aiowpsecurity').'</span></p></div>';
+                echo '<div class="aio_red_box"><p>'.__('Your site currently has the following accounts which have an identical login name and display name.', 'all-in-one-wp-security-and-firewall').'
+                         <span class="description">('.__('Click on the link to edit the settings of that particular user account', 'all-in-one-wp-security-and-firewall').'</span></p></div>';
             ?>
                 <table class="form-table">
                     <?php 
@@ -187,8 +187,8 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                 </table>
         <?php 
             } else {
-                echo '<div id="aios_message" class="aio_green_box"><p><strong>'.__('No action required.', 'aiowpsecurity').'</strong>
-                        <br />'.__('Your site does not have a user account where the display name is identical to the username.', 'aiowpsecurity').'</p></div>';
+                echo '<div id="aios_message" class="aio_green_box"><p><strong>'.__('No action required.', 'all-in-one-wp-security-and-firewall').'</strong>
+                        <br />'.__('Your site does not have a user account where the display name is identical to the username.', 'all-in-one-wp-security-and-firewall').'</p></div>';
             } 
         ?>
             </div>
@@ -199,32 +199,32 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
     function render_tab3()
     {
         ?>
-            <h2><?php _e('Password Tool', 'aiowpsecurity')?></h2>
+            <h2><?php _e('Password Tool', 'all-in-one-wp-security-and-firewall')?></h2>
             <div class="aio_blue_box">
                 <?php
-                echo '<p>'.__('Poor password selection is one of the most common weak points of many sites and is usually the first thing a hacker will try to exploit when attempting to break into your site.', 'aiowpsecurity').'</p>'.
-                '<p>'.__('Many people fall into the trap of using a simple word or series of numbers as their password. Such a predictable and simple password would take a competent hacker merely minutes to guess your password by using a simple script which cycles through the easy and most common combinations.', 'aiowpsecurity').'</p>'.
-                '<p>'.__('The longer and more complex your password is the harder it is for hackers to "crack" because more complex passwords require much greater computing power and time.', 'aiowpsecurity').'</p>'.
-                '<p>'.__('This section contains a useful password strength tool which you can use to check whether your password is sufficiently strong enough.', 'aiowpsecurity').'</p>';
+                echo '<p>'.__('Poor password selection is one of the most common weak points of many sites and is usually the first thing a hacker will try to exploit when attempting to break into your site.', 'all-in-one-wp-security-and-firewall').'</p>'.
+                '<p>'.__('Many people fall into the trap of using a simple word or series of numbers as their password. Such a predictable and simple password would take a competent hacker merely minutes to guess your password by using a simple script which cycles through the easy and most common combinations.', 'all-in-one-wp-security-and-firewall').'</p>'.
+                '<p>'.__('The longer and more complex your password is the harder it is for hackers to "crack" because more complex passwords require much greater computing power and time.', 'all-in-one-wp-security-and-firewall').'</p>'.
+                '<p>'.__('This section contains a useful password strength tool which you can use to check whether your password is sufficiently strong enough.', 'all-in-one-wp-security-and-firewall').'</p>';
                 ?>
             </div>
 
             <div class="postbox">
-            <h3><label for="title"><?php _e('Password Strength Tool', 'aiowpsecurity')?></label></h3>
+            <h3><label for="title"><?php _e('Password Strength Tool', 'all-in-one-wp-security-and-firewall')?></label></h3>
             <div class="inside">
                 <div class="aio_grey_box aio_half_width"><p>This password tool uses an algorithm which calculates how long it would take for your password to be cracked using the computing power of an off-the-shelf current model desktop PC with high end processor, graphics card and appropriate password cracking software.</p></div>
                 <div class="aiowps_password_tool_field">
                     <input size="40" id="aiowps_password_test" name="aiowps_password_test" type="text" />
-                    <div class="description"><?php _e('Start typing a password.', 'aiowpsecurity'); ?></div>
+                    <div class="description"><?php _e('Start typing a password.', 'all-in-one-wp-security-and-firewall'); ?></div>
                 </div>
             <div id="aiowps_pw_tool_main">
-                <div class="aiowps_password_crack_info_text"><?php _e('It would take a desktop PC approximately', 'aiowpsecurity'); ?>
-                <div id="aiowps_password_crack_time_calculation"><?php _e('1 sec', 'aiowpsecurity'); ?></div> <?php _e('to crack your password!', 'aiowpsecurity'); ?></div>
+                <div class="aiowps_password_crack_info_text"><?php _e('It would take a desktop PC approximately', 'all-in-one-wp-security-and-firewall'); ?>
+                <div id="aiowps_password_crack_time_calculation"><?php _e('1 sec', 'all-in-one-wp-security-and-firewall'); ?></div> <?php _e('to crack your password!', 'all-in-one-wp-security-and-firewall'); ?></div>
                 <!-- The rotating arrow -->
                 <div class="arrowCap"></div>
                 <div class="arrow"></div>
 
-                <p class="meterText"><?php _e('Password Strength', 'aiowpsecurity'); ?></p>
+                <p class="meterText"><?php _e('Password Strength', 'all-in-one-wp-security-and-firewall'); ?></p>
             </div>
             </div>
             </div>   
@@ -240,14 +240,14 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
         if (!wp_verify_nonce($nonce, 'aiowpsec-change-admin-nonce'))
         {
             $aio_wp_security->debug_logger->log_debug("Nonce check failed on admin username change operation!",4);
-            die(__('Nonce check failed on admin username change operation!','aiowpsecurity'));
+            die(__('Nonce check failed on admin username change operation!','all-in-one-wp-security-and-firewall'));
         }
         if (!empty($_POST['aiowps_new_user_name'])) {
             $new_username = sanitize_text_field($_POST['aiowps_new_user_name']);
             if (validate_username($new_username))
             {
                 if (AIOWPSecurity_Utility::check_user_exists($new_username)){
-                    $errors .= __('Username ', 'aiowpsecurity').$new_username.__(' already exists. Please enter another value. ', 'aiowpsecurity');
+                    $errors .= __('Username ', 'all-in-one-wp-security-and-firewall').$new_username.__(' already exists. Please enter another value. ', 'all-in-one-wp-security-and-firewall');
                 } 
                 else 
                 {
@@ -263,7 +263,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                     $result = $wpdb->query("UPDATE `" . $wpdb->users . "` SET user_login = '" . esc_sql($new_username) . "' WHERE user_login='admin';");
                     if (!$result) {
                         //There was an error updating the users table
-                        $user_update_error = __('The database update operation of the user account failed!', 'aiowpsecurity');
+                        $user_update_error = __('The database update operation of the user account failed!', 'all-in-one-wp-security-and-firewall');
                         //TODO## - add error logging here
                         $return_msg = '<div id="message" class="updated fade"><p>'.$user_update_error.'</p></div>';
                         return $return_msg;
@@ -292,18 +292,18 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                 }
             } 
             else {//An invalid username was entered
-                $errors .= __('You entered an invalid username. Please enter another value. ', 'aiowpsecurity');
+                $errors .= __('You entered an invalid username. Please enter another value. ', 'all-in-one-wp-security-and-firewall');
             }
         } 
         else {//No username value was entered
-            $errors .= __('Please enter a value for your username. ', 'aiowpsecurity');
+            $errors .= __('Please enter a value for your username. ', 'all-in-one-wp-security-and-firewall');
         }
 
         if (strlen($errors)> 0){//We have some validation or other error
             $return_msg = '<div id="message" class="error"><p>' . $errors . '</p></div>';
         } 
         else{
-            $return_msg = '<div id="message" class="updated fade"><p>'.__('Username Successfully Changed!', 'aiowpsecurity').'</p></div>';
+            $return_msg = '<div id="message" class="updated fade"><p>'.__('Username Successfully Changed!', 'all-in-one-wp-security-and-firewall').'</p></div>';
         }
         return $return_msg;
     }
@@ -323,7 +323,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
         $account_output = "";
         if ($admin_users != NULL) {
             $account_output .= '<table>';
-            $account_output .= '<tr><th>'.__('Account Login Name', 'aiowpsecurity').'</th></tr>';
+            $account_output .= '<tr><th>'.__('Account Login Name', 'all-in-one-wp-security-and-firewall').'</th></tr>';
             foreach ($admin_users as $entry) {
                 $account_output .= '<tr>';
                 if (strtolower($entry->user_login) == 'admin') {

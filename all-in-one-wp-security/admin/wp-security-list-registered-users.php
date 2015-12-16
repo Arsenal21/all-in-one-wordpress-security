@@ -84,7 +84,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         {//Process approve bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
             }else 
             {            
                 $this->approve_selected_accounts(($_REQUEST['item']));
@@ -95,7 +95,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         {//Process delete bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
             }else 
             {            
                 $this->delete_selected_accounts(($_REQUEST['item']));
@@ -129,8 +129,8 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                     }else{
                         $email_msg = '';
                         $to_email_address = $user->user_email;
-                        $subject = '['.get_option('siteurl').'] '. __('Your account is now active','aiowpsecurity');
-                        $email_msg .= __('Your account with user ID:','aiowpsecurity').$user->ID.__(' is now active','aiowpsecurity')."\n";
+                        $subject = '['.get_option('siteurl').'] '. __('Your account is now active','all-in-one-wp-security-and-firewall');
+                        $email_msg .= __('Your account with user ID:','all-in-one-wp-security-and-firewall').$user->ID.__(' is now active','all-in-one-wp-security-and-firewall')."\n";
                         $site_title = get_bloginfo( 'name' );
                         $from_name = empty($site_title)?'WordPress':$site_title;
                         $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
@@ -139,11 +139,11 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                 }
             }
             if ($at_least_one_updated){
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected accounts were approved successfully!','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected accounts were approved successfully!','all-in-one-wp-security-and-firewall'));
             }
             if ($failed_accts != ''){//display any failed account updates
                 rtrim($failed_accts);
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The following accounts failed to update successfully: ','aiowpsecurity').$failed_accts);
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The following accounts failed to update successfully: ','all-in-one-wp-security-and-firewall').$failed_accts);
             }
         } elseif ($entries != NULL)
         {
@@ -151,12 +151,12 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
             $result = update_user_meta($entries, $meta_key, $meta_value);
             if($result)
             {
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected account was approved successfully!','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected account was approved successfully!','all-in-one-wp-security-and-firewall'));
                 $user = get_user_by('id', $entries);
                 $to_email_address = $user->user_email;
                 $email_msg = '';
-                $subject = '['.get_option('siteurl').'] '. __('Your account is now active','aiowpsecurity');
-                $email_msg .= __('Your account with username: ','aiowpsecurity').$user->user_login.__(' is now active','aiowpsecurity')."\n";
+                $subject = '['.get_option('siteurl').'] '. __('Your account is now active','all-in-one-wp-security-and-firewall');
+                $email_msg .= __('Your account with username: ','all-in-one-wp-security-and-firewall').$user->user_login.__(' is now active','all-in-one-wp-security-and-firewall')."\n";
                 $site_title = get_bloginfo( 'name' );
                 $from_name = empty($site_title)?'WordPress':$site_title;
                 $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
@@ -184,7 +184,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                         $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_List_Registered_Users::delete_selected_accounts() - could not delete account ID: $user_id",4);
                     }
                 }
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected accounts were deleted successfully!','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected accounts were deleted successfully!','all-in-one-wp-security-and-firewall'));
             }
         } elseif ($entries != NULL)
         {
@@ -192,7 +192,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
             if (!isset($nonce) ||!wp_verify_nonce($nonce, 'delete_user_acct'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete registered user account operation!",4);
-                die(__('Nonce check failed for delete registered user account operation!','aiowpsecurity'));
+                die(__('Nonce check failed for delete registered user account operation!','all-in-one-wp-security-and-firewall'));
             }
             
             //Delete single account
@@ -200,7 +200,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
             $result = wp_delete_user($entries);
             if($result === true)
             {
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected account was deleted successfully!','aiowpsecurity'));
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected account was deleted successfully!','all-in-one-wp-security-and-firewall'));
             }
             else
             {

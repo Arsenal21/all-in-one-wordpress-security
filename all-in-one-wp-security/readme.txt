@@ -3,8 +3,8 @@ Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrso
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
-Tested up to: 4.3
-Stable tag: 3.9.9
+Tested up to: 4.3.1
+Stable tag: 4.0.1
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -179,6 +179,15 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+= 4.0.1 =
+- Renamed the language files to match the new textdomain slug to fix the language translation bug.
+- Fixed bug related to the rename login feature and force logout or logout expiry events.
+
+= 4.0.0 =
+- Updated text domain to match expected value for translate.wordpress.org translation system.
+- Fixed bug related to multi-site user_roles not being updated for child sites.
+- Fixed minor bug in rename login feature.
+- Updated the Italian language file. 
 
 = 3.9.9 =
 - Fixed an issue with the rename login page feature for WordPress 4.3
