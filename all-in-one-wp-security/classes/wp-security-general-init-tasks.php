@@ -44,6 +44,11 @@ class AIOWPSecurity_General_Init_Tasks
             }
         }
         
+        //stop users enumeration
+        if( $aio_wp_security->configs->get_value('aiowps_prevent_users_enumeration') == 1) {
+            include_once(AIO_WP_SECURITY_PATH.'/other-includes/wp-security-stop-users-enumeration.php');
+        }
+        
         //For user unlock request feature
         if(isset($_POST['aiowps_unlock_request']) || isset($_POST['aiowps_wp_submit_unlock_request'])){
             nocache_headers();            
