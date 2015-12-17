@@ -124,6 +124,8 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->set_value('aiowps_copy_protection','');//Checkbox
         //Prevent others from dislaying your site in iframe
         $aio_wp_security->configs->set_value('aiowps_prevent_site_display_inside_frame','');//Checkbox
+       //Prevent users enumeration
+        $aio_wp_security->configs->set_value('aiowps_prevent_users_enumeration','');//Checkbox
         
                 
         //TODO - keep adding default options for any fields that require it
@@ -250,6 +252,8 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->add_value('aiowps_copy_protection','');//Checkbox
         //Prevent others from dislaying your site in iframe
         $aio_wp_security->configs->add_value('aiowps_prevent_site_display_inside_frame','');//Checkbox
+        //Prevent users enumeration
+        $aio_wp_security->configs->set_value('aiowps_prevent_users_enumeration','');//Checkbox
 
         
         //TODO - keep adding default options for any fields that require it
