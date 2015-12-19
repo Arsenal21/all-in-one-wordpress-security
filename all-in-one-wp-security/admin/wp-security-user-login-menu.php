@@ -16,7 +16,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
     
     function __construct() 
     {
-        $this->render_user_login_menu_page();
+        $this->render_menu_page();
     }
     
     function set_menu_tabs() 
@@ -56,15 +56,16 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
     /*
      * The menu rendering goes here
      */
-    function render_user_login_menu_page() 
+    function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('User Login','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
-        <div id="poststuff"><div id="post-body">
-        <?php 
         $this->render_menu_tabs();
+        ?>        
+        <div id="poststuff"><div id="post-body">
+        <?php  
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>

@@ -500,8 +500,16 @@ class AIOWPSecurity_Utility_Htaccess
                             //The following works:
                             //RewriteCond %{REMOTE_ADDR} !^203\.87\.121\.
 
-                            //$dhost = trim( str_replace('*', '0', implode( '.', array_reverse( $parts ) ) ) . '/' . $netmask );
-                            $dhost = trim(str_replace('*', '', implode('.', array_reverse($parts))));
+                            if($special_case){
+                                $dhost = trim(str_replace('*', '', implode('.', array_reverse($parts)),$count));
+                                if($count > 1){
+                                    //means that we will have consecutive periods in the string and we must remove all except one - eg: 45.12..
+                                    $dhost = rtrim($dhost, '.');
+                                    $dhost = $dhost . '.';
+                                }
+                            }else{
+                                $dhost = trim( str_replace('*', '0', implode( '.', array_reverse( $parts ) ) ) . '/' . $netmask );
+                            }
                             if (strlen($dhost) > 4) {
                                 if ($special_case) {
                                     $dhost = preg_quote($dhost); //escape any applicable chars

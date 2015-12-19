@@ -4,7 +4,9 @@ class AIOWPSecurity_General_Init_Tasks
 {
     function __construct(){
         global $aio_wp_security;
-        
+
+        add_action( 'permalink_structure_changed', array(&$this, 'refresh_firewall_rules' ), 10, 2);
+
         if ($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page') == '1') {
             add_action( 'widgets_init', array(&$this, 'remove_standard_wp_meta_widget' ));
             add_filter( 'retrieve_password_message', array(&$this, 'decode_reset_pw_msg'), 10, 4); //Fix for non decoded html entities in password reset link
@@ -44,7 +46,7 @@ class AIOWPSecurity_General_Init_Tasks
             }
         }
         
-        //stop users enumeration
+        //Stop users enumeration feature
         if( $aio_wp_security->configs->get_value('aiowps_prevent_users_enumeration') == 1) {
             include_once(AIO_WP_SECURITY_PATH.'/other-includes/wp-security-stop-users-enumeration.php');
         }
@@ -169,9 +171,28 @@ class AIOWPSecurity_General_Init_Tasks
         if($aio_wp_security->configs->get_value('aiowps_enable_404_logging') == '1'){
             add_action('wp_head', array(&$this, 'check_404_event'));
         }
-        
+
         //Add more tasks that need to be executed at init time
         
+    }
+
+    /**
+     * Refreshes the firewall rules in .htaccess file
+     * eg: if permalink settings changed and white list enabled
+     * @param $old_permalink_structure
+     * @param $permalink_structure
+     */
+    function refresh_firewall_rules($old_permalink_structure, $permalink_structure){
+        global $aio_wp_security;
+        //If white list enabled need to re-adjust the .htaccess rules
+        if ($aio_wp_security->configs->get_value('aiowps_enable_whitelisting') == '1') {
+            $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
+            if ($write_result == -1)
+            {
+                $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
+                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_whitelist_Menu - The plugin was unable to write to the .htaccess file.");
+            }
+        }
     }
     
     function remove_standard_wp_meta_widget()

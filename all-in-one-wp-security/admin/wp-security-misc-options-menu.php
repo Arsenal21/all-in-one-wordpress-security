@@ -23,6 +23,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         $this->menu_tabs = array(
         'tab1' => __('Copy Protection', 'all-in-one-wp-security-and-firewall'),
         'tab2' => __('Frames', 'all-in-one-wp-security-and-firewall'),
+        'tab3' => __('Users Enumeration', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -54,13 +55,14 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
      */
     function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('Miscellaneous','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
+        $this->render_menu_tabs();
+        ?>        
         <div id="poststuff"><div id="post-body">
         <?php 
-        $this->render_menu_tabs();
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -199,7 +201,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_blue_box">
             <?php
             echo '<p>'.__('This feature allows you to prevent external users/bots from fetching the user info with urls like "/?author=1".', 'all-in-one-wp-security-and-firewall').'</p>';
-            echo '<p>'.__('When enabled, this feature will print "Forbidden" rather than the user informations.', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p>'.__('When enabled, this feature will print a "forbidden" error rather than the user information.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
         <table class="form-table">

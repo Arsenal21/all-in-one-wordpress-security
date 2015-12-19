@@ -1,10 +1,10 @@
 === All In One WP Security & Firewall ===
-Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, samuelaguilera
+Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, gdavide, samuelaguilera
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.4
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -37,6 +37,7 @@ Below is a list of the security and firewall features offered in this plugin:
 * The plugin will also detect if you have any WordPress user accounts which have identical login and display names. Having account's where display name is identical to login name is bad security practice because 
 you are making it 50% easier for hackers because they already know the login name.
 * Password strength tool to allow you to create very strong passwords.
+* Stop user enumeration. So users/bots cannot discover user info via author permalink.
 
 = User Login Security =
 * Protect against "Brute Force Login Attack" with the Login Lockdown feature. Users with a certain IP address or range will be locked out of the system for a predetermined amount of time based on the configuration settings and you can also choose to be notified 
@@ -179,6 +180,13 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.0.3 =
+- Added urlencode to query strings in URLs to prevent unexpected behaviour. Thanks to @chesio for spotting the issue.
+- Added new feature to stop users enumeration. Thanks to @davidegiunchidiennea for adding this.
+- Added a more robust code for check_user_exists function. Thanks to Christian Carey.
+- Added cron cleanup of the global meta table.
+- Added a title in each of the admin interface menu.
 
 = 4.0.2 =
 - Added ability to enable/disable debug from the settings menu.
