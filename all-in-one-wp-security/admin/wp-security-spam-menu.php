@@ -189,9 +189,49 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
     function render_tab2()
     {
         global $aio_wp_security;
+        global $aiowps_feature_mgr;
         include_once 'wp-security-list-comment-spammer-ip.php'; //For rendering the AIOWPSecurity_List_Table in tab2
         $spammer_ip_list = new AIOWPSecurity_List_Comment_Spammer_IP();
-        
+
+        //Do form submission tasks for auto block spam IP
+        if(isset($_POST['aiowps_auto_spam_block']))
+        {
+            $error = '';
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-auto-block-spam-ip-nonce'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed on auto block SPAM IPs options save!",4);
+                die("Nonce check failed on auto block SPAM IPs options save!");
+            }
+
+            $spam_ip_min_comments = sanitize_text_field($_POST['aiowps_spam_ip_min_comments_block']);
+            if(!is_numeric($spam_ip_min_comments))
+            {
+                $error .= '<br />'.__('You entered a non numeric value for the minimum number of spam comments field. It has been set to the default value.','all-in-one-wp-security-and-firewall');
+                $spam_ip_min_comments = '3';//Set it to the default value for this field
+            }elseif(empty($spam_ip_min_comments)){
+                $error .= '<br />'.__('You must enter an integer greater than zero for minimum number of spam comments field. It has been set to the default value.','all-in-one-wp-security-and-firewall');
+                $spam_ip_min_comments = '3';//Set it to the default value for this field
+
+            }
+
+            if($error)
+            {
+                $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall').$error);
+            }
+
+            //Save all the form values to the options
+            $aio_wp_security->configs->set_value('aiowps_enable_autoblock_spam_ip',isset($_POST["aiowps_enable_autoblock_spam_ip"])?'1':'');
+            $aio_wp_security->configs->set_value('aiowps_spam_ip_min_comments_block',absint($spam_ip_min_comments));
+            $aio_wp_security->configs->save_config();
+
+            //Recalculate points after the feature status/options have been altered
+            $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
+
+            $this->show_msg_settings_updated();
+        }
+
+
         if (isset($_POST['aiowps_ip_spam_comment_search']))
         {
             $error = '';
@@ -231,19 +271,109 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
         }
 
         ?>
-        <div class="aio_blue_box">
-            <?php
-            echo '<p>'.__('This tab displays a list of the IP addresses of the people or bots who have left SPAM comments on your site.', 'all-in-one-wp-security-and-firewall').'
-                <br />'.__('This information can be handy for identifying the most persistent IP addresses or ranges used by spammers.', 'all-in-one-wp-security-and-firewall').'
-                <br />'.__('By inspecting the IP address data coming from spammers you will be in a better position to determine which addresses or address ranges you should block by adding them to your blacklist.', 'all-in-one-wp-security-and-firewall').'
-                <br />'.__('To add one or more of the IP addresses displayed in the table below to your blacklist, simply click the "Block" link for the individual row or select more than one address 
-                            using the checkboxes and then choose the "block" option from the Bulk Actions dropdown list and click the "Apply" button.', 'all-in-one-wp-security-and-firewall').'
-            </p>';
-            ?>
-        </div>
+        <div class="postbox">
+            <h3 class="hndle"><label for="title"><?php _e('Auto Block SPAMMER IPs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+            <div class="inside">
+                <?php
+                if($aio_wp_security->configs->get_value('aiowps_enable_autoblock_spam_ip')=='1' && !class_exists('Akismet')){
+                    $akismet_link = '<a href="https://wordpress.org/plugins/akismet/" target="_blank">Akismet</a>';
+                    $info_msg = sprintf( __('This feature has detected that %s is not active. It is highly recommended that you activate the Akismet plugin to make the most of this feature.', 'all-in-one-wp-security-and-firewall'), $akismet_link);
+
+                    echo '<div class="aio_orange_box" id="message"><p><strong>'.$info_msg.'</strong></p></div>';
+                }
+
+                ?>
+                <form action="" method="POST">
+                <div class="aio_blue_box">
+                    <?php
+                    echo '<p>'.__('This feature allows you to automatically and permanently block IP addresses which have exceeded a certain number of comments labelled as SPAM.', 'all-in-one-wp-security-and-firewall').'</p>'.
+                        '<p>'.__('Comments are usually labelled as SPAM either by the Akismet plugin or manually by the WP administrator when they mark a comment as "spam" from the WordPress Comments menu.', 'all-in-one-wp-security-and-firewall').'</p>'.
+                        '<p><strong>'.__('NOTE: This feature does NOT use the .htaccess file to permanently block the IP addresses so it should be compatible with all web servers running WordPress.', 'all-in-one-wp-security-and-firewall').'</strong></p>';
+                    ?>
+                </div>
+                    <?php
+                    $min_block_comments = $aio_wp_security->configs->get_value('aiowps_spam_ip_min_comments_block');
+                    if(!empty($min_block_comments)){
+                        global $wpdb;
+                        $sql = $wpdb->prepare('SELECT * FROM '.AIOWPSEC_TBL_PERM_BLOCK.' WHERE block_reason=%s', 'spam');
+                        $total_res = $wpdb->get_results($sql);
+                        ?>
+                        <div class="aio_yellow_box">
+                            <?php
+                            if(empty($total_res)){
+                                echo '<p><strong>'.__('You currently have no IP addresses permanently blocked due to SPAM.', 'all-in-one-wp-security-and-firewall').'</strong></p>';
+                            }else{
+                                $total_count = count($total_res);
+                                $todays_blocked_count = 0;
+                                foreach($total_res as $blocked_item){
+                                    $now = current_time('mysql');
+                                    $now_date_time = new DateTime($now);
+                                    $blocked_date = new DateTime($blocked_item->blocked_date);
+                                    if($blocked_date->format('Y-m-d') == $now_date_time->format('Y-m-d')) {
+                                        //there was an IP added to permanent block list today
+                                        ++$todays_blocked_count;
+                                    }
+                                }
+                                echo '<p><strong>'.__('Spammer IPs Added To Permanent Block List Today: ', 'all-in-one-wp-security-and-firewall').$todays_blocked_count.'</strong></p>'.
+                                    '<hr><p><strong>'.__('All Time Total: ', 'all-in-one-wp-security-and-firewall').$total_count.'</strong></p>'.
+                                    '<p><a class="button" href="admin.php?page='.AIOWPSEC_MAIN_MENU_SLUG.'&tab=tab4" target="_blank">'.__('View Blocked IPs','all-in-one-wp-security-and-firewall').'</a></p>';
+                            }
+                            ?>
+                        </div>
+
+                    <?php
+                    }
+                //Display security info badge
+                //$aiowps_feature_mgr->output_feature_details_badge("auto-block-spam-ip");
+                    ?>
+                    <?php wp_nonce_field('aiowpsec-auto-block-spam-ip-nonce'); ?>
+                <table class="form-table">
+                    <tr valign="top">
+                        <th scope="row"><?php _e('Enable Auto Block of SPAM Comment IPs', 'all-in-one-wp-security-and-firewall')?>:</th>
+                        <td>
+                            <input name="aiowps_enable_autoblock_spam_ip" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_autoblock_spam_ip')=='1') echo ' checked="checked"'; ?> value="1"/>
+                            <span class="description"><?php _e('Check this box if you want this plugin to automatically block IP addresses which submit SPAM comments.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row"><?php _e('Minimum number of SPAM comments', 'all-in-one-wp-security-and-firewall')?>:</th>
+                        <td><input type="text" size="5" name="aiowps_spam_ip_min_comments_block" value="<?php echo $aio_wp_security->configs->get_value('aiowps_spam_ip_min_comments_block'); ?>" />
+                            <span class="description"><?php _e('Specify the minimum number of SPAM comments for an IP address before it is permanently blocked.', 'all-in-one-wp-security-and-firewall');?></span>
+                            <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
+                            <div class="aiowps_more_info_body">
+                                <?php
+                                echo '<p class="description">'.__('Example 1: Setting this value to "1" will block ALL IP addresses which were used to submit at least one SPAM comment.', 'all-in-one-wp-security-and-firewall').'</p>';
+                                echo '<p class="description">'.__('Example 2: Setting this value to "5" will block only those IP addresses which were used to submit 5 SPAM comments or more on your site.', 'all-in-one-wp-security-and-firewall').'</p>';
+                                ?>
+                            </div>
+                        </td>
+                    </tr>
+<!--                    <tr valign="top">-->
+<!--                        <th scope="row">--><?php //_e('Run Now', 'all-in-one-wp-security-and-firewall')?><!--:</th>-->
+<!--                        <td><input type="submit" name="aiowps_auto_spam_block_run" value="--><?php //_e('Run SPAM IP Blocking Now', 'all-in-one-wp-security-and-firewall')?><!--" class="button-secondary" />-->
+<!--                            <span class="description">--><?php //_e('This feature normally runs automatically whenever a comment is submitted but you can run it manually by clicking this button. (useful for older comments)', 'all-in-one-wp-security-and-firewall');?><!--</span>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+
+                </table>
+                <input type="submit" name="aiowps_auto_spam_block" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
+                </form>
+            </div></div>
+
         <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('List SPAMMER IP Addresses', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
+            <div class="aio_blue_box">
+                <?php
+                echo '<p>'.__('This section displays a list of the IP addresses of the people or bots who have left SPAM comments on your site.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('This information can be handy for identifying the most persistent IP addresses or ranges used by spammers.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('By inspecting the IP address data coming from spammers you will be in a better position to determine which addresses or address ranges you should block by adding them to your blacklist.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('To add one or more of the IP addresses displayed in the table below to your blacklist, simply click the "Block" link for the individual row or select more than one address
+                            using the checkboxes and then choose the "block" option from the Bulk Actions dropdown list and click the "Apply" button.', 'all-in-one-wp-security-and-firewall').'
+            </p>';
+                ?>
+            </div>
+
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-spammer-ip-list-nonce'); ?>
         <table class="form-table">

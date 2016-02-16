@@ -75,7 +75,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
     static function renamed_login_init_tasks()
     {
         global $aio_wp_security;
-        
+
         //The following will process the native wordpress post password protection form
         //Normally this is done by wp-login.php file but we cannot use that since the login page has been renamed 
         $action = isset($_GET['action'])?strip_tags($_GET['action']):'';
@@ -134,8 +134,20 @@ class AIOWPSecurity_Process_Renamed_Login_Page
         $parsed_url = parse_url($_SERVER['REQUEST_URI']);
 
         $login_slug = $aio_wp_security->configs->get_value('aiowps_login_page_slug');
-        
-        if(untrailingslashit($parsed_url['path']) === home_url($login_slug, 'relative')
+        $home_url_with_slug = home_url($login_slug, 'relative');
+        /*
+         * *** Compatibility fix for qTranslate-X plugin ***
+         * qTranslate-X plugin modifies the result for the following command by adding the protocol and host to the url path:
+         * home_url($login_slug, 'relative');
+         * Therefore we will remove the protocol and host for the following cases:
+         * qTranslate-X is active AND the URL being accessed contains the secret slug
+         */
+        if (function_exists('qtranxf_init_language') && strpos($home_url_with_slug,$login_slug)){
+            $parsed_home_url_with_slug = parse_url($home_url_with_slug);
+            $home_url_with_slug = $parsed_home_url_with_slug['path']; //this will return just the path minus the protocol and host
+        }
+
+        if(untrailingslashit($parsed_url['path']) === $home_url_with_slug
                 || (!get_option('permalink_structure') && isset($_GET[$login_slug]))){
             status_header( 200 );
             require_once(AIO_WP_SECURITY_PATH . '/other-includes/wp-security-rename-login-feature.php' );

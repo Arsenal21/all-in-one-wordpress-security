@@ -85,6 +85,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             'event_date' => 'Date',
             'status' => 'Lock Status',
         );
+        $columns = apply_filters('list_404_get_columns', $columns);
         return $columns;
     }
 
@@ -97,6 +98,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             'referer_info' => array('referer_info', false),
             'event_date' => array('event_date', false),
         );
+        $sortable_columns = apply_filters('list_404_get_sortable_columns', $sortable_columns);
         return $sortable_columns;
     }
 

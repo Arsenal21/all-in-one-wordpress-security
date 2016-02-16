@@ -182,7 +182,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
             if (!wp_verify_nonce($nonce, 'aiowpsec-users-enumeration'))
             {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed on prevent users enumeration feature settings save!",4);
-                die("Nonce check failed on prevent users enumeration frame feature settings save!");
+                die("Nonce check failed on prevent users enumeration feature settings save!");
             }
 
             //Save settings

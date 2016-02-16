@@ -35,7 +35,7 @@ class AIOWPSecurity_Admin_Init
             add_action('init', array( &$this, 'init_hook_handler_for_admin_side')); 
         }
     }
-    
+
     function admin_includes()
     {
         include_once('wp-security-admin-menu.php');

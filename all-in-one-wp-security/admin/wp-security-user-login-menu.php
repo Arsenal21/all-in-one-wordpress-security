@@ -173,7 +173,6 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         <div class="inside">
         <?php
         //Display security info badge
-        global $aiowps_feature_mgr;
         $aiowps_feature_mgr->output_feature_details_badge("user-login-login-lockdown");
         ?>
 

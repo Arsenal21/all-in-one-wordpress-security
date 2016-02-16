@@ -107,6 +107,8 @@ class AIOWPSecurity_Configure_Settings
         //SPAM Prevention menu
         $aio_wp_security->configs->set_value('aiowps_enable_spambot_blocking','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_comment_captcha','');//Checkbox
+        $aio_wp_security->configs->set_value('aiowps_enable_autoblock_spam_ip','');//Checkbox
+        $aio_wp_security->configs->set_value('aiowps_spam_ip_min_comments_block','');
         
         //Filescan features
         //File change detection feature
@@ -235,6 +237,9 @@ class AIOWPSecurity_Configure_Settings
         //SPAM Prevention menu
         $aio_wp_security->configs->add_value('aiowps_enable_spambot_blocking','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_enable_comment_captcha','');//Checkbox
+        $aio_wp_security->configs->add_value('aiowps_enable_autoblock_spam_ip','');//Checkbox
+        $aio_wp_security->configs->add_value('aiowps_spam_ip_min_comments_block','');
+
 
         //Filescan features
         //File change detection feature
@@ -264,6 +269,7 @@ class AIOWPSecurity_Configure_Settings
 
     static function turn_off_all_security_features()
     {
+        global $aio_wp_security;
         AIOWPSecurity_Configure_Settings::set_default_settings();
         
         //Refresh the .htaccess file based on the new settings

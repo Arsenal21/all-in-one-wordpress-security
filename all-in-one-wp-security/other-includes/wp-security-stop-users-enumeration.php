@@ -21,18 +21,16 @@
  */
 
 if (!is_admin()) {
-    if (!is_admin()) {
-        if (preg_match('/(wp-comments-post)/', $_SERVER['REQUEST_URI']) === 0) {
-            if (!empty($_POST['author'])) {
-                wp_die('Accessing author info via link is forbidden');
-            }
-        }
-
-        if (preg_match('/author=([0-9]*)/', $_SERVER['QUERY_STRING']) === 1)
+    if (preg_match('/(wp-comments-post)/', $_SERVER['REQUEST_URI']) === 0) {
+        if (!empty($_POST['author'])) {
             wp_die('Accessing author info via link is forbidden');
-
-        add_filter('redirect_canonical', 'll_detect_enumeration', 10, 2);
+        }
     }
+
+    if (preg_match('/author=([0-9]*)/', $_SERVER['QUERY_STRING']) === 1)
+        wp_die('Accessing author info via link is forbidden');
+
+    add_filter('redirect_canonical', 'll_detect_enumeration', 10, 2);
 }
 
 add_filter('redirect_canonical', 'll_detect_enumeration', 10, 2);

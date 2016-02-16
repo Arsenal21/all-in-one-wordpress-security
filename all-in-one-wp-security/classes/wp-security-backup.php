@@ -300,7 +300,7 @@ class AIOWPSecurity_Backup
         //Check the global meta table
         $global_meta_table_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
         $max_rows_global_meta_table = '5000'; //Keep a max of 5000 rows in this table
-        $max_rows_global_meta_table = apply_filters( 'aiowps_max_rows_global_meta_table', $global_meta_table_name );
+        $max_rows_global_meta_table = apply_filters( 'aiowps_max_rows_global_meta_table', $max_rows_global_meta_table );
         AIOWPSecurity_Utility::cleanup_table($global_meta_table_name, $max_rows_global_meta_table);
 
 

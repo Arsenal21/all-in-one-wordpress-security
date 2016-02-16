@@ -66,6 +66,17 @@
     padding: 0 1em 0 1em; 
 }
 
+.aio_orange_box{
+    margin: 10px 0 15px;
+    background-color: #FFB900;
+    border-color: #D64500;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0 0 0 1em;
+}
+
+
 .aio_success_with_icon {
     background-image: url("../images/success.png");
     background-repeat: no-repeat;
@@ -351,4 +362,8 @@
     padding-right: 6.25%;
     text-align: center;
     color: darkorange;
+}
+
+.aiowps_dashboard_table{
+    table-layout: fixed;
 }

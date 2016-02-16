@@ -1,10 +1,10 @@
 === All In One WP Security & Firewall ===
-Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, gdavide, samuelaguilera
+Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, gdavide
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.4
-Stable tag: 4.0.3
+Stable tag: 4.0.4
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -113,6 +113,7 @@ or malicious bots who do not have a special cookie in their browser. You (the si
 * Monitor the most active IP addresses which persistently produce the most SPAM comments and instantly block them with the click of a button.
 * Prevent comments from being submitted if it doesn't originate from your domain (this should reduce some SPAM bot comment posting on your site).
 * Add a captcha to your wordpress comment form to add security against comment spam.
+* Automatically and permanently block IP addresses which have exceeded a certain number of comments labeled as SPAM.
 
 = Front-end Text Copy Protection =
 * Ability to disable the right click, text selection and copy option for your front-end.
@@ -181,9 +182,19 @@ None
 
 == Changelog ==
 
+= 4.0.4 =
+- Added new feature: Auto Block Spammer IPs. This feature will automatically and permanently block IP addresses which are linked to comment SPAM. (see SPAM Prevention -> Comment SPAM IP Monitoring tab)
+- Added compatibility fix for the qTranslate-X plugin in the rename login page feature.
+- Added ability to send to more than one email address for file change detection feature notification.
+- Fixed bug in whois library when searching ARIN registry.
+- Fixed the handling of display of longer IPV6 strings in dashboard summary table.
+- Added hook for WooCommerce login form to display unlock button.
+- Added Dutch language translation. Thanks to Jeroen van der Linde for providing the translation files.
+- Typo fix in the "stop users enumeration" feature.
+
 = 4.0.3 =
 - Added urlencode to query strings in URLs to prevent unexpected behaviour. Thanks to @chesio for spotting the issue.
-- Added new feature to stop users enumeration. Thanks to @davidegiunchidiennea for adding this.
+- Added new feature to stop users enumeration. Thanks to Davide Giunchi @davidegiunchidiennea for adding this.
 - Added a more robust code for check_user_exists function. Thanks to Christian Carey.
 - Added cron cleanup of the global meta table.
 - Added a title in each of the admin interface menu.
