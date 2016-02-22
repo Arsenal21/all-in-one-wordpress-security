@@ -317,7 +317,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         
         if (isset($_POST['aiowps_system_log_file'])){
             if ($_POST['aiowps_system_log_file'] != NULL){
-                $sys_log_file = sanitize_text_field($_POST['aiowps_system_log_file']);
+                $sys_log_file = esc_html($_POST['aiowps_system_log_file']);
                 $aio_wp_security->configs->set_value('aiowps_system_log_file',$sys_log_file);
             }else{
                 $sys_log_file = 'error_log';
@@ -346,7 +346,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             <form action="" method="POST">
                 <?php wp_nonce_field('aiowpsec-view-system-logs-nonce'); ?>
                 <div><?php _e('Enter System Log File Name', 'all-in-one-wp-security-and-firewall')?>:
-                <input type="text" size="25" name="aiowps_system_log_file" value="<?php echo sanitize_text_field($sys_log_file); ?>" />
+                <input type="text" size="25" name="aiowps_system_log_file" value="<?php echo esc_html($sys_log_file); ?>" />
                 <span class="description"><?php _e('Enter your system log file name. (Defaults to error_log)', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </div>
                 <div class="aio_spacer_15"></div>

@@ -172,7 +172,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
             <tr valign="top">
                 <th scope="row"><?php _e('Enter IP Addresses:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
-                    <textarea name="aiowps_banned_ip_addresses" rows="5" cols="50"><?php echo ($result == -1)?$_POST['aiowps_banned_ip_addresses']:$aio_wp_security->configs->get_value('aiowps_banned_ip_addresses'); ?></textarea>
+                    <textarea name="aiowps_banned_ip_addresses" rows="5" cols="50"><?php echo ($result == -1)?htmlspecialchars($_POST['aiowps_banned_ip_addresses']):htmlspecialchars($aio_wp_security->configs->get_value('aiowps_banned_ip_addresses')); ?></textarea>
                     <br />
                     <span class="description"><?php _e('Enter one or more IP addresses or IP ranges.','all-in-one-wp-security-and-firewall');?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
