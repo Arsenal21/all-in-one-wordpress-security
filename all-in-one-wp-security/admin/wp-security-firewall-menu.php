@@ -1020,7 +1020,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                         <tr valign="top">
                             <th scope="row"><?php _e('Enter Custom .htaccess Rules:', 'all-in-one-wp-security-and-firewall')?></th>
                             <td>
-                                <textarea name="aiowps_custom_rules" rows="35" cols="50"><?php echo $aio_wp_security->configs->get_value('aiowps_custom_rules'); ?></textarea>
+                                <textarea name="aiowps_custom_rules" rows="35" cols="50"><?php echo htmlspecialchars($aio_wp_security->configs->get_value('aiowps_custom_rules')); ?></textarea>
                                 <br />
                                 <span class="description"><?php _e('Enter your custom .htaccess rules/directives.','all-in-one-wp-security-and-firewall');?></span>
                             </td>

@@ -357,16 +357,16 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         <input type="submit" name="aiowps_restore_htaccess_button" value="<?php _e('Restore .htaccess File', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
-        <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('View Contents of the currently active .htaccess file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
-        <div class="inside">
-            <?php
-            $ht_file = ABSPATH . '.htaccess';
-            $ht_contents = AIOWPSecurity_Utility_File::get_file_contents($ht_file);
-            //echo $ht_contents;
-            ?>
-            <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly><?php echo $ht_contents; ?></textarea>
-        </div></div>
+<!--        <div class="postbox">-->
+<!--        <h3 class="hndle"><label for="title">--><?php //_e('View Contents of the currently active .htaccess file', 'all-in-one-wp-security-and-firewall'); ?><!--</label></h3>-->
+<!--        <div class="inside">-->
+<!--            --><?php
+//            $ht_file = ABSPATH . '.htaccess';
+//            $ht_contents = AIOWPSecurity_Utility_File::get_file_contents($ht_file);
+//            //echo $ht_contents;
+//            ?>
+<!--            <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly>--><?php //echo $ht_contents; ?><!--</textarea>-->
+<!--        </div></div>-->
 
         <?php
         } // End if statement
@@ -469,15 +469,15 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         <input type="submit" name="aiowps_restore_wp_config_button" value="<?php _e('Restore wp-config File', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
-        <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('View Contents of the currently active wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
-        <div class="inside">
-            <?php
-            $wp_config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
-            $wp_config_contents = AIOWPSecurity_Utility_File::get_file_contents($wp_config_file); 
-            ?>
-            <textarea class="aio_text_area_file_output aio_width_80 aio_spacer_10_tb" rows="20" readonly><?php echo $wp_config_contents; ?></textarea>
-        </div></div>
+<!--        <div class="postbox">-->
+<!--        <h3 class="hndle"><label for="title">--><?php //_e('View Contents of the currently active wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?><!--</label></h3>-->
+<!--        <div class="inside">-->
+<!--            --><?php
+//            $wp_config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
+//            $wp_config_contents = AIOWPSecurity_Utility_File::get_file_contents($wp_config_file);
+//            ?>
+<!--            <textarea class="aio_text_area_file_output aio_width_80 aio_spacer_10_tb" rows="20" readonly>--><?php //echo $wp_config_contents; ?><!--</textarea>-->
+<!--        </div></div>-->
 
         <?php
         } //End if statement

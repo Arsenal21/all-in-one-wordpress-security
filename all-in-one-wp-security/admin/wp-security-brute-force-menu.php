@@ -610,7 +610,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                     }
                     else{
                         $result = -1;
-                        $error_msg = $payload[1][0];
+                        $error_msg = htmlspecialchars($payload[1][0]);
                         $this->show_msg_error($error_msg);
                     }
                     
@@ -687,7 +687,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             <tr valign="top">
                 <th scope="row"><?php _e('Enter Whitelisted IP Addresses:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
-                    <textarea name="aiowps_allowed_ip_addresses" rows="5" cols="50"><?php echo ($result == -1)?$_POST['aiowps_allowed_ip_addresses']:$aio_wp_security->configs->get_value('aiowps_allowed_ip_addresses'); ?></textarea>
+                    <textarea name="aiowps_allowed_ip_addresses" rows="5" cols="50"><?php echo ($result == -1)?htmlspecialchars($_POST['aiowps_allowed_ip_addresses']):htmlspecialchars($aio_wp_security->configs->get_value('aiowps_allowed_ip_addresses')); ?></textarea>
                     <br />
                     <span class="description"><?php _e('Enter one or more IP addresses or IP ranges you wish to include in your whitelist. Only the addresses specified here will have access to the WordPress login page.','all-in-one-wp-security-and-firewall');?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
