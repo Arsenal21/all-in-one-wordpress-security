@@ -859,9 +859,9 @@ class AIOWPSecurity_Utility_Htaccess
         global $aio_wp_security;
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_enable_spambot_blocking') == '1') {
-            $url_string = AIOWPSecurity_Utility_Htaccess::return_regularized_url(AIOWPSEC_WP_URL);
+            $url_string = AIOWPSecurity_Utility_Htaccess::return_regularized_url(AIOWPSEC_WP_HOME_URL);
             if ($url_string == FALSE) {
-                $url_string = AIOWPSEC_WP_URL;
+                $url_string = AIOWPSEC_WP_HOME_URL;
             }
             $rules .= AIOWPSecurity_Utility_Htaccess::$block_spambots_marker_start . PHP_EOL; //Add feature marker start
             $rules .= '<IfModule mod_rewrite.c>
@@ -885,9 +885,9 @@ class AIOWPSecurity_Utility_Htaccess
         global $aio_wp_security;
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_prevent_hotlinking') == '1') {
-            $url_string = AIOWPSecurity_Utility_Htaccess::return_regularized_url(AIOWPSEC_WP_URL);
+            $url_string = AIOWPSecurity_Utility_Htaccess::return_regularized_url(AIOWPSEC_WP_HOME_URL);
             if ($url_string == FALSE) {
-                $url_string = AIOWPSEC_WP_URL;
+                $url_string = AIOWPSEC_WP_HOME_URL;
             }
             $rules .= AIOWPSecurity_Utility_Htaccess::$prevent_image_hotlinks_marker_start . PHP_EOL; //Add feature marker start
             $rules .= '<IfModule mod_rewrite.c>
