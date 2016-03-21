@@ -3,24 +3,24 @@ if ( !defined( 'ABSPATH' ) ) { exit; } // Prevent direct access to file
 class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_FILESYSTEM_MENU_SLUG;
-
+    
     /* Specify all the tabs of this menu in the following array */
     var $menu_tabs;
 
     var $menu_tabs_handler = array(
-        'tab1' => 'render_tab1',
+        'tab1' => 'render_tab1', 
         'tab2' => 'render_tab2',
         'tab3' => 'render_tab3',
         'tab4' => 'render_tab4',
         );
-
-    function __construct()
+    
+    function __construct() 
     {
         $this->render_menu_page();
         add_action( 'admin_footer', array( &$this, 'filesystem_menu_footer_code' ) );
     }
-
-    function set_menu_tabs()
+    
+    function set_menu_tabs() 
     {
         $this->menu_tabs = array(
         'tab1' => __('File Permissions','all-in-one-wp-security-and-firewall'),
@@ -30,7 +30,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         );
     }
 
-    function get_current_tab()
+    function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
         $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
@@ -40,32 +40,32 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
     /*
      * Renders our tabs of this menu as nav items
      */
-    function render_menu_tabs()
+    function render_menu_tabs() 
     {
         $current_tab = $this->get_current_tab();
 
         echo '<h2 class="nav-tab-wrapper">';
-        foreach ( $this->menu_tabs as $tab_key => $tab_caption )
+        foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
         {
             $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
-            echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';
+            echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
         }
         echo '</h2>';
     }
-
+    
     /*
      * The menu rendering goes here
      */
-    function render_menu_page()
+    function render_menu_page() 
     {
         echo '<div class="wrap">';
         echo '<h2>'.__('Filesystem Security','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
         $this->render_menu_tabs();
-        ?>
+        ?>        
         <div id="poststuff"><div id="post-body">
-        <?php
+        <?php 
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -73,8 +73,8 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         </div><!-- end of wrap -->
         <?php
     }
-
-    function render_tab1()
+    
+    function render_tab1() 
     {
         //if this is the case there is no need to display a "fix permissions" button
         global $wpdb, $aio_wp_security;
@@ -124,7 +124,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         $aiowps_feature_mgr->output_feature_details_badge("filesystem-file-permissions");
         ?>
         <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-fix-permissions-nonce'); ?>
+        <?php wp_nonce_field('aiowpsec-fix-permissions-nonce'); ?>            
             <table class="widefat file_permission_table">
                 <thead>
                     <tr>
@@ -158,7 +158,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
         <?php
     }
-
+    
     function render_tab2()
     {
         global $aio_wp_security;
@@ -177,7 +177,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             {
 
                 $res = AIOWPSecurity_Utility::disable_file_edits();//$this->disable_file_edits();
-            } else
+            } else 
             {
                 $res = AIOWPSecurity_Utility::enable_file_edits();//$this->enable_file_edits();
             }
@@ -186,7 +186,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 //Save settings if no errors
                 $aio_wp_security->configs->set_value('aiowps_disable_file_editing',isset($_POST["aiowps_disable_file_editing"])?'1':'');
                 $aio_wp_security->configs->save_config();
-
+                
                 //Recalculate points after the feature status/options have been altered
                 $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
                 $this->show_msg_updated(__('Your PHP file editing settings were saved successfully.', 'all-in-one-wp-security-and-firewall'));
@@ -198,13 +198,13 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             //$this->show_msg_settings_updated();
 
         }
-		else {
+        else {
                 // Make sure the setting value is up-to-date with current value in WP config
                 $aio_wp_security->configs->set_value('aiowps_disable_file_editing', defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT ? '1' : '');
                 $aio_wp_security->configs->save_config();
                 //Recalculate points after the feature status/options have been altered
                 $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
-		}
+        }
         ?>
         <h2><?php _e('File Editing', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
@@ -226,7 +226,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         ?>
 
         <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-disable-file-edit-nonce'); ?>
+        <?php wp_nonce_field('aiowpsec-disable-file-edit-nonce'); ?>            
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Disable Ability To Edit PHP Files', 'all-in-one-wp-security-and-firewall')?>:</th>
@@ -234,7 +234,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 <input name="aiowps_disable_file_editing" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_disable_file_editing')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want to remove the ability for people to edit PHP files via the WP dashboard', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
-            </tr>
+            </tr>            
         </table>
         <input type="submit" name="aiowps_disable_file_edit" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
@@ -259,7 +259,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             if(isset($_POST['aiowps_prevent_default_wp_file_access']))
             {
                 $aio_wp_security->configs->set_value('aiowps_prevent_default_wp_file_access','1');
-            }
+            } 
             else
             {
                 $aio_wp_security->configs->set_value('aiowps_prevent_default_wp_file_access','');
@@ -267,7 +267,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
 
             //Commit the config settings
             $aio_wp_security->configs->save_config();
-
+            
             //Recalculate points after the feature status/options have been altered
             $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
 
@@ -302,7 +302,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         $aiowps_feature_mgr->output_feature_details_badge("block-wp-files-access");
         ?>
         <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-prevent-default-wp-file-access-nonce'); ?>
+        <?php wp_nonce_field('aiowpsec-prevent-default-wp-file-access-nonce'); ?>            
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Prevent Access to WP Default Install Files', 'all-in-one-wp-security-and-firewall')?>:</th>
@@ -310,7 +310,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 <input name="aiowps_prevent_default_wp_file_access" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_prevent_default_wp_file_access')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want to prevent access to readme.html, license.txt and wp-config-sample.php.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
-            </tr>
+            </tr>            
         </table>
         <input type="submit" name="aiowps_save_wp_file_access_settings" value="<?php _e('Save Setting', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
@@ -321,7 +321,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
     function render_tab4()
     {
         global $aio_wp_security;
-
+        
         if (isset($_POST['aiowps_system_log_file'])){
             if ($_POST['aiowps_system_log_file'] != NULL){
                 $sys_log_file = esc_html($_POST['aiowps_system_log_file']);
@@ -334,7 +334,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         }else{
             $sys_log_file = $aio_wp_security->configs->get_value('aiowps_system_log_file');
         }
-
+        
         ?>
         <h2><?php _e('System Logs', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
@@ -360,7 +360,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 <input type="submit" name="aiowps_search_error_files" value="<?php _e('View Latest System Logs', 'all-in-one-wp-security-and-firewall'); ?>" class="button-primary search-error-files" />
                 <span class="aiowps_loading_1">
                     <img src="<?php echo AIO_WP_SECURITY_URL.'/images/loading.gif'; ?>" alt="<?php __('Loading...', 'all-in-one-wp-security-and-firewall'); ?>" />
-                </span>
+                </span>            
             </form>
         </div></div>
     <?php
@@ -372,13 +372,13 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed on view system log operation!",4);
                 die("Nonce check failed on view system log operation!");
             }
-
+            
             $logResults = AIOWPSecurity_Utility_File::recursive_file_search($sys_log_file, 0, ABSPATH);
             if (empty($logResults) || $logResults == NULL || $logResults == '' || $logResults === FALSE)
             {
                 $this->show_msg_updated(__('No system logs were found!', 'all-in-one-wp-security-and-firewall'));
             }
-            else
+            else 
             {
                 foreach($logResults as $file)
                 {
@@ -387,7 +387,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             }
         }
     }
-
+    
     /*
      * Scans WP key core files and directory permissions and populates a wp wide_fat table
      * Displays a red background entry with a "Fix" button for permissions which are "777"
@@ -401,7 +401,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         if ($configmod == "0777"){
             $trclass = "aio_table_row_red"; //Display a red background if permissions are set as least secure ("777")
             $fix = true;
-        }
+        } 
         else if($configmod != $recommended)
         {
             //$res = $this->is_file_permission_secure($recommended, $configmod);
@@ -416,7 +416,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 $trclass = "aio_table_row_yellow"; //Display a yellow background if permissions are set to something different than recommended
                 $fix = true;
             }
-        }
+        } 
         else
         {
             $trclass = "aio_table_row_green";
@@ -431,7 +431,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 echo '<td>
                     <input type="submit" name="aiowps_fix_permissions" value="'.__('Set Recommended Permissions','all-in-one-wp-security-and-firewall').'" class="button-secondary" />
                     <input type="hidden" name="aiowps_permission_chg_file" value="'.$path.'"/>
-                    <input type="hidden" name="aiowps_recommended_permissions" value="'.$recommended.'"/>
+                    <input type="hidden" name="aiowps_recommended_permissions" value="'.$recommended.'"/>                        
                     </td>';
             } else
             {
@@ -439,9 +439,9 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             }
         echo "</tr>";
     }
-
-
-
+    
+    
+    
     function filesystem_menu_footer_code()
     {
         ?>
@@ -458,7 +458,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
 	</script>
          <?php
     }
-
+    
     function display_system_logs_in_table($filepath)
     {
         global $aio_wp_security;
@@ -468,7 +468,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         {
             //TODO - error could not read file, display notice???
             $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Filesystem_Menu - Unable to read file: ".$filepath,4);
-
+            
         }
         $last_50_entries = array_slice($error_file_contents, -50); //extract the last 50 entries
         ?>
@@ -484,7 +484,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 {
                     echo "<tr>";
                     echo '<td>' . $entry . "</td>";
-                    echo "</tr>";
+                    echo "</tr>";                    
                 }
                 ?>
             </tbody>
