@@ -226,8 +226,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 echo '</p><p>';
                 _e('Your DB Backup File location: ');
                 echo '<strong>'.$aiowps_backup_file_path.'</strong>';
-                echo '</p>';
-                echo '</div>';
+                echo '</p></div>';
             } 
             else
             {
