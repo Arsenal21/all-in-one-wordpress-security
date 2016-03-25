@@ -223,10 +223,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 }
                 echo '<div id="message" class="updated fade"><p>';
                 _e('DB Backup was successfully completed! You will receive the backup file via email if you have enabled "Send Backup File Via Email", otherwise you can retrieve it via FTP from the following directory:','all-in-one-wp-security-and-firewall');
-                echo '<p>';
+                echo '</p><p>';
                 _e('Your DB Backup File location: ');
                 echo '<strong>'.$aiowps_backup_file_path.'</strong>';
-                echo '</p>';
                 echo '</p></div>';
             } 
             else
@@ -300,11 +299,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-db-manual-change-nonce'); ?>
-        <table class="form-table">
-            <tr valign="top">
+        <p>
             <span class="description"><?php _e('To create a new DB backup just click on the button below.', 'all-in-one-wp-security-and-firewall'); ?></span>
-            </tr>            
-        </table>
+        </p>
         <input type="submit" name="aiowps_manual_db_backup" value="<?php _e('Create DB Backup Now', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
