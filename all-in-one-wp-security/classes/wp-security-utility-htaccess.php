@@ -644,7 +644,7 @@ class AIOWPSecurity_Utility_Htaccess
             $rules .= AIOWPSecurity_Utility_Htaccess::$deny_bad_query_strings_marker_start . PHP_EOL; //Add feature marker start
             //$rules .= 'RewriteCond %{QUERY_STRING} ../    [NC,OR]' . PHP_EOL;
             //$rules .= 'RewriteCond %{QUERY_STRING} boot.ini [NC,OR]' . PHP_EOL;
-            $rules .= 'RewriteCond %{QUERY_STRING} tag=     [NC,OR]' . PHP_EOL;
+            //$rules .= 'RewriteCond %{QUERY_STRING} tag=     [NC,OR]' . PHP_EOL;
             $rules .= 'RewriteCond %{QUERY_STRING} ftp:     [NC,OR]' . PHP_EOL;
             $rules .= 'RewriteCond %{QUERY_STRING} http:    [NC,OR]' . PHP_EOL;
             $rules .= 'RewriteCond %{QUERY_STRING} https:   [NC,OR]' . PHP_EOL;
