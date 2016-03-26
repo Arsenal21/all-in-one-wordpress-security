@@ -43,6 +43,9 @@ class AIOWPSecurity_Utility_Htaccess
     public static $five_g_blacklist_marker_start = '#AIOWPS_FIVE_G_BLACKLIST_START';
     public static $five_g_blacklist_marker_end = '#AIOWPS_FIVE_G_BLACKLIST_END';
 
+    public static $six_g_blacklist_marker_start = '#AIOWPS_SIX_G_BLACKLIST_START';
+    public static $six_g_blacklist_marker_end = '#AIOWPS_SIX_G_BLACKLIST_END';
+
     public static $block_spambots_marker_start = '#AIOWPS_BLOCK_SPAMBOTS_START';
     public static $block_spambots_marker_end = '#AIOWPS_BLOCK_SPAMBOTS_END';
 
@@ -185,6 +188,7 @@ class AIOWPSecurity_Utility_Htaccess
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_forbid_proxy_comment_posting();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_deny_bad_query_strings();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_advanced_character_string_filter();
+        $rules .= AIOWPSecurity_Utility_Htaccess::getrules_6g_blacklist();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_5g_blacklist();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_enable_brute_force_prevention();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_block_spambots();
@@ -845,6 +849,81 @@ class AIOWPSecurity_Utility_Htaccess
                                 RewriteRule .* - [F]
                         </IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$five_g_blacklist_marker_end . PHP_EOL; //Add feature marker end
+        }
+
+        return $rules;
+    }
+
+    /*
+     * This function contains the rules for the 6G blacklist produced by Jeff Starr:
+	 * https://perishablepress.com/6g/
+     */
+    static function getrules_6g_blacklist()
+    {
+        global $aio_wp_security;
+        $rules = '';
+        if ($aio_wp_security->configs->get_value('aiowps_enable_6g_firewall') == '1') {
+            $rules .= AIOWPSecurity_Utility_Htaccess::$six_g_blacklist_marker_start . PHP_EOL; //Add feature marker start
+
+            $rules .= '# 6G BLACKLIST/FIREWALL (2016)
+                        # @ https://perishablepress.com/6g/
+
+                        # 6G:[QUERY STRINGS]
+                        <IfModule mod_rewrite.c>
+                                RewriteEngine On
+                                RewriteCond %{QUERY_STRING} (eval\() [NC,OR]
+                                RewriteCond %{QUERY_STRING} (127\.0\.0\.1) [NC,OR]
+                                RewriteCond %{QUERY_STRING} ([a-z0-9]{2000}) [NC,OR]
+                                RewriteCond %{QUERY_STRING} (javascript:)(.*)(;) [NC,OR]
+                                RewriteCond %{QUERY_STRING} (base64_encode)(.*)(\() [NC,OR]
+                                RewriteCond %{QUERY_STRING} (GLOBALS|REQUEST)(=|\[|%) [NC,OR]
+                                RewriteCond %{QUERY_STRING} (<|%3C)(.*)script(.*)(>|%3) [NC,OR]
+                                RewriteCond %{QUERY_STRING} (\\|\.\.\.|\.\./|~|`|<|>|\|) [NC,OR]
+                                RewriteCond %{QUERY_STRING} (boot\.ini|etc/passwd|self/environ) [NC,OR]
+                                RewriteCond %{QUERY_STRING} (thumbs?(_editor|open)?|tim(thumb)?)\.php [NC,OR]
+                                RewriteCond %{QUERY_STRING} (\'|\")(.*)(drop|insert|md5|select|union) [NC]
+                                RewriteRule .* - [F]
+                        </IfModule>
+
+                        # 6G:[REQUEST METHOD]
+                        <ifModule mod_rewrite.c>
+                                RewriteCond %{REQUEST_METHOD} ^(connect|debug|delete|move|put|trace|track) [NC]
+                                RewriteRule .* - [F]
+                        </IfModule>
+
+                        # 6G:[REFERRERS]
+                        <IfModule mod_rewrite.c>
+                                RewriteCond %{HTTP_REFERER} ([a-z0-9]{2000}) [NC,OR]
+                                RewriteCond %{HTTP_REFERER} (semalt.com|todaperfeita) [NC]
+                                RewriteRule .* - [F]
+                        </IfModule>
+
+                        # 6G:[REQUEST STRINGS]
+                        <IfModule mod_alias.c>
+                                RedirectMatch 403 (?i)([a-z0-9]{2000})
+                                RedirectMatch 403 (?i)(https?|ftp|php):/
+                                RedirectMatch 403 (?i)(base64_encode)(.*)(\()
+                                RedirectMatch 403 (?i)(=\\\'|=\\%27|/\\\'/?)\.
+                                RedirectMatch 403 (?i)/(\$(\&)?|\*|\"|\.|,|&|&amp;?)/?$
+                                RedirectMatch 403 (?i)(\{0\}|\(/\(|\.\.\.|\+\+\+|\\\"\\\")
+                                RedirectMatch 403 (?i)(~|`|<|>|:|;|,|%|\\|\s|\{|\}|\[|\]|\|)
+                                RedirectMatch 403 (?i)/(=|\$&|_mm|cgi-|etc/passwd|muieblack)
+                                RedirectMatch 403 (?i)(&pws=0|_vti_|\(null\)|\{\$itemURL\}|echo(.*)kae|etc/passwd|eval\(|self/environ)
+                                RedirectMatch 403 (?i)\.(aspx?|bash|bak?|cfg|cgi|dll|exe|git|hg|ini|jsp|log|mdb|out|sql|svn|swp|tar|rar|rdf)$
+                                RedirectMatch 403 (?i)/(^$|(wp-)?config|mobiquo|phpinfo|shell|sqlpatch|thumb|thumb_editor|thumbopen|timthumb|webshell)\.php
+                        </IfModule>
+
+                        # 6G:[USER AGENTS]
+                        <IfModule mod_setenvif.c>
+                                SetEnvIfNoCase User-Agent ([a-z0-9]{2000}) bad_bot
+                                SetEnvIfNoCase User-Agent (archive.org|binlar|casper|checkpriv|choppy|clshttp|cmsworld|diavol|dotbot|extract|feedfinder|flicky|g00g1e|harvest|heritrix|httrack|kmccrew|loader|miner|nikto|nutch|planetwork|postrank|purebot|pycurl|python|seekerspider|siclab|skygrid|sqlmap|sucker|turnit|vikspider|winhttp|xxxyy|youda|zmeu|zune) bad_bot
+                                <limit GET POST PUT>
+                                        Order Allow,Deny
+                                        Allow from all
+                                        Deny from env=bad_bot
+                                </limit>
+                        </IfModule>' . PHP_EOL;
+            $rules .= AIOWPSecurity_Utility_Htaccess::$six_g_blacklist_marker_end . PHP_EOL; //Add feature marker end
         }
 
         return $rules;

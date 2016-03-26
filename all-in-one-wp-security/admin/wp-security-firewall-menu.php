@@ -27,7 +27,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         $this->menu_tabs = array(
         'tab1' => __('Basic Firewall Rules', 'all-in-one-wp-security-and-firewall'),
         'tab2' => __('Additional Firewall Rules', 'all-in-one-wp-security-and-firewall'),
-        'tab3' => __('5G Blacklist Firewall Rules', 'all-in-one-wp-security-and-firewall'),
+        'tab3' => __('6G Blacklist Firewall Rules', 'all-in-one-wp-security-and-firewall'),
         'tab4' => __('Internet Bots', 'all-in-one-wp-security-and-firewall'),
         'tab5' => __('Prevent Hotlinks', 'all-in-one-wp-security-and-firewall'),
         'tab6' => __('404 Detection', 'all-in-one-wp-security-and-firewall'),
@@ -493,14 +493,14 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
     
     function render_tab3()
     {
-        global $aio_wp_security;
-        if(isset($_POST['aiowps_apply_5g_firewall_settings']))//Do form submission tasks
+        global $aio_wp_security, $aiowps_feature_mgr;
+        if(isset($_POST['aiowps_apply_5g_6g_firewall_settings']))//Do form submission tasks
         {
             $nonce=$_REQUEST['_wpnonce'];
-            if (!wp_verify_nonce($nonce, 'aiowpsec-enable-5g-firewall-nonce'))
+            if (!wp_verify_nonce($nonce, 'aiowpsec-enable-5g-6g-firewall-nonce'))
             {
-                $aio_wp_security->debug_logger->log_debug("Nonce check failed on enable 5G firewall settings!",4);
-                die("Nonce check failed on enable 5G firewall settings!");
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed on enable 5G/6G firewall settings!",4);
+                die("Nonce check failed on enable 5G/6G firewall settings!");
             }
 
             //Save settings
@@ -512,6 +512,14 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             {
                 $aio_wp_security->configs->set_value('aiowps_enable_5g_firewall','');
             }
+            if(isset($_POST['aiowps_enable_6g_firewall']))
+            {
+                $aio_wp_security->configs->set_value('aiowps_enable_6g_firewall','1');
+            }
+            else
+            {
+                $aio_wp_security->configs->set_value('aiowps_enable_6g_firewall','');
+            }
 
             //Commit the config settings
             $aio_wp_security->configs->save_config();
@@ -521,7 +529,9 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('You have successfully saved the 5G Firewall Protection configuration', 'all-in-one-wp-security-and-firewall'));
+                $this->show_msg_updated(__('You have successfully saved the 5G/6G Firewall Protection configuration', 'all-in-one-wp-security-and-firewall'));
+                // Recalculate points after the feature status/options have been altered
+                $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
             }
             else if($res == -1)
             {
@@ -534,28 +544,47 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_blue_box">
             <?php
             $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_SETTINGS_MENU_SLUG.'&tab=tab2" target="_blank">backup</a>';
-            $info_msg = '<p>'.sprintf( __('This feature allows you to activate the 5G  firewall security protection rules designed and produced by %s.', 'all-in-one-wp-security-and-firewall'), '<a href="http://perishablepress.com/5g-blacklist-2013/" target="_blank">Perishable Press</a>').'</p>';
-            $info_msg .= '<p>'.__('The 5G Blacklist is a simple, flexible blacklist that helps reduce the number of malicious URL requests that hit your website.', 'all-in-one-wp-security-and-firewall').'</p>';
-            $info_msg .= '<p>'.__('The added advantage of applying the 5G firewall to your site is that it has been tested and confirmed by the people at PerishablePress.com to be an optimal and least disruptive set of .htaccess security rules for general WP sites running on an Apache server or similar.', 'all-in-one-wp-security-and-firewall').'</p>';
-            $info_msg .= '<p>'.sprintf( __('Therefore the 5G firewall rules should not have any impact on your site\'s general functionality but if you wish you can take a %s of your .htaccess file before proceeding.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link).'</p>';
+            $info_msg = '<p>'.sprintf( __('This feature allows you to activate the %s (or legacy %s) firewall security protection rules designed and produced by %s.', 'all-in-one-wp-security-and-firewall'), '<a href="http://perishablepress.com/6g/" target="_blank">6G</a>', '<a href="http://perishablepress.com/5g-blacklist-2013/" target="_blank">5G</a>', '<a href="http://perishablepress.com/" target="_blank">Perishable Press</a>').'</p>';
+			$info_msg .= '<p>'.__('The 6G Blacklist is updated and improved version of 5G Blacklist. If you have 5G Blacklist active, you might consider activating 6G Blacklist instead.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'.__('The 6G Blacklist is a simple, flexible blacklist that helps reduce the number of malicious URL requests that hit your website.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'.__('The added advantage of applying the 6G firewall to your site is that it has been tested and confirmed by the people at PerishablePress.com to be an optimal and least disruptive set of .htaccess security rules for general WP sites running on an Apache server or similar.', 'all-in-one-wp-security-and-firewall').'</p>';
+            $info_msg .= '<p>'.sprintf( __('Therefore the 6G firewall rules should not have any impact on your site\'s general functionality but if you wish you can take a %s of your .htaccess file before proceeding.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link).'</p>';
             echo $info_msg;
             ?>
         </div>
 
         <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('5G Blacklist/Firewall Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('6G Blacklist/Firewall Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
         //Display security info badge
         global $aiowps_feature_mgr;
-        $aiowps_feature_mgr->output_feature_details_badge("firewall-enable-5g-blacklist");
+        $aiowps_feature_mgr->output_feature_details_badge("firewall-enable-5g-6g-blacklist");
         ?>
             
         <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-enable-5g-firewall-nonce'); ?>            
+        <?php wp_nonce_field('aiowpsec-enable-5g-6g-firewall-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Enable 5G Firewall Protection', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <th scope="row"><?php _e('Enable 6G Firewall Protection', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                <input name="aiowps_enable_6g_firewall" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_6g_firewall')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to apply the 6G Blacklist firewall protection from perishablepress.com to your site.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
+                <div class="aiowps_more_info_body">
+                        <?php
+                        echo '<p class="description">'.__('This setting will implement the 6G security firewall protection mechanisms on your site which include the following things:', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('1) Block forbidden characters commonly used in exploitative attacks.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('2) Block malicious encoded URL characters such as the ".css(" string.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('3) Guard against the common patterns and specific exploits in the root portion of targeted URLs.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('4) Stop attackers from manipulating query strings by disallowing illicit characters.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('....and much more.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        ?>
+                </div>
+                </td>
+            </tr>
+            <tr valign="top">
+                <th scope="row"><?php _e('Enable legacy 5G Firewall Protection', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_5g_firewall" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_5g_firewall')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want to apply the 5G Blacklist firewall protection from perishablepress.com to your site.', 'all-in-one-wp-security-and-firewall'); ?></span>
@@ -573,7 +602,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 </td>
             </tr>            
         </table>
-        <input type="submit" name="aiowps_apply_5g_firewall_settings" value="<?php _e('Save 5G Firewall Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
+        <input type="submit" name="aiowps_apply_5g_6g_firewall_settings" value="<?php _e('Save 5G/6G Firewall Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
         <?php

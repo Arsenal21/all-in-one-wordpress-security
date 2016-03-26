@@ -80,6 +80,7 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->set_value('aiowps_deny_bad_query_strings','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_advanced_char_string_filter','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_5g_firewall','');//Checkbox
+        $aio_wp_security->configs->set_value('aiowps_enable_6g_firewall','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_custom_rules','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_custom_rules','');
         
@@ -210,6 +211,7 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->add_value('aiowps_deny_bad_query_strings','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_advanced_char_string_filter','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_enable_5g_firewall','');//Checkbox
+        $aio_wp_security->configs->add_value('aiowps_enable_6g_firewall','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_enable_custom_rules','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_custom_rules','');
 
@@ -295,6 +297,7 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->set_value('aiowps_deny_bad_query_strings','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_advanced_char_string_filter','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_5g_firewall','');//Checkbox
+        $aio_wp_security->configs->set_value('aiowps_enable_6g_firewall','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_brute_force_attack_prevention','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_custom_rules','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_custom_rules','');
