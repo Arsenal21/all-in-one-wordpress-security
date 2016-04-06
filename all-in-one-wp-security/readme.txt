@@ -3,8 +3,8 @@ Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrso
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
-Tested up to: 4.4
-Stable tag: 4.0.6
+Tested up to: 4.5
+Stable tag: 4.0.7
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -181,6 +181,16 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.0.7 =
+- Added a new action hook "aiopws_before_set_404" which triggers just before the AIOWPS sets a 404. (handy for cases when rename login page is used which affects some themes when accessing "wp-admin" directly)
+- Fixed some potential SQL injection vulnerabilities.
+- Thanks to @chesio for submitting the following changes and applying the fixes.
+- Sub-directory install fixes.
+- Improve behavior of WP File Access tab. 
+- Fix invalid nesting of HTML elements.
+- Do not block HTTP requests that contain "tag=" in query string.
+- Option to enable the 6G firewall.
 
 = 4.0.6 =
 - Removed the viewing of contents of wp-config.php and .htaccess files in order to protect sensitive info.

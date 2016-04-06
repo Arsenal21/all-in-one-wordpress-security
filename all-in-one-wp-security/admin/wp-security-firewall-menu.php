@@ -863,6 +863,16 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 <br />'.__('If you want to temporarily block an IP address, simply click the "Temp Block" link for the applicable IP entry in the "404 Event Logs" table below.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
+        <div class="aio_grey_box">
+            <?php
+            $addon_link = '<strong><a href="http://www.site-scanners.com/smart-404-security-blocking-addon/" target="_blank">Smart404 Blocking Addon</a></strong>';
+            $info_msg = sprintf( __('You may also be interested in our %s.', 'all-in-one-wp-security-and-firewall'), $addon_link);
+            $info_msg2 = __('This addon allows you to automatically and permanently block IP addresses based on how many 404 errors they produce.', 'all-in-one-wp-security-and-firewall');
+
+            echo '<p>'.$info_msg.
+                '<br />'.$info_msg2.'</p>';
+            ?>
+        </div>
 
         <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('404 Detection Options', 'all-in-one-wp-security-and-firewall'); ?></label></h3>

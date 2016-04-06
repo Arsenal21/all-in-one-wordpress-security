@@ -104,6 +104,7 @@ class AIOWPSecurity_List_Account_Activity extends AIOWPSecurity_List_Table {
             if (isset($_REQUEST['_wp_http_referer']))
             {
                 //Delete multiple records
+                $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
                 $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
                 $delete_command = "DELETE FROM ".$login_activity_table." WHERE id IN ".$id_list;
                 $result = $wpdb->query($delete_command);

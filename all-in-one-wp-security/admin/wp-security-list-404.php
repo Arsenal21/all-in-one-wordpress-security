@@ -146,6 +146,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         $events_table = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
         if (is_array($entries)) {
             //lock multiple records
+            $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
             $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
             $events_table = AIOWPSEC_TBL_EVENTS;
             $query = "SELECT ip_or_host FROM $events_table WHERE ID IN ".$id_list;
@@ -183,6 +184,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         
         if (is_array($entries)) {
             //Get the selected IP addresses
+            $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
             $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
             $events_table = AIOWPSEC_TBL_EVENTS;
             $query = "SELECT ip_or_host FROM $events_table WHERE ID IN ".$id_list;
@@ -238,6 +240,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             {
                 //Delete multiple records
                 $entries = array_map( 'esc_sql', $entries); //escape every array element
+                $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
                 $id_list = "(" . implode(",", $entries) . ")"; //Create comma separate list for DB operation
                 $delete_command = "DELETE FROM " . $events_table . " WHERE id IN " . $id_list;
                 $result = $wpdb->query($delete_command);

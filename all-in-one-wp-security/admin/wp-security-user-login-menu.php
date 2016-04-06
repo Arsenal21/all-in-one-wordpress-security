@@ -521,6 +521,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         if (is_array($entries))
         {
             //Unlock multiple records
+            $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
             $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
             $unlock_command = "UPDATE ".$lockdown_table." SET release_date = now() WHERE ID IN ".$id_list;
             $result = $wpdb->query($unlock_command);
@@ -552,6 +553,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         if (is_array($entries))
         {
             //Delete multiple records
+            $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
             $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
             $delete_command = "DELETE FROM ".$lockdown_table." WHERE ID IN ".$id_list;
             $result = $wpdb->query($delete_command);
