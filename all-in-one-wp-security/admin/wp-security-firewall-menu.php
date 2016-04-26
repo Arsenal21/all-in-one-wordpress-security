@@ -997,8 +997,10 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             {
                 if (!empty($_POST['aiowps_custom_rules']))
                 {
-                    $custom_rules = $_POST['aiowps_custom_rules'];
-
+                    // Undo magic quotes that are automatically added to `$_GET`,
+                    // `$_POST`, `$_COOKIE`, and `$_SERVER` by WordPress as
+                    // they corrupt any custom rule with backslash in it...
+                    $custom_rules = stripslashes($_POST['aiowps_custom_rules']);
                 }
                 else
                 {
