@@ -37,7 +37,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -118,11 +118,12 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                     {
                         //User has chosen their own DB prefix value
                         $new_db_prefix = wp_strip_all_tags( trim( $_POST['aiowps_new_manual_db_prefix'] ) );
-                        $error = $wpdb->set_prefix( $new_db_prefix );
+                        $error = $wpdb->set_prefix( $new_db_prefix ); //validate the user chosen prefix
                         if(is_wp_error($error))
                         {
                             wp_die( __('<strong>ERROR</strong>: The table prefix can only contain numbers, letters, and underscores.', 'all-in-one-wp-security-and-firewall') );
                         }
+                        $wpdb->set_prefix( $old_db_prefix );
                         $perform_db_change = true;
                     }
                 }

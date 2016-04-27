@@ -1,10 +1,10 @@
 === All In One WP Security & Firewall ===
-Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, gdavide
+Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, chesio
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.5
-Stable tag: 4.0.7
+Stable tag: 4.0.8
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -181,6 +181,15 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.0.8 =
+- Added ability to identify IP addresses during user registration and option to block selected IPs.
+- Added login form captcha functionality for sub-sites in a multi-site installation. (see the Brute Force menu)
+- Fixed multi-site bug related to manual user-chosen DB prefix change.
+- Added extra XSS protection inside admin menu pages for the "tab" query parameter.
+- Added a note to the features that has the potential to lock you out if it doesn't work correctly on your site.
+- Updated Brazil-Portuguese language file.
+- Fixed issue with firewall custom rules being corrupted by magic quotes. Thanks to @chesio for fixing this.
 
 = 4.0.7 =
 - Added a new action hook "aiopws_before_set_404" which triggers just before the AIOWPS sets a 404. (handy for cases when rename login page is used which affects some themes when accessing "wp-admin" directly)

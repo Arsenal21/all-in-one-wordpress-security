@@ -26,7 +26,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -148,6 +148,16 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
             <br />'.__('The plugin achieves this by making appropriate modifications to your .htaccess file.', 'all-in-one-wp-security-and-firewall').'
             <br />'.__('By blocking people via the .htaccess file your are using the most secure first line of defence which denies all access to blacklisted visitors as soon as they hit your hosting server.', 'all-in-one-wp-security-and-firewall').'
             </p>';
+            ?>
+        </div>
+        <div class="aio_grey_box">
+            <?php
+            $addon_link = '<strong><a href="http://www.site-scanners.com/country-blocking-addon/" target="_blank">Country Blocking Addon</a></strong>';
+            $info_msg = sprintf( __('You may also be interested in our %s.', 'all-in-one-wp-security-and-firewall'), $addon_link);
+            $info_msg2 = __('This addon allows you to automatically block IP addresses based on their country of origin.', 'all-in-one-wp-security-and-firewall');
+
+            echo '<p>'.$info_msg.
+                '<br />'.$info_msg2.'</p>';
             ?>
         </div>
 

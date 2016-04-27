@@ -35,7 +35,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -49,8 +49,9 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         echo '<h2 class="nav-tab-wrapper">';
         foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
         {
-            if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1 && stristr($tab_caption, "Rename Login Page") === false){
-                //Suppress the all Brute Force menu tabs except rename login if site is a multi site AND not the main site
+            if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1
+                && stristr($tab_caption, "Rename Login Page") === false && stristr($tab_caption, "Login Captcha") === false){
+                //Suppress the all Brute Force menu tabs if site is a multi site AND not the main site except "rename login" and "captcha"
             }else{
                 $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
                 echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
@@ -179,6 +180,11 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
 
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-rename-login-page-nonce'); ?>
+        <div class="aio_orange_box">
+            <p>
+            <?php _e('This feature can lock you out of admin if it doesn\'t work correctly on your site. You <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">must read this message</a> before activating this feature.', 'all-in-one-wp-security-and-firewall'); ?>
+            </p>
+        </div>
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Enable Rename Login Page Feature', 'all-in-one-wp-security-and-firewall')?>:</th>
@@ -310,7 +316,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_yellow_box">
             <?php
             $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_SETTINGS_MENU_SLUG.'&tab=tab2" target="_blank">backup</a>';
-            $video_link = '<a href="http://www.tipsandtricks-hq.com/all-in-one-wp-security-plugin-cookie-based-brute-force-login-attack-prevention-feature-5994" target="_blank">video tutorial</a>';
+            $video_link = '<a href="https://www.tipsandtricks-hq.com/all-in-one-wp-security-plugin-cookie-based-brute-force-login-attack-prevention-feature-5994" target="_blank">video tutorial</a>';
             $info_msg = sprintf( __('Even though this feature should not have any impact on your site\'s general functionality <strong>you are strongly encouraged to take a %s of your .htaccess file before proceeding</strong>.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link);
             $info_msg1 = __('If this feature is not used correctly, you can get locked out of your site. A backed up .htaccess file will come in handy if that happens.', 'all-in-one-wp-security-and-firewall');
             $info_msg2 = sprintf( __('To learn more about how to use this feature please watch the following %s.', 'all-in-one-wp-security-and-firewall'), $video_link);
@@ -342,7 +348,12 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         $aiowps_feature_mgr->output_feature_details_badge("firewall-enable-brute-force-attack-prevention");
         ?>
         <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-enable-cookie-based-brute-force-prevention'); ?>              
+        <?php wp_nonce_field('aiowpsec-enable-cookie-based-brute-force-prevention'); ?>
+        <div class="aio_orange_box">
+            <p>
+            <?php _e('This feature can lock you out of admin if it doesn\'t work correctly on your site. You <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">must read this message</a> before activating this feature.', 'all-in-one-wp-security-and-firewall'); ?>
+            </p>
+        </div>            
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Enable Brute Force Attack Prevention', 'all-in-one-wp-security-and-firewall')?>:</th>

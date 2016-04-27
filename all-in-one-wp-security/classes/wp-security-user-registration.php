@@ -27,6 +27,12 @@ class AIOWPSecurity_User_Registration
             if (!$res){
                 $aio_wp_security->debug_logger->log_debug("aiowps_user_registration_action_handler: Error adding user meta data: aiowps_account_status",4);
             }
+            $user_ip_address = AIOWPSecurity_Utility_IP::get_user_ip_address();
+            $res = add_user_meta($user_id, 'aiowps_registrant_ip', $user_ip_address);
+            if (!$res){
+                $aio_wp_security->debug_logger->log_debug("aiowps_user_registration_action_handler: Error adding user meta data: aiowps_registrant_ip",4);
+            }
+
         }
     }
 
