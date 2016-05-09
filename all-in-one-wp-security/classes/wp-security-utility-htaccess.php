@@ -679,7 +679,10 @@ class AIOWPSecurity_Utility_Htaccess
     //Redirectmatch 403 convert(
     //RedirectMatch 403 .inc
     //RedirectMatch 403 include.
-
+    //
+    // The "@" sign is often used in filenames of retina-ready images like
+    // "logo@2x.jpg", therefore it has been removed from the list.
+    //RedirectMatch 403 \@
 
     static function getrules_advanced_character_string_filter()
     {
@@ -693,7 +696,6 @@ class AIOWPSecurity_Utility_Htaccess
                         RedirectMatch 403 \:
                         RedirectMatch 403 \;
                         RedirectMatch 403 \=
-                        RedirectMatch 403 \@
                         RedirectMatch 403 \[
                         RedirectMatch 403 \]
                         RedirectMatch 403 \^
