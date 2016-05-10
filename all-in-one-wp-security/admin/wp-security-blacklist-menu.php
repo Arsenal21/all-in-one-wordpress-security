@@ -170,7 +170,12 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
         $aiowps_feature_mgr->output_feature_details_badge("blacklist-manager-ip-user-agent-blacklisting");
         ?>    
         <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-blacklist-settings-nonce'); ?>            
+        <?php wp_nonce_field('aiowpsec-blacklist-settings-nonce'); ?>
+        <div class="aio_orange_box">
+            <p>
+            <?php _e('This feature can lock you out of admin if it doesn\'t work correctly on your site. You <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">must read this message</a> before activating this feature.', 'all-in-one-wp-security-and-firewall'); ?>
+            </p>
+        </div>            
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Enable IP or User Agent Blacklisting', 'all-in-one-wp-security-and-firewall')?>:</th>

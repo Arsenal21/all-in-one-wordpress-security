@@ -72,7 +72,7 @@ class AIOWPSecurity_Feature_Item_Manager
         
         //Blacklist Manager Menu Features
         //IP and user agent blacklisting
-        $this->feature_items[] = new AIOWPSecurity_Feature_Item("blacklist-manager-ip-user-agent-blacklisting", __("IP and User Agent Blacklisting", "all-in-one-wp-security-and-firewall"), $this->feature_point_3, $this->sec_level_inter);
+        $this->feature_items[] = new AIOWPSecurity_Feature_Item("blacklist-manager-ip-user-agent-blacklisting", __("IP and User Agent Blacklisting", "all-in-one-wp-security-and-firewall"), $this->feature_point_3, $this->sec_level_advanced);
         
         //Firewall Menu Features
         //Basic firewall

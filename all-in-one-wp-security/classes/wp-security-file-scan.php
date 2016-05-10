@@ -210,6 +210,7 @@ class AIOWPSecurity_Scan
         $file_types_to_skip = $aio_wp_security->configs->get_value('aiowps_fcd_exclude_filetypes');
 
         foreach ($rit as $fileinfo) {
+            if ($fileinfo->getFilename() == "..") continue; //skip .. directories
             if ($fileinfo->isDir()) continue; //skip directories
             if ($fileinfo->getFilename() == 'wp-security-log-cron-job.txt' || $fileinfo->getFilename() == 'wp-security-log.txt') continue; //skip aiowps log files
             //Let's omit any file types from the scan which were specified in the settings if necessary

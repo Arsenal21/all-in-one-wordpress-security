@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.5
-Stable tag: 4.0.8
+Stable tag: 4.0.9
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -126,6 +126,7 @@ or malicious bots who do not have a special cookie in their browser. You (the si
 
 = Additional Features =
 * Ability to remove the WordPress Generator Meta information from the HTML source of your site.
+* Ability to remove the WordPress Version information from the JS and CSS file includes of your site.
 * Ability to prevent people from accessing the readme.html, license.txt and wp-config-sample.php files
 * Ability to temporarily lock down the front end of your site from general visitors while you do various backend tasks (investigate security attacks, perform site upgrades, do maintenance work etc.)
 * Ability to export/import the security settings.
@@ -181,6 +182,14 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.0.9 =
+- Made file change scanner code more robust for cases when open_basedir restriction is in effect. (Thanks to Manuel Jeanne for pointing this out).
+- Added code which will remove WordPress version info during CSS and JS script loading if you have the "Remove WP Generator Meta Info" option checked. (Thanks to aldemarcalazans for pointing this out).
+- Fixed some potential SQL injection vulnerabilities. (Thanks to Julio Potier for pointing these out).
+- Changed the feature category of blacklist manger from "Intermediate" to "Advanced".
+- Tweak: Remove "@" from list of characters blocked by advanced character string filter. (Because it is often used in retina-ready images).
+- Fix: Use home URL instead of site URL in lock notification email subject. Thanks to @chesio for fixing this.
 
 = 4.0.8 =
 - Added ability to identify IP addresses during user registration and option to block selected IPs.

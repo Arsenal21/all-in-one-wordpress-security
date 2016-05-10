@@ -295,8 +295,7 @@ class AIOWPSecurity_User_Login
         $unlock_link = '';
         $lockdown_table_name = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
         $secret_rand_key = (md5(uniqid(rand(), true)));
-        $sql = "UPDATE $lockdown_table_name SET unlock_key = '$secret_rand_key' WHERE release_date > now() AND failed_login_ip LIKE '%".esc_sql($ip_range)."%'";
-        //$res = $wpdb->get_results("SELECT * FROM $lockdown_table_name WHERE release_date > now() AND user_login = '$username'", ARRAY_A);
+        $sql = $wpdb->prepare("UPDATE $lockdown_table_name SET unlock_key = '$secret_rand_key' WHERE release_date > now() AND failed_login_ip LIKE %s","%".esc_sql($ip_range)."%");
         $res = $wpdb->query($sql);
         if($res == NULL){
             $aio_wp_security->debug_logger->log_debug("No locked user found with IP range ".$ip_range,4);
@@ -304,7 +303,7 @@ class AIOWPSecurity_User_Login
         }else{
             $query_param = array('aiowps_auth_key'=>$secret_rand_key);
             $wp_site_url = AIOWPSEC_WP_URL;
-            $unlock_link = esc_url(add_query_arg($query_param, $wp_site_url)); 
+            $unlock_link = esc_url(add_query_arg($query_param, $wp_site_url));
         }
         return $unlock_link;
     }
@@ -319,7 +318,7 @@ class AIOWPSecurity_User_Login
         global $wpdb, $aio_wp_security;
         $lockdown_table_name = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
         
-        $unlock_command = "UPDATE ".$lockdown_table_name." SET release_date = now() WHERE unlock_key = '".$unlock_key."'";
+        $unlock_command = $wpdb->prepare( "UPDATE ".$lockdown_table_name." SET release_date = now() WHERE unlock_key = %s", $unlock_key );
         $result = $wpdb->query($unlock_command);
         if($result === false)
         {
@@ -427,16 +426,6 @@ class AIOWPSecurity_User_Login
             $aio_wp_security->debug_logger->log_debug("Error inserting record into ".$login_activity_table,4);//Log the highly unlikely event of DB error
         }
         
-    }
-
-    function check_user_logged_in($user_login) 
-    {
-          // get the online users list
-        $logged_in_users = get_transient('users_online');
-
-        //If user is in the transient list and last activity was less than 15 minutes ago they are classed as being online
-        return isset($logged_in_users[$user_id]) && ($logged_in_users[$user_id]['last_activity'] > (current_time('timestamp') - (15 * 60)));
-
     }
 
     /**

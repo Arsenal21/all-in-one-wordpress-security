@@ -462,10 +462,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         }
         
         //Now let's update the options table
-        $update_option_table_query = "UPDATE " . $table_new_prefix . "options 
+        $update_option_table_query = $wpdb->prepare("UPDATE " . $table_new_prefix . "options
                                                                   SET option_name = '".$table_new_prefix ."user_roles' 
-                                                                  WHERE option_name = '".$table_old_prefix."user_roles' 
-                                                                  LIMIT 1";
+                                                                  WHERE option_name = %s LIMIT 1", $table_old_prefix."user_roles");
 
         if ( false === $wpdb->query($update_option_table_query) ) 
         {
@@ -483,10 +482,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                     if ($blog_id == 1){continue;} //skip main site
                     $new_pref_and_site_id = $table_new_prefix.$blog_id.'_';
                     $old_pref_and_site_id = $table_old_prefix.$blog_id.'_';
-                    $update_ms_option_table_query = "UPDATE " . $new_pref_and_site_id . "options
+                    $update_ms_option_table_query = $wpdb->prepare("UPDATE " . $new_pref_and_site_id . "options
                                                                             SET option_name = '".$new_pref_and_site_id."user_roles'
-                                                                            WHERE option_name = '".$old_pref_and_site_id."user_roles'
-                                                                            LIMIT 1";
+                                                                            WHERE option_name = %s LIMIT 1", $old_pref_and_site_id."user_roles");
                     if ( false === $wpdb->query($update_ms_option_table_query) ) 
                     {
                         echo '<p class="aio_error_with_icon">'.sprintf( __('Update of table %s failed: unable to change %s to %s', 'all-in-one-wp-security-and-firewall'),$new_pref_and_site_id.'options', $old_pref_and_site_id.'user_roles', $new_pref_and_site_id.'user_roles').'</p>';
@@ -515,10 +513,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             //Create new meta key
             $new_meta_key = $table_new_prefix . substr( $meta_key->meta_key, $old_prefix_length );
 
-            $update_user_meta_sql = "UPDATE " . $table_new_prefix . "usermeta 
+            $update_user_meta_sql = $wpdb->prepare("UPDATE " . $table_new_prefix . "usermeta
                                                             SET meta_key='" . $new_meta_key . "' 
-                                                            WHERE meta_key='" . $meta_key->meta_key . "'
-                                                            AND user_id='" . $meta_key->user_id."'";
+                                                            WHERE meta_key=%s AND user_id=%s", $meta_key->meta_key, $meta_key->user_id);
 
             if (false === $wpdb->query($update_user_meta_sql))
             {

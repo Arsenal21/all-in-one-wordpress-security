@@ -26,7 +26,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             'tab1' => __('General Settings', 'all-in-one-wp-security-and-firewall'),
             'tab2' => '.htaccess '.__('File', 'all-in-one-wp-security-and-firewall'),
             'tab3' => 'wp-config.php '.__('File', 'all-in-one-wp-security-and-firewall'),
-            'tab4' => __('WP Meta Info', 'all-in-one-wp-security-and-firewall'),
+            'tab4' => __('WP Version Info', 'all-in-one-wp-security-and-firewall'),
             'tab5' => __('Import/Export', 'all-in-one-wp-security-and-firewall'),
         );
     }
@@ -505,13 +505,15 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             $this->show_msg_settings_updated();
     }
         ?>
-        <h2><?php _e('WP Generator Meta Tag', 'all-in-one-wp-security-and-firewall')?></h2>
+        <h2><?php _e('WP Generator Meta Tag & Version Info', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
             echo '<p>'.__('Wordpress generator automatically adds some meta information inside the "head" tags of every page on your site\'s front end. Below is an example of this:', 'all-in-one-wp-security-and-firewall');
             echo '<br /><strong>&lt;meta name="generator" content="WordPress 3.5.1" /&gt;</strong>';
             echo '<br />'.__('The above meta information shows which version of WordPress your site is currently running and thus can help hackers or crawlers scan your site to see if you have an older version of WordPress or one with a known exploit.', 'all-in-one-wp-security-and-firewall').'
-            <br />'.__('This feature will allow you to remove the WP generator meta info from your site\'s pages.', 'all-in-one-wp-security-and-firewall').'
+            <br /><br />'.__('There are also other ways wordpress reveals version info such as during style and script loading. An example of this is:', 'all-in-one-wp-security-and-firewall').'
+            <br /><strong>&lt;link rel="stylesheet" id="jquery-ui-style-css"  href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css?ver=4.5.2" type="text/css" media="all" /&gt;</strong>
+            <br /><br />'.__('This feature will allow you to remove the WP generator meta info and other version info from your site\'s pages.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>
         </div>
@@ -532,7 +534,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Remove WP Generator Meta Info', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_remove_wp_generator_meta_info" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_remove_wp_generator_meta_info')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to remove the meta info produced by WP Generator from all pages', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to remove the version and meta info produced by WP from all pages', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>

@@ -138,7 +138,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
             }
             
             //Unlock single record
-            $unlock_command = "UPDATE ".$lockdown_table." SET release_date = now() WHERE id = '".absint($entries)."'";
+            $unlock_command = $wpdb->prepare( "UPDATE ".$lockdown_table." SET release_date = now() WHERE id = %d", absint($entries) );
             $result = $wpdb->query($unlock_command);
             if($result != NULL)
             {

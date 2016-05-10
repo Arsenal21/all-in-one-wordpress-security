@@ -43,6 +43,8 @@ class AIOWPSecurity_General_Init_Tasks
 
         if($aio_wp_security->configs->get_value('aiowps_remove_wp_generator_meta_info') == '1'){
             add_filter('the_generator', array(&$this,'remove_wp_generator_meta_info'));
+            add_filter( 'style_loader_src', array(&$this,'remove_wp_css_js_meta_info'));
+            add_filter( 'script_loader_src', array(&$this,'remove_wp_css_js_meta_info'));
         }
         
         //For the cookie based brute force prevention feature
@@ -250,6 +252,13 @@ class AIOWPSecurity_General_Init_Tasks
     function remove_wp_generator_meta_info()
     {
         return '';
+    }
+
+    function remove_wp_css_js_meta_info($src) {
+        if (strpos($src, 'ver=')) {
+            $src = remove_query_arg('ver', $src);
+        }
+        return $src;
     }
 
     function do_404_lockout_tasks(){
