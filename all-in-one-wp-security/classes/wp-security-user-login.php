@@ -267,7 +267,7 @@ class AIOWPSecurity_User_Login
         $email_msg = '';
         if ($email_notification_enabled == 1)
         {
-            $subject = '['.get_option('siteurl').'] '. __('Site Lockout Notification','all-in-one-wp-security-and-firewall');
+            $subject = '['.get_option('home').'] '. __('Site Lockout Notification','all-in-one-wp-security-and-firewall');
             $email_msg .= __('A lockdown event has occurred due to too many failed login attempts or invalid username:','all-in-one-wp-security-and-firewall')."\n";
             $email_msg .= __('Username: '.($username?$username:"Unknown"),'all-in-one-wp-security-and-firewall')."\n";
             $email_msg .= __('IP Address: '.$ip,'all-in-one-wp-security-and-firewall')."\n\n";
