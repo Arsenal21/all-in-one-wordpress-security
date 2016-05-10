@@ -118,7 +118,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             {
                 $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
@@ -312,11 +312,11 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             {
                 $this->show_msg_updated(__('You have successfully saved the Additional Firewall Protection configuration', 'all-in-one-wp-security-and-firewall'));
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
-            
+
             if($error)
             {
                 $this->show_msg_error($error);
@@ -533,7 +533,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 // Recalculate points after the feature status/options have been altered
                 $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
@@ -721,7 +721,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             {
                 $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
@@ -1014,7 +1014,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 $this->show_msg_settings_updated();
 
                 $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
-                if ($write_result == -1)
+                if ( !$write_result )
                 {
                     $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                     $aio_wp_security->debug_logger->log_debug("Custom Rules feature - The plugin was unable to write to the .htaccess file.");

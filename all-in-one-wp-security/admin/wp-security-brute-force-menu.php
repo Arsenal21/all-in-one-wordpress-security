@@ -130,10 +130,10 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 //Recalculate points after the feature status/options have been altered
                 $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
                 $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //Delete the cookie based directives if that feature is active
-                if ($res){
+                if ($res) {
                     $this->show_msg_settings_updated();
                 }
-                else if($res == -1){
+                else {
                     $this->show_msg_error(__('Could not delete the Cookie-based directives from the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
                 }
             }
@@ -287,12 +287,12 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
 
                 $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
-                if ($res){
+                if ($res) {
                     echo '<div id="message" class="updated fade"><p>';
                     echo $msg;
                     echo '</p></div>';
                 }
-                else if($res == -1){
+                else {
                     $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
                 }
             }
@@ -642,7 +642,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                     $this->show_msg_settings_updated();
 
                     $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
-                    if ($write_result == -1)
+                    if ( !$write_result )
                     {
                         $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                         $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_whitelist_Menu - The plugin was unable to write to the .htaccess file.");

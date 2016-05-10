@@ -97,7 +97,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             {
                 $this->show_msg_updated(__('All the security features have been disabled successfully!', 'all-in-one-wp-security-and-firewall'));
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please restore your .htaccess file manually using the restore functionality in the ".htaccess File".', 'all-in-one-wp-security-and-firewall'));
             }
@@ -119,12 +119,12 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules();
             //Now let's clear the applicable rules from the .htaccess file
             $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
-            
+
             if ($res)
             {
                 $this->show_msg_updated(__('All firewall rules have been disabled successfully!', 'all-in-one-wp-security-and-firewall'));
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please restore your .htaccess file manually using the restore functionality in the ".htaccess File".', 'all-in-one-wp-security-and-firewall'));
             }
@@ -630,7 +630,7 @@ function render_tab5()
                         //Now let's refresh the .htaccess file with any modified rules if applicable
                         $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
 
-                        if($res == -1)
+                        if( !$res )
                         {
                             $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
                         }

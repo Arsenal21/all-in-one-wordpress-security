@@ -198,7 +198,7 @@ class AIOWPSecurity_General_Init_Tasks
         //If white list enabled need to re-adjust the .htaccess rules
         if ($aio_wp_security->configs->get_value('aiowps_enable_whitelisting') == '1') {
             $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
-            if ($write_result == -1)
+            if ( !$write_result )
             {
                 $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                 $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_whitelist_Menu - The plugin was unable to write to the .htaccess file.");
