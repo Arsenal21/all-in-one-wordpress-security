@@ -178,7 +178,7 @@ class AIOWPSecurity_Installer
             //Now let's write any rules to the .htaccess file if necessary
             $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
 
-            if ($res == -1) {
+            if ( !$res ) {
                 $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Deactivation::run_deactivation_tasks() - Could not write to the .htaccess file. Please check the file permissions.", 4);
                 return false;
             }

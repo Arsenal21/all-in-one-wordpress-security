@@ -193,15 +193,14 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         if($aio_wp_security->configs->get_value('aiowps_enable_blacklisting')=='1')
         {
             $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
-            if ($write_result == -1)
+            if ( $write_result )
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
-                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The .htaccess file was successfully modified to include the selected IP addresses.','all-in-one-wp-security-and-firewall'));
             }
             else
             {
-                
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The .htaccess file was successfully modified to include the selected IP addresses.','all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
+                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
             }
         }
         else

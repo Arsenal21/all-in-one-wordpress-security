@@ -212,12 +212,11 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             $aio_wp_security->configs->save_config(); //Save the configuration
 
             $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
-            if ($write_result == -1)
-            {
+            if ( $write_result ) {
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses have been added to the blacklist and will be permanently blocked!', 'WPS'));
+            } else {
                 AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                 $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
-            }else{
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses have been added to the blacklist and will be permanently blocked!', 'WPS'));
             }
         }
         else{

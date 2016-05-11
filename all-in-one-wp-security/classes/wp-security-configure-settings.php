@@ -276,9 +276,9 @@ class AIOWPSecurity_Configure_Settings
         
         //Refresh the .htaccess file based on the new settings
         $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
-        if($res == -1)
+        if( !$res )
         {
-            $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules() - Could not write to the .htaccess file. Please check the file permissions.",4);
+            $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - Could not write to the .htaccess file. Please check the file permissions.",4);
         }
     }
     
@@ -318,9 +318,9 @@ class AIOWPSecurity_Configure_Settings
         //Refresh the .htaccess file based on the new settings
         $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
 
-        if($res == -1)
+        if( !$res )
         {
-            $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules() - Could not write to the .htaccess file. Please check the file permissions.",4);
+            $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - Could not write to the .htaccess file. Please check the file permissions.",4);
         }
     }
 
