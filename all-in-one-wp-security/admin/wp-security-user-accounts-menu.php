@@ -253,8 +253,8 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                 else 
                 {
                     //let's check if currently logged in username is 'admin'
-                    global $user_login;
-                    get_currentuserinfo();
+                    $user = wp_get_current_user();
+                    $user_login = $user->user_login;
                     if (strtolower($user_login) == 'admin'){
                         $username_is_admin = TRUE;
                     } else {
