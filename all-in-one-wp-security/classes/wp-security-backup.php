@@ -91,7 +91,7 @@ class AIOWPSecurity_Backup
         }
 
         //Generate a random prefix for more secure filenames
-        $random_prefix = AIOWPSecurity_Utility::generate_alpha_numeric_random_string(10);
+        $random_suffix = AIOWPSecurity_Utility::generate_alpha_numeric_random_string(10);
 
         if ($is_multi_site)
         {
@@ -110,9 +110,9 @@ class AIOWPSecurity_Backup
             
             //Convert whitespaces and underscore to dash
             $site_name = preg_replace("/[\s_]/", "-", $site_name);
-            
-            $file = $random_prefix.'-database-backup-site-name-' . $site_name . '-' . current_time( 'timestamp' );
-            
+
+            $file = 'database-backup-site-name-' . $site_name . '-' . current_time( 'Ymd-His' ) . '-' . $random_suffix;
+
             //We will create a sub dir for the blog using its blog id
             $dirpath = $aiowps_backup_dir . '/blogid_' . $blog_id . '/';
             
@@ -128,7 +128,7 @@ class AIOWPSecurity_Backup
         else
         {
             $dirpath = $aiowps_backup_dir;
-            $file = $random_prefix.'-database-backup-' . current_time( 'timestamp' );
+            $file = 'database-backup-' . current_time( 'Ymd-His' ) . '-' . $random_suffix;
             $handle = @fopen( $dirpath . '/' . $file . '.sql', 'w+' );
         }
         
@@ -155,7 +155,7 @@ class AIOWPSecurity_Backup
         {
             $fileext = '.sql';
         }
-        $this->last_backup_file_name = $file . $fileext;//database-backup-1367644822.zip or database-backup-1367644822.sql
+        $this->last_backup_file_name = $file . $fileext;//database-backup-YYYYMMDD-HHIISS-<random-string>.zip or database-backup-YYYYMMDD-HHIISS-<random-string>.sql
         $this->last_backup_file_path = $dirpath . '/' . $file . $fileext;
         if ($is_multi_site)
         {
@@ -209,7 +209,7 @@ class AIOWPSecurity_Backup
 
             foreach ( $files as $file ) 
             {
-                if ( strstr( $file, 'database-backup' ) ) 
+                if ( strpos( $file, 'database-backup' ) !== false )
                 {
                     if ( $count >= $aio_wp_security->configs->get_value('aiowps_backup_files_stored') ) 
                     {
