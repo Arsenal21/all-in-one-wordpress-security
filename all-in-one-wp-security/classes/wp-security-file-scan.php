@@ -263,8 +263,8 @@ class AIOWPSecurity_Scan
                 if ( array_key_exists( $entry, $old_scan_minus_deleted ) ) 
                 {
                     //check filesize and last_modified values
-                    if (strcmp($key['last_modified'], $old_scan_minus_deleted[$entry]['last_modified']) != 0 || 
-                                    strcmp($key['filesize'], $old_scan_minus_deleted[$entry]['filesize']) != 0) 
+                    if ( ($key['last_modified'] !== $old_scan_minus_deleted[$entry]['last_modified'])
+                       || ($key['filesize'] !== $old_scan_minus_deleted[$entry]['filesize']) )
                     {
                         $file_changes_detected[$entry]['filesize'] = $key['filesize'];
                         $file_changes_detected[$entry]['last_modified'] = $key['last_modified'];
