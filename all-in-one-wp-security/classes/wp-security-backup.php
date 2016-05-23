@@ -114,24 +114,23 @@ class AIOWPSecurity_Backup
             $file = 'database-backup-site-name-' . $site_name . '-' . current_time( 'Ymd-His' ) . '-' . $random_suffix;
 
             //We will create a sub dir for the blog using its blog id
-            $dirpath = $aiowps_backup_dir . '/blogid_' . $blog_id . '/';
-            
+            $dirpath = $aiowps_backup_dir . '/blogid_' . $blog_id;
+
             //Create a subdirectory for this blog_id
             if (!AIOWPSecurity_Utility_File::create_dir($dirpath))
             {
-                $aio_wp_security->debug_logger->log_debug("Creation failed of DB backup directory for the following multisite blog ID: ".$blog_details->blog_id,4);
+                $aio_wp_security->debug_logger->log_debug("Creation failed of DB backup directory for the following multisite blog ID: ".$blog_id,4);
                 return false;
             }
-            
-            $handle = @fopen( $dirpath . $file . '.sql', 'w+' );
         }
         else
         {
             $dirpath = $aiowps_backup_dir;
             $file = 'database-backup-' . current_time( 'Ymd-His' ) . '-' . $random_suffix;
-            $handle = @fopen( $dirpath . '/' . $file . '.sql', 'w+' );
         }
-        
+
+        $handle = @fopen( $dirpath . '/' . $file . '.sql', 'w+' );
+
         $fw_res = @fwrite( $handle, $return );
         if (!$fw_res)
         {
