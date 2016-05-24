@@ -41,7 +41,9 @@ class AIOWPSecurity_User_Login
                 add_action('woocommerce_login_form', array(&$this, 'insert_unlock_request_form'));
             }
             $aio_wp_security->debug_logger->log_debug("Login attempt from blocked IP range - ".$user_locked['failed_login_ip'],2);
-            return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Login failed because your IP address has been blocked. Please contact the administrator.', 'all-in-one-wp-security-and-firewall'));
+            $error_msg = __('<strong>ERROR</strong>: Login failed because your IP address has been blocked. Please contact the administrator.', 'all-in-one-wp-security-and-firewall');
+            $error_msg = apply_filters( 'aiowps_ip_blocked_error_msg', $error_msg );
+            return new WP_Error('authentication_failed', $error_msg);
             //$unlock_msg_form = $this->user_unlock_message();
             //return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Login failed because your IP address has been blocked.
               //                  Please contact the administrator.', 'all-in-one-wp-security-and-firewall').$unlock_msg_form);
@@ -162,6 +164,7 @@ class AIOWPSecurity_User_Login
         $login_lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
         $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
         $ip_range = AIOWPSecurity_Utility_IP::get_sanitized_ip_range($ip); //Get the IP range of the current user
+        if(empty($ip_range)) return false;
         $locked_user = $wpdb->get_row("SELECT * FROM $login_lockdown_table " .
                                         "WHERE release_date > now() AND " .
                                         "failed_login_ip LIKE '" . esc_sql($ip_range) . "%'", ARRAY_A);
@@ -178,6 +181,8 @@ class AIOWPSecurity_User_Login
         $login_retry_interval = $aio_wp_security->configs->get_value('aiowps_retry_time_period');
         $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
         $ip_range = AIOWPSecurity_Utility_IP::get_sanitized_ip_range($ip); //Get the IP range of the current user
+        if(empty($ip_range)) return false;
+
         $login_failures = $wpdb->get_var("SELECT COUNT(ID) FROM $failed_logins_table " . 
                                 "WHERE failed_login_date + INTERVAL " .
                                 $login_retry_interval . " MINUTE > now() AND " . 
@@ -195,8 +200,10 @@ class AIOWPSecurity_User_Login
         $lockout_time_length = $aio_wp_security->configs->get_value('aiowps_lockout_time_length');
         $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
         $ip_range = AIOWPSecurity_Utility_IP::get_sanitized_ip_range($ip); //Get the IP range of the current user
+        if(empty($ip_range)) return false;
+
         $username = sanitize_user($username);
-	$user = get_user_by('login',$username); //Returns WP_User object if exists
+	    $user = get_user_by('login',$username); //Returns WP_User object if exists
         $ip_range = apply_filters('aiowps_before_lockdown', $ip_range);
         if ($user)
         {
@@ -234,9 +241,10 @@ class AIOWPSecurity_User_Login
         $login_fails_table = AIOWPSEC_TBL_FAILED_LOGINS;
         $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
         $ip_range = AIOWPSecurity_Utility_IP::get_sanitized_ip_range($ip); //Get the IP range of the current user
-        
+        if(empty($ip_range)) return false;
+
         $username = sanitize_user($username);
-	$user = get_user_by('login',$username); //Returns WP_User object if it exists
+	    $user = get_user_by('login',$username); //Returns WP_User object if it exists
         if ($user)
         {
             //If the login attempt was made using a valid user set variables for DB storage later on

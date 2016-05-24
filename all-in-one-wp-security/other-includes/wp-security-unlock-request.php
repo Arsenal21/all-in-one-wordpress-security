@@ -66,8 +66,12 @@ if (isset($_POST['aiowps_wp_submit_unlock_request']))
             //Generate a special code and unlock url
             $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
             $ip_range = AIOWPSecurity_Utility_IP::get_sanitized_ip_range($ip); //Get the IP range of the current user
+            if(empty($ip_range)){
+                $unlock_url = false;
+            }else{
+                $unlock_url = AIOWPSecurity_User_Login::generate_unlock_request_link($ip_range);
+            }
 
-            $unlock_url = AIOWPSecurity_User_Login::generate_unlock_request_link($ip_range);
             if (!$unlock_url){
                 //No entry found in lockdown table with this IP range
                 $error_msg = '<p>'.__('Error: No locked entry was found in the DB with your IP address range!','all-in-one-wp-security-and-firewall').'</p>';
