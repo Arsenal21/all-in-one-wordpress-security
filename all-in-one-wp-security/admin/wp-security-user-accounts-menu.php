@@ -317,7 +317,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
     function get_all_admin_accounts($blog_id='') {
         //TODO: Have included the "blog_id" variable for future use for cases where people want to search particular blog (eg, multi-site)
         if ($blog_id) {
-            $admin_users = get_users('blog_id='.$blog_id.'orderby=login&role=administrator');
+            $admin_users = get_users('blog_id='.$blog_id.'&orderby=login&role=administrator');
         } else {
             $admin_users = get_users('orderby=login&role=administrator');
         }
@@ -333,8 +333,8 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                 }else {
                     $account_output .= '<td>'.$entry->user_login.'</td>';
                 }
-                $user_acct_edit_link = get_option('siteurl').'/wp-admin/user-edit.php?user_id=';
-                $account_output .= '<td><a href="'.$user_acct_edit_link.$entry->ID.'" target="_blank">Edit User</a></td>';
+                $user_acct_edit_link = admin_url('user-edit.php?user_id=' . $entry->ID);
+                $account_output .= '<td><a href="'.$user_acct_edit_link.'" target="_blank">Edit User</a></td>';
                 $account_output .= '</tr>';
             }
             $account_output .= '</table>';
