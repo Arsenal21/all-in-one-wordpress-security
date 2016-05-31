@@ -58,15 +58,13 @@ class AIOWPSecurity_Utility
         //If multisite 
         if (AIOWPSecurity_Utility::is_multisite_install()) {
             $blog_id = get_current_blog_id();
-            $admin_users = get_users('blog_id=' . $blog_id . 'orderby=login&role=administrator');
-            $acct_name_exists = false;
+            $admin_users = get_users('blog_id=' . $blog_id . '&orderby=login&role=administrator');
             foreach ($admin_users as $user) {
                 if ($user->user_login == $username) {
-                    $acct_name_exists = true;
-                    break;
+                    return true;
                 }
             }
-            return $acct_name_exists;
+            return false;
         }
 
         //check users table
@@ -74,20 +72,18 @@ class AIOWPSecurity_Utility
         $sql_1 = $wpdb->prepare("SELECT user_login FROM $wpdb->users WHERE user_login=%s", $sanitized_username);
         $user_login = $wpdb->get_var($sql_1);
         if ($user_login == $sanitized_username) {
-            $users_table_value_exists = true;
+            return true;
         } else {
             //make sure that the sanitized username is an integer before comparing it to the users table's ID column
-            $sanitized_username_is_an_integer = (1 === preg_match('/^\d+$/', $sanitized_username)) ? true : false;
+            $sanitized_username_is_an_integer = (1 === preg_match('/^\d+$/', $sanitized_username));
             if ($sanitized_username_is_an_integer) {
                 $sql_2 = $wpdb->prepare("SELECT ID FROM $wpdb->users WHERE ID=%d", intval($sanitized_username));
                 $userid = $wpdb->get_var($sql_2);
-                $users_table_value_exists = ($userid == $sanitized_username) ? true : false;
+                return ($userid == $sanitized_username);
             } else {
-                $users_table_value_exists = false;
+                return false;
             }
         }
-        return $users_table_value_exists;
-
     }
 
     /*
@@ -163,11 +159,7 @@ class AIOWPSecurity_Utility
 
     static function is_multisite_install()
     {
-        if (function_exists('is_multisite') && is_multisite()) {
-            return true;
-        } else {
-            return false;
-        }
+        return function_exists('is_multisite') && is_multisite();
     }
 
     //This is a general yellow box message for when we want to suppress a feature's config items because site is subsite of multi-site
@@ -305,9 +297,7 @@ class AIOWPSecurity_Utility
 
         //Some initialising
         $url = '';
-        $ip_or_host = '';
         $referer_info = '';
-        $event_data = '';
 
         $events_table_name = AIOWPSEC_TBL_EVENTS;
 
@@ -428,7 +418,7 @@ class AIOWPSecurity_Utility
      */
     static function get_blog_ids()
     {
-        global $wpdb, $aio_wp_security;
+        global $wpdb;
         if (AIOWPSecurity_Utility::is_multisite_install()) {
             global $wpdb;
             $blog_ids = $wpdb->get_col("SELECT blog_id FROM " . $wpdb->prefix . "blogs");
