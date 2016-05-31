@@ -183,6 +183,12 @@ None
 
 == Changelog ==
 
+= TODO - 4.1.1 =
+- Fix (minor): No need to use strcmp to compare integer values.
+- Minor code cleanup (thanks to @chesio).
+- Updated and simplified wp-security-stop-users-enumeration.php for bug (thanks to @davidegiunchidiennea)
+
+
 = 4.1.0 =
 - Fixed bug in Maintenance menu page when trying to attach a media file to the message text box.
 - Added a new filter (called "aiowps_ip_blocked_error_msg") which allows the modification of the error message displayed on the login page when an IP address has been blocked by the login lockdown feature.
