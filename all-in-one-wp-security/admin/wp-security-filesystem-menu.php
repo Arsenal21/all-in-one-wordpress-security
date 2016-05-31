@@ -3,24 +3,15 @@ if ( !defined( 'ABSPATH' ) ) { exit; } // Prevent direct access to file
 class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_FILESYSTEM_MENU_SLUG;
-    
-    /* Specify all the tabs of this menu in the following array */
-    var $menu_tabs;
 
     var $menu_tabs_handler = array(
-        'tab1' => 'render_tab1', 
+        'tab1' => 'render_tab1',
         'tab2' => 'render_tab2',
         'tab3' => 'render_tab3',
         'tab4' => 'render_tab4',
-        );
-    
-    function __construct() 
-    {
-        $this->render_menu_page();
-        add_action( 'admin_footer', array( &$this, 'filesystem_menu_footer_code' ) );
-    }
-    
-    function set_menu_tabs() 
+    );
+
+    function __construct()
     {
         $this->menu_tabs = array(
         'tab1' => __('File Permissions','all-in-one-wp-security-and-firewall'),
@@ -28,53 +19,13 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         'tab3' => __('WP File Access','all-in-one-wp-security-and-firewall'),
         'tab4' => __('Host System Logs','all-in-one-wp-security-and-firewall'),
         );
+
+        add_action( 'admin_footer', array( &$this, 'filesystem_menu_footer_code' ) );
+
+        parent::__construct(__('Filesystem Security','all-in-one-wp-security-and-firewall'));
     }
 
-    function get_current_tab() 
-    {
-        $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
-        return $tab;
-    }
-
-    /*
-     * Renders our tabs of this menu as nav items
-     */
-    function render_menu_tabs() 
-    {
-        $current_tab = $this->get_current_tab();
-
-        echo '<h2 class="nav-tab-wrapper">';
-        foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
-        {
-            $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
-            echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
-        }
-        echo '</h2>';
-    }
-    
-    /*
-     * The menu rendering goes here
-     */
-    function render_menu_page() 
-    {
-        echo '<div class="wrap">';
-        echo '<h2>'.__('Filesystem Security','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
-        $this->set_menu_tabs();
-        $tab = $this->get_current_tab();
-        $this->render_menu_tabs();
-        ?>        
-        <div id="poststuff"><div id="post-body">
-        <?php 
-        //$tab_keys = array_keys($this->menu_tabs);
-        call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
-        ?>
-        </div></div>
-        </div><!-- end of wrap -->
-        <?php
-    }
-    
-    function render_tab1() 
+    function render_tab1()
     {
         //if this is the case there is no need to display a "fix permissions" button
         global $wpdb, $aio_wp_security;

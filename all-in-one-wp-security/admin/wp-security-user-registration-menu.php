@@ -3,72 +3,22 @@
 class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_USER_REGISTRATION_MENU_SLUG;
-    
-    /* Specify all the tabs of this menu in the following array */
-    var $menu_tabs;
 
     var $menu_tabs_handler = array(
         'tab1' => 'render_tab1',
         'tab2' => 'render_tab2',
         );
-    
-    function __construct() 
-    {
-        $this->render_menu_page();
-    }
-    
-    function set_menu_tabs() 
+
+    function __construct()
     {
         $this->menu_tabs = array(
         'tab1' => __('Manual Approval', 'all-in-one-wp-security-and-firewall'),
         'tab2' => __('Registration Captcha', 'all-in-one-wp-security-and-firewall'),
         );
+
+        parent::__construct(__('User Registration','all-in-one-wp-security-and-firewall'));
     }
 
-    function get_current_tab() 
-    {
-        $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
-        return $tab;
-    }
-
-    /*
-     * Renders our tabs of this menu as nav items
-     */
-    function render_menu_tabs() 
-    {
-        $current_tab = $this->get_current_tab();
-
-        echo '<h2 class="nav-tab-wrapper">';
-        foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
-        {
-            $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
-            echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
-        }
-        echo '</h2>';
-    }
-    
-    /*
-     * The menu rendering goes here
-     */
-    function render_menu_page() 
-    {
-        echo '<div class="wrap">';
-        echo '<h2>'.__('User Registration','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
-        $this->set_menu_tabs();
-        $tab = $this->get_current_tab();
-        $this->render_menu_tabs();
-        ?>        
-        <div id="poststuff"><div id="post-body">
-        <?php 
-        //$tab_keys = array_keys($this->menu_tabs);
-        call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
-        ?>
-        </div></div>
-        </div><!-- end of wrap -->
-        <?php
-    }
-    
     function render_tab1()
     {
         global $aiowps_feature_mgr;

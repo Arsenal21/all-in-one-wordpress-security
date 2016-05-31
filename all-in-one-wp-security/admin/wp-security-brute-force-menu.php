@@ -3,9 +3,6 @@
 class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_BRUTE_FORCE_MENU_SLUG;
-    
-    /* Specify all the tabs of this menu in the following array */
-    var $menu_tabs;
 
     var $menu_tabs_handler = array(
         'tab1' => 'render_tab1',
@@ -13,72 +10,28 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         'tab3' => 'render_tab3',
         'tab4' => 'render_tab4',
         'tab5' => 'render_tab5',
-        );
-    
-    function __construct() 
-    {
-        $this->render_menu_page();
-    }
-    
-    function set_menu_tabs() 
-    {
-        $this->menu_tabs = array(
-        'tab1' => __('Rename Login Page','all-in-one-wp-security-and-firewall'),
-        'tab2' => __('Cookie Based Brute Force Prevention', 'all-in-one-wp-security-and-firewall'),
-        'tab3' => __('Login Captcha', 'all-in-one-wp-security-and-firewall'),
-        'tab4' => __('Login Whitelist', 'all-in-one-wp-security-and-firewall'),
-        'tab5' => __('Honeypot', 'all-in-one-wp-security-and-firewall'),
-            
-        );
-    }
+    );
 
-    function get_current_tab() 
+    function __construct()
     {
-        $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
-        return $tab;
-    }
-
-    /*
-     * Renders our tabs of this menu as nav items
-     */
-    function render_menu_tabs() 
-    {
-        $current_tab = $this->get_current_tab();
-
-        echo '<h2 class="nav-tab-wrapper">';
-        foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
-        {
-            if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1
-                && stristr($tab_caption, "Rename Login Page") === false && stristr($tab_caption, "Login Captcha") === false){
-                //Suppress the all Brute Force menu tabs if site is a multi site AND not the main site except "rename login" and "captcha"
-            }else{
-                $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
-                echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
-            }
+        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1) {
+            // Suppress the all Brute Force menu tabs if site is a multi site AND not the main site except "rename login" and "captcha"
+            $this->menu_tabs = array(
+                'tab1' => __('Rename Login Page','all-in-one-wp-security-and-firewall'),
+                'tab3' => __('Login Captcha', 'all-in-one-wp-security-and-firewall'),
+            );
         }
-        echo '</h2>';
-    }
-    
-    /*
-     * The menu rendering goes here
-     */
-    function render_menu_page() 
-    {
-        echo '<div class="wrap">';
-        echo '<h2>'.__('Brute Force','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
-        $this->set_menu_tabs();
-        $tab = $this->get_current_tab();
-        $this->render_menu_tabs();
-        ?>        
-        <div id="poststuff"><div id="post-body">
-        <?php 
-        //$tab_keys = array_keys($this->menu_tabs);
-        call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
-        ?>
-        </div></div>
-        </div><!-- end of wrap -->
-        <?php
+        else {
+            $this->menu_tabs = array(
+                'tab1' => __('Rename Login Page','all-in-one-wp-security-and-firewall'),
+                'tab2' => __('Cookie Based Brute Force Prevention', 'all-in-one-wp-security-and-firewall'),
+                'tab3' => __('Login Captcha', 'all-in-one-wp-security-and-firewall'),
+                'tab4' => __('Login Whitelist', 'all-in-one-wp-security-and-firewall'),
+                'tab5' => __('Honeypot', 'all-in-one-wp-security-and-firewall'),
+            );
+        }
+
+        parent::__construct(__('Brute Force','all-in-one-wp-security-and-firewall'));
     }
     
     function render_tab1()
