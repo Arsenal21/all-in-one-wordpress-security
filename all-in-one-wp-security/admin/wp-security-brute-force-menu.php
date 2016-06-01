@@ -49,7 +49,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         echo '<h2 class="nav-tab-wrapper">';
         foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
         {
-            if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1
+            if ( !is_main_site()
                 && stristr($tab_caption, "Rename Login Page") === false && stristr($tab_caption, "Login Captcha") === false){
                 //Suppress the all Brute Force menu tabs if site is a multi site AND not the main site except "rename login" and "captcha"
             }else{

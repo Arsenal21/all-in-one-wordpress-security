@@ -75,7 +75,7 @@ class AIOWPSecurity_Utility_File
         
         //Check to see if the main "backups" directory exists - create it otherwise
         $aiowps_backup_dir = WP_CONTENT_DIR.'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
-        if (!AIOWPSecurity_Utility_File::create_dir($aiowps_backup_dir))
+        if ( !wp_mkdir_p($aiowps_backup_dir) )
         {
             $aio_wp_security->debug_logger->log_debug("backup_and_rename_wp_config - Creation of backup directory failed!",4);
             return false;
@@ -98,7 +98,7 @@ class AIOWPSecurity_Utility_File
         
         //Check to see if the main "backups" directory exists - create it otherwise
         $aiowps_backup_dir = WP_CONTENT_DIR.'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
-        if (!AIOWPSecurity_Utility_File::create_dir($aiowps_backup_dir))
+        if ( !wp_mkdir_p($aiowps_backup_dir) )
         {
             $aio_wp_security->debug_logger->log_debug("backup_and_rename_htaccess - Creation of backup directory failed!",4);
             return false;
@@ -374,25 +374,6 @@ class AIOWPSecurity_Utility_File
         return $result;
     }
 
-    /*
-     * Checks if a directory exists and creates one if it does not
-     */
-    static function create_dir($dirpath='')
-    {
-        $res = true;
-        if ($dirpath != '')
-        {
-            //TODO - maybe add some checks to make sure someone is not passing a path with a filename, ie, something which has ".<extenstion>" at the end
-            //$path_parts = pathinfo($dirpath);
-            //$dirpath = $path_parts['dirname'] . '/' . $path_parts['basename'];
-            if (!file_exists($dirpath))
-            {
-                $res = mkdir($dirpath, 0755);
-            }
-        }
-        return $res;
-    }
-
     static function get_attachment_id_from_url($attachment_url = '')
     {
         global $wpdb;
@@ -434,7 +415,5 @@ class AIOWPSecurity_Utility_File
         }
         return ($files) ? $files : false;
     }
-
-
 
 }

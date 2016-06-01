@@ -108,13 +108,13 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
         $sortable = $this->get_sortable_columns();
 
         $this->_column_headers = array($columns, $hidden, $sortable);
-        
+
         //$this->process_bulk_action();
-    	
+
     	global $wpdb;
         global $aio_wp_security;
 
-        $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
+        $logged_in_users = (is_multisite() ? get_site_transient('users_online') : get_transient('users_online'));
         if($logged_in_users !== FALSE){
             foreach ($logged_in_users as $key=>$val)
             {

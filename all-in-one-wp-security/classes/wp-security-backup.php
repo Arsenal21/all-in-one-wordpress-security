@@ -20,7 +20,7 @@ class AIOWPSecurity_Backup
         $is_multi_site = false;
         
         @ini_set( 'auto_detect_line_endings', true );
-        if (function_exists('is_multisite') && is_multisite()) 
+        if ( is_multisite() )
         {
             //Let's get the current site's table prefix
             $site_pref = esc_sql($wpdb->prefix);
@@ -81,10 +81,9 @@ class AIOWPSecurity_Backup
         $return .= PHP_EOL . PHP_EOL;
 
         //Check to see if the main "backups" directory exists - create it otherwise
-        
+
         $aiowps_backup_dir = WP_CONTENT_DIR.'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
-        $aiowps_backup_url = content_url().'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
-        if (!AIOWPSecurity_Utility_File::create_dir($aiowps_backup_dir))
+        if ( !wp_mkdir_p($aiowps_backup_dir) )
         {
             $aio_wp_security->debug_logger->log_debug("Creation of DB backup directory failed!",4);
             return false;
@@ -117,7 +116,7 @@ class AIOWPSecurity_Backup
             $dirpath = $aiowps_backup_dir . '/blogid_' . $blog_id;
 
             //Create a subdirectory for this blog_id
-            if (!AIOWPSecurity_Utility_File::create_dir($dirpath))
+            if ( !wp_mkdir_p($dirpath) )
             {
                 $aio_wp_security->debug_logger->log_debug("Creation failed of DB backup directory for the following multisite blog ID: ".$blog_id,4);
                 return false;

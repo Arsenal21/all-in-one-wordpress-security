@@ -317,8 +317,8 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             </p>';
             ?>
         </div>
-        <?php 
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+        <?php
+        if ( !is_main_site() )
         {
            //Hide config settings if MS and not main site
            AIOWPSecurity_Utility::display_multisite_message();
@@ -428,8 +428,8 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             </p>';
             ?>
         </div>
-        <?php 
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+        <?php
+        if ( !is_main_site() )
         {
            //Hide config settings if MS and not main site
            AIOWPSecurity_Utility::display_multisite_message();

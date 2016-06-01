@@ -19,7 +19,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
     
     function set_menu_tabs() 
     {
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1){
+        if ( !is_main_site() ){
             //Suppress the DB prefix change tab if site is a multi site AND not the main site
             $this->menu_tabs = array(
             //'tab1' => __('DB Prefix', 'all-in-one-wp-security-and-firewall'),
@@ -213,7 +213,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             if ($result)
             {
                 $backup_file_name = $aio_wp_security->backup_obj->last_backup_file_name;
-                if (function_exists('is_multisite') && is_multisite()) 
+                if ( is_multisite() )
                 {
                     $aiowps_backup_file_path = $aio_wp_security->backup_obj->last_backup_file_dir_multisite . '/' . $backup_file_name;
                 }
@@ -397,9 +397,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         else{
             echo '<p class="aio_success_with_icon">'.__('A backup copy of your wp-config.php file was created successfully!', 'all-in-one-wp-security-and-firewall').'</p>';
         }
-        
+
         //Get multisite blog_ids if applicable
-        if (AIOWPSecurity_Utility::is_multisite_install()) {
+        if ( is_multisite() ) {
             $blog_ids = AIOWPSecurity_Utility::get_blog_ids();
         }
 
@@ -476,7 +476,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         }
 
         //Now let's update the options tables for the multisite subsites if applicable
-        if (AIOWPSecurity_Utility::is_multisite_install()) {
+        if ( is_multisite() ) {
             if(!empty($blog_ids)){
                 foreach ($blog_ids as $blog_id) {
                     if ($blog_id == 1){continue;} //skip main site

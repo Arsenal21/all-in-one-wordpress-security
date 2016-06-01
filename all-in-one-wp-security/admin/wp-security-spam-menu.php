@@ -152,7 +152,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
         <?php
         //Display security info badge
         $aiowps_feature_mgr->output_feature_details_badge("block-spambots");
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+        if ( !is_main_site() )
         {
            //Hide config settings if MS and not main site
            AIOWPSecurity_Utility::display_multisite_message();
@@ -399,7 +399,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
         <h3 class="hndle"><label for="title"><?php _e('SPAMMER IP Address Results', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
             <?php
-            if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+            if ( !is_main_site() )
             {
                     echo '<div class="aio_yellow_box">';
                     echo '<p>'.__('The plugin has detected that you are using a Multi-Site WordPress installation.', 'all-in-one-wp-security-and-firewall').'</p>

@@ -149,7 +149,7 @@ class AIO_WP_Security{
         AIOWPSecurity_Deactivation::run_deactivation_tasks();
         wp_clear_scheduled_hook('aiowps_hourly_cron_event');
         wp_clear_scheduled_hook('aiowps_daily_cron_event');
-        if (AIOWPSecurity_Utility::is_multisite_install()){
+        if ( is_multisite() ){
             delete_site_transient('users_online');
         }
         else{
@@ -245,7 +245,7 @@ class AIO_WP_Security{
                 }
 
                 //Inspect the payload and do redirect to login page with a msg and redirect url
-                $logout_payload = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_logout_payload') : get_transient('aiowps_logout_payload'));
+                $logout_payload = ( is_multisite() ? get_site_transient('aiowps_logout_payload') : get_transient('aiowps_logout_payload') );
                 if(!empty($logout_payload['redirect_to'])){
                     $login_url = AIOWPSecurity_Utility::add_query_data_to_url($login_url,'redirect_to',$logout_payload['redirect_to']);
                 }

@@ -124,7 +124,7 @@ class AIOWPSecurity_General_Init_Tasks
         }
 
         //For registration page captcha feature
-        if (AIOWPSecurity_Utility::is_multisite_install()){
+        if ( is_multisite() ){
             $blog_id = get_current_blog_id();
             switch_to_blog($blog_id);
             if($aio_wp_security->configs->get_value('aiowps_enable_registration_page_captcha') == '1'){
@@ -145,7 +145,7 @@ class AIOWPSecurity_General_Init_Tasks
         }
 
         //For comment captcha feature
-        if (AIOWPSecurity_Utility::is_multisite_install()){
+        if ( is_multisite() ){
             $blog_id = get_current_blog_id();
             switch_to_blog($blog_id);
             if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1'){
@@ -281,9 +281,9 @@ class AIOWPSecurity_General_Init_Tasks
         if(is_user_logged_in()){
             $current_user_ip = AIOWPSecurity_Utility_IP::get_user_ip_address();
             // get the logged in users list from transients entry
-            $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
+            $logged_in_users = (is_multisite() ? get_site_transient('users_online') : get_transient('users_online'));
             $current_user = wp_get_current_user();
-            $current_user = $current_user->ID;  
+            $current_user = $current_user->ID;
             $current_time = current_time('timestamp');
 
             $current_user_info = array("user_id" => $current_user, "last_activity" => $current_time, "ip_address" => $current_user_ip); //We will store last activity time and ip address in transient entry
@@ -291,7 +291,7 @@ class AIOWPSecurity_General_Init_Tasks
             if($logged_in_users === false || $logged_in_users == NULL){
                 $logged_in_users = array();
                 $logged_in_users[] = $current_user_info;
-                AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+                is_multisite() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
             }
             else
             {
@@ -320,17 +320,17 @@ class AIOWPSecurity_General_Init_Tasks
                 {
                     //Update transient if the last activity was less than 15 min ago for this user
                     $logged_in_users[$item_index] = $current_user_info;
-                    AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+                    is_multisite() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
                 }else if($do_nothing){
                     //Do nothing
                 }else{
                     $logged_in_users[] = $current_user_info;
-                    AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+                    is_multisite() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
                 }
             }
         }
     }
-    
+
     function insert_captcha_custom_login($cust_html_code, $args)
     {
         global $aio_wp_security;
