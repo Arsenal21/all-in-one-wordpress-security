@@ -160,7 +160,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             }
 
             // Explode by end-of-line character, then trim and filter empty lines
-            $email_list_array = array_filter(array_map('trim', explode(PHP_EOL, $_POST['aiowps_fcd_scan_email_address'])));
+            $email_list_array = array_filter(array_map('trim', explode(PHP_EOL, $_POST['aiowps_fcd_scan_email_address'])), 'strlen');
             $errors = array();
             foreach($email_list_array as $key=>$value){
                 $email_sane = sanitize_email($value);
