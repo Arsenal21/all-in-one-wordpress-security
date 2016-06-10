@@ -156,26 +156,25 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
                 {
                     $reset_scan_data = TRUE;
                 }
-                
+
             }
 
-            //$email_address = sanitize_email($_POST['aiowps_fcd_scan_email_address']);
-            $email_address = $_POST['aiowps_fcd_scan_email_address'];
-            $email_list_array = explode(PHP_EOL, $email_address);
+            // Explode by end-of-line character, then trim and filter empty lines
+            $email_list_array = array_filter(array_map('trim', explode(PHP_EOL, $_POST['aiowps_fcd_scan_email_address'])), 'strlen');
+            $errors = array();
             foreach($email_list_array as $key=>$value){
                 $email_sane = sanitize_email($value);
                 if(!is_email($email_sane))
                 {
-                    $err_msg = 'The following address was removed because it is not a valid email address: '.htmlspecialchars($value);
-                    $error .= '<p>'.__($err_msg,'all-in-one-wp-security-and-firewall').'</p>';
+                    $errors[] = __('The following address was removed because it is not a valid email address: ', 'all-in-one-wp-security-and-firewall')
+                        . htmlspecialchars($value);
                     unset($email_list_array[$key]);
                 }
-
             }
             $email_address = implode(PHP_EOL, $email_list_array);
-            if($error)
+            if ( !empty($errors) )
             {
-                $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall').$error);
+                $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall') . '<br/>' . implode('<br />', $errors));
             }
 
             //Save all the form values to the options
