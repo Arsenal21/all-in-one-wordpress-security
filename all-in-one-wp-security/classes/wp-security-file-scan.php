@@ -255,38 +255,34 @@ class AIOWPSecurity_Scan
     
     function compare_scan_data($last_scan_data, $new_scanned_data)
     {
-        $files_added = @array_diff_assoc( $new_scanned_data, $last_scan_data ); //Identify new files added: get all files which are in the new scan but not present in the old scan
-        $files_removed = @array_diff_assoc( $last_scan_data, $new_scanned_data ); //Identify files deleted : get all files which are in the old scan but not present in the new scan
-        $new_scan_minus_added = @array_diff_key( $new_scanned_data, $files_added ); //Get all files in current scan which were not newly added
-        $old_scan_minus_deleted = @array_diff_key( $last_scan_data, $files_removed );  //Get all files in old scan which were not deleted
-        $file_changes_detected = array();
+        // Identify new files added: get all files which are in the new scan but not present in the old scan
+        $files_added = @array_diff_key( $new_scanned_data, $last_scan_data );
+        // Identify files deleted: get all files which are in the old scan but not present in the new scan
+        $files_removed = @array_diff_key( $last_scan_data, $new_scanned_data );
+        // Identify existing files: get all files which are in new scan, but were not added
+        $files_kept = @array_diff_key( $new_scanned_data, $files_added );
 
-        if(!empty($new_scan_minus_added)){
-            //compare file hashes and mod dates
-            foreach ( $new_scan_minus_added as $entry => $key) {
-                if ( array_key_exists( $entry, $old_scan_minus_deleted ) ) 
-                {
-                    //check filesize and last_modified values
-                    if ( ($key['last_modified'] !== $old_scan_minus_deleted[$entry]['last_modified'])
-                       || ($key['filesize'] !== $old_scan_minus_deleted[$entry]['filesize']) )
-                    {
-                        $file_changes_detected[$entry]['filesize'] = $key['filesize'];
-                        $file_changes_detected[$entry]['last_modified'] = $key['last_modified'];
-                    }
-                }
+        $files_changed = array();
 
+        // Loop through existing files and determine, if they have been changed
+        foreach ( $files_kept as $filename => $new_scan_meta ) {
+            $last_scan_meta = $last_scan_data[$filename];
+            // Check filesize and last_modified values
+            if ( ($new_scan_meta['last_modified'] !== $last_scan_meta['last_modified'])
+                || ($new_scan_meta['filesize'] !== $last_scan_meta['filesize']) )
+            {
+                $files_changed[$filename] = $new_scan_meta;
             }
         }
 
-        //create single array of all changes
-        $results = array(
-                'files_added' => $files_added,
-                'files_removed' => $files_removed,
-                'files_changed' => $file_changes_detected
+        // Create single array of all changes
+        return array(
+            'files_added' => $files_added,
+            'files_removed' => $files_removed,
+            'files_changed' => $files_changed,
         );
-        return $results;
     }
-    
+
     function execute_db_scan()
     {
         global $aio_wp_security;
