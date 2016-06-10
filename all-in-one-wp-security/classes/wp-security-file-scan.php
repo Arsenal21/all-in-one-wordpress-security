@@ -183,52 +183,71 @@ class AIOWPSecurity_Scan
             return true;
         }
     }
-    
+
+    /**
+     * Recursively scan the entire $start_dir directory and return file size
+     * and last modified date of every regular file. Ignore files and file
+     * types specified in file scanner settings.
+     * @global AIO_WP_Security $aio_wp_security
+     * @param string $start_dir
+     * @return array
+     */
     function do_file_change_scan($start_dir=ABSPATH)
     {
         global $aio_wp_security;
         $filescan_data = array();
-        $dit = new RecursiveDirectoryIterator($start_dir);
+        // Iterator key is absolute file path, iterator value is SplFileInfo object,
+        // iteration skips '..' and '.' records, because we're not interested in directories.
+        $dit = new RecursiveDirectoryIterator(
+            $start_dir, FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS
+        );
         $rit = new RecursiveIteratorIterator(
-            $dit, RecursiveIteratorIterator::SELF_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
-        
-        $file_types_to_skip = $aio_wp_security->configs->get_value('aiowps_fcd_exclude_filetypes');
+            $dit, RecursiveIteratorIterator::SELF_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD
+        );
 
-        foreach ($rit as $fileinfo) {
-            if ($fileinfo->getFilename() == "..") continue; //skip .. directories
-            if ($fileinfo->isDir()) continue; //skip directories
-            if ($fileinfo->getFilename() == 'wp-security-log-cron-job.txt' || $fileinfo->getFilename() == 'wp-security-log.txt') continue; //skip aiowps log files
-            //Let's omit any file types from the scan which were specified in the settings if necessary
-            if (!empty($file_types_to_skip)){
-                $file_types_to_skip = strtolower($file_types_to_skip);
+        // Grab files/directories to skip
+        $files_to_skip = AIOWPSecurity_Utility::explode_trim_filter_empty($aio_wp_security->configs->get_value('aiowps_fcd_exclude_files'));
+        // Grab (lowercased) file types to skip
+        $file_types_to_skip = AIOWPSecurity_Utility::explode_trim_filter_empty(strtolower($aio_wp_security->configs->get_value('aiowps_fcd_exclude_filetypes')));
+
+        $start_dir_length = strlen($start_dir);
+
+        foreach ($rit as $filename => $fileinfo) {
+
+            if ( !file_exists($filename) || is_dir($filename) ) {
+                continue; // if file doesn't exist or is a directory move on to next iteration
+            }
+
+            if ( $fileinfo->getFilename() == 'wp-security-log-cron-job.txt' || $fileinfo->getFilename() == 'wp-security-log.txt' ) {
+                continue; // skip aiowps log files
+            }
+
+            // Let's omit any file types from the scan which were specified in the settings if necessary
+            if ( !empty($file_types_to_skip) ) {
                 //$current_file_ext = strtolower($fileinfo->getExtension()); //getExtension() only available on PHP 5.3.6 or higher
-                $ext = pathinfo($fileinfo->getFilename(), PATHINFO_EXTENSION);
-                $current_file_ext = strtolower($ext);
-                if (!empty($current_file_ext)){
-                    if (strpos($file_types_to_skip, $current_file_ext) !== FALSE) continue;
+                $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                if ( isset($file_types_to_skip[$ext]) ) { continue; }
+            }
+
+            // Let's omit specific files or directories from the scan which were specified in the settings
+            if ( !empty($files_to_skip) ) {
+
+                $skip_this = false;
+                foreach ($files_to_skip as $f_or_dir) {
+                    // Expect files/dirs to be specified relatively to $start_dir,
+                    // so start searching at $start_dir_length offset.
+                    if (strpos($filename, $f_or_dir, $start_dir_length) !== false) {
+                        $skip_this = true;
+                        break; // !
+                    }
                 }
+                if ($skip_this) { continue; }
             }
-            //Let's omit specific files or directories from the scan which were specified in the settings
-            $filename = $fileinfo->getPathname();
-            if(file_exists($filename) === FALSE){
-                continue; //if file doesn't exist move on to next iteration
-            }
-            $files_to_skip = $aio_wp_security->configs->get_value('aiowps_fcd_exclude_files');
-            if (!empty($files_to_skip))
-            {
-                $file_array = explode(PHP_EOL, $files_to_skip);
-                $skip_this = FALSE;
-                foreach ($file_array as $f_or_dir)
-                {
-                    if (strpos($filename, trim($f_or_dir)) !== FALSE){
-                        $skip_this = TRUE;
-                    } 
-                }
-                if ($skip_this) continue;
-            }
-            $filescan_data[$filename] = array();
-            $filescan_data[$filename]['last_modified'] = $fileinfo->getMTime();
-            $filescan_data[$filename]['filesize'] = $fileinfo->getSize();
+
+            $filescan_data[$filename] = array(
+                'last_modified' => $fileinfo->getMTime(),
+                'filesize'      => $fileinfo->getSize(),
+            );
 
         }
         return $filescan_data; 

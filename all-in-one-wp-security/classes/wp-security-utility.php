@@ -7,6 +7,16 @@ class AIOWPSecurity_Utility
         //NOP
     }
 
+    /**
+     * Explode $string with $delimiter, trim all lines and filter out empty ones.
+     * @param string $string
+     * @param string $delimiter
+     * @return array
+     */
+    static function explode_trim_filter_empty($string, $delimiter = PHP_EOL) {
+        return array_filter(array_map('trim', explode($delimiter, $string)), 'strlen');
+    }
+
     static function get_current_page_url()
     {
         $pageURL = 'http';
