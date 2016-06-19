@@ -10,7 +10,6 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
     var $menu_tabs_handler = array(
         'tab1' => 'render_tab1',
         'tab2' => 'render_tab2',
-        'tab3' => 'render_tab3',
         );
     
     function __construct() 
@@ -23,7 +22,6 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
         $this->menu_tabs = array(
             'tab1' => __('File Change Detection','all-in-one-wp-security-and-firewall'),
             'tab2' => __('Malware Scan','all-in-one-wp-security-and-firewall'),
-            'tab3' => __('DB Scan','all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -374,74 +372,6 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <?php
-    }
-    
-    function render_tab3()
-    {
-        echo '<div class="aio_blue_box">';
-        echo '<p>'.__('This feature performs a basic database scan which will look for any common suspicious-looking strings and javascript and html code in some of the Wordpress core tables.', 'all-in-one-wp-security-and-firewall');
-        echo '</div>';
-        
-        echo '<div class="aio_yellow_box">';
-        echo '<p>This feature can give you false positive result. We have temporarily deactivated this feature to make sure you don\'t lose some data on a false positive. We will re-introduced this feature after we rework it.</p>';
-        echo '</div>';
-        
-        return;//This feature is temporarily deactivated while we re-work the interface
-        
-        global $wpdb, $aio_wp_security;
-        $perform_db_scan = false;
-        if (isset($_POST['aiowps_manual_db_scan']))
-        {
-            $nonce=$_REQUEST['_wpnonce'];
-            if (!wp_verify_nonce($nonce, 'aiowpsec-manual-db-scan-nonce'))
-            {
-                $aio_wp_security->debug_logger->log_debug("Nonce check failed for manual db scan operation!",4);
-                die(__('Nonce check failed for manual db scan operation!','all-in-one-wp-security-and-firewall'));
-            }
-
-            $perform_db_scan = true;
-        }
-
-        
-        ?>
-        <div class="aio_blue_box">
-            <?php
-            $malware_scan = '<a href="admin.php?page='.AIOWPSEC_FILESCAN_MENU_SLUG.'&tab=tab2">Malware Scan</a>';
-            echo '<p>'.__('This feature will perform a basic database scan which will look for any common suspicious-looking strings and javascript and html code in some of the Wordpress core tables.', 'all-in-one-wp-security-and-firewall').
-            '<br />'.__('If the scan finds anything it will list all "potentially" malicious results but it is up to you to verify whether a result is a genuine example of a hacking attack or a false positive.', 'all-in-one-wp-security-and-firewall').
-            '<br />'.__('As well as scanning for generic strings commonly used in malicious cases, this feature will also scan for some of the known "pharma" hack entries and if it finds any it will automatically delete them.', 'all-in-one-wp-security-and-firewall').
-            '<br />'.__('The WordPress core tables scanned by this feature include: posts, postmeta, comments, links, users, usermeta, and options tables.', 'all-in-one-wp-security-and-firewall').'</p>';
-            ?>
-        </div>
-
-        <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('Database Scan', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
-        <div class="inside">
-        <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-manual-db-scan-nonce'); ?>
-        <table class="form-table">
-            <tr valign="top">
-            <span class="description"><?php _e('To perform a database scan click on the button below.', 'all-in-one-wp-security-and-firewall'); ?></span>
-            </tr>            
-        </table>
-        <input type="submit" name="aiowps_manual_db_scan" value="<?php _e('Perform DB Scan', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
-        </form>
-        </div></div>
-        <?php
-        if ($perform_db_scan)
-        {
-            
-            $result = $aio_wp_security->scan_obj->execute_db_scan();
-            echo $result;
-//            if ($result == 1)
-//            {
-//            $error_msg = '<p>'.__('The plugin has detected that there are some potentially suspicious entries in your database.', 'all-in-one-wp-security-and-firewall').'</p>';
-//            $error_msg .= '<p>'.__('Please verify the results listed below to confirm whether the entries detected are genuinely suspicious or if they are false positives.', 'all-in-one-wp-security-and-firewall').'</p>';
-//            $this->show_msg_error($error_msg);
-//            }else{
-//                $this->show_msg_updated(__('The basic database scan was completed and no suspicious entries were detected.', 'all-in-one-wp-security-and-firewall'));
-//            }
-        }
     }
     
 

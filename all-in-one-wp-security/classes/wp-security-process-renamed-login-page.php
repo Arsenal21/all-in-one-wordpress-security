@@ -106,7 +106,8 @@ class AIOWPSecurity_Process_Renamed_Login_Page
             if($aio_wp_security->configs->get_value('aiowps_site_lockout') == '1'){
                 AIOWPSecurity_WP_Loaded_Tasks::site_lockout_tasks();
             }else{
-                AIOWPSecurity_Process_Renamed_Login_Page::aiowps_set_404();
+                //Fix to prevent fatal error caused by some themes and Yoast SEO
+                wp_die( __( 'Not available.', 'all-in-one-wp-security-and-firewall' ), 403 );
             }
         }
 

@@ -123,6 +123,11 @@ class AIOWPSecurity_General_Init_Tasks
             }
         }
 
+        //For registration manual approval feature
+        if($aio_wp_security->configs->get_value('aiowps_enable_manual_registration_approval') == '1'){
+            add_filter('wp_login_errors', array(&$this, 'modify_registration_page_messages'),10, 2);
+        }
+        
         //For registration page captcha feature
         if (AIOWPSecurity_Utility::is_multisite_install()){
             $blog_id = get_current_blog_id();
@@ -484,5 +489,18 @@ class AIOWPSecurity_General_Init_Tasks
         global $aio_wp_security;
         $message = html_entity_decode($message);
         return $message;
+    }
+    
+    function modify_registration_page_messages($errors, $redirect_to)
+    {
+        if( isset($_GET['checkemail']) && 'registered' == $_GET['checkemail'] ){
+            if(is_wp_error($errors)){
+                $errors->remove('registered');
+                $pending_approval_msg = __('Your registration is pending approval.', 'all-in-one-wp-security-and-firewall');
+                $pending_approval_msg = apply_filters('aiowps_pending_registration_message', $pending_approval_msg);
+                $errors->add('registered', $pending_approval_msg, array('registered'=>'message'));
+            }
+        }
+        return $errors;
     }
 }
