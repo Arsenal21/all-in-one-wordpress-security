@@ -391,11 +391,11 @@ class AIOWPSecurity_User_Login
                 {
                     $aio_wp_security->debug_logger->log_debug("Force Logout - This user logged in more than (".$logout_time_interval_value.") minutes ago. Doing a force log out for the user with username: ".$current_user->user_login);
                     $this->wp_logout_action_handler(); //this will register the logout time/date in the logout_date column
-                    
+
                     $curr_page_url = AIOWPSecurity_Utility::get_current_page_url();
                     $after_logout_payload = array('redirect_to'=>$curr_page_url, 'msg'=>$this->key_login_msg.'=session_expired');
                     //Save some of the logout redirect data to a transient
-                    AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60) : set_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60);
+                    is_multisite() ? set_site_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60) : set_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60);
                     $logout_url = AIOWPSEC_WP_URL.'?aiowpsec_do_log_out=1';
                     $logout_url = AIOWPSecurity_Utility::add_query_data_to_url($logout_url, 'al_additional_data', '1');
                     AIOWPSecurity_Utility::redirect_to_url($logout_url);
@@ -473,9 +473,7 @@ class AIOWPSecurity_User_Login
      */
     function update_user_online_transient($user_id, $ip_addr) 
     {
-        global $aio_wp_security;
-        $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
-        //$logged_in_users = get_transient('users_online');
+        $logged_in_users = (is_multisite() ? get_site_transient('users_online') : get_transient('users_online'));
         if ($logged_in_users === false || $logged_in_users == NULL)
         {
             return;
@@ -490,12 +488,10 @@ class AIOWPSecurity_User_Login
             }
             $j++;
         }
-        //Save the transient
-        AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
-        //set_transient('users_online', $logged_in_users, 30 * 60); //Set transient with the data obtained above and also set the expiry to 30min
-        return;
+        // Set transient with the data obtained above and also set the expiry to 30min
+        is_multisite() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
     }
-    
+
     /**
      * The handler for the WP "login_message" filter
      * Adds custom messages to the other messages that appear above the login form.

@@ -446,11 +446,9 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
         <?php
     }
-    
+
     function render_tab5()
     {
-        $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
-        
         global $aio_wp_security;
         include_once 'wp-security-list-logged-in-users.php'; //For rendering the AIOWPSecurity_List_Table
         $user_list = new AIOWPSecurity_List_Logged_In_Users();

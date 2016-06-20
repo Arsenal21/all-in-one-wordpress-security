@@ -7,7 +7,7 @@ class AIOWPSecurity_Installer
     static function run_installer()
     {
         global $wpdb;
-        if (function_exists('is_multisite') && is_multisite()) {
+        if ( is_multisite() ) {
             // check if it is a network activation - if so, run the activation function for each blog id
             if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
                 $old_blog = $wpdb->blogid;
@@ -138,26 +138,24 @@ class AIOWPSecurity_Installer
         global $aio_wp_security;
         //Create our folder in the "wp-content" directory
         $aiowps_dir = WP_CONTENT_DIR . '/' . AIO_WP_SECURITY_BACKUPS_DIR_NAME;
-        if (!is_dir($aiowps_dir)) {
-            mkdir($aiowps_dir, 0755, true);
+        if ( wp_mkdir_p($aiowps_dir) ) {
             //Let's also create an empty index.html file in this folder
-            $index_file = $aiowps_dir . '/index.html';
-            $handle = fopen($index_file, 'w'); //or die('Cannot open file:  '.$index_file);
-            fclose($handle);
-        }
-        $server_type = AIOWPSecurity_Utility::get_server_type();
-        //Only create .htaccess if server is the right type
-        if ($server_type == 'apache' || $server_type == 'litespeed') {
-            $file = $aiowps_dir . '/.htaccess';
-            if (!file_exists($file)) {
-                //Create an .htacces file
-                //Write some rules which will only allow people originating from wp admin page to download the DB backup
-                $rules = '';
-                $rules .= 'order deny,allow' . PHP_EOL;
-                $rules .= 'deny from all' . PHP_EOL;
-                $write_result = file_put_contents($file, $rules);
-                if ($write_result === false) {
-                    $aio_wp_security->debug_logger->log_debug("Creation of .htaccess file in " . AIO_WP_SECURITY_BACKUPS_DIR_NAME . " directory failed!", 4);
+            file_put_contents($aiowps_dir . '/index.html', '');
+
+            $server_type = AIOWPSecurity_Utility::get_server_type();
+            //Only create .htaccess if server is the right type
+            if ($server_type == 'apache' || $server_type == 'litespeed') {
+                $file = $aiowps_dir . '/.htaccess';
+                if (!file_exists($file)) {
+                    //Create an .htacces file
+                    //Write some rules which will only allow people originating from wp admin page to download the DB backup
+                    $rules = '';
+                    $rules .= 'order deny,allow' . PHP_EOL;
+                    $rules .= 'deny from all' . PHP_EOL;
+                    $write_result = file_put_contents($file, $rules);
+                    if ($write_result === false) {
+                        $aio_wp_security->debug_logger->log_debug("Creation of .htaccess file in " . AIO_WP_SECURITY_BACKUPS_DIR_NAME . " directory failed!", 4);
+                    }
                 }
             }
         }

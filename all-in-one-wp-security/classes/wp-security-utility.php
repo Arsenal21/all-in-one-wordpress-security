@@ -19,17 +19,12 @@ class AIOWPSecurity_Utility
 
     static function get_current_page_url()
     {
-        $pageURL = 'http';
-        if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
-            $pageURL .= "s";
-        }
-        $pageURL .= "://";
-        if ($_SERVER["SERVER_PORT"] != "80") {
-            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
-        } else {
-            $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-        }
-        return $pageURL;
+        return
+              is_ssl() ? 'https://' : 'http://'
+            . $_SERVER["SERVER_NAME"]
+            . $_SERVER["SERVER_PORT"] != "80" ? (":" . $_SERVER["SERVER_PORT"]) : ""
+            . $_SERVER["REQUEST_URI"]
+        ;
     }
 
     static function redirect_to_url($url, $delay = '0', $exit = '1')
@@ -65,8 +60,8 @@ class AIOWPSecurity_Utility
             return false;
         }
 
-        //If multisite 
-        if (AIOWPSecurity_Utility::is_multisite_install()) {
+        //If multisite
+        if ( is_multisite() ) {
             $blog_id = get_current_blog_id();
             $admin_users = get_users('blog_id=' . $blog_id . '&orderby=login&role=administrator');
             foreach ($admin_users as $user) {
@@ -165,11 +160,6 @@ class AIOWPSecurity_Utility
             return $_COOKIE[$cookie_name];
         }
         return "";
-    }
-
-    static function is_multisite_install()
-    {
-        return function_exists('is_multisite') && is_multisite();
     }
 
     //This is a general yellow box message for when we want to suppress a feature's config items because site is subsite of multi-site
@@ -429,7 +419,7 @@ class AIOWPSecurity_Utility
     static function get_blog_ids()
     {
         global $wpdb;
-        if (AIOWPSecurity_Utility::is_multisite_install()) {
+        if ( is_multisite() ) {
             global $wpdb;
             $blog_ids = $wpdb->get_col("SELECT blog_id FROM " . $wpdb->prefix . "blogs");
         } else {

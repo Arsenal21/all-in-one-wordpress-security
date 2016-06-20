@@ -21,7 +21,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
     function column_comment_author_IP($item){
         $tab = strip_tags($_REQUEST['tab']);
         //Build row actions
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1){
+        if ( !is_main_site() ){
             //Suppress the block link if site is a multi site AND not the main site
             $actions = array(); //blank array
         }else{
@@ -68,17 +68,10 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         );
         return $sortable_columns;
     }
-    
+
     function get_bulk_actions() {
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1){
-            //Suppress the block link if site is a multi site AND not the main site
-            $actions = array(); //blank array
-        }else{
-            $actions = array(
-                'block' => 'Block'
-            );
-        }
-        return $actions;
+        // Suppress the block link if site is not the main site
+        return is_main_site() ? array('block' => 'Block') : array();
     }
 
     function process_bulk_action() {

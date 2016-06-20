@@ -481,7 +481,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                     <div class="inside">
                         <?php
                         $users_online_link = '<a href="admin.php?page=' . AIOWPSEC_USER_LOGIN_MENU_SLUG . '&tab=tab5">Logged In Users</a>';
-                        if (AIOWPSecurity_Utility::is_multisite_install()) {
+                        if ( is_multisite() ) {
                             $logged_in_users = get_site_transient('users_online');
                             $num_users = count($logged_in_users);
                             if ($num_users > 1) {

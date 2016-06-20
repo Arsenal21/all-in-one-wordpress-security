@@ -130,7 +130,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
         <?php
         //Display security info badge
         $aiowps_feature_mgr->output_feature_details_badge("manually-approve-registrations");
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+        if ( !is_main_site() )
         {
            //Hide config settings if MS and not main site
            AIOWPSecurity_Utility::display_multisite_message();
@@ -207,7 +207,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
         <h3 class="hndle"><label for="title"><?php _e('Registration Page Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <?php
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+        if ( !is_main_site() )
         {
             //Hide config settings if MS and not main site
             $special_msg = '<div class="aio_yellow_box">';
