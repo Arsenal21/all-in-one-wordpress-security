@@ -102,13 +102,8 @@ class AIOWPSecurity_Process_Renamed_Login_Page
         
         //case where someone attempting to reach wp-admin 
         if (is_admin() && !is_user_logged_in() && !defined('DOING_AJAX')){
-            //Check if the maintenance (lockout) mode is active - if so prevent access to site by not displaying 404 page!
-            if($aio_wp_security->configs->get_value('aiowps_site_lockout') == '1'){
-                AIOWPSecurity_WP_Loaded_Tasks::site_lockout_tasks();
-            }else{
-                //Fix to prevent fatal error caused by some themes and Yoast SEO
-                wp_die( __( 'Not available.', 'all-in-one-wp-security-and-firewall' ), 403 );
-            }
+            //Fix to prevent fatal error caused by some themes and Yoast SEO
+            wp_die( __( 'Not available.', 'all-in-one-wp-security-and-firewall' ), 403 );
         }
 
         //case where someone attempting to reach wp-login

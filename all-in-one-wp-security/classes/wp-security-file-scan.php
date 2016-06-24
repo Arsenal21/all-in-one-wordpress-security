@@ -226,7 +226,7 @@ class AIOWPSecurity_Scan
             if ( !empty($file_types_to_skip) ) {
                 //$current_file_ext = strtolower($fileinfo->getExtension()); //getExtension() only available on PHP 5.3.6 or higher
                 $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-                if ( isset($file_types_to_skip[$ext]) ) { continue; }
+                if (in_array($ext, $file_types_to_skip) ) { continue; }
             }
 
             // Let's omit specific files or directories from the scan which were specified in the settings

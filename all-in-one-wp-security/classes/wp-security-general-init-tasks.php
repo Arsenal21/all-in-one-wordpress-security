@@ -213,7 +213,7 @@ class AIOWPSecurity_General_Init_Tasks
 
     function spam_detect_process_comment_post($comment_id, $comment_approved)
     {
-        if($comment_approved == 'spam'){
+        if($comment_approved === "spam"){
             $this->block_comment_ip($comment_id);
         }
 
