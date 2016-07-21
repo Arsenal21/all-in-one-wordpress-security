@@ -5257,7 +5257,7 @@ msgstr "Votre dernier fichier de sauvegarde BdD pour l’URL du site est attach�
 
 #: all-in-one-wp-security/classes/wp-security-backup.php:190
 msgid " generated on"
-msgstr "généré le"
+msgstr " généré le"
 
 #: all-in-one-wp-security/classes/wp-security-captcha.php:17
 #: all-in-one-wp-security/classes/wp-security-general-init-tasks.php:254
