@@ -258,8 +258,8 @@ class AIOWPSecurity_Utility_File
         $public_value_actual = substr($actual,-1,1); //get dec value for actual public permission
         $public_value_rec = substr($recommended,-1,1); //get dec value for recommended public permission
 
-        $pva_bin = decbin($public_value_actual); //Convert value to binary
-        $pvr_bin = decbin($public_value_rec); //Convert value to binary
+        $pva_bin = sprintf('%04b', $public_value_actual); //Convert value to binary
+        $pvr_bin = sprintf('%04b', $public_value_rec); //Convert value to binary
         //Compare the "executable" bit values for the public actual versus the recommended
         if (substr($pva_bin,-1,1)<=substr($pvr_bin,-1,1))
         {
@@ -296,8 +296,8 @@ class AIOWPSecurity_Utility_File
         //Check "group" permissions
         $group_value_actual = substr($actual,-2,1);
         $group_value_rec = substr($recommended,-2,1);
-        $gva_bin = decbin($group_value_actual); //Convert value to binary
-        $gvr_bin = decbin($group_value_rec); //Convert value to binary
+        $gva_bin = sprintf('%04b', $group_value_actual); //Convert value to binary
+        $gvr_bin = sprintf('%04b', $group_value_rec); //Convert value to binary
 
         //Compare the "executable" bit values for the group actual versus the recommended
         if (substr($gva_bin,-1,1)<=substr($gvr_bin,-1,1))
@@ -335,8 +335,8 @@ class AIOWPSecurity_Utility_File
         //Check "owner" permissions
         $owner_value_actual = substr($actual,-3,1);
         $owner_value_rec = substr($recommended,-3,1);
-        $ova_bin = decbin($owner_value_actual); //Convert value to binary
-        $ovr_bin = decbin($owner_value_rec); //Convert value to binary
+        $ova_bin = sprintf('%04b', $owner_value_actual); //Convert value to binary
+        $ovr_bin = sprintf('%04b', $owner_value_rec); //Convert value to binary
 
         //Compare the "executable" bit values for the group actual versus the recommended
         if (substr($ova_bin,-1,1)<=substr($ovr_bin,-1,1))
