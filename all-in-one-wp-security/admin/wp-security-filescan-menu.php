@@ -363,7 +363,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
                 <li>'.__('Automatic Email Alerting','all-in-one-wp-security-and-firewall').'</li>
                 <li>'.__('Site uptime monitoring','all-in-one-wp-security-and-firewall').'</li>
                 <li>'.__('Site response time monitoring','all-in-one-wp-security-and-firewall').'</li>
-                <li>'.__('Malware Cleanup','all-in-one-wp-security-and-firewall').'</li>
+                <li>'.__('We provide advice for malware cleanup','all-in-one-wp-security-and-firewall').'</li>
                 <li>'.__('Blacklist Removal','all-in-one-wp-security-and-firewall').'</li>
                 <li>'.__('No Contract (Cancel Anytime)','all-in-one-wp-security-and-firewall').'</li>
             </ul>';

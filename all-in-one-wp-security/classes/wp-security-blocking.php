@@ -59,12 +59,13 @@ class AIOWPSecurity_Blocking
         global $wpdb, $aio_wp_security;
         //Check if this IP address is already in the block list
         $blocked = AIOWPSecurity_Blocking::is_ip_blocked($ip_address);
+        $time_now = date_i18n( 'Y-m-d H:i:s' );
         if(empty($blocked)){
             //Add this IP to the blocked table
             $data = array(
                 'blocked_ip'=>$ip_address,
                 'block_reason'=>$reason,
-                'blocked_date'=>current_time('mysql')
+                'blocked_date'=>$time_now
             );
             $data = apply_filters('pre_add_to_permanent_block', $data);
             $res = $wpdb->insert(AIOWPSEC_TBL_PERM_BLOCK, $data);

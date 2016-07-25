@@ -328,11 +328,12 @@ class AIOWPSecurity_Utility
             $referer_info = isset($_SERVER['HTTP_REFERER']) ? esc_attr($_SERVER['HTTP_REFERER']) : '';
         }
 
+        $current_time = date_i18n( 'Y-m-d H:i:s' );
         $data = array(
             'event_type' => $event_type,
             'username' => $username,
             'user_id' => $user_id,
-            'event_date' => current_time('mysql'),
+            'event_date' => $current_time,
             'ip_or_host' => $ip_or_host,
             'referer_info' => $referer_info,
             'url' => $url,
@@ -491,7 +492,7 @@ class AIOWPSecurity_Utility
     {
         $keys = array_keys($valid_values);
         $keys = array_map('strtolower', $keys);
-        if (in_array($to_check, $keys)) {
+        if (in_array(strtolower($to_check), $keys)) {
             return $to_check;
         }
         return reset($keys);//Return he first element from the valid values

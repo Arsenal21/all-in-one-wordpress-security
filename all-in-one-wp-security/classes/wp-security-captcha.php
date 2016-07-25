@@ -84,7 +84,8 @@ class AIOWPSecurity_Captcha
         $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
         $current_time = time();
         $enc_result = base64_encode($current_time.$captcha_secret_string.$result);
-        $equation_string .= '<input type="hidden" name="aiowps-captcha-string-info" id="aiowps-captcha-string-info" value="'.$enc_result.'" />';
+        AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('aiowps_captcha_string_info', $enc_result, 30 * 60) : set_transient('aiowps_captcha_string_info', $enc_result, 30 * 60);
+//        $equation_string .= '<input type="hidden" name="aiowps-captcha-string-info" id="aiowps-captcha-string-info" value="'.$enc_result.'" />';
         $equation_string .= '<input type="hidden" name="aiowps-captcha-temp-string" id="aiowps-captcha-temp-string" value="'.$current_time.'" />';
         $equation_string .= '<input type="text" size="2" id="aiowps-captcha-answer" name="aiowps-captcha-answer" value="" />';
         return $equation_string;

@@ -82,7 +82,8 @@ class AIOWPSecurity_Scan
         if($aio_wp_security->configs->get_value('aiowps_enable_automated_fcd_scan')=='1')
         {
             $aio_wp_security->debug_logger->log_debug_cron("Filescan - Scheduled fcd_scan is enabled. Checking now to see if scan needs to be done...");
-            $current_time = strtotime(current_time('mysql'));
+            $time_now = date_i18n( 'Y-m-d H:i:s' );
+            $current_time = strtotime($time_now);
             $fcd_scan_frequency = $aio_wp_security->configs->get_value('aiowps_fcd_scan_frequency'); //Number of hours or days or months interval
             $interval_setting = $aio_wp_security->configs->get_value('aiowps_fcd_scan_interval'); //Hours/Days/Months
             switch($interval_setting)
@@ -108,7 +109,7 @@ class AIOWPSecurity_Scan
                     $result = $this->execute_file_change_detection_scan(ABSPATH);
 //                    if ($result)
 //                    {
-                        $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', current_time('mysql'));
+                        $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', $time_now);
                         $aio_wp_security->configs->save_config();
                         $aio_wp_security->debug_logger->log_debug_cron("Filescan - Scheduled filescan was successfully completed.");
 //                    } 
@@ -121,7 +122,7 @@ class AIOWPSecurity_Scan
             else
             {
                 //Set the last scan time to now so it can trigger for the next scheduled period
-                $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', current_time('mysql'));
+                $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', $time_now);
                 $aio_wp_security->configs->save_config();
             }
         }
@@ -166,7 +167,7 @@ class AIOWPSecurity_Scan
         $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
         $payload = maybe_serialize($scanned_data);
         $scan_result = maybe_serialize($scan_result);
-        $date_time = current_time('mysql');
+        $date_time = date_i18n( 'Y-m-d H:i:s' );
         $data = array('date_time' => $date_time, 'meta_key1' => 'file_change_detection', 'meta_value1' => 'file_scan_data', 'meta_value4' => $payload, 'meta_key5' => 'last_scan_result', 'meta_value5' => $scan_result);
         if($save_type == 'insert'){
             $result = $wpdb->insert($aiowps_global_meta_tbl_name, $data);

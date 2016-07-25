@@ -142,7 +142,6 @@ if ( $shake_error_codes && $wp_error->get_error_code() && in_array( $wp_error->g
      * @param string $action  The action that brought the visitor to the login page.
      */
     $classes = apply_filters( 'login_body_class', $classes, $action );
-
     ?>
 </head>
 <body class="login <?php echo esc_attr( implode( ' ', $classes ) ); ?>">
@@ -159,6 +158,7 @@ if ( $shake_error_codes && $wp_error->get_error_code() && in_array( $wp_error->g
      *
      * @param string $message Login message text.
      */
+
     $message = apply_filters( 'login_message', $message );
     if ( !empty( $message ) )
         echo $message . "\n";
@@ -180,7 +180,7 @@ if ( $shake_error_codes && $wp_error->get_error_code() && in_array( $wp_error->g
                 else
                     $errors .= '	' . $error_message . "<br />\n";
             }
-        }
+    }
         if ( ! empty( $errors ) ) {
             /**
              * Filter the error messages displayed above the login form.

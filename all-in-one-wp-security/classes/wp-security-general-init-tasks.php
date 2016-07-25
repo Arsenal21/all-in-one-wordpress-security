@@ -4,6 +4,11 @@ class AIOWPSecurity_General_Init_Tasks
 {
     function __construct(){
         global $aio_wp_security;
+        
+        if ($aio_wp_security->configs->get_value('aiowps_disable_xmlrpc_pingback_methods') == '1') {
+            add_filter( 'xmlrpc_methods', array(&$this, 'aiowps_disable_xmlrpc_pingback_methods') );
+            add_filter( 'wp_headers', array(&$this, 'aiowps_remove_x_pingback_header') );
+        }
 
         add_action( 'permalink_structure_changed', array(&$this, 'refresh_firewall_rules' ), 10, 2);
 
@@ -191,6 +196,17 @@ class AIOWPSecurity_General_Init_Tasks
         //Add more tasks that need to be executed at init time
         
     }
+    
+    function aiowps_disable_xmlrpc_pingback_methods( $methods ) {
+       unset( $methods['pingback.ping'] );
+       unset( $methods['pingback.extensions.getPingbacks'] );
+       return $methods;
+    }
+    
+    function aiowps_remove_x_pingback_header( $headers ) {
+       unset( $headers['X-Pingback'] );
+       return $headers;
+    }
 
     /**
      * Refreshes the firewall rules in .htaccess file
@@ -363,7 +379,8 @@ class AIOWPSecurity_General_Init_Tasks
             isset($_POST['aiowps-captcha-answer'])?$captcha_answer = strip_tags(trim($_POST['aiowps-captcha-answer'])): $captcha_answer = '';
             $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
             $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
+            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info') : get_transient('aiowps_captcha_string_info'));
+            if($submitted_encoded_string !== $captcha_string_info_trans)
             {
                 //This means a wrong answer was entered
                 $result['errors']->add('generic', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
@@ -410,7 +427,9 @@ class AIOWPSecurity_General_Init_Tasks
             $captcha_answer = trim($_REQUEST['aiowps-captcha-answer']);
             $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
             $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            if ($_REQUEST['aiowps-captcha-string-info'] === $submitted_encoded_string){
+            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info') : get_transient('aiowps_captcha_string_info'));
+
+            if ($captcha_string_info_trans === $submitted_encoded_string){
                 //Correct answer given
                 return($comment);
             }else{
@@ -431,7 +450,9 @@ class AIOWPSecurity_General_Init_Tasks
                 isset($_POST['aiowps-captcha-answer'])?($captcha_answer = strip_tags(trim($_POST['aiowps-captcha-answer']))):($captcha_answer = '');
                 $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
                 $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-                if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
+                $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info') : get_transient('aiowps_captcha_string_info'));
+
+                if($submitted_encoded_string !== $captcha_string_info_trans)
                 {
                     add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
                 }
@@ -464,7 +485,9 @@ class AIOWPSecurity_General_Init_Tasks
             isset($_POST['aiowps-captcha-answer'])?$captcha_answer = strip_tags(trim($_POST['aiowps-captcha-answer'])): $captcha_answer = '';
             $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
             $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
+            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info') : get_transient('aiowps_captcha_string_info'));
+
+            if($submitted_encoded_string !== $captcha_string_info_trans)
             {
                 //This means a wrong answer was entered
                 $bp->signup->errors['aiowps-captcha-answer'] = __('Your CAPTCHA answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall');

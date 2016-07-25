@@ -227,7 +227,8 @@ class AIOWPSecurity_Backup
         if($aio_wp_security->configs->get_value('aiowps_enable_automated_backups')=='1')
         {
             $aio_wp_security->debug_logger->log_debug_cron("DB Backup - Scheduled backup is enabled. Checking if a backup needs to be done now...");
-            $current_time = strtotime(current_time('mysql'));
+            $time_now = date_i18n( 'Y-m-d H:i:s' );
+            $current_time = strtotime($time_now);
             $backup_frequency = $aio_wp_security->configs->get_value('aiowps_db_backup_frequency'); //Number of hours or days or months interval per backup
             $interval_setting = $aio_wp_security->configs->get_value('aiowps_db_backup_interval'); //Hours/Days/Months
             switch($interval_setting)
@@ -253,7 +254,7 @@ class AIOWPSecurity_Backup
                     $result = $this->execute_backup();
                     if ($result)
                     {
-                        $aio_wp_security->configs->set_value('aiowps_last_backup_time', current_time('mysql'));
+                        $aio_wp_security->configs->set_value('aiowps_last_backup_time', $time_now);
                         $aio_wp_security->configs->save_config();
                         $aio_wp_security->debug_logger->log_debug_cron("DB Backup - Scheduled backup was successfully completed.");
                     } 
@@ -266,7 +267,7 @@ class AIOWPSecurity_Backup
             else
             {
                 //Set the last backup time to now so it can trigger for the next scheduled period
-                $aio_wp_security->configs->set_value('aiowps_last_backup_time', current_time('mysql'));
+                $aio_wp_security->configs->set_value('aiowps_last_backup_time', $time_now);
                 $aio_wp_security->configs->save_config();
             }
         }

@@ -67,7 +67,9 @@ class AIOWPSecurity_User_Registration
             isset($_POST['aiowps-captcha-answer'])?$captcha_answer = strip_tags(trim($_POST['aiowps-captcha-answer'])): $captcha_answer = '';
             $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
             $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
+            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info') : get_transient('aiowps_captcha_string_info'));
+            
+            if($submitted_encoded_string !== $captcha_string_info_trans)
             {
                 //This means a wrong answer was entered
                 //return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
