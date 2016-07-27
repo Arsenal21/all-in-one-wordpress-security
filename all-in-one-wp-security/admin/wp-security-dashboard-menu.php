@@ -641,15 +641,6 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                 <strong><?php _e('PHP Max Post Size', 'all-in-one-wp-security-and-firewall'); ?>
                     : </strong><code><?php echo $post_max; ?></code><br/>
                 <?php
-                if (ini_get('safe_mode')) {
-                    $safe_mode = __('On', 'all-in-one-wp-security-and-firewall');
-                } else {
-                    $safe_mode = __('Off', 'all-in-one-wp-security-and-firewall');
-                }
-                ?>
-                <strong><?php _e('PHP Safe Mode', 'all-in-one-wp-security-and-firewall'); ?>
-                    : </strong><code><?php echo $safe_mode; ?></code><br/>
-                <?php
                 if (ini_get('allow_url_fopen')) {
                     $allow_url_fopen = __('On', 'all-in-one-wp-security-and-firewall');
                 } else {

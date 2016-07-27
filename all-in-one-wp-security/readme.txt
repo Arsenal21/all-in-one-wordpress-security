@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.6
-Stable tag: 4.1.3
+Stable tag: 4.1.4
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -182,6 +182,10 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.1.4 =
+- Improved and tweaked the login captcha feature to avoid some issues people had with the last modification.
+- Deleted reference to ini_get('safe_mode') to avoid fatal errors for newer versions of PHP where that setting has been totally removed.
 
 = 4.1.3 =
 - Added new checkbox for XMLRPC to disable only pingback methods but leave other XMLRPC functionality accessible. This will be useful for people who use Jetpack or Wordpress iOS or other apps.
