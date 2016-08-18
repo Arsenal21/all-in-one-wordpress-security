@@ -212,18 +212,9 @@ class AIOWPSecurity_Utility_Htaccess
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_prevent_default_wp_file_access') == '1') {
             $rules .= AIOWPSecurity_Utility_Htaccess::$prevent_wp_file_access_marker_start . PHP_EOL; //Add feature marker start
-            $rules .= '<Files license.txt>
-                        order allow,deny
-                        deny from all
-                        </files>
-                        <Files wp-config-sample.php>
-                        order allow,deny
-                        deny from all
-                        </Files>
-                        <Files readme.html>
-                        order allow,deny
-                        deny from all
-                        </Files>' . PHP_EOL;
+            $rules .= self::create_apache2_access_denied_rule('license.txt');
+            $rules .= self::create_apache2_access_denied_rule('wp-config-sample.php');
+            $rules .= self::create_apache2_access_denied_rule('readme.html');
             $rules .= AIOWPSecurity_Utility_Htaccess::$prevent_wp_file_access_marker_end . PHP_EOL; //Add feature marker end
         }
 
@@ -344,10 +335,7 @@ class AIOWPSecurity_Utility_Htaccess
         if ($aio_wp_security->configs->get_value('aiowps_enable_basic_firewall') == '1') {
             $rules .= AIOWPSecurity_Utility_Htaccess::$basic_htaccess_rules_marker_start . PHP_EOL; //Add feature marker start
             //protect the htaccess file - this is done by default with apache config file but we are including it here for good measure
-            $rules .= '<Files .htaccess>' . PHP_EOL;
-            $rules .= 'order allow,deny' . PHP_EOL;
-            $rules .= 'deny from all' . PHP_EOL;
-            $rules .= '</Files>' . PHP_EOL;
+            $rules .= self::create_apache2_access_denied_rule('.htaccess');
 
             //disable the server signature
             $rules .= 'ServerSignature Off' . PHP_EOL;
@@ -355,11 +343,8 @@ class AIOWPSecurity_Utility_Htaccess
             //limit file uploads to 10mb
             $rules .= 'LimitRequestBody 10240000' . PHP_EOL;
 
-            // protect wpconfig.php. 
-            $rules .= '<Files wp-config.php>' . PHP_EOL;
-            $rules .= 'order allow,deny' . PHP_EOL;
-            $rules .= 'deny from all' . PHP_EOL;
-            $rules .= '</Files>' . PHP_EOL;
+            // protect wpconfig.php.
+            $rules .= self::create_apache2_access_denied_rule('wp-config.php');
 
             $rules .= AIOWPSecurity_Utility_Htaccess::$basic_htaccess_rules_marker_end . PHP_EOL; //Add feature marker end
         }
@@ -373,11 +358,7 @@ class AIOWPSecurity_Utility_Htaccess
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_enable_pingback_firewall') == '1') {
             $rules .= AIOWPSecurity_Utility_Htaccess::$pingback_htaccess_rules_marker_start . PHP_EOL; //Add feature marker start
-            $rules .= '<Files xmlrpc.php>' . PHP_EOL;
-            $rules .= 'order deny,allow' . PHP_EOL;
-            $rules .= 'deny from all' . PHP_EOL;
-            $rules .= '</Files>' . PHP_EOL;
-
+            $rules .= self::create_apache2_access_denied_rule('xmlrpc.php');
             $rules .= AIOWPSecurity_Utility_Htaccess::$pingback_htaccess_rules_marker_end . PHP_EOL; //Add feature marker end
         }
         return $rules;
@@ -389,11 +370,8 @@ class AIOWPSecurity_Utility_Htaccess
 
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_block_debug_log_file_access') == '1') {
-            $rules .= AIOWPSecurity_Utility_Htaccess::$debug_log_block_htaccess_rules_marker_start . PHP_EOL; //Add feature marker start            
-            $rules .= '<Files debug.log>' . PHP_EOL;
-            $rules .= 'order deny,allow' . PHP_EOL;
-            $rules .= 'deny from all' . PHP_EOL;
-            $rules .= '</Files>' . PHP_EOL;
+            $rules .= AIOWPSecurity_Utility_Htaccess::$debug_log_block_htaccess_rules_marker_start . PHP_EOL; //Add feature marker start
+            $rules .= self::create_apache2_access_denied_rule('debug.log');
             $rules .= AIOWPSecurity_Utility_Htaccess::$debug_log_block_htaccess_rules_marker_end . PHP_EOL; //Add feature marker end
         }
         return $rules;
@@ -1061,5 +1039,31 @@ class AIOWPSecurity_Utility_Htaccess
         } else {
             return FALSE;
         }
+    }
+
+    /**
+     * Returns a string with <Files $filename> directive that contains rules
+     * to effectively block access to any file that has basename matching
+     * $filename under Apache webserver.
+     *
+     * @link http://httpd.apache.org/docs/current/mod/core.html#files
+     *
+     * @param string $filename
+     * @return string
+     */
+    protected static function create_apache2_access_denied_rule($filename) {
+        return <<<END
+<Files $filename>
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>
+</Files>
+
+END;
+        // Keep the empty line, otherwise there is no end-of-line character at the end!
     }
 }
