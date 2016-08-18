@@ -1074,6 +1074,7 @@ class AIOWPSecurity_Utility_Htaccess
 </Files>
 
 END;
-        // Keep the empty line, otherwise there is no end-of-line character at the end!
+        // Keep the empty line at the end of heredoc string,
+        // otherwise the string will not end with end-of-line character!
     }
 }
