@@ -891,11 +891,21 @@ class AIOWPSecurity_Utility_Htaccess
                         <IfModule mod_setenvif.c>
                                 SetEnvIfNoCase User-Agent ([a-z0-9]{2000}) bad_bot
                                 SetEnvIfNoCase User-Agent (archive.org|binlar|casper|checkpriv|choppy|clshttp|cmsworld|diavol|dotbot|extract|feedfinder|flicky|g00g1e|harvest|heritrix|httrack|kmccrew|loader|miner|nikto|nutch|planetwork|postrank|purebot|pycurl|python|seekerspider|siclab|skygrid|sqlmap|sucker|turnit|vikspider|winhttp|xxxyy|youda|zmeu|zune) bad_bot
-                                <limit GET POST PUT>
-                                        Order Allow,Deny
-                                        Allow from all
-                                        Deny from env=bad_bot
-                                </limit>
+
+                                # Apache < 2.3
+                                <IfModule !mod_authz_core.c>
+                                    Order allow,deny
+                                    Allow from all
+                                    Deny from env=bad_bot
+                                </IfModule>
+
+                                # Apache >= 2.3
+                                <IfModule mod_authz_core.c>
+                                    <RequireAll>
+                                    Require all granted
+                                    Require not env bad_bot
+                                    </RequireAll>
+                                </IfModule>
                         </IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$six_g_blacklist_marker_end . PHP_EOL; //Add feature marker end
         }
