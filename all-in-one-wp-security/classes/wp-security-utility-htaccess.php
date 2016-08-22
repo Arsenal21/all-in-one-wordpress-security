@@ -224,60 +224,54 @@ class AIOWPSecurity_Utility_Htaccess
     static function getrules_blacklist()
     {
         global $aio_wp_security;
+        // Are we on Apache or LiteSpeed webserver?
         $aiowps_server = AIOWPSecurity_Utility::get_server_type();
+        $apache_or_litespeed = $aiowps_server == 'apache' || $aiowps_server == 'litespeed';
+        //
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_enable_blacklisting') == '1') {
-            //Let's do the list of blacklisted IPs first
-            $hosts = explode(PHP_EOL, $aio_wp_security->configs->get_value('aiowps_banned_ip_addresses'));
-            if (!empty($hosts) && !(sizeof($hosts) == 1 && trim($hosts[0]) == '')) {
-                if ($aiowps_server == 'apache' || $aiowps_server == 'litespeed') {
-                    $rules .= AIOWPSecurity_Utility_Htaccess::$ip_blacklist_marker_start . PHP_EOL; //Add feature marker start
-                    $rules .= "Order allow,deny" . PHP_EOL .
-                        "Allow from all" . PHP_EOL;
-                }
-                $phosts = array();
-                foreach ($hosts as $host) {
-                    $host = trim($host);
-                    if (!in_array($host, $phosts)) {
-                        if (strstr($host, '*')) {
-                            $parts = array_reverse(explode('.', $host));
-                            $netmask = 32;
-                            foreach ($parts as $part) {
-                                if (strstr(trim($part), '*')) {
-                                    $netmask = $netmask - 8;
+            // Let's do the list of blacklisted IPs first
+            $hosts = AIOWPSecurity_Utility::explode_trim_filter_empty($aio_wp_security->configs->get_value('aiowps_banned_ip_addresses'));
+            // Filter out duplicate lines, add netmask to IP addresses
+            $ips_with_netmask = self::add_netmask(array_unique($hosts));
 
-                                }
-                            }
-                            $dhost = trim(str_replace('*', '0', implode('.', array_reverse($parts))) . '/' . $netmask);
-                            if (strlen($dhost) > 4) {
-                                if ($aiowps_server == 'apache' || $aiowps_server == 'litespeed') {
-                                    $trule = "Deny from " . $dhost . PHP_EOL;
-                                    if (trim($trule) != 'Deny From') {
-                                        $rules .= $trule;
-                                    }
-                                } else {
-                                    $rules .= "\tdeny " . $dhost . ';' . PHP_EOL;
-                                }
-                            }
-                        } else {
-                            $dhost = trim($host);
-                            if (strlen($dhost) > 4) {
-                                if ($aiowps_server == 'apache' || $aiowps_server == 'litespeed') {
-                                    $rules .= "Deny from " . $dhost . PHP_EOL;
-                                } else {
-                                    $rules .= "\tdeny " . $dhost . ";" . PHP_EOL;
-                                }
-                            }
-                        }
+            if ( !empty($ips_with_netmask) ) {
+                $rules .= AIOWPSecurity_Utility_Htaccess::$ip_blacklist_marker_start . PHP_EOL; //Add feature marker start
+
+                if ( $apache_or_litespeed ) {
+                    // Apache or LiteSpeed webserver
+                    // Apache 2.2 and older
+                    $rules .= "<IfModule !mod_authz_core.c>" . PHP_EOL;
+                    $rules .= "Order allow,deny" . PHP_EOL;
+                    $rules .= "Allow from all" . PHP_EOL;
+                    foreach ($ips_with_netmask as $ip_with_netmask) {
+                        $rules .= "Deny from " . $ip_with_netmask . PHP_EOL;
                     }
-                    $phosts[] = $host;
+                    $rules .= "</IfModule>" . PHP_EOL;
+                    // Apache 2.3 and newer
+                    $rules .= "<IfModule mod_authz_core.c>" . PHP_EOL;
+                    $rules .= "<RequireAll>" . PHP_EOL;
+                    $rules .= "Require all granted" . PHP_EOL;
+                    foreach ($ips_with_netmask as $ip_with_netmask) {
+                        $rules .= "Require not ip " . $ip_with_netmask . PHP_EOL;
+                    }
+                    $rules .= "</RequireAll>" . PHP_EOL;
+                    $rules .= "</IfModule>" . PHP_EOL;
                 }
+                else {
+                    // Nginx webserver
+                    foreach ($ips_with_netmask as $ip_with_netmask) {
+                        $rules .= "\tdeny " . $ip_with_netmask . ";" . PHP_EOL;
+                    }
+                }
+
                 $rules .= AIOWPSecurity_Utility_Htaccess::$ip_blacklist_marker_end . PHP_EOL; //Add feature marker end
             }
+
             //Now let's do the user agent list
             $user_agents = explode(PHP_EOL, $aio_wp_security->configs->get_value('aiowps_banned_user_agents'));
             if (!empty($user_agents) && !(sizeof($user_agents) == 1 && trim($user_agents[0]) == '')) {
-                if ($aiowps_server == 'apache' || $aiowps_server == 'litespeed') {
+                if ( $apache_or_litespeed ) {
                     $rules .= AIOWPSecurity_Utility_Htaccess::$user_agent_blacklist_marker_start . PHP_EOL; //Add feature marker start
                     //Start mod_rewrite rules
                     $rules .= "<IfModule mod_rewrite.c>" . PHP_EOL . "RewriteEngine On" . PHP_EOL . PHP_EOL;
@@ -298,6 +292,9 @@ class AIOWPSecurity_Utility_Htaccess
 
                     }
                     $rules .= "RewriteRule ^(.*)$ - [F,L]" . PHP_EOL . PHP_EOL;
+                    // End mod_rewrite rules
+                    $rules .= "</IfModule>" . PHP_EOL;
+                    $rules .= AIOWPSecurity_Utility_Htaccess::$user_agent_blacklist_marker_end . PHP_EOL; //Add feature marker end
                 } else {
                     $count = 1;
                     $alist = '';
@@ -309,14 +306,6 @@ class AIOWPSecurity_Utility_Htaccess
                         }
                     }
                     $rules .= "\tif (\$http_user_agent ~* " . $alist . ") { return 403; }" . PHP_EOL;
-                }
-            }
-
-            //close mod_rewrite
-            if (strlen($aio_wp_security->configs->get_value('aiowps_banned_user_agents')) > 0) {
-                if (($aiowps_server == 'apache' || $aiowps_server == 'litespeed')) {
-                    $rules .= "</IfModule>" . PHP_EOL;
-                    $rules .= AIOWPSecurity_Utility_Htaccess::$user_agent_blacklist_marker_end . PHP_EOL; //Add feature marker end
                 }
             }
         }
@@ -1076,5 +1065,67 @@ class AIOWPSecurity_Utility_Htaccess
 END;
         // Keep the empty line at the end of heredoc string,
         // otherwise the string will not end with end-of-line character!
+    }
+
+
+    /**
+     * Convert an array of optionally asterisk-masked or partial IPv4 addresses
+     * into network/netmask notation. Netmask value for a "full" IP is not
+     * added (see example below)
+     *
+     * Example:
+     * In: array('1.2.3.4', '5.6', '7.8.9.*')
+     * Out: array('1.2.3.4', '5.6.0.0/16', '7.8.9.0/24')
+     *
+     * Simple validation is performed:
+     * In: array('1.2.3.4.5', 'abc', '1.2.xyz.4')
+     * Out: array()
+     *
+     * Simple sanitization is performed:
+     * In: array('6.7.*.9')
+     * Out: array('6.7.0.0/16')
+     *
+     * @param array $ips
+     * @return array
+     */
+    protected static function add_netmask($ips) {
+
+        $output = array();
+
+        foreach ( $ips as $ip ) {
+
+            $parts = explode('.', $ip);
+
+            // Skip any IP that is empty, has more parts than expected or has
+            // a non-numeric first part.
+            if ( empty($parts) || (count($parts) > 4) || !is_numeric($parts[0]) ) {
+                continue;
+            }
+
+            $ip_out = array( $parts[0] );
+            $netmask = 8;
+
+            for ( $i = 1, $force_zero = false; ($i < 4) && $ip_out; $i++ ) {
+                if ( $force_zero || !isset($parts[$i]) || ($parts[$i] === '') || ($parts[$i] === '*') ) {
+                    $ip_out[$i] = '0';
+                    $force_zero = true; // Forces all subsequent parts to be a zero
+                }
+                else if ( is_numeric($parts[$i]) ) {
+                    $ip_out[$i] = $parts[$i];
+                    $netmask += 8;
+                }
+                else {
+                    // Invalid IP part detected, invalidate entire IP
+                    $ip_out = false;
+                }
+            }
+
+            if ( $ip_out ) {
+                // Glue IP back together, add netmask if IP denotes a subnet, store for output.
+                $output[] = implode('.', $ip_out) . (($netmask < 32) ? ('/' . $netmask) : '');
+            }
+        }
+
+        return $output;
     }
 }
