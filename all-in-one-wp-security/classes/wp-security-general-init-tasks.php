@@ -48,8 +48,8 @@ class AIOWPSecurity_General_Init_Tasks
 
         if($aio_wp_security->configs->get_value('aiowps_remove_wp_generator_meta_info') == '1'){
             add_filter('the_generator', array(&$this,'remove_wp_generator_meta_info'));
-            add_filter( 'style_loader_src', array(&$this,'remove_wp_css_js_meta_info'));
-            add_filter( 'script_loader_src', array(&$this,'remove_wp_css_js_meta_info'));
+            add_filter('style_loader_src', array(&$this,'remove_wp_css_js_meta_info'));
+            add_filter('script_loader_src', array(&$this,'remove_wp_css_js_meta_info'));
         }
         
         //For the cookie based brute force prevention feature
@@ -276,8 +276,16 @@ class AIOWPSecurity_General_Init_Tasks
     }
 
     function remove_wp_css_js_meta_info($src) {
-        if (strpos($src, 'ver=')) {
-            $src = remove_query_arg('ver', $src);
+        global $wp_version;
+        static $wp_version_hash = null; // Cache hash value for all function calls
+
+        // Replace only version number of assets with WP version
+        if ( strpos($src, 'ver=' . $wp_version) !== false ) {
+            if ( !$wp_version_hash ) {
+                $wp_version_hash = wp_hash($wp_version);
+            }
+            // Replace version number with computed hash
+            $src = add_query_arg('ver', $wp_version_hash, $src);
         }
         return $src;
     }
