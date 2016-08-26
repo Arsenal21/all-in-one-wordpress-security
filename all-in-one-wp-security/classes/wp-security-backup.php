@@ -37,9 +37,9 @@ class AIOWPSecurity_Backup
             . '-- MySQL dump' . PHP_EOL
             . '-- ' . date('Y-m-d H:i:s') . PHP_EOL . PHP_EOL
             // When importing the backup, tell database server that our data is in UTF-8...
-            . "SET NAMES utf8;" . PHP_EOL . PHP_EOL
+            . "SET NAMES utf8;" . PHP_EOL
             // ...and that foreign key checks should be ignored.
-            . "SET foreign_key_checks = 0;"
+            . "SET foreign_key_checks = 0;" . PHP_EOL . PHP_EOL
         ;
         if ( !@fwrite( $handle, $preamble ) ) { return false; }
 
