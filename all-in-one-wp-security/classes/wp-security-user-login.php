@@ -365,18 +365,18 @@ class AIOWPSecurity_User_Login
     static function send_unlock_request_email($email, $unlock_link)
     {
         global $aio_wp_security;
-        $to_email_address = $email;
-        $email_msg = '';
         $subject = '['.get_option('siteurl').'] '. __('Unlock Request Notification','all-in-one-wp-security-and-firewall');
-        $email_msg .= __('You have requested for the account with email address '.$email.' to be unlocked. Please click the link below to unlock your account:','all-in-one-wp-security-and-firewall')."\n";
-        $email_msg .= __('Unlock link: '.$unlock_link,'all-in-one-wp-security-and-firewall')."\n\n";
-        $email_msg .= __('After clicking the above link you will be able to login to the WordPress administration panel.','all-in-one-wp-security-and-firewall')."\n";
+        $email_msg
+            = sprintf(__('You have requested for the account with email address %s to be unlocked. Please click the link below to unlock your account:','all-in-one-wp-security-and-firewall'), $email) . "\n"
+            . sprintf(__('Unlock link: %s', 'all-in-one-wp-security-and-firewall'), $unlock_link) . "\n\n"
+            . __('After clicking the above link you will be able to login to the WordPress administration panel.', 'all-in-one-wp-security-and-firewall') . "\n"
+        ;
         $site_title = get_bloginfo( 'name' );
         $from_name = empty($site_title)?'WordPress':$site_title;
         $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
-        $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
-        if(FALSE === $sendMail){
-            $aio_wp_security->debug_logger->log_debug("Unlock Request Notification email failed to send to ".$email,4);
+        $sendMail = wp_mail($email, $subject, $email_msg, $email_header);
+        if ( false === $sendMail ) {
+            $aio_wp_security->debug_logger->log_debug("Unlock Request Notification email failed to send to " . $email, 4);
         }
     }
     
