@@ -79,7 +79,7 @@ if (isset($_POST['aiowps_wp_submit_unlock_request']))
             }else{
                 //Send an email to the user
                 AIOWPSecurity_User_Login::send_unlock_request_email($email, $unlock_url);
-                echo '<p class="message">An email has been sent to you with the unlock instructions.</p>';
+                echo '<p class="message">' . __('An email has been sent to you with the unlock instructions.', 'all-in-one-wp-security-and-firewall') . '</p>';
             }
         }
         $display_form = false;
@@ -95,9 +95,11 @@ if (isset($_POST['aiowps_wp_submit_unlock_request']))
 function display_unlock_form($email='')
 {
     ob_start();
-            //Display the unlock request form
-    $unlock_form_msg = '<p>You are here because you have been locked out due to too many incorrect login attempts.</p>
-            <p>Please enter your email address and you will receive an email with instructions on how to unlock yourself.</p>'
+    // Display the unlock request form
+    $unlock_form_msg
+        = '<p>' . __('You are here because you have been locked out due to too many incorrect login attempts.', 'all-in-one-wp-security-and-firewall') . '</p>'
+        . '<p>' . __('Please enter your email address and you will receive an email with instructions on how to unlock yourself.', 'all-in-one-wp-security-and-firewall') . '</p>'
+    ;
 ?>
 <div class="message"><?php echo $unlock_form_msg; ?></div>
 <form name="loginform" id="loginform" action="<?php echo wp_login_url(); ?>" method="post">
@@ -106,7 +108,7 @@ function display_unlock_form($email='')
 		<input type="text" name="aiowps_unlock_request_email" id="aiowps_unlock_request_email" class="input" value="<?php echo $email; ?>" size="20"></label>
 	</p>
         <p class="submit">
-		<input type="submit" name="aiowps_wp_submit_unlock_request" id="aiowps_wp_submit_unlock_request" class="button button-primary button-large" value="Send Unlock Request">
+            <input type="submit" name="aiowps_wp_submit_unlock_request" id="aiowps_wp_submit_unlock_request" class="button button-primary button-large" value="<?php esc_attr_e('Send Unlock Request', 'all-in-one-wp-security-and-firewall'); ?>">
 	</p>
 </form>
 <?php    
