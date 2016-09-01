@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.6
-Stable tag: 4.1.4
+Stable tag: 4.1.5
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -182,6 +182,13 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.1.5 =
+- Fixed bug where username is an email and captcha was being ignored.
+- Reduce memory footprint of database backup.
+- Improvements: Make hard-coded strings localizable.
+- Partial Apache 2.3 compatibility.
+- Improved: Hide WP version number by replacing it with a hash. This way, WordPress version number is not exposed, but browser caching is not obscured by missing version numbers.
 
 = 4.1.4 =
 - Improved and tweaked the login captcha feature to avoid some issues people had with the last modification.

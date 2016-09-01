@@ -97,6 +97,7 @@ class AIOWPSecurity_Backup
         $is_multi_site = function_exists('is_multisite') && is_multisite();
 
         @ini_set( 'auto_detect_line_endings', true );
+        @ini_set( 'memory_limit', '512M' );
         if ( $is_multi_site )
         {
             //Let's get the current site's table prefix
