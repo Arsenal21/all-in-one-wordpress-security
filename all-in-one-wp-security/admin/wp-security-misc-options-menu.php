@@ -100,6 +100,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_blue_box">
             <?php
             echo '<p>'.__('This feature allows you to disable the ability to select and copy text from your front end.', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p>'.__('When admin user is logged in, the feature is automatically disabled for his session.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
         <table class="form-table">
