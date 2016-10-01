@@ -819,6 +819,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 
     function render_tab5()
     {
+        $file_selected = '';
 
         ?>
         <div class="postbox">
