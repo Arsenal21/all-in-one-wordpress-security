@@ -345,6 +345,8 @@ class AIOWPSecurity_Backup
         $max_rows_global_meta_table = apply_filters( 'aiowps_max_rows_global_meta_table', $max_rows_global_meta_table );
         AIOWPSecurity_Utility::cleanup_table($global_meta_table_name, $max_rows_global_meta_table);
 
+        //Delete any expired _aiowps_captcha_string_info_xxxx transients
+        AIOWPSecurity_Utility::delete_expired_captcha_transients();
 
         //Keep adding other DB cleanup tasks as they arise...
     }
