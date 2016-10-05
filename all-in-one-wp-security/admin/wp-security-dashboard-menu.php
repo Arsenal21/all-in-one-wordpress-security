@@ -902,7 +902,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                             $log_contents = $file_selected . ': ' . __('Log file is empty!', 'all-in-one-wp-security-and-firewall');
                         }
                         ?>
-                        <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly><?php echo $log_contents; ?></textarea>
+                        <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly><?php echo esc_textarea($log_contents); ?></textarea>
 
                     </div>
                 </div>

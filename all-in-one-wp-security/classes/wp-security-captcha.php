@@ -88,7 +88,7 @@ class AIOWPSecurity_Captcha
         AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('aiowps_captcha_string_info_'.$random_str, $enc_result, 30 * 60) : set_transient('aiowps_captcha_string_info_'.$random_str, $enc_result, 30 * 60);
         $equation_string .= '<input type="hidden" name="aiowps-captcha-string-info" id="aiowps-captcha-string-info" value="'.$random_str.'" />';
         $equation_string .= '<input type="hidden" name="aiowps-captcha-temp-string" id="aiowps-captcha-temp-string" value="'.$current_time.'" />';
-        $equation_string .= '<input type="text" size="2" id="aiowps-captcha-answer" name="aiowps-captcha-answer" value="" />';
+        $equation_string .= '<input type="text" size="2" id="aiowps-captcha-answer" name="aiowps-captcha-answer" value="" autocomplete="off" />';
         return $equation_string;
     }
     

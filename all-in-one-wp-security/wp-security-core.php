@@ -3,7 +3,7 @@
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '4.1.6';
+    var $version = '4.1.7';
     var $db_version = '1.8';
     var $plugin_url;
     var $plugin_path;
