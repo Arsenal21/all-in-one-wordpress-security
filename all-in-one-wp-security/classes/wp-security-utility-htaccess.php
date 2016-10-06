@@ -946,9 +946,9 @@ class AIOWPSecurity_Utility_Htaccess
                         RewriteEngine on
                         RewriteCond %{HTTP_REFERER} !^$' . PHP_EOL;
             $rules .= ' RewriteCond %{REQUEST_FILENAME} -f' . PHP_EOL;
-            $rules .= ' RewriteCond %{REQUEST_FILENAME} \.(gif|jpe?g?|png)$ [NC]' . PHP_EOL;
+            $rules .= ' RewriteCond %{REQUEST_FILENAME} \.(gif|jpe?g|png)$ [NC]' . PHP_EOL;
             $rules .= ' RewriteCond %{HTTP_REFERER} !^' . $url_string . ' [NC]' . PHP_EOL;
-            $rules .= ' RewriteRule \.(gif|jpe?g?|png)$ - [F,NC,L]
+            $rules .= ' RewriteRule \.(gif|jpe?g|png)$ - [F,NC,L]
                        </IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$prevent_image_hotlinks_marker_end . PHP_EOL; //Add feature marker end
         }
