@@ -946,9 +946,9 @@ class AIOWPSecurity_Utility_Htaccess
                         RewriteEngine on
                         RewriteCond %{HTTP_REFERER} !^$' . PHP_EOL;
             $rules .= ' RewriteCond %{REQUEST_FILENAME} -f' . PHP_EOL;
-            $rules .= ' RewriteCond %{REQUEST_FILENAME} \.(gif|jpe?g?|png)$ [NC]' . PHP_EOL;
+            $rules .= ' RewriteCond %{REQUEST_FILENAME} \.(gif|jpe?g|png)$ [NC]' . PHP_EOL;
             $rules .= ' RewriteCond %{HTTP_REFERER} !^' . $url_string . ' [NC]' . PHP_EOL;
-            $rules .= ' RewriteRule \.(gif|jpe?g?|png)$ - [F,NC,L]
+            $rules .= ' RewriteRule \.(gif|jpe?g|png)$ - [F,NC,L]
                        </IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$prevent_image_hotlinks_marker_end . PHP_EOL; //Add feature marker end
         }
@@ -1004,40 +1004,43 @@ class AIOWPSecurity_Utility_Htaccess
         }
     }
 
-    /*
-     * This function will take a URL string and convert it to a form useful for using in htaccess rules.
-     * Example: If URL passed to function = "http://www.mysite.com"
-     * Result = "http(s)?://(.*)?mysite\.com"
+    /**
+     * Convert URL (scheme, hostname and optional path) to a form useful for
+     * using in .htaccess rules.
+     *
+     * Examples:
+     * 1) http://www.mysite.com     ->  https?://(www\.)?mysite\.com
+     * 2) https://mysite.com        ->  https?://mysite\.com
+     * 3) https://mysite.com/       ->  https?://mysite\.com
+     * 4) https://mysite.com/path/  ->  https?://mysite\.com/path
+     *
+     * @param string $url
+     * @return mixed Regularized url on success, false on error.
      */
-
     static function return_regularized_url($url)
     {
-        if (filter_var($url, FILTER_VALIDATE_URL)) {
-            $xyz = explode('.', $url);
-            $y = '';
-            if (count($xyz) > 1) {
-                $j = 1;
-                foreach ($xyz as $x) {
-                    if (strpos($x, 'www') !== false) {
-                        $y .= str_replace('www', '(.*)?', $x);
-                    } else if ($j == 1) {
-                        $y .= $x;
-                    } else if ($j > 1) {
-                        $y .= '\.' . $x;
-                    }
-                    $j++;
-                }
-                //Now replace the "http" with "http(s)?" to cover both secure and non-secure
-                if (strpos($y, 'http') !== false) {
-                    $y = str_replace('http', 'http(s)?', $y);
-                }
-                return $y;
-            } else {
-                return $url;
-            }
-        } else {
-            return FALSE;
+        $scheme = parse_url($url, PHP_URL_SCHEME);
+        $host = parse_url($url, PHP_URL_HOST);
+        $path = parse_url($url, PHP_URL_PATH);
+
+        // Cannot continue without scheme or host
+        if ( !$scheme || !$host ) {
+            return false;
         }
+
+        // If scheme is http or https, allow for both at the same time.
+        $regex_scheme = strpos($scheme, 'http') === 0 ? 'https?' : $scheme;
+
+        // Make www subdomain optional, escape dots in hostname.
+        $regex_host = str_replace('.', '\.',
+            strpos($host, 'www.') === 0 ? ('(www.)?' . substr($host, 4)) : $host
+        );
+
+        // Path is optional, but if parsed, escape any dots in it.
+        $regex_path = str_replace('.', '\.', $path ? $path : '');
+
+        // Glue the result together, strip any trailing slash.
+        return rtrim($regex_scheme . '://' . $regex_host . $regex_path, '/');
     }
 
     /**
