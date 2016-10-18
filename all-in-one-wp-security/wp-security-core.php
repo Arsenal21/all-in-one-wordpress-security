@@ -136,9 +136,13 @@ class AIO_WP_Security{
         include_once ('classes/wp-security-installer.php');
         AIOWPSecurity_Installer::run_installer();
 
-        wp_schedule_event(time(), 'hourly', 'aiowps_hourly_cron_event'); //schedule an hourly cron event
-        wp_schedule_event(time(), 'daily', 'aiowps_daily_cron_event'); //schedule an daily cron event
-        
+        if ( !wp_next_scheduled('aiowps_hourly_cron_event') ) {
+            wp_schedule_event(time(), 'hourly', 'aiowps_hourly_cron_event'); //schedule an hourly cron event
+        }
+        if ( !wp_next_scheduled('aiowps_daily_cron_event') ) {
+            wp_schedule_event(time(), 'daily', 'aiowps_daily_cron_event'); //schedule an daily cron event
+        }
+
         do_action('aiowps_activation_complete');
     }
     
