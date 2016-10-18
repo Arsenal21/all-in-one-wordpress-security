@@ -35,6 +35,7 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->set_value('aiowps_enable_forced_logout','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_logout_time_period','60');
         $aio_wp_security->configs->set_value('aiowps_enable_invalid_username_lockdown','');//Checkbox
+        $aio_wp_security->configs->set_value('aiowps_instantly_lockout_specific_usernames', array()); // Textarea (list of strings)
         $aio_wp_security->configs->set_value('aiowps_unlock_request_secret_key',AIOWPSecurity_Utility::generate_alpha_numeric_random_string(20));//Hidden secret value which will be used to do some unlock request processing. This will be assigned a random string generated when lockdown settings saved
 
         //Captcha feature
@@ -168,6 +169,7 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->add_value('aiowps_enable_forced_logout','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_logout_time_period','60');
         $aio_wp_security->configs->add_value('aiowps_enable_invalid_username_lockdown','');//Checkbox
+        $aio_wp_security->configs->add_value('aiowps_instantly_lockout_specific_usernames', array()); // Textarea (list of strings)
         $aio_wp_security->configs->add_value('aiowps_unlock_request_secret_key',AIOWPSecurity_Utility::generate_alpha_numeric_random_string(20));//Hidden secret value which will be used to do some unlock request processing. This will be assigned a random string generated when lockdown settings saved
         
         //Login Whitelist feature
