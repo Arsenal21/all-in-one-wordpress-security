@@ -110,7 +110,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 if($aiowps_login_page_slug == 'wp-admin'){
                     $error .= '<br />'.__('You cannot use the value "wp-admin" for your login page slug.','all-in-one-wp-security-and-firewall');
                 }elseif(preg_match('/[^a-z_\-0-9]/i', $aiowps_login_page_slug)){
-                    $error .= '<br />'.__('You must alpha numeric characters for your login page slug.','all-in-one-wp-security-and-firewall');
+                    $error .= '<br />'.__('You must use alpha numeric characters for your login page slug.','all-in-one-wp-security-and-firewall');
                 }
             }
             
@@ -136,6 +136,16 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 else {
                     $this->show_msg_error(__('Could not delete the Cookie-based directives from the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
                 }
+                
+                /** The following is a fix/workaround for the following issue:
+                 * https://wordpress.org/support/topic/applying-brute-force-rename-login-page-not-working/
+                 * ie, when saving the rename login config, the logout link does not update on the first page load after the $_POST submit to reflect the new rename login setting.
+                 * Added a page refresh to fix this for now until I figure out a better solution.
+                 * 
+                **/
+                $cur_url = "admin.php?page=".AIOWPSEC_BRUTE_FORCE_MENU_SLUG."&tab=tab1";
+                AIOWPSecurity_Utility::redirect_to_url($cur_url);
+                
             }
         }
         

@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.6
-Stable tag: 4.1.7
+Stable tag: 4.1.8
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -182,6 +182,16 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.1.8 =
+- New feature to allow immediate blocking of specific usernames.
+- Only activate copy (right-click) protection for non-admin users.
+- Fixed bug where logout link in admin bar does not get updated on after the $_POST submit to reflect the new rename login setting.
+- Fixed small bug in return_regularized_url function.
+- Improvement/bug fix: When currently logged in user attempts to access renamed login page, redirect them to dashboard.
+- Removed Spanish language files so they can be automatically pulled from WordPress.org.
+- Drop unnecessary WHERE clause in some backend listings.
+- Improvement: do not schedule a cronjob, if it is already scheduled.
 
 = 4.1.7 =
 - Added sanitisation for log file data in textarea.
