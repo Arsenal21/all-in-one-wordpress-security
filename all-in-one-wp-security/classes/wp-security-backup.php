@@ -241,25 +241,29 @@ class AIOWPSecurity_Backup
     function aiowps_delete_backup_files()
     {
         global $aio_wp_security;
-        if ( $aio_wp_security->configs->get_value('aiowps_backup_files_stored') > 0 ) 
+        $files_to_keep = absint($aio_wp_security->configs->get_value('aiowps_backup_files_stored'));
+        if ( $files_to_keep > 0 )
         {
-            $path_parts = pathinfo($this->last_backup_file_path);
-            $backups_path = $path_parts['dirname'];
-            $files = AIOWPSecurity_Utility_File::scan_dir_sort_date( $backups_path );
+            $backups_dir = dirname($this->last_backup_file_path);
+            $aio_wp_security->debug_logger->log_debug(sprintf('DB Backup - Deleting all but %d latest backup file(s) in %s directory.', $files_to_keep, $backups_dir));
+            $files = AIOWPSecurity_Utility_File::scan_dir_sort_date( $backups_dir );
             $count = 0;
 
             foreach ( $files as $file ) 
             {
                 if ( strpos( $file, 'database-backup' ) !== false )
                 {
-                    if ( $count >= $aio_wp_security->configs->get_value('aiowps_backup_files_stored') ) 
+                    if ( $count >= $files_to_keep )
                     {
-                            @unlink( $backups_path . '/' . $file );
+                        @unlink( $backups_dir . '/' . $file );
                     }
                     $count++;
                 }
-
             }
+        }
+        else
+        {
+            $aio_wp_security->debug_logger->log_debug('DB Backup - Backup configuration prevents removal of old backup files!', 3);
         }
     }
     
