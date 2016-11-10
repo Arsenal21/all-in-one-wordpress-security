@@ -282,6 +282,7 @@ class AIOWPSecurity_Backup
                     $interval = 'days';
                     break;
                 case '2':
+                default: // Fall back to default value, if config is corrupted for some reason.
                     $interval = 'weeks';
                     break;
             }
