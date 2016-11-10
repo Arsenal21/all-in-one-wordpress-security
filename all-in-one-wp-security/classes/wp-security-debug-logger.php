@@ -73,28 +73,7 @@ class AIOWPSecurity_Logger
 
     function log_debug_cron($message,$level=0,$section_break=false)
     {
-        global $aio_wp_security;
-        $debug_config = $aio_wp_security->configs->get_value('aiowps_enable_debug');
-        $this->debug_enabled = empty($debug_config)?false:true;
+        $this->log_debug($message, $level, $section_break, $this->default_log_file_cron);
+    }
 
-        if (!$this->debug_enabled) return;
-        $content = $this->get_debug_timestamp();//Timestamp
-        $content .= $this->get_debug_status($level);//Debug status
-        $content .= ' : ';
-        $content .= $message . "\n";
-        $content .= $this->get_section_break($section_break);
-        //$file_name = $this->default_log_file_cron;
-        $this->append_to_file($content, $this->default_log_file_cron);
-    }
-    
-    //TODO - this function need to be completed
-    static function log_debug_st($message,$level=0,$section_break=false,$file_name='')
-    {
-        $content = "\n". $message . "\n";
-        $debug_log_file = 'wp-security-log-static.txt';
-        //$debug_log_file =  AIO_WP_SECURITY_PATH .'/wp-security-log.txt';
-        $fp=fopen($debug_log_file,'a');
-        fwrite($fp, $content);
-        fclose($fp);
-    }
 }
