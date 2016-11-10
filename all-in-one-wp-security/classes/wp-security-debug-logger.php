@@ -13,10 +13,45 @@ class AIOWPSecurity_Logger
     var $debug_status = array('SUCCESS','STATUS','NOTICE','WARNING','FAILURE','CRITICAL');
     var $section_break_marker = "\n----------------------------------------------------------\n\n";
     var $log_reset_marker = "-------- Log File Reset --------\n";
-    
-    function __construct()
+
+    /**
+     * @param bool $debug_enabled Should the logger log anything?
+     */
+    function __construct($debug_enabled)
     {
-        $this->log_folder_path = AIO_WP_SECURITY_PATH . '/logs';
+        $this->debug_enabled = $debug_enabled;
+        $this->log_folder_path = WP_CONTENT_DIR . '/aiowps_logs';
+        if ( $debug_enabled ) {
+            $this->prepare_log_dir();
+        }
+    }
+
+    function prepare_log_dir() {
+        if ( !is_dir($this->log_folder_path) ) {
+            @mkdir($this->log_folder_path, 0775);
+            @chmod($this->log_folder_path, 0775);
+            // Forbid direct access to folder contents
+            $htaccess = $this->log_folder_path . '/.htaccess';
+            @file_put_contents($htaccess, <<<APACHE
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+APACHE
+            );
+            @chmod($htaccess, 0664);
+            // Prevent directory listing
+            $index = $this->log_folder_path . '/index.html';
+            @file_put_contents($index, '');
+            @chmod($index, 0664);
+        }
+    }
+
+    function is_valid_log_file($filename) {
+        return $filename === $this->default_log_file || $filename === $this->default_log_file_cron;
     }
     
     function get_debug_timestamp()
@@ -55,13 +90,9 @@ class AIOWPSecurity_Logger
         fwrite($fp, $content);
         fclose($fp);
     }
-    
+
     function log_debug($message,$level=0,$section_break=false,$file_name='')
     {
-        global $aio_wp_security;
-        $debug_config = $aio_wp_security->configs->get_value('aiowps_enable_debug');
-        $this->debug_enabled = empty($debug_config)?false:true;
-
         if (!$this->debug_enabled) return;
         $content = $this->get_debug_timestamp();//Timestamp
         $content .= $this->get_debug_status($level);//Debug status

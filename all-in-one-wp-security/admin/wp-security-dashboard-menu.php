@@ -847,8 +847,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                                         wp-security-log-cron-job
                                     </option>
                                 </select>
-                                <span
-                                    class="description"><?php _e('Select one of the log files to view the contents', 'all-in-one-wp-security-and-firewall'); ?></span>
+                                <span class="description"><?php _e('Select one of the log files to view the contents', 'all-in-one-wp-security-and-firewall'); ?></span>
                             </td>
                         </tr>
                     </table>
@@ -870,25 +869,19 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
             }
 
             //Let's make sure that the file selected can only ever be the correct log file of this plugin.
-            $valid_aiowps_log_files = array('wp-security-log.txt', 'wp-security-log-cron-job.txt');
-            if(!in_array($file_selected, $valid_aiowps_log_files)){
-                $file_selected = '';
-                unset($_POST['aiowps_view_logs']);
+            if ( !$aio_wp_security->debug_logger->is_valid_log_file($file_selected) ) {
                 wp_die(__('Error! The file you selected is not a permitted file. You can only view log files created by this plugin.','all-in-one-wp-security-and-firewall'));
             }
-            
-            if (!empty($file_selected)) {
-                ?>
+            else {
+            ?>
                 <div class="postbox">
-                    <h3 class="hndle"><label
-                            for="title"><?php echo __('Log File Contents For', 'all-in-one-wp-security-and-firewall') . ': ' . $file_selected;?></label>
+                    <h3 class="hndle"><label for="title"><?php echo __('Log File Contents For', 'all-in-one-wp-security-and-firewall') . ': ' . $file_selected;?></label>
                     </h3>
 
                     <div class="inside">
                         <?php
-                        $aiowps_log_dir = AIO_WP_SECURITY_PATH . '/logs';
-                        $log_file = $aiowps_log_dir . '/' . $file_selected;
-                        if (file_exists($log_file)) {
+                        $log_file = $aio_wp_security->debug_logger->log_folder_path . '/' . $file_selected;
+                        if ( is_readable($log_file) ) {
                             $log_contents = AIOWPSecurity_Utility_File::get_file_contents($log_file);
                         } else {
                             $log_contents = '';
@@ -902,16 +895,9 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 
                     </div>
                 </div>
-
             <?php
-
             }
         }
-        ?>
-
-
-
-    <?php
     }
 
 } //end class
