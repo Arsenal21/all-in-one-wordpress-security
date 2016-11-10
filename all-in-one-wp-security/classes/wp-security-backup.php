@@ -1,11 +1,9 @@
 <?php
 class AIOWPSecurity_Backup
 {
-    var $last_backup_file_name;//Stores the name of the last backup file when execute_backup function is called
-    var $last_backup_file_path;
-    var $last_backup_file_dir_multisite;
-    
-    function __construct() 
+    var $last_backup_file_path; // Stores the path to the last backup file when execute_backup function is called
+
+    function __construct()
     {
         add_action('aiowps_perform_scheduled_backup_tasks', array(&$this, 'aiowps_scheduled_backup_handler'));
         add_action('aiowps_perform_db_cleanup_tasks', array(&$this, 'aiowps_scheduled_db_cleanup_handler'));
@@ -196,13 +194,9 @@ class AIOWPSecurity_Backup
         {
             $fileext = '.sql';
         }
-        $this->last_backup_file_name = $file . $fileext;//database-backup-YYYYMMDD-HHIISS-<random-string>.zip or database-backup-YYYYMMDD-HHIISS-<random-string>.sql
+
         $this->last_backup_file_path = $dirpath . '/' . $file . $fileext;
-        if ($is_multi_site)
-        {
-            $this->last_backup_file_dir_multisite = $aiowps_backup_dir . '/blogid_' . $blog_id; 
-        }
-        
+
         $this->aiowps_send_backup_email(); //Send backup file via email if applicable
         $this->aiowps_delete_backup_files();
         return true;
