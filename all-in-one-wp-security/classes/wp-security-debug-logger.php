@@ -26,13 +26,7 @@ class AIOWPSecurity_Logger
     
     function get_debug_status($level)
     {
-        $size = count($this->debug_status);
-        if($level >= $size){
-            return 'UNKNOWN';
-        }
-        else{
-            return $this->debug_status[$level];
-        }
+        return isset($this->debug_status[$level]) ? $this->debug_status[$level] : 'UNKNOWN';
     }
     
     function get_section_break($section_break)
