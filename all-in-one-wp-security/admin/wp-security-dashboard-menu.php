@@ -819,7 +819,8 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 
     function render_tab5()
     {
-        $file_selected = '';
+        global $aio_wp_security;
+        $file_selected = filter_input(INPUT_POST, 'aiowps_log_file'); // Get the selected file
 
         ?>
         <div class="postbox">
@@ -859,20 +860,15 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
             </div>
         </div>
         <?php
-        if (isset($_POST['aiowps_view_logs']))//Do form submission tasks
+        if (isset($_POST['aiowps_view_logs']) && $file_selected)//Do form submission tasks
         {
-            $error = '';
-
-            //Check nonce before doing anything 
+            //Check nonce before doing anything
             $nonce = $_REQUEST['_wpnonce'];
             if (!wp_verify_nonce($nonce, 'aiowpsec-dashboard-logs-nonce')) {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed on dashboard view logs!", 4);
                 wp_die("Error! Nonce check failed on dashboard view logs!");
             }
 
-            //Get the selected file
-            $file_selected = isset($_POST["aiowps_log_file"]) ? sanitize_text_field($_POST["aiowps_log_file"]) : '';
-            
             //Let's make sure that the file selected can only ever be the correct log file of this plugin.
             $valid_aiowps_log_files = array('wp-security-log.txt', 'wp-security-log-cron-job.txt');
             if(!in_array($file_selected, $valid_aiowps_log_files)){
