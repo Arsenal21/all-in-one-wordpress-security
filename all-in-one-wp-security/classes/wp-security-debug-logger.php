@@ -13,9 +13,10 @@ class AIOWPSecurity_Logger
     var $debug_status = array('SUCCESS','STATUS','NOTICE','WARNING','FAILURE','CRITICAL');
     var $section_break_marker = "\n----------------------------------------------------------\n\n";
     var $log_reset_marker = "-------- Log File Reset --------\n";
-    
-    function __construct()
+
+    function __construct($debug_enabled)
     {
+        $this->debug_enabled = $debug_enabled;
         $this->log_folder_path = AIO_WP_SECURITY_PATH . '/logs';
     }
     
@@ -55,13 +56,9 @@ class AIOWPSecurity_Logger
         fwrite($fp, $content);
         fclose($fp);
     }
-    
+
     function log_debug($message,$level=0,$section_break=false,$file_name='')
     {
-        global $aio_wp_security;
-        $debug_config = $aio_wp_security->configs->get_value('aiowps_enable_debug');
-        $this->debug_enabled = empty($debug_config)?false:true;
-
         if (!$this->debug_enabled) return;
         $content = $this->get_debug_timestamp();//Timestamp
         $content .= $this->get_debug_status($level);//Debug status
