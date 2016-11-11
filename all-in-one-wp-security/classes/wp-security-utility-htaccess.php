@@ -557,9 +557,11 @@ class AIOWPSecurity_Utility_Htaccess
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_disable_trace_and_track') == '1') {
             $rules .= AIOWPSecurity_Utility_Htaccess::$disable_trace_track_marker_start . PHP_EOL; //Add feature marker start
+            $rules .= '<IfModule mod_rewrite.c>' . PHP_EOL;
             $rules .= 'RewriteEngine On' . PHP_EOL;
             $rules .= 'RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)' . PHP_EOL;
             $rules .= 'RewriteRule .* - [F]' . PHP_EOL;
+            $rules .= '</IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$disable_trace_track_marker_end . PHP_EOL; //Add feature marker end
         }
 
@@ -578,6 +580,8 @@ class AIOWPSecurity_Utility_Htaccess
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_forbid_proxy_comments') == '1') {
             $rules .= AIOWPSecurity_Utility_Htaccess::$forbid_proxy_comments_marker_start . PHP_EOL; //Add feature marker start
+            $rules .= '<IfModule mod_rewrite.c>' . PHP_EOL;
+            $rules .= 'RewriteEngine On' . PHP_EOL;
             $rules .= 'RewriteCond %{REQUEST_METHOD} ^POST' . PHP_EOL;
             $rules .= 'RewriteCond %{HTTP:VIA} !^$ [OR]' . PHP_EOL;
             $rules .= 'RewriteCond %{HTTP:FORWARDED} !^$ [OR]' . PHP_EOL;
@@ -589,6 +593,7 @@ class AIOWPSecurity_Utility_Htaccess
             $rules .= 'RewriteCond %{HTTP:HTTP_PC_REMOTE_ADDR} !^$ [OR]' . PHP_EOL;
             $rules .= 'RewriteCond %{HTTP:HTTP_CLIENT_IP} !^$' . PHP_EOL;
             $rules .= 'RewriteRule wp-comments-post\.php - [F]' . PHP_EOL;
+            $rules .= '</IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$forbid_proxy_comments_marker_end . PHP_EOL; //Add feature marker end
         }
 
@@ -607,6 +612,8 @@ class AIOWPSecurity_Utility_Htaccess
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_deny_bad_query_strings') == '1') {
             $rules .= AIOWPSecurity_Utility_Htaccess::$deny_bad_query_strings_marker_start . PHP_EOL; //Add feature marker start
+            $rules .= '<IfModule mod_rewrite.c>' . PHP_EOL;
+            $rules .= 'RewriteEngine On' . PHP_EOL;
             //$rules .= 'RewriteCond %{QUERY_STRING} ../    [NC,OR]' . PHP_EOL;
             //$rules .= 'RewriteCond %{QUERY_STRING} boot.ini [NC,OR]' . PHP_EOL;
             //$rules .= 'RewriteCond %{QUERY_STRING} tag=     [NC,OR]' . PHP_EOL;
@@ -620,6 +627,7 @@ class AIOWPSecurity_Utility_Htaccess
             $rules .= 'RewriteCond %{QUERY_STRING} ^.*(globals|encode|localhost|loopback).* [NC,OR]' . PHP_EOL;
             $rules .= 'RewriteCond %{QUERY_STRING} (\;|\'|\"|%22).*(request|insert|union|declare|drop) [NC]' . PHP_EOL;
             $rules .= 'RewriteRule ^(.*)$ - [F,L]' . PHP_EOL;
+            $rules .= '</IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$deny_bad_query_strings_marker_end . PHP_EOL; //Add feature marker end
         }
 
@@ -916,13 +924,14 @@ class AIOWPSecurity_Utility_Htaccess
                 $url_string = AIOWPSEC_WP_HOME_URL;
             }
             $rules .= AIOWPSecurity_Utility_Htaccess::$block_spambots_marker_start . PHP_EOL; //Add feature marker start
-            $rules .= '<IfModule mod_rewrite.c>
-                        RewriteCond %{REQUEST_METHOD} POST
-                        RewriteCond %{REQUEST_URI} ^(.*)?wp-comments-post\.php(.*)$' . PHP_EOL;
-            $rules .= ' RewriteCond %{HTTP_REFERER} !^' . $url_string . ' [NC,OR]' . PHP_EOL;
-            $rules .= ' RewriteCond %{HTTP_USER_AGENT} ^$
-                        RewriteRule .* http://127.0.0.1 [L]
-                       </IfModule>' . PHP_EOL;
+            $rules .= '<IfModule mod_rewrite.c>' . PHP_EOL;
+            $rules .= 'RewriteEngine On' . PHP_EOL;
+            $rules .= 'RewriteCond %{REQUEST_METHOD} POST' . PHP_EOL;
+            $rules .= 'RewriteCond %{REQUEST_URI} ^(.*)?wp-comments-post\.php(.*)$' . PHP_EOL;
+            $rules .= 'RewriteCond %{HTTP_REFERER} !^' . $url_string . ' [NC,OR]' . PHP_EOL;
+            $rules .= 'RewriteCond %{HTTP_USER_AGENT} ^$' . PHP_EOL;
+            $rules .= 'RewriteRule .* http://127.0.0.1 [L]' . PHP_EOL;
+            $rules .= '</IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$block_spambots_marker_end . PHP_EOL; //Add feature marker end
         }
 
@@ -942,14 +951,14 @@ class AIOWPSecurity_Utility_Htaccess
                 $url_string = AIOWPSEC_WP_HOME_URL;
             }
             $rules .= AIOWPSecurity_Utility_Htaccess::$prevent_image_hotlinks_marker_start . PHP_EOL; //Add feature marker start
-            $rules .= '<IfModule mod_rewrite.c>
-                        RewriteEngine on
-                        RewriteCond %{HTTP_REFERER} !^$' . PHP_EOL;
-            $rules .= ' RewriteCond %{REQUEST_FILENAME} -f' . PHP_EOL;
-            $rules .= ' RewriteCond %{REQUEST_FILENAME} \.(gif|jpe?g?|png)$ [NC]' . PHP_EOL;
-            $rules .= ' RewriteCond %{HTTP_REFERER} !^' . $url_string . ' [NC]' . PHP_EOL;
-            $rules .= ' RewriteRule \.(gif|jpe?g?|png)$ - [F,NC,L]
-                       </IfModule>' . PHP_EOL;
+            $rules .= '<IfModule mod_rewrite.c>' . PHP_EOL;
+            $rules .= 'RewriteEngine On' . PHP_EOL;
+            $rules .= 'RewriteCond %{HTTP_REFERER} !^$' . PHP_EOL;
+            $rules .= 'RewriteCond %{REQUEST_FILENAME} -f' . PHP_EOL;
+            $rules .= 'RewriteCond %{REQUEST_FILENAME} \.(gif|jpe?g?|png)$ [NC]' . PHP_EOL;
+            $rules .= 'RewriteCond %{HTTP_REFERER} !^' . $url_string . ' [NC]' . PHP_EOL;
+            $rules .= 'RewriteRule \.(gif|jpe?g?|png)$ - [F,NC,L]' . PHP_EOL;
+            $rules .= '</IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$prevent_image_hotlinks_marker_end . PHP_EOL; //Add feature marker end
         }
 
