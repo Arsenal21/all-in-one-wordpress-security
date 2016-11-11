@@ -972,7 +972,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             <?php
             if(isset($_REQUEST["tab"]))
             {
-                echo '<input type="hidden" name="tab" value="'.$_REQUEST["tab"].'" />';
+                echo '<input type="hidden" name="tab" value="'.esc_attr($_REQUEST["tab"]).'" />';
             }
             ?>
             <!-- Now we can render the completed list table -->

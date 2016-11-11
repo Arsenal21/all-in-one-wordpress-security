@@ -131,6 +131,15 @@ class AIOWPSecurity_Process_Renamed_Login_Page
 
         $login_slug = $aio_wp_security->configs->get_value('aiowps_login_page_slug');
         $home_url_with_slug = home_url($login_slug, 'relative');
+        
+        /*
+         * Compatibility fix for WPML plugin
+         */
+        if (function_exists('icl_object_id') && strpos($home_url_with_slug,$login_slug)){
+            $home_url_with_slug = home_url($login_slug);
+            function qtranxf_init_language() {}
+        }
+
         /*
          * *** Compatibility fix for qTranslate-X plugin ***
          * qTranslate-X plugin modifies the result for the following command by adding the protocol and host to the url path:

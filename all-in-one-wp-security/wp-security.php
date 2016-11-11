@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: All In One WP Security
-Version: 4.1.9
+Version: 4.2.1
 Plugin URI: https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 Author: Tips and Tricks HQ, Peter, Ruhul, Ivy
 Author URI: https://www.tipsandtricks-hq.com/
@@ -9,7 +9,9 @@ Description: All round best WordPress security plugin!
 License: GPL3
 */
 
-if(!defined('ABSPATH'))exit; //Exit if accessed directly
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
 
 include_once('wp-security-core.php');
 register_activation_hook(__FILE__,array('AIO_WP_Security','activate_handler'));//activation hook

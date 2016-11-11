@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.6
-Stable tag: 4.1.9
+Stable tag: 4.2.1
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -182,6 +182,15 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.2.1 = 
+- Improve output of .htaccess to include <IfModule mod_rewrite.c> checks and RewriteEngine On directives.
+- Fall back to default DB backup interval in case of invalid value.
+- The aiowps_delete_backup_files() function will produce a debug log message on every call (to help with troubleshooting when needed).
+
+= 4.2.0 =
+- WPML plugin compatibility fix for the renamed admin login page feature.
+- Fixed a few potential XSS vulnerabilities.
 
 = 4.1.9 =
 - Small improvement to the new "immediate blocking of specific usernames" feature.

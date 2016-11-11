@@ -756,7 +756,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                     <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>"/>
                     <?php
                     if (isset($_REQUEST["tab"])) {
-                        echo '<input type="hidden" name="tab" value="' . $_REQUEST["tab"] . '" />';
+                        echo '<input type="hidden" name="tab" value="' . esc_attr($_REQUEST["tab"]) . '" />';
                     }
                     ?>
                     <!-- Now we can render the completed list table -->
@@ -805,7 +805,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                     <?php
                     $blocked_ip_list->search_box('Search', 'search_permanent_block');
                     if (isset($_REQUEST["tab"])) {
-                        echo '<input type="hidden" name="tab" value="' . $_REQUEST["tab"] . '" />';
+                        echo '<input type="hidden" name="tab" value="' . esc_attr($_REQUEST["tab"]) . '" />';
                     }
                     ?>
                     <!-- Now we can render the completed list table -->
