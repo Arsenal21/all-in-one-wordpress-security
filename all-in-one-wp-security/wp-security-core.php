@@ -124,9 +124,11 @@ class AIO_WP_Security{
     function loader_operations()
     {
         add_action('plugins_loaded',array(&$this, 'plugins_loaded_handler'));//plugins loaded hook
-        $this->debug_logger = new AIOWPSecurity_Logger(
-            !empty($this->configs->get_value('aiowps_enable_debug')) // ~ is debug enabled?
-        );
+        
+        $debug_config = $this->configs->get_value('aiowps_enable_debug');
+        $debug_enabled = empty($debug_config) ? false : true;
+        $this->debug_logger = new AIOWPSecurity_Logger($debug_enabled);
+        
         if(is_admin()){
             $this->admin_init = new AIOWPSecurity_Admin_Init();
         }

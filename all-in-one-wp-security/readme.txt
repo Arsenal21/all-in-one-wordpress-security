@@ -183,6 +183,10 @@ None
 
 == Changelog ==
 
+= TODO 4.2.2 =
+- Debug logger class improvements.
+- Added a message in the debug settings area to state that the log files are reset on every plugin update.
+
 = 4.2.1 = 
 - Improve output of .htaccess to include <IfModule mod_rewrite.c> checks and RewriteEngine On directives.
 - Fall back to default DB backup interval in case of invalid value.
