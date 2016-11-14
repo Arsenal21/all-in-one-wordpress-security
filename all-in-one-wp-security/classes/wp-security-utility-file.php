@@ -417,9 +417,9 @@ class AIOWPSecurity_Utility_File
 
     /**
      * Will return an indexed array of files sorted by last modified timestamp
-     * @param $dir
+     * @param string $dir
      * @param string $sort (ASC, DESC)
-     * @return array|bool
+     * @return array
      */
     static function scan_dir_sort_date($dir, $sort='DESC') {
         $files = array();
@@ -427,14 +427,14 @@ class AIOWPSecurity_Utility_File
             $files[$file] = filemtime($dir . '/' . $file);
         }
 
-        arsort($files);
-        $files = array_keys($files);
-        if($sort == 'ASC'){
-            $files = array_reverse($files);
+        if ($sort === 'ASC') {
+            asort($files);
         }
-        return ($files) ? $files : false;
+        else {
+            arsort($files);
+        }
+
+        return array_keys($files);
     }
-
-
 
 }
