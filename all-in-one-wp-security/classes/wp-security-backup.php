@@ -171,6 +171,12 @@ class AIOWPSecurity_Backup
             return false;
         }
 
+        // Delete old backup files now to avoid polluting backups directory
+        // with incomplete backups on websites where max execution time is too
+        // low for database content to be written to a file:
+        // https://github.com/Arsenal21/all-in-one-wordpress-security/issues/62
+        $this->aiowps_delete_backup_files($dirpath);
+
         $fw_res = $this->write_db_backup_file($handle, $tables);
         @fclose( $handle );
 
@@ -204,7 +210,6 @@ class AIOWPSecurity_Backup
         }
         
         $this->aiowps_send_backup_email(); //Send backup file via email if applicable
-        $this->aiowps_delete_backup_files();
         return true;
     }
     
@@ -237,19 +242,18 @@ class AIOWPSecurity_Backup
             }
         }
     }
-    
-    function aiowps_delete_backup_files()
+
+    function aiowps_delete_backup_files($backups_dir)
     {
         global $aio_wp_security;
         $files_to_keep = absint($aio_wp_security->configs->get_value('aiowps_backup_files_stored'));
         if ( $files_to_keep > 0 )
         {
-            $backups_dir = dirname($this->last_backup_file_path);
             $aio_wp_security->debug_logger->log_debug(sprintf('DB Backup - Deleting all but %d latest backup file(s) in %s directory.', $files_to_keep, $backups_dir));
             $files = AIOWPSecurity_Utility_File::scan_dir_sort_date( $backups_dir );
             $count = 0;
 
-            foreach ( $files as $file ) 
+            foreach ( $files as $file )
             {
                 if ( strpos( $file, 'database-backup' ) !== false )
                 {
