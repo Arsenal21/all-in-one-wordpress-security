@@ -11,6 +11,7 @@ class AIOWPSecurity_User_Login
     {
         $this->initialize();
         remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
+        remove_filter('authenticate', 'wp_authenticate_email_password', 20, 3);
         add_filter('authenticate', array(&$this, 'aiowp_auth_login'), 10, 3);
         add_action('aiowps_force_logout_check', array(&$this, 'aiowps_force_logout_action_handler'));
         //add_action('wp_login', array(&$this, 'wp_login_action_handler'), 10, 2);
