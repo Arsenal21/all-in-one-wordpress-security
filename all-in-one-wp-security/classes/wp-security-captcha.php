@@ -14,7 +14,7 @@ class AIOWPSecurity_Captcha
             //if buddy press feature active add action hook so buddy press can display our errors properly on bp registration form
             do_action( 'bp_aiowps-captcha-answer_errors' );
         }
-        $cap_form = '<p class="aiowps-captcha"><label>'.__('Please enter an answer in digits:','all-in-one-wp-security-and-firewall').'</label>';
+        $cap_form = '<p class="aiowps-captcha"><label for="aiowps-captcha-answer">'.__('Please enter an answer in digits:','all-in-one-wp-security-and-firewall').'</label>';
         $cap_form .= '<div class="aiowps-captcha-equation"><strong>';
         $maths_question_output = $this->generate_maths_question();
         $cap_form .= $maths_question_output . '</strong></div></p>';
