@@ -183,11 +183,16 @@ None
 
 == Changelog ==
 
+= TODO 4.2.3 =
+- Logs directory now contains a .htaccess file with proper deny directives.
+- Small UX improvement: add for attribute to captcha label.
+
 = 4.2.2 =
 - Debug logger class improvements.
 - Added a message in the debug settings area to state that the log files are reset on every plugin update.
 - Always return an array from scan_dir_sort_date() to prevent PHP notices.
 - Improvements for Automated DB backups filling up space - old backup file will be deleted first.
+- Thanks to RIPS Analyzer for sending us the vulnerability report. 
 
 = 4.2.1 = 
 - Improve output of .htaccess to include <IfModule mod_rewrite.c> checks and RewriteEngine On directives.
