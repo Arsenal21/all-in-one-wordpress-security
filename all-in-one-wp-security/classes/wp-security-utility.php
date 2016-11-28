@@ -572,6 +572,8 @@ class AIOWPSecurity_Utility
             return 'nginx';
         } else if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'litespeed')) {
             return 'litespeed';
+        } else if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'iis')) {
+            return 'iis';
         } else { //unsupported server
             return -1;
         }
