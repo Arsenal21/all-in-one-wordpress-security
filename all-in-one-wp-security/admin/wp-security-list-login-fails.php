@@ -104,6 +104,7 @@ class AIOWPSecurity_List_Login_Failed_Attempts extends AIOWPSecurity_List_Table 
             if (isset($_REQUEST['_wp_http_referer']))
             {
                 //Delete multiple records
+                $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
                 $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
                 $delete_command = "DELETE FROM ".$failed_login_table." WHERE ID IN ".$id_list;
                 $result = $wpdb->query($delete_command);
@@ -163,8 +164,8 @@ class AIOWPSecurity_List_Login_Failed_Attempts extends AIOWPSecurity_List_Table 
 
         $orderby = AIOWPSecurity_Utility::sanitize_value_by_array($orderby, $sortable);
         $order = AIOWPSecurity_Utility::sanitize_value_by_array($order, array('DESC' => '1', 'ASC' => '1'));
-        
-	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $failed_logins_table_name WHERE id > %d ORDER BY $orderby $order", -1), ARRAY_A); //Note: had to deliberately introduce WHERE clause because you need at least 2 arguments in prepare statement. Cannot use order/orderby
+
+	$data = $wpdb->get_results("SELECT * FROM $failed_logins_table_name ORDER BY $orderby $order", ARRAY_A);
         $current_page = $this->get_pagenum();
         $total_items = count($data);
         $data = array_slice($data,(($current_page-1)*$per_page),$per_page);

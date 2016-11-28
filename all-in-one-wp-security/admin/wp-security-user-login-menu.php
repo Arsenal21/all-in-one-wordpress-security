@@ -16,7 +16,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
     
     function __construct() 
     {
-        $this->render_user_login_menu_page();
+        $this->render_menu_page();
     }
     
     function set_menu_tabs() 
@@ -33,7 +33,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -56,15 +56,16 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
     /*
      * The menu rendering goes here
      */
-    function render_user_login_menu_page() 
+    function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('User Login','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
-        <div id="poststuff"><div id="post-body">
-        <?php 
         $this->render_menu_tabs();
+        ?>        
+        <div id="poststuff"><div id="post-body">
+        <?php  
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -118,6 +119,21 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
                 $email_address = get_bloginfo('admin_email'); //Set the default value to the blog admin email
             }
 
+            // Instantly lockout specific usernames
+            $_ilsu = isset($_POST['aiowps_instantly_lockout_specific_usernames']) ? $_POST['aiowps_instantly_lockout_specific_usernames'] : '';
+            // Read into array, sanitize, filter empty and keep only unique usernames.
+            $instantly_lockout_specific_usernames
+                = array_unique(
+                    array_filter(
+                        array_map(
+                            'sanitize_user',
+                            AIOWPSecurity_Utility::explode_trim_filter_empty($_ilsu)
+                        ),
+                        'strlen'
+                    )
+                )
+            ;
+
             if($error)
             {
                 $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall').$error);
@@ -134,6 +150,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             $aio_wp_security->configs->set_value('aiowps_lockout_time_length',absint($lockout_time_length));
             $aio_wp_security->configs->set_value('aiowps_set_generic_login_msg',isset($_POST["aiowps_set_generic_login_msg"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_enable_invalid_username_lockdown',isset($_POST["aiowps_enable_invalid_username_lockdown"])?'1':'');
+            $aio_wp_security->configs->set_value('aiowps_instantly_lockout_specific_usernames', $instantly_lockout_specific_usernames);
             $aio_wp_security->configs->set_value('aiowps_enable_email_notify',isset($_POST["aiowps_enable_email_notify"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_email_address',$email_address);
             $aio_wp_security->configs->save_config();
@@ -160,8 +177,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_blue_box">
             <?php
             $brute_force_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab2">Cookie-Based Brute Force Login Prevention</a>';
-            echo '<p>'.__('One of the ways hackers try to compromise sites is via a ', 'all-in-one-wp-security-and-firewall').'<strong>'.__('Brute Force Login Attack', 'all-in-one-wp-security-and-firewall').'</strong>.
-            <br />'.__('This is where attackers use repeated login attempts until they guess the password.', 'all-in-one-wp-security-and-firewall').'
+            echo '<p>'.__('One of the ways hackers try to compromise sites is via a ', 'all-in-one-wp-security-and-firewall').'<strong>'.__('Brute Force Login Attack', 'all-in-one-wp-security-and-firewall').'</strong>. '.__('This is where attackers use repeated login attempts until they guess the password.', 'all-in-one-wp-security-and-firewall').'
             <br />'.__('Apart from choosing strong passwords, monitoring and blocking IP addresses which are involved in repeated login failures in a short period of time is a very effective way to stop these types of attacks.', 'all-in-one-wp-security-and-firewall').
             '<p>'.sprintf( __('You may also want to checkout our %s feature for another secure way to protect against these types of attacks.', 'all-in-one-wp-security-and-firewall'), $brute_force_login_feature_link).'</p>';
             ?>
@@ -172,7 +188,6 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         <div class="inside">
         <?php
         //Display security info badge
-        global $aiowps_feature_mgr;
         $aiowps_feature_mgr->output_feature_details_badge("user-login-login-lockdown");
         ?>
 
@@ -225,7 +240,19 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
                 <span class="description"><?php _e('Check this if you want to instantly lockout login attempts with usernames which do not exist on your system', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
-            
+            <tr valign="top">
+                <th scope="row"><?php _e('Instantly Lockout Specific Usernames', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                    <?php 
+                    $instant_lockout_users_list = $aio_wp_security->configs->get_value('aiowps_instantly_lockout_specific_usernames');
+                    if(empty($instant_lockout_users_list)){
+                        $instant_lockout_users_list = array();
+                    }
+                    ?>
+                    <textarea name="aiowps_instantly_lockout_specific_usernames" cols="50" rows="5"><?php echo implode(PHP_EOL, $instant_lockout_users_list); ?></textarea><br>
+                    <span class="description"><?php _e('Insert one username per line. Existing usernames are not blocked even if present in the list.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
+            </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Notify By Email', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
@@ -511,66 +538,4 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
 
     }
 
-    /*
-     * This function will unlock an IP range by modifying the "release_date" column of a record in the "login_lockdown" table
-     */
-    function unlock_ip_range($entries)
-    {
-        global $wpdb, $aio_wp_security;
-        $lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
-        if (is_array($entries))
-        {
-            //Unlock multiple records
-            $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
-            $unlock_command = "UPDATE ".$lockdown_table." SET release_date = now() WHERE ID IN ".$id_list;
-            $result = $wpdb->query($unlock_command);
-            if($result != NULL)
-            {
-                $this->show_msg_updated(__('The selected IP entries were unlocked successfully!','all-in-one-wp-security-and-firewall'));
-            }
-        } elseif ($entries != NULL)
-        {
-            //Delete single record
-            $unlock_command = "UPDATE ".$lockdown_table." SET release_date = now() WHERE ID = '".absint($entries)."'";
-            $result = $wpdb->query($unlock_command);
-            if($result != NULL)
-            {
-                $this->show_msg_updated(__('The selected IP entry was unlocked successfully!','all-in-one-wp-security-and-firewall'));
-            }
-        }
-        //$aio_wp_security->debug_logger->log_debug("IP range unlocked from login_lockdown table - lockdown ID: ".$lockdown_id,0);
-    }
-    
-    /*
-     * This function will delete selected records from the "login_lockdown" table.
-     * The function accepts either an array of IDs or a single ID
-     */
-    function delete_lockdown_records($entries)
-    {
-        global $wpdb, $aio_wp_security;
-        $lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
-        if (is_array($entries))
-        {
-            //Delete multiple records
-            $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
-            $delete_command = "DELETE FROM ".$lockdown_table." WHERE ID IN ".$id_list;
-            $result = $wpdb->query($delete_command);
-            if($result != NULL)
-            {
-                $this->show_msg_updated(__('The selected records were deleted successfully!','all-in-one-wp-security-and-firewall'));
-            }
-        } elseif ($entries != NULL)
-        {
-            //Delete single record
-//            $delete_command = "DELETE FROM ".$lockdown_table." WHERE ID = '".absint($entries)."'";
-//            $result = $wpdb->query($delete_command);
-            $result = $wpdb->delete($lockdown_table, array('ID' => absint($entries)));
-            if($result != NULL)
-            {
-                $this->show_msg_updated(__('The selected record was deleted successfully!','all-in-one-wp-security-and-firewall'));
-            }
-            //$aio_wp_security->debug_logger->log_debug("Record deleted from login_lockdown table - lockdown ID: ".$entries,0);
-        }
-    }
-    
 } //end class

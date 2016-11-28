@@ -10,7 +10,6 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
     var $menu_tabs_handler = array(
         'tab1' => 'render_tab1',
         'tab2' => 'render_tab2',
-        'tab3' => 'render_tab3',
         );
     
     function __construct() 
@@ -23,14 +22,13 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
         $this->menu_tabs = array(
             'tab1' => __('File Change Detection','all-in-one-wp-security-and-firewall'),
             'tab2' => __('Malware Scan','all-in-one-wp-security-and-firewall'),
-            'tab3' => __('DB Scan','all-in-one-wp-security-and-firewall'),
         );
     }
 
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -55,13 +53,14 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
      */
     function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('Scanner','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
+        $this->render_menu_tabs();
+        ?>        
         <div id="poststuff"><div id="post-body">
         <?php 
-        $this->render_menu_tabs();
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -74,7 +73,6 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
     {
         global $wpdb, $aio_wp_security;
         global $aiowps_feature_mgr;
-        
         if (isset($_POST['fcd_scan_info']))
         {
             //Display scan file change info and clear the global alert variable
@@ -156,19 +154,25 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
                 {
                     $reset_scan_data = TRUE;
                 }
-                
+
             }
 
-            $email_address = sanitize_email($_POST['aiowps_fcd_scan_email_address']);
-            if(!is_email($email_address))
-            {
-                $error .= '<p>'.__('You have entered an incorrect email address format. It has been set to your WordPress admin email as default.','all-in-one-wp-security-and-firewall').'</p>';
-                $email_address = get_bloginfo('admin_email'); //Set the default value to the blog admin email
+            // Explode by end-of-line character, then trim and filter empty lines
+            $email_list_array = array_filter(array_map('trim', explode(PHP_EOL, $_POST['aiowps_fcd_scan_email_address'])), 'strlen');
+            $errors = array();
+            foreach($email_list_array as $key=>$value){
+                $email_sane = sanitize_email($value);
+                if(!is_email($email_sane))
+                {
+                    $errors[] = __('The following address was removed because it is not a valid email address: ', 'all-in-one-wp-security-and-firewall')
+                        . htmlspecialchars($value);
+                    unset($email_list_array[$key]);
+                }
             }
-
-            if($error)
+            $email_address = implode(PHP_EOL, $email_list_array);
+            if ( !empty($errors) )
             {
-                $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall').$error);
+                $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall') . '<br/>' . implode('<br />', $errors));
             }
 
             //Save all the form values to the options
@@ -287,7 +291,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('File Types To Ignore', 'all-in-one-wp-security-and-firewall')?>:</th>
-                <td><textarea name="aiowps_fcd_exclude_filetypes" rows="5" cols="50"><?php echo $aio_wp_security->configs->get_value('aiowps_fcd_exclude_filetypes'); ?></textarea>
+                <td><textarea name="aiowps_fcd_exclude_filetypes" rows="5" cols="50"><?php echo htmlspecialchars($aio_wp_security->configs->get_value('aiowps_fcd_exclude_filetypes')); ?></textarea>
                     <br />
                     <span class="description"><?php _e('Enter each file type or extension on a new line which you wish to exclude from the file change detection scan.', 'all-in-one-wp-security-and-firewall'); ?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
@@ -304,7 +308,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Files/Directories To Ignore', 'all-in-one-wp-security-and-firewall')?>:</th>
-                <td><textarea name="aiowps_fcd_exclude_files" rows="5" cols="50"><?php echo $aio_wp_security->configs->get_value('aiowps_fcd_exclude_files'); ?></textarea>
+                <td><textarea name="aiowps_fcd_exclude_files" rows="5" cols="50"><?php echo htmlspecialchars($aio_wp_security->configs->get_value('aiowps_fcd_exclude_files')); ?></textarea>
                     <br />
                     <span class="description"><?php _e('Enter each file or directory on a new line which you wish to exclude from the file change detection scan.', 'all-in-one-wp-security-and-firewall'); ?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
@@ -323,8 +327,10 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
                 <td>
                 <input name="aiowps_send_fcd_scan_email" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_send_fcd_scan_email')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want the system to email you if a file change was detected', 'all-in-one-wp-security-and-firewall'); ?></span>
-                <br /><input type="text" size="40" name="aiowps_fcd_scan_email_address" value="<?php echo $aio_wp_security->configs->get_value('aiowps_fcd_scan_email_address'); ?>" />
-                <span class="description"><?php _e('Enter an email address', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <br />
+                    <textarea name="aiowps_fcd_scan_email_address" rows="5" cols="50"><?php echo htmlspecialchars($aio_wp_security->configs->get_value('aiowps_fcd_scan_email_address')); ?></textarea>
+                    <br />
+                    <span class="description"><?php _e('Enter one or more email addresses on a new line.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
@@ -357,7 +363,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
                 <li>'.__('Automatic Email Alerting','all-in-one-wp-security-and-firewall').'</li>
                 <li>'.__('Site uptime monitoring','all-in-one-wp-security-and-firewall').'</li>
                 <li>'.__('Site response time monitoring','all-in-one-wp-security-and-firewall').'</li>
-                <li>'.__('Malware Cleanup','all-in-one-wp-security-and-firewall').'</li>
+                <li>'.__('We provide advice for malware cleanup','all-in-one-wp-security-and-firewall').'</li>
                 <li>'.__('Blacklist Removal','all-in-one-wp-security-and-firewall').'</li>
                 <li>'.__('No Contract (Cancel Anytime)','all-in-one-wp-security-and-firewall').'</li>
             </ul>';
@@ -366,74 +372,6 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
         </div>
 
         <?php
-    }
-    
-    function render_tab3()
-    {
-        echo '<div class="aio_blue_box">';
-        echo '<p>'.__('This feature performs a basic database scan which will look for any common suspicious-looking strings and javascript and html code in some of the Wordpress core tables.', 'all-in-one-wp-security-and-firewall');
-        echo '</div>';
-        
-        echo '<div class="aio_yellow_box">';
-        echo '<p>This feature can give you false positive result. We have temporarily deactivated this feature to make sure you don\'t lose some data on a false positive. We will re-introduced this feature after we rework it.</p>';
-        echo '</div>';
-        
-        return;//This feature is temporarily deactivated while we re-work the interface
-        
-        global $wpdb, $aio_wp_security;
-        $perform_db_scan = false;
-        if (isset($_POST['aiowps_manual_db_scan']))
-        {
-            $nonce=$_REQUEST['_wpnonce'];
-            if (!wp_verify_nonce($nonce, 'aiowpsec-manual-db-scan-nonce'))
-            {
-                $aio_wp_security->debug_logger->log_debug("Nonce check failed for manual db scan operation!",4);
-                die(__('Nonce check failed for manual db scan operation!','all-in-one-wp-security-and-firewall'));
-            }
-
-            $perform_db_scan = true;
-        }
-
-        
-        ?>
-        <div class="aio_blue_box">
-            <?php
-            $malware_scan = '<a href="admin.php?page='.AIOWPSEC_FILESCAN_MENU_SLUG.'&tab=tab2">Malware Scan</a>';
-            echo '<p>'.__('This feature will perform a basic database scan which will look for any common suspicious-looking strings and javascript and html code in some of the Wordpress core tables.', 'all-in-one-wp-security-and-firewall').
-            '<br />'.__('If the scan finds anything it will list all "potentially" malicious results but it is up to you to verify whether a result is a genuine example of a hacking attack or a false positive.', 'all-in-one-wp-security-and-firewall').
-            '<br />'.__('As well as scanning for generic strings commonly used in malicious cases, this feature will also scan for some of the known "pharma" hack entries and if it finds any it will automatically delete them.', 'all-in-one-wp-security-and-firewall').
-            '<br />'.__('The WordPress core tables scanned by this feature include: posts, postmeta, comments, links, users, usermeta, and options tables.', 'all-in-one-wp-security-and-firewall').'</p>';
-            ?>
-        </div>
-
-        <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('Database Scan', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
-        <div class="inside">
-        <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-manual-db-scan-nonce'); ?>
-        <table class="form-table">
-            <tr valign="top">
-            <span class="description"><?php _e('To perform a database scan click on the button below.', 'all-in-one-wp-security-and-firewall'); ?></span>
-            </tr>            
-        </table>
-        <input type="submit" name="aiowps_manual_db_scan" value="<?php _e('Perform DB Scan', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
-        </form>
-        </div></div>
-        <?php
-        if ($perform_db_scan)
-        {
-            
-            $result = $aio_wp_security->scan_obj->execute_db_scan();
-            echo $result;
-//            if ($result == 1)
-//            {
-//            $error_msg = '<p>'.__('The plugin has detected that there are some potentially suspicious entries in your database.', 'all-in-one-wp-security-and-firewall').'</p>';
-//            $error_msg .= '<p>'.__('Please verify the results listed below to confirm whether the entries detected are genuinely suspicious or if they are false positives.', 'all-in-one-wp-security-and-firewall').'</p>';
-//            $this->show_msg_error($error_msg);
-//            }else{
-//                $this->show_msg_updated(__('The basic database scan was completed and no suspicious entries were detected.', 'all-in-one-wp-security-and-firewall'));
-//            }
-        }
     }
     
 

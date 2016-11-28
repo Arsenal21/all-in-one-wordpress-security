@@ -5,6 +5,22 @@ class AIOWPSecurity_General_Init_Tasks
     function __construct(){
         global $aio_wp_security;
         
+        if ($aio_wp_security->configs->get_value('aiowps_disable_xmlrpc_pingback_methods') == '1') {
+            add_filter( 'xmlrpc_methods', array(&$this, 'aiowps_disable_xmlrpc_pingback_methods') );
+            add_filter( 'wp_headers', array(&$this, 'aiowps_remove_x_pingback_header') );
+        }
+
+        add_action( 'permalink_structure_changed', array(&$this, 'refresh_firewall_rules' ), 10, 2);
+
+        if ($aio_wp_security->configs->get_value('aiowps_enable_autoblock_spam_ip') == '1') {
+            AIOWPSecurity_Blocking::check_visitor_ip_and_perform_blocking();
+
+            //add_action( 'spammed_comment', array(&$this, 'process_spammed_comment' )); //this hook gets fired when admin marks comment as spam
+            //add_action( 'akismet_submit_spam_comment', array(&$this, 'process_akismet_submit_spam_comment' ), 10, 2); //this hook gets fired when akismet marks a comment as spam
+            add_action( 'comment_post', array(&$this, 'spam_detect_process_comment_post' ), 10, 2); //this hook gets fired just after comment is saved to DB
+            add_action( 'transition_comment_status', array(&$this, 'process_transition_comment_status' ), 10, 3); //this hook gets fired when a comment's status changes
+        }
+
         if ($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page') == '1') {
             add_action( 'widgets_init', array(&$this, 'remove_standard_wp_meta_widget' ));
             add_filter( 'retrieve_password_message', array(&$this, 'decode_reset_pw_msg'), 10, 4); //Fix for non decoded html entities in password reset link
@@ -32,6 +48,8 @@ class AIOWPSecurity_General_Init_Tasks
 
         if($aio_wp_security->configs->get_value('aiowps_remove_wp_generator_meta_info') == '1'){
             add_filter('the_generator', array(&$this,'remove_wp_generator_meta_info'));
+            add_filter('style_loader_src', array(&$this,'remove_wp_css_js_meta_info'));
+            add_filter('script_loader_src', array(&$this,'remove_wp_css_js_meta_info'));
         }
         
         //For the cookie based brute force prevention feature
@@ -44,7 +62,7 @@ class AIOWPSecurity_General_Init_Tasks
             }
         }
         
-        //stop users enumeration
+        //Stop users enumeration feature
         if( $aio_wp_security->configs->get_value('aiowps_prevent_users_enumeration') == 1) {
             include_once(AIO_WP_SECURITY_PATH.'/other-includes/wp-security-stop-users-enumeration.php');
         }
@@ -110,6 +128,11 @@ class AIOWPSecurity_General_Init_Tasks
             }
         }
 
+        //For registration manual approval feature
+        if($aio_wp_security->configs->get_value('aiowps_enable_manual_registration_approval') == '1'){
+            add_filter('wp_login_errors', array(&$this, 'modify_registration_page_messages'),10, 2);
+        }
+        
         //For registration page captcha feature
         if (AIOWPSecurity_Utility::is_multisite_install()){
             $blog_id = get_current_blog_id();
@@ -169,11 +192,79 @@ class AIOWPSecurity_General_Init_Tasks
         if($aio_wp_security->configs->get_value('aiowps_enable_404_logging') == '1'){
             add_action('wp_head', array(&$this, 'check_404_event'));
         }
-        
+
         //Add more tasks that need to be executed at init time
         
     }
     
+    function aiowps_disable_xmlrpc_pingback_methods( $methods ) {
+       unset( $methods['pingback.ping'] );
+       unset( $methods['pingback.extensions.getPingbacks'] );
+       return $methods;
+    }
+    
+    function aiowps_remove_x_pingback_header( $headers ) {
+       unset( $headers['X-Pingback'] );
+       return $headers;
+    }
+
+    /**
+     * Refreshes the firewall rules in .htaccess file
+     * eg: if permalink settings changed and white list enabled
+     * @param $old_permalink_structure
+     * @param $permalink_structure
+     */
+    function refresh_firewall_rules($old_permalink_structure, $permalink_structure){
+        global $aio_wp_security;
+        //If white list enabled need to re-adjust the .htaccess rules
+        if ($aio_wp_security->configs->get_value('aiowps_enable_whitelisting') == '1') {
+            $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
+            if ( !$write_result )
+            {
+                $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
+                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_whitelist_Menu - The plugin was unable to write to the .htaccess file.");
+            }
+        }
+    }
+
+    function spam_detect_process_comment_post($comment_id, $comment_approved)
+    {
+        if($comment_approved === "spam"){
+            $this->block_comment_ip($comment_id);
+        }
+
+    }
+
+    function process_transition_comment_status($new_status, $old_status, $comment)
+    {
+        if($new_status == 'spam'){
+            $this->block_comment_ip($comment->comment_ID);
+        }
+
+    }
+
+    /**
+     * Will check auto-spam blocking settings and will add IP to blocked table accordingly
+     * @param $comment_id
+     */
+    function block_comment_ip($comment_id)
+    {
+        global $aio_wp_security, $wpdb;
+        $comment_obj = get_comment( $comment_id );
+        $comment_ip = $comment_obj->comment_author_IP;
+        //Get number of spam comments from this IP
+        $sql = $wpdb->prepare("SELECT * FROM $wpdb->comments
+                WHERE comment_approved = 'spam'
+                AND comment_author_IP = %s
+                ", $comment_ip);
+        $comment_data = $wpdb->get_results($sql, ARRAY_A);
+        $spam_count = count($comment_data);
+        $min_comment_before_block = $aio_wp_security->configs->get_value('aiowps_spam_ip_min_comments_block');
+        if(!empty($min_comment_before_block) && $spam_count >= ($min_comment_before_block - 1)){
+            AIOWPSecurity_Blocking::add_ip_to_block_list($comment_ip, 'spam');
+        }
+    }
+
     function remove_standard_wp_meta_widget()
     {
         unregister_widget('WP_Widget_Meta');
@@ -182,6 +273,21 @@ class AIOWPSecurity_General_Init_Tasks
     function remove_wp_generator_meta_info()
     {
         return '';
+    }
+
+    function remove_wp_css_js_meta_info($src) {
+        global $wp_version;
+        static $wp_version_hash = null; // Cache hash value for all function calls
+
+        // Replace only version number of assets with WP version
+        if ( strpos($src, 'ver=' . $wp_version) !== false ) {
+            if ( !$wp_version_hash ) {
+                $wp_version_hash = wp_hash($wp_version);
+            }
+            // Replace version number with computed hash
+            $src = add_query_arg('ver', $wp_version_hash, $src);
+        }
+        return $src;
     }
 
     function do_404_lockout_tasks(){
@@ -281,7 +387,9 @@ class AIOWPSecurity_General_Init_Tasks
             isset($_POST['aiowps-captcha-answer'])?$captcha_answer = strip_tags(trim($_POST['aiowps-captcha-answer'])): $captcha_answer = '';
             $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
             $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
+            $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
+            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
+            if($submitted_encoded_string !== $captcha_string_info_trans)
             {
                 //This means a wrong answer was entered
                 $result['errors']->add('generic', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
@@ -328,7 +436,10 @@ class AIOWPSecurity_General_Init_Tasks
             $captcha_answer = trim($_REQUEST['aiowps-captcha-answer']);
             $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
             $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            if ($_REQUEST['aiowps-captcha-string-info'] === $submitted_encoded_string){
+            $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
+            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
+
+            if ($captcha_string_info_trans === $submitted_encoded_string){
                 //Correct answer given
                 return($comment);
             }else{
@@ -349,7 +460,10 @@ class AIOWPSecurity_General_Init_Tasks
                 isset($_POST['aiowps-captcha-answer'])?($captcha_answer = strip_tags(trim($_POST['aiowps-captcha-answer']))):($captcha_answer = '');
                 $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
                 $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-                if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
+                $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
+                $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
+
+                if($submitted_encoded_string !== $captcha_string_info_trans)
                 {
                     add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
                 }
@@ -382,7 +496,10 @@ class AIOWPSecurity_General_Init_Tasks
             isset($_POST['aiowps-captcha-answer'])?$captcha_answer = strip_tags(trim($_POST['aiowps-captcha-answer'])): $captcha_answer = '';
             $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
             $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            if($submitted_encoded_string !== $_POST['aiowps-captcha-string-info'])
+            $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
+            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
+
+            if($submitted_encoded_string !== $captcha_string_info_trans)
             {
                 //This means a wrong answer was entered
                 $bp->signup->errors['aiowps-captcha-answer'] = __('Your CAPTCHA answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall');
@@ -407,5 +524,18 @@ class AIOWPSecurity_General_Init_Tasks
         global $aio_wp_security;
         $message = html_entity_decode($message);
         return $message;
+    }
+    
+    function modify_registration_page_messages($errors, $redirect_to)
+    {
+        if( isset($_GET['checkemail']) && 'registered' == $_GET['checkemail'] ){
+            if(is_wp_error($errors)){
+                $errors->remove('registered');
+                $pending_approval_msg = __('Your registration is pending approval.', 'all-in-one-wp-security-and-firewall');
+                $pending_approval_msg = apply_filters('aiowps_pending_registration_message', $pending_approval_msg);
+                $errors->add('registered', $pending_approval_msg, array('registered'=>'message'));
+            }
+        }
+        return $errors;
     }
 }

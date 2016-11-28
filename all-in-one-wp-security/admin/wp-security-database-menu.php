@@ -37,7 +37,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -62,13 +62,14 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
      */
     function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('Database Security','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
+        $this->render_menu_tabs();
+        ?>        
         <div id="poststuff"><div id="post-body">
         <?php 
-        $this->render_menu_tabs();
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -117,11 +118,12 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                     {
                         //User has chosen their own DB prefix value
                         $new_db_prefix = wp_strip_all_tags( trim( $_POST['aiowps_new_manual_db_prefix'] ) );
-                        $error = $wpdb->set_prefix( $new_db_prefix );
+                        $error = $wpdb->set_prefix( $new_db_prefix ); //validate the user chosen prefix
                         if(is_wp_error($error))
                         {
                             wp_die( __('<strong>ERROR</strong>: The table prefix can only contain numbers, letters, and underscores.', 'all-in-one-wp-security-and-firewall') );
                         }
+                        $wpdb->set_prefix( $old_db_prefix );
                         $perform_db_change = true;
                     }
                 }
@@ -222,10 +224,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 }
                 echo '<div id="message" class="updated fade"><p>';
                 _e('DB Backup was successfully completed! You will receive the backup file via email if you have enabled "Send Backup File Via Email", otherwise you can retrieve it via FTP from the following directory:','all-in-one-wp-security-and-firewall');
-                echo '<p>';
+                echo '</p><p>';
                 _e('Your DB Backup File location: ');
                 echo '<strong>'.$aiowps_backup_file_path.'</strong>';
-                echo '</p>';
                 echo '</p></div>';
             } 
             else
@@ -299,11 +300,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         <div class="inside">
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-db-manual-change-nonce'); ?>
-        <table class="form-table">
-            <tr valign="top">
+        <p>
             <span class="description"><?php _e('To create a new DB backup just click on the button below.', 'all-in-one-wp-security-and-firewall'); ?></span>
-            </tr>            
-        </table>
+        </p>
         <input type="submit" name="aiowps_manual_db_backup" value="<?php _e('Create DB Backup Now', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
@@ -463,10 +462,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         }
         
         //Now let's update the options table
-        $update_option_table_query = "UPDATE " . $table_new_prefix . "options 
+        $update_option_table_query = $wpdb->prepare("UPDATE " . $table_new_prefix . "options
                                                                   SET option_name = '".$table_new_prefix ."user_roles' 
-                                                                  WHERE option_name = '".$table_old_prefix."user_roles' 
-                                                                  LIMIT 1";
+                                                                  WHERE option_name = %s LIMIT 1", $table_old_prefix."user_roles");
 
         if ( false === $wpdb->query($update_option_table_query) ) 
         {
@@ -484,10 +482,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                     if ($blog_id == 1){continue;} //skip main site
                     $new_pref_and_site_id = $table_new_prefix.$blog_id.'_';
                     $old_pref_and_site_id = $table_old_prefix.$blog_id.'_';
-                    $update_ms_option_table_query = "UPDATE " . $new_pref_and_site_id . "options
+                    $update_ms_option_table_query = $wpdb->prepare("UPDATE " . $new_pref_and_site_id . "options
                                                                             SET option_name = '".$new_pref_and_site_id."user_roles'
-                                                                            WHERE option_name = '".$old_pref_and_site_id."user_roles'
-                                                                            LIMIT 1";
+                                                                            WHERE option_name = %s LIMIT 1", $old_pref_and_site_id."user_roles");
                     if ( false === $wpdb->query($update_ms_option_table_query) ) 
                     {
                         echo '<p class="aio_error_with_icon">'.sprintf( __('Update of table %s failed: unable to change %s to %s', 'all-in-one-wp-security-and-firewall'),$new_pref_and_site_id.'options', $old_pref_and_site_id.'user_roles', $new_pref_and_site_id.'user_roles').'</p>';
@@ -516,10 +513,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             //Create new meta key
             $new_meta_key = $table_new_prefix . substr( $meta_key->meta_key, $old_prefix_length );
 
-            $update_user_meta_sql = "UPDATE " . $table_new_prefix . "usermeta 
+            $update_user_meta_sql = $wpdb->prepare("UPDATE " . $table_new_prefix . "usermeta
                                                             SET meta_key='" . $new_meta_key . "' 
-                                                            WHERE meta_key='" . $meta_key->meta_key . "'
-                                                            AND user_id='" . $meta_key->user_id."'";
+                                                            WHERE meta_key=%s AND user_id=%s", $meta_key->meta_key, $meta_key->user_id);
 
             if (false === $wpdb->query($update_user_meta_sql))
             {

@@ -26,7 +26,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -51,13 +51,14 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
      */
     function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('Blacklist Manager','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
+        $this->render_menu_tabs();
+        ?>        
         <div id="poststuff"><div id="post-body">
         <?php 
-        $this->render_menu_tabs();
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -130,7 +131,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                     $this->show_msg_settings_updated();
 
                     $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
-                    if ($write_result == -1)
+                    if ( !$write_result )
                     {
                         $this->show_msg_error(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                         $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
@@ -149,6 +150,16 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
             </p>';
             ?>
         </div>
+        <div class="aio_grey_box">
+            <?php
+            $addon_link = '<strong><a href="http://www.site-scanners.com/country-blocking-addon/" target="_blank">Country Blocking Addon</a></strong>';
+            $info_msg = sprintf( __('You may also be interested in our %s.', 'all-in-one-wp-security-and-firewall'), $addon_link);
+            $info_msg2 = __('This addon allows you to automatically block IP addresses based on their country of origin.', 'all-in-one-wp-security-and-firewall');
+
+            echo '<p>'.$info_msg.
+                '<br />'.$info_msg2.'</p>';
+            ?>
+        </div>
 
         <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('IP Hosts and User Agent Blacklist Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
@@ -159,7 +170,15 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
         $aiowps_feature_mgr->output_feature_details_badge("blacklist-manager-ip-user-agent-blacklisting");
         ?>    
         <form action="" method="POST">
-        <?php wp_nonce_field('aiowpsec-blacklist-settings-nonce'); ?>            
+        <?php wp_nonce_field('aiowpsec-blacklist-settings-nonce'); ?>
+        <div class="aio_orange_box">
+            <p>
+            <?php
+            $read_link = '<a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">must read this message</a>';
+            echo sprintf(__('This feature can lock you out of admin if it doesn\'t work correctly on your site. You %s before activating this feature.', 'all-in-one-wp-security-and-firewall'), $read_link);
+            ?>
+            </p>
+        </div>            
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Enable IP or User Agent Blacklisting', 'all-in-one-wp-security-and-firewall')?>:</th>
@@ -171,7 +190,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
             <tr valign="top">
                 <th scope="row"><?php _e('Enter IP Addresses:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
-                    <textarea name="aiowps_banned_ip_addresses" rows="5" cols="50"><?php echo ($result == -1)?$_POST['aiowps_banned_ip_addresses']:$aio_wp_security->configs->get_value('aiowps_banned_ip_addresses'); ?></textarea>
+                    <textarea name="aiowps_banned_ip_addresses" rows="5" cols="50"><?php echo ($result == -1)?htmlspecialchars($_POST['aiowps_banned_ip_addresses']):htmlspecialchars($aio_wp_security->configs->get_value('aiowps_banned_ip_addresses')); ?></textarea>
                     <br />
                     <span class="description"><?php _e('Enter one or more IP addresses or IP ranges.','all-in-one-wp-security-and-firewall');?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>

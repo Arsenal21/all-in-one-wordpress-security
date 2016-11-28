@@ -33,7 +33,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -58,13 +58,14 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
      */
     function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('Filesystem Security','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
+        $this->render_menu_tabs();
+        ?>        
         <div id="poststuff"><div id="post-body">
         <?php 
-        $this->render_menu_tabs();
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -197,6 +198,13 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             //$this->show_msg_settings_updated();
 
         }
+        else {
+                // Make sure the setting value is up-to-date with current value in WP config
+                $aio_wp_security->configs->set_value('aiowps_disable_file_editing', defined('DISALLOW_FILE_EDIT') && DISALLOW_FILE_EDIT ? '1' : '');
+                $aio_wp_security->configs->save_config();
+                //Recalculate points after the feature status/options have been altered
+                $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
+        }
         ?>
         <h2><?php _e('File Editing', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
@@ -270,7 +278,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             {
                 $this->show_msg_updated(__('You have successfully saved the Prevent Access to Default WP Files configuration.', 'all-in-one-wp-security-and-firewall'));
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
             }
@@ -316,7 +324,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         
         if (isset($_POST['aiowps_system_log_file'])){
             if ($_POST['aiowps_system_log_file'] != NULL){
-                $sys_log_file = sanitize_text_field($_POST['aiowps_system_log_file']);
+                $sys_log_file = esc_html($_POST['aiowps_system_log_file']);
                 $aio_wp_security->configs->set_value('aiowps_system_log_file',$sys_log_file);
             }else{
                 $sys_log_file = 'error_log';
@@ -345,7 +353,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             <form action="" method="POST">
                 <?php wp_nonce_field('aiowpsec-view-system-logs-nonce'); ?>
                 <div><?php _e('Enter System Log File Name', 'all-in-one-wp-security-and-firewall')?>:
-                <input type="text" size="25" name="aiowps_system_log_file" value="<?php echo sanitize_text_field($sys_log_file); ?>" />
+                <input type="text" size="25" name="aiowps_system_log_file" value="<?php echo esc_html($sys_log_file); ?>" />
                 <span class="description"><?php _e('Enter your system log file name. (Defaults to error_log)', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </div>
                 <div class="aio_spacer_15"></div>

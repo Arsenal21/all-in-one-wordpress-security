@@ -13,7 +13,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
         );
     function __construct() 
     {
-        $this->render_user_account_menu_page();
+        $this->render_menu_page();
         
         //Add the JS library for password tool - make sure we are on our password tab
         if (isset($_GET['page']) && strpos($_GET['page'], AIOWPSEC_USER_ACCOUNTS_MENU_SLUG ) !== false) {
@@ -35,7 +35,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -58,15 +58,16 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
     /*
      * The menu rendering goes here
      */
-    function render_user_account_menu_page() 
+    function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('User Accounts','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
-        <div id="poststuff"><div id="post-body">
-        <?php 
         $this->render_menu_tabs();
+        ?>        
+        <div id="poststuff"><div id="post-body">
+        <?php  
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -252,15 +253,16 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                 else 
                 {
                     //let's check if currently logged in username is 'admin'
-                    global $user_login;
-                    get_currentuserinfo();
+                    $user = wp_get_current_user();
+                    $user_login = $user->user_login;
                     if (strtolower($user_login) == 'admin'){
                         $username_is_admin = TRUE;
                     } else {
                         $username_is_admin = FALSE;
                     }
                     //Now let's change the username
-                    $result = $wpdb->query("UPDATE `" . $wpdb->users . "` SET user_login = '" . esc_sql($new_username) . "' WHERE user_login='admin';");
+                    $sql = $wpdb->prepare( "UPDATE `" . $wpdb->users . "` SET user_login = '" . esc_sql($new_username) . "' WHERE user_login=%s", "admin" );
+                    $result = $wpdb->query($sql);
                     if (!$result) {
                         //There was an error updating the users table
                         $user_update_error = __('The database update operation of the user account failed!', 'all-in-one-wp-security-and-firewall');
@@ -315,7 +317,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
     function get_all_admin_accounts($blog_id='') {
         //TODO: Have included the "blog_id" variable for future use for cases where people want to search particular blog (eg, multi-site)
         if ($blog_id) {
-            $admin_users = get_users('blog_id='.$blog_id.'orderby=login&role=administrator');
+            $admin_users = get_users('blog_id='.$blog_id.'&orderby=login&role=administrator');
         } else {
             $admin_users = get_users('orderby=login&role=administrator');
         }
@@ -331,8 +333,8 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                 }else {
                     $account_output .= '<td>'.$entry->user_login.'</td>';
                 }
-                $user_acct_edit_link = get_option('siteurl').'/wp-admin/user-edit.php?user_id=';
-                $account_output .= '<td><a href="'.$user_acct_edit_link.$entry->ID.'" target="_blank">Edit User</a></td>';
+                $user_acct_edit_link = admin_url('user-edit.php?user_id=' . $entry->ID);
+                $account_output .= '<td><a href="'.$user_acct_edit_link.'" target="_blank">Edit User</a></td>';
                 $account_output .= '</tr>';
             }
             $account_output .= '</table>';

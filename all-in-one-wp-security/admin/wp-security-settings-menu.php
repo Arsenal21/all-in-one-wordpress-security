@@ -26,7 +26,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             'tab1' => __('General Settings', 'all-in-one-wp-security-and-firewall'),
             'tab2' => '.htaccess '.__('File', 'all-in-one-wp-security-and-firewall'),
             'tab3' => 'wp-config.php '.__('File', 'all-in-one-wp-security-and-firewall'),
-            'tab4' => __('WP Meta Info', 'all-in-one-wp-security-and-firewall'),
+            'tab4' => __('WP Version Info', 'all-in-one-wp-security-and-firewall'),
             'tab5' => __('Import/Export', 'all-in-one-wp-security-and-firewall'),
         );
     }
@@ -34,7 +34,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -59,13 +59,14 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
      */
     function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('Settings','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
+        $this->render_menu_tabs();
+        ?>        
         <div id="poststuff"><div id="post-body">
         <?php 
-        $this->render_menu_tabs();
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -96,7 +97,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             {
                 $this->show_msg_updated(__('All the security features have been disabled successfully!', 'all-in-one-wp-security-and-firewall'));
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please restore your .htaccess file manually using the restore functionality in the ".htaccess File".', 'all-in-one-wp-security-and-firewall'));
             }
@@ -118,12 +119,12 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules();
             //Now let's clear the applicable rules from the .htaccess file
             $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
-            
+
             if ($res)
             {
                 $this->show_msg_updated(__('All firewall rules have been disabled successfully!', 'all-in-one-wp-security-and-firewall'));
             }
-            else if($res == -1)
+            else
             {
                 $this->show_msg_error(__('Could not write to the .htaccess file. Please restore your .htaccess file manually using the restore functionality in the ".htaccess File".', 'all-in-one-wp-security-and-firewall'));
             }
@@ -215,7 +216,8 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                             <th scope="row"><?php _e('Enable Debug', 'all-in-one-wp-security-and-firewall')?>:</th>
                             <td>
                                 <input name="aiowps_enable_debug" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_debug')=='1') echo ' checked="checked"'; ?> value="1"/>
-                                <span class="description"><?php _e('Check this if you want to enable debug', 'all-in-one-wp-security-and-firewall'); ?></span>
+                                <span class="description"><?php _e('Check this if you want to enable debug. You should keep this option disabled after you have finished debugging the issue.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                                <p class="description"><?php _e('Please note that the log files are reset on every plugin update.', 'all-in-one-wp-security-and-firewall'); ?></p>
                             </td>
                         </tr>
                     </table>
@@ -356,16 +358,16 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         <input type="submit" name="aiowps_restore_htaccess_button" value="<?php _e('Restore .htaccess File', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
-        <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('View Contents of the currently active .htaccess file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
-        <div class="inside">
-            <?php
-            $ht_file = ABSPATH . '.htaccess';
-            $ht_contents = AIOWPSecurity_Utility_File::get_file_contents($ht_file);
-            //echo $ht_contents;
-            ?>
-            <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly><?php echo $ht_contents; ?></textarea>
-        </div></div>
+<!--        <div class="postbox">-->
+<!--        <h3 class="hndle"><label for="title">--><?php //_e('View Contents of the currently active .htaccess file', 'all-in-one-wp-security-and-firewall'); ?><!--</label></h3>-->
+<!--        <div class="inside">-->
+<!--            --><?php
+//            $ht_file = ABSPATH . '.htaccess';
+//            $ht_contents = AIOWPSecurity_Utility_File::get_file_contents($ht_file);
+//            //echo $ht_contents;
+//            ?>
+<!--            <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly>--><?php //echo $ht_contents; ?><!--</textarea>-->
+<!--        </div></div>-->
 
         <?php
         } // End if statement
@@ -468,15 +470,15 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         <input type="submit" name="aiowps_restore_wp_config_button" value="<?php _e('Restore wp-config File', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
-        <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('View Contents of the currently active wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
-        <div class="inside">
-            <?php
-            $wp_config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
-            $wp_config_contents = AIOWPSecurity_Utility_File::get_file_contents($wp_config_file); 
-            ?>
-            <textarea class="aio_text_area_file_output aio_width_80 aio_spacer_10_tb" rows="20" readonly><?php echo $wp_config_contents; ?></textarea>
-        </div></div>
+<!--        <div class="postbox">-->
+<!--        <h3 class="hndle"><label for="title">--><?php //_e('View Contents of the currently active wp-config.php file', 'all-in-one-wp-security-and-firewall'); ?><!--</label></h3>-->
+<!--        <div class="inside">-->
+<!--            --><?php
+//            $wp_config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
+//            $wp_config_contents = AIOWPSecurity_Utility_File::get_file_contents($wp_config_file);
+//            ?>
+<!--            <textarea class="aio_text_area_file_output aio_width_80 aio_spacer_10_tb" rows="20" readonly>--><?php //echo $wp_config_contents; ?><!--</textarea>-->
+<!--        </div></div>-->
 
         <?php
         } //End if statement
@@ -504,13 +506,15 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             $this->show_msg_settings_updated();
     }
         ?>
-        <h2><?php _e('WP Generator Meta Tag', 'all-in-one-wp-security-and-firewall')?></h2>
+        <h2><?php _e('WP Generator Meta Tag & Version Info', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
             <?php
             echo '<p>'.__('Wordpress generator automatically adds some meta information inside the "head" tags of every page on your site\'s front end. Below is an example of this:', 'all-in-one-wp-security-and-firewall');
             echo '<br /><strong>&lt;meta name="generator" content="WordPress 3.5.1" /&gt;</strong>';
             echo '<br />'.__('The above meta information shows which version of WordPress your site is currently running and thus can help hackers or crawlers scan your site to see if you have an older version of WordPress or one with a known exploit.', 'all-in-one-wp-security-and-firewall').'
-            <br />'.__('This feature will allow you to remove the WP generator meta info from your site\'s pages.', 'all-in-one-wp-security-and-firewall').'
+            <br /><br />'.__('There are also other ways wordpress reveals version info such as during style and script loading. An example of this is:', 'all-in-one-wp-security-and-firewall').'
+            <br /><strong>&lt;link rel="stylesheet" id="jquery-ui-style-css"  href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css?ver=4.5.2" type="text/css" media="all" /&gt;</strong>
+            <br /><br />'.__('This feature will allow you to remove the WP generator meta info and other version info from your site\'s pages.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>
         </div>
@@ -531,7 +535,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Remove WP Generator Meta Info', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_remove_wp_generator_meta_info" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_remove_wp_generator_meta_info')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to remove the meta info produced by WP Generator from all pages', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to remove the version and meta info produced by WP from all pages', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
@@ -627,7 +631,7 @@ function render_tab5()
                         //Now let's refresh the .htaccess file with any modified rules if applicable
                         $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
 
-                        if($res == -1)
+                        if( !$res )
                         {
                             $this->show_msg_error(__('Could not write to the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
                         }

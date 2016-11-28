@@ -112,13 +112,14 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
      */
     function unlock_ip_range($entries)
     {
-        global $wpdb;
+        global $wpdb,$aio_wp_security;
         $lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
         if (is_array($entries))
         {
             if (isset($_REQUEST['_wp_http_referer']))
             {
                 //Unlock multiple records
+                $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
                 $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
                 $unlock_command = "UPDATE ".$lockdown_table." SET release_date = now() WHERE id IN ".$id_list;
                 $result = $wpdb->query($unlock_command);
@@ -137,7 +138,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
             }
             
             //Unlock single record
-            $unlock_command = "UPDATE ".$lockdown_table." SET release_date = now() WHERE id = '".absint($entries)."'";
+            $unlock_command = $wpdb->prepare( "UPDATE ".$lockdown_table." SET release_date = now() WHERE id = %d", absint($entries) );
             $result = $wpdb->query($unlock_command);
             if($result != NULL)
             {
@@ -159,6 +160,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
             if (isset($_REQUEST['_wp_http_referer']))
             {
                 //Delete multiple records
+                $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
                 $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
                 $delete_command = "DELETE FROM ".$lockdown_table." WHERE id IN ".$id_list;
                 $result = $wpdb->query($delete_command);

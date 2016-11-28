@@ -16,10 +16,17 @@ jQuery(document).ready(function($){
                 tb_remove();
         };
     }
-    aiowps_attach_media_uploader('aiowps_htaccess_file');
-    aiowps_attach_media_uploader('aiowps_wp_config_file');
-    aiowps_attach_media_uploader('aiowps_import_settings_file');
-    aiowps_attach_media_uploader('aiowps_db_file'); //TODO - for future use when we implement DB restore
+
+    var current_admin_page = getParameterByName('page'); //check query arg of loaded page to see if a gallery needs wm processing
+    if(current_admin_page == 'aiowpsec_maintenance'){
+        //don't load custom uploader stuff because we want to use standard wp uploader code
+    }else{
+        aiowps_attach_media_uploader('aiowps_htaccess_file');
+        aiowps_attach_media_uploader('aiowps_wp_config_file');
+        aiowps_attach_media_uploader('aiowps_import_settings_file');
+        aiowps_attach_media_uploader('aiowps_db_file'); //TODO - for future use when we implement DB restore
+
+    }
     //End of Media Uploader
     
     //Triggers the more info toggle link
@@ -36,5 +43,15 @@ jQuery(document).ready(function($){
         }
     });
     //End of more info toggle
-    
+
+    //This function uses javascript to retrieve a query arg from the current page URL
+    function getParameterByName(name) {
+        var url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 });

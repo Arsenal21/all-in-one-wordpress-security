@@ -85,6 +85,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             'event_date' => 'Date',
             'status' => 'Lock Status',
         );
+        $columns = apply_filters('list_404_get_columns', $columns);
         return $columns;
     }
 
@@ -97,6 +98,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             'referer_info' => array('referer_info', false),
             'event_date' => array('event_date', false),
         );
+        $sortable_columns = apply_filters('list_404_get_sortable_columns', $sortable_columns);
         return $sortable_columns;
     }
 
@@ -144,6 +146,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         $events_table = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
         if (is_array($entries)) {
             //lock multiple records
+            $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
             $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
             $events_table = AIOWPSEC_TBL_EVENTS;
             $query = "SELECT ip_or_host FROM $events_table WHERE ID IN ".$id_list;
@@ -181,6 +184,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         
         if (is_array($entries)) {
             //Get the selected IP addresses
+            $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
             $id_list = "(" .implode(",",$entries) .")"; //Create comma separate list for DB operation
             $events_table = AIOWPSEC_TBL_EVENTS;
             $query = "SELECT ip_or_host FROM $events_table WHERE ID IN ".$id_list;
@@ -208,12 +212,11 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             $aio_wp_security->configs->save_config(); //Save the configuration
 
             $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
-            if ($write_result == -1)
-            {
+            if ( $write_result ) {
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses have been added to the blacklist and will be permanently blocked!', 'WPS'));
+            } else {
                 AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
                 $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
-            }else{
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses have been added to the blacklist and will be permanently blocked!', 'WPS'));
             }
         }
         else{
@@ -236,6 +239,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             {
                 //Delete multiple records
                 $entries = array_map( 'esc_sql', $entries); //escape every array element
+                $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
                 $id_list = "(" . implode(",", $entries) . ")"; //Create comma separate list for DB operation
                 $delete_command = "DELETE FROM " . $events_table . " WHERE id IN " . $id_list;
                 $result = $wpdb->query($delete_command);

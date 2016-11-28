@@ -27,11 +27,12 @@ class AIOWPSecurity_Utility_IP
     static function get_sanitized_ip_range($ip)
     {
         global $aio_wp_security;
-        //$ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
         $ip_range = '';
         $valid_ip = filter_var($ip, FILTER_VALIDATE_IP); //Sanitize the IP address
         if ($valid_ip)
         {
+            $ip_type = WP_Http::is_ip_address($ip); //returns 4 or 6 if ipv4 or ipv6 or false if invalid
+            if($ip_type == 6 || $ip_type === false) return ''; // for now return empty if ipv6 or invalid IP
             $ip_range = substr($valid_ip, 0 , strrpos ($valid_ip, ".")); //strip last portion of address to leave an IP range
         }
         else

@@ -66,6 +66,17 @@
     padding: 0 1em 0 1em; 
 }
 
+.aio_orange_box{
+    margin: 10px 0 15px;
+    background-color: #FFB900;
+    border-color: #D64500;
+    border-radius: 3px 3px 3px 3px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0 1em 0 1em;
+}
+
+
 .aio_success_with_icon {
     background-image: url("../images/success.png");
     background-repeat: no-repeat;
@@ -351,4 +362,38 @@
     padding-right: 6.25%;
     text-align: center;
     color: darkorange;
+}
+
+/* bootstrap type labels */
+.aiowps_dashboard_table{
+    table-layout: fixed;
+}
+
+.aiowps-label-danger {
+    background-color: #d9534f;
+}
+
+.aiowps-label-warning {
+    background-color: #f0ad4e;
+}
+
+.aiowps-label-primary {
+    background-color: #337ab7;
+}
+
+.aiowps-label-success {
+    background-color: #5cb85c;
+}
+
+.aiowps-label {
+    border-radius: 0.25em;
+    color: #fff;
+    display: inline;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.2em 0.6em 0.3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
 }

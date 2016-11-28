@@ -35,7 +35,7 @@ class AIOWPSecurity_Admin_Init
             add_action('init', array( &$this, 'init_hook_handler_for_admin_side')); 
         }
     }
-    
+
     function admin_includes()
     {
         include_once('wp-security-admin-menu.php');
@@ -122,7 +122,7 @@ class AIOWPSecurity_Admin_Init
 
                 //Write this new cookie to the .htaccess file
                 $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
-                if($res == -1){
+                if( !$res ){
                     $aio_wp_security->debug_logger->log_debug("Error writing new test cookie with random suffix to .htaccess file!",4);
                 }
 

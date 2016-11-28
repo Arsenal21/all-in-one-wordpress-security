@@ -26,9 +26,9 @@ class AIOWPSecurity_Scan
                 $aio_wp_security->configs->set_value('aiowps_fcds_change_detected', TRUE);
                 $aio_wp_security->configs->save_config();
                 $aio_wp_security->debug_logger->log_debug("File Change Detection Feature: change to filesystem detected!");
-                
-                $this->aiowps_send_file_change_alert_email(); //Send file change scan results via email if applicable
-            }else if(empty($scan_result['files_added']) && empty($scan_result['files_removed']) && empty($scan_result['files_changed'])){
+
+                $this->aiowps_send_file_change_alert_email($scan_result); //Send file change scan results via email if applicable
+            } else {
                 //Reset the change flag
                 $aio_wp_security->configs->set_value('aiowps_fcds_change_detected', FALSE);
                 $aio_wp_security->configs->save_config();
@@ -42,22 +42,17 @@ class AIOWPSecurity_Scan
             return $scan_result;
         }
     }
-    
-    function aiowps_send_file_change_alert_email()
+
+    /**
+     * Send email with notification about file changes detected by last scan.
+     * @global AIO_WP_Security $aio_wp_security
+     * @param array $scan_result Array with scan result returned by compare_scan_data() method.
+     */
+    function aiowps_send_file_change_alert_email($scan_result)
     {
         global $aio_wp_security;
         if ( $aio_wp_security->configs->get_value('aiowps_send_fcd_scan_email') == '1' ) 
         {
-            //Get the right email address.
-            if ( is_email( $aio_wp_security->configs->get_value('aiowps_fcd_scan_email_address') ) ) 
-            {
-                    $toaddress = $aio_wp_security->configs->get_value('aiowps_fcd_scan_email_address');
-            } else 
-            {
-                    $toaddress = get_site_option( 'admin_email' );
-            }
-
-            $to = $toaddress;
             $site_title = get_bloginfo( 'name' );
             $from_name = empty($site_title)?'WordPress':$site_title;
             
@@ -66,20 +61,18 @@ class AIOWPSecurity_Scan
             //$attachment = array();
             $message = __( 'A file change was detected on your system for site URL', 'all-in-one-wp-security-and-firewall' ) . ' ' . get_option( 'siteurl' ) . __( '. Scan was generated on', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
             $message .= "\r\n\r\n".__( 'A summary of the scan results is shown below:', 'all-in-one-wp-security-and-firewall' );
-            $scan_res_unserialized = self::get_file_change_data();
-            $scan_results_message = '';
-            if($scan_res_unserialized !== false){
-                $scan_results_message = self::get_file_change_summary($scan_res_unserialized);
-            }
-            
             $message .= "\r\n\r\n";
-            $message .= $scan_results_message;
+            $message .= self::get_file_change_summary($scan_result);
             $message .= "\r\n".__( 'Login to your site to view the scan details.', 'all-in-one-wp-security-and-firewall' );
 
-            $sendMail = wp_mail( $to, $subject, $message, $headers );
-            if(FALSE === $sendMail){
-                $aio_wp_security->debug_logger->log_debug("File change notification email failed to send to ".$to,4);
+            // Get the email address(es).
+            $addresses = $aio_wp_security->configs->get_value('aiowps_fcd_scan_email_address');
+            // If no explicit email address(es) are given, send email to site admin.
+            $to = empty( $addresses ) ? array( get_site_option('admin_email') ) : explode(PHP_EOL, $addresses);
+            if ( !wp_mail( $to, $subject, $message, $headers ) ) {
+                $aio_wp_security->debug_logger->log_debug("File change notification email failed to send.",4);
             }
+
         }
     }
     
@@ -89,7 +82,8 @@ class AIOWPSecurity_Scan
         if($aio_wp_security->configs->get_value('aiowps_enable_automated_fcd_scan')=='1')
         {
             $aio_wp_security->debug_logger->log_debug_cron("Filescan - Scheduled fcd_scan is enabled. Checking now to see if scan needs to be done...");
-            $current_time = strtotime(current_time('mysql'));
+            $time_now = date_i18n( 'Y-m-d H:i:s' );
+            $current_time = strtotime($time_now);
             $fcd_scan_frequency = $aio_wp_security->configs->get_value('aiowps_fcd_scan_frequency'); //Number of hours or days or months interval
             $interval_setting = $aio_wp_security->configs->get_value('aiowps_fcd_scan_interval'); //Hours/Days/Months
             switch($interval_setting)
@@ -115,7 +109,7 @@ class AIOWPSecurity_Scan
                     $result = $this->execute_file_change_detection_scan(ABSPATH);
 //                    if ($result)
 //                    {
-                        $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', current_time('mysql'));
+                        $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', $time_now);
                         $aio_wp_security->configs->save_config();
                         $aio_wp_security->debug_logger->log_debug_cron("Filescan - Scheduled filescan was successfully completed.");
 //                    } 
@@ -128,7 +122,7 @@ class AIOWPSecurity_Scan
             else
             {
                 //Set the last scan time to now so it can trigger for the next scheduled period
-                $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', current_time('mysql'));
+                $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', $time_now);
                 $aio_wp_security->configs->save_config();
             }
         }
@@ -173,7 +167,7 @@ class AIOWPSecurity_Scan
         $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
         $payload = maybe_serialize($scanned_data);
         $scan_result = maybe_serialize($scan_result);
-        $date_time = current_time('mysql');
+        $date_time = date_i18n( 'Y-m-d H:i:s' );
         $data = array('date_time' => $date_time, 'meta_key1' => 'file_change_detection', 'meta_value1' => 'file_scan_data', 'meta_value4' => $payload, 'meta_key5' => 'last_scan_result', 'meta_value5' => $scan_result);
         if($save_type == 'insert'){
             $result = $wpdb->insert($aiowps_global_meta_tbl_name, $data);
@@ -190,51 +184,71 @@ class AIOWPSecurity_Scan
             return true;
         }
     }
-    
+
+    /**
+     * Recursively scan the entire $start_dir directory and return file size
+     * and last modified date of every regular file. Ignore files and file
+     * types specified in file scanner settings.
+     * @global AIO_WP_Security $aio_wp_security
+     * @param string $start_dir
+     * @return array
+     */
     function do_file_change_scan($start_dir=ABSPATH)
     {
         global $aio_wp_security;
         $filescan_data = array();
-        $dit = new RecursiveDirectoryIterator($start_dir);
+        // Iterator key is absolute file path, iterator value is SplFileInfo object,
+        // iteration skips '..' and '.' records, because we're not interested in directories.
+        $dit = new RecursiveDirectoryIterator(
+            $start_dir, FilesystemIterator::KEY_AS_PATHNAME | FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::SKIP_DOTS
+        );
         $rit = new RecursiveIteratorIterator(
-            $dit, RecursiveIteratorIterator::SELF_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD);
-        
-        $file_types_to_skip = $aio_wp_security->configs->get_value('aiowps_fcd_exclude_filetypes');
+            $dit, RecursiveIteratorIterator::SELF_FIRST, RecursiveIteratorIterator::CATCH_GET_CHILD
+        );
 
-        foreach ($rit as $fileinfo) {
-            if ($fileinfo->isDir()) continue; //skip directories
-            if ($fileinfo->getFilename() == 'wp-security-log-cron-job.txt' || $fileinfo->getFilename() == 'wp-security-log.txt') continue; //skip aiowps log files
-            //Let's omit any file types from the scan which were specified in the settings if necessary
-            if (!empty($file_types_to_skip)){
-                $file_types_to_skip = strtolower($file_types_to_skip);
+        // Grab files/directories to skip
+        $files_to_skip = AIOWPSecurity_Utility::explode_trim_filter_empty($aio_wp_security->configs->get_value('aiowps_fcd_exclude_files'));
+        // Grab (lowercased) file types to skip
+        $file_types_to_skip = AIOWPSecurity_Utility::explode_trim_filter_empty(strtolower($aio_wp_security->configs->get_value('aiowps_fcd_exclude_filetypes')));
+
+        $start_dir_length = strlen($start_dir);
+
+        foreach ($rit as $filename => $fileinfo) {
+
+            if ( !file_exists($filename) || is_dir($filename) ) {
+                continue; // if file doesn't exist or is a directory move on to next iteration
+            }
+
+            if ( $fileinfo->getFilename() == 'wp-security-log-cron-job.txt' || $fileinfo->getFilename() == 'wp-security-log.txt' ) {
+                continue; // skip aiowps log files
+            }
+
+            // Let's omit any file types from the scan which were specified in the settings if necessary
+            if ( !empty($file_types_to_skip) ) {
                 //$current_file_ext = strtolower($fileinfo->getExtension()); //getExtension() only available on PHP 5.3.6 or higher
-                $ext = pathinfo($fileinfo->getFilename(), PATHINFO_EXTENSION);
-                $current_file_ext = strtolower($ext);
-                if (!empty($current_file_ext)){
-                    if (strpos($file_types_to_skip, $current_file_ext) !== FALSE) continue;
+                $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                if (in_array($ext, $file_types_to_skip) ) { continue; }
+            }
+
+            // Let's omit specific files or directories from the scan which were specified in the settings
+            if ( !empty($files_to_skip) ) {
+
+                $skip_this = false;
+                foreach ($files_to_skip as $f_or_dir) {
+                    // Expect files/dirs to be specified relatively to $start_dir,
+                    // so start searching at $start_dir_length offset.
+                    if (strpos($filename, $f_or_dir, $start_dir_length) !== false) {
+                        $skip_this = true;
+                        break; // !
+                    }
                 }
+                if ($skip_this) { continue; }
             }
-            //Let's omit specific files or directories from the scan which were specified in the settings
-            $filename = $fileinfo->getPathname();
-            if(file_exists($filename) === FALSE){
-                continue; //if file doesn't exist move on to next iteration
-            }
-            $files_to_skip = $aio_wp_security->configs->get_value('aiowps_fcd_exclude_files');
-            if (!empty($files_to_skip))
-            {
-                $file_array = explode(PHP_EOL, $files_to_skip);
-                $skip_this = FALSE;
-                foreach ($file_array as $f_or_dir)
-                {
-                    if (strpos($filename, trim($f_or_dir)) !== FALSE){
-                        $skip_this = TRUE;
-                    } 
-                }
-                if ($skip_this) continue;
-            }
-            $filescan_data[$filename] = array();
-            $filescan_data[$filename]['last_modified'] = $fileinfo->getMTime();
-            $filescan_data[$filename]['filesize'] = $fileinfo->getSize();
+
+            $filescan_data[$filename] = array(
+                'last_modified' => $fileinfo->getMTime(),
+                'filesize'      => $fileinfo->getSize(),
+            );
 
         }
         return $filescan_data; 
@@ -242,38 +256,34 @@ class AIOWPSecurity_Scan
     
     function compare_scan_data($last_scan_data, $new_scanned_data)
     {
-        $files_added = @array_diff_assoc( $new_scanned_data, $last_scan_data ); //Identify new files added: get all files which are in the new scan but not present in the old scan
-        $files_removed = @array_diff_assoc( $last_scan_data, $new_scanned_data ); //Identify files deleted : get all files which are in the old scan but not present in the new scan
-        $new_scan_minus_added = @array_diff_key( $new_scanned_data, $files_added ); //Get all files in current scan which were not newly added
-        $old_scan_minus_deleted = @array_diff_key( $last_scan_data, $files_removed );  //Get all files in old scan which were not deleted
-        $file_changes_detected = array();
+        // Identify new files added: get all files which are in the new scan but not present in the old scan
+        $files_added = @array_diff_key( $new_scanned_data, $last_scan_data );
+        // Identify files deleted: get all files which are in the old scan but not present in the new scan
+        $files_removed = @array_diff_key( $last_scan_data, $new_scanned_data );
+        // Identify existing files: get all files which are in new scan, but were not added
+        $files_kept = @array_diff_key( $new_scanned_data, $files_added );
 
-        if(!empty($new_scan_minus_added)){
-            //compare file hashes and mod dates
-            foreach ( $new_scan_minus_added as $entry => $key) {
-                if ( array_key_exists( $entry, $old_scan_minus_deleted ) ) 
-                {
-                    //check filesize and last_modified values
-                    if (strcmp($key['last_modified'], $old_scan_minus_deleted[$entry]['last_modified']) != 0 || 
-                                    strcmp($key['filesize'], $old_scan_minus_deleted[$entry]['filesize']) != 0) 
-                    {
-                        $file_changes_detected[$entry]['filesize'] = $key['filesize'];
-                        $file_changes_detected[$entry]['last_modified'] = $key['last_modified'];
-                    }
-                }
+        $files_changed = array();
 
+        // Loop through existing files and determine, if they have been changed
+        foreach ( $files_kept as $filename => $new_scan_meta ) {
+            $last_scan_meta = $last_scan_data[$filename];
+            // Check filesize and last_modified values
+            if ( ($new_scan_meta['last_modified'] !== $last_scan_meta['last_modified'])
+                || ($new_scan_meta['filesize'] !== $last_scan_meta['filesize']) )
+            {
+                $files_changed[$filename] = $new_scan_meta;
             }
         }
 
-        //create single array of all changes
-        $results = array(
-                'files_added' => $files_added,
-                'files_removed' => $files_removed,
-                'files_changed' => $file_changes_detected
+        // Create single array of all changes
+        return array(
+            'files_added' => $files_added,
+            'files_removed' => $files_removed,
+            'files_changed' => $files_changed,
         );
-        return $results;
     }
-    
+
     function execute_db_scan()
     {
         global $aio_wp_security;
@@ -703,46 +713,42 @@ class AIOWPSecurity_Scan
         }else{
             return $scan_results_unserialized;
         }
-        
+
     }
-    
-    static function get_file_change_summary($scan_results_unserialized)
+
+    static function get_file_change_summary($scan_result)
     {
         $scan_summary = "";
-        $files_added_output = "";
-        $files_removed_output = "";
-        $files_changed_output = "";
-        if (!empty($scan_results_unserialized['files_added']))
+        if (!empty($scan_result['files_added']))
         {
             //Output of files added
-            $files_added_output .= "\r\n".__('The following files were added to your host', 'all-in-one-wp-security-and-firewall').":\r\n";
-            foreach ($scan_results_unserialized['files_added'] as $key=>$value) {
-                $files_added_output .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
+            $scan_summary .= "\r\n".__('The following files were added to your host', 'all-in-one-wp-security-and-firewall').":\r\n";
+            foreach ($scan_result['files_added'] as $key=>$value) {
+                $scan_summary .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
             }
-            $files_added_output .= "\r\n======================================\r\n";
+            $scan_summary .= "\r\n======================================\r\n";
         }
-        if (!empty($scan_results_unserialized['files_removed']))
+        if (!empty($scan_result['files_removed']))
         {
             //Output of files removed
-            $files_removed_output .= "\r\n".__('The following files were removed from your host', 'all-in-one-wp-security-and-firewall').":\r\n";
-            foreach ($scan_results_unserialized['files_removed'] as $key=>$value) {
-                $files_removed_output .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
+            $scan_summary .= "\r\n".__('The following files were removed from your host', 'all-in-one-wp-security-and-firewall').":\r\n";
+            foreach ($scan_result['files_removed'] as $key=>$value) {
+                $scan_summary .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
             }
-            $files_removed_output .= "\r\n======================================\r\n";
+            $scan_summary .= "\r\n======================================\r\n";
         }
 
-        if (!empty($scan_results_unserialized['files_changed']))
+        if (!empty($scan_result['files_changed']))
         {
             //Output of files changed
-            $files_changed_output .= "\r\n".__('The following files were changed on your host', 'all-in-one-wp-security-and-firewall').":\r\n";
-            foreach ($scan_results_unserialized['files_changed'] as $key=>$value) {
-                $files_changed_output .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
+            $scan_summary .= "\r\n".__('The following files were changed on your host', 'all-in-one-wp-security-and-firewall').":\r\n";
+            foreach ($scan_result['files_changed'] as $key=>$value) {
+                $scan_summary .= "\r\n".$key.' ('.__('modified on: ', 'all-in-one-wp-security-and-firewall').date('Y-m-d H:i:s',$value['last_modified']).')';
             }
-            $files_changed_output .= "\r\n======================================\r\n";
+            $scan_summary .= "\r\n======================================\r\n";
         }
-        
-        $scan_summary .= $files_added_output . $files_removed_output . $files_changed_output;
+
         return $scan_summary;
     }
-    
+
 }

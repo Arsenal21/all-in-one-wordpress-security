@@ -8,8 +8,9 @@ class AIOWPSecurity_WP_Footer_Content {
 
         global $aio_wp_security;
 
-        //Handle the copy protection feature
-        if ($aio_wp_security->configs->get_value('aiowps_copy_protection') == '1') {
+        // Activate the copy protection feature for non-admin users
+        $copy_protection_active = $aio_wp_security->configs->get_value('aiowps_copy_protection') == '1';
+        if ( $copy_protection_active && !current_user_can(AIOWPSEC_MANAGEMENT_PERMISSION) ) {
             $this->output_copy_protection_code();
         }
 

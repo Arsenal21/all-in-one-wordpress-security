@@ -1,10 +1,10 @@
 === All In One WP Security & Firewall ===
-Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, samuelaguilera
+Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, chesio
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
-Tested up to: 4.4
-Stable tag: 4.0.2
+Tested up to: 4.6
+Stable tag: 4.2.3
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -37,6 +37,7 @@ Below is a list of the security and firewall features offered in this plugin:
 * The plugin will also detect if you have any WordPress user accounts which have identical login and display names. Having account's where display name is identical to login name is bad security practice because 
 you are making it 50% easier for hackers because they already know the login name.
 * Password strength tool to allow you to create very strong passwords.
+* Stop user enumeration. So users/bots cannot discover user info via author permalink.
 
 = User Login Security =
 * Protect against "Brute Force Login Attack" with the Login Lockdown feature. Users with a certain IP address or range will be locked out of the system for a predetermined amount of time based on the configuration settings and you can also choose to be notified 
@@ -112,6 +113,7 @@ or malicious bots who do not have a special cookie in their browser. You (the si
 * Monitor the most active IP addresses which persistently produce the most SPAM comments and instantly block them with the click of a button.
 * Prevent comments from being submitted if it doesn't originate from your domain (this should reduce some SPAM bot comment posting on your site).
 * Add a captcha to your wordpress comment form to add security against comment spam.
+* Automatically and permanently block IP addresses which have exceeded a certain number of comments labeled as SPAM.
 
 = Front-end Text Copy Protection =
 * Ability to disable the right click, text selection and copy option for your front-end.
@@ -124,6 +126,7 @@ or malicious bots who do not have a special cookie in their browser. You (the si
 
 = Additional Features =
 * Ability to remove the WordPress Generator Meta information from the HTML source of your site.
+* Ability to remove the WordPress Version information from the JS and CSS file includes of your site.
 * Ability to prevent people from accessing the readme.html, license.txt and wp-config-sample.php files
 * Ability to temporarily lock down the front end of your site from general visitors while you do various backend tasks (investigate security attacks, perform site upgrades, do maintenance work etc.)
 * Ability to export/import the security settings.
@@ -179,6 +182,147 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.2.3 =
+- Fixed bug when math captcha was displayed on Woocommerce registration page.
+- Fixed login page bug for cases where email address and captcha are used to submit login form (thanks to @chesio for fix).
+- Logs directory now contains a .htaccess file with proper deny directives.
+- Small UX improvement: add for attribute to captcha label.
+- Added check for IIS server in get_server_type function.
+
+= 4.2.2 =
+- Debug logger class improvements.
+- Added a message in the debug settings area to state that the log files are reset on every plugin update.
+- Always return an array from scan_dir_sort_date() to prevent PHP notices.
+- Improvements for Automated DB backups filling up space - old backup file will be deleted first.
+- Thanks to RIPS Analyzer for sending us the vulnerability report. 
+
+= 4.2.1 = 
+- Improve output of .htaccess to include <IfModule mod_rewrite.c> checks and RewriteEngine On directives.
+- Fall back to default DB backup interval in case of invalid value.
+- The aiowps_delete_backup_files() function will produce a debug log message on every call (to help with troubleshooting when needed).
+
+= 4.2.0 =
+- WPML plugin compatibility fix for the renamed admin login page feature.
+- Fixed a few potential XSS vulnerabilities.
+
+= 4.1.9 =
+- Small improvement to the new "immediate blocking of specific usernames" feature.
+
+= 4.1.8 =
+- New feature to allow immediate blocking of specific usernames.
+- Only activate copy (right-click) protection for non-admin users.
+- Fixed bug where logout link in admin bar does not get updated on after the $_POST submit to reflect the new rename login setting.
+- Fixed small bug in return_regularized_url function.
+- Improvement/bug fix: When currently logged in user attempts to access renamed login page, redirect them to dashboard.
+- Removed Spanish language files so they can be automatically pulled from WordPress.org.
+- Drop unnecessary WHERE clause in some backend listings.
+- Improvement: do not schedule a cronjob, if it is already scheduled.
+
+= 4.1.7 =
+- Added sanitisation for log file data in textarea.
+- Disabled autocomplete for Captcha field.
+
+= 4.1.6 =
+- Added cleanup code for captcha string info transients.
+- Minor change to the username label in the renamed login page to keep it inline with the standard WordPress login page.
+- Fixed a potential vulnerability when viewing AIOWPS log files in the Dashboard menu. Thanks to Manuel LLOP for pointing this out.
+
+= 4.1.5 =
+- Fixed bug where username is an email and captcha was being ignored.
+- Reduce memory footprint of database backup.
+- Improvements: Make hard-coded strings localizable.
+- Partial Apache 2.3 compatibility.
+- Improved: Hide WP version number by replacing it with a hash. This way, WordPress version number is not exposed, but browser caching is not obscured by missing version numbers.
+
+= 4.1.4 =
+- Improved and tweaked the login captcha feature to avoid some issues people had with the last modification.
+- Deleted reference to ini_get('safe_mode') to avoid fatal errors for newer versions of PHP where that setting has been totally removed.
+
+= 4.1.3 =
+- Added new checkbox for XMLRPC to disable only pingback methods but leave other XMLRPC functionality accessible. This will be useful for people who use Jetpack or Wordpress iOS or other apps.
+- Updated the French language file.
+- Fix: decbin doesn't add leading zero. Comparing empty strings return bad results.
+- Fix: bugfix in the login captcha. Thanks to Sipke Mellema for pointing it out.
+
+= 4.1.2 =
+- Fixed bug introduced by last file change scanner code changes.
+- Fixed bug in SPAM comment blocking functionality.
+- Fixed fatal error case when Divi theme and front end lockout is enabled.
+
+= 4.1.1 =
+- Fixed Fatal error conflict between Rename Login feature and Yoast SEO and some themes when attempting to access wp-admin page directly.
+- Added "Pending Approval" message when manual registration approval feature is enabled and a user registers.
+- Fix (minor): No need to use strcmp to compare integer values.
+- Updated and simplified wp-security-stop-users-enumeration.php for bug (thanks to @davidegiunchidiennea)
+- Minor code cleanup (Thanks to @chesio for the following changes).
+- File scanner codebase cleanup.
+- Fix: properly report invalid email addresses in file scanner configuration.
+- Code clean-up in AIOWPSecurity_Scan::do_file_change_scan() method.
+- Tweak: Compare file scan data faster.
+
+= 4.1.0 =
+- Fixed bug in Maintenance menu page when trying to attach a media file to the message text box.
+- Added a new filter (called "aiowps_ip_blocked_error_msg") which allows the modification of the error message displayed on the login page when an IP address has been blocked by the login lockdown feature.
+- Updated French language translation. Thanks to Claude Ribaux for providing the translation files.
+- Thanks to @chesio for making the following two changes.
+- Replaced deprecated call to get_currentuserinfo() function.
+- Minor code fixes in the backup class file.
+- Fix: display correct (error) message when write_to_htaccess() fails.
+- Tweak: database backup filename is more human-readable. 
+  Before: 24x7eg8l6i-database-backup-1463042767.zip
+  After: database-backup-20160512-104607-24x7eg8l6i.zip
+
+= 4.0.9 =
+- Made file change scanner code more robust for cases when open_basedir restriction is in effect. (Thanks to Manuel Jeanne for pointing this out).
+- Added code which will remove WordPress version info during CSS and JS script loading if you have the "Remove WP Generator Meta Info" option checked. (Thanks to aldemarcalazans for pointing this out).
+- Fixed some potential SQL injection vulnerabilities. (Thanks to Julio Potier for pointing these out).
+- Changed the feature category of blacklist manger from "Intermediate" to "Advanced".
+- Tweak: Remove "@" from list of characters blocked by advanced character string filter. (Because it is often used in retina-ready images).
+- Fix: Use home URL instead of site URL in lock notification email subject. Thanks to @chesio for fixing this.
+
+= 4.0.8 =
+- Added ability to identify IP addresses during user registration and option to block selected IPs.
+- Added login form captcha functionality for sub-sites in a multi-site installation. (see the Brute Force menu)
+- Fixed multi-site bug related to manual user-chosen DB prefix change.
+- Added extra XSS protection inside admin menu pages for the "tab" query parameter.
+- Added a note to the features that has the potential to lock you out if it doesn't work correctly on your site.
+- Updated Brazil-Portuguese language file.
+- Fixed issue with firewall custom rules being corrupted by magic quotes. Thanks to @chesio for fixing this.
+
+= 4.0.7 =
+- Added a new action hook "aiopws_before_set_404" which triggers just before the AIOWPS sets a 404. (handy for cases when rename login page is used which affects some themes when accessing "wp-admin" directly)
+- Fixed some potential SQL injection vulnerabilities.
+- Thanks to @chesio for submitting the following changes and applying the fixes.
+- Sub-directory install fixes.
+- Improve behavior of WP File Access tab. 
+- Fix invalid nesting of HTML elements.
+- Do not block HTTP requests that contain "tag=" in query string.
+- Option to enable the 6G firewall.
+
+= 4.0.6 =
+- Removed the viewing of contents of wp-config.php and .htaccess files in order to protect sensitive info.
+- Fixed more potential XSS vulnerabilities in some other settings pages. (Once again many thanks to Erin Germ for pointing these out)
+
+= 4.0.5 =
+- Fixed some potential XSS vulnerability in the blacklist, file system and file change detection settings pages. (Many thanks to Erin Germ for pointing these out)
+
+= 4.0.4 =
+- Added new feature: Auto Block Spammer IPs. This feature will automatically and permanently block IP addresses which are linked to comment SPAM. (see SPAM Prevention -> Comment SPAM IP Monitoring tab)
+- Added compatibility fix for the qTranslate-X plugin in the rename login page feature.
+- Added ability to send to more than one email address for file change detection feature notification.
+- Fixed bug in whois library when searching ARIN registry.
+- Fixed the handling of display of longer IPV6 strings in dashboard summary table.
+- Added hook for WooCommerce login form to display unlock button.
+- Added Dutch language translation. Thanks to Jeroen van der Linde for providing the translation files.
+- Typo fix in the "stop users enumeration" feature.
+
+= 4.0.3 =
+- Added urlencode to query strings in URLs to prevent unexpected behaviour. Thanks to @chesio for spotting the issue.
+- Added new feature to stop users enumeration. Thanks to Davide Giunchi @davidegiunchidiennea for adding this.
+- Added a more robust code for check_user_exists function. Thanks to Christian Carey.
+- Added cron cleanup of the global meta table.
+- Added a title in each of the admin interface menu.
 
 = 4.0.2 =
 - Added ability to enable/disable debug from the settings menu.

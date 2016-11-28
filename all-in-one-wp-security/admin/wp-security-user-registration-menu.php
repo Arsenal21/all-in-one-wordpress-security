@@ -28,7 +28,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
     function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : $tab_keys[0];
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
         return $tab;
     }
 
@@ -53,13 +53,14 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
      */
     function render_menu_page() 
     {
+        echo '<div class="wrap">';
+        echo '<h2>'.__('User Registration','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
-        ?>
-        <div class="wrap">
+        $this->render_menu_tabs();
+        ?>        
         <div id="poststuff"><div id="post-body">
         <?php 
-        $this->render_menu_tabs();
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -98,12 +99,16 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
         
         if(isset($_REQUEST['action'])) //Do list table form row action tasks
         {
-            if($_REQUEST['action'] == 'approve_acct'){ //Delete link was clicked for a row in list table
+            if($_REQUEST['action'] == 'approve_acct'){ //Approve link was clicked for a row in list table
                 $user_list->approve_selected_accounts(strip_tags($_REQUEST['user_id']));
             }
             
-            if($_REQUEST['action'] == 'delete_acct'){ //Unlock link was clicked for a row in list table
+            if($_REQUEST['action'] == 'delete_acct'){ //Delete link was clicked for a row in list table
                 $user_list->delete_selected_accounts(strip_tags($_REQUEST['user_id']));
+            }
+
+            if($_REQUEST['action'] == 'block_ip'){ //Block IP link was clicked for a row in list table
+                $user_list->block_selected_ips(strip_tags($_REQUEST['ip_address']));
             }
         }
 

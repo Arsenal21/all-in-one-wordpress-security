@@ -30,7 +30,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
             $block_url_nonce = wp_nonce_url($block_url, "block_spammer_ip", "aiowps_nonce");
             
             $actions = array(
-                'block' => '<a href="'.$block_url_nonce.'" onclick="return confirm(\'Are you sure you want to add this IP address to your blacklist?\')">Block</a>',
+                'block' => '<a href="'.$block_url_nonce.'" onclick="return confirm(\'Are you sure you want to permanently block this IP address?\')">Block</a>',
             );
         }
         
@@ -55,6 +55,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
             'cb' => '<input type="checkbox" />', //Render a checkbox
             'comment_author_IP' => 'Spammer IP',
             'amount' => 'Number of SPAM Comments From This IP',
+            'status' => 'Status',
         );
         return $columns;
     }
@@ -63,6 +64,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         $sortable_columns = array(
             'comment_author_IP' => array('comment_author_IP',false),
             'amount' => array('amount',false),
+            'status' => array('status',false),
         );
         return $sortable_columns;
     }
@@ -103,6 +105,41 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
      * The function accepts either an array of IDs or a single ID
      */
     function block_spammer_ip_records($entries)
+    {
+        global $wpdb, $aio_wp_security;
+        if (is_array($entries))
+        {
+            if (isset($_REQUEST['_wp_http_referer']))
+            {
+                //Bulk selection using checkboxes were used
+                foreach ($entries as $ip_add)
+                {
+                    AIOWPSecurity_Blocking::add_ip_to_block_list($ip_add, 'spam');
+                }
+            }
+        }
+        else if ($entries != NULL)
+        {
+            $nonce=isset($_GET['aiowps_nonce'])?$_GET['aiowps_nonce']:'';
+            if (!isset($nonce) ||!wp_verify_nonce($nonce, 'block_spammer_ip'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for delete selected blocked IP operation!",4);
+                die(__('Nonce check failed for delete selected blocked IP operation!','all-in-one-wp-security-and-firewall'));
+            }
+
+            //individual entry where "block" link was clicked
+            AIOWPSecurity_Blocking::add_ip_to_block_list($entries, 'spam');
+        }
+
+        AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected IP addresses are now permanently blocked!','all-in-one-wp-security-and-firewall'));
+    }
+
+    /*
+     * (Old function which uses .htaccess blacklist - replaced by new method which uses php blocking code)
+     * This function will add the selected IP addresses to the .htaccess blacklist.
+     * The function accepts either an array of IDs or a single ID
+     */
+    function block_spammer_ip_records_old($entries)
     {
         global $wpdb, $aio_wp_security;
         $raw_banned_ip_list = $aio_wp_security->configs->get_value('aiowps_banned_ip_addresses');
@@ -156,15 +193,14 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         if($aio_wp_security->configs->get_value('aiowps_enable_blacklisting')=='1')
         {
             $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess();
-            if ($write_result == -1)
+            if ( $write_result )
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
-                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
+                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The .htaccess file was successfully modified to include the selected IP addresses.','all-in-one-wp-security-and-firewall'));
             }
             else
             {
-                
-                AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The .htaccess file was successfully modified to include the selected IP addresses.','all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('The plugin was unable to write to the .htaccess file. Please edit file manually.','all-in-one-wp-security-and-firewall'));
+                $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Blacklist_Menu - The plugin was unable to write to the .htaccess file.");
             }
         }
         else
@@ -213,6 +249,16 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
                 ORDER BY $orderby $order
                 ", $minimum_comments_per_ip);
         $data = $wpdb->get_results($sql, ARRAY_A);
+
+        //Get all permamnetly blocked IP addresses
+        $block_list = AIOWPSecurity_Blocking::get_list_blocked_ips();
+        if(!empty($block_list)){
+            foreach($data as $key=>$value){
+                if(in_array($value['comment_author_IP'],$block_list)){
+                    $data[$key]['status'] = 'blocked';
+                }
+            }
+        }
         $current_page = $this->get_pagenum();
         $total_items = count($data);
         $data = array_slice($data, (($current_page - 1) * $per_page), $per_page);
