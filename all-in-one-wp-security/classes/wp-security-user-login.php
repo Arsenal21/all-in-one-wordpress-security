@@ -26,6 +26,8 @@ class AIOWPSecurity_User_Login
      * user's IP is currently locked.
      *
      * @global AIO_WP_Security $aio_wp_security
+     * @param WP_Error|WP_User $user
+     * @return WP_User
      */
     function block_ip_if_locked($user)
     {
