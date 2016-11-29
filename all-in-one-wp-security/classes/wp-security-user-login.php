@@ -10,7 +10,7 @@ class AIOWPSecurity_User_Login
     {
         $this->key_login_msg = 'aiowps_login_msg_id';
         // As a first authentication step, check if user's IP is locked.
-        add_filter('authenticate', array($this, 'block_ip_if_locked'), 1, 0);
+        add_filter('authenticate', array($this, 'block_ip_if_locked'), 1, 1);
         // Check whether user needs to be manually approved after default WordPress authenticate hooks (with priority 20).
         add_filter('authenticate', array($this, 'check_manual_registration_approval'), 30, 1);
         // Check login captcha
@@ -26,8 +26,10 @@ class AIOWPSecurity_User_Login
      * user's IP is currently locked.
      *
      * @global AIO_WP_Security $aio_wp_security
+     * @param WP_Error|WP_User $user
+     * @return WP_User
      */
-    function block_ip_if_locked()
+    function block_ip_if_locked($user)
     {
         global $aio_wp_security;
         $user_locked = $this->check_locked_user();
@@ -41,7 +43,9 @@ class AIOWPSecurity_User_Login
                 $error_msg .= $this->get_unlock_request_form();
             }
             wp_die($error_msg, __('Service Temporarily Unavailable', 'all-in-one-wp-security-and-firewall'), 503);
-        }
+        } else {
+		return $user;
+	}
 	}
     /**
      * Check login captcha (if enabled).
