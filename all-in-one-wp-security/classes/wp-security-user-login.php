@@ -143,7 +143,7 @@ class AIOWPSecurity_User_Login
         }
         if ( $user->get_error_code() === 'account_pending' ) {
             // Neither log nor block users attempting to log in before their registration is approved.
-            return;
+            return $user;
         }
         // Login failed for non-trivial reason
         $this->increment_failed_logins($username);
