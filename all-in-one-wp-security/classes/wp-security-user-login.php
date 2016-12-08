@@ -44,9 +44,10 @@ class AIOWPSecurity_User_Login
             }
             wp_die($error_msg, __('Service Temporarily Unavailable', 'all-in-one-wp-security-and-firewall'), 503);
         } else {
-		return $user;
+            return $user;
 	}
-	}
+    }
+    
     /**
      * Check login captcha (if enabled).
      * @global AIO_WP_Security $aio_wp_security
