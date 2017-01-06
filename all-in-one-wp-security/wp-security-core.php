@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+if ( !defined('ABSPATH') ) {
+    exit; // Exit if accessed directly
+}
 
 if (!class_exists('AIO_WP_Security')){
 
