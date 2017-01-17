@@ -188,8 +188,9 @@ class AIOWPSecurity_User_Login
         $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
         $ip_range = AIOWPSecurity_Utility_IP::get_sanitized_ip_range($ip); //Get the IP range of the current user
         if(empty($ip_range)) return false;
+        $now = date_i18n( 'Y-m-d H:i:s' );
         $locked_user = $wpdb->get_row("SELECT * FROM $login_lockdown_table " .
-                                        "WHERE release_date > now() AND " .
+                                        "WHERE release_date > '".$now."' AND " .
                                         "failed_login_ip LIKE '" . esc_sql($ip_range) . "%'", ARRAY_A);
         return $locked_user;
     }
@@ -234,19 +235,24 @@ class AIOWPSecurity_User_Login
             $user_id = 0;
         }
         $ip_range_str = esc_sql($ip_range).'.*';
-        $insert = "INSERT INTO " . $login_lockdown_table . " (user_id, user_login, lockdown_date, release_date, failed_login_IP, lock_reason) " .
-                        "VALUES (' . $user_id . ', '" . $username . "', now(), date_add(now(), INTERVAL " .
-                        $lockout_time_length . " MINUTE), '" . $ip_range_str . "', '" . $lock_reason . "')";
-        $result = $wpdb->query($insert);
-        if ($result > 0)
+        
+        $lock_time = date_i18n( 'Y-m-d H:i:s' );
+        $lock_minutes = $lockout_time_length;
+        $newtimestamp = strtotime($lock_time.' + '.$lock_minutes.' minute');
+        $release_time = date('Y-m-d H:i:s', $newtimestamp);
+        $data = array('user_id' => $user_id, 'user_login' => $username, 'lockdown_date' => $lock_time, 'release_date' => $release_time, 'failed_login_IP' => $ip_range_str, 'lock_reason' => $lock_reason);
+        $format = array('%d', '%s', '%s', '%s', '%s', '%s');
+        $result = $wpdb->insert($login_lockdown_table, $data, $format);
+        
+        if ($result === FALSE)
+        {
+            $aio_wp_security->debug_logger->log_debug("Error inserting record into ".$login_lockdown_table,4);//Log the highly unlikely event of DB error
+        }
+        else
         {
             do_action('aiowps_lockdown_event', $ip_range, $username);
             $this->send_ip_lock_notification_email($username, $ip_range, $ip);
             $aio_wp_security->debug_logger->log_debug("The following IP address range has been locked out for exceeding the maximum login attempts: ".$ip_range,2);//Log the lockdown event
-        }
-        else if ($result === FALSE)
-        {
-            $aio_wp_security->debug_logger->log_debug("Error inserting record into ".$login_lockdown_table,4);//Log the highly unlikely event of DB error
         }
     }
     /**

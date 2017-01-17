@@ -84,7 +84,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         $old_db_prefix = $wpdb->prefix;
         $new_db_prefix = '';
         $perform_db_change = false;
-
+        
         if (isset($_POST['aiowps_db_prefix_change']))//Do form submission tasks
         {
             $nonce=$_REQUEST['_wpnonce'];
@@ -439,7 +439,10 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         {
             echo '<p class="aio_success_with_icon">'.sprintf( __('%s tables had their prefix updated successfully!', 'all-in-one-wp-security-and-firewall'), '<strong>'.$table_count.'</strong>').'</p>';
         }
-        
+
+        //Let's check for mysql tables of type "view"
+        $this->alter_table_views($table_old_prefix, $table_new_prefix);
+
         //Get wp-config.php file contents and modify it with new info
         $config_contents = file($config_file);
         $prefix_match_string = '$table_prefix='; //this is our search string for the wp-config.php file
@@ -557,6 +560,46 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         }
         $mysqli->close();        
         return $tables;
+    }
+    
+    /**
+     * Will modify existing table view definitions to reflect the new DB prefix change
+     * 
+     * @param type $old_prefix
+     * @param type $new_prefix
+     */
+    function alter_table_views($old_db_prefix, $new_db_prefix)
+    {
+        global $wpdb;
+        $table_count = 0;
+        $info_msg_string = '<p class="aio_info_with_icon">'.__('Checking for MySQL tables of type "view".....', 'all-in-one-wp-security-and-firewall').'</p>';
+        echo ($info_msg_string);
+        
+        //get tables which are views
+        $query = "SELECT * FROM INFORMATION_SCHEMA.VIEWS";
+        $res = $wpdb->get_results($query);
+        if(empty($res)) return;
+        $view_count = 0;
+        foreach ($res as $item){
+            $old_def = $item->VIEW_DEFINITION;
+            $new_def = str_replace($old_db_prefix, $new_db_prefix, $old_def);
+            $new_def_no_bt = str_replace("`", "", $new_def); //remove any backticks because these will cause the "ALTER" command used later to fail
+
+            $view_name = $item->TABLE_NAME;
+            $chg_view_sql = "ALTER VIEW $view_name AS $new_def_no_bt"; //Note: cannot use $wpdb->prepare because it adds single quotes which cause the ALTER query to fail
+            $view_res = $wpdb->query($chg_view_sql);
+            if($view_res === false){
+                echo '<p class="aio_error_with_icon">'.sprintf( __('Update of the following MySQL view definition failed: %s', 'all-in-one-wp-security-and-firewall'),$old_def).'</p>';
+                $aio_wp_security->debug_logger->log_debug("Update of the following MySQL view definition failed: ".$old_def,4);//Log the highly unlikely event of DB error
+            }else{
+                $view_count++;
+            }
+        }
+        if($view_count > 0){
+            echo '<p class="aio_success_with_icon">'.sprintf( __('%s view definitions were updated successfully!', 'all-in-one-wp-security-and-firewall'), '<strong>'.$view_count.'</strong>').'</p>';
+        }
+        
+        return;
     }
     
 } //end class

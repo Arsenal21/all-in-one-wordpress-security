@@ -215,7 +215,8 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
         $orderby = AIOWPSecurity_Utility::sanitize_value_by_array($orderby, $sortable);
         $order = AIOWPSecurity_Utility::sanitize_value_by_array($order, array('DESC' => '1', 'ASC' => '1'));
         
-	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $lockdown_table_name WHERE (lock_reason=%s OR lock_reason=%s) AND release_date > now() ORDER BY $orderby $order", 'login_fail', '404'), ARRAY_A);
+        $now = date_i18n( 'Y-m-d H:i:s' );
+	$data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $lockdown_table_name WHERE (lock_reason=%s OR lock_reason=%s) AND release_date > %s ORDER BY $orderby $order", 'login_fail', '404', $now), ARRAY_A);
         $current_page = $this->get_pagenum();
         $total_items = count($data);
         $data = array_slice($data,(($current_page-1)*$per_page),$per_page);

@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.7
-Stable tag: 4.2.4
+Stable tag: 4.2.5
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -59,7 +59,7 @@ via email whenever somebody gets locked out due to too many login attempts.
 * Ability to add captcha to the WordPress user registration page to protect you from spam user registration.
 
 = Database Security =
-* Easily the default WP prefix to a value of your choice with the click of a button.
+* Easily set the default WP prefix to a value of your choice with the click of a button.
 * Schedule automatic backups and email notifications or make an instant DB backup whenever you want with one click.
 
 = File System Security =
@@ -182,6 +182,13 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.2.5 =
+- Fixed bug - added code which caters for mysql view definitions when DB prefix is changed.
+- Fixed a typo in the user login security menu.
+- Fixed storage of time stamp in lockdown table to match the local Wordpress server time and be consistent with the timestamp stored in the failed logins table.
+- Prevent direct access to wp-security-core.php
+- Updated the POT file.
 
 = 4.2.4 =
 - Fix error on block_ip_if_locked(), doesn't exit with a wp_user. This is needed for other plugins that create the $user (aka ldap auth plugins).
