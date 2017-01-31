@@ -182,6 +182,8 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+= tdo 4.2.6 =
+- Fixed bug - Replaced date_i18n with current_time to prevent cases where some localisations produce foreign characters in date stamp output.
 
 = 4.2.5 =
 - Fixed bug - added code which caters for mysql view definitions when DB prefix is changed.

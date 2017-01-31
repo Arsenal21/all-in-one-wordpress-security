@@ -59,7 +59,7 @@ class AIOWPSecurity_Blocking
         global $wpdb, $aio_wp_security;
         //Check if this IP address is already in the block list
         $blocked = AIOWPSecurity_Blocking::is_ip_blocked($ip_address);
-        $time_now = date_i18n( 'Y-m-d H:i:s' );
+        $time_now = current_time( 'mysql' );
         if(empty($blocked)){
             //Add this IP to the blocked table
             $data = array(

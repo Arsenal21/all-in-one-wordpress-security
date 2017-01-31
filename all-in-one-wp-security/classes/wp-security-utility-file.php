@@ -122,7 +122,7 @@ class AIOWPSecurity_Utility_File
         $file_contents = AIOWPSecurity_Utility_File::get_file_contents($src_file_path);
         
         $payload = serialize($file_contents);
-        $date_time = date_i18n( 'Y-m-d H:i:s' );
+        $date_time = current_time( 'mysql' );
         $data = array('date_time' => $date_time, 'meta_key1' => $key_description, 'meta_value2' => $payload);
 
         //First check if a backup entry already exists in the global_meta table

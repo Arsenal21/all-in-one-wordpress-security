@@ -380,7 +380,7 @@ class AIOWPSecurity_Utility
             $referer_info = isset($_SERVER['HTTP_REFERER']) ? esc_attr($_SERVER['HTTP_REFERER']) : '';
         }
 
-        $current_time = date_i18n( 'Y-m-d H:i:s' );
+        $current_time = current_time( 'mysql' );
         $data = array(
             'event_type' => $event_type,
             'username' => $username,

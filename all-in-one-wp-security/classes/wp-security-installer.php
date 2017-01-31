@@ -126,6 +126,7 @@ class AIOWPSecurity_Installer
         block_reason varchar(128) NOT NULL DEFAULT '',
         country_origin varchar(50) NOT NULL DEFAULT '',
         blocked_date datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+        unblock tinyint(1) NOT NULL DEFAULT '0',
         PRIMARY KEY  (id)
         )" . $charset_collate . ";";
         dbDelta($pb_tbl_sql);
