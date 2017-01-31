@@ -10,6 +10,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
     var $menu_tabs_handler = array(
         'tab1' => 'render_tab1',
         'tab2' => 'render_tab2',
+        'tab3' => 'render_tab3',
         );
     
     function __construct() 
@@ -22,6 +23,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
         $this->menu_tabs = array(
         'tab1' => __('Manual Approval', 'all-in-one-wp-security-and-firewall'),
         'tab2' => __('Registration Captcha', 'all-in-one-wp-security-and-firewall'),
+        'tab3' => __('Registration Honeypot', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -240,6 +242,66 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
         <?php
         }
     }
-    
+ 
+    function render_tab3()
+    {
+        global $aio_wp_security;
+        global $aiowps_feature_mgr;
+        
+        if(isset($_POST['aiowpsec_save_registration_honeypot_settings']))//Do form submission tasks
+        {
+            $error = '';
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-registration-honeypot-settings-nonce'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed on registration honeypot settings save!",4);
+                die("Nonce check failed on registration honeypot settings save!");
+            }
+
+            //Save all the form values to the options
+            $aio_wp_security->configs->set_value('aiowps_enable_registration_honeypot',isset($_POST["aiowps_enable_registration_honeypot"])?'1':'');
+            $aio_wp_security->configs->save_config();
+            
+            //Recalculate points after the feature status/options have been altered
+            $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
+            
+            $this->show_msg_settings_updated();
+        }
+        ?>
+        <div class="aio_blue_box">
+            <?php
+            echo '<p>'.__('This feature allows you to add a special hidden "honeypot" field on the WordPress registration page. This will only be visible to robots and not humans.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('Since robots usually fill in every input field from a registration form, they will also submit a value for the special hidden honeypot field.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('The way honeypots work is that a hidden field is placed somewhere inside a form which only robots will submit. If that field contains a value when the form is submitted then a robot has most likely submitted the form and it is consequently dealt with.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('Therefore, if the plugin detects that this field has a value when the registration form is submitted, then the robot which is attempting to register on your site will be redirected to its localhost address - http://127.0.0.1.', 'all-in-one-wp-security-and-firewall').'
+            </p>';
+            ?>
+        </div>
+        <form action="" method="POST">
+        <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('Registration Form Honeypot Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <?php
+        //Display security info badge
+        global $aiowps_feature_mgr;
+        $aiowps_feature_mgr->output_feature_details_badge("registration-honeypot");
+        ?>
+
+        <?php wp_nonce_field('aiowpsec-registration-honeypot-settings-nonce'); ?>
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Enable Honeypot On Registration Page', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                <input name="aiowps_enable_registration_honeypot" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_registration_honeypot')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to enable the honeypot feature for the registration page', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
+            </tr>            
+        </table>
+        </div></div>        
+     
+        <input type="submit" name="aiowpsec_save_registration_honeypot_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
+        </form>
+        <?php
+    }   
         
 } //end class

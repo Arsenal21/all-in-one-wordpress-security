@@ -119,6 +119,13 @@ class AIOWPSecurity_General_Init_Tasks
                 add_action('login_form', array(&$this, 'insert_honeypot_hidden_field'));
             }
         }
+ 
+        //For registration honeypot feature
+        if($aio_wp_security->configs->get_value('aiowps_enable_registration_honeypot') == '1'){
+            if (!is_user_logged_in()) {
+                add_action('register_form', array(&$this, 'insert_honeypot_hidden_field'));
+            }
+        }
         
         //For lost password captcha feature
         if($aio_wp_security->configs->get_value('aiowps_enable_lost_password_captcha') == '1'){
