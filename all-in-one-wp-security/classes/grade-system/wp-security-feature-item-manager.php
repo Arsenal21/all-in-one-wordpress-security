@@ -224,10 +224,10 @@ class AIOWPSecurity_Feature_Item_Manager
             {
                 $this->check_registration_captcha_feature($item);
             }
-             if($item->feature_id == "registration-honeypot")
+            if($item->feature_id == "registration-honeypot")
             {
                 $this->check_enable_registration_honeypot_feature($item);
-            }           
+            }
             
             if($item->feature_id == "filesystem-file-permissions")
             {

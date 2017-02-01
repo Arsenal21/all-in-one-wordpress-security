@@ -412,7 +412,7 @@ class AIOWPSecurity_General_Init_Tasks
 
     function insert_honeypot_hidden_field(){
         $honey_input = '<p style="display: none;"><label>'.__('Enter something special:','all-in-one-wp-security-and-firewall').'</label>';
-        $honey_input .= '<input name="aio_special_field" type="text" id="aio_special_field" class="aio_special_field" /></p>';
+        $honey_input .= '<input name="aio_special_field" type="text" id="aio_special_field" class="aio_special_field" value="" /></p>';
         echo $honey_input;
     }
     

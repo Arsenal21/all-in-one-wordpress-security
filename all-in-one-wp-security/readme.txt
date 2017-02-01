@@ -56,7 +56,8 @@ via email whenever somebody gets locked out due to too many login attempts.
 
 = User Registration Security =
 * Enable manual approval of WordPress user accounts. If your site allows people to create their own accounts via the WordPress registration form, then you can minimize SPAM or bogus registrations by manually approving each registration.
-* Ability to add captcha to the WordPress user registration page to protect you from spam user registration.
+* Ability to add captcha to the WordPress's user registration page to protect you from spam user registration.
+* Ability to add Honeypot to the WordPress's user registration form to reduce registration attempts by robots.
 
 = Database Security =
 * Easily set the default WP prefix to a value of your choice with the click of a button.
@@ -182,8 +183,10 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
-= tdo 4.2.6 =
+
+= TODO - 4.2.6 =
 - Fixed bug - Replaced date_i18n with current_time to prevent cases where some localisations produce foreign characters in date stamp output.
+- Added a new feature to add Honeypot to the WordPress's user registration form (this can help reduce registration attempts by robots).
 
 = 4.2.5 =
 - Fixed bug - added code which caters for mysql view definitions when DB prefix is changed.
