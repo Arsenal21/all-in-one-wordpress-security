@@ -55,6 +55,8 @@ class AIOWPSecurity_Feature_Item_Manager
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("manually-approve-registrations", __("Registration Approval", "all-in-one-wp-security-and-firewall"), $this->feature_point_4, $this->sec_level_basic);
         //Registration Captcha
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("user-registration-captcha", __("Registration Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_4, $this->sec_level_basic);
+        //Registration Honeypot
+        $this->feature_items[] = new AIOWPSecurity_Feature_Item("registration-honeypot", __("Enable Registration Honeypot", "all-in-one-wp-security-and-firewall"), $this->feature_point_2, $this->sec_level_inter);
         
         //Database Security Menu Features
         //DB Prefix
@@ -222,7 +224,10 @@ class AIOWPSecurity_Feature_Item_Manager
             {
                 $this->check_registration_captcha_feature($item);
             }
-            
+             if($item->feature_id == "registration-honeypot")
+            {
+                $this->check_enable_registration_honeypot_feature($item);
+            }           
             
             if($item->feature_id == "filesystem-file-permissions")
             {
@@ -509,6 +514,17 @@ class AIOWPSecurity_Feature_Item_Manager
         }
     }
     
+    function check_enable_registration_honeypot_feature($item)
+    {
+        global $aio_wp_security;
+        if ($aio_wp_security->configs->get_value('aiowps_enable_registration_honeypot') == '1') {
+            $item->set_feature_status($this->feature_active);
+        }
+        else
+        {
+            $item->set_feature_status($this->feature_inactive);
+        }
+    }
     
     function check_db_security_db_prefix_feature($item)
     {

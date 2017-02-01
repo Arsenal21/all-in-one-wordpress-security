@@ -51,6 +51,7 @@ class AIOWPSecurity_Configure_Settings
         //User registration
         $aio_wp_security->configs->set_value('aiowps_enable_manual_registration_approval','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_registration_page_captcha','');//Checkbox
+        $aio_wp_security->configs->set_value('aiowps_enable_registration_honeypot','');//Checkbox
         
         //DB Security feature
         //$aio_wp_security->configs->set_value('aiowps_new_manual_db_pefix',''); //text field
@@ -183,7 +184,8 @@ class AIOWPSecurity_Configure_Settings
         //User registration
         $aio_wp_security->configs->add_value('aiowps_enable_manual_registration_approval','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_enable_registration_page_captcha','');//Checkbox
-        
+        $aio_wp_security->configs->set_value('aiowps_enable_registration_honeypot','');//Checkbox
+       
         //DB Security feature
         //$aio_wp_security->configs->add_value('aiowps_new_manual_db_pefix',''); //text field
         $aio_wp_security->configs->add_value('aiowps_enable_random_prefix','');//Checkbox
