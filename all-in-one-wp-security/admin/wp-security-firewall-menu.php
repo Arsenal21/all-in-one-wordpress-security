@@ -980,6 +980,19 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             </form>
         </div></div>
         <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('Export to CSV', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-export-404-event-logs-to-csv-nonce'); ?>
+        <table class="form-table">
+            <tr valign="top">
+            <span class="description"><?php _e('Click this button if you wish to download this log in CSV format.', 'all-in-one-wp-security-and-firewall'); ?></span>
+            </tr>            
+        </table>
+        <input type="submit" name="aiowps_export_404_event_logs_to_csv" value="<?php _e('Export to CSV', 'all-in-one-wp-security-and-firewall')?>" class="button-primary"/>
+        </form>
+        </div></div>  
+        <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('Delete All 404 Event Logs', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">

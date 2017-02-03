@@ -22,17 +22,101 @@ class AIOWPSecurity_Admin_Init
     var $filescan_menu;
     var $misc_menu;
 
-    function __construct()
-    {
+    function __construct() {
         //This class is only initialized if is_admin() is true
         $this->admin_includes();
         add_action('admin_menu', array(&$this, 'create_admin_menus'));
+        //handle CSV download
+        add_action('admin_init', array(&$this, 'aiowps_csv_download'));
 
         //make sure we are on our plugin's menu pages
-        if (isset($_GET['page']) && strpos($_GET['page'], AIOWPSEC_MENU_SLUG_PREFIX ) !== false ) {
+        if (isset($_GET['page']) && strpos($_GET['page'], AIOWPSEC_MENU_SLUG_PREFIX) !== false) {
             add_action('admin_print_scripts', array(&$this, 'admin_menu_page_scripts'));
-            add_action('admin_print_styles', array(&$this, 'admin_menu_page_styles'));            
-            add_action('init', array( &$this, 'init_hook_handler_for_admin_side')); 
+            add_action('admin_print_styles', array(&$this, 'admin_menu_page_styles'));
+            add_action('init', array(&$this, 'init_hook_handler_for_admin_side'));
+        }
+    }
+
+    private function aiowps_output_csv($items, $export_keys, $filename='data.csv') {
+        header("Content-Type: text/csv; charset=utf-8");
+        header("Content-Disposition: attachment; filename=".$filename);
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        $output = fopen('php://output', 'w'); //open output stream
+
+        fputcsv($output, $export_keys); //let's put column names first
+
+        foreach ($items as $item) {
+            unset($csv_line);
+            foreach ($export_keys as $key => $value) {
+                if (isset($item[$key])) {
+                    $csv_line[] = $item[$key];
+                }
+            }
+            fputcsv($output, $csv_line);
+        }
+    }
+
+    function aiowps_csv_download() {
+        global $aio_wp_security;
+        if (isset($_POST['aiowpsec_export_acct_activity_logs_to_csv'])) { //Export account activity logs
+            $nonce = $_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-export-acct-activity-logs-to-csv-nonce')) {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for export account activity logs to CSV!", 4);
+                die(__('Nonce check failed for export account activity logs to CSV!', 'all-in-one-wp-security-and-firewall'));
+            }
+            include_once 'wp-security-list-acct-activity.php';
+            $acct_activity_list = new AIOWPSecurity_List_Account_Activity();
+            $acct_activity_list->prepare_items(true);
+            //Let's build a list of items we want to export and give them readable names
+            $export_keys = array(
+                'user_id' => 'User ID',
+                'user_login' => 'Username',
+                'login_date' => 'Login Date',
+                'logout_date' => 'Logout Date',
+                'login_ip' => 'IP'
+            );
+            $this->aiowps_output_csv($acct_activity_list->items, $export_keys, 'account_activity_logs.csv');
+            exit();
+        }
+        if (isset($_POST['aiowps_export_failed_login_records_to_csv'])) {//Export failed login records
+            $nonce = $_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-export-failed-login-records-to-csv-nonce')) {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for export failed login records to CSV!", 4);
+                die(__('Nonce check failed for export failed login records to CSV!', 'all-in-one-wp-security-and-firewall'));
+            }
+            include_once 'wp-security-list-login-fails.php';
+            $failed_login_list = new AIOWPSecurity_List_Login_Failed_Attempts();
+            $failed_login_list->prepare_items(true);
+            $export_keys = array(
+                'login_attempt_ip' => 'Login IP Range',
+                'user_id' => 'User ID',
+                'user_login' => 'Username',
+                'failed_login_date' => 'Date',
+            );
+            $this->aiowps_output_csv($failed_login_list->items, $export_keys, 'failed_login_records.csv');
+            exit();
+        }
+        if (isset($_POST['aiowps_export_404_event_logs_to_csv'])) {//Export 404 event logs
+            $nonce = $_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-export-404-event-logs-to-csv-nonce')) {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for export 404 event logs to CSV!", 4);
+                die(__('Nonce check failed for export 404 event logs to CSV!', 'all-in-one-wp-security-and-firewall'));
+            }
+            include_once 'wp-security-list-404.php'; //For rendering the AIOWPSecurity_List_Table in tab1
+            $event_list_404 = new AIOWPSecurity_List_404(); //For rendering the AIOWPSecurity_List_Table in tab1
+            $event_list_404->prepare_items(true);
+            $export_keys = array(
+                'id' => 'ID',
+                'event_type' => 'Event Type',
+                'ip_or_host' => 'IP Address',
+                'url' => 'Attempted URL',
+                'referer_info' => 'Referer',
+                'event_date' => 'Date',
+                'status' => 'Lock Status',
+            );
+            $this->aiowps_output_csv($event_list_404->items, $export_keys, '404_event_logs.csv');
+            exit();
         }
     }
 

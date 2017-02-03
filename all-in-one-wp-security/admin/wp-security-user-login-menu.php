@@ -338,6 +338,19 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             </form>
         </div></div>
         <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('Export to CSV', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-export-failed-login-records-to-csv-nonce'); ?>
+        <table class="form-table">
+            <tr valign="top">
+            <span class="description"><?php _e('Click this button if you wish to download this log in CSV format.', 'all-in-one-wp-security-and-firewall'); ?></span>
+            </tr>            
+        </table>
+        <input type="submit" name="aiowps_export_failed_login_records_to_csv" value="<?php _e('Export to CSV', 'all-in-one-wp-security-and-firewall')?>" class="button-primary"/>
+        </form>
+        </div></div>  
+        <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('Delete All Failed Login Records', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <form action="" method="POST">
@@ -447,6 +460,10 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
                 $acct_activity_list->delete_login_activity_records(strip_tags($_REQUEST['activity_login_rec']));
             }
         }
+        if (isset($_POST['aiowpsec_export_to_csv'])) {
+            echo'yo';
+            die;
+        }
         ?>
         <div class="aio_blue_box">
             <?php
@@ -471,6 +488,19 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             <?php $acct_activity_list->display(); ?>
             </form>
         </div></div>
+        <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('Export to CSV', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-export-acct-activity-logs-to-csv-nonce'); ?>
+        <table class="form-table">
+            <tr valign="top">
+            <span class="description"><?php _e('Click this button if you wish to download this log in CSV format.', 'all-in-one-wp-security-and-firewall'); ?></span>
+            </tr>            
+        </table>
+        <input type="submit" name="aiowpsec_export_acct_activity_logs_to_csv" value="<?php _e('Export to CSV', 'all-in-one-wp-security-and-firewall')?>" class="button-primary"/>
+        </form>
+        </div></div>  
         <?php
     }
     

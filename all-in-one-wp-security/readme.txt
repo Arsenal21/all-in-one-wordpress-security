@@ -185,6 +185,7 @@ None
 == Changelog ==
 
 = TODO - 4.2.6 =
+- Added "Export to CSV" buttons for 404 Event Logs, Account Activity Logs and Failed Login Records.
 - Fixed bug - Replaced date_i18n with current_time to prevent cases where some localisations produce foreign characters in date stamp output.
 - Added a new feature to add Honeypot to the WordPress's user registration form (this can help reduce registration attempts by robots).
 
