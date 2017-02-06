@@ -107,7 +107,7 @@ class AIOWPSecurity_Admin_Init
             $event_list_404 = new AIOWPSecurity_List_404(); //For rendering the AIOWPSecurity_List_Table in tab1
             $event_list_404->prepare_items(true);
             $export_keys = array(
-                'id' => 'ID',
+                'id' => 'Id',
                 'event_type' => 'Event Type',
                 'ip_or_host' => 'IP Address',
                 'url' => 'Attempted URL',
