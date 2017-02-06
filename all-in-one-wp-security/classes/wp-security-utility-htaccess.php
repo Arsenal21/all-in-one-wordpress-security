@@ -836,7 +836,7 @@ class AIOWPSecurity_Utility_Htaccess
         if ($aio_wp_security->configs->get_value('aiowps_enable_6g_firewall') == '1') {
             $rules .= AIOWPSecurity_Utility_Htaccess::$six_g_blacklist_marker_start . PHP_EOL; //Add feature marker start
 
-            $rules .= '# 6G BLACKLIST/FIREWALL (2016)
+            $rules .= '# 6G FIREWALL/BLACKLIST
                         # @ https://perishablepress.com/6g/
 
                         # 6G:[QUERY STRINGS]
@@ -844,7 +844,7 @@ class AIOWPSecurity_Utility_Htaccess
                                 RewriteEngine On
                                 RewriteCond %{QUERY_STRING} (eval\() [NC,OR]
                                 RewriteCond %{QUERY_STRING} (127\.0\.0\.1) [NC,OR]
-                                RewriteCond %{QUERY_STRING} ([a-z0-9]{2000}) [NC,OR]
+                                RewriteCond %{QUERY_STRING} ([a-z0-9]{2000,}) [NC,OR]
                                 RewriteCond %{QUERY_STRING} (javascript:)(.*)(;) [NC,OR]
                                 RewriteCond %{QUERY_STRING} (base64_encode)(.*)(\() [NC,OR]
                                 RewriteCond %{QUERY_STRING} (GLOBALS|REQUEST)(=|\[|%) [NC,OR]
@@ -857,21 +857,21 @@ class AIOWPSecurity_Utility_Htaccess
                         </IfModule>
 
                         # 6G:[REQUEST METHOD]
-                        <ifModule mod_rewrite.c>
-                                RewriteCond %{REQUEST_METHOD} ^(connect|debug|delete|move|put|trace|track) [NC]
+                        <IfModule mod_rewrite.c>
+                                RewriteCond %{REQUEST_METHOD} ^(connect|debug|move|put|trace|track) [NC]
                                 RewriteRule .* - [F]
                         </IfModule>
 
                         # 6G:[REFERRERS]
                         <IfModule mod_rewrite.c>
-                                RewriteCond %{HTTP_REFERER} ([a-z0-9]{2000}) [NC,OR]
+                                RewriteCond %{HTTP_REFERER} ([a-z0-9]{2000,}) [NC,OR]
                                 RewriteCond %{HTTP_REFERER} (semalt.com|todaperfeita) [NC]
                                 RewriteRule .* - [F]
                         </IfModule>
 
                         # 6G:[REQUEST STRINGS]
                         <IfModule mod_alias.c>
-                                RedirectMatch 403 (?i)([a-z0-9]{2000})
+                                RedirectMatch 403 (?i)([a-z0-9]{2000,})
                                 RedirectMatch 403 (?i)(https?|ftp|php):/
                                 RedirectMatch 403 (?i)(base64_encode)(.*)(\()
                                 RedirectMatch 403 (?i)(=\\\'|=\\%27|/\\\'/?)\.
@@ -886,22 +886,22 @@ class AIOWPSecurity_Utility_Htaccess
 
                         # 6G:[USER AGENTS]
                         <IfModule mod_setenvif.c>
-                                SetEnvIfNoCase User-Agent ([a-z0-9]{2000}) bad_bot
+                                SetEnvIfNoCase User-Agent ([a-z0-9]{2000,}) bad_bot
                                 SetEnvIfNoCase User-Agent (archive.org|binlar|casper|checkpriv|choppy|clshttp|cmsworld|diavol|dotbot|extract|feedfinder|flicky|g00g1e|harvest|heritrix|httrack|kmccrew|loader|miner|nikto|nutch|planetwork|postrank|purebot|pycurl|python|seekerspider|siclab|skygrid|sqlmap|sucker|turnit|vikspider|winhttp|xxxyy|youda|zmeu|zune) bad_bot
 
                                 # Apache < 2.3
                                 <IfModule !mod_authz_core.c>
-                                    Order allow,deny
-                                    Allow from all
-                                    Deny from env=bad_bot
+                                        Order Allow,Deny
+                                        Allow from all
+                                        Deny from env=bad_bot
                                 </IfModule>
 
                                 # Apache >= 2.3
                                 <IfModule mod_authz_core.c>
-                                    <RequireAll>
-                                    Require all granted
-                                    Require not env bad_bot
-                                    </RequireAll>
+                                        <RequireAll>
+                                                Require all Granted
+                                                Require not env bad_bot
+                                        </RequireAll>
                                 </IfModule>
                         </IfModule>' . PHP_EOL;
             $rules .= AIOWPSecurity_Utility_Htaccess::$six_g_blacklist_marker_end . PHP_EOL; //Add feature marker end
