@@ -138,7 +138,7 @@ class AIOWPSecurity_List_Login_Failed_Attempts extends AIOWPSecurity_List_Table 
         }
     }
     
-    function prepare_items() {
+    function prepare_items($ignore_pagination = false) {
         /**
          * First, lets decide how many records per page to show
          */
@@ -148,32 +148,34 @@ class AIOWPSecurity_List_Login_Failed_Attempts extends AIOWPSecurity_List_Table 
         $sortable = $this->get_sortable_columns();
 
         $this->_column_headers = array($columns, $hidden, $sortable);
-        
+
         $this->process_bulk_action();
-    	
-    	global $wpdb;
+
+        global $wpdb;
         $failed_logins_table_name = AIOWPSEC_TBL_FAILED_LOGINS;
 
-	/* -- Ordering parameters -- */
-	    //Parameters that are going to be used to order the result
-        isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]): $orderby = '';
-        isset($_GET["order"]) ? $order = strip_tags($_GET["order"]): $order = '';
+        /* -- Ordering parameters -- */
+        //Parameters that are going to be used to order the result
+        isset($_GET["orderby"]) ? $orderby = strip_tags($_GET["orderby"]) : $orderby = '';
+        isset($_GET["order"]) ? $order = strip_tags($_GET["order"]) : $order = '';
 
-	$orderby = !empty($orderby) ? esc_sql($orderby) : 'failed_login_date';
-	$order = !empty($order) ? esc_sql($order) : 'DESC';
+        $orderby = !empty($orderby) ? esc_sql($orderby) : 'failed_login_date';
+        $order = !empty($order) ? esc_sql($order) : 'DESC';
 
         $orderby = AIOWPSecurity_Utility::sanitize_value_by_array($orderby, $sortable);
         $order = AIOWPSecurity_Utility::sanitize_value_by_array($order, array('DESC' => '1', 'ASC' => '1'));
 
-	$data = $wpdb->get_results("SELECT * FROM $failed_logins_table_name ORDER BY $orderby $order", ARRAY_A);
-        $current_page = $this->get_pagenum();
-        $total_items = count($data);
-        $data = array_slice($data,(($current_page-1)*$per_page),$per_page);
+        $data = $wpdb->get_results("SELECT * FROM $failed_logins_table_name ORDER BY $orderby $order", ARRAY_A);
+        if (!$ignore_pagination) {
+            $current_page = $this->get_pagenum();
+            $total_items = count($data);
+            $data = array_slice($data, (($current_page - 1) * $per_page), $per_page);
+            $this->set_pagination_args(array(
+                'total_items' => $total_items, //WE have to calculate the total number of items
+                'per_page' => $per_page, //WE have to determine how many items to show on a page
+                'total_pages' => ceil($total_items / $per_page)   //WE have to calculate the total number of pages
+            ));
+        }
         $this->items = $data;
-        $this->set_pagination_args( array(
-            'total_items' => $total_items,                  //WE have to calculate the total number of items
-            'per_page'    => $per_page,                     //WE have to determine how many items to show on a page
-            'total_pages' => ceil($total_items/$per_page)   //WE have to calculate the total number of pages
-        ) );
-    }
+        }
 }

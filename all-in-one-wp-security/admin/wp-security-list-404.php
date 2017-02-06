@@ -266,7 +266,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         }
     }
 
-    function prepare_items() {
+    function prepare_items($ignore_pagination=false) {
         /**
          * First, lets decide how many records per page to show
          */
@@ -305,15 +305,17 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
             $row['status'] = '';
             $new_data[] = $row;
         }
-        $current_page = $this->get_pagenum();
-        $total_items = count($new_data);
-        $new_data = array_slice($new_data, (($current_page - 1) * $per_page), $per_page);
+        if (!$ignore_pagination) {
+            $current_page = $this->get_pagenum();
+            $total_items = count($new_data);
+            $new_data = array_slice($new_data, (($current_page - 1) * $per_page), $per_page);
+            $this->set_pagination_args(array(
+                'total_items' => $total_items, //WE have to calculate the total number of items
+                'per_page' => $per_page, //WE have to determine how many items to show on a page
+                'total_pages' => ceil($total_items / $per_page)   //WE have to calculate the total number of pages
+            ));
+        }
         $this->items = $new_data;
-        $this->set_pagination_args(array(
-            'total_items' => $total_items, //WE have to calculate the total number of items
-            'per_page' => $per_page, //WE have to determine how many items to show on a page
-            'total_pages' => ceil($total_items / $per_page)   //WE have to calculate the total number of pages
-        ));
     }
 
 }
