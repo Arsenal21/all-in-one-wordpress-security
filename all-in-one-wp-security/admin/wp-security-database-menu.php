@@ -150,10 +150,10 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         $aiowps_feature_mgr->output_feature_details_badge("db-security-db-prefix");
         ?>
 
-        <div class="aio_yellow_box">
+        <div class="aio_red_box">
             <?php
             $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_DB_SEC_MENU_SLUG.'&tab=tab2">DB Backup</a>';
-            $info_msg = '<p>'.sprintf( __('It is recommended that you perform a %s before using this feature', 'all-in-one-wp-security-and-firewall'), $backup_tab_link).'</p>';
+            $info_msg = '<p><strong>'.sprintf( __('It is recommended that you perform a %s before using this feature', 'all-in-one-wp-security-and-firewall'), $backup_tab_link).'</strong></p>';
             echo $info_msg;
             ?>
         </div>

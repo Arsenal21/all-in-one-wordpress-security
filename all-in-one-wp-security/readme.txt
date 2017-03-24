@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.7
-Stable tag: 4.2.5
+Stable tag: 4.2.6
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -184,10 +184,13 @@ None
 
 == Changelog ==
 
-= TODO - 4.2.6 =
+= 4.2.6 =
+- Added new Login Lockdown whitelist feature which allows immunity for IP address or ranges from being locked by the lockdown feature.
 - Fixed bug - Replaced date_i18n with current_time to prevent cases where some localizations produce foreign characters in date stamp output.
 - Added a new feature to add Honeypot to the WordPress's user registration form (this can help reduce registration attempts by robots).
 - Added "Export to CSV" buttons for 404 Event Logs, Account Activity Logs and Failed Login Records.
+- Minor update to 6G rules.
+- Minor spelling and wording fixes and changes.
 
 = 4.2.5 =
 - Fixed bug - added code which caters for mysql view definitions when DB prefix is changed.

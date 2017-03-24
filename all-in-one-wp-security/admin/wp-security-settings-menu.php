@@ -208,6 +208,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                     <div class="aio_blue_box">
                         <?php
                         echo '<p>'.__('This setting allows you to enable/disable debug for this plugin.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p>'.__('Note: the debug log files are located in the "plugins/all-in-one-wp-security-and-firewall/logs" directory.', 'all-in-one-wp-security-and-firewall').'</p>';
                         ?>
                     </div>
 

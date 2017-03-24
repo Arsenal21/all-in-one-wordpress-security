@@ -172,6 +172,57 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
                 $locked_ip_list->unlock_ip_range(strip_tags($_REQUEST['lockdown_id']));
             }
         }
+        
+        //login lockdown whitelist settings
+        $result = 1;
+        if (isset($_POST['aiowps_save_lockdown_whitelist_settings']))
+        {
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-lockdown-whitelist-settings-nonce'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for save lockdown whitelist settings!",4);
+                die(__('Nonce check failed for save lockdown whitelist settings!','aiowpsecurity'));
+            }
+            
+            if (isset($_POST["aiowps_lockdown_enable_whitelisting"]) && empty($_POST['aiowps_lockdown_allowed_ip_addresses']))
+            {
+                $this->show_msg_error('You must submit at least one IP address!','aiowpsecurity');
+            }
+            else
+            {
+                if (!empty($_POST['aiowps_lockdown_allowed_ip_addresses']))
+                {
+                    $ip_addresses = $_POST['aiowps_lockdown_allowed_ip_addresses'];
+                    $ip_list_array = AIOWPSecurity_Utility_IP::create_ip_list_array_from_string_with_newline($ip_addresses);
+                    $payload = AIOWPSecurity_Utility_IP::validate_ip_list($ip_list_array, 'whitelist');
+                    if($payload[0] == 1){
+                        //success case
+                        $result = 1;
+                        $list = $payload[1];
+                        $banned_ip_data = implode(PHP_EOL, $list);
+                        $aio_wp_security->configs->set_value('aiowps_lockdown_allowed_ip_addresses',$banned_ip_data);
+                        $_POST['aiowps_lockdown_allowed_ip_addresses'] = ''; //Clear the post variable for the banned address list
+                    }
+                    else{
+                        $result = -1;
+                        $error_msg = $payload[1][0];
+                        $this->show_msg_error($error_msg);
+                    }
+                }
+                else
+                {
+                    $aio_wp_security->configs->set_value('aiowps_lockdown_allowed_ip_addresses',''); //Clear the IP address config value
+                }
+
+                if ($result == 1)
+                {
+                    $aio_wp_security->configs->set_value('aiowps_lockdown_enable_whitelisting',isset($_POST["aiowps_lockdown_enable_whitelisting"])?'1':'');
+                    $aio_wp_security->configs->save_config(); //Save the configuration
+                    
+                    $this->show_msg_settings_updated();
+                }
+            }
+        }        
         ?>
         <h2><?php _e('Login Lockdown Configuration', 'all-in-one-wp-security-and-firewall')?></h2>
         <div class="aio_blue_box">
@@ -276,6 +327,43 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
                 ?>
             </div>
         </div></div>
+        <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('Login Lockdown IP Whitelist Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-lockdown-whitelist-settings-nonce'); ?>            
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Enable Login Lockdown IP Whitelist', 'all-in-one-wp-security-and-firewall')?>:</th>                
+                <td>
+                <input name="aiowps_lockdown_enable_whitelisting" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_lockdown_enable_whitelisting')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to enable the whitelisting of selected IP addresses specified in the settings below', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
+            </tr>            
+            <tr valign="top">
+                <th scope="row"><?php _e('Enter Whitelisted IP Addresses:', 'all-in-one-wp-security-and-firewall')?></th>
+                <td>
+                    <textarea name="aiowps_lockdown_allowed_ip_addresses" rows="5" cols="50"><?php echo ($result == -1)?htmlspecialchars($_POST['aiowps_lockdown_allowed_ip_addresses']):htmlspecialchars($aio_wp_security->configs->get_value('aiowps_lockdown_allowed_ip_addresses')); ?></textarea>
+                    <br />
+                    <span class="description"><?php _e('Enter one or more IP addresses or IP ranges you wish to include in your whitelist. The addresses specified here will never be blocked by the login lockdown feature.','all-in-one-wp-security-and-firewall');?></span>
+                    <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
+                    <div class="aiowps_more_info_body">
+                            <?php 
+                            echo '<p class="description">'.__('Each IP address must be on a new line.', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('To specify an IP range use a wildcard "*" character. Acceptable ways to use wildcards is shown in the examples below:', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 1: 195.47.89.*', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 2: 195.47.*.*', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 3: 195.*.*.*', 'all-in-one-wp-security-and-firewall').'</p>';
+                            ?>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+        <input type="submit" name="aiowps_save_lockdown_whitelist_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
+        </form>
+        </div></div>
+        
         <?php
     }
 
@@ -467,7 +555,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This tab displays the login activity for WordPress admin accounts registered with your site.', 'all-in-one-wp-security-and-firewall').'
+            echo '<p>'.__('This tab displays the activity for accounts registered with your site that have logged in using the WordPress login form.', 'all-in-one-wp-security-and-firewall').'
             <br />'.__('The information below can be handy if you need to do security investigations because it will show you the last 50 recent login events by username, IP address and time/date.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>

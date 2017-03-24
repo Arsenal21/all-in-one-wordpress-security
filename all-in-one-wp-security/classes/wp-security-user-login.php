@@ -150,25 +150,36 @@ class AIOWPSecurity_User_Login
         $this->increment_failed_logins($username);
         if ( $aio_wp_security->configs->get_value('aiowps_enable_login_lockdown') == '1' )
         {
-            // Too many failed logins from user's IP?
-            $login_attempts_permitted = absint($aio_wp_security->configs->get_value('aiowps_max_login_attempts'));
-            $too_many_failed_logins = $login_attempts_permitted <= $this->get_login_fail_count();
-            // Is an invalid username or email the reason for login error?
-            $invalid_username = ($user->get_error_code() === 'invalid_username' || $user->get_error_code() == 'invalid_email');
-            // Should an invalid username be immediately locked?
-            $invalid_username_lockdown = $aio_wp_security->configs->get_value('aiowps_enable_invalid_username_lockdown') == '1';
-            $lock_invalid_username = $invalid_username && $invalid_username_lockdown;
-            // Should an invalid username be blocked as per blacklist?
-            $instant_lockout_users_list = $aio_wp_security->configs->get_value('aiowps_instantly_lockout_specific_usernames');
-            if ( !is_array($instant_lockout_users_list) ) {
-                $instant_lockout_users_list = array();
+            $is_whitelisted = false;
+            //check if lockdown whitelist enabled
+            if ( $aio_wp_security->configs->get_value('aiowps_lockdown_enable_whitelisting') == '1' ){
+                $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
+                $whitelisted_ips = $aio_wp_security->configs->get_value('aiowps_lockdown_allowed_ip_addresses');
+                $is_whitelisted = AIOWPSecurity_Utility_IP::is_ip_whitelisted($ip, $whitelisted_ips);
             }
-            $username_blacklisted = $invalid_username && in_array($username, $instant_lockout_users_list);
-            if ( $too_many_failed_logins || $lock_invalid_username || $username_blacklisted )
-            {
-                $this->lock_the_user($username, 'login_fail');
+            
+            if($is_whitelisted === false){
+                // Too many failed logins from user's IP?
+                $login_attempts_permitted = absint($aio_wp_security->configs->get_value('aiowps_max_login_attempts'));
+                $too_many_failed_logins = $login_attempts_permitted <= $this->get_login_fail_count();
+                // Is an invalid username or email the reason for login error?
+                $invalid_username = ($user->get_error_code() === 'invalid_username' || $user->get_error_code() == 'invalid_email');
+                // Should an invalid username be immediately locked?
+                $invalid_username_lockdown = $aio_wp_security->configs->get_value('aiowps_enable_invalid_username_lockdown') == '1';
+                $lock_invalid_username = $invalid_username && $invalid_username_lockdown;
+                // Should an invalid username be blocked as per blacklist?
+                $instant_lockout_users_list = $aio_wp_security->configs->get_value('aiowps_instantly_lockout_specific_usernames');
+                if ( !is_array($instant_lockout_users_list) ) {
+                    $instant_lockout_users_list = array();
+                }
+                $username_blacklisted = $invalid_username && in_array($username, $instant_lockout_users_list);
+                if ( $too_many_failed_logins || $lock_invalid_username || $username_blacklisted )
+                {
+                    $this->lock_the_user($username, 'login_fail');
+                }
             }
         }
+        
         if ( $aio_wp_security->configs->get_value('aiowps_set_generic_login_msg') == '1' )
         {
             // Return generic error message if configured
