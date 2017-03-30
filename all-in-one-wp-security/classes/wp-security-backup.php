@@ -304,20 +304,21 @@ class AIOWPSecurity_Backup
                 $next_backup_time = strtotime("+".abs($backup_frequency).$interval, $last_backup_time);
                 if ($next_backup_time <= $current_time)
                 {
-                    //It's time to do a backup
-                    $result = $this->execute_backup();
-                    if ($result)
+                    // It's time to do a backup
+                    $aio_wp_security->debug_logger->log_debug_cron("DB Backup - Performing scheduled backup ...");
+                    $aio_wp_security->configs->set_value('aiowps_last_backup_time', $time_now);
+                    $aio_wp_security->configs->save_config();
+
+                    if ( $this->execute_backup() )
                     {
-                        $aio_wp_security->configs->set_value('aiowps_last_backup_time', $time_now);
-                        $aio_wp_security->configs->save_config();
                         $aio_wp_security->debug_logger->log_debug_cron("DB Backup - Scheduled backup was successfully completed.");
-                    } 
+                    }
                     else
                     {
                         $aio_wp_security->debug_logger->log_debug_cron("DB Backup - Scheduled backup operation failed!",4);
                     }
                 }
-            } 
+            }
             else
             {
                 //Set the last backup time to now so it can trigger for the next scheduled period
