@@ -260,7 +260,7 @@ class WhoisClient {
 				$result['regyinfo']['servers'] = $servers;
 			
 			// Handler may forget to set rawdata
-			if (empty($result['rawdata']))
+			if (!isset($result['rawdata']))
 				$result['rawdata'] = $output;
 			}
 

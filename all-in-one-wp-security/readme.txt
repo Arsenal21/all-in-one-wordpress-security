@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.7
-Stable tag: 4.2.6
+Stable tag: 4.2.7
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -183,6 +183,9 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.2.7 =
+- The PHPWhois library updated to their latest version to include a security patch.
 
 = 4.2.6 =
 - Added new Login Lockdown whitelist feature which allows immunity for IP address or ranges from being locked by the lockdown feature.
