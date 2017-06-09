@@ -14,6 +14,8 @@ class AIOWPSecurity_WP_Loaded_Tasks {
             include_once(AIO_WP_SECURITY_PATH . '/classes/wp-security-process-renamed-login-page.php');
             $login_object = new AIOWPSecurity_Process_Renamed_Login_Page();
             AIOWPSecurity_Process_Renamed_Login_Page::renamed_login_init_tasks();
+        }else{
+            add_action('login_init', array(&$this, 'aiowps_login_init'));
         }
 
         //For site lockout feature (ie, maintenance mode). It needs to be checked after the rename login page
@@ -37,6 +39,15 @@ class AIOWPSecurity_WP_Loaded_Tasks {
         }
 
         exit();
+    }
+    
+    static function aiowps_login_init(){
+        //if user is logged in and tries to access login page - redirect them to wp-admin
+        //this will prevent issues such as the following:
+        //https://wordpress.org/support/topic/already-logged-in-no-captcha
+        if(is_user_logged_in()){
+            wp_redirect(admin_url());
+        }
     }
 
 }

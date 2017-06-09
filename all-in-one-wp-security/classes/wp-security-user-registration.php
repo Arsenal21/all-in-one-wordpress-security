@@ -24,6 +24,9 @@ class AIOWPSecurity_User_Registration
         //Check if auto pending new account status feature is enabled
         if ($aio_wp_security->configs->get_value('aiowps_enable_manual_registration_approval') == '1')
         {
+            if ( isset($_REQUEST['action']) && 'createuser' == $_REQUEST['action'] ) {
+                return; //if the user has been added from admin side don't put in pending state
+            }
             $res = add_user_meta($user_id, 'aiowps_account_status', 'pending');
             if (!$res){
                 $aio_wp_security->debug_logger->log_debug("aiowps_user_registration_action_handler: Error adding user meta data: aiowps_account_status",4);

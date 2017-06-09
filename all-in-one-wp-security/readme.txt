@@ -3,8 +3,8 @@ Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrso
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
-Tested up to: 4.7
-Stable tag: 4.2.7
+Tested up to: 4.8
+Stable tag: 4.2.8
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -183,6 +183,12 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.2.8 =
+- Improved "User Registration" feature to bypass the pending approval status for new users created in admin side.
+- Fixed bug in whois library.
+- Added translation domain parameter for translatable strings in the rename login page.
+- Updated the chinese language file.
 
 = 4.2.7 =
 - The PHPWhois library updated to their latest version to include a security patch.
