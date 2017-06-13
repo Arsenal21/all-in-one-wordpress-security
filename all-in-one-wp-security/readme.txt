@@ -184,6 +184,10 @@ None
 
 == Changelog ==
 
+= TODO 4.2.9 =
+- Deleted local copy of the Persian and Italian language files. These translations are available on translate.wordpress.org.
+- Domain path and text domain added to plugin header.
+
 = 4.2.8 =
 - Improved "User Registration" feature to bypass the pending approval status for new users created in admin side.
 - Fixed bug in whois library.
