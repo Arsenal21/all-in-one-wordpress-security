@@ -403,7 +403,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 <td><input type="text" size="40" name="aiowps_cookie_based_brute_force_redirect_url" value="<?php echo $aio_wp_security->configs->get_value('aiowps_cookie_based_brute_force_redirect_url'); ?>" />
                 <span class="description">
                     <?php 
-                    _e('Specify a URL to redirect a hacker to when they try to access your WordPress login page.', 'all-in-one-wp-security-and-firewall');
+                    _e('Specify a URL to redirect hackers to when they try to access your WordPress login page.', 'all-in-one-wp-security-and-firewall');
                     ?>
                 </span>
                 <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
