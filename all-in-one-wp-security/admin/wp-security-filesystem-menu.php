@@ -435,7 +435,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                     </td>';
             } else
             {
-                echo '<td>'.__('No Action Required', 'all-in-one-wp-security-and-firewall').'</td>';
+                echo '<td>'.__('No action required!', 'all-in-one-wp-security-and-firewall').'</td>';
             }
         echo "</tr>";
     }
