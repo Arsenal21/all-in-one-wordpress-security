@@ -893,7 +893,7 @@ switch ($action) {
         if ( $reauth )
             wp_clear_auth_cookie();
 
-        login_header(__('Log In', 'all-in-one-wp-security-and-firewall' ), '', $errors);
+        login_header(__('Log in', 'all-in-one-wp-security-and-firewall' ), '', $errors);
 
         if ( isset($_POST['log']) )
             $user_login = ( 'incorrect_password' == $errors->get_error_code() || 'empty_password' == $errors->get_error_code() ) ? esc_attr(wp_unslash($_POST['log'])) : '';
@@ -925,7 +925,7 @@ switch ($action) {
         ?>
 	<p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked( $rememberme ); ?> /> <?php esc_attr_e('Remember Me'); ?></label></p>
 	<p class="submit">
-		<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log In'); ?>" />
+		<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log in'); ?>" />
 <?php	if ( $interim_login ) { ?>
         <input type="hidden" name="interim-login" value="1" />
     <?php	} else { ?>
