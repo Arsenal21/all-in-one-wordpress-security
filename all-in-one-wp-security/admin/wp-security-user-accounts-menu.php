@@ -188,7 +188,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                 </table>
         <?php 
             } else {
-                echo '<div id="aios_message" class="aio_green_box"><p><strong>'.__('No action required.', 'all-in-one-wp-security-and-firewall').'</strong>
+                echo '<div id="aios_message" class="aio_green_box"><p><strong>'.__('No action required!', 'all-in-one-wp-security-and-firewall').'</strong>
                         <br />'.__('Your site does not have a user account where the display name is identical to the username.', 'all-in-one-wp-security-and-firewall').'</p></div>';
             } 
         ?>
