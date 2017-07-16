@@ -338,7 +338,7 @@ function retrieve_password() {
     $allow = apply_filters( 'allow_password_reset', true, $user_data->ID );
 
     if ( ! $allow ) {
-        return new WP_Error( 'no_password_reset', __('Password reset is not allowed for this user', 'all-in-one-wp-security-and-firewall' ) );
+        return new WP_Error( 'no_password_reset', __('Password reset is not allowed for this user.', 'all-in-one-wp-security-and-firewall' ) );
     } elseif ( is_wp_error( $allow ) ) {
         return $allow;
     }
