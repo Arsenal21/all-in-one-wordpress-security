@@ -90,7 +90,7 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
     {
         if ('unblock' === $this->current_action()) {//Process unlock bulk actions
             if (!isset($_REQUEST['item'])) {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.', 'all-in-one-wp-security-and-firewall'));
             } else {
                 $this->unblock_ip_address(($_REQUEST['item']));
             }
