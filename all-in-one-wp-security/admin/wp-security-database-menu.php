@@ -153,7 +153,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_red_box">
             <?php
             $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_DB_SEC_MENU_SLUG.'&tab=tab2">DB Backup</a>';
-            $info_msg = '<p><strong>'.sprintf( __('It is recommended that you perform a %s before using this feature', 'all-in-one-wp-security-and-firewall'), $backup_tab_link).'</strong></p>';
+            $info_msg = '<p><strong>'.sprintf( __('It is recommended that you perform a %s before using this feature.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link).'</strong></p>';
             echo $info_msg;
             ?>
         </div>
@@ -322,7 +322,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable Automated Scheduled Backups', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_automated_backups" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_automated_backups')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want the system to automatically generate backups periodically based on the settings below', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want the system to automatically generate backups periodically based on the settings below.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
             <tr valign="top">
@@ -333,22 +333,22 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                         <option value="1" <?php selected( $aio_wp_security->configs->get_value('aiowps_db_backup_interval'), '1' ); ?>><?php _e( 'Days', 'all-in-one-wp-security-and-firewall' ); ?></option>
                         <option value="2" <?php selected( $aio_wp_security->configs->get_value('aiowps_db_backup_interval'), '2' ); ?>><?php _e( 'Weeks', 'all-in-one-wp-security-and-firewall' ); ?></option>
                     </select>
-                <span class="description"><?php _e('Set the value for how often you would like an automated backup to occur', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Set the value for how often you would like an automated backup to occur.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Number of Backup Files To Keep', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><input type="text" size="5" name="aiowps_backup_files_stored" value="<?php echo $aio_wp_security->configs->get_value('aiowps_backup_files_stored'); ?>" />
-                <span class="description"><?php _e('Thie field allows you to choose the number of backup files you would like to keep in the backup directory', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Thie field allows you to choose the number of backup files you would like to keep in the backup directory.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Send Backup File Via Email', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_send_backup_email_address" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_send_backup_email_address')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want the system to email you the backup file after a DB backup has been performed', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want the system to email you the backup file after a DB backup has been performed.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 <br /><input type="text" size="30" name="aiowps_backup_email_address" value="<?php echo $aio_wp_security->configs->get_value('aiowps_backup_email_address'); ?>" />
-                <span class="description"><?php _e('Enter an email address', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Please enter an email address.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
@@ -422,7 +422,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 if ( false === $wpdb->query($sql) )
                 {
                     $error = 1;
-                    echo '<p class="aio_error_with_icon">'.sprintf( __('%s table name update failed', 'all-in-one-wp-security-and-firewall'), '<strong>'.$table_old_name.'</strong>').'</p>';
+                    echo '<p class="aio_error_with_icon">'.sprintf( __('%s table name update failed!', 'all-in-one-wp-security-and-firewall'), '<strong>'.$table_old_name.'</strong>').'</p>';
                     $aio_wp_security->debug_logger->log_debug("DB Security Feature - Unable to change prefix of table ".$table_old_name,4);
                 } else {
                     $table_count++;
