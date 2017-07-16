@@ -87,7 +87,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
         {//Process delete bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.','all-in-one-wp-security-and-firewall'));
             }else 
             {            
                 $this->delete_lockdown_records(($_REQUEST['item']));
@@ -98,7 +98,7 @@ class AIOWPSecurity_List_Locked_IP extends AIOWPSecurity_List_Table {
         {//Process unlock bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.','all-in-one-wp-security-and-firewall'));
             }else 
             {            
                 $this->unlock_ip_range(($_REQUEST['item']));
