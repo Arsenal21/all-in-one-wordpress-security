@@ -202,7 +202,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable Rename Login Page Feature', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_rename_login_page" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the rename login page feature', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the rename login page feature.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
             <tr valign="top">
@@ -260,7 +260,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 if (!$error)
                 {
                     $aio_wp_security->configs->set_value('aiowps_brute_force_secret_word',$brute_force_feature_secret_word);
-                    $msg = '<p>'.__('You have successfully enabled the cookie based brute force prevention feature', 'all-in-one-wp-security-and-firewall').'</p>';
+                    $msg = '<p>'.__('You have successfully enabled the cookie based brute force prevention feature.', 'all-in-one-wp-security-and-firewall').'</p>';
                     $msg .= '<p>'.__('From now on you will need to log into your WP Admin using the following URL:', 'all-in-one-wp-security-and-firewall').'</p>';
                     $msg .= '<p><strong>'.AIOWPSEC_WP_URL.'/?'.$brute_force_feature_secret_word.'=1</strong></p>';
                     $msg .= '<p>'.__('It is important that you save this URL value somewhere in case you forget it, OR,', 'all-in-one-wp-security-and-firewall').'</p>';
@@ -550,7 +550,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable Captcha On Login Page', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_login_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_login_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to insert a captcha form on the login page', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to insert a captcha form on the login page.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
@@ -587,7 +587,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable Captcha On Lost Password Page', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_lost_password_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_lost_password_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to insert a captcha form on the lost password page', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to insert a captcha form on the lost password page.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
@@ -697,7 +697,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable IP Whitelisting', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_whitelisting" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_whitelisting')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the whitelisting of selected IP addresses specified in the settings below', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the whitelisting of selected IP addresses specified in the settings below.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
             <tr valign="top">
@@ -721,7 +721,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                             echo '<p class="description">'.__('Example 1: 195.47.89.*', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 2: 195.47.*.*', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 3: 195.*.*.*', 'all-in-one-wp-security-and-firewall').'</p>';
-                            echo '<p class="description">'.__('Or you can enter an IPv6 address (NOTE: ranges/wildcards are currently not supported for ipv6)', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Or you can enter an IPv6 address (NOTE: ranges/wildcards are currently not supported for ipv6):', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 4: 4102:0:3ea6:79fd:b:46f8:230f:bb05', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 5: 2205:0:1ca2:810d::', 'all-in-one-wp-security-and-firewall').'</p>';
                             ?>
@@ -786,7 +786,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable Honeypot On Login Page', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_login_honeypot" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_login_honeypot')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the honeypot feature for the login page', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the honeypot feature for the login page.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
