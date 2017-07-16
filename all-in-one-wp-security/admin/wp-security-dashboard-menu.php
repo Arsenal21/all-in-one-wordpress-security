@@ -241,7 +241,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                     <div class="inside">
 
                         <?php
-                        _e('Below is the current status of the critical features that you should activate on your site to achieve a minimum level of recommended security', 'all-in-one-wp-security-and-firewall');
+                        _e('Below is the current status of the critical features that you should activate on your site to achieve a minimum level of recommended security.', 'all-in-one-wp-security-and-firewall');
                         $feature_items = $feature_mgr->feature_items;
                         $username_admin_feature = $feature_mgr->get_feature_item_by_id("user-accounts-change-admin-user");
                         echo '<div class="aiowps_feature_status_container">';
@@ -369,7 +369,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                     <div class="inside">
                         <?php
                         if ($aio_wp_security->configs->get_value('aiowps_site_lockout') == '1') {
-                            echo '<p>' . __('Maintenance mode is currently enabled. Remember to turn it off when you are done', 'all-in-one-wp-security-and-firewall') . '</p>';
+                            echo '<p>' . __('Maintenance mode is currently enabled. Remember to turn it off when you are done!', 'all-in-one-wp-security-and-firewall') . '</p>';
                         } else {
                             echo '<p>' . __('Maintenance mode is currently off.', 'all-in-one-wp-security-and-firewall') . '</p>';
                         }
@@ -486,7 +486,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                             $num_users = count($logged_in_users);
                             if ($num_users > 1) {
                                 echo '<div class="aio_red_box"><p>' . __('Number of users currently logged in site-wide is:', 'all-in-one-wp-security-and-firewall') . ' <strong>' . $num_users . '</strong></p>';
-                                $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details', 'all-in-one-wp-security-and-firewall'), $users_online_link) . '</p>';
+                                $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details.', 'all-in-one-wp-security-and-firewall'), $users_online_link) . '</p>';
                                 echo $info_msg . '</div>';
                             } else {
                                 echo '<div class="aio_green_box"><p>' . __('There are no other site-wide users currently logged in.', 'all-in-one-wp-security-and-firewall') . '</p></div>';
@@ -500,7 +500,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                             }
                             if ($num_users > 1) {
                                 echo '<div class="aio_red_box"><p>' . __('Number of users currently logged into your site (including you) is:', 'all-in-one-wp-security-and-firewall') . ' <strong>' . $num_users . '</strong></p>';
-                                $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details', 'all-in-one-wp-security-and-firewall'), $users_online_link) . '</p>';
+                                $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details.', 'all-in-one-wp-security-and-firewall'), $users_online_link) . '</p>';
                                 echo $info_msg . '</div>';
                             } else {
                                 echo '<div class="aio_green_box"><p>' . __('There are no other users currently logged in.', 'all-in-one-wp-security-and-firewall') . '</p></div>';
@@ -528,7 +528,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                         } else {
                             $num_ips = count($locked_ips);
                             echo '<div class="aio_red_box"><p>' . __('Number of temporarily locked out IP addresses: ', 'all-in-one-wp-security-and-firewall') . ' <strong>' . $num_ips . '</strong></p>';
-                            $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details', 'all-in-one-wp-security-and-firewall'), $locked_ips_link) . '</p>';
+                            $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details.', 'all-in-one-wp-security-and-firewall'), $locked_ips_link) . '</p>';
                             echo $info_msg . '</div>';
                         }
 
@@ -848,7 +848,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                                     </option>
                                 </select>
                                 <span
-                                    class="description"><?php _e('Select one of the log files to view the contents', 'all-in-one-wp-security-and-firewall'); ?></span>
+                                    class="description"><?php _e('Select one of the log files to view the contents.', 'all-in-one-wp-security-and-firewall'); ?></span>
                             </td>
                         </tr>
                     </table>
