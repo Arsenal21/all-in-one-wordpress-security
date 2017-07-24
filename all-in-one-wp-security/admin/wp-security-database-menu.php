@@ -348,7 +348,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 <input name="aiowps_send_backup_email_address" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_send_backup_email_address')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want the system to email you the backup file after a DB backup has been performed.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 <br /><input type="text" size="30" name="aiowps_backup_email_address" value="<?php echo $aio_wp_security->configs->get_value('aiowps_backup_email_address'); ?>" />
-                <span class="description"><?php _e('Please enter an email address.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Enter an email address.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
