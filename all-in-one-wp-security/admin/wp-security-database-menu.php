@@ -162,7 +162,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-db-prefix-change-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
-                <th scope="row"><?php _e('Current DB Table Prefix', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <th scope="row"><?php _e('Current DB Table Prefix:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
                     <span class="aiowpsec_field_value"><strong><?php echo $wpdb->prefix; ?></strong></span>
                     <?php
@@ -175,7 +175,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 </td> 
             </tr>
             <tr valign="top">
-                <th scope="row"><?php _e('Generate New DB Table Prefix', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <th scope="row"><?php _e('Generate New DB Table Prefix:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
                 <input name="aiowps_enable_random_prefix" type="checkbox" <?php if($aio_wp_security->configs->get_value('aiowps_enable_random_prefix')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want the plugin to generate a random 6 character string for the table prefix', 'all-in-one-wp-security-and-firewall'); ?></span>
