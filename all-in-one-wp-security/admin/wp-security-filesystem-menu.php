@@ -94,7 +94,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 $perm_result = @chmod($_POST['aiowps_permission_chg_file'], $rec_perm_dec);
                 if ($perm_result === true)
                 {
-                    $msg = sprintf( __('The permissions for %s were succesfully changed to %s', 'all-in-one-wp-security-and-firewall'), $folder_or_file, $rec_perm_oct_string);
+                    $msg = sprintf( __('The permissions for %s were succesfully changed to %s!', 'all-in-one-wp-security-and-firewall'), $folder_or_file, $rec_perm_oct_string);
                     $this->show_msg_updated($msg);
                 }else if($perm_result === false)
                 {
@@ -232,7 +232,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Disable Ability To Edit PHP Files', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_disable_file_editing" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_disable_file_editing')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to remove the ability for people to edit PHP files via the WP dashboard', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to remove the ability for people to edit PHP files via the WP dashboard.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
@@ -352,7 +352,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
             <p>Please click the button below to view the latest system logs:</p>
             <form action="" method="POST">
                 <?php wp_nonce_field('aiowpsec-view-system-logs-nonce'); ?>
-                <div><?php _e('Enter System Log File Name', 'all-in-one-wp-security-and-firewall')?>:
+                <div><?php _e('Enter System Log File Name.', 'all-in-one-wp-security-and-firewall')?>:
                 <input type="text" size="25" name="aiowps_system_log_file" value="<?php echo esc_html($sys_log_file); ?>" />
                 <span class="description"><?php _e('Enter your system log file name. (Defaults to error_log)', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </div>
@@ -435,7 +435,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
                     </td>';
             } else
             {
-                echo '<td>'.__('No Action Required', 'all-in-one-wp-security-and-firewall').'</td>';
+                echo '<td>'.__('No action required!', 'all-in-one-wp-security-and-firewall').'</td>';
             }
         echo "</tr>";
     }

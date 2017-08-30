@@ -89,7 +89,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
                 if(!isset($_REQUEST['item']))
                 {
                     $error_msg = '<div id="message" class="error"><p><strong>';
-                    $error_msg .= __('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall');
+                    $error_msg .= __('Please select some records using the checkboxes.','all-in-one-wp-security-and-firewall');
                     $error_msg .= '</strong></p></div>';
                     _e($error_msg);
                 } else {
@@ -207,7 +207,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
         {
             $blacklist_settings_link = '<a href="admin.php?page='.AIOWPSEC_BLACKLIST_MENU_SLUG.'">Ban Users</a>';
             $info_msg = '<p>'.__('NOTE: The .htaccess file was not modified because you have disabled the "Enable IP or User Agent Blacklisting" check box.', 'all-in-one-wp-security-and-firewall').
-                        '<br />'.sprintf( __('To block these IP addresses you will need to enable the above flag in the %s menu', 'all-in-one-wp-security-and-firewall'), $blacklist_settings_link).'</p>';
+                        '<br />'.sprintf( __('To block these IP addresses you will need to enable the above flag in the %s menu.', 'all-in-one-wp-security-and-firewall'), $blacklist_settings_link).'</p>';
             AIOWPSecurity_Admin_Menu::show_msg_updated_st($info_msg);
         }
     }

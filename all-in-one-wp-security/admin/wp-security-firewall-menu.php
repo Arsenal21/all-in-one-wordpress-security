@@ -117,7 +117,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
+                $this->show_msg_updated(__('Settings were successfully saved.', 'all-in-one-wp-security-and-firewall'));
             }
             else
             {
@@ -205,7 +205,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                         <?php 
                         echo '<p class="description">'.__('This setting will add a directive in your .htaccess to disable access to the WordPress xmlrpc.php file which is responsible for the XML-RPC functionality in WordPress.', 'all-in-one-wp-security-and-firewall').'</p>';
                         echo '<p class="description">'.__('Hackers can exploit various vulnerabilities in the WordPress XML-RPC API in a number of ways such as:', 'all-in-one-wp-security-and-firewall').'</p>';
-                        echo '<p class="description">'.__('1) Denial of Service (DoS) attacks', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('1) Denial of Service (DoS) attacks.', 'all-in-one-wp-security-and-firewall').'</p>';
                         echo '<p class="description">'.__('2) Hacking internal routers.', 'all-in-one-wp-security-and-firewall').'</p>';
                         echo '<p class="description">'.__('3) Scanning ports in internal networks to get info from various hosts.', 'all-in-one-wp-security-and-firewall').'</p>';
                         echo '<p class="description">'.__('Apart from the security protection benefit, this feature may also help reduce load on your server, particularly if your site currently has a lot of unwanted traffic hitting the XML-RPC API on your installation.', 'all-in-one-wp-security-and-firewall').'</p>';
@@ -250,7 +250,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 <div class="aiowps_more_info_body">
                     <?php 
                     echo '<p class="description">'.__('WordPress has an option to turn on the debug logging to a file located in wp-content/debug.log. This file may contain sensitive information.', 'all-in-one-wp-security-and-firewall').'</p>';
-                    echo '<p class="description">'.__('Using this optoin will block external access to this file. You can still access this file by logging into your site via FTP', 'all-in-one-wp-security-and-firewall').'</p>';
+                    echo '<p class="description">'.__('Using this optoin will block external access to this file. You can still access this file by logging into your site via FTP.', 'all-in-one-wp-security-and-firewall').'</p>';
                     ?>
                 </div>
                 </td>
@@ -330,7 +330,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('You have successfully saved the Additional Firewall Protection configuration', 'all-in-one-wp-security-and-firewall'));
+                $this->show_msg_updated(__('You have successfully saved the Additional Firewall Protection configuration.', 'all-in-one-wp-security-and-firewall'));
             }
             else
             {
@@ -381,7 +381,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                         echo '<br />';
                         _e('This feature will prevent the listing of contents for all directories.', 'all-in-one-wp-security-and-firewall');
                         echo '<br />';
-                        _e('NOTE: In order for this feature to work "AllowOverride" of the Indexes directive must be enabled in your httpd.conf file. Ask your hosting provider to check this if you don\'t have access to httpd.conf', 'all-in-one-wp-security-and-firewall');
+                        _e('NOTE: In order for this feature to work "AllowOverride" of the Indexes directive must be enabled in your httpd.conf file. Ask your hosting provider to check this if you don\'t have access to httpd.conf.', 'all-in-one-wp-security-and-firewall');
                         ?>
                     </p>
                 </div>
@@ -549,7 +549,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('You have successfully saved the 5G/6G Firewall Protection configuration', 'all-in-one-wp-security-and-firewall'));
+                $this->show_msg_updated(__('You have successfully saved the 5G/6G Firewall Protection configuration.', 'all-in-one-wp-security-and-firewall'));
                 // Recalculate points after the feature status/options have been altered
                 $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
             }
@@ -653,7 +653,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             //Commit the config settings
             $aio_wp_security->configs->save_config();
 
-            $this->show_msg_updated(__('The Internet bot settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
+            $this->show_msg_updated(__('The Internet bot settings were successfully saved.', 'all-in-one-wp-security-and-firewall'));
         }
 
         ?>
@@ -703,7 +703,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                         <?php 
                         echo '<p class="description">'.__('This feature will check if the User Agent information of a bot contains the string "Googlebot".', 'all-in-one-wp-security-and-firewall').'</p>';
                         echo '<p class="description">'.__('It will then perform a few tests to verify if the bot is legitimately from Google and if so it will allow the bot to proceed.', 'all-in-one-wp-security-and-firewall').'</p>';
-                        echo '<p class="description">'.__('If the bot fails the checks then the plugin will mark it as being a fake Googlebot and it will block it', 'all-in-one-wp-security-and-firewall').'</p>';
+                        echo '<p class="description">'.__('If the bot fails the checks then the plugin will mark it as being a fake Googlebot and it will block it.', 'all-in-one-wp-security-and-firewall').'</p>';
                         ?>
                 </div>
                 </td>
@@ -739,7 +739,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
+                $this->show_msg_updated(__('Settings were successfully saved.', 'all-in-one-wp-security-and-firewall'));
             }
             else
             {
@@ -926,14 +926,14 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable 404 Event Logging', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_404_logging" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_404_logging')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the logging of 404 events', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the logging of 404 events.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>
             -->
             <tr valign="top">
                 <th scope="row"><?php _e('Time Length of 404 Lockout (min)', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><input type="text" size="5" name="aiowps_404_lockout_time_length" value="<?php echo $aio_wp_security->configs->get_value('aiowps_404_lockout_time_length'); ?>" />
-                <span class="description"><?php _e('Set the length of time for which a blocked IP address will be prevented from visiting your site', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Set the length of time for which a blocked IP address will be prevented from visiting your site.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
                     <p class="description">
@@ -1024,7 +1024,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             //Save settings
             if (isset($_POST["aiowps_enable_custom_rules"]) && empty($_POST['aiowps_custom_rules']))
             {
-                $this->show_msg_error('You must enter some .htaccess directives code in the text box below','all-in-one-wp-security-and-firewall');
+                $this->show_msg_error('You must enter some .htaccess directives code in the text box below.','all-in-one-wp-security-and-firewall');
             }
             else
             {
@@ -1088,7 +1088,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                             <th scope="row"><?php _e('Enable Custom .htaccess Rules', 'all-in-one-wp-security-and-firewall')?>:</th>
                             <td>
                                 <input name="aiowps_enable_custom_rules" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_custom_rules')=='1') echo ' checked="checked"'; ?> value="1"/>
-                                <span class="description"><?php _e('Check this if you want to enable custom rules entered in the text box below', 'all-in-one-wp-security-and-firewall'); ?></span>
+                                <span class="description"><?php _e('Check this if you want to enable custom rules entered in the text box below.', 'all-in-one-wp-security-and-firewall'); ?></span>
                             </td>
                         </tr>
                         <tr valign="top">

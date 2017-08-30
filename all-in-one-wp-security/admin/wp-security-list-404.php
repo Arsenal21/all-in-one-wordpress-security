@@ -115,7 +115,7 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
     function process_bulk_action() {
         if ('bulk_block_ip' === $this->current_action()) {//Process delete bulk actions
             if (!isset($_REQUEST['item'])) {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.', 'all-in-one-wp-security-and-firewall'));
             } else {
                 $this->block_ip(($_REQUEST['item']));
             }
@@ -123,14 +123,14 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
 
         if ('bulk_blacklist_ip' === $this->current_action()) {//Process delete bulk actions
             if (!isset($_REQUEST['item'])) {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.', 'all-in-one-wp-security-and-firewall'));
             } else {
                 $this->blacklist_ip_address(($_REQUEST['item']));
             }
         }
         if ('delete' === $this->current_action()) {//Process delete bulk actions
             if (!isset($_REQUEST['item'])) {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes', 'all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.', 'all-in-one-wp-security-and-firewall'));
             } else {
                 $this->delete_404_event_records(($_REQUEST['item']));
             }

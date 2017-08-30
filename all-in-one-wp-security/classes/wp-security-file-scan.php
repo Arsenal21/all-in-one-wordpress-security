@@ -59,7 +59,7 @@ class AIOWPSecurity_Scan
             $headers = 'From: ' . $from_name . ' <' . get_option('admin_email') . '>' . PHP_EOL;
             $subject = __( 'All In One WP Security - File change detected!', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
             //$attachment = array();
-            $message = __( 'A file change was detected on your system for site URL', 'all-in-one-wp-security-and-firewall' ) . ' ' . get_option( 'siteurl' ) . __( '. Scan was generated on', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
+            $message = __( 'A file change was detected on your system for site URL.', 'all-in-one-wp-security-and-firewall' ) . ' ' . get_option( 'siteurl' ) . __( '. Scan was generated on', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
             $message .= "\r\n\r\n".__( 'A summary of the scan results is shown below:', 'all-in-one-wp-security-and-firewall' );
             $message .= "\r\n\r\n";
             $message .= self::get_file_change_summary($scan_result);
@@ -370,7 +370,7 @@ class AIOWPSecurity_Scan
                     if($delete_sql === FALSE){
                         echo '<p class="aio_error_with_icon">'.sprintf( __('Deletion of known pharma hack entry for option_name %s failed. Please delete this entry manually!', 'all-in-one-wp-security-and-firewall'), $entry['option_name']).'</p>';
                     }else{
-                        echo '<p class="aio_success_with_icon">'.sprintf( __('The options table entry with known pharma hack for option_id %s with option_name %s was successfully deleted', 'all-in-one-wp-security-and-firewall'), $entry['option_id'], $entry['option_name']).'</p>';
+                        echo '<p class="aio_success_with_icon">'.sprintf( __('The options table entry with known pharma hack for option_id %s with option_name %s was successfully deleted.', 'all-in-one-wp-security-and-firewall'), $entry['option_id'], $entry['option_name']).'</p>';
                     }
                     
                 }
@@ -393,7 +393,7 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_options_entry_found){
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in options table', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in options table.', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
         
         //Posts table
@@ -446,7 +446,7 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_posts_entry_found){
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in posts table', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in posts table.', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
         
         //Links table
@@ -498,7 +498,7 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_links_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in links table', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in links table.', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
 
         //Comments table
@@ -549,7 +549,7 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_comments_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in comments table', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in comments table.', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
         
         //postmeta table
@@ -577,7 +577,7 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_postmeta_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in postmeta table', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in postmeta table.', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
 
         //usermeta table
@@ -605,7 +605,7 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_usermeta_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in usermeta table', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in usermeta table.', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
 
         //users table
@@ -654,7 +654,7 @@ class AIOWPSecurity_Scan
 	}
         
         if(!$sus_users_entry_found) {
-            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in users table', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p class="aio_success_with_icon">'.__('No suspicious entries found in users table.', 'all-in-one-wp-security-and-firewall').'</p>';
 	}        
 
         $output = ob_get_contents();

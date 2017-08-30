@@ -338,7 +338,7 @@ function retrieve_password() {
     $allow = apply_filters( 'allow_password_reset', true, $user_data->ID );
 
     if ( ! $allow ) {
-        return new WP_Error( 'no_password_reset', __('Password reset is not allowed for this user', 'all-in-one-wp-security-and-firewall' ) );
+        return new WP_Error( 'no_password_reset', __('Password reset is not allowed for this user.', 'all-in-one-wp-security-and-firewall' ) );
     } elseif ( is_wp_error( $allow ) ) {
         return $allow;
     }
@@ -893,7 +893,7 @@ switch ($action) {
         if ( $reauth )
             wp_clear_auth_cookie();
 
-        login_header(__('Log In', 'all-in-one-wp-security-and-firewall' ), '', $errors);
+        login_header(__('Log in', 'all-in-one-wp-security-and-firewall' ), '', $errors);
 
         if ( isset($_POST['log']) )
             $user_login = ( 'incorrect_password' == $errors->get_error_code() || 'empty_password' == $errors->get_error_code() ) ? esc_attr(wp_unslash($_POST['log'])) : '';
@@ -925,7 +925,7 @@ switch ($action) {
         ?>
 	<p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked( $rememberme ); ?> /> <?php esc_attr_e('Remember Me'); ?></label></p>
 	<p class="submit">
-		<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log In'); ?>" />
+		<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log in'); ?>" />
 <?php	if ( $interim_login ) { ?>
         <input type="hidden" name="interim-login" value="1" />
     <?php	} else { ?>

@@ -102,7 +102,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
 
             if ($res)
             {
-                $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
+                $this->show_msg_updated(__('Settings were successfully saved.', 'all-in-one-wp-security-and-firewall'));
             }
             else
             {
@@ -133,7 +133,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable Captcha On Comment Forms', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_comment_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to insert a captcha field on the comment forms', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to insert a captcha field on the comment forms.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>
@@ -257,7 +257,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
             //Save all the form values to the options
             $aio_wp_security->configs->set_value('aiowps_spam_ip_min_comments',absint($min_comments_per_ip));
             $aio_wp_security->configs->save_config();
-            $info_msg_string = sprintf( __('Displaying results for IP addresses which have posted a minimum of %s SPAM comments', 'all-in-one-wp-security-and-firewall'), $min_comments_per_ip);
+            $info_msg_string = sprintf( __('Displaying results for IP addresses which have posted a minimum of %s SPAM comments.', 'all-in-one-wp-security-and-firewall'), $min_comments_per_ip);
             $this->show_msg_updated($info_msg_string);
             
         }
@@ -445,7 +445,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
             //Recalculate points after the feature status/options have been altered
             $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
 
-            $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
+            $this->show_msg_updated(__('Settings were successfully saved.', 'all-in-one-wp-security-and-firewall'));
         }
 
         ?>
@@ -472,7 +472,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable Captcha On BuddyPress Registration Form', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_bp_register_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_bp_register_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to insert a captcha field on the BuddyPress registration forms', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to insert a captcha field on the BuddyPress registration forms.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>

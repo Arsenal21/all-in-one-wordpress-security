@@ -173,7 +173,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
             $login_nick_name_accounts = AIOWPSecurity_Utility::check_identical_login_and_nick_names();
             if ($login_nick_name_accounts) {
                 echo '<div class="aio_red_box"><p>'.__('Your site currently has the following accounts which have an identical login name and display name.', 'all-in-one-wp-security-and-firewall').'
-                         <span class="description">('.__('Click on the link to edit the settings of that particular user account', 'all-in-one-wp-security-and-firewall').'</span></p></div>';
+                         <span class="description">('.__('Click on the link to edit the settings of that particular user account.', 'all-in-one-wp-security-and-firewall').'</span></p></div>';
             ?>
                 <table class="form-table">
                     <?php 
@@ -188,7 +188,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                 </table>
         <?php 
             } else {
-                echo '<div id="aios_message" class="aio_green_box"><p><strong>'.__('No action required.', 'all-in-one-wp-security-and-firewall').'</strong>
+                echo '<div id="aios_message" class="aio_green_box"><p><strong>'.__('No action required!', 'all-in-one-wp-security-and-firewall').'</strong>
                         <br />'.__('Your site does not have a user account where the display name is identical to the username.', 'all-in-one-wp-security-and-firewall').'</p></div>';
             } 
         ?>

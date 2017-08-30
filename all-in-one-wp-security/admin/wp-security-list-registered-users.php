@@ -98,7 +98,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         {//Process approve bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.','all-in-one-wp-security-and-firewall'));
             }else 
             {            
                 $this->approve_selected_accounts(($_REQUEST['item']));
@@ -109,7 +109,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         {//Process delete bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.','all-in-one-wp-security-and-firewall'));
             }else 
             {            
                 $this->delete_selected_accounts(($_REQUEST['item']));
@@ -120,7 +120,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         {//Process block bulk actions
             if(!isset($_REQUEST['item']))
             {
-                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes','all-in-one-wp-security-and-firewall'));
+                AIOWPSecurity_Admin_Menu::show_msg_error_st(__('Please select some records using the checkboxes.','all-in-one-wp-security-and-firewall'));
             }else
             {
                 $this->block_selected_ips(($_REQUEST['item']));
@@ -154,8 +154,8 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                     }else{
                         $email_msg = '';
                         $to_email_address = $user->user_email;
-                        $subject = '['.get_option('siteurl').'] '. __('Your account is now active','all-in-one-wp-security-and-firewall');
-                        $email_msg .= __('Your account with user ID:','all-in-one-wp-security-and-firewall').$user->ID.__(' is now active','all-in-one-wp-security-and-firewall')."\n";
+                        $subject = '['.get_option('siteurl').'] '. __('Your account is now active.','all-in-one-wp-security-and-firewall');
+                        $email_msg .= __('Your account with user ID:','all-in-one-wp-security-and-firewall').$user->ID.__(' is now active.','all-in-one-wp-security-and-firewall')."\n";
                         $site_title = get_bloginfo( 'name' );
                         $from_name = empty($site_title)?'WordPress':$site_title;
                         $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
@@ -184,8 +184,8 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                 $user = get_user_by('id', $entries);
                 $to_email_address = $user->user_email;
                 $email_msg = '';
-                $subject = '['.get_option('siteurl').'] '. __('Your account is now active','all-in-one-wp-security-and-firewall');
-                $email_msg .= __('Your account with username: ','all-in-one-wp-security-and-firewall').$user->user_login.__(' is now active','all-in-one-wp-security-and-firewall')."\n";
+                $subject = '['.get_option('siteurl').'] '. __('Your account is now active.','all-in-one-wp-security-and-firewall');
+                $email_msg .= __('Your account with username: ','all-in-one-wp-security-and-firewall').$user->user_login.__(' is now active.','all-in-one-wp-security-and-firewall')."\n";
                 $site_title = get_bloginfo( 'name' );
                 $from_name = empty($site_title)?'WordPress':$site_title;
                 $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";

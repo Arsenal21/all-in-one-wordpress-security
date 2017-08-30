@@ -47,7 +47,7 @@ abstract class AIOWPSecurity_Admin_Menu
     static function show_msg_record_deleted_st()
     {
         echo '<div id="message" class="updated fade"><p><strong>';
-        _e('The selected record(s) deleted successfully!','all-in-one-wp-security-and-firewall');
+        _e('The selected record(s) were deleted successfully!','all-in-one-wp-security-and-firewall');
         echo '</strong></p></div>';
     }
     

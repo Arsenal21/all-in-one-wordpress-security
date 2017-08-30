@@ -536,7 +536,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Remove WP Generator Meta Info', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_remove_wp_generator_meta_info" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_remove_wp_generator_meta_info')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to remove the version and meta info produced by WP from all pages', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to remove the version and meta info produced by WP from all pages.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>

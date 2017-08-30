@@ -184,7 +184,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable IP or User Agent Blacklisting', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_blacklisting" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_blacklisting')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the banning (or blacklisting) of selected IP addresses and/or user agents specified in the settings below', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the banning (or blacklisting) of selected IP addresses and/or user agents specified in the settings below.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
             <tr valign="top">
@@ -219,7 +219,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                             echo '<p class="description">'.__('Each user agent string must be on a new line.', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 1 - A single user agent string to block:', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">SquigglebotBot</p>';
-                            echo '<p class="description">'.__('Example 2 - A list of more than 1 user agent strings to block', 'all-in-one-wp-security-and-firewall').'</p>';
+                            echo '<p class="description">'.__('Example 2 - A list of more than 1 user agent strings to block:', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">baiduspider<br />SquigglebotBot<br />SurveyBot<br />VoidEYE<br />webcrawl.net<br />YottaShopping_Bot</p>';
                             ?>
                     </div>

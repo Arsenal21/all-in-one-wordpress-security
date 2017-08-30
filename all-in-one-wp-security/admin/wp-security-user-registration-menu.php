@@ -96,7 +96,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
             //Recalculate points after the feature status/options have been altered
             $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
 
-            $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
+            $this->show_msg_updated(__('Settings were successfully saved.', 'all-in-one-wp-security-and-firewall'));
         }
         
         if(isset($_REQUEST['action'])) //Do list table form row action tasks
@@ -293,7 +293,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
                 <th scope="row"><?php _e('Enable Honeypot On Registration Page', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
                 <input name="aiowps_enable_registration_honeypot" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_registration_honeypot')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to enable the honeypot feature for the registration page', 'all-in-one-wp-security-and-firewall'); ?></span>
+                <span class="description"><?php _e('Check this if you want to enable the honeypot feature for the registration page.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>

@@ -47,7 +47,7 @@ if (isset($_POST['aiowps_wp_submit_unlock_request']))
     $email = trim($_POST['aiowps_unlock_request_email']);
     if (empty($email) || !is_email($email))
     {
-        $errors .= '<p>'.__('Please enter a valid email address','all-in-one-wp-security-and-firewall').'</p>';
+        $errors .= '<p>'.__('Please enter a valid email address.','all-in-one-wp-security-and-firewall').'</p>';
     }
     
     if($errors){
