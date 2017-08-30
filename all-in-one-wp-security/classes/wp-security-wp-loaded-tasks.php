@@ -8,6 +8,7 @@ class AIOWPSecurity_WP_Loaded_Tasks {
         //Add tasks that need to be executed at wp-loaded time
 
         global $aio_wp_security;
+        do_action( 'aiowps_wp_loaded_tasks_start', $this);
 
         //Handle the rename login page feature
         if ($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page') == '1') {
@@ -20,10 +21,17 @@ class AIOWPSecurity_WP_Loaded_Tasks {
 
         //For site lockout feature (ie, maintenance mode). It needs to be checked after the rename login page
         if ($aio_wp_security->configs->get_value('aiowps_site_lockout') == '1') {
-            if (!is_user_logged_in() && !current_user_can('administrator') && !is_admin() && !in_array($GLOBALS['pagenow'], array('wp-login.php'))) {
+            if (!is_user_logged_in()) {
+                //now check if user trying to reach login pages
+                if(!in_array($GLOBALS['pagenow'], array('wp-login.php'))){
+                    self::site_lockout_tasks();
+                }
+            }else if(is_user_logged_in() && !current_user_can('manage_options') && !is_admin() && !in_array($GLOBALS['pagenow'], array('wp-login.php')) ){
                 self::site_lockout_tasks();
             }
         }
+        do_action( 'aiowps_wp_loaded_tasks_end', $this);
+
     }
 
     static function site_lockout_tasks() {

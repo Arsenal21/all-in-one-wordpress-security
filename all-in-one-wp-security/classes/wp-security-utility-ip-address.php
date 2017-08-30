@@ -8,7 +8,10 @@ class AIOWPSecurity_Utility_IP
     
     static function get_user_ip_address()
     {
-        foreach (array('HTTP_CF_CONNECTING_IP', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+        //I have modified this function slightly so that the $_SERVER['REMOTE_ADDR'] value is the first method checked and returned.
+        //This change was necessary because $_SERVER['REMOTE_ADDR'] is the most reliable and accurate way to get IP address because the other methods are easily spoofed.
+        //TODO - in a future release we can probably add a config item to allow admins to choose the other methods of finding IP address. 
+        foreach (array('REMOTE_ADDR', 'HTTP_CF_CONNECTING_IP', 'HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED') as $key){
             if (array_key_exists($key, $_SERVER) === true){
                 foreach (explode(',', $_SERVER[$key]) as $ip){
                     $userIP = trim($ip);

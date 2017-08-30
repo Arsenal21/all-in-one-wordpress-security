@@ -214,7 +214,7 @@ if ( $shake_error_codes && $wp_error->get_error_code() && in_array( $wp_error->g
 
     // Don't allow interim logins to navigate away from the page.
     if ( ! $interim_login ): ?>
-        <p id="backtoblog"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php esc_attr_e( 'Are you lost?' ); ?>"><?php printf( __( '&larr; Back to %s', 'all-in-one-wp-security-and-firewall'  ), get_bloginfo( 'title', 'display' ) ); ?></a></p>
+        <p id="backtoblog"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php esc_attr_e( 'Are you lost?', 'all-in-one-wp-security-and-firewall' ); ?>"><?php printf( __( '&larr; Back to %s', 'all-in-one-wp-security-and-firewall'  ), get_bloginfo( 'title', 'display' ) ); ?></a></p>
     <?php endif; ?>
 
 </div>
@@ -558,7 +558,7 @@ switch ($action) {
 
         <form name="lostpasswordform" id="lostpasswordform" action="<?php echo esc_url( network_site_url( 'wp-login.php?action=lostpassword', 'login_post' ) ); ?>" method="post">
             <p>
-                <label for="user_login" ><?php _e('Username or E-mail:') ?><br />
+                <label for="user_login" ><?php _e('Username or E-mail:', 'all-in-one-wp-security-and-firewall') ?><br />
                     <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr($user_login); ?>" size="20" /></label>
             </p>
             <?php
@@ -569,11 +569,11 @@ switch ($action) {
              */
             do_action( 'lostpassword_form' ); ?>
             <input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect_to ); ?>" />
-            <p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Get New Password'); ?>" /></p>
+            <p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Get New Password', 'all-in-one-wp-security-and-firewall'); ?>" /></p>
         </form>
 
         <p id="nav">
-            <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e('Log in') ?></a>
+            <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e('Log in', 'all-in-one-wp-security-and-firewall') ?></a>
             <?php
             if ( get_option( 'users_can_register' ) ) :
                 $registration_url = sprintf( '<a href="%s">%s</a>', esc_url( wp_registration_url() ), __( 'Register', 'all-in-one-wp-security-and-firewall'  ) );
@@ -651,16 +651,16 @@ switch ($action) {
             <input type="hidden" id="user_login" value="<?php echo esc_attr( $rp_login ); ?>" autocomplete="off" />
 
             <p class="user-pass1-wrap">
-                <label for="pass1"><?php _e('New password') ?></label><br />
+                <label for="pass1"><?php _e('New password', 'all-in-one-wp-security-and-firewall') ?></label><br />
             <div class="wp-pwd">
 			<span class="password-input-wrapper">
 				<input type="password" data-reveal="1" data-pw="<?php echo esc_attr( wp_generate_password( 16 ) ); ?>" name="pass1" id="pass1" class="input" size="20" value="" autocomplete="off" aria-describedby="pass-strength-result" />
 			</span>
-                <div id="pass-strength-result" class="hide-if-no-js" aria-live="polite"><?php _e( 'Strength indicator' ); ?></div>
+                <div id="pass-strength-result" class="hide-if-no-js" aria-live="polite"><?php _e( 'Strength indicator', 'all-in-one-wp-security-and-firewall' ); ?></div>
             </div>
             </p>
             <p class="user-pass2-wrap">
-                <label for="pass2"><?php _e('Confirm new password') ?></label><br />
+                <label for="pass2"><?php _e('Confirm new password', 'all-in-one-wp-security-and-firewall') ?></label><br />
                 <input type="password" name="pass2" id="pass2" class="input" size="20" value="" autocomplete="off" />
             </p>
 
@@ -678,11 +678,11 @@ switch ($action) {
             do_action( 'resetpass_form', $user );
             ?>
             <input type="hidden" name="rp_key" value="<?php echo esc_attr( $rp_key ); ?>" />
-            <p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Reset Password'); ?>" /></p>
+            <p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Reset Password', 'all-in-one-wp-security-and-firewall'); ?>" /></p>
         </form>
 
         <p id="nav">
-            <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
+            <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in', 'all-in-one-wp-security-and-firewall' ); ?></a>
             <?php
             if ( get_option( 'users_can_register' ) ) :
                 $registration_url = sprintf( '<a href="%s">%s</a>', esc_url( wp_registration_url() ), __( 'Register', 'all-in-one-wp-security-and-firewall' ) );
@@ -742,11 +742,11 @@ switch ($action) {
 
         <form name="registerform" id="registerform" action="<?php echo esc_url( site_url('wp-login.php?action=register', 'login_post') ); ?>" method="post" novalidate="novalidate">
             <p>
-                <label for="user_login"><?php _e('Username') ?><br />
+                <label for="user_login"><?php _e('Username', 'all-in-one-wp-security-and-firewall') ?><br />
                     <input type="text" name="user_login" id="user_login" class="input" value="<?php echo esc_attr(wp_unslash($user_login)); ?>" size="20" /></label>
             </p>
             <p>
-                <label for="user_email"><?php _e('E-mail') ?><br />
+                <label for="user_email"><?php _e('E-mail', 'all-in-one-wp-security-and-firewall') ?><br />
                     <input type="email" name="user_email" id="user_email" class="input" value="<?php echo esc_attr( wp_unslash( $user_email ) ); ?>" size="25" /></label>
             </p>
             <?php
@@ -757,15 +757,15 @@ switch ($action) {
              */
             do_action( 'register_form' );
             ?>
-            <p id="reg_passmail"><?php _e( 'Registration confirmation will be e-mailed to you.' ); ?></p>
+            <p id="reg_passmail"><?php _e( 'Registration confirmation will be e-mailed to you.', 'all-in-one-wp-security-and-firewall' ); ?></p>
             <br class="clear" />
             <input type="hidden" name="redirect_to" value="<?php echo esc_attr( $redirect_to ); ?>" />
-            <p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Register'); ?>" /></p>
+            <p class="submit"><input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Register', 'all-in-one-wp-security-and-firewall'); ?>" /></p>
         </form>
 
         <p id="nav">
-            <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a> |
-            <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" title="<?php esc_attr_e( 'Password Lost and Found' ) ?>"><?php _e( 'Lost your password?' ); ?></a>
+            <a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in', 'all-in-one-wp-security-and-firewall' ); ?></a> |
+            <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'all-in-one-wp-security-and-firewall' ) ?>"><?php _e( 'Lost your password?', 'all-in-one-wp-security-and-firewall' ); ?></a>
         </p>
 
         <?php
@@ -908,11 +908,11 @@ switch ($action) {
 
 <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
 	<p>
-		<label for="user_login"><?php _e('Username or Email') ?><br />
+		<label for="user_login"><?php _e('Username or Email', 'all-in-one-wp-security-and-firewall') ?><br />
 		<input type="text" name="log" id="user_login"<?php echo $aria_describedby_error; ?> class="input" value="<?php echo esc_attr( $user_login ); ?>" size="20" /></label>
 	</p>
 	<p>
-		<label for="user_pass"><?php _e('Password') ?><br />
+		<label for="user_pass"><?php _e('Password', 'all-in-one-wp-security-and-firewall') ?><br />
 		<input type="password" name="pwd" id="user_pass"<?php echo $aria_describedby_error; ?> class="input" value="" size="20" /></label>
 	</p>
 	<?php
@@ -923,9 +923,9 @@ switch ($action) {
          */
         do_action( 'login_form' );
         ?>
-	<p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked( $rememberme ); ?> /> <?php esc_attr_e('Remember Me'); ?></label></p>
+	<p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked( $rememberme ); ?> /> <?php esc_attr_e('Remember Me', 'all-in-one-wp-security-and-firewall'); ?></label></p>
 	<p class="submit">
-		<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log In'); ?>" />
+		<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="<?php esc_attr_e('Log In', 'all-in-one-wp-security-and-firewall'); ?>" />
 <?php	if ( $interim_login ) { ?>
         <input type="hidden" name="interim-login" value="1" />
     <?php	} else { ?>
@@ -948,7 +948,7 @@ switch ($action) {
                     echo apply_filters( 'register', $registration_url ) . ' | ';
                 endif;
                 ?>
-                <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" title="<?php esc_attr_e( 'Password Lost and Found' ); ?>"><?php _e( 'Lost your password?' ); ?></a>
+                <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'all-in-one-wp-security-and-firewall' ); ?>"><?php _e( 'Lost your password?', 'all-in-one-wp-security-and-firewall' ); ?></a>
             <?php endif; ?>
         </p>
     <?php } ?>

@@ -26,7 +26,7 @@ class AIOWPSecurity_Feature_Item_Manager
         $this->feature_items = array();
         //Settings Menu Features
         //WP Generator Meta
-        $this->feature_items[] = new AIOWPSecurity_Feature_Item("wp-generator-meta-tag", __("Remove WP Generatore Meta Tag", "all-in-one-wp-security-and-firewall"), $this->feature_point_1, $this->sec_level_basic);
+        $this->feature_items[] = new AIOWPSecurity_Feature_Item("wp-generator-meta-tag", __("Remove WP Generator Meta Tag", "all-in-one-wp-security-and-firewall"), $this->feature_point_1, $this->sec_level_basic);
         
         //Prevent Image Hotlinks
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("prevent-hotlinking", __("Prevent Image Hotlinking", "all-in-one-wp-security-and-firewall"), $this->feature_point_2, $this->sec_level_basic);

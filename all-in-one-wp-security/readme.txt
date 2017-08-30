@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.8
-Stable tag: 4.2.8
+Stable tag: 4.2.9
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -184,9 +184,15 @@ None
 
 == Changelog ==
 
-= TODO 4.2.9 =
+= 4.2.9 =
+- Changed the parameter in current_user_can function to use an administrator capability instead of the "administrator" role name.
+- Added some new hooks to the AIOWPSecurity_WP_Loaded_Tasks called aiowps_wp_loaded_tasks_start and aiowps_wp_loaded_tasks_end.
+- Improved get_locked_ips() function and added $wpdb->prepare statement.
+- Added more missing translation domain parameters for translatable strings in the rename login page.
 - Deleted local copy of the Persian and Italian language files. These translations are available on translate.wordpress.org.
 - Domain path and text domain added to plugin header.
+- Changed the get_user_ip_address functions so that $_SERVER['REMOTE_ADDR'] is the primary method used to obtain IP address.
+- Added enumeration block via REST API (wp >= 4.7)
 
 = 4.2.8 =
 - Improved "User Registration" feature to bypass the pending approval status for new users created in admin side.

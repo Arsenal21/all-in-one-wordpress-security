@@ -521,7 +521,7 @@ class AIOWPSecurity_General_Init_Tasks
     function reapply_htaccess_rules_notice()
     {
         if (get_option('aiowps_temp_configs') !== FALSE){
-            echo '<div class="updated"><p>Would you like All In One WP Security & Firewall to re-insert the security rules in your .htaccess file which were cleared when you deactivated the plugin?&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=1" class="button-primary">Yes</a>&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=2" class="button-primary">No</a></p></div>';
+            echo '<div class="updated"><p>'.__('Would you like All In One WP Security & Firewall to re-insert the security rules in your .htaccess file which were cleared when you deactivated the plugin?', 'all-in-one-wp-security-and-firewall').'&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=1" class="button-primary">Yes</a>&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=2" class="button-primary">No</a></p></div>';
         }
     }
     

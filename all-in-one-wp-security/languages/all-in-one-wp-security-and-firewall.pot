@@ -5261,7 +5261,7 @@ msgid ""
 msgstr ""
 
 #: classes/grade-system/wp-security-feature-item-manager.php:29
-msgid "Remove WP Generatore Meta Tag"
+msgid "Remove WP Generator Meta Tag"
 msgstr ""
 
 #: classes/grade-system/wp-security-feature-item-manager.php:38
