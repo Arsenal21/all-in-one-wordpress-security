@@ -189,6 +189,7 @@ None
 - Added captcha for woocommerce login and registration forms.
 - Fixed "mixed line endings" warnings for whois library.
 - Moved DB cleanup task cron job from daily to hourly.
+- Updated the reapply htaccess function so it doesn't create the header already sent error.
 
 = 4.2.9 =
 - Changed the parameter in current_user_can function to use an administrator capability instead of the "administrator" role name.

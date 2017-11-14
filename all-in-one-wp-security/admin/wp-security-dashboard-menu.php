@@ -75,6 +75,17 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 
     function render_tab1()
     {
+	
+	//Lets check if reapply httaccess rules action was performed
+	if(strip_tags($_REQUEST['aiowps_reapply_htaccess']) == 1){
+	    //Show success or failure message from the reapply operation.
+	    if(isset($_SESSION['reapply_htaccess_rules_action_result']) && $_SESSION['reapply_htaccess_rules_action_result'] == '1'){
+		echo '<div class="updated"><p>The AIOWPS .htaccess rules were successfully re-inserted.</p></div>';
+	    } else if (isset($_SESSION['reapply_htaccess_rules_action_result']) && $_SESSION['reapply_htaccess_rules_action_result'] == '2'){
+		echo '<div class="error"><p>AIOWPS encountered an error when trying to write to your .htaccess file. Please check the logs.</p></div>';
+	    }
+	}
+	
         echo '<div class="aio_grey_box">';
         echo '<p>' . __('For information, updates and documentation, please visit the', 'all-in-one-wp-security-and-firewall') . ' <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin" target="_blank">' . __('AIO WP Security & Firewall Plugin', 'all-in-one-wp-security-and-firewall') . '</a> ' . __('Page', 'all-in-one-wp-security-and-firewall') . '</p>';
         echo '<p><a href="https://www.tipsandtricks-hq.com/development-center" target="_blank">' . __('Follow us', 'all-in-one-wp-security-and-firewall') . '</a> on ' . __('Twitter, Google+ or via Email to stay up to date about the new security features of this plugin.', 'all-in-one-wp-security-and-firewall') . '</p>';
