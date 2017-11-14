@@ -43,6 +43,8 @@ class AIOWPSecurity_Feature_Item_Manager
         //Login Captcha
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("user-login-captcha", __("Login Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_4, $this->sec_level_basic);
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("custom-login-captcha", __("Custom Login Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_4, $this->sec_level_basic);
+        $this->feature_items[] = new AIOWPSecurity_Feature_Item("woo-login-captcha", __("Woo Login Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_2, $this->sec_level_basic);
+        $this->feature_items[] = new AIOWPSecurity_Feature_Item("woo-register-captcha", __("Woo Register Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_2, $this->sec_level_basic);
         //Lost Password Captcha
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("lost-password-captcha", __("Lost Password Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_2, $this->sec_level_basic);
         //Login whitelisting
@@ -194,6 +196,14 @@ class AIOWPSecurity_Feature_Item_Manager
             if($item->feature_id == "custom-login-captcha")
             {
                 $this->check_custom_login_captcha_feature($item);
+            }
+            if($item->feature_id == "woo-login-captcha")
+            {
+                $this->check_woo_login_captcha_feature($item);
+            }
+            if($item->feature_id == "woo-register-captcha")
+            {
+                $this->check_woo_register_captcha_feature($item);
             }
             if($item->feature_id == "lost-password-captcha")
             {
@@ -422,6 +432,30 @@ class AIOWPSecurity_Feature_Item_Manager
     {
         global $aio_wp_security;
         if ($aio_wp_security->configs->get_value('aiowps_enable_custom_login_captcha') == '1') {
+            $item->set_feature_status($this->feature_active);
+        }
+        else
+        {
+            $item->set_feature_status($this->feature_inactive);
+        }
+    }
+
+    function check_woo_login_captcha_feature($item)
+    {
+        global $aio_wp_security;
+        if ($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1') {
+            $item->set_feature_status($this->feature_active);
+        }
+        else
+        {
+            $item->set_feature_status($this->feature_inactive);
+        }
+    }
+
+    function check_woo_register_captcha_feature($item)
+    {
+        global $aio_wp_security;
+        if ($aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1') {
             $item->set_feature_status($this->feature_active);
         }
         else
