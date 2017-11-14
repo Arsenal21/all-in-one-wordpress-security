@@ -183,6 +183,12 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+TODO
+- Improved white list directives to cater for Apache 2.4 and earlier versions.
+- Added 3 filters for the manual account registration approval email: aiowps_register_approval_email_subject, aiowps_register_approval_email_msg, aiowps_register_approval_email_from_name
+- Added configuration option to allow custom firewall rules to be applied at beginning of all rules applied by aiowps.
+- Changed record insertions to DB table aiowps_failed_logins to store the full IP address instead of IP range.
+
 
 = 4.3.0 =
 - Updated wp-security-rename-login-feature.php to include latest WordPress core changes.

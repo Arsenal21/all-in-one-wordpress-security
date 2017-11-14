@@ -142,7 +142,27 @@ class AIOWPSecurity_Utility_Htaccess
             $ht = @fopen($htaccess, 'a+');
             @fclose($ht);
         }
-        $ht_contents = explode(PHP_EOL, implode('', file($htaccess))); //parse each line of file into array
+        /* 
+         * 
+         Bug Fix: On some environments such as windows (xampp) this function was clobbering the non-aiowps-related .htaccess contents for certain cases.
+         In some cases when WordPress saves the .htaccess file (eg, when saving permalink settings), 
+         the line endings differ from the expected PHP_EOL endings. (WordPress saves with "\n" (UNIX style) but PHP_EOL may be set as "\r\n" (WIN/DOS))
+         In this case exploding via PHP_EOL may not yield the result we expect.
+         Therefore we need to do the following extra checks.
+         */
+        $ht_contents_imploded = implode('', file($htaccess));
+        if(empty($ht_contents_imploded)){
+            return 1;
+        }else if(strstr($ht_contents_imploded, PHP_EOL)) {
+            $ht_contents = explode(PHP_EOL, $ht_contents_imploded); //parse each line of file into array
+        }else if(strstr($ht_contents_imploded, "\n")){
+            $ht_contents = explode("\n", $ht_contents_imploded); //parse each line of file into array
+        }else if(strstr($ht_contents_imploded, "\r")){
+            $ht_contents = explode("\r", $ht_contents_imploded); //parse each line of file into array
+        }else if(strstr($ht_contents_imploded, "\r\n")){
+            $ht_contents = explode("\r\n", $ht_contents_imploded); //parse each line of file into array
+        }
+        
         if ($ht_contents) { //as long as there are lines in the file
             $state = true;
             if (!$f = @fopen($htaccess, 'w+')) {
@@ -171,6 +191,7 @@ class AIOWPSecurity_Utility_Htaccess
 
     static function getrules()
     {
+        global $aio_wp_security;
         $rules = "";
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_block_wp_file_access();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_basic_htaccess();
@@ -186,9 +207,15 @@ class AIOWPSecurity_Utility_Htaccess
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_5g_blacklist();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_enable_brute_force_prevention();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_block_spambots();
-        $rules .= AIOWPSecurity_Utility_Htaccess::getrules_enable_login_whitelist();
+        $rules .= AIOWPSecurity_Utility_Htaccess::getrules_enable_login_whitelist_v2();
         $rules .= AIOWPSecurity_Utility_Htaccess::prevent_image_hotlinks();
-        $rules .= AIOWPSecurity_Utility_Htaccess::getrules_custom_rules();
+        $custom_rules = AIOWPSecurity_Utility_Htaccess::getrules_custom_rules();
+        if($aio_wp_security->configs->get_value('aiowps_place_custom_rules_at_top')=='1'){
+            $rules = $custom_rules . $rules;
+        }else{
+            $rules .= $custom_rules;
+        }                
+        
         //TODO: The following utility functions are ready to use when we write the menu pages for these features
 
         //Add more functions for features as needed
@@ -423,7 +450,7 @@ class AIOWPSecurity_Utility_Htaccess
                     $special_case = true;
                     $rules .= '<IfModule mod_rewrite.c>' . PHP_EOL;
                     $rules .= 'RewriteEngine on' . PHP_EOL;
-                    $rules .= 'RewriteCond %{QUERY_STRING} ^' . $secret_slug . '$' . PHP_EOL;
+                    $rules .= 'RewriteCond %{QUERY_STRING} ^' . $secret_slug . '=1.*$' . PHP_EOL;
                     $rules .= 'RewriteCond %{REMOTE_ADDR} !^' . preg_quote($host_ip) . '[OR]' . PHP_EOL;
                 } else {
                     $slug = preg_quote($secret_slug); //escape any applicable chars
@@ -516,6 +543,111 @@ class AIOWPSecurity_Utility_Htaccess
             }
 
             if ($special_case) {
+                $rules .= 'RewriteRule .* http://127.0.0.1 [L]' . PHP_EOL;
+                $rules .= '</IfModule>' . PHP_EOL;
+            } else {
+                $rules .= '</FilesMatch>' . PHP_EOL;
+            }
+            $rules .= AIOWPSecurity_Utility_Htaccess::$enable_login_whitelist_marker_end . PHP_EOL; //Add feature marker end
+        }
+
+        return $rules;
+    }
+
+    /*
+     * (This is an updated and improved version of getrules_enable_login_whitelist())
+     * This function will write some directives to allow IPs in the whitelist to access wp-login.php or wp-admin
+     * The function also handles the following special cases:
+     * 1) If the rename login feature is being used: for this scenario instead of protecting wp-login.php we must protect the special page slug
+     * 2) If the rename login feature is being used AND non permalink URL structure: for this case need to use mod_rewrite because we must check QUERY_STRING 
+     */
+    static function getrules_enable_login_whitelist_v2()
+    {
+        global $aio_wp_security;
+        $rules = '';
+        
+            if ($aio_wp_security->configs->get_value('aiowps_enable_whitelisting') == '1') {
+            $site_url = AIOWPSEC_WP_URL;
+            $parse_url = parse_url($site_url);
+            $hostname = $parse_url['host'];
+            $host_ip = gethostbyname($hostname);
+            $hidden_login_pretty_perms = false;
+            $rules .= AIOWPSecurity_Utility_Htaccess::$enable_login_whitelist_marker_start . PHP_EOL; //Add feature marker start
+            //If the rename login page feature is active, we will need to adjust the directives
+            if ($aio_wp_security->configs->get_value('aiowps_enable_rename_login_page') == '1') {
+                $secret_slug = $aio_wp_security->configs->get_value('aiowps_login_page_slug');
+                if (get_option('permalink_structure')) {
+                    $slug = preg_quote($secret_slug); //escape any applicable chars
+                    $rules .= '<FilesMatch "^(' . $slug . ')">' . PHP_EOL;
+                } else {
+                    //standard url structure is being used - ie, non permalinks
+                    $hidden_login_pretty_perms = true;
+                    $rules .= '<IfModule mod_rewrite.c>' . PHP_EOL;
+                    $rules .= 'RewriteEngine on' . PHP_EOL;
+                    $rules .= 'RewriteCond %{QUERY_STRING} ^' . $secret_slug . '=1.*$' . PHP_EOL;
+                    $rules .= 'RewriteCond %{REMOTE_ADDR} !^' . preg_quote($host_ip) . PHP_EOL;
+                }
+            } else {
+                $rules .= '<FilesMatch "^(wp-login\.php)">' . PHP_EOL;
+            }
+            $rules_apache_pre_24 = '';
+            $rules_apache_24 = '';
+            if (!$hidden_login_pretty_perms) {
+                //start writing rules for versions of apache < 2.4
+                $rules_apache_pre_24 .= '<IfModule !mod_authz_core.c>' . PHP_EOL;
+                $rules_apache_pre_24 .= 'Order Allow,Deny' . PHP_EOL;
+                $rules_apache_pre_24 .= 'Allow from ' . $hostname . PHP_EOL;
+                $rules_apache_pre_24 .= 'Allow from ' . $host_ip . PHP_EOL;
+                
+                //start writing rules for versions of apache >=2.4
+                $rules_apache_24 .= '<IfModule mod_authz_core.c>' . PHP_EOL;
+                $rules_apache_24 .= 'Require all denied' . PHP_EOL;
+                $rules_apache_24 .= 'Require local' . PHP_EOL;
+                $rules_apache_24 .= 'Require ip 127.0.0.1' . PHP_EOL;
+                $rules_apache_24 .= 'Require host ' . $hostname . PHP_EOL;
+            }
+
+            //Let's get list of whitelisted IPs
+            $hosts = AIOWPSecurity_Utility::explode_trim_filter_empty($aio_wp_security->configs->get_value('aiowps_allowed_ip_addresses'));
+            // Filter out duplicate lines, add netmask to IP addresses
+            $ips_with_netmask = self::add_netmask(array_unique($hosts));
+            if(!empty($ips_with_netmask)){
+                foreach($ips_with_netmask as $xhost){
+                    $ipv6 = false;
+                    if (strpos($xhost, ':') !== false) {
+                        //possible ipv6 addr
+                        //ipv6 - for now we will support only whole ipv6 addresses, NOT ranges
+                        $ipv6 = WP_Http::is_ip_address($xhost);
+                        if (FALSE === $ipv6) {
+                            continue;
+                        }
+                    }
+                    $ip_range = substr($xhost, 0, strpos($xhost, "/")); //check if address range
+                    if($hidden_login_pretty_perms){
+                        if(!empty($ip_range)){
+                            $xhost = $ip_range; //get the IP minus the slash with netmask bits
+                        }
+                        if(!$ipv6){
+                            $xhost = preg_replace("/[\.0]+$/", ".", $xhost);
+                            $xhost = preg_quote($xhost);
+                        }
+                        $rules .= 'RewriteCond %{REMOTE_ADDR} !^' . $xhost . PHP_EOL;
+                    }else{
+                        //write rules for both apache 2.2 and 2.4+
+                        $rules_apache_pre_24 .= 'Allow from ' . $xhost . PHP_EOL;
+                        $rules_apache_24 .= 'Require ip '. $xhost . PHP_EOL;
+                    }
+                }
+                
+            }
+            if(!empty($rules_apache_pre_24)){
+                $rules_apache_pre_24 .= '</IfModule>' . PHP_EOL;
+            }
+            if(!empty($rules_apache_24)){
+                $rules_apache_24 .= '</IfModule>' . PHP_EOL;
+            }
+            $rules .= $rules_apache_pre_24 . $rules_apache_24;
+            if ($hidden_login_pretty_perms) {
                 $rules .= 'RewriteRule .* http://127.0.0.1 [L]' . PHP_EOL;
                 $rules .= '</IfModule>' . PHP_EOL;
             } else {
@@ -1098,11 +1230,21 @@ END;
      * @param array $ips
      * @return array
      */
-    protected static function add_netmask($ips) {
+    protected static function add_netmask($ips=array()) {
 
         $output = array();
-
+        if(empty($ips)) return array();
         foreach ( $ips as $ip ) {
+            //Check if ipv6
+            if (strpos($ip, ':') !== false) {
+                //for now we'll only support whole ipv6 (not address ranges)
+                $ipv6 = WP_Http::is_ip_address($ip);
+                if (FALSE === $ipv6) {
+                    continue;
+                }
+                $output[] = $ip;
+            }
+            
 
             $parts = explode('.', $ip);
 

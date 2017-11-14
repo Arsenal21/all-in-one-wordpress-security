@@ -1042,6 +1042,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
 
                 $aio_wp_security->configs->set_value('aiowps_custom_rules',$custom_rules);
                 $aio_wp_security->configs->set_value('aiowps_enable_custom_rules',isset($_POST["aiowps_enable_custom_rules"])?'1':'');
+                $aio_wp_security->configs->set_value('aiowps_place_custom_rules_at_top',isset($_POST["aiowps_place_custom_rules_at_top"])?'1':'');
                 $aio_wp_security->configs->save_config(); //Save the configuration
 
                 $this->show_msg_settings_updated();
@@ -1089,6 +1090,13 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                             <td>
                                 <input name="aiowps_enable_custom_rules" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_custom_rules')=='1') echo ' checked="checked"'; ?> value="1"/>
                                 <span class="description"><?php _e('Check this if you want to enable custom rules entered in the text box below', 'all-in-one-wp-security-and-firewall'); ?></span>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <th scope="row"><?php _e('Place custom rules at the top', 'all-in-one-wp-security-and-firewall')?>:</th>
+                            <td>
+                                <input name="aiowps_place_custom_rules_at_top" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_place_custom_rules_at_top')=='1') echo ' checked="checked"'; ?> value="1"/>
+                                <span class="description"><?php _e('Check this if you want to place your custom rules at the beginning of all the rules applied by this plugin', 'all-in-one-wp-security-and-firewall'); ?></span>
                             </td>
                         </tr>
                         <tr valign="top">

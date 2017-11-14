@@ -74,7 +74,7 @@ class AIOWPSecurity_Utility_IP
                         //possible ipv6 addr
                         $res = WP_Http::is_ip_address($item);
                         if(FALSE === $res){
-                            $errors .= '<p>'.$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall').'</p>';
+                            $errors .= "\n".$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall');
                         }else if($res == '6'){
                             $list[] = trim($item);
                         }
@@ -89,7 +89,7 @@ class AIOWPSecurity_Utility_IP
                     
                     if (count($ipParts) < 2)
                     {
-                        $errors .= '<p>'.$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        $errors .= "\n".$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall');
                         continue;
                     }
 
@@ -108,7 +108,7 @@ class AIOWPSecurity_Utility_IP
                                     if (trim($part) == '*') 
                                     {
                                         $goodip = false;
-                                        $errors .= '<p>'.$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall').'</p>';
+                                        $errors .= "\n".$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall');
                                     }
                                     break;
                                 case 2:
@@ -123,7 +123,7 @@ class AIOWPSecurity_Utility_IP
                                         if ($foundwild == true) 
                                         {
                                             $goodip = false;
-                                            $errors .= '<p>'.$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall').'</p>';
+                                            $errors .= "\n".$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall');
                                         }
                                     }
                                     else 
@@ -138,7 +138,7 @@ class AIOWPSecurity_Utility_IP
                     }
                     if (ip2long(trim(str_replace('*', '0', $item))) == false) 
                     { //invalid ip 
-                        $errors .= '<p>'.$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall').'</p>';
+                        $errors .= "\n".$item.__(' is not a valid ip address format.', 'all-in-one-wp-security-and-firewall');
                     } 
                     elseif (strlen($item) > 4 && !in_array($item, $list)) 
                     {
@@ -146,7 +146,7 @@ class AIOWPSecurity_Utility_IP
                         if ($current_user_ip == $item && $list_type == 'blacklist')
                         {
                             //You can't ban your own IP
-                            $errors .= '<p>'.__('You cannot ban your own IP address: ', 'all-in-one-wp-security-and-firewall').$item.'</p>';
+                            $errors .= "\n".__('You cannot ban your own IP address: ', 'all-in-one-wp-security-and-firewall').$item;
                         }
                         else
                         {

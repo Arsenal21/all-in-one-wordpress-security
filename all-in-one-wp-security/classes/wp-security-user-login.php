@@ -273,12 +273,9 @@ class AIOWPSecurity_User_Login
     function increment_failed_logins($username)
     {
         global $wpdb, $aio_wp_security;
-        //$login_attempts_permitted = $aio_wp_security->configs->get_value('aiowps_max_login_attempts');
-        //$lockout_time_length = $aio_wp_security->configs->get_value('aiowps_lockout_time_length');
         $login_fails_table = AIOWPSEC_TBL_FAILED_LOGINS;
         $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
-        $ip_range = AIOWPSecurity_Utility_IP::get_sanitized_ip_range($ip); //Get the IP range of the current user
-        if(empty($ip_range)) return;
+        if(empty($ip)) return;
         $user = is_email($username) ? get_user_by('email', $username) : get_user_by('login', $username); //Returns WP_User object if it exists
         if ($user)
         {
@@ -288,9 +285,9 @@ class AIOWPSecurity_User_Login
             //If the login attempt was made using a non-existent user then let's set user_id to blank and record the attempted user login name for DB storage later on
             $user_id = 0;
         }
-        $ip_range_str = esc_sql($ip_range).'.*';
+        $ip_str = esc_sql($ip);
         $now = current_time( 'mysql' );
-        $data = array('user_id' => $user_id, 'user_login' => $username, 'failed_login_date' => $now, 'login_attempt_ip' => $ip_range_str);
+        $data = array('user_id' => $user_id, 'user_login' => $username, 'failed_login_date' => $now, 'login_attempt_ip' => $ip_str);
         $format = array('%d', '%s', '%s', '%s');
         $result = $wpdb->insert($login_fails_table, $data, $format);
         if ($result === FALSE)

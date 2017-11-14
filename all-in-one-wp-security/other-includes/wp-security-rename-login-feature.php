@@ -886,6 +886,15 @@ switch ($action) {
         } else {
             $aria_describedby_error = '';
         }
+        
+	//aiowps - this check is necessary because otherwise if variables are undefined we get a warning!
+	if(empty($user_login)){
+		$user_login = '';
+	}	
+	if(empty($error)){
+		$error = '';
+	}        
+        
         ?>
 
 <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
