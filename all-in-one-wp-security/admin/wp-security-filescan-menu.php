@@ -3,72 +3,22 @@
 class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_FILESCAN_MENU_SLUG;
-    
-    /* Specify all the tabs of this menu in the following array */
-    var $menu_tabs;
 
     var $menu_tabs_handler = array(
         'tab1' => 'render_tab1',
         'tab2' => 'render_tab2',
-        );
-    
-    function __construct() 
-    {
-        $this->render_menu_page();
-    }
-    
-    function set_menu_tabs() 
+    );
+
+    function __construct()
     {
         $this->menu_tabs = array(
             'tab1' => __('File Change Detection','all-in-one-wp-security-and-firewall'),
             'tab2' => __('Malware Scan','all-in-one-wp-security-and-firewall'),
         );
+
+        parent::__construct(__('Scanner','all-in-one-wp-security-and-firewall'));
     }
 
-    function get_current_tab() 
-    {
-        $tab_keys = array_keys($this->menu_tabs);
-        $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
-        return $tab;
-    }
-
-    /*
-     * Renders our tabs of this menu as nav items
-     */
-    function render_menu_tabs() 
-    {
-        $current_tab = $this->get_current_tab();
-
-        echo '<h2 class="nav-tab-wrapper">';
-        foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
-        {
-            $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
-            echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
-        }
-        echo '</h2>';
-    }
-    
-    /*
-     * The menu rendering goes here
-     */
-    function render_menu_page() 
-    {
-        echo '<div class="wrap">';
-        echo '<h2>'.__('Scanner','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
-        $this->set_menu_tabs();
-        $tab = $this->get_current_tab();
-        $this->render_menu_tabs();
-        ?>        
-        <div id="poststuff"><div id="post-body">
-        <?php 
-        //$tab_keys = array_keys($this->menu_tabs);
-        call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
-        ?>
-        </div></div>
-        </div><!-- end of wrap -->
-        <?php
-    }
-    
     function render_tab1()
     {
         global $wpdb, $aio_wp_security;
@@ -296,7 +246,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
                     <span class="description"><?php _e('Enter each file type or extension on a new line which you wish to exclude from the file change detection scan.', 'all-in-one-wp-security-and-firewall'); ?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                     <div class="aiowps_more_info_body">
-                            <?php 
+                            <?php
                             echo '<p class="description">'.__('You can exclude file types from the scan which would not normally pose any security threat if they were changed. These can include things such as image files.', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example: If you want the scanner to ignore files of type jpg, png, and bmp, then you would enter the following:', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('jpg', 'all-in-one-wp-security-and-firewall').'</p>';
@@ -313,7 +263,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
                     <span class="description"><?php _e('Enter each file or directory on a new line which you wish to exclude from the file change detection scan.', 'all-in-one-wp-security-and-firewall'); ?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                     <div class="aiowps_more_info_body">
-                            <?php 
+                            <?php
                             echo '<p class="description">'.__('You can exclude specific files/directories from the scan which would not normally pose any security threat if they were changed. These can include things such as log files.', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example: If you want the scanner to ignore certain files in different directories or whole directories, then you would enter the following:', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('cache/config/master.php', 'all-in-one-wp-security-and-firewall').'</p>';
