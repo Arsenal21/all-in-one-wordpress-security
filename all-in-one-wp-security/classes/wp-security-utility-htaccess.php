@@ -1,4 +1,7 @@
 <?php
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
 
 class AIOWPSecurity_Utility_Htaccess
 {
@@ -254,15 +257,13 @@ class AIOWPSecurity_Utility_Htaccess
         // Are we on Apache or LiteSpeed webserver?
         $aiowps_server = AIOWPSecurity_Utility::get_server_type();
         $apache_or_litespeed = $aiowps_server == 'apache' || $aiowps_server == 'litespeed';
-        //
         $rules = '';
         if ($aio_wp_security->configs->get_value('aiowps_enable_blacklisting') == '1') {
             // Let's do the list of blacklisted IPs first
             $hosts = AIOWPSecurity_Utility::explode_trim_filter_empty($aio_wp_security->configs->get_value('aiowps_banned_ip_addresses'));
             // Filter out duplicate lines, add netmask to IP addresses
             $ips_with_netmask = self::add_netmask(array_unique($hosts));
-
-            if ( !empty($ips_with_netmask) ) {
+            if ( !empty($ips_with_netmask) && ($aio_wp_security->configs->get_value('aiowps_enable_6g_firewall') != '1') ) {
                 $rules .= AIOWPSecurity_Utility_Htaccess::$ip_blacklist_marker_start . PHP_EOL; //Add feature marker start
 
                 if ( $apache_or_litespeed ) {
@@ -965,7 +966,30 @@ class AIOWPSecurity_Utility_Htaccess
     {
         global $aio_wp_security;
         $rules = '';
+        $ip_blacklist_23 = '';
+        $ip_blacklist_24 = '';
         if ($aio_wp_security->configs->get_value('aiowps_enable_6g_firewall') == '1') {
+            //if ip blacklist is enabled we will merge that code with the 6G rules to prevent clashes
+            if ($aio_wp_security->configs->get_value('aiowps_enable_blacklisting') == '1') {
+                // Let's do the list of blacklisted IPs first
+                $hosts = AIOWPSecurity_Utility::explode_trim_filter_empty($aio_wp_security->configs->get_value('aiowps_banned_ip_addresses'));
+                // Filter out duplicate lines, add netmask to IP addresses
+                $ips_with_netmask = self::add_netmask(array_unique($hosts));
+
+                if ( !empty($ips_with_netmask) ) {
+                    // Apache or LiteSpeed webserver
+                    // Apache 2.2 and older
+                    $ip_blacklist_23 .= '#AIOWPS_IP_BLACKLIST_2_3_START' . PHP_EOL;
+                    $ip_blacklist_24 .= '#AIOWPS_IP_BLACKLIST_2_4_START' . PHP_EOL;
+                    foreach ($ips_with_netmask as $ip_with_netmask) {
+                        $ip_blacklist_23 .= "Deny from " . $ip_with_netmask . PHP_EOL;
+                        $ip_blacklist_24 .= "Require not ip " . $ip_with_netmask . PHP_EOL;
+                    }
+                    $ip_blacklist_23 .= '#AIOWPS_IP_BLACKLIST_2_3_END' . PHP_EOL;
+                    $ip_blacklist_24 .= '#AIOWPS_IP_BLACKLIST_2_4_END' . PHP_EOL;
+                }
+            }
+            
             $rules .= AIOWPSecurity_Utility_Htaccess::$six_g_blacklist_marker_start . PHP_EOL; //Add feature marker start
 
             $rules .= '# 6G FIREWALL/BLACKLIST
@@ -1025,14 +1049,20 @@ class AIOWPSecurity_Utility_Htaccess
                                 <IfModule !mod_authz_core.c>
                                         Order Allow,Deny
                                         Allow from all
-                                        Deny from env=bad_bot
+                                        Deny from env=bad_bot';
+            if(!empty($ip_blacklist_23))
+                $rules .= PHP_EOL.$ip_blacklist_23; //add ip blacklist if applicable
+            $rules .= '
                                 </IfModule>
 
                                 # Apache >= 2.3
                                 <IfModule mod_authz_core.c>
                                         <RequireAll>
                                                 Require all Granted
-                                                Require not env bad_bot
+                                                Require not env bad_bot';
+            if(!empty($ip_blacklist_24))
+                $rules .= PHP_EOL.$ip_blacklist_24; //add ip blacklist if applicable
+            $rules .= '
                                         </RequireAll>
                                 </IfModule>
                         </IfModule>' . PHP_EOL;

@@ -1,4 +1,8 @@
 <?php
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
+
 class AIOWPSecurity_List_Account_Activity extends AIOWPSecurity_List_Table {
     
     function __construct(){

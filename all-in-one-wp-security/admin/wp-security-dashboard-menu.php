@@ -1,4 +1,7 @@
 <?php
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
 
 class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 {
@@ -77,7 +80,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
     {
 	
 	//Lets check if reapply httaccess rules action was performed
-	if(strip_tags($_REQUEST['aiowps_reapply_htaccess']) == 1){
+	if(isset($_REQUEST['aiowps_reapply_htaccess'])){
 	    //Show success or failure message from the reapply operation.
 	    if(isset($_SESSION['reapply_htaccess_rules_action_result']) && $_SESSION['reapply_htaccess_rules_action_result'] == '1'){
 		echo '<div class="updated"><p>The AIOWPS .htaccess rules were successfully re-inserted.</p></div>';

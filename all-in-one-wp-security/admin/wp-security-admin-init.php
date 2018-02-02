@@ -3,6 +3,10 @@
  * Inits the admin dashboard side of things.
  * Main admin file which loads all settings panels and sets up admin menus. 
  */
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
+
 class AIOWPSecurity_Admin_Init
 {
     var $main_menu_page;

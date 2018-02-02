@@ -1,4 +1,8 @@
 <?php
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
+
 class AIOWPSecurity_Backup
 {
     var $last_backup_file_name;//Stores the name of the last backup file when execute_backup function is called

@@ -1,4 +1,7 @@
 <?php
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
 
 class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
 

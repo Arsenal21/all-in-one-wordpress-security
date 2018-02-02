@@ -1,4 +1,7 @@
 <?php
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
 
 class AIOWPSecurity_Configure_Settings
 {    
@@ -118,6 +121,8 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->set_value('aiowps_enable_comment_captcha','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_enable_autoblock_spam_ip','');//Checkbox
         $aio_wp_security->configs->set_value('aiowps_spam_ip_min_comments_block','');
+        $aio_wp_security->configs->set_value('aiowps_enable_bp_register_captcha','');
+        $aio_wp_security->configs->set_value('aiowps_enable_bbp_new_topic_captcha','');//Checkbox
         
         //Filescan features
         //File change detection feature
@@ -138,6 +143,8 @@ class AIOWPSecurity_Configure_Settings
        //Prevent users enumeration
         $aio_wp_security->configs->set_value('aiowps_prevent_users_enumeration','');//Checkbox
         
+        //IP retrieval setting
+        $aio_wp_security->configs->set_value('aiowps_ip_retrieve_method','0');//default is $_SERVER['REMOTE_ADDR']
                 
         //TODO - keep adding default options for any fields that require it
         
@@ -257,6 +264,8 @@ class AIOWPSecurity_Configure_Settings
         $aio_wp_security->configs->add_value('aiowps_enable_comment_captcha','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_enable_autoblock_spam_ip','');//Checkbox
         $aio_wp_security->configs->add_value('aiowps_spam_ip_min_comments_block','');
+        $aio_wp_security->configs->add_value('aiowps_enable_bp_register_captcha','');
+        $aio_wp_security->configs->add_value('aiowps_enable_bbp_new_topic_captcha','');//Checkbox
 
 
         //Filescan features
@@ -278,6 +287,8 @@ class AIOWPSecurity_Configure_Settings
         //Prevent users enumeration
         $aio_wp_security->configs->add_value('aiowps_prevent_users_enumeration','');//Checkbox
 
+        //IP retrieval setting
+        $aio_wp_security->configs->add_value('aiowps_ip_retrieve_method','0');//default is $_SERVER['REMOTE_ADDR']
         
         //TODO - keep adding default options for any fields that require it
         

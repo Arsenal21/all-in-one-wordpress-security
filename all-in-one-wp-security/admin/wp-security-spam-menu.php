@@ -1,4 +1,7 @@
 <?php
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
 
 class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
 {
@@ -11,6 +14,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
         'tab1' => 'render_tab1',
         'tab2' => 'render_tab2',
         'tab3' => 'render_tab3',
+        'tab4' => 'render_tab4',
         );
     
     function __construct() 
@@ -24,6 +28,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
         'tab1' => __('Comment SPAM', 'all-in-one-wp-security-and-firewall'),
         'tab2' => __('Comment SPAM IP Monitoring', 'all-in-one-wp-security-and-firewall'),
         'tab3' => __('BuddyPress', 'all-in-one-wp-security-and-firewall'),
+        'tab4' => __('BBPress', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -482,6 +487,68 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
         <?php
         }else{
             $this->show_msg_error(__('BuddyPress is not active! In order to use this feature you will need to have BuddyPress installed and activated.', 'all-in-one-wp-security-and-firewall'));
+        }
+    }
+
+    function render_tab4()
+    {
+        global $aiowps_feature_mgr;
+        global $aio_wp_security;
+        if(isset($_POST['aiowps_save_bbp_spam_settings']))//Do form submission tasks
+        {
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-bbp-spam-settings-nonce'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed on save bbp spam settings!",4);
+                die("Nonce check failed on save bbpress spam settings!");
+            }
+
+            //Save settings
+            $aio_wp_security->configs->set_value('aiowps_enable_bbp_new_topic_captcha',isset($_POST["aiowps_enable_bbp_new_topic_captcha"])?'1':'');
+
+            //Commit the config settings
+            $aio_wp_security->configs->save_config();
+            
+            //Recalculate points after the feature status/options have been altered
+            $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
+
+            $this->show_msg_updated(__('Settings were successfully saved', 'all-in-one-wp-security-and-firewall'));
+        }
+
+        ?>
+        <h2><?php _e('BBPress SPAM Settings', 'all-in-one-wp-security-and-firewall')?></h2>
+        <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-bbp-spam-settings-nonce'); ?>            
+
+        <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('Add Captcha To BBPress New Topic Form', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <div class="aio_blue_box">
+            <?php
+            echo '<p>'.__('This feature will add a simple math captcha field in the BBPress new topic form.', 'all-in-one-wp-security-and-firewall').
+            '<br />'.__('Adding a captcha field in the this form is a simple way of greatly reducing SPAM submitted from bots.', 'all-in-one-wp-security-and-firewall').'</p>';
+            ?>
+        </div>
+        <?php
+        if (class_exists( 'bbPress' )){
+            //Display security info badge
+            $aiowps_feature_mgr->output_feature_details_badge("bbp-new-topic-captcha");
+        ?>
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Enable Captcha On BBPress New Topic Form', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                <input name="aiowps_enable_bbp_new_topic_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_bbp_new_topic_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to insert a captcha field on the BBPress new topic forms', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
+            </tr>            
+        </table>
+        </div></div>
+        <input type="submit" name="aiowps_save_bbp_spam_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
+        </form>
+        <?php
+        }else{
+            $this->show_msg_error(__('BBPress is not active! In order to use this feature you will need to have BBPress installed and activated.', 'all-in-one-wp-security-and-firewall'));
         }
     }
     

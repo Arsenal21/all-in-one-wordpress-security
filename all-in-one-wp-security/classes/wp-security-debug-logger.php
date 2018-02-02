@@ -4,6 +4,10 @@
  * global $aio_wp_security;
  * $aio_wp_security->debug_logger->log_debug("Log messaged goes here");
  */
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
+
 class AIOWPSecurity_Logger
 {
     var $log_folder_path;

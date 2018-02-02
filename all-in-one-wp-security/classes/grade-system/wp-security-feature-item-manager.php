@@ -106,6 +106,8 @@ class AIOWPSecurity_Feature_Item_Manager
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("comment-form-captcha", __("Comment Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_4, $this->sec_level_basic);
         //BuddyPress Registration Captcha
         $this->feature_items[] = new AIOWPSecurity_Feature_Item("bp-register-captcha", __("BuddyPress Registration Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_1, $this->sec_level_basic);
+        //BBPress new topic Captcha
+        $this->feature_items[] = new AIOWPSecurity_Feature_Item("bbp-new-topic-captcha", __("BBPress New Topic Captcha", "all-in-one-wp-security-and-firewall"), $this->feature_point_1, $this->sec_level_basic);
         
         //Filescan
         //File change detection
@@ -216,6 +218,10 @@ class AIOWPSecurity_Feature_Item_Manager
             if($item->feature_id == "bp-register-captcha")
             {
                 $this->check_bp_register_captcha_feature($item);
+            }
+            if($item->feature_id == "bbp-new-topic-captcha")
+            {
+                $this->check_bbp_new_topic_captcha_feature($item);
             }
             if($item->feature_id == "whitelist-manager-ip-login-whitelisting")
             {
@@ -500,6 +506,18 @@ class AIOWPSecurity_Feature_Item_Manager
         }
     }
 
+    function check_bbp_new_topic_captcha_feature($item)
+    {
+        global $aio_wp_security;
+        if ($aio_wp_security->configs->get_value('aiowps_enable_bbp_new_topic_captcha') == '1') {
+            $item->set_feature_status($this->feature_active);
+        }
+        else
+        {
+            $item->set_feature_status($this->feature_inactive);
+        }
+    }
+    
     function check_login_whitelist_feature($item)
     {
         global $aio_wp_security;

@@ -1,4 +1,7 @@
 <?php
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
 
 class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
 {
@@ -13,6 +16,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         'tab3' => 'render_tab3',
         'tab4' => 'render_tab4',
         'tab5' => 'render_tab5',
+        'tab6' => 'render_tab6',
         );
 
     function __construct() 
@@ -28,6 +32,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             'tab3' => 'wp-config.php '.__('File', 'all-in-one-wp-security-and-firewall'),
             'tab4' => __('WP Version Info', 'all-in-one-wp-security-and-firewall'),
             'tab5' => __('Import/Export', 'all-in-one-wp-security-and-firewall'),
+            'tab6' => __('Advanced Settings', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -715,6 +720,78 @@ function render_tab5()
     <?php
     }
 
+    function render_tab6()
+    {
+        global $aio_wp_security;
+        
+        $result = 1;
+        if (isset($_POST['aiowps_save_advanced_settings']))
+        {
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-ip-settings-nonce'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed for save advanced settings!",4);
+                die(__('Nonce check failed for save advanced settings!','aiowpsecurity'));
+            }
+            
+            $aio_wp_security->configs->set_value('aiowps_ip_retrieve_method', sanitize_text_field($_POST["aiowps_ip_retrieve_method"]));
+            $aio_wp_security->configs->save_config(); //Save the configuration
+
+            //Clear logged in list because it might be showing wrong addresses
+            if (AIOWPSecurity_Utility::is_multisite_install()){
+                delete_site_transient('users_online');
+            }
+            else{
+                delete_transient('users_online');
+            }
+            
+            $this->show_msg_settings_updated();
+        }
+        ?>
+        <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('IP Retrieval Settings', 'aiowpsecurity'); ?></label></h3>
+        <div class="inside">
+        <div class="aio_blue_box">
+            <?php
+            echo '<p>'.__('The IP Retrieval Settings allow you to specify which $_SERVER global variable you want this plugin to use to retrieve the visitor IP address.', 'aiowpsecurity').
+            '<br />'.__('By default this plugin uses the $_SERVER[\'REMOTE_ADDR\'] variable to retrieve the visitor IP address. This should normally be the most accurate safest way to get the IP.', 'aiowpsecurity').
+            '<br />'.__('However in some setups such as those using proxies, load-balancers and CloudFlare, it may be necessary to use a different $_SERVER variable.', 'aiowpsecurity').
+            '<br />'.__('You can use the settings below to configure which $_SERVER global you would like to use for retrieving the IP address.', 'aiowpsecurity').'</p>';
+            ?>
+        </div>
+            
+        <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-ip-settings-nonce'); ?>            
+        <table class="form-table">
+            <tr valign="top">
+                <td>
+                    <select id="aiowps_ip_retrieve_method" name="aiowps_ip_retrieve_method">
+                        <option value="0" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '0' ); ?>><?php echo 'REMOTE_ADDR' .' ('.__('Default','aiowpsecurity').')'; ?></option>
+                        <option value="1" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '1' ); ?>><?php echo 'HTTP_CF_CONNECTING_IP'; ?></option>
+                        <option value="2" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '2' ); ?>><?php echo 'HTTP_X_FORWARDED_FOR'; ?></option>
+                        <option value="3" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '3' ); ?>><?php echo 'HTTP_X_FORWARDED'; ?></option>
+                        <option value="4" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '4' ); ?>><?php echo 'HTTP_CLIENT_IP'; ?></option>
+                    </select>
+                <span class="description"><?php _e('Choose a $_SERVER variable you would like to retrieve the visitor IP address from.', 'aiowpsecurity'); ?>
+                </span>
+                <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
+                <div class="aiowps_more_info_body">
+                    <p class="description">
+                        <?php 
+                        _e('If your chosen server variable fails the plugin will automatically fall back to retrieving the IP address from $_SERVER["REMOTE_ADDR"]', 'all-in-one-wp-security-and-firewall');
+                        ?>
+                    </p>
+                </div>
+                </td> 
+            </tr>            
+        </table>
+        <input type="submit" name="aiowps_save_advanced_settings" value="<?php _e('Save Settings', 'aiowpsecurity')?>" class="button-primary" />
+        </form>
+        </div></div>
+        <?php
+        
+    }
+    
     function check_if_wp_config_contents($wp_file)
     {
         $is_wp_config = false;

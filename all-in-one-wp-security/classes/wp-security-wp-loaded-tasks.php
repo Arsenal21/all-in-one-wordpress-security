@@ -1,6 +1,9 @@
 <?php
 
 /* * * This class handles tasks that need to be executed at wp-loaded time ** */
+if(!defined('ABSPATH')){
+    exit;//Exit if accessed directly
+}
 
 class AIOWPSecurity_WP_Loaded_Tasks {
 

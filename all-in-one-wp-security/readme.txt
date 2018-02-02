@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 4.3.1
+Stable tag: 4.3.2
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -183,6 +183,19 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.3.2 =
+- Added new IP address settings page which user the ability to configure which $_SERVER global the IP address will be retrieved from. (New setting found in WP Security >> Settings >> Advanced Settings)
+- Fixed bug in .htaccess rules caused when 6G and IP blacklist firewall rules were simultaneously enabled.
+- Fixed bug where captcha answer was being ignored on woocommerce login page.
+- Added support for unlock requests made from woocomerce account login page when rename login feature is active.
+- Added useful debug code for troubleshooting in the fake googlebot function.
+- Some general code cleanup and improvement.
+- Added code to prevent direct access data leaks.
+- Added captcha settings for BBPress new topic form.
+- Fixed minor bug in dashboard page when checking if htaccess rules applied.
+- Added a check for Windows server installation in File Permissions feature - this feature is not applicable for Windows servers.
+- Added check to display comment captcha only when user not logged in.
 
 = 4.3.1 =
 - Improved white list directives to cater for Apache 2.4 and earlier versions.

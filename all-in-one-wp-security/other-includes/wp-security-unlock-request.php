@@ -103,6 +103,11 @@ function display_unlock_form($email='')
 ?>
 <div class="message"><?php echo $unlock_form_msg; ?></div>
 <form name="loginform" id="loginform" action="<?php echo wp_login_url(); ?>" method="post">
+    <?php
+    if(isset($_POST['aiowps-woo-login'])){
+        echo '<input type="hidden" name="aiowps-woo-login" id="aiowps-woo-login" value="1" />';
+    }
+    ?>
 	<p>
 		<label for="aiowps_unlock_request_email"><?php _e('Email Address', 'all-in-one-wp-security-and-firewall'); ?><br>
 		<input type="text" name="aiowps_unlock_request_email" id="aiowps_unlock_request_email" class="input" value="<?php echo $email; ?>" size="20"></label>
