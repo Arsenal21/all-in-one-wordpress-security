@@ -246,7 +246,8 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed on htaccess file save!",4);
                 die("Nonce check failed on htaccess file save!");
             }
-            $htaccess_path = ABSPATH . '.htaccess';
+            $home_path = get_home_path();
+            $htaccess_path = $home_path . '.htaccess';
             $result = AIOWPSecurity_Utility_File::backup_and_rename_htaccess($htaccess_path); //Backup the htaccess file
             
             if ($result)
@@ -294,7 +295,8 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 $is_htaccess = AIOWPSecurity_Utility_Htaccess::check_if_htaccess_contents($new_htaccess_file_path);
                 if ($is_htaccess == 1)
                 {
-                    $active_root_htaccess = ABSPATH.'.htaccess';
+                    $home_path = get_home_path();
+                    $active_root_htaccess = $home_path . '.htaccess';
                     if (!copy($new_htaccess_file_path, $active_root_htaccess)) 
                     {
                         //Failed to make a backup copy
@@ -368,7 +370,8 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
 <!--        <h3 class="hndle"><label for="title">--><?php //_e('View Contents of the currently active .htaccess file', 'all-in-one-wp-security-and-firewall'); ?><!--</label></h3>-->
 <!--        <div class="inside">-->
 <!--            --><?php
-//            $ht_file = ABSPATH . '.htaccess';
+//            $home_path = get_home_path();
+//            $ht_file = $home_path . '.htaccess';
 //            $ht_contents = AIOWPSecurity_Utility_File::get_file_contents($ht_file);
 //            //echo $ht_contents;
 //            ?>
