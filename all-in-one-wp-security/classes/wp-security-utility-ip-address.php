@@ -32,7 +32,7 @@ class AIOWPSecurity_Utility_IP
         //Check if multiple IPs were given - these will be present as comma-separated list
         
         if(stristr($visitor_ip, ',')){
-            $visitor_ip = trim(end((explode(',', $visitor_ip)))); //get last address because this will likely be the original connecting IP
+            $visitor_ip = trim(reset((explode(',', $visitor_ip)))); //get first address because this will likely be the original connecting IP
         }
         
         //Now remove port portion if applicable

@@ -119,12 +119,12 @@ class AIOWPSecurity_General_Init_Tasks
                 add_action('woocommerce_login_form', array(&$this, 'insert_captcha_question_form'));
             }
             
-            if(isset($_POST['woocommerce-login-nonce'])){
+            if(isset($_POST['woocommerce-login-nonce']) || isset($_POST['woocommerce-register-nonce'])){
                 // If answer is empty
-                if ($_REQUEST['aiowps-captcha-answer'] == ''){
+                if (empty($_POST['aiowps-captcha-answer'])){
                     wp_die( __('Please enter an answer in the CAPTCHA field.', 'all-in-one-wp-security-and-firewall' ) );
                 }
-                $captcha_answer = trim($_REQUEST['aiowps-captcha-answer']);
+                $captcha_answer = sanitize_text_field($_POST['aiowps-captcha-answer']);
                 $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
                 $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
                 $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);

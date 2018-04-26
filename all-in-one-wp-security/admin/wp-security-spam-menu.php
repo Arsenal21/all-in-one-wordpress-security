@@ -372,7 +372,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
                 <?php
                 echo '<p>'.__('This section displays a list of the IP addresses of the people or bots who have left SPAM comments on your site.', 'all-in-one-wp-security-and-firewall').'
                 <br />'.__('This information can be handy for identifying the most persistent IP addresses or ranges used by spammers.', 'all-in-one-wp-security-and-firewall').'
-                <br />'.__('By inspecting the IP address data coming from spammers you will be in a better position to determine which addresses or address ranges you should block by adding them to your blacklist.', 'all-in-one-wp-security-and-firewall').'
+                <br />'.__('By inspecting the IP address data coming from spammers you will be in a better position to determine which addresses or address ranges you should block by adding them to the permanent block list.', 'all-in-one-wp-security-and-firewall').'
                 <br />'.__('To add one or more of the IP addresses displayed in the table below to your blacklist, simply click the "Block" link for the individual row or select more than one address
                             using the checkboxes and then choose the "block" option from the Bulk Actions dropdown list and click the "Apply" button.', 'all-in-one-wp-security-and-firewall').'
             </p>';

@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 4.3.2
+Stable tag: 4.3.3
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -183,6 +183,13 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+= 4.3.3 =
+- Fixed bug - aiowps will now allow access to admin-post.php from front-end when rename login feature is active.
+- Modified login lockdown feature so that the exact IP address is locked down and not the IP range.
+- Added new filter (aiowps_ip_blocked_output_page) which allows user to filter the complete output when someone's IP has been locked out.
+- Added new action hook (aiopws_before_wp_die_renamed_login) for the renamed login feature which fires just before the wp_die event which produces the "Not available" behaviour.
+- Removed unused code.
+- Modified get_user_ip_address to get the first IP address in cases where there are multiple comma separated addresses provided - example X-Forwarded-For.
 
 = 4.3.2 =
 - Added new IP address settings page which user the ability to configure which $_SERVER global the IP address will be retrieved from. (New setting found in WP Security >> Settings >> Advanced Settings)
