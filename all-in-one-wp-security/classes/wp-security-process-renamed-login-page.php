@@ -106,7 +106,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
         //case where someone attempting to reach wp-admin 
         if (is_admin() && !is_user_logged_in() && !defined('DOING_AJAX') && basename( $_SERVER["SCRIPT_FILENAME"] ) !== 'admin-post.php'){
             //Fix to prevent fatal error caused by some themes and Yoast SEO
-            do_action('aiopws_before_wp_die_renamed_login');
+            do_action('aiowps_before_wp_die_renamed_login');
             wp_die( __( 'Not available.', 'all-in-one-wp-security-and-firewall' ), 403 );
         }
 

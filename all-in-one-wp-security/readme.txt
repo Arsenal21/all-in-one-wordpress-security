@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 4.3.3
+Stable tag: 4.3.3.1
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -183,6 +183,10 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.3.3.1 =
+- Fixed a typo with the newly added action hook - aiowps_before_wp_die_renamed_login
+
 = 4.3.3 =
 - Fixed bug - aiowps will now allow access to admin-post.php from front-end when rename login feature is active.
 - Modified login lockdown feature so that the exact IP address is locked down and not the IP range.
