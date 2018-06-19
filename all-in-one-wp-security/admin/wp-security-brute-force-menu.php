@@ -120,24 +120,34 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             if($error){
                 $this->show_msg_error(__('Attention!','all-in-one-wp-security-and-firewall').$error);
             }else{
+                $htaccess_res = '';
+                $cookie_feature_active = false;
                 //Save all the form values to the options
                 if (isset($_POST["aiowps_enable_rename_login_page"])){
                     $aio_wp_security->configs->set_value('aiowps_enable_rename_login_page', '1');
-                    $aio_wp_security->configs->set_value('aiowps_enable_brute_force_attack_prevention', '');//deactivate cookie based feature
+                    // check if the cookie based feature was active and deactivate it and delete the directives in .htaccess
+                    if($aio_wp_security->configs->get_value('aiowps_enable_brute_force_attack_prevention')){
+                        $cookie_feature_active = true;
+                        $aio_wp_security->configs->set_value('aiowps_enable_brute_force_attack_prevention', '');//deactivate cookie based feature
+                    }
                 }else{
                     $aio_wp_security->configs->set_value('aiowps_enable_rename_login_page', '');
                 }
                 $aio_wp_security->configs->set_value('aiowps_login_page_slug',$aiowps_login_page_slug);
                 $aio_wp_security->configs->save_config();
 
+                // if cookie based feature was active previously need to clear those rules out of .htaccess
+                if($cookie_feature_active){
+                    $htaccess_res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //Delete the cookie based directives
+                }
+
                 //Recalculate points after the feature status/options have been altered
                 $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
-                $res = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //Delete the cookie based directives if that feature is active
-                if ($res) {
-                    $this->show_msg_settings_updated();
+                if ($htaccess_res === false) {
+                    $this->show_msg_error(__('Could not delete the Cookie-based directives from the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
                 }
                 else {
-                    $this->show_msg_error(__('Could not delete the Cookie-based directives from the .htaccess file. Please check the file permissions.', 'all-in-one-wp-security-and-firewall'));
+                    $this->show_msg_settings_updated();
                 }
                 
                 /** The following is a fix/workaround for the following issue:

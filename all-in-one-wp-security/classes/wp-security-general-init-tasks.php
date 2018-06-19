@@ -114,7 +114,8 @@ class AIOWPSecurity_General_Init_Tasks
         }
 
         //For woo form captcha features
-        if($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1'){
+        if($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1' 
+                || $aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1'){
             if (!is_user_logged_in()) {
                 add_action('woocommerce_login_form', array(&$this, 'insert_captcha_question_form'));
             }
