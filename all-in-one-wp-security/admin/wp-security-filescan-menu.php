@@ -236,6 +236,20 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             ?>
         </div>
 
+        <?php 
+        if (!class_exists ( "FilesystemIterator" )){
+        ?>
+        <div class="aio_orange_box">
+            <p>
+            <?php
+            $read_link = '<a href="https://secure.php.net/manual/en/class.filesystemiterator.php" target="_blank">the FilesystemIterator class</a>';
+            echo sprintf(__('It appears that your server is using an old PHP version which is missing the %s. The file scanner feature needs this class in order to work. If you would like to use this feature please upgrade your server PHP version to 5.3 or greater.', 'all-in-one-wp-security-and-firewall'), $read_link);
+            ?>
+            </p>
+        </div>            
+        <?php
+        } else {
+        ?>
         <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('Manual File Change Detection Scan', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
@@ -342,6 +356,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
         
         <?php
+        }
     }
     
     function render_tab2()

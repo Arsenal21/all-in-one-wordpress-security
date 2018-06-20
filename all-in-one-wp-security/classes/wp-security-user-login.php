@@ -219,11 +219,12 @@ class AIOWPSecurity_User_Login
         global $wpdb, $aio_wp_security;
         $failed_logins_table = AIOWPSEC_TBL_FAILED_LOGINS;
         $login_retry_interval = $aio_wp_security->configs->get_value('aiowps_retry_time_period');
+        $now = current_time( 'mysql' );
         $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
         if(empty($ip)) return false;
         $login_failures = $wpdb->get_var("SELECT COUNT(ID) FROM $failed_logins_table " . 
                                 "WHERE failed_login_date + INTERVAL " .
-                                $login_retry_interval . " MINUTE > now() AND " . 
+                                $login_retry_interval . " MINUTE > '" . esc_sql($now) . "' AND " . 
                                 "login_attempt_ip = '" . esc_sql($ip) . "'");
         return $login_failures;
     }

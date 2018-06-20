@@ -251,7 +251,11 @@ do_action( 'login_header' );
 		/* translators: %s: site title */
 		printf( _x( '&larr; Back to %s', 'all-in-one-wp-security-and-firewall' ), get_bloginfo( 'title', 'display' ) );
 	?></a></p>
-	<?php the_privacy_policy_link( '<div class="privacy-policy-page-link">', '</div>' ); ?>
+	<?php 
+        if(function_exists('the_privacy_policy_link')){
+            the_privacy_policy_link( '<div class="privacy-policy-page-link">', '</div>' );
+        }
+        ?>
     <?php endif; ?>
 
 </div>

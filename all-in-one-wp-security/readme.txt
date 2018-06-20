@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 4.3.4
+Stable tag: 4.3.5
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -183,6 +183,11 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+= 4.3.5 =
+- Fix - Error: Call to undefined function the_privacy_policy_link() in older versions of WordPress.
+- Added a check to disable file change detection feature and prevent fatal errors when FilesystemIterator is not available due to old versions of PHP.
+- Improved get_login_fail_count method in the AIOWPSecurity_User_Login class which will fix cases where login lockdown 
+was not working on some servers due to timestamp difference between PHP current_time( 'mysql' ) and mysql now().
 
 = 4.3.4 =
 - Modified rename login page to handle GDPR Export/Erase Personal Data request.
