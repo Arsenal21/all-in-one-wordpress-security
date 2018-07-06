@@ -74,6 +74,11 @@ class AIOWPSecurity_General_Init_Tasks
             include_once(AIO_WP_SECURITY_PATH.'/other-includes/wp-security-stop-users-enumeration.php');
         }
         
+        //REST API security
+        if( $aio_wp_security->configs->get_value('aiowps_disallow_unauthorized_rest_requests') == 1) {
+            add_action('rest_api_init', array(&$this, 'check_rest_api_requests'), 10 ,1);
+        }
+        
         //For user unlock request feature
         if(isset($_POST['aiowps_unlock_request']) || isset($_POST['aiowps_wp_submit_unlock_request'])){
             nocache_headers();            
@@ -596,4 +601,18 @@ class AIOWPSecurity_General_Init_Tasks
         }
         return $errors;
     }
+    
+    /*
+     * Re-wrote code which checks for REST API requests
+     * Below uses the "rest_api_init" action hook to check for REST requests.
+     * The code will block unauthorized requests whilst allowing genuine requests. 
+     * (P. Petreski June 2018)
+     */
+    function check_rest_api_requests($rest_server_object){
+        $rest_user = wp_get_current_user();
+        if(empty($rest_user->ID)){
+            $error_message = apply_filters('aiowps_rest_api_error_message', __('You are not authorized to perform this action.', 'disable-wp-rest-api'));
+            wp_die($error_message); 
+        }
+    }    
 }

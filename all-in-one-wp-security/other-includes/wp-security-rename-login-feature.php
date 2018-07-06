@@ -249,7 +249,7 @@ do_action( 'login_header' );
     if ( ! $interim_login ): ?>
 	<p id="backtoblog"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php
 		/* translators: %s: site title */
-		printf( _x( '&larr; Back to %s', 'all-in-one-wp-security-and-firewall' ), get_bloginfo( 'title', 'display' ) );
+		printf( __( '&larr; Back to %s', 'all-in-one-wp-security-and-firewall' ), get_bloginfo( 'title', 'display' ) );
 	?></a></p>
 	<?php 
         if(function_exists('the_privacy_policy_link')){
@@ -1021,7 +1021,14 @@ switch ($action) {
         } else {
             $aria_describedby_error = '';
         }
-        
+
+        //aiowps - this check is necessary because otherwise if variables are undefined we get a warning!
+	if(empty($user_login)){
+		$user_login = '';
+	}	
+	if(empty($error)){
+		$error = '';
+	}        
         ?>
 
 <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">

@@ -4,10 +4,14 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 4.3.5
+Stable tag: 4.3.6
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
+
+== Privacy Policy ==
+This plugin may collect IP addresses for security reasons such as mitigating brute force login threats and malicious activity.
+The collected information is stored on your server. No information is transmitted to third parties or remote server locations.
 
 == Description ==
 = A COMPREHENSIVE, EASY TO USE, STABLE AND WELL SUPPORTED WORDPRESS SECURITY PLUGIN =
@@ -183,6 +187,12 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.3.6 =
+- Added new tab called "WP REST API" in the Miscellaneous menu and created separate feature which disables unauthorized REST access for non-logged in users independent of the users enumeration feature.
+- Improved dashboard page widget area display.
+- Small translation string fix in the rename login page feature.
+
 = 4.3.5 =
 - Fix - Error: Call to undefined function the_privacy_policy_link() in older versions of WordPress.
 - Added a check to disable file change detection feature and prevent fatal errors when FilesystemIterator is not available due to old versions of PHP.

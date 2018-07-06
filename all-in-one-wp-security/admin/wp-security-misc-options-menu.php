@@ -14,6 +14,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         'tab1' => 'render_tab1',
         'tab2' => 'render_tab2',
         'tab3' => 'render_tab3',
+        'tab4' => 'render_tab4',
         );
 
     function __construct() 
@@ -27,6 +28,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         'tab1' => __('Copy Protection', 'all-in-one-wp-security-and-firewall'),
         'tab2' => __('Frames', 'all-in-one-wp-security-and-firewall'),
         'tab3' => __('Users Enumeration', 'all-in-one-wp-security-and-firewall'),
+        'tab4' => __('WP REST API', 'all-in-one-wp-security-and-firewall'),
         );
     }
 
@@ -227,5 +229,64 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         <?php
     }
 
+    function render_tab4()
+    {
+        global $aio_wp_security;
+        $maint_msg = '';
+        if(isset($_POST['aiowpsec_save_rest_settings']))
+        {
+            $nonce=$_REQUEST['_wpnonce'];
+            if (!wp_verify_nonce($nonce, 'aiowpsec-rest-settings'))
+            {
+                $aio_wp_security->debug_logger->log_debug("Nonce check failed on REST API security feature settings save!",4);
+                die("Nonce check failed on REST API security feature settings save!");
+            }
+
+            //Save settings
+            $aio_wp_security->configs->set_value('aiowps_disallow_unauthorized_rest_requests',isset($_POST["aiowps_disallow_unauthorized_rest_requests"])?'1':'');
+            $aio_wp_security->configs->save_config();
+
+            $this->show_msg_updated(__('WP REST API Security feature settings saved!', 'all-in-one-wp-security-and-firewall'));
+
+        }
+        ?>
+        <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-rest-settings'); ?>
+        <div class="aio_blue_box">
+            <?php
+            echo '<p>'.__('This feature allows you to block WordPress REST API access for unauthorized requests.', 'all-in-one-wp-security-and-firewall').'</p>';
+            echo '<p>'.__('When enabled this feature will only allow REST requests to be processed if the user is logged in.', 'all-in-one-wp-security-and-firewall').'</p>';
+            ?>
+        </div>
+        <div class="aio_orange_box">
+            <p>
+            <?php
+            echo __('Beware that if you are using other plugins which have registered REST endpoints (eg, Contact Form 7), then this feature will also block REST requests used by these plugins if the user is not logged in.'
+                    . ' It is recommended that you leave this feature disabled if you want uninterrupted functionality for such plugins.', 'all-in-one-wp-security-and-firewall');
+            ?>
+            </p>
+        </div>            
+            
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Disallow Unauthorized REST Requests', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                <input name="aiowps_disallow_unauthorized_rest_requests" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_disallow_unauthorized_rest_requests')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to stop REST API access for non-logged in requests.', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="submit">
+            <input type="submit" class="button-primary" name="aiowpsec_save_rest_settings" value="<?php _e('Save Settings'); ?>" />
+        </div>
+        </form>
+        </div></div>
+        <?php
+    }
     
 } //end class
