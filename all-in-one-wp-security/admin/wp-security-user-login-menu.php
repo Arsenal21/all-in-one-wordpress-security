@@ -233,7 +233,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             $brute_force_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab2">Cookie-Based Brute Force Login Prevention</a>';
             echo '<p>'.__('One of the ways hackers try to compromise sites is via a ', 'all-in-one-wp-security-and-firewall').'<strong>'.__('Brute Force Login Attack', 'all-in-one-wp-security-and-firewall').'</strong>. '.__('This is where attackers use repeated login attempts until they guess the password.', 'all-in-one-wp-security-and-firewall').'
             <br />'.__('Apart from choosing strong passwords, monitoring and blocking IP addresses which are involved in repeated login failures in a short period of time is a very effective way to stop these types of attacks.', 'all-in-one-wp-security-and-firewall').
-            '<p>'.sprintf( __('You may also want to checkout our %s feature for another secure way to protect against these types of attacks.', 'all-in-one-wp-security-and-firewall'), $brute_force_login_feature_link).'</p>';
+            '<p>'.sprintf( esc_html(__('You may also want to checkout our %s feature for another secure way to protect against these types of attacks.', 'all-in-one-wp-security-and-firewall')), $brute_force_login_feature_link).'</p>';
             ?>
         </div>
 
@@ -264,19 +264,19 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             </tr>            
             <tr valign="top">
                 <th scope="row"><?php _e('Max Login Attempts', 'all-in-one-wp-security-and-firewall')?>:</th>
-                <td><input type="text" size="5" name="aiowps_max_login_attempts" value="<?php echo $aio_wp_security->configs->get_value('aiowps_max_login_attempts'); ?>" />
+                <td><input type="text" size="5" name="aiowps_max_login_attempts" value="<?php echo esc_html($aio_wp_security->configs->get_value('aiowps_max_login_attempts')); ?>" />
                 <span class="description"><?php _e('Set the value for the maximum login retries before IP address is locked out', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Login Retry Time Period (min)', 'all-in-one-wp-security-and-firewall')?>:</th>
-                <td><input type="text" size="5" name="aiowps_retry_time_period" value="<?php echo $aio_wp_security->configs->get_value('aiowps_retry_time_period'); ?>" />
+                <td><input type="text" size="5" name="aiowps_retry_time_period" value="<?php echo esc_html($aio_wp_security->configs->get_value('aiowps_retry_time_period')); ?>" />
                 <span class="description"><?php _e('If the maximum number of failed login attempts for a particular IP address occur within this time period the plugin will lock out that address', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Time Length of Lockout (min)', 'all-in-one-wp-security-and-firewall')?>:</th>
-                <td><input type="text" size="5" name="aiowps_lockout_time_length" value="<?php echo $aio_wp_security->configs->get_value('aiowps_lockout_time_length'); ?>" />
+                <td><input type="text" size="5" name="aiowps_lockout_time_length" value="<?php echo esc_html($aio_wp_security->configs->get_value('aiowps_lockout_time_length')); ?>" />
                 <span class="description"><?php _e('Set the length of time for which a particular IP address will be prevented from logging in', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>
@@ -303,7 +303,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
                         $instant_lockout_users_list = array();
                     }
                     ?>
-                    <textarea name="aiowps_instantly_lockout_specific_usernames" cols="50" rows="5"><?php echo implode(PHP_EOL, $instant_lockout_users_list); ?></textarea><br>
+                    <textarea name="aiowps_instantly_lockout_specific_usernames" cols="50" rows="5"><?php echo esc_textarea(implode(PHP_EOL, $instant_lockout_users_list)); ?></textarea><br>
                     <span class="description"><?php _e('Insert one username per line. Existing usernames are not blocked even if present in the list.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>
@@ -312,7 +312,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
                 <td>
                     <input name="aiowps_enable_email_notify" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_email_notify')=='1') echo ' checked="checked"'; ?> value="1"/>
                     <span class="description"><?php _e('Check this if you want to receive an email when someone has been locked out due to maximum failed login attempts', 'all-in-one-wp-security-and-firewall'); ?></span>
-                    <br /><input type="text" size="30" name="aiowps_email_address" value="<?php echo $aio_wp_security->configs->get_value('aiowps_email_address'); ?>" />
+                    <br /><input type="text" size="30" name="aiowps_email_address" value="<?php echo esc_html($aio_wp_security->configs->get_value('aiowps_email_address')); ?>" />
                     <span class="description"><?php _e('Enter an email address', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
             </tr>

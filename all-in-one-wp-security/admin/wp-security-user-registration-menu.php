@@ -135,7 +135,8 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
         <?php
         //Display security info badge
         $aiowps_feature_mgr->output_feature_details_badge("manually-approve-registrations");
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+        $blog_id = get_current_blog_id(); 
+        if (AIOWPSecurity_Utility::is_multisite_install() && !is_main_site( $blog_id ))
         {
            //Hide config settings if MS and not main site
            AIOWPSecurity_Utility::display_multisite_message();

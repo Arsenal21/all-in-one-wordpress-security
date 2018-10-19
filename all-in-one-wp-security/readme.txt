@@ -2,9 +2,9 @@
 Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, chesio
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
-Requires at least: 3.5
+Requires at least: 4.7
 Tested up to: 4.9
-Stable tag: 4.3.6
+Stable tag: 4.3.7
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -55,12 +55,12 @@ via email whenever somebody gets locked out due to too many login attempts.
 * Ability to automatically lockout IP address ranges which attempt to login with an invalid username.
 * Ability to see a list of all the users who are currently logged into your site.
 * Allows you to specify one or more IP addresses in a special whitelist. The whitelisted IP addresses will have access to your WP login page.
-* Add captcha to WordPress Login form.
-* Add captcha to the forgot password form of your WP Login system.
+* Add Google reCaptcha or plain maths captcha to WordPress Login form.
+* Add Google reCaptcha or plain maths captcha to the forgot password form of your WP Login system.
 
 = User Registration Security =
 * Enable manual approval of WordPress user accounts. If your site allows people to create their own accounts via the WordPress registration form, then you can minimize SPAM or bogus registrations by manually approving each registration.
-* Ability to add captcha to the WordPress's user registration page to protect you from spam user registration.
+* Ability to add Google reCaptcha or plain maths captcha to the WordPress's user registration page to protect you from spam user registration.
 * Ability to add Honeypot to the WordPress's user registration form to reduce registration attempts by robots.
 
 = Database Security =
@@ -187,6 +187,12 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+= 4.3.7 =
+- Added Google reCaptcha feature for login forms.
+- Improved code which checks if site is main for multi-site installations.
+- Removed the text domain string from the translation functions in the wp-security-rename-login-feature.php file.
+- Changed .htaccess path location to use get_home_path().
+- Fixed minor woocommerce captcha bug
 
 = 4.3.6 =
 - Added new tab called "WP REST API" in the Miscellaneous menu and created separate feature which disables unauthorized REST access for non-logged in users independent of the users enumeration feature.

@@ -82,7 +82,6 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
         $this->wp_dashboard_setup();
 
         wp_enqueue_script( 'dashboard' );
-        add_thickbox();
         if ( wp_is_mobile() )
                 wp_enqueue_script( 'jquery-touch-punch' );
         ?>
@@ -496,12 +495,6 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 		$name = empty( $wp_registered_widgets[$widget_id]['all_link'] ) ? $wp_registered_widgets[$widget_id]['name'] : $wp_registered_widgets[$widget_id]['name'] . " <a href='{$wp_registered_widgets[$widget_id]['all_link']}' class='edit-box open-box'>" . __('View all') . '</a>';
 		wp_add_dashboard_widget( $widget_id, $name, $wp_registered_widgets[$widget_id]['callback'], $wp_registered_widget_controls[$widget_id]['callback'] );
 	}
-
-	/** This action is documented in wp-admin/edit-form-advanced.php */
-	do_action( 'do_meta_boxes', $screen->id, 'normal', '' );
-
-	/** This action is documented in wp-admin/edit-form-advanced.php */
-	do_action( 'do_meta_boxes', $screen->id, 'side', '' );
     }
     
     function widget_security_strength_meter() {

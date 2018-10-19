@@ -600,5 +600,32 @@ class AIOWPSecurity_Utility
         }
         return reset($keys); //Return the first element from the valid values
     }
+    
+    /**
+     * Partially or fully masks a string using '*' to replace original characters
+     * 
+     * @param type string $str
+     * @param type int $chars_unmasked
+     * @return type string
+     */
+    static function mask_string($str, $chars_unmasked = 0) {
+	$str_length = strlen( $str );
+        $chars_unmasked = absint( $chars_unmasked );
+
+        if (0 == $chars_unmasked) {
+            if ( 8 < $str_length ) {
+                // mask all but last 4 characters
+                return preg_replace("/(.{4}$)(*SKIP)(*F)|(.)/u", "*", $str);
+            } else if ( 3 < $str_length ) {
+                // mask all but last 2 characters
+                return preg_replace("/(.{2}$)(*SKIP)(*F)|(.)/u", "*", $str);
+            } else {
+                // return whole string masked
+                return str_pad( "", $str_length, "*", STR_PAD_LEFT );
+            }
+        }
+        if( $chars_unmasked >= $str_length ) return $str;
+        return preg_replace("/(.{".$chars_unmasked."}$)(*SKIP)(*F)|(.)/u","*", $str);
+    }
 
 }

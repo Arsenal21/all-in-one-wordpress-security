@@ -64,39 +64,23 @@ class AIOWPSecurity_User_Login
     function check_captcha($user)
     {
         global $aio_wp_security;
-        if ( is_wp_error($user) )
-        {
+        if ( is_wp_error($user) ) {
             // Authentication has failed already at some earlier step.
             return $user;
         }
-        if ( ! (isset($_POST['log']) && isset($_POST['pwd'])) )
-        {
+        
+        if ( ! (isset($_POST['log']) && isset($_POST['pwd'])) ) {
             // XML-RPC authentication (not via wp-login.php), nothing to do here.
             return $user;
         }
-        if ( $aio_wp_security->configs->get_value('aiowps_enable_login_captcha') != '1' )
-        {
+        
+        if ( $aio_wp_security->configs->get_value('aiowps_enable_login_captcha') != '1' ) {
             // Captcha not enabled, nothing to do here.
             return $user;
         }
         $captcha_error = new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
-        $captcha_answer = filter_input(INPUT_POST, 'aiowps-captcha-answer', FILTER_VALIDATE_INT);
-        if ( is_null($captcha_answer) || ($captcha_answer === false) )
-        {
-            // null - no post data, false - not an integer
-            return $captcha_error;
-        }
-        $captcha_temp_string = filter_input(INPUT_POST, 'aiowps-captcha-temp-string', FILTER_SANITIZE_STRING);
-        if ( is_null($captcha_temp_string) )
-        {
-            return $captcha_error;
-        }
-        $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
-        $submitted_encoded_string = base64_encode($captcha_temp_string.$captcha_secret_string.$captcha_answer);
-        $trans_handle = sanitize_text_field(filter_input(INPUT_POST, 'aiowps-captcha-string-info', FILTER_SANITIZE_STRING));
-        $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
-        if ( $submitted_encoded_string !== $captcha_string_info_trans )
-        {
+        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        if ( $verify_captcha === false ) {
             return $captcha_error;
         }
         return $user;

@@ -533,6 +533,15 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             $aio_wp_security->configs->set_value('aiowps_enable_woo_register_captcha',isset($_POST["aiowps_enable_woo_register_captcha"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_enable_custom_login_captcha',isset($_POST["aiowps_enable_custom_login_captcha"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_enable_lost_password_captcha',isset($_POST["aiowps_enable_lost_password_captcha"])?'1':'');
+            
+            // if secret key is masked then don't resave it or the site key
+            $secret_key = sanitize_text_field($_POST["aiowps_recaptcha_secret_key"]);
+            if(strpos($secret_key, '********') === false){
+                $aio_wp_security->configs->set_value('aiowps_recaptcha_site_key',sanitize_text_field($_POST["aiowps_recaptcha_site_key"]));
+                $aio_wp_security->configs->set_value('aiowps_recaptcha_secret_key',sanitize_text_field($_POST["aiowps_recaptcha_secret_key"]));
+            }
+            
+            $aio_wp_security->configs->set_value('aiowps_default_recaptcha',isset($_POST["aiowps_default_recaptcha"])?'1':'');//Checkbox
             $aio_wp_security->configs->save_config();
             
             //Recalculate points after the feature status/options have been altered
@@ -540,16 +549,53 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             
             $this->show_msg_settings_updated();
         }
+        
+        $secret_key_masked = AIOWPSecurity_Utility::mask_string($aio_wp_security->configs->get_value('aiowps_recaptcha_secret_key'));
         ?>
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This feature allows you to add a captcha form on the WordPress login page.', 'all-in-one-wp-security-and-firewall').'
-            <br />'.__('Users who attempt to login will also need to enter the answer to a simple mathematical question - if they enter the wrong answer, the plugin will not allow them login even if they entered the correct username and password.', 'all-in-one-wp-security-and-firewall').'
-                <br />'.__('Therefore, adding a captcha form on the login page is another effective yet simple "Brute Force" prevention technique.', 'all-in-one-wp-security-and-firewall').'
-            </p>';
+            $recaptcha_link = '<a href="https://www.google.com/recaptcha" target="_blank">Google reCAPTCHA v2</a>';
+            echo sprintf('<p>'.__('This feature allows you to add a captcha form on various WordPress login pages and forms.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('Adding a captcha form on a login page or form is another effective yet simple "Brute Force" prevention technique.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('You have the option of using either %s or a plain maths captcha form.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('If you enable Google reCAPTCHA the reCAPTCHA widget will be displayed for all forms the captcha settings below.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('If Google reCAPTCHA is disabled the simple maths captcha form will apply and users will need to enter the answer to a simple mathematical question.', 'all-in-one-wp-security-and-firewall').'
+            </p>', $recaptcha_link);
             ?>
         </div>
         <form action="" method="POST">
+        <?php wp_nonce_field('aiowpsec-captcha-settings-nonce'); ?>
+        <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('Google reCAPTCHA Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <div class="aio_orange_box">
+            <p>
+            <?php
+            echo __('By enabling these settings the Google reCAPTCHA v2 widget will be applied by default for all forms in the captcha settings below.', 'all-in-one-wp-security-and-firewall');
+            ?>
+            </p>
+        </div>            
+            
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Use Google reCAPTCHA as default', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                <input name="aiowps_default_recaptcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to default to Google reCAPTCHA for all settings below. (If this is left unchecked, all captcha forms will revert to the plain maths captcha)', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
+            </tr>            
+            <tr valign="top">
+                <th scope="row"><?php _e('Site Key', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td><input type="text" size="50" name="aiowps_recaptcha_site_key" value="<?php echo esc_html( $aio_wp_security->configs->get_value('aiowps_recaptcha_site_key') ); ?>" />
+                </td> 
+            </tr>
+            <tr valign="top">
+                <th scope="row"><?php _e('Secret Key', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td><input type="text" size="50" name="aiowps_recaptcha_secret_key" value="<?php echo esc_html( $secret_key_masked ); ?>" />
+                </td> 
+            </tr>
+        </table>
+        </div></div>        
         <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('Login Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
@@ -558,8 +604,6 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         global $aiowps_feature_mgr;
         $aiowps_feature_mgr->output_feature_details_badge("user-login-captcha");
         ?>
-
-        <?php wp_nonce_field('aiowpsec-captcha-settings-nonce'); ?>
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Enable Captcha On Login Page', 'all-in-one-wp-security-and-firewall')?>:</th>

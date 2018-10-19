@@ -119,42 +119,27 @@ class AIOWPSecurity_General_Init_Tasks
         }
 
         //For woo form captcha features
-        if($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1' 
-                || $aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1'){
-            if (!is_user_logged_in()) {
-                add_action('woocommerce_login_form', array(&$this, 'insert_captcha_question_form'));
-            }
-            
-            if(isset($_POST['woocommerce-login-nonce']) || isset($_POST['woocommerce-register-nonce'])){
-                // If answer is empty
-                if (empty($_POST['aiowps-captcha-answer'])){
-                    wp_die( __('Please enter an answer in the CAPTCHA field.', 'all-in-one-wp-security-and-firewall' ) );
-                }
-                $captcha_answer = sanitize_text_field($_POST['aiowps-captcha-answer']);
-                $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
-                $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-                $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
-                $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
+        $woo_captcha_enabled = false;
+        if($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1' &&
+                !is_user_logged_in()) {
+            $woo_captcha_enabled = true;
+            add_action('woocommerce_login_form', array(&$this, 'insert_captcha_question_form'));
+        }
 
-                if ($captcha_string_info_trans === $submitted_encoded_string){
-                    //Correct answer given
-                }else{
-                    //Wrong answer
-                    wp_die( __('Error: You entered an incorrect CAPTCHA answer. Please go back and try again.', 'all-in-one-wp-security-and-firewall'));
-                }
-            }
+        if($aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1' &&
+                !is_user_logged_in()) {
+            $woo_captcha_enabled = true;
+            add_action('woocommerce_register_form', array(&$this, 'insert_captcha_question_form'));
+        }
+        
+        if($woo_captcha_enabled){
+            add_filter('woocommerce_process_login_errors', array(&$this, 'aiowps_validate_woo_login_with_captcha'), 10, 3);
         }
 
         //For bbpress new topic form captcha
         if($aio_wp_security->configs->get_value('aiowps_enable_bbp_new_topic_captcha') == '1'){
             if (!is_user_logged_in()) {
                 add_action('bbp_theme_before_topic_form_submit_wrapper', array(&$this, 'insert_captcha_question_form'));
-            }
-        }
-
-        if($aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1'){
-            if (!is_user_logged_in()) {
-                add_action('woocommerce_register_form', array(&$this, 'insert_captcha_question_form'));
             }
         }
         
@@ -445,25 +430,41 @@ class AIOWPSecurity_General_Init_Tasks
     {
         global $aio_wp_security;
         //Check if captcha enabled
-        if (array_key_exists('aiowps-captcha-answer', $_POST)) //If the register form with captcha was submitted then do some processing
-        {
-            $captcha_answer = isset($_POST['aiowps-captcha-answer'])?sanitize_text_field($_POST['aiowps-captcha-answer']):'';
-            $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
-            $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
-            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
-            if($submitted_encoded_string !== $captcha_string_info_trans)
-            {
-                //This means a wrong answer was entered
-                $result['errors']->add('generic', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
-            }
+        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        if ( $verify_captcha === false ) {
+            // wrong answer was entered
+            $result['errors']->add('generic', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
         }
         return $result;
     }
     
     function insert_captcha_question_form(){
         global $aio_wp_security;
-        $aio_wp_security->captcha_obj->display_captcha_form();
+        
+        if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
+            
+            // Woocommerce "my account" page needs special consideration, ie,
+            // need to display two Google reCaptcha forms on same page (for login and register forms)
+            // For this case we use the "explicit" recaptcha display
+            $calling_hook = current_filter();
+            $site_key = esc_html( $aio_wp_security->configs->get_value('aiowps_recaptcha_site_key') );
+            if ( $calling_hook == 'woocommerce_login_form' ) {
+                echo '<div class="g-recaptcha-wrap" style="padding:10px 0 10px 0"><div id="woo_recaptcha_1" class="g-recaptcha" data-sitekey="'.$site_key.'"></div></div>';
+                return;
+            }
+
+            if ( $calling_hook == 'woocommerce_register_form' ) {
+                echo '<div class="g-recaptcha-wrap" style="padding:10px 0 10px 0"><div id="woo_recaptcha_2" class="g-recaptcha" data-sitekey="'.$site_key.'"></div></div>';
+                return;
+            }
+            
+            // For all other forms simply display google recaptcha as per normal
+            $aio_wp_security->captcha_obj->display_recaptcha_form();
+        } else {
+            // display plain maths captcha form
+            $aio_wp_security->captcha_obj->display_captcha_form();
+        }
+        
     }
 
     function insert_honeypot_hidden_field(){
@@ -489,50 +490,24 @@ class AIOWPSecurity_General_Init_Tasks
         if ($comment['comment_type'] != '' && $comment['comment_type'] != 'comment') {
             return $comment;
         }
-
-        if (isset($_REQUEST['aiowps-captcha-answer']))
-        {
-            // If answer is empty
-            if ($_REQUEST['aiowps-captcha-answer'] == ''){
-                wp_die( __('Please enter an answer in the CAPTCHA field.', 'all-in-one-wp-security-and-firewall' ) );
-            }
-            $captcha_answer = trim($_REQUEST['aiowps-captcha-answer']);
-            $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
-            $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
-            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
-
-            if ($captcha_string_info_trans === $submitted_encoded_string){
-                //Correct answer given
-                return($comment);
-            }else{
-                //Wrong answer
-                wp_die( __('Error: You entered an incorrect CAPTCHA answer. Please go back and try again.', 'all-in-one-wp-security-and-firewall'));
-            }
+        
+        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha(); 
+        if($verify_captcha === false) {
+            //Wrong answer
+            wp_die( __('Error: You entered an incorrect CAPTCHA answer. Please go back and try again.', 'all-in-one-wp-security-and-firewall'));
+        } else {
+            return($comment);
         }
     }
     
     function process_lost_password_form_post() 
     {
         global $aio_wp_security;
-        //Check if captcha enabled
-        if ($aio_wp_security->configs->get_value('aiowps_enable_lost_password_captcha') == '1')
-        {
-            if (array_key_exists('aiowps-captcha-answer', $_POST)) //If the lost pass form with captcha was submitted then do some processing
-            {
-                $captcha_answer = isset($_POST['aiowps-captcha-answer'])?sanitize_text_field($_POST['aiowps-captcha-answer']):'';
-                $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
-                $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-                $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
-                $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
-
-                if($submitted_encoded_string !== $captcha_string_info_trans)
-                {
-                    add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
-                }
-            }
-        }
         
+        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        if ( $verify_captcha === false ) {
+            add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
+        }
     }
     
     function add_lostpassword_captcha_error_msg()
@@ -553,27 +528,39 @@ class AIOWPSecurity_General_Init_Tasks
     function buddy_press_signup_validate_captcha($errors)
     {
         global $bp, $aio_wp_security;
-        //Check if captcha enabled
-        if (array_key_exists('aiowps-captcha-answer', $_POST)) //If the register form with captcha was submitted then do some processing
-        {
-            $captcha_answer = isset($_POST['aiowps-captcha-answer'])?sanitize_text_field($_POST['aiowps-captcha-answer']):'';
-            $captcha_secret_string = $aio_wp_security->configs->get_value('aiowps_captcha_secret_key');
-            $submitted_encoded_string = base64_encode($_POST['aiowps-captcha-temp-string'].$captcha_secret_string.$captcha_answer);
-            $trans_handle = sanitize_text_field($_POST['aiowps-captcha-string-info']);
-            $captcha_string_info_trans = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('aiowps_captcha_string_info_'.$trans_handle) : get_transient('aiowps_captcha_string_info_'.$trans_handle));
-
-            if($submitted_encoded_string !== $captcha_string_info_trans)
-            {
-                //This means a wrong answer was entered
-                $bp->signup->errors['aiowps-captcha-answer'] = __('Your CAPTCHA answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall');
-            }
+        //Check captcha if required
+        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        if($verify_captcha === false) {
+            // wrong answer was entered
+            $bp->signup->errors['aiowps-captcha-answer'] = __('Your CAPTCHA answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall');
         }
-
         return;
     }
     
-    //Displays a notice message if the plugin was reactivated after being initially deactivated.
-    //Notice message gives users option of re-applying the aiowps rules which were deleted from the .htaccess when deactivation occurred
+    function aiowps_validate_woo_login_with_captcha( $errors, $username, $password ) {
+        global $aio_wp_security;
+
+        $locked = $aio_wp_security->user_login_obj->check_locked_user();
+        if($locked == null){
+            //user is not locked continue
+        } else {
+            $errors->add('authentication_failed', __('<strong>ERROR</strong>: You are not allowed to register because your IP address is currently locked!', 'all-in-one-wp-security-and-firewall'));
+            return $errors;
+        }
+        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+
+        if($verify_captcha === false) {
+            // wrong answer was entered
+            $errors->add('authentication_failed', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
+        }        
+        return $errors;
+        
+    }
+    
+    /**
+     * Displays a notice message if the plugin was reactivated after being initially deactivated
+     * Gives users option of re-applying the aiowps rules which were deleted from the .htaccess after deactivation.
+     */
     function reapply_htaccess_rules_notice()
     {
         if (get_option('aiowps_temp_configs') !== FALSE){
@@ -605,7 +592,7 @@ class AIOWPSecurity_General_Init_Tasks
     /*
      * Re-wrote code which checks for REST API requests
      * Below uses the "rest_api_init" action hook to check for REST requests.
-     * The code will block unauthorized requests whilst allowing genuine requests. 
+     * The code will block "unauthorized" requests whilst allowing genuine requests. 
      * (P. Petreski June 2018)
      */
     function check_rest_api_requests($rest_server_object){

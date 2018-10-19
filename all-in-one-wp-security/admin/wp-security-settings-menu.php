@@ -238,6 +238,9 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
     {
         global $aio_wp_security;
 
+        $home_path = get_home_path();
+        $htaccess_path = $home_path . '.htaccess';
+
         if(isset($_POST['aiowps_save_htaccess']))//Do form submission tasks
         {
             $nonce=$_REQUEST['_wpnonce'];
@@ -246,7 +249,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed on htaccess file save!",4);
                 die("Nonce check failed on htaccess file save!");
             }
-            $htaccess_path = ABSPATH . '.htaccess';
+            
             $result = AIOWPSecurity_Utility_File::backup_and_rename_htaccess($htaccess_path); //Backup the htaccess file
             
             if ($result)
@@ -294,8 +297,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
                 $is_htaccess = AIOWPSecurity_Utility_Htaccess::check_if_htaccess_contents($new_htaccess_file_path);
                 if ($is_htaccess == 1)
                 {
-                    $active_root_htaccess = ABSPATH.'.htaccess';
-                    if (!copy($new_htaccess_file_path, $active_root_htaccess)) 
+                    if (!copy($new_htaccess_file_path, $htaccess_path)) 
                     {
                         //Failed to make a backup copy
                         $aio_wp_security->debug_logger->log_debug("htaccess - Restore from .htaccess operation failed!",4);
@@ -324,8 +326,9 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             </p>';
             ?>
         </div>
-        <?php 
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+        <?php
+        $blog_id = get_current_blog_id(); 
+        if (AIOWPSecurity_Utility::is_multisite_install() && !is_main_site( $blog_id ))
         {
            //Hide config settings if MS and not main site
            AIOWPSecurity_Utility::display_multisite_message();
@@ -364,17 +367,6 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
         <input type="submit" name="aiowps_restore_htaccess_button" value="<?php _e('Restore .htaccess File', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
-<!--        <div class="postbox">-->
-<!--        <h3 class="hndle"><label for="title">--><?php //_e('View Contents of the currently active .htaccess file', 'all-in-one-wp-security-and-firewall'); ?><!--</label></h3>-->
-<!--        <div class="inside">-->
-<!--            --><?php
-//            $ht_file = ABSPATH . '.htaccess';
-//            $ht_contents = AIOWPSecurity_Utility_File::get_file_contents($ht_file);
-//            //echo $ht_contents;
-//            ?>
-<!--            <textarea class="aio_text_area_file_output aio_half_width aio_spacer_10_tb" rows="15" readonly>--><?php //echo $ht_contents; ?><!--</textarea>-->
-<!--        </div></div>-->
-
         <?php
         } // End if statement
     }
@@ -436,7 +428,8 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             ?>
         </div>
         <?php 
-        if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1)
+        $blog_id = get_current_blog_id(); 
+        if (AIOWPSecurity_Utility::is_multisite_install() && !is_main_site( $blog_id ))
         {
            //Hide config settings if MS and not main site
            AIOWPSecurity_Utility::display_multisite_message();

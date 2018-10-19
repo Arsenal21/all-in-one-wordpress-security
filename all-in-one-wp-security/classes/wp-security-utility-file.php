@@ -16,11 +16,12 @@ class AIOWPSecurity_Utility_File
 
         //Get wp-config.php file path
         $wp_config_path = AIOWPSecurity_Utility_File::get_wp_config_file_path();
-
+        $home_path = get_home_path();
+        
         $this->files_and_dirs_to_check = array(
             array('name'=>'root directory','path'=>ABSPATH,'permissions'=>'0755'),
             array('name'=>'wp-includes/','path'=>ABSPATH."wp-includes",'permissions'=>'0755'),
-            array('name'=>'.htaccess','path'=>ABSPATH.".htaccess",'permissions'=>'0644'),
+            array('name'=>'.htaccess','path'=>$home_path.".htaccess",'permissions'=>'0644'),
             array('name'=>'wp-admin/index.php','path'=>ABSPATH."wp-admin/index.php",'permissions'=>'0644'),
             array('name'=>'wp-admin/js/','path'=>ABSPATH."wp-admin/js/",'permissions'=>'0755'),
             array('name'=>'wp-content/themes/','path'=>ABSPATH."wp-content/themes",'permissions'=>'0755'),
