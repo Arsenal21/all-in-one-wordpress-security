@@ -18,7 +18,7 @@ class AIOWPSecurity_User_Login
         // Check whether user needs to be manually approved after default WordPress authenticate hooks (with priority 20).
         add_filter('authenticate', array($this, 'check_manual_registration_approval'), 30, 1);
         // Check login captcha
-        add_filter('authenticate', array($this, 'check_captcha'), 30, 1);
+        add_filter('authenticate', array($this, 'check_captcha'), 1, 1);
         // As a last authentication step, perform post authentication steps
         add_filter('authenticate', array($this, 'post_authenticate'), 100, 3);
         add_action('aiowps_force_logout_check', array($this, 'aiowps_force_logout_action_handler'));

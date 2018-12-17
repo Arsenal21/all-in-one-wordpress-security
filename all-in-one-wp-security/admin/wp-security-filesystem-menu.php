@@ -116,7 +116,7 @@ class AIOWPSecurity_Filesystem_Menu extends AIOWPSecurity_Admin_Menu
         </div>
         <?php
         $detected_os = strtoupper(PHP_OS);
-        if(strpos($detected_os, "WIN") !== false){
+        if(strpos($detected_os, "WIN") !== false && $detected_os != "DARWIN"){
             echo '<div class="aio_yellow_box">';
             echo '<p>'.__('This plugin has detected that your site is running on a Windows server.', 'all-in-one-wp-security-and-firewall').'
             <br />'.__('This feature is not applicable for Windows server installations.', 'all-in-one-wp-security-and-firewall').'

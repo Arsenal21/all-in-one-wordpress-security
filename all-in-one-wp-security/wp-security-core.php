@@ -7,7 +7,7 @@ if ( !defined('ABSPATH') ) {
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '4.3.7';
+    var $version = '4.3.8';
     var $db_version = '1.9';
     var $plugin_url;
     var $plugin_path;
@@ -138,11 +138,11 @@ class AIO_WP_Security{
         }
     }
 
-    static function activate_handler()
+    static function activate_handler($networkwide)
     {
         //Only runs when the plugin activates
         include_once ('classes/wp-security-installer.php');
-        AIOWPSecurity_Installer::run_installer();
+        AIOWPSecurity_Installer::run_installer($networkwide);
 
         if ( !wp_next_scheduled('aiowps_hourly_cron_event') ) {
             wp_schedule_event(time(), 'hourly', 'aiowps_hourly_cron_event'); //schedule an hourly cron event

@@ -249,7 +249,7 @@ do_action( 'login_header' );
     if ( ! $interim_login ): ?>
 	<p id="backtoblog"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php
 		/* translators: %s: site title */
-		printf( __( '&larr; Back to %s' ), get_bloginfo( 'title', 'display' ) );
+		printf( _x( '&larr; Back to %s', 'site' ), get_bloginfo( 'title', 'display' ) );
 	?></a></p>
 	<?php 
         if(function_exists('the_privacy_policy_link')){
@@ -1033,7 +1033,7 @@ switch ($action) {
 
 <form name="loginform" id="loginform" action="<?php echo esc_url( site_url( 'wp-login.php', 'login_post' ) ); ?>" method="post">
 	<p>
-		<label for="user_login"><?php _e('Username or Email'); ?><br />
+		<label for="user_login"><?php _e('Username or Email Address'); ?><br />
 		<input type="text" name="log" id="user_login"<?php echo $aria_describedby_error; ?> class="input" value="<?php echo esc_attr( $user_login ); ?>" size="20" /></label>
 	</p>
 	<p>

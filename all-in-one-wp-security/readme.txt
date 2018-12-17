@@ -3,8 +3,8 @@ Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrso
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 4.7
-Tested up to: 4.9
-Stable tag: 4.3.7
+Tested up to: 5.0
+Stable tag: trunk
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -88,7 +88,7 @@ So these firewall rules will stop malicious script(s) before it gets a chance to
 
 * Access control facility.
 * Instantly activate a selection of firewall settings ranging from basic, intermediate and advanced.
-* Enable the famous "5G Blacklist" Firewall rules courtesy of [Perishable Press](http://perishablepress.com/)
+* Enable the famous "6G Blacklist" Firewall rules courtesy of [Perishable Press](http://perishablepress.com/)
 * Forbid proxy comment posting.
 * Block access to debug log file.
 * Disable trace and track.
@@ -187,6 +187,24 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.3.8 =
+- Added ability to hide secret rename login page link when sending emails to people asking for personal data export.
+- Fixed Google reCaptcha not showing on comment page.
+- Fixed activation handler and creation of DB tables to handle multi-site activations more robustly.
+- Improved reCaptcha code to prevent the occasional occurrence of "Uncaught Error: reCAPTCHA placeholder element must be an element or id" error.
+- Added extra check for PHP_OS value to prevent Apple "DARWIN" being interpreted as windows server.
+- Corrected some minor translation issues on rename login page.
+- Increased priority of authenticate hook for captcha check.
+- Updated the Dutch Language file.
+
+= 4.3.7.2 =
+- More "get_home_path" fatal error preventions.
+
+= 4.3.7.1 =
+- Fixed fatal error regarding "get_home_path" function.
+
+
 = 4.3.7 =
 - Added Google reCaptcha feature for login forms.
 - Improved code which checks if site is main for multi-site installations.

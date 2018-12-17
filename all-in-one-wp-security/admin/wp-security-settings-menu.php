@@ -238,6 +238,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
     {
         global $aio_wp_security;
 
+        if ( !function_exists( 'get_home_path' ) ) require_once( ABSPATH. '/wp-admin/includes/file.php' );
         $home_path = get_home_path();
         $htaccess_path = $home_path . '.htaccess';
 

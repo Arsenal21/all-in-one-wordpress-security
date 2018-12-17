@@ -15,6 +15,7 @@ class AIOWPSecurity_Utility_File
          */
 
         //Get wp-config.php file path
+        if ( !function_exists( 'get_home_path' ) ) require_once( ABSPATH. '/wp-admin/includes/file.php' );
         $wp_config_path = AIOWPSecurity_Utility_File::get_wp_config_file_path();
         $home_path = get_home_path();
         

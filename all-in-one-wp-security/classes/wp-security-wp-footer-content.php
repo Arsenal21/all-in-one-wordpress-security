@@ -35,12 +35,16 @@ class AIOWPSecurity_WP_Footer_Content {
             alert(response);
         };
         var onloadCallback = function() {
-            grecaptcha.render('woo_recaptcha_1', {
-              'sitekey' : '<?php echo $site_key; ?>',
-            });
-            grecaptcha.render('woo_recaptcha_2', {
-              'sitekey' : '<?php echo $site_key; ?>',
-            });
+            if ( jQuery('#woo_recaptcha_1').length ) {
+                grecaptcha.render('woo_recaptcha_1', {
+                  'sitekey' : '<?php echo $site_key; ?>',
+                });
+            }
+            if ( jQuery('#woo_recaptcha_2').length ) {
+                grecaptcha.render('woo_recaptcha_2', {
+                  'sitekey' : '<?php echo $site_key; ?>',
+                });
+            }
         };
     </script>
     <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>

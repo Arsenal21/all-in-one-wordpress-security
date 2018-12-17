@@ -7,28 +7,24 @@ include_once(dirname(__FILE__) . '/wp-security-configure-settings.php');//Allows
 
 class AIOWPSecurity_Installer
 {
-    static function run_installer()
+    static function run_installer($networkwide='')
     {
         global $wpdb;
-        if (function_exists('is_multisite') && is_multisite()) {
+        if (function_exists('is_multisite') && is_multisite() && $networkwide) {
             // check if it is a network activation - if so, run the activation function for each blog id
-            if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
-                $old_blog = $wpdb->blogid;
-                // Get all blog ids
                 $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
                 foreach ($blogids as $blog_id) {
                     switch_to_blog($blog_id);
                     AIOWPSecurity_Installer::create_db_tables();
                     AIOWPSecurity_Configure_Settings::add_option_values();
+                    restore_current_blog();
                 }
                 AIOWPSecurity_Installer::create_db_backup_dir(); //Create a backup dir in the WP uploads directory
-                switch_to_blog($old_blog);
-                return;
-            }
+        } else {
+            AIOWPSecurity_Installer::create_db_tables();
+            AIOWPSecurity_Configure_Settings::add_option_values();
+            AIOWPSecurity_Installer::create_db_backup_dir(); //Create a backup dir in the WP uploads directory
         }
-        AIOWPSecurity_Installer::create_db_tables();
-        AIOWPSecurity_Configure_Settings::add_option_values();
-        AIOWPSecurity_Installer::create_db_backup_dir(); //Create a backup dir in the WP uploads directory
     }
 
     static function create_db_tables()
@@ -36,13 +32,28 @@ class AIOWPSecurity_Installer
         global $wpdb;
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-        //"User Login" related tables
-        $lockdown_tbl_name = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
-        $failed_login_tbl_name = AIOWPSEC_TBL_FAILED_LOGINS;
-        $user_login_activity_tbl_name = AIOWPSEC_TBL_USER_LOGIN_ACTIVITY;
-        $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
-        $aiowps_event_tbl_name = AIOWPSEC_TBL_EVENTS;
-        $perm_block_tbl_name = AIOWPSEC_TBL_PERM_BLOCK;
+        if (function_exists('is_multisite') && is_multisite()) {
+            /* 
+             * FIX for multisite table creation case:
+             * Although each table name is defined in a constant inside the wp-security-core.php,
+             * we need to do this step for multisite case because we need to refresh the $wpdb->prefix value 
+             * otherwise it will contain the original blog id and not the current id we need.
+             * 
+             */
+            $lockdown_tbl_name = $wpdb->prefix.'aiowps_login_lockdown';
+            $failed_login_tbl_name = $wpdb->prefix.'aiowps_failed_logins';
+            $user_login_activity_tbl_name = $wpdb->prefix.'aiowps_login_activity';
+            $aiowps_global_meta_tbl_name = $wpdb->prefix.'aiowps_global_meta';
+            $aiowps_event_tbl_name = $wpdb->prefix.'aiowps_events';
+            $perm_block_tbl_name = $wpdb->prefix.'aiowps_permanent_block';
+        } else {
+            $lockdown_tbl_name = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
+            $failed_login_tbl_name = AIOWPSEC_TBL_FAILED_LOGINS;
+            $user_login_activity_tbl_name = AIOWPSEC_TBL_USER_LOGIN_ACTIVITY;
+            $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
+            $aiowps_event_tbl_name = AIOWPSEC_TBL_EVENTS;
+            $perm_block_tbl_name = AIOWPSEC_TBL_PERM_BLOCK;
+        }
 
         $charset_collate = '';
         if (!empty($wpdb->charset)) {
