@@ -15,9 +15,10 @@ class AIOWPSecurity_General_Init_Tasks
 
         add_action( 'permalink_structure_changed', array(&$this, 'refresh_firewall_rules' ), 10, 2);
 
-        if ($aio_wp_security->configs->get_value('aiowps_enable_autoblock_spam_ip') == '1') {
-            AIOWPSecurity_Blocking::check_visitor_ip_and_perform_blocking();
+        // Check permanent block list and block if applicable (ie, do PHP blocking)
+        AIOWPSecurity_Blocking::check_visitor_ip_and_perform_blocking();
 
+        if ($aio_wp_security->configs->get_value('aiowps_enable_autoblock_spam_ip') == '1') {
             //add_action( 'spammed_comment', array(&$this, 'process_spammed_comment' )); //this hook gets fired when admin marks comment as spam
             //add_action( 'akismet_submit_spam_comment', array(&$this, 'process_akismet_submit_spam_comment' ), 10, 2); //this hook gets fired when akismet marks a comment as spam
             add_action( 'comment_post', array(&$this, 'spam_detect_process_comment_post' ), 10, 2); //this hook gets fired just after comment is saved to DB
@@ -204,7 +205,9 @@ class AIOWPSecurity_General_Init_Tasks
             switch_to_blog($blog_id);
             if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1'){
                 if (!is_user_logged_in()) {
-                    add_action('wp_head', array(&$this, 'add_recaptcha_script'));
+                    if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
+                        add_action('wp_head', array(&$this, 'add_recaptcha_script'));
+                    }
                     add_action( 'comment_form_after_fields', array(&$this, 'insert_captcha_question_form'), 1 );
                     add_action( 'comment_form_logged_in_after', array(&$this, 'insert_captcha_question_form'), 1 );
                     add_filter( 'preprocess_comment', array(&$this, 'process_comment_post') );
@@ -214,7 +217,9 @@ class AIOWPSecurity_General_Init_Tasks
         }else{
             if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1'){
                 if (!is_user_logged_in()) {
-                    add_action('wp_head', array(&$this, 'add_recaptcha_script'));
+                    if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
+                        add_action('wp_head', array(&$this, 'add_recaptcha_script'));
+                    }
                     add_action( 'comment_form_after_fields', array(&$this, 'insert_captcha_question_form'), 1 );
                     add_action( 'comment_form_logged_in_after', array(&$this, 'insert_captcha_question_form'), 1 );
                     add_filter( 'preprocess_comment', array(&$this, 'process_comment_post') );

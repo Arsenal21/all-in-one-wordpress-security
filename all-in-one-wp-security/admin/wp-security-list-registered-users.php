@@ -304,13 +304,14 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = $this->get_sortable_columns();
+        $search = isset( $_REQUEST['s'] ) ? sanitize_text_field( $_REQUEST['s'] ) : '';
 
         $this->_column_headers = array($columns, $hidden, $sortable);
         
         $this->process_bulk_action();
     	
         //Get registered users which have the special 'aiowps_account_status' meta key set to 'pending'
-        $data = $this->get_registered_user_data('pending');
+        $data = $this->get_registered_user_data('pending', $search);
         
         $current_page = $this->get_pagenum();
         $total_items = count($data);
@@ -324,7 +325,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
     }
     
     //Returns all users who have the special 'aiowps_account_status' meta key
-    function get_registered_user_data($status='')
+    function get_registered_user_data($status='', $search='')
     {
         $user_fields = array( 'ID', 'user_login', 'user_email', 'user_registered');
         $user_query = new WP_User_Query(array('meta_key' => 'aiowps_account_status', 'meta_value' => $status, 'fields' => $user_fields));
@@ -337,7 +338,14 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
             $temp_array['account_status'] = get_user_meta($temp_array['ID'], 'aiowps_account_status', true);
             $ip = get_user_meta($temp_array['ID'], 'aiowps_registrant_ip', true);
             $temp_array['ip_address'] = empty($ip)?'':$ip;
-            $final_data[] = $temp_array;
+            if(empty($search)) {
+                $final_data[] = $temp_array;
+            } else {
+                $input = preg_quote($search, '~'); // don't forget to quote input string!
+
+                $result = preg_grep('~' . $input . '~', $temp_array);
+                if(!empty($result)) $final_data[] = $temp_array;
+            }
         }
         return $final_data;
     }

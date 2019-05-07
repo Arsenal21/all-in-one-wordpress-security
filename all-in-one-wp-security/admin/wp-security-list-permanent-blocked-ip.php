@@ -110,13 +110,25 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
         global $wpdb, $aio_wp_security;
         if (is_array($entries)) {
             if (isset($_REQUEST['_wp_http_referer'])) {
-                //Delete multiple records
+                // multiple records
+                $tab = strip_tags($_REQUEST['tab']);
+
                 $entries = array_filter($entries, 'is_numeric'); //discard non-numeric ID values
                 $id_list = "(" . implode(",", $entries) . ")"; //Create comma separate list for DB operation
                 $delete_command = "DELETE FROM " . AIOWPSEC_TBL_PERM_BLOCK . " WHERE id IN " . $id_list;
                 $result = $wpdb->query($delete_command);
-                if ($result != NULL) {
-                    AIOWPSecurity_Admin_Menu::show_msg_record_deleted_st();
+                if($result !== false)
+                {
+                    $redir_url = sprintf('admin.php?page=%s&tab=%s&bulk_count=%s', AIOWPSEC_MAIN_MENU_SLUG, $tab, count($entries));
+                    wp_redirect($redir_url);
+                    exit;
+                } else {
+                    // error on bulk delete
+                    $aio_wp_security->debug_logger->log_debug("DB error: ".$wpdb->last_error,4);
+                    $redir_url = sprintf('admin.php?page=%s&tab=%s&bulk_error=%s', AIOWPSEC_MAIN_MENU_SLUG, $tab, 1);
+                    wp_redirect($redir_url);
+                    exit;
+                    
                 }
             }
         } elseif ($entries != NULL) {
@@ -128,7 +140,7 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
             //Delete single record
             $delete_command = "DELETE FROM " . AIOWPSEC_TBL_PERM_BLOCK . " WHERE id = '" . absint($entries) . "'";
             $result = $wpdb->query($delete_command);
-            if ($result != NULL) {
+            if ($result !== false) {
                 AIOWPSecurity_Admin_Menu::show_msg_record_deleted_st();
             }
         }
@@ -143,6 +155,7 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = $this->get_sortable_columns();
+        $search = isset( $_REQUEST['s'] ) ? sanitize_text_field( $_REQUEST['s'] ) : '';
 
         $this->_column_headers = array($columns, $hidden, $sortable);
 
@@ -162,11 +175,10 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
         $orderby = AIOWPSecurity_Utility::sanitize_value_by_array($orderby, $sortable);
         $order = AIOWPSecurity_Utility::sanitize_value_by_array($order, array('DESC' => '1', 'ASC' => '1'));
 
-        if (isset($_POST['s'])) {
-            $search_term = trim($_POST['s']);
-            $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $block_table_name . " WHERE `blocked_ip` LIKE '%%%s%%' OR `block_reason` LIKE '%%%s%%' OR `country_origin` LIKE '%%%s%%' OR `blocked_date` LIKE '%%%s%%'", $search_term, $search_term, $search_term, $search_term), ARRAY_A);
-        } else {
+        if(empty($search)) {
             $data = $wpdb->get_results("SELECT * FROM " . $block_table_name . " ORDER BY $orderby $order", ARRAY_A);
+        } else {
+            $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $block_table_name . " WHERE `blocked_ip` LIKE '%%%s%%' OR `block_reason` LIKE '%%%s%%' OR `country_origin` LIKE '%%%s%%' OR `blocked_date` LIKE '%%%s%%' ORDER BY $orderby $order", $search, $search, $search, $search), ARRAY_A);
         }
 
         $current_page = $this->get_pagenum();

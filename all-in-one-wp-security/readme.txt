@@ -3,7 +3,7 @@ Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrso
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 4.7
-Tested up to: 5.0
+Tested up to: 5.2
 Stable tag: trunk
 License: GPLv3
 
@@ -112,7 +112,6 @@ or malicious bots who do not have a special cookie in their browser. You (the si
 
 = Security Scanner =
 * The file change detection scanner can alert you if any files have changed in your WordPress system. You can then investigate and see if that was a legitimate change or some bad code was injected.
-* Database scanner feature can be used to scan your database tables. It will look for any common suspicious-looking strings, javascript and html code in some of the WordPress core tables.
 
 = Comment SPAM Security =
 * Monitor the most active IP addresses which persistently produce the most SPAM comments and instantly block them with the click of a button.
@@ -187,6 +186,23 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.3.9 =
+- Fixed captcha bug.
+- Fixed PHP_EOL issue where some IPv6 and v4 addresses saved in settings were incorrectly deemed invalid.
+- Tightened file permission for wp-config.php to "640"
+- Fixed DB prefix change bug for cases where DB had tables of type "view".
+- Fixed some translation string issues.
+- Minor style fix for wp list table pagination nav buttons.
+
+= 4.3.8.3 =
+- Trying again - Fixed login captcha authentication bug.
+
+= 4.3.8.2 =
+- Fixed login captcha authentication bug.
+
+= 4.3.8.1 =
+- Minor bug fix - added missing check to enqueue recaptcha script only if that feature is enabled.
 
 = 4.3.8 =
 - Added ability to hide secret rename login page link when sending emails to people asking for personal data export.

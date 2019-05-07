@@ -153,19 +153,31 @@ class AIOWPSecurity_Captcha
      */
     function maybe_verify_captcha () {
         global $aio_wp_security;
-        if (array_key_exists('aiowps-captcha-answer', $_POST)) {
-            $captcha_answer = isset($_POST['aiowps-captcha-answer'])?sanitize_text_field($_POST['aiowps-captcha-answer']):'';
-            
-            $verify_captcha = $this->verify_math_captcha_answer($captcha_answer);
-            if ( $verify_captcha === false ) {
-                return false; // wrong answer was entered
-            }
-        } else if (array_key_exists('g-recaptcha-response', $_POST)) {
-            $g_recaptcha_response = isset($_POST['g-recaptcha-response'])?sanitize_text_field($_POST['g-recaptcha-response']):'';
-            $verify_captcha = $this->verify_google_recaptcha($g_recaptcha_response);
-            if($verify_captcha === false) {
-                return false; // wrong answer was entered
-            }
+        if($aio_wp_security->configs->get_value('aiowps_enable_login_captcha') && $aio_wp_security->configs->get_value('aiowps_default_recaptcha')){
+            //Google reCaptcha enabled
+            if (array_key_exists('g-recaptcha-response', $_POST)) {
+                $g_recaptcha_response = isset($_POST['g-recaptcha-response'])?sanitize_text_field($_POST['g-recaptcha-response']):'';
+                $verify_captcha = $this->verify_google_recaptcha($g_recaptcha_response);
+                if($verify_captcha === false) {
+                    return false; // wrong answer was entered
+                }
+            }else {
+                //no captcha form data submitted
+                return false;
+            }            
+        }else if($aio_wp_security->configs->get_value('aiowps_enable_login_captcha')) {
+            // this means basic math captcha is enabled
+            if (array_key_exists('aiowps-captcha-answer', $_POST)) {
+                $captcha_answer = isset($_POST['aiowps-captcha-answer'])?sanitize_text_field($_POST['aiowps-captcha-answer']):'';
+
+                $verify_captcha = $this->verify_math_captcha_answer($captcha_answer);
+                if ( $verify_captcha === false ) {
+                    return false; // wrong answer was entered
+                }
+            } else {
+                //no captcha form data submitted
+                return false;
+            } 
         }
         return true;
     }

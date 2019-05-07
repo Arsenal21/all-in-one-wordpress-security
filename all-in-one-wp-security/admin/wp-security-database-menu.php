@@ -575,11 +575,12 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
     {
         global $wpdb;
         $table_count = 0;
+        $db_name = $wpdb->dbname;
         $info_msg_string = '<p class="aio_info_with_icon">'.__('Checking for MySQL tables of type "view".....', 'all-in-one-wp-security-and-firewall').'</p>';
         echo ($info_msg_string);
         
         //get tables which are views
-        $query = "SELECT * FROM INFORMATION_SCHEMA.VIEWS";
+        $query = "SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_SCHEMA LIKE '".$db_name."'";
         $res = $wpdb->get_results($query);
         if(empty($res)) return;
         $view_count = 0;

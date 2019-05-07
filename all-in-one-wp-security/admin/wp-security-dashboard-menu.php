@@ -304,6 +304,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                 $blocked_ip_list->unblock_ip_address(strip_tags($_REQUEST['blocked_id']));
             }
         }
+        AIOWPSecurity_Admin_Menu::display_bulk_result_message();
 
         ?>
         <div class="aio_blue_box">
@@ -323,7 +324,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                 //Fetch, prepare, sort, and filter our data...
                 $blocked_ip_list->prepare_items();
                 ?>
-                <form id="tables-filter" method="post">
+                <form id="tables-filter" method="get">
                     <!-- For plugins, we also need to ensure that the form posts back to our current page -->
                     <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>"/>
                     <?php
@@ -474,19 +475,19 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
 	$screen = get_current_screen();
         
         // Add widgets
-        wp_add_dashboard_widget( 'security_strength_meter', __( 'Security Strength Meter' ), array(&$this, 'widget_security_strength_meter') );
-        wp_add_dashboard_widget( 'security_points_breakdown', __( 'Security Points Breakdown' ), array(&$this, 'widget_security_points_breakdown') );
-        wp_add_dashboard_widget( 'spread_the_word', __( 'Spread the Word' ), array(&$this, 'widget_spread_the_word') );
-        wp_add_dashboard_widget( 'know_developers', __( 'Get To Know The Developers' ), array(&$this, 'widget_know_developers') );
-        wp_add_dashboard_widget( 'critical_feature_status', __( 'Critical Feature Status' ), array(&$this, 'widget_critical_feature_status') );
-        wp_add_dashboard_widget( 'last_5_logins', __( 'Last 5 Logins' ), array(&$this, 'widget_last_5_logins') );
-        wp_add_dashboard_widget( 'maintenance_mode_status', __( 'Maintenance Mode Status' ), array(&$this, 'widget_maintenance_mode_status') );
+        wp_add_dashboard_widget( 'security_strength_meter', __( 'Security Strength Meter', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_security_strength_meter') );
+        wp_add_dashboard_widget( 'security_points_breakdown', __( 'Security Points Breakdown', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_security_points_breakdown') );
+        wp_add_dashboard_widget( 'spread_the_word', __( 'Spread the Word', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_spread_the_word') );
+        wp_add_dashboard_widget( 'know_developers', __( 'Get To Know The Developers', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_know_developers') );
+        wp_add_dashboard_widget( 'critical_feature_status', __( 'Critical Feature Status', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_critical_feature_status') );
+        wp_add_dashboard_widget( 'last_5_logins', __( 'Last 5 Logins', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_last_5_logins') );
+        wp_add_dashboard_widget( 'maintenance_mode_status', __( 'Maintenance Mode Status', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_maintenance_mode_status') );
         if ($aio_wp_security->configs->get_value('aiowps_enable_brute_force_attack_prevention') == '1' ||
                 $aio_wp_security->configs->get_value('aiowps_enable_rename_login_page') == '1') {
             wp_add_dashboard_widget( 'brute_force', __( 'Brute Force Prevention Login Page' ), array(&$this, 'widget_brute_force') );
         }
-        wp_add_dashboard_widget( 'logged_in_users', __( 'Logged In Users' ), array(&$this, 'widget_logged_in_users') );
-        wp_add_dashboard_widget( 'locked_ip_addresses', __( 'Locked IP Addresses' ), array(&$this, 'widget_locked_ip_addresses') );
+        wp_add_dashboard_widget( 'logged_in_users', __( 'Logged In Users', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_logged_in_users') );
+        wp_add_dashboard_widget( 'locked_ip_addresses', __( 'Locked IP Addresses', 'all-in-one-wp-security-and-firewall' ), array(&$this, 'widget_locked_ip_addresses') );
 
         do_action( 'aiowps_dashboard_setup' );
         $dashboard_widgets = apply_filters( 'aiowps_dashboard_widgets', array() );

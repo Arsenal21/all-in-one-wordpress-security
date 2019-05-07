@@ -164,11 +164,18 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
             //Fetch, prepare, sort, and filter our data...
             $user_list->prepare_items();
             ?>
-            <form id="tables-filter" method="get" onSubmit="return confirm('Are you sure you want to perform this bulk operation on the selected entries?');">
+            <form id="tables-filter" method="get">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
             <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
+            <?php
+            $user_list->search_box('Search', 'search_user_registration');
+            if (isset($_REQUEST["tab"])) {
+                echo '<input type="hidden" name="tab" value="' . esc_attr($_REQUEST["tab"]) . '" />';
+            }
+            ?>
             <!-- Now we can render the completed list table -->
             <?php $user_list->display(); ?>
+            </form>
         </div></div>
         <?php
     }
