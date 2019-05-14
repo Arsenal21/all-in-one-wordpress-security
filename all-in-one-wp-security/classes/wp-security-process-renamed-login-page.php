@@ -208,8 +208,14 @@ class AIOWPSecurity_Process_Renamed_Login_Page
                 //if user is already logged in but tries to access the renamed login page, send them to the dashboard
                 AIOWPSecurity_Utility::redirect_to_url(AIOWPSEC_WP_URL."/wp-admin");
             }else{
+                global $wp_version;
                 status_header( 200 );
-                require_once(AIO_WP_SECURITY_PATH . '/other-includes/wp-security-rename-login-feature.php' );
+                if ( version_compare( $wp_version, '5.2', '>=' ) ) {
+                    require_once(AIO_WP_SECURITY_PATH . '/other-includes/wp-security-rename-login-feature.php' );
+                } else {
+                    require_once(AIO_WP_SECURITY_PATH . '/other-includes/wp-security-rename-login-feature-pre-5-2.php' );
+                }
+                
                 die;
             }
         }        

@@ -79,7 +79,7 @@ class AIOWPSecurity_User_Login
             return $user;
         }
         $captcha_error = new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
-        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
         if ( $verify_captcha === false ) {
             return $captcha_error;
         }

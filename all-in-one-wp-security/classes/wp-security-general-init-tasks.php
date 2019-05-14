@@ -120,21 +120,44 @@ class AIOWPSecurity_General_Init_Tasks
         }
 
         //For woo form captcha features
-        $woo_captcha_enabled = false;
+        $woo_login_captcha_enabled = false;
         if($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1' &&
                 !is_user_logged_in()) {
-            $woo_captcha_enabled = true;
+            $woo_login_captcha_enabled = true;
             add_action('woocommerce_login_form', array(&$this, 'insert_captcha_question_form'));
         }
 
+        $woo_register_captcha_enabled = false;
         if($aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1' &&
                 !is_user_logged_in()) {
-            $woo_captcha_enabled = true;
+            $woo_register_captcha_enabled = true;
             add_action('woocommerce_register_form', array(&$this, 'insert_captcha_question_form'));
         }
         
-        if($woo_captcha_enabled){
-            add_filter('woocommerce_process_login_errors', array(&$this, 'aiowps_validate_woo_login_with_captcha'), 10, 3);
+        $woo_lostpassword_captcha_enabled = false;
+        if($aio_wp_security->configs->get_value('aiowps_enable_woo_lostpassword_captcha') == '1' &&
+                !is_user_logged_in()) {
+            $woo_lostpassword_captcha_enabled = true;
+            add_action('woocommerce_lostpassword_form', array(&$this, 'insert_captcha_question_form'));
+        }
+
+        
+        if($woo_login_captcha_enabled){
+            if(isset($_POST['woocommerce-login-nonce'])) {
+                add_filter('woocommerce_process_login_errors', array(&$this, 'aiowps_validate_woo_login_with_captcha'), 10, 3);
+            }
+        }
+        
+        if($woo_register_captcha_enabled){
+            if(isset($_POST['woocommerce-register-nonce'])) {
+                add_filter('woocommerce_process_registration_errors', array(&$this, 'aiowps_validate_woo_login_with_captcha'), 10, 3);
+            }
+        }
+
+        if($woo_lostpassword_captcha_enabled){
+            if(isset($_POST['woocommerce-lost-password-nonce'])) {
+                add_action('lostpassword_post', array(&$this, 'process_woo_lost_password_form_post'));
+            }
         }
 
         //For bbpress new topic form captcha
@@ -187,7 +210,6 @@ class AIOWPSecurity_General_Init_Tasks
                     add_action('signup_extra_fields', array(&$this, 'insert_captcha_question_form_multi'));
                     //add_action('preprocess_signup_form', array(&$this, 'process_signup_form_multi'));
                     add_filter( 'wpmu_validate_user_signup', array(&$this, 'process_signup_form_multi') );
-                    
                 }
             }
             restore_current_blog();
@@ -199,11 +221,12 @@ class AIOWPSecurity_General_Init_Tasks
             }
         }
 
-        //For comment captcha feature
+        //For comment captcha feature or custom login form captcha
         if (AIOWPSecurity_Utility::is_multisite_install()){
             $blog_id = get_current_blog_id();
             switch_to_blog($blog_id);
-            if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1'){
+            if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1' || 
+                    $aio_wp_security->configs->get_value('aiowps_enable_custom_login_captcha') == '1'){
                 if (!is_user_logged_in()) {
                     if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
                         add_action('wp_head', array(&$this, 'add_recaptcha_script'));
@@ -215,7 +238,8 @@ class AIOWPSecurity_General_Init_Tasks
             }
             restore_current_blog();
         }else{
-            if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1'){
+            if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1' || 
+                    $aio_wp_security->configs->get_value('aiowps_enable_custom_login_captcha') == '1'){
                 if (!is_user_logged_in()) {
                     if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
                         add_action('wp_head', array(&$this, 'add_recaptcha_script'));
@@ -415,16 +439,30 @@ class AIOWPSecurity_General_Init_Tasks
         }
     }
     
+    /**
+     * Renders captcha on form produced by the wp_login_form() function, ie, custom wp login form
+     * @global type $aio_wp_security
+     * @param type $cust_html_code
+     * @param type $args
+     * @return string
+     */
     function insert_captcha_custom_login($cust_html_code, $args)
     {
         global $aio_wp_security;
-        $cap_form = '<p class="aiowps-captcha"><label>'.__('Please enter an answer in digits:','all-in-one-wp-security-and-firewall').'</label>';
-        $cap_form .= '<div class="aiowps-captcha-equation"><strong>';
-        $maths_question_output = $aio_wp_security->captcha_obj->generate_maths_question();
-        $cap_form .= $maths_question_output . '</strong></div></p>';
-        
-        $cust_html_code .= $cap_form;
-        return $cust_html_code;
+        if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
+            $site_key = esc_html( $aio_wp_security->configs->get_value('aiowps_recaptcha_site_key') );
+            $cap_form = '<div class="g-recaptcha-wrap" style="padding:10px 0 10px 0"><div class="g-recaptcha" data-sitekey="'.$site_key.'"></div></div>';
+            $cust_html_code .= $cap_form;
+            return $cust_html_code;
+        } else {
+            $cap_form = '<p class="aiowps-captcha"><label>'.__('Please enter an answer in digits:','all-in-one-wp-security-and-firewall').'</label>';
+            $cap_form .= '<div class="aiowps-captcha-equation"><strong>';
+            $maths_question_output = $aio_wp_security->captcha_obj->generate_maths_question();
+            $cap_form .= $maths_question_output . '</strong></div></p>';
+
+            $cust_html_code .= $cap_form;
+            return $cust_html_code;
+        }
     }
     
     function insert_captcha_question_form_multi($error)
@@ -437,7 +475,7 @@ class AIOWPSecurity_General_Init_Tasks
     {
         global $aio_wp_security;
         //Check if captcha enabled
-        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
         if ( $verify_captcha === false ) {
             // wrong answer was entered
             $result['errors']->add('generic', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
@@ -455,7 +493,7 @@ class AIOWPSecurity_General_Init_Tasks
             // For this case we use the "explicit" recaptcha display
             $calling_hook = current_filter();
             $site_key = esc_html( $aio_wp_security->configs->get_value('aiowps_recaptcha_site_key') );
-            if ( $calling_hook == 'woocommerce_login_form' ) {
+            if ( $calling_hook == 'woocommerce_login_form' || $calling_hook == 'woocommerce_lostpassword_form') {
                 echo '<div class="g-recaptcha-wrap" style="padding:10px 0 10px 0"><div id="woo_recaptcha_1" class="g-recaptcha" data-sitekey="'.$site_key.'"></div></div>';
                 return;
             }
@@ -498,7 +536,7 @@ class AIOWPSecurity_General_Init_Tasks
             return $comment;
         }
         
-        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha(); 
+        $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit(); 
         if($verify_captcha === false) {
             //Wrong answer
             wp_die( __('Error: You entered an incorrect CAPTCHA answer. Please go back and try again.', 'all-in-one-wp-security-and-firewall'));
@@ -507,13 +545,21 @@ class AIOWPSecurity_General_Init_Tasks
         }
     }
     
+    /**
+     * Process the main Wordpress account lost password login form post
+     * Called by wp hook "lostpassword_post"
+     */
     function process_lost_password_form_post() 
     {
         global $aio_wp_security;
         
-        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
-        if ( $verify_captcha === false ) {
-            add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
+        // Workaround - the woocommerce lost password form also uses the same "lostpassword_post" hook.
+        // We don't want to process woo forms here so ignore if this is a woo lost password $_POST 
+        if (!array_key_exists('woocommerce-lost-password-nonce', $_POST)) {
+            $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
+            if ( $verify_captcha === false ) {
+                add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
+            }
         }
     }
     
@@ -536,7 +582,7 @@ class AIOWPSecurity_General_Init_Tasks
     {
         global $bp, $aio_wp_security;
         //Check captcha if required
-        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
         if($verify_captcha === false) {
             // wrong answer was entered
             $bp->signup->errors['aiowps-captcha-answer'] = __('Your CAPTCHA answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall');
@@ -546,16 +592,13 @@ class AIOWPSecurity_General_Init_Tasks
     
     function aiowps_validate_woo_login_with_captcha( $errors, $username, $password ) {
         global $aio_wp_security;
-
         $locked = $aio_wp_security->user_login_obj->check_locked_user();
-        if($locked == null){
-            //user is not locked continue
-        } else {
-            $errors->add('authentication_failed', __('<strong>ERROR</strong>: You are not allowed to register because your IP address is currently locked!', 'all-in-one-wp-security-and-firewall'));
+        if(!empty($locked)){
+            $errors->add('authentication_failed', __('<strong>ERROR</strong>: Your IP address is currently locked please contact the administrator!', 'all-in-one-wp-security-and-firewall'));
             return $errors;
         }
-        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
 
+        $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
         if($verify_captcha === false) {
             // wrong answer was entered
             $errors->add('authentication_failed', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
@@ -563,6 +606,23 @@ class AIOWPSecurity_General_Init_Tasks
         return $errors;
         
     }
+    
+    /**
+     * Process the woocommerce lost password login form post
+     * Called by wp hook "lostpassword_post"
+     */
+    function process_woo_lost_password_form_post() 
+    {
+        global $aio_wp_security;
+        
+        if(isset($_POST['woocommerce-lost-password-nonce'])) { 
+            $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
+            if ( $verify_captcha === false ) {
+                add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
+            }
+        }
+    }
+    
     
     /**
      * Displays a notice message if the plugin was reactivated after being initially deactivated
@@ -610,8 +670,26 @@ class AIOWPSecurity_General_Init_Tasks
         }
     }
 
+    /**
+     * Enqueues the Google recaptcha api URL in the wp_head for general pages
+     * Caters for scenarios when recaptcha used on wp comments or custom wp login form
+     * 
+     */
     function add_recaptcha_script()
     {
-        wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js', false );        
+        // Enqueue the recaptcha api url 
+        
+        // Do NOT enqueue if this is the main woocommerce account login page because for woocommerce page we "explicitly" render the recaptcha widget
+        $is_woo = false;
+        
+        if ( function_exists('is_account_page') ) {
+            // Check if this a woocommerce account page
+            $is_woo = is_account_page(); 
+        }
+                         
+        if ( empty( $is_woo ) ) {
+            //only enqueue when not a woocommerce page
+            wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js', false );
+        } 
     }
 }

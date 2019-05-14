@@ -531,6 +531,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
             $aio_wp_security->configs->set_value('aiowps_enable_login_captcha',isset($_POST["aiowps_enable_login_captcha"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_enable_woo_login_captcha',isset($_POST["aiowps_enable_woo_login_captcha"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_enable_woo_register_captcha',isset($_POST["aiowps_enable_woo_register_captcha"])?'1':'');
+            $aio_wp_security->configs->set_value('aiowps_enable_woo_lostpassword_captcha',isset($_POST["aiowps_enable_woo_lostpassword_captcha"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_enable_custom_login_captcha',isset($_POST["aiowps_enable_custom_login_captcha"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_enable_lost_password_captcha',isset($_POST["aiowps_enable_lost_password_captcha"])?'1':'');
             
@@ -613,6 +614,25 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 </td>
             </tr>            
         </table>
+        </div></div>
+        <div class="postbox">
+        <h3 class="hndle"><label for="title"><?php _e('Lost Password Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
+        <div class="inside">
+        <?php
+        //Display security info badge
+        global $aiowps_feature_mgr;
+        $aiowps_feature_mgr->output_feature_details_badge("lost-password-captcha");
+        ?>
+
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Enable Captcha On Lost Password Page', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                <input name="aiowps_enable_lost_password_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_lost_password_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to insert a captcha form on the lost password page', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
+            </tr>            
+        </table>
         </div></div>        
         <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('Custom Login Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
@@ -651,6 +671,19 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         </table>
             <hr>
         <?php
+        $aiowps_feature_mgr->output_feature_details_badge("woo-lostpassword-captcha");
+        ?>
+        <table class="form-table">
+            <tr valign="top">
+                <th scope="row"><?php _e('Enable Captcha On Woocommerce Lost Password Form', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                <input name="aiowps_enable_woo_lostpassword_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_woo_lostpassword_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
+                <span class="description"><?php _e('Check this if you want to insert captcha on a Woocommerce lost password form', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
+            </tr>            
+        </table>
+            <hr>
+        <?php
         $aiowps_feature_mgr->output_feature_details_badge("woo-register-captcha");
         ?>
         <table class="form-table">
@@ -659,25 +692,6 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 <td>
                 <input name="aiowps_enable_woo_register_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want to insert captcha on a Woocommerce registration form', 'all-in-one-wp-security-and-firewall'); ?></span>
-                </td>
-            </tr>            
-        </table>
-        </div></div>        
-        <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('Lost Password Form Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
-        <div class="inside">
-        <?php
-        //Display security info badge
-        global $aiowps_feature_mgr;
-        $aiowps_feature_mgr->output_feature_details_badge("lost-password-captcha");
-        ?>
-
-        <table class="form-table">
-            <tr valign="top">
-                <th scope="row"><?php _e('Enable Captcha On Lost Password Page', 'all-in-one-wp-security-and-firewall')?>:</th>
-                <td>
-                <input name="aiowps_enable_lost_password_captcha" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_lost_password_captcha')=='1') echo ' checked="checked"'; ?> value="1"/>
-                <span class="description"><?php _e('Check this if you want to insert a captcha form on the lost password page', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
             </tr>            
         </table>

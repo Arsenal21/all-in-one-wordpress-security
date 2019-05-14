@@ -7,7 +7,7 @@ if ( !defined('ABSPATH') ) {
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '4.3.9';
+    var $version = '4.3.9.2';
     var $db_version = '1.9';
     var $plugin_url;
     var $plugin_path;
@@ -219,6 +219,10 @@ class AIO_WP_Security{
         new AIOWPSecurity_WP_Loaded_Tasks();
     }
     
+    /**
+     * Enqueues the Google recaptcha v2 api URL for the standard WP login page
+     * @global type $aio_wp_security
+     */
     function aiowps_login_enqueue()
     {
         global $aio_wp_security;

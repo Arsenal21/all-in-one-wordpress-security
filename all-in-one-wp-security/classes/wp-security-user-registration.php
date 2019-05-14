@@ -69,7 +69,7 @@ class AIOWPSecurity_User_Registration
             $errors->add('authentication_failed', __('<strong>ERROR</strong>: You are not allowed to register because your IP address is currently locked!', 'all-in-one-wp-security-and-firewall'));
             return $errors;
         }
-        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
         if($verify_captcha === false)
         {
             // wrong answer was entered
@@ -89,7 +89,7 @@ class AIOWPSecurity_User_Registration
         }else{
             $errors->add('authentication_failed', __('<strong>ERROR</strong>: You are not allowed to register because your IP address is currently locked!', 'all-in-one-wp-security-and-firewall'));
         }
-        $verify_captcha = $aio_wp_security->captcha_obj->maybe_verify_captcha();
+        $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
 
         if($verify_captcha === false)
         {
