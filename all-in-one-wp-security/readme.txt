@@ -188,6 +188,7 @@ None
 This should prevent 32-bit systems from being constrained to the max date of 19 Jan 2038.
 - Fixed bugs related to captcha features.
 - Fixed and improved "Logged In Users" functionality for multisite.
+- Always set valid dates, to avoid errors when strict mode is enabled on mysql. Thanks to Davide.
 
 = 4.3.9.4 =
 - Removed whois feature because it adds relatively little value and the third-party library used is not being maintained regularly.
