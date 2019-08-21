@@ -509,7 +509,7 @@ class AIOWPSecurity_User_Login
         $data = array('logout_date' => $logout_date_time);
         $where = array('user_id' => $user_id,
                         'login_ip' => $ip_addr,
-                        'logout_date' => '0000-00-00 00:00:00');
+                        'logout_date' => '1000-10-10 10:00:00');
         $result = $wpdb->update($login_activity_table, $data, $where);
         if ($result === FALSE)
         {
@@ -625,6 +625,7 @@ class AIOWPSecurity_User_Login
         $unlock_request_form .= '<button type="submit" name="aiowps_unlock_request" id="aiowps_unlock_request" class="button">'.__('Request Unlock', 'all-in-one-wp-security-and-firewall').'</button></div></form>';
         return $unlock_request_form;
     }
+}
     
     /**
      * Returns all logged in users for specific subsite of multisite installation
