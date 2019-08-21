@@ -625,8 +625,7 @@ class AIOWPSecurity_User_Login
         $unlock_request_form .= '<button type="submit" name="aiowps_unlock_request" id="aiowps_unlock_request" class="button">'.__('Request Unlock', 'all-in-one-wp-security-and-firewall').'</button></div></form>';
         return $unlock_request_form;
     }
-}
-    
+
     /**
      * Returns all logged in users for specific subsite of multisite installation
      * Checks the aiowps transient 'users_online'
@@ -639,7 +638,8 @@ class AIOWPSecurity_User_Login
         $subsite_logged_in_users = array();
         if (AIOWPSecurity_Utility::is_multisite_install()) {
             // this contains all logged in users sitewide across subsites
-            $logged_in_users = empty(get_site_transient('users_online'))?array():get_site_transient('users_online'); 
+            $users_online = get_site_transient('users_online');
+            $logged_in_users = empty($users_online)?array():$users_online;
             // Subsite - extract only logged in users for current blog
             foreach($logged_in_users as $user) {
                 if (isset($user['blog_id']) && $user['blog_id'] == $blog_id) {

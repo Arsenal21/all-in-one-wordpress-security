@@ -586,7 +586,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
     function widget_spread_the_word() {
 ?>
         <p><?php _e('We are working hard to make your WordPress site more secure. Please support us, here is how:', 'all-in-one-wp-security-and-firewall');?></p>
-        <p><a href="https://plus.google.com/+Tipsandtricks-hq/" target="_blank"><?php _e('Follow us on', 'all-in-one-wp-security-and-firewall');?> Google+</a>
+        <p><a href="https://www.facebook.com/tipsntrickshq/" target="_blank"><?php _e('Follow us on', 'all-in-one-wp-security-and-firewall');?> Facebook</a>
         </p>
         <p>
             <a href="http://twitter.com/intent/tweet?url=https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin&text=I love the All In One WP Security and Firewall plugin!"
