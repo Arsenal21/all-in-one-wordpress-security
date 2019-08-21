@@ -12,13 +12,16 @@ class AIOWPSecurity_User_Login
     var $key_login_msg;
     function __construct()
     {
+        global $aio_wp_security;
         $this->key_login_msg = 'aiowps_login_msg_id';
         // As a first authentication step, check if user's IP is locked.
         add_filter('authenticate', array($this, 'block_ip_if_locked'), 1, 1);
         // Check whether user needs to be manually approved after default WordPress authenticate hooks (with priority 20).
         add_filter('authenticate', array($this, 'check_manual_registration_approval'), 30, 1);
         // Check login captcha
-        add_filter('authenticate', array($this, 'check_captcha'), 20, 1);
+        if($aio_wp_security->configs->get_value('aiowps_enable_login_captcha')) {
+            add_filter('authenticate', array($this, 'check_captcha'), 20, 1);
+        }
         // As a last authentication step, perform post authentication steps
         add_filter('authenticate', array($this, 'post_authenticate'), 100, 3);
         add_action('aiowps_force_logout_check', array($this, 'aiowps_force_logout_action_handler'));
@@ -89,8 +92,6 @@ class AIOWPSecurity_User_Login
      * Check, whether $user needs to be manually approved by site admin yet.
      * @global AIO_WP_Security $aio_wp_security
      * @param WP_Error|WP_User $user
-     * @param string $username
-     * @param string $password
      * @return WP_Error|WP_User
      */
     function check_manual_registration_approval($user)
@@ -221,7 +222,7 @@ class AIOWPSecurity_User_Login
     {
         global $wpdb, $aio_wp_security;
         $login_lockdown_table = AIOWPSEC_TBL_LOGIN_LOCKDOWN;
-        $lockout_time_length = $aio_wp_security->configs->get_value('aiowps_lockout_time_length');
+        $lock_minutes = $aio_wp_security->configs->get_value('aiowps_lockout_time_length');
         $ip = AIOWPSecurity_Utility_IP::get_user_ip_address(); //Get the IP address of user
         if(empty($ip)) return;
         $ip_range = AIOWPSecurity_Utility_IP::get_sanitized_ip_range($ip); //Get the IP range of the current user
@@ -238,9 +239,11 @@ class AIOWPSecurity_User_Login
         $ip_range_str = esc_sql($ip_range).'.*';
         
         $lock_time = current_time( 'mysql' );
-        $lock_minutes = $lockout_time_length;
-        $newtimestamp = strtotime($lock_time.' + '.$lock_minutes.' minute');
-        $release_time = date('Y-m-d H:i:s', $newtimestamp);
+        $date = new DateTime($lock_time);
+        $add_interval = 'PT'.absint($lock_minutes).'M';
+        $date->add(new DateInterval($add_interval));
+        $release_time = $date->format('Y-m-d H:i:s');
+
         $data = array('user_id' => $user_id, 'user_login' => $username, 'lockdown_date' => $lock_time, 'release_date' => $release_time, 'failed_login_IP' => $ip, 'lock_reason' => $lock_reason);
         $format = array('%d', '%s', '%s', '%s', '%s', '%s');
         $result = $wpdb->insert($login_lockdown_table, $data, $format);
@@ -520,7 +523,20 @@ class AIOWPSecurity_User_Login
     function update_user_online_transient($user_id, $ip_addr) 
     {
         global $aio_wp_security;
-        $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
+        $is_multi_site = AIOWPSecurity_Utility::is_multisite_install();
+        if ($is_multi_site) {
+            $current_blog_id = get_current_blog_id();
+            $is_main = is_main_site($current_blog_id);
+            if($is_main) {
+                $logged_in_users = get_site_transient('users_online');
+            } else {
+                switch_to_blog($current_blog_id);
+                $logged_in_users = get_transient('users_online');
+            }
+        } else {
+            $logged_in_users = get_transient('users_online');
+        }
+        
         //$logged_in_users = get_transient('users_online');
         if ($logged_in_users === false || $logged_in_users == NULL)
         {
@@ -537,8 +553,13 @@ class AIOWPSecurity_User_Login
             $j++;
         }
         //Save the transient
-        AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
-        //set_transient('users_online', $logged_in_users, 30 * 60); //Set transient with the data obtained above and also set the expiry to 30min
+        
+//        AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+        if ($is_multi_site) {
+            ($is_main) ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+        } else {
+            set_transient('users_online', $logged_in_users, 30 * 60);
+        }
         return;
     }
     
@@ -603,5 +624,28 @@ class AIOWPSecurity_User_Login
         }
         $unlock_request_form .= '<button type="submit" name="aiowps_unlock_request" id="aiowps_unlock_request" class="button">'.__('Request Unlock', 'all-in-one-wp-security-and-firewall').'</button></div></form>';
         return $unlock_request_form;
+    }
+    
+    /**
+     * Returns all logged in users for specific subsite of multisite installation
+     * Checks the aiowps transient 'users_online'
+     * @param type $blog_id
+     * @return array
+     */
+    static function get_subsite_logged_in_users($blog_id=0) {
+        if(empty($blog_id)) return false;
+        
+        $subsite_logged_in_users = array();
+        if (AIOWPSecurity_Utility::is_multisite_install()) {
+            // this contains all logged in users sitewide across subsites
+            $logged_in_users = empty(get_site_transient('users_online'))?array():get_site_transient('users_online'); 
+            // Subsite - extract only logged in users for current blog
+            foreach($logged_in_users as $user) {
+                if (isset($user['blog_id']) && $user['blog_id'] == $blog_id) {
+                    $subsite_logged_in_users[] = $user;
+                }
+            }
+        }
+        return $subsite_logged_in_users;
     }
 }

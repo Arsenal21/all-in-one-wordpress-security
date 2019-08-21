@@ -120,7 +120,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         </table>
     
         <div class="submit">
-            <input type="submit" class="button-primary" name="aiowpsec_save_copy_protection" value="<?php _e('Save Copy Protection Settings'); ?>" />
+            <input type="submit" class="button-primary" name="aiowpsec_save_copy_protection" value="<?php _e('Save Copy Protection Settings', 'all-in-one-wp-security-and-firewall'); ?>" />
         </div>
         </form>   
         </div></div>
@@ -171,7 +171,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         </table>
     
         <div class="submit">
-            <input type="submit" class="button-primary" name="aiowpsec_save_frame_display_prevent" value="<?php _e('Save Settings'); ?>" />
+            <input type="submit" class="button-primary" name="aiowpsec_save_frame_display_prevent" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall'); ?>" />
         </div>
         </form>   
         </div></div>
@@ -222,7 +222,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         </table>
 
         <div class="submit">
-            <input type="submit" class="button-primary" name="aiowpsec_save_users_enumeration" value="<?php _e('Save Settings'); ?>" />
+            <input type="submit" class="button-primary" name="aiowpsec_save_users_enumeration" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall'); ?>" />
         </div>
         </form>
         </div></div>
@@ -282,7 +282,7 @@ class AIOWPSecurity_Misc_Options_Menu extends AIOWPSecurity_Admin_Menu
         </table>
 
         <div class="submit">
-            <input type="submit" class="button-primary" name="aiowpsec_save_rest_settings" value="<?php _e('Save Settings'); ?>" />
+            <input type="submit" class="button-primary" name="aiowpsec_save_rest_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall'); ?>" />
         </div>
         </form>
         </div></div>

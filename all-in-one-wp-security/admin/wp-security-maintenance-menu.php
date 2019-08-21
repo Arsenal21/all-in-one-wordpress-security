@@ -132,7 +132,7 @@ class AIOWPSecurity_Maintenance_Menu extends AIOWPSecurity_Admin_Menu
         </table>
     
         <div class="submit">
-            <input type="submit" class="button-primary" name="aiowpsec_save_site_lockout" value="<?php _e('Save Site Lockout Settings'); ?>" />
+            <input type="submit" class="button-primary" name="aiowpsec_save_site_lockout" value="<?php _e('Save Site Lockout Settings', 'all-in-one-wp-security-and-firewall'); ?>" />
         </div>
         </form>   
         </div></div>

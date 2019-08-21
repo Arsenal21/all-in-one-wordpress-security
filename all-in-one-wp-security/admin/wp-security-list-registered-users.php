@@ -66,12 +66,12 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
     function get_columns(){
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox
-            'ID' => 'User ID',
-            'user_login' => 'Login Name',
-            'user_email' => 'Email',
-            'user_registered' => 'Register Date',
-            'account_status' => 'Account Status',
-            'ip_address' => 'IP Address'
+            'ID' => __('User ID', 'all-in-one-wp-security-and-firewall'),
+            'user_login' => __('Login Name', 'all-in-one-wp-security-and-firewall'),
+            'user_email' => __('Email', 'all-in-one-wp-security-and-firewall'),
+            'user_registered' => __('Register Date', 'all-in-one-wp-security-and-firewall'),
+            'account_status' => __('Account Status', 'all-in-one-wp-security-and-firewall'),
+            'ip_address' => __('IP Address', 'all-in-one-wp-security-and-firewall')
         );
         return $columns;
     }

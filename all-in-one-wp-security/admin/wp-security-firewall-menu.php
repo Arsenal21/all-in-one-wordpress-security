@@ -663,7 +663,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_blue_box">
             <?php
             $info_msg = '';
-            $wiki_link = '<a href="http://en.wikipedia.org/wiki/Internet_bot" target="_blank">What is an Internet Bot</a>';
+            $wiki_link = '<a href="http://en.wikipedia.org/wiki/Internet_bot" target="_blank">'.__('What is an Internet Bot', 'all-in-one-wp-security-and-firewall').'</a>';
             $info_msg .= '<p><strong>'.sprintf( __('%s?', 'all-in-one-wp-security-and-firewall'), $wiki_link).'</strong></p>';
             
             $info_msg .= '<p>'. __('A bot is a piece of software which runs on the Internet and performs automatic tasks. For example when Google indexes your pages it uses automatic bots to achieve this task.', 'all-in-one-wp-security-and-firewall').'</p>';
@@ -968,7 +968,7 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
             <form id="tables-filter" method="post">
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
             <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
-            <?php $event_list_404->search_box('Search', 'search_404_events'); ?>
+            <?php $event_list_404->search_box(__('Search', 'all-in-one-wp-security-and-firewall'), 'search_404_events'); ?>
             <?php
             if(isset($_REQUEST["tab"]))
             {

@@ -203,4 +203,39 @@ class AIOWPSecurity_Installer
             return false;
         }
     }
+    
+    /**
+     * Setup aiowps cron tasks
+     * Handles both single and multi-site (NW activation) cases
+     * @global type $wpdb
+     * @param type $networkwide
+     */
+    static function set_cron_tasks_upon_activation($networkwide) {
+        global $wpdb;
+        if (AIOWPSecurity_Utility::is_multisite_install() && $networkwide) {
+            // check if it is a network activation
+            $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
+            foreach ($blogids as $blog_id) {
+                switch_to_blog($blog_id);
+                AIOWPSecurity_Installer::schedule_cron_events();
+                do_action('aiowps_activation_complete');
+                restore_current_blog();
+            }
+        } else {
+            AIOWPSecurity_Installer::schedule_cron_events();
+            do_action('aiowps_activation_complete');
+        }
+    }
+    
+    /**
+     * Helper function for scheduling aiowps cron events
+     */
+    static function schedule_cron_events() {
+        if ( !wp_next_scheduled('aiowps_hourly_cron_event') ) {
+            wp_schedule_event(time(), 'hourly', 'aiowps_hourly_cron_event'); //schedule an hourly cron event
+        }
+        if ( !wp_next_scheduled('aiowps_daily_cron_event') ) {
+            wp_schedule_event(time(), 'daily', 'aiowps_daily_cron_event'); //schedule an daily cron event
+        }
+    }
 }

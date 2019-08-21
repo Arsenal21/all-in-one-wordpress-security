@@ -168,7 +168,7 @@ class AIOWPSecurity_User_Registration_Menu extends AIOWPSecurity_Admin_Menu
             <!-- For plugins, we also need to ensure that the form posts back to our current page -->
             <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>" />
             <?php
-            $user_list->search_box('Search', 'search_user_registration');
+            $user_list->search_box(__('Search', 'all-in-one-wp-security-and-firewall'), 'search_user_registration');
             if (isset($_REQUEST["tab"])) {
                 echo '<input type="hidden" name="tab" value="' . esc_attr($_REQUEST["tab"]) . '" />';
             }

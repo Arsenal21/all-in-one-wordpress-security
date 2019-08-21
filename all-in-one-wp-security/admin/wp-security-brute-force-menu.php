@@ -165,8 +165,8 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         ?>
         <div class="aio_blue_box">
             <?php
-            $cookie_based_feature_url = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab2" target="_blank">Cookie Based Brute Force Prevention</a>';
-            $white_list_feature_url = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab4" target="_blank">Login Page White List</a>';
+            $cookie_based_feature_url = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab2" target="_blank">'.__('Cookie Based Brute Force Prevention', 'all-in-one-wp-security-and-firewall').'</a>';
+            $white_list_feature_url = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab4" target="_blank">'.__('Login Page White List', 'all-in-one-wp-security-and-firewall').'</a>';
             echo '<p>'.__('An effective Brute Force prevention technique is to change the default WordPress login page URL.', 'all-in-one-wp-security-and-firewall').'</p>'.
             '<p>'.__('Normally if you wanted to login to WordPress you would type your site\'s home URL followed by wp-login.php.', 'all-in-one-wp-security-and-firewall').'</p>'.
             '<p>'.__('This feature allows you to change the login URL by setting your own slug and renaming the last portion of the login URL which contains the <strong>wp-login.php</strong> to any string that you like.', 'all-in-one-wp-security-and-firewall').'</p>'.
@@ -205,7 +205,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-rename-login-page-nonce'); ?>
         <div class="aio_orange_box">
             <?php
-            $read_link = '<a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">must read this message</a>';
+            $read_link = '<a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">'.__('must read this message', 'all-in-one-wp-security-and-firewall').'</a>';
             echo '<p>'.sprintf(__('This feature can lock you out of admin if it doesn\'t work correctly on your site. You %s before activating this feature.', 'all-in-one-wp-security-and-firewall'), $read_link).'</p>';
             echo '<p>'.__("NOTE: If you are hosting your site on WPEngine or a provider which performs server caching, you will need to ask the host support people to NOT cache your renamed login page.", "all-in-one-wp-security-and-firewall").'</p>';
             ?>
@@ -340,12 +340,12 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         </div>
         <div class="aio_yellow_box">
             <?php
-            $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_SETTINGS_MENU_SLUG.'&tab=tab2" target="_blank">backup</a>';
-            $video_link = '<a href="https://www.tipsandtricks-hq.com/all-in-one-wp-security-plugin-cookie-based-brute-force-login-attack-prevention-feature-5994" target="_blank">video tutorial</a>';
+            $backup_tab_link = '<a href="admin.php?page='.AIOWPSEC_SETTINGS_MENU_SLUG.'&tab=tab2" target="_blank">'.__('backup', 'all-in-one-wp-security-and-firewall').'</a>';
+            $video_link = '<a href="https://www.tipsandtricks-hq.com/all-in-one-wp-security-plugin-cookie-based-brute-force-login-attack-prevention-feature-5994" target="_blank">'.__('video tutorial', 'all-in-one-wp-security-and-firewall').'</a>';
             $info_msg = sprintf( __('Even though this feature should not have any impact on your site\'s general functionality <strong>you are strongly encouraged to take a %s of your .htaccess file before proceeding</strong>.', 'all-in-one-wp-security-and-firewall'), $backup_tab_link);
             $info_msg1 = __('If this feature is not used correctly, you can get locked out of your site. A backed up .htaccess file will come in handy if that happens.', 'all-in-one-wp-security-and-firewall');
             $info_msg2 = sprintf( __('To learn more about how to use this feature please watch the following %s.', 'all-in-one-wp-security-and-firewall'), $video_link);
-            $brute_force_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_FIREWALL_MENU_SLUG.'&tab=tab4" target="_blank">Cookie-Based Brute Force Login Prevention</a>';
+            $brute_force_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_FIREWALL_MENU_SLUG.'&tab=tab4" target="_blank">'.__('Cookie-Based Brute Force Login Prevention', 'all-in-one-wp-security-and-firewall').'</a>';
             echo '<p>'.$info_msg.
             '<br />'.$info_msg1.
             '<br />'.$info_msg2.'</p>';
@@ -376,7 +376,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <?php wp_nonce_field('aiowpsec-enable-cookie-based-brute-force-prevention'); ?>
         <div class="aio_orange_box">
             <p>
-            <?php _e('This feature can lock you out of admin if it doesn\'t work correctly on your site. You <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">must read this message</a> before activating this feature.', 'all-in-one-wp-security-and-firewall'); ?>
+            <?php _e('This feature can lock you out of admin if it doesn\'t work correctly on your site. You <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">'.__('must read this message', 'all-in-one-wp-security-and-firewall').'</a> before activating this feature.', 'all-in-one-wp-security-and-firewall'); ?>
             </p>
         </div>            
         <table class="form-table">
@@ -572,7 +572,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_orange_box">
             <p>
             <?php
-            echo __('By enabling these settings the Google reCAPTCHA v2 widget will be applied by default for all forms in the captcha settings below.', 'all-in-one-wp-security-and-firewall');
+            echo __('By enabling these settings the Google reCAPTCHA v2 widget will be applied by default for all forms with captcha enabled.', 'all-in-one-wp-security-and-firewall');
             ?>
             </p>
         </div>            
@@ -780,7 +780,7 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_yellow_box">
             <?php
             $brute_force_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab2" target="_blank">Cookie-Based Brute Force Login Prevention</a>';
-            $rename_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab1" target="_blank">Rename Login Page</a>';
+            $rename_login_feature_link = '<a href="admin.php?page='.AIOWPSEC_BRUTE_FORCE_MENU_SLUG.'&tab=tab1" target="_blank">'.__('Rename Login Page', 'all-in-one-wp-security-and-firewall').'</a>';
             echo '<p>'.sprintf( __('Attention: If in addition to enabling the white list feature, you also have one of the %s or %s features enabled, <strong>you will still need to use your secret word or special slug in the URL when trying to access your WordPress login page</strong>.', 'all-in-one-wp-security-and-firewall'), $brute_force_login_feature_link, $rename_login_feature_link).'</p>
             <p>'.__('These features are NOT functionally related. Having both of them enabled on your site means you are creating 2 layers of security.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>

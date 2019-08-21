@@ -7,7 +7,7 @@ if ( !defined('ABSPATH') ) {
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '4.3.9.2';
+    var $version = '4.3.9.4';
     var $db_version = '1.9';
     var $plugin_url;
     var $plugin_path;
@@ -74,7 +74,6 @@ class AIO_WP_Security{
         define('AIOWPSEC_USER_REGISTRATION_MENU_SLUG', 'aiowpsec_user_registration');
         define('AIOWPSEC_DB_SEC_MENU_SLUG', 'aiowpsec_database');
         define('AIOWPSEC_FILESYSTEM_MENU_SLUG', 'aiowpsec_filesystem');
-        define('AIOWPSEC_WHOIS_MENU_SLUG', 'aiowpsec_whois');
         define('AIOWPSEC_BLACKLIST_MENU_SLUG', 'aiowpsec_blacklist');
         define('AIOWPSEC_FIREWALL_MENU_SLUG', 'aiowpsec_firewall');
         define('AIOWPSEC_MAINTENANCE_MENU_SLUG', 'aiowpsec_maintenance');
@@ -140,34 +139,18 @@ class AIO_WP_Security{
 
     static function activate_handler($networkwide)
     {
+        global $wpdb;
         //Only runs when the plugin activates
         include_once ('classes/wp-security-installer.php');
         AIOWPSecurity_Installer::run_installer($networkwide);
-
-        if ( !wp_next_scheduled('aiowps_hourly_cron_event') ) {
-            wp_schedule_event(time(), 'hourly', 'aiowps_hourly_cron_event'); //schedule an hourly cron event
-        }
-        if ( !wp_next_scheduled('aiowps_daily_cron_event') ) {
-            wp_schedule_event(time(), 'daily', 'aiowps_daily_cron_event'); //schedule an daily cron event
-        }
-
-        do_action('aiowps_activation_complete');
+        AIOWPSecurity_Installer::set_cron_tasks_upon_activation($networkwide);
     }
     
-    static function deactivate_handler()
+    static function deactivate_handler($networkwide)
     {
         //Only runs with the pluign is deactivated
         include_once ('classes/wp-security-deactivation-tasks.php');
-        AIOWPSecurity_Deactivation::run_deactivation_tasks();
-        wp_clear_scheduled_hook('aiowps_hourly_cron_event');
-        wp_clear_scheduled_hook('aiowps_daily_cron_event');
-        if (AIOWPSecurity_Utility::is_multisite_install()){
-            delete_site_transient('users_online');
-        }
-        else{
-            delete_transient('users_online');
-        }
-        
+        AIOWPSecurity_Deactivation::run_deactivation_tasks($networkwide);
         do_action('aiowps_deactivation_complete');
     }
     

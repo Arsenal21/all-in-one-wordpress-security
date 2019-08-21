@@ -56,9 +56,9 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
     function get_columns(){
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox
-            'comment_author_IP' => 'Spammer IP',
-            'amount' => 'Number of SPAM Comments From This IP',
-            'status' => 'Status',
+            'comment_author_IP' => __('Spammer IP', 'all-in-one-wp-security-and-firewall'),
+            'amount' => __('Number of SPAM Comments From This IP', 'all-in-one-wp-security-and-firewall'),
+            'status' => __('Status', 'all-in-one-wp-security-and-firewall'),
         );
         return $columns;
     }
@@ -78,7 +78,7 @@ class AIOWPSecurity_List_Comment_Spammer_IP extends AIOWPSecurity_List_Table {
             $actions = array(); //blank array
         }else{
             $actions = array(
-                'block' => 'Block'
+                'block' => __('Block', 'all-in-one-wp-security-and-firewall')
             );
         }
         return $actions;

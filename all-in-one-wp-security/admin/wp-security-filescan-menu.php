@@ -369,7 +369,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             '<p>'.__('Often when malware code has been inserted into your site you will normally not notice anything out of the ordinary based on appearances, but it can have a dramatic effect on your site\'s search ranking.', 'all-in-one-wp-security-and-firewall').'</p>'.
             '<p>'.__('This is because the bots and spiders from search engines such as Google have the capability to detect malware when they are indexing the pages on your site, and consequently they can blacklist your website which will in turn affect your search rankings.', 'all-in-one-wp-security-and-firewall').'</p>';
 
-            $site_scanners_link = '<a href="http://www.site-scanners.com" target="_blank">CLICK HERE</a>';
+            $site_scanners_link = '<a href="http://www.site-scanners.com" target="_blank">'.__('CLICK HERE', 'all-in-one-wp-security-and-firewall').'</a>';
 
             echo '<h2>'.__('Scanning For Malware', 'all-in-one-wp-security-and-firewall').'</h2>';
             echo '<p>'.__('Due to the constantly changing and complex nature of Malware, scanning for such things using a standalone plugin will not work reliably. This is something best done via an external scan of your site regularly.', 'all-in-one-wp-security-and-firewall').'</p>'.

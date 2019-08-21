@@ -155,7 +155,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
         </div>
         <div class="aio_grey_box">
             <?php
-            $addon_link = '<strong><a href="http://www.site-scanners.com/country-blocking-addon/" target="_blank">Country Blocking Addon</a></strong>';
+            $addon_link = '<strong><a href="http://www.site-scanners.com/country-blocking-addon/" target="_blank">'.__('Country Blocking Addon', 'all-in-one-wp-security-and-firewall').'</a></strong>';
             $info_msg = sprintf( __('You may also be interested in our %s.', 'all-in-one-wp-security-and-firewall'), $addon_link);
             $info_msg2 = __('This addon allows you to automatically block IP addresses based on their country of origin.', 'all-in-one-wp-security-and-firewall');
 
@@ -177,7 +177,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_orange_box">
             <p>
             <?php
-            $read_link = '<a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">must read this message</a>';
+            $read_link = '<a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin#advanced_features_note" target="_blank">'.__('must read this message', 'all-in-one-wp-security-and-firewall').'</a>';
             echo sprintf(__('This feature can lock you out of admin if it doesn\'t work correctly on your site. You %s before activating this feature.', 'all-in-one-wp-security-and-firewall'), $read_link);
             ?>
             </p>
