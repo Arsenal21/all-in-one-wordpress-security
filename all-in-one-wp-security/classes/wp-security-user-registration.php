@@ -12,7 +12,6 @@ class AIOWPSecurity_User_Registration
         add_action('user_register', array(&$this, 'aiowps_user_registration_action_handler'));
         if($aio_wp_security->configs->get_value('aiowps_enable_registration_page_captcha') == '1'){
             add_filter('registration_errors', array(&$this, 'aiowps_validate_registration_with_captcha'), 10, 3);
-            add_filter('woocommerce_process_registration_errors', array(&$this, 'aiowps_validate_woo_registration_with_captcha'), 10, 4);
         }
     }
     
@@ -78,25 +77,4 @@ class AIOWPSecurity_User_Registration
         }
         return $errors;
     }
-
-    function aiowps_validate_woo_registration_with_captcha($errors, $username, $password, $email)
-    {
-        global $aio_wp_security;
-
-        $locked = $aio_wp_security->user_login_obj->check_locked_user();
-        if($locked == null){
-            //user is not locked continue
-        }else{
-            $errors->add('authentication_failed', __('<strong>ERROR</strong>: You are not allowed to register because your IP address is currently locked!', 'all-in-one-wp-security-and-firewall'));
-        }
-        $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
-
-        if($verify_captcha === false)
-        {
-            // wrong answer was entered
-            $errors->add('authentication_failed', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
-        }        
-        return $errors;
-    }
-    
 }

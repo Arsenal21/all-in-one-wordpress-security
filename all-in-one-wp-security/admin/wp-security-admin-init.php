@@ -17,7 +17,6 @@ class AIOWPSecurity_Admin_Init
     var $user_registration_menu;
     var $db_security_menu;
     var $filesystem_menu;
-    var $whois_menu;
     var $blacklist_menu;
     var $firewall_menu;
     var $brute_force_menu;
@@ -300,7 +299,6 @@ class AIOWPSecurity_Admin_Init
         }else{
             add_submenu_page(AIOWPSEC_MAIN_MENU_SLUG, __('Filesystem Security', 'all-in-one-wp-security-and-firewall'),  __('Filesystem Security', 'all-in-one-wp-security-and-firewall') , AIOWPSEC_MANAGEMENT_PERMISSION, AIOWPSEC_FILESYSTEM_MENU_SLUG, array(&$this, 'handle_filesystem_menu_rendering'));
         }
-        add_submenu_page(AIOWPSEC_MAIN_MENU_SLUG, __('WHOIS Lookup', 'all-in-one-wp-security-and-firewall'),  __('WHOIS Lookup', 'all-in-one-wp-security-and-firewall') , AIOWPSEC_MANAGEMENT_PERMISSION, AIOWPSEC_WHOIS_MENU_SLUG, array(&$this, 'handle_whois_menu_rendering'));
         if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1){
             //Suppress the Blacklist Manager menu if site is a multi site AND not the main site
         }else{
@@ -364,12 +362,6 @@ class AIOWPSecurity_Admin_Init
     {
         include_once('wp-security-filesystem-menu.php');
         $this->filesystem_menu = new AIOWPSecurity_Filesystem_Menu();
-    }
-
-    function handle_whois_menu_rendering()
-    {
-        include_once('wp-security-whois-menu.php');
-        $this->whois_menu = new AIOWPSecurity_WhoIs_Menu();
     }
 
     function handle_blacklist_menu_rendering()

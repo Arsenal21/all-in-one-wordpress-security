@@ -6,6 +6,7 @@ if(!defined('ABSPATH')){
 class AIOWPSecurity_General_Init_Tasks
 {
     function __construct(){
+        // Do init time tasks
         global $aio_wp_security;
         
         if ($aio_wp_security->configs->get_value('aiowps_disable_xmlrpc_pingback_methods') == '1') {
@@ -120,41 +121,29 @@ class AIOWPSecurity_General_Init_Tasks
         }
 
         //For woo form captcha features
-        $woo_login_captcha_enabled = false;
-        if($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1' &&
-                !is_user_logged_in()) {
-            $woo_login_captcha_enabled = true;
-            add_action('woocommerce_login_form', array(&$this, 'insert_captcha_question_form'));
-        }
-
-        $woo_register_captcha_enabled = false;
-        if($aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1' &&
-                !is_user_logged_in()) {
-            $woo_register_captcha_enabled = true;
-            add_action('woocommerce_register_form', array(&$this, 'insert_captcha_question_form'));
-        }
-        
-        $woo_lostpassword_captcha_enabled = false;
-        if($aio_wp_security->configs->get_value('aiowps_enable_woo_lostpassword_captcha') == '1' &&
-                !is_user_logged_in()) {
-            $woo_lostpassword_captcha_enabled = true;
-            add_action('woocommerce_lostpassword_form', array(&$this, 'insert_captcha_question_form'));
-        }
-
-        
-        if($woo_login_captcha_enabled){
+        if($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1') {
+            if (!is_user_logged_in()) {
+                add_action('woocommerce_login_form', array(&$this, 'insert_captcha_question_form'));
+            }
             if(isset($_POST['woocommerce-login-nonce'])) {
-                add_filter('woocommerce_process_login_errors', array(&$this, 'aiowps_validate_woo_login_with_captcha'), 10, 3);
-            }
-        }
-        
-        if($woo_register_captcha_enabled){
-            if(isset($_POST['woocommerce-register-nonce'])) {
-                add_filter('woocommerce_process_registration_errors', array(&$this, 'aiowps_validate_woo_login_with_captcha'), 10, 3);
+                add_filter('woocommerce_process_login_errors', array(&$this, 'aiowps_validate_woo_login_or_reg_captcha'), 10, 3);
             }
         }
 
-        if($woo_lostpassword_captcha_enabled){
+        if($aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1') {
+            if(!is_user_logged_in()) {
+                add_action('woocommerce_register_form', array(&$this, 'insert_captcha_question_form'));
+            }
+            
+            if(isset($_POST['woocommerce-register-nonce'])) {
+                add_filter('woocommerce_process_registration_errors', array(&$this, 'aiowps_validate_woo_login_or_reg_captcha'), 10, 3);
+            }
+        }
+        
+        if($aio_wp_security->configs->get_value('aiowps_enable_woo_lostpassword_captcha') == '1') {
+            if(!is_user_logged_in()) {
+                add_action('woocommerce_lostpassword_form', array(&$this, 'insert_captcha_question_form'));
+            }
             if(isset($_POST['woocommerce-lost-password-nonce'])) {
                 add_action('lostpassword_post', array(&$this, 'process_woo_lost_password_form_post'));
             }
@@ -225,8 +214,7 @@ class AIOWPSecurity_General_Init_Tasks
         if (AIOWPSecurity_Utility::is_multisite_install()){
             $blog_id = get_current_blog_id();
             switch_to_blog($blog_id);
-            if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1' || 
-                    $aio_wp_security->configs->get_value('aiowps_enable_custom_login_captcha') == '1'){
+            if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1'){
                 if (!is_user_logged_in()) {
                     if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
                         add_action('wp_head', array(&$this, 'add_recaptcha_script'));
@@ -238,8 +226,7 @@ class AIOWPSecurity_General_Init_Tasks
             }
             restore_current_blog();
         }else{
-            if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1' || 
-                    $aio_wp_security->configs->get_value('aiowps_enable_custom_login_captcha') == '1'){
+            if($aio_wp_security->configs->get_value('aiowps_enable_comment_captcha') == '1'){
                 if (!is_user_logged_in()) {
                     if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
                         add_action('wp_head', array(&$this, 'add_recaptcha_script'));
@@ -274,7 +261,7 @@ class AIOWPSecurity_General_Init_Tasks
 
         //Add more tasks that need to be executed at init time
         
-    }
+    } // end _construct()
     
     function aiowps_disable_xmlrpc_pingback_methods( $methods ) {
        unset( $methods['pingback.ping'] );
@@ -394,7 +381,15 @@ class AIOWPSecurity_General_Init_Tasks
             $current_user = $current_user->ID;  
             $current_time = current_time('timestamp');
 
-            $current_user_info = array("user_id" => $current_user, "last_activity" => $current_time, "ip_address" => $current_user_ip); //We will store last activity time and ip address in transient entry
+            // Store last activity time and ip address in transient entry
+            if(AIOWPSecurity_Utility::is_multisite_install()) {
+                $current_blog_id = get_current_blog_id();
+                // For multi-sites also store blog_id
+                $current_user_info = array("user_id" => $current_user, "last_activity" => $current_time, "ip_address" => $current_user_ip, "blog_id" => $current_blog_id);
+            } else {
+                $current_user_info = array("user_id" => $current_user, "last_activity" => $current_time, "ip_address" => $current_user_ip); //We will store last activity time and ip address in transient entry                
+            }
+            
 
             if($logged_in_users === false || $logged_in_users == NULL){
                 $logged_in_users = array();
@@ -590,7 +585,7 @@ class AIOWPSecurity_General_Init_Tasks
         return;
     }
     
-    function aiowps_validate_woo_login_with_captcha( $errors, $username, $password ) {
+    function aiowps_validate_woo_login_or_reg_captcha( $errors, $username, $password ) {
         global $aio_wp_security;
         $locked = $aio_wp_security->user_login_obj->check_locked_user();
         if(!empty($locked)){

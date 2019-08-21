@@ -107,9 +107,6 @@ or malicious bots who do not have a special cookie in their browser. You (the si
 * Ability to hide admin login page. Rename your WordPress login page URL so that bots and hackers cannot access your real WordPress login URL. This feature allows you to change the default login page (wp-login.php) to something you configure.
 * Ability to use Login Honeypot which will helps reduce brute force login attempts by robots.
 
-= WhoIs Lookup =
-* Perform a WhoIs lookup of a suspicious host or IP address and get full details.
-
 = Security Scanner =
 * The file change detection scanner can alert you if any files have changed in your WordPress system. You can then investigate and see if that was a legitimate change or some bad code was injected.
 
@@ -186,6 +183,19 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+= TODO - 4.3.9.5 =
+- Added robustness to login lockdown feature by replacing the strtotime function with DateTime/DateInterval. 
+This should prevent 32-bit systems from being constrained to the max date of 19 Jan 2038.
+- Fixed bugs related to captcha features.
+- Fixed and improved "Logged In Users" functionality for multisite.
+
+= 4.3.9.4 =
+- Removed whois feature because it adds relatively little value and the third-party library used is not being maintained regularly.
+- Fixed "headers already sent" error when bulk action performed using aiowps list table.
+
+= 4.3.9.3 =
+- Fixed another captcha bug related to comment form.
+
 = 4.3.9.2 =
 - Fixed various captcha bugs: woocommerce lost password page, custom login form page, etc
 

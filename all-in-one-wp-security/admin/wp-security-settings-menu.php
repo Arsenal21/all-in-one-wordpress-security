@@ -151,7 +151,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
 
         ?>
         <div class="aio_grey_box">
- 	<p>For information, updates and documentation, please visit the <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin" target="_blank">AIO WP Security & Firewall Plugin</a> Page.</p>
+ 	<p><?php _e('For information, updates and documentation, please visit the', 'all-in-one-wp-security-and-firewall'); ?> <a href="https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin" target="_blank">AIO WP Security & Firewall Plugin</a> <?php _e('Page', 'all-in-one-wp-security-and-firewall'); ?>.</p>
         <p><a href="https://www.tipsandtricks-hq.com/development-center" target="_blank">Follow us</a> on Twitter, Google+ or via Email to stay upto date about the new security features of this plugin.</p>
         </div>
         
@@ -182,7 +182,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             ?>
         </div>      
         <div class="submit">
-            <input type="submit" class="button" name="aiowpsec_disable_all_features" value="<?php _e('Disable All Security Features'); ?>" />
+            <input type="submit" class="button" name="aiowpsec_disable_all_features" value="<?php _e('Disable All Security Features', 'all-in-one-wp-security-and-firewall'); ?>" />
         </div>
         </form>   
         </div>
@@ -355,7 +355,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             <tr valign="top">
                 <th scope="row"><?php _e('.htaccess file to restore from', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
-                    <input type="button" id="aiowps_htaccess_file_button" name="aiowps_htaccess_file_button" class="button rbutton" value="Select Your htaccess File" />
+                    <input type="button" id="aiowps_htaccess_file_button" name="aiowps_htaccess_file_button" class="button rbutton" value="<?php _e('Select Your htaccess File', 'all-in-one-wp-security-and-firewall'); ?>" />
                     <input name="aiowps_htaccess_file" type="text" id="aiowps_htaccess_file" value="" size="80" />
                     <p class="description">
                         <?php
@@ -457,7 +457,7 @@ class AIOWPSecurity_Settings_Menu extends AIOWPSecurity_Admin_Menu
             <tr valign="top">
                 <th scope="row"><?php _e('wp-config file to restore from', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
-                    <input type="button" id="aiowps_wp_config_file_button" name="aiowps_wp_config_file_button" class="button rbutton" value="Select Your wp-config File" />
+                    <input type="button" id="aiowps_wp_config_file_button" name="aiowps_wp_config_file_button" class="button rbutton" value="<?php _e('Select Your wp-config File', 'all-in-one-wp-security-and-firewall'); ?>" />
                     <input name="aiowps_wp_config_file" type="text" id="aiowps_wp_config_file" value="" size="80" />                    
                     <p class="description">
                         <?php
@@ -692,7 +692,7 @@ function render_tab5()
                 <span class="description"><?php _e('Use this section to import your All In One WP Security & Firewall settings from a file. Alternatively, copy/paste the contents of your import file into the textarea below.', 'all-in-one-wp-security-and-firewall'); ?></span>
                 <th scope="row"><?php _e('Import File', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td>
-                    <input type="button" id="aiowps_import_settings_file_button" name="aiowps_import_settings_file_button" class="button rbutton" value="Select Your Import Settings File" />
+                    <input type="button" id="aiowps_import_settings_file_button" name="aiowps_import_settings_file_button" class="button rbutton" value="<?php _e('Select Your Import Settings File', 'all-in-one-wp-security-and-firewall'); ?>" />
                     <input name="aiowps_import_settings_file" type="text" id="aiowps_import_settings_file" value="" size="80" />
                     <p class="description">
                         <?php
@@ -743,14 +743,14 @@ function render_tab5()
         }
         ?>
         <div class="postbox">
-        <h3 class="hndle"><label for="title"><?php _e('IP Retrieval Settings', 'aiowpsecurity'); ?></label></h3>
+        <h3 class="hndle"><label for="title"><?php _e('IP Retrieval Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('The IP Retrieval Settings allow you to specify which $_SERVER global variable you want this plugin to use to retrieve the visitor IP address.', 'aiowpsecurity').
-            '<br />'.__('By default this plugin uses the $_SERVER[\'REMOTE_ADDR\'] variable to retrieve the visitor IP address. This should normally be the most accurate safest way to get the IP.', 'aiowpsecurity').
-            '<br />'.__('However in some setups such as those using proxies, load-balancers and CloudFlare, it may be necessary to use a different $_SERVER variable.', 'aiowpsecurity').
-            '<br />'.__('You can use the settings below to configure which $_SERVER global you would like to use for retrieving the IP address.', 'aiowpsecurity').'</p>';
+            echo '<p>'.__('The IP Retrieval Settings allow you to specify which $_SERVER global variable you want this plugin to use to retrieve the visitor IP address.', 'all-in-one-wp-security-and-firewall').
+            '<br />'.__('By default this plugin uses the $_SERVER[\'REMOTE_ADDR\'] variable to retrieve the visitor IP address. This should normally be the most accurate safest way to get the IP.', 'all-in-one-wp-security-and-firewall').
+            '<br />'.__('However in some setups such as those using proxies, load-balancers and CloudFlare, it may be necessary to use a different $_SERVER variable.', 'all-in-one-wp-security-and-firewall').
+            '<br />'.__('You can use the settings below to configure which $_SERVER global you would like to use for retrieving the IP address.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
             
@@ -760,13 +760,13 @@ function render_tab5()
             <tr valign="top">
                 <td>
                     <select id="aiowps_ip_retrieve_method" name="aiowps_ip_retrieve_method">
-                        <option value="0" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '0' ); ?>><?php echo 'REMOTE_ADDR' .' ('.__('Default','aiowpsecurity').')'; ?></option>
+                        <option value="0" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '0' ); ?>><?php echo 'REMOTE_ADDR' .' ('.__('Default','all-in-one-wp-security-and-firewall').')'; ?></option>
                         <option value="1" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '1' ); ?>><?php echo 'HTTP_CF_CONNECTING_IP'; ?></option>
                         <option value="2" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '2' ); ?>><?php echo 'HTTP_X_FORWARDED_FOR'; ?></option>
                         <option value="3" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '3' ); ?>><?php echo 'HTTP_X_FORWARDED'; ?></option>
                         <option value="4" <?php selected( $aio_wp_security->configs->get_value('aiowps_ip_retrieve_method'), '4' ); ?>><?php echo 'HTTP_CLIENT_IP'; ?></option>
                     </select>
-                <span class="description"><?php _e('Choose a $_SERVER variable you would like to retrieve the visitor IP address from.', 'aiowpsecurity'); ?>
+                <span class="description"><?php _e('Choose a $_SERVER variable you would like to retrieve the visitor IP address from.', 'all-in-one-wp-security-and-firewall'); ?>
                 </span>
                 <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                 <div class="aiowps_more_info_body">
@@ -779,7 +779,7 @@ function render_tab5()
                 </td> 
             </tr>            
         </table>
-        <input type="submit" name="aiowps_save_advanced_settings" value="<?php _e('Save Settings', 'aiowpsecurity')?>" class="button-primary" />
+        <input type="submit" name="aiowps_save_advanced_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
         <?php

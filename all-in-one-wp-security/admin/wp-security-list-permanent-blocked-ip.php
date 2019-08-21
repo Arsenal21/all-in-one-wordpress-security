@@ -63,9 +63,9 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox
             'id' => 'ID',
-            'blocked_ip' => 'Blocked IP',
-            'block_reason' => 'Reason',
-            'blocked_date' => 'Date'
+            'blocked_ip' => __('Blocked IP', 'all-in-one-wp-security-and-firewall'),
+            'block_reason' => __('Reason', 'all-in-one-wp-security-and-firewall'),
+            'blocked_date' => __('Date', 'all-in-one-wp-security-and-firewall')
         );
         return $columns;
     }
@@ -84,7 +84,7 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
     function get_bulk_actions()
     {
         $actions = array(
-            'unblock' => 'Unblock'
+            'unblock' => __('Unblock', 'all-in-one-wp-security-and-firewall')
         );
         return $actions;
     }
@@ -120,14 +120,12 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
                 if($result !== false)
                 {
                     $redir_url = sprintf('admin.php?page=%s&tab=%s&bulk_count=%s', AIOWPSEC_MAIN_MENU_SLUG, $tab, count($entries));
-                    wp_redirect($redir_url);
-                    exit;
+                    AIOWPSecurity_Utility::redirect_to_url($redir_url);
                 } else {
                     // error on bulk delete
                     $aio_wp_security->debug_logger->log_debug("DB error: ".$wpdb->last_error,4);
                     $redir_url = sprintf('admin.php?page=%s&tab=%s&bulk_error=%s', AIOWPSEC_MAIN_MENU_SLUG, $tab, 1);
-                    wp_redirect($redir_url);
-                    exit;
+                    AIOWPSecurity_Utility::redirect_to_url($redir_url);
                     
                 }
             }

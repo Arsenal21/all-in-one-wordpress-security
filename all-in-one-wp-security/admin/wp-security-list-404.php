@@ -81,12 +81,12 @@ class AIOWPSecurity_List_404 extends AIOWPSecurity_List_Table {
         $columns = array(
             'cb' => '<input type="checkbox" />', //Render a checkbox
             'id' => 'ID',
-            'event_type' => 'Event Type',
-            'ip_or_host' => 'IP Address',
-            'url' => 'Attempted URL',
-            'referer_info' => 'Referer',
-            'event_date' => 'Date',
-            'status' => 'Lock Status',
+            'event_type' => __('Event Type','all-in-one-wp-security-and-firewall'),
+            'ip_or_host' => __('IP Address','all-in-one-wp-security-and-firewall'),
+            'url' => __('Attempted URL','all-in-one-wp-security-and-firewall'),
+            'referer_info' => __('Referer','all-in-one-wp-security-and-firewall'),
+            'event_date' => __('Date','all-in-one-wp-security-and-firewall'),
+            'status' => __('Lock Status','all-in-one-wp-security-and-firewall'),
         );
         $columns = apply_filters('list_404_get_columns', $columns);
         return $columns;

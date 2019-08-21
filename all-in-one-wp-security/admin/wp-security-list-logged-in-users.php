@@ -41,9 +41,9 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
    
     function get_columns(){
         $columns = array(
-            'user_id' => 'User ID',
-            'username' => 'Login Name',
-            'ip_address' => 'IP Address',
+            'user_id' =>  __('User ID', 'all-in-one-wp-security-and-firewall'),
+            'username' =>  __('Login Name', 'all-in-one-wp-security-and-firewall'),
+            'ip_address' =>  __('IP Address', 'all-in-one-wp-security-and-firewall'),
         );
         return $columns;
     }
@@ -111,14 +111,28 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
         $sortable = $this->get_sortable_columns();
 
         $this->_column_headers = array($columns, $hidden, $sortable);
-        
-        //$this->process_bulk_action();
     	
     	global $wpdb;
         global $aio_wp_security;
 
-        $logged_in_users = (AIOWPSecurity_Utility::is_multisite_install() ? get_site_transient('users_online') : get_transient('users_online'));
-        if($logged_in_users !== FALSE){
+        if (AIOWPSecurity_Utility::is_multisite_install()) {
+            $current_blog_id = get_current_blog_id();
+            $is_main = is_main_site($current_blog_id);
+            if(empty($is_main)) {
+                // subsite - only get logged in users for this blog_id
+                $logged_in_users = AIOWPSecurity_User_Login::get_subsite_logged_in_users($current_blog_id);
+            } else {
+                // main site - get sitewide users
+                $logged_in_users = get_site_transient('users_online');
+            }
+            
+        } else {
+            $logged_in_users = get_transient('users_online');
+        }
+        
+        if(empty($logged_in_users)){
+            $logged_in_users = array(); //If no transient found set to empty array
+        }else{
             foreach ($logged_in_users as $key=>$val)
             {
                 $userdata = get_userdata($val['user_id']);
@@ -126,8 +140,6 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
                 $val['username'] = $username;
                 $logged_in_users[$key] = $val;
             }
-        }else{
-            $logged_in_users = array(); //If no transient found set to empty array
         }
         $data = $logged_in_users;
         $current_page = $this->get_pagenum();

@@ -125,7 +125,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
         <div class="inside">
         <div class="aio_blue_box">
             <?php
-            echo '<p>'.__('This feature will add a simple math captcha field in the WordPress comments form.', 'all-in-one-wp-security-and-firewall').
+            echo '<p>'.__('This feature will add a captcha field in the WordPress comments form.', 'all-in-one-wp-security-and-firewall').
             '<br />'.__('Adding a captcha field in the comment form is a simple way of greatly reducing SPAM comments from bots without using .htaccess rules.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>

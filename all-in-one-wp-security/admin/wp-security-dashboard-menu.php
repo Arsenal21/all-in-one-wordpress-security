@@ -328,7 +328,7 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
                     <!-- For plugins, we also need to ensure that the form posts back to our current page -->
                     <input type="hidden" name="page" value="<?php echo esc_attr($_REQUEST['page']); ?>"/>
                     <?php
-                    $blocked_ip_list->search_box('Search', 'search_permanent_block');
+                    $blocked_ip_list->search_box(__('Search', 'all-in-one-wp-security-and-firewall'), 'search_permanent_block');
                     if (isset($_REQUEST["tab"])) {
                         echo '<input type="hidden" name="tab" value="' . esc_attr($_REQUEST["tab"]) . '" />';
                     }
@@ -586,16 +586,15 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
     function widget_spread_the_word() {
 ?>
         <p><?php _e('We are working hard to make your WordPress site more secure. Please support us, here is how:', 'all-in-one-wp-security-and-firewall');?></p>
-        <p><a href="https://plus.google.com/+Tipsandtricks-hq/" target="_blank">Follow us on
-                Google+</a>
+        <p><a href="https://plus.google.com/+Tipsandtricks-hq/" target="_blank"><?php _e('Follow us on', 'all-in-one-wp-security-and-firewall');?> Google+</a>
         </p>
         <p>
             <a href="http://twitter.com/intent/tweet?url=https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin&text=I love the All In One WP Security and Firewall plugin!"
-               target="_blank" class="aio_tweet_link">Post to Twitter</a>
+               target="_blank" class="aio_tweet_link"><?php _e('Post to Twitter', 'all-in-one-wp-security-and-firewall');?></a>
         </p>
         <p>
             <a href="http://wordpress.org/support/view/plugin-reviews/all-in-one-wp-security-and-firewall/"
-               target="_blank" class="aio_rate_us_link">Give us a Good Rating</a>
+               target="_blank" class="aio_rate_us_link"><?php _e('Give us a Good Rating', 'all-in-one-wp-security-and-firewall');?></a>
         </p>                        
 <?php                        
     }
@@ -780,31 +779,41 @@ class AIOWPSecurity_Dashboard_Menu extends AIOWPSecurity_Admin_Menu
     
     function widget_logged_in_users() {
         $users_online_link = '<a href="admin.php?page=' . AIOWPSEC_USER_LOGIN_MENU_SLUG . '&tab=tab5">Logged In Users</a>';
+        // default display messages
+        $multiple_users_info_msg = __('Number of users currently logged into your site (including you) is:', 'all-in-one-wp-security-and-firewall');
+        $single_user_info_msg = __('There are no other users currently logged in.', 'all-in-one-wp-security-and-firewall');
         if (AIOWPSecurity_Utility::is_multisite_install()) {
-            $logged_in_users = get_site_transient('users_online');
-            $num_users = count($logged_in_users);
-            if ($num_users > 1) {
-                echo '<div class="aio_red_box"><p>' . __('Number of users currently logged in site-wide is:', 'all-in-one-wp-security-and-firewall') . ' <strong>' . $num_users . '</strong></p>';
-                $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details', 'all-in-one-wp-security-and-firewall'), $users_online_link) . '</p>';
-                echo $info_msg . '</div>';
+            $current_blog_id = get_current_blog_id();
+            $is_main = is_main_site($current_blog_id);
+
+            if(empty($is_main)) {
+                // subsite - only get logged in users for this blog_id
+                $logged_in_users = AIOWPSecurity_User_Login::get_subsite_logged_in_users($current_blog_id);
             } else {
-                echo '<div class="aio_green_box"><p>' . __('There are no other site-wide users currently logged in.', 'all-in-one-wp-security-and-firewall') . '</p></div>';
+                // main site - get sitewide users
+                $logged_in_users = get_site_transient('users_online');
+                
+                // If viewing aiowps from multisite main network dashboard then display a different message
+                $multiple_users_info_msg = __('Number of users currently logged in site-wide (including you) is:', 'all-in-one-wp-security-and-firewall');
+                $single_user_info_msg = __('There are no other site-wide users currently logged in.', 'all-in-one-wp-security-and-firewall');
             }
         } else {
             $logged_in_users = get_transient('users_online');
-            if ($logged_in_users === false || $logged_in_users == NULL) {
-                $num_users = 0;
-            } else {
-                $num_users = count($logged_in_users);
-            }
-            if ($num_users > 1) {
-                echo '<div class="aio_red_box"><p>' . __('Number of users currently logged into your site (including you) is:', 'all-in-one-wp-security-and-firewall') . ' <strong>' . $num_users . '</strong></p>';
-                $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details', 'all-in-one-wp-security-and-firewall'), $users_online_link) . '</p>';
-                echo $info_msg . '</div>';
-            } else {
-                echo '<div class="aio_green_box"><p>' . __('There are no other users currently logged in.', 'all-in-one-wp-security-and-firewall') . '</p></div>';
-            }
-        }        
+        }
+        
+        if (empty($logged_in_users)) {
+            $num_users = 0;
+        } else {
+            $num_users = count($logged_in_users);
+        }
+        if ($num_users > 1) {
+            echo '<div class="aio_red_box"><p>' . $multiple_users_info_msg . ' <strong>' . $num_users . '</strong></p>';
+            $info_msg = '<p>' . sprintf(__('Go to the %s menu to see more details', 'all-in-one-wp-security-and-firewall'), $users_online_link) . '</p>';
+            echo $info_msg . '</div>';
+        } else {
+            echo '<div class="aio_green_box"><p>' . $single_user_info_msg . '</p></div>';
+        }
+        
     }
     
     function widget_locked_ip_addresses() {
