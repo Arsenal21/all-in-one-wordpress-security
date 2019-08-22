@@ -183,7 +183,7 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
-= TODO - 4.3.9.5 =
+= 4.4.0 =
 - Added robustness to login lockdown feature by replacing the strtotime function with DateTime/DateInterval. 
 This should prevent 32-bit systems from being constrained to the max date of 19 Jan 2038.
 - Fixed bugs related to captcha features.
