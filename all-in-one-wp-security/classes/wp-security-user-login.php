@@ -509,7 +509,7 @@ class AIOWPSecurity_User_Login
         $data = array('logout_date' => $logout_date_time);
         $where = array('user_id' => $user_id,
                         'login_ip' => $ip_addr,
-                        'logout_date' => '1000-10-10 10:00:00');
+                        'logout_date' => '1000-10-00 10:00:00');
         $result = $wpdb->update($login_activity_table, $data, $where);
         if ($result === FALSE)
         {

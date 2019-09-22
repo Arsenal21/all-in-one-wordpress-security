@@ -183,6 +183,11 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.4.1 =
+- Fixed bug where Apache directives were not being re-added into the .htaccess file after plugin re-activation.
+- Fixed bug related to account activity logout date not being set.
+
 = 4.4.0 =
 - Added robustness to login lockdown feature by replacing the strtotime function with DateTime/DateInterval. 
 This should prevent 32-bit systems from being constrained to the max date of 19 Jan 2038.

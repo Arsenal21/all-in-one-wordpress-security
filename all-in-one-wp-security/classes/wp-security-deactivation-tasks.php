@@ -19,9 +19,6 @@ class AIOWPSecurity_Deactivation
         global $wpdb;
         global $aio_wp_security;
         
-        //Deactivate all firewall and other .htaccess rules
-        AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules();
-        
         if (AIOWPSecurity_Utility::is_multisite_install()){
             delete_site_transient('users_online');
         }
@@ -29,7 +26,6 @@ class AIOWPSecurity_Deactivation
             delete_transient('users_online');
         }
         
-        //
         if (AIOWPSecurity_Utility::is_multisite_install() && $networkwide) {
             // check if it is a network activation
             $blogids = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
@@ -47,8 +43,8 @@ class AIOWPSecurity_Deactivation
             
             AIOWPSecurity_Deactivation::clear_cron_events();
         }
-        
-        
+        //Deactivate all firewall and other .htaccess rules
+        AIOWPSecurity_Configure_Settings::turn_off_all_firewall_rules();
     }
     
     /**
