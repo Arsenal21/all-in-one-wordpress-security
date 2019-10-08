@@ -184,6 +184,9 @@ None
 
 == Changelog ==
 
+= 4.4.2 =
+- Fixed vulnerability related to open redirect and exposure of hidden login page for specific case. (Thanks to Erwan (wpscanteam) for letting us know)
+
 = 4.4.1 =
 - Fixed bug where Apache directives were not being re-added into the .htaccess file after plugin re-activation.
 - Fixed bug related to account activity logout date not being set.

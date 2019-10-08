@@ -451,7 +451,8 @@ class AIOWPSecurity_User_Login
                     AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60) : set_transient('aiowps_logout_payload', $after_logout_payload, 30 * 60);
                     $logout_url = AIOWPSEC_WP_URL.'?aiowpsec_do_log_out=1';
                     $logout_url = AIOWPSecurity_Utility::add_query_data_to_url($logout_url, 'al_additional_data', '1');
-                    AIOWPSecurity_Utility::redirect_to_url($logout_url);
+                    $logout_url_with_nonce = html_entity_decode(wp_nonce_url($logout_url, 'aio_logout'));
+                    AIOWPSecurity_Utility::redirect_to_url($logout_url_with_nonce);
                 }
             }
         }

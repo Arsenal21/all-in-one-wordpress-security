@@ -7,7 +7,7 @@ if ( !defined('ABSPATH') ) {
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '4.4.1';
+    var $version = '4.4.2';
     var $db_version = '1.9';
     var $plugin_url;
     var $plugin_path;
@@ -226,6 +226,10 @@ class AIO_WP_Security{
         global $aio_wp_security;
         if(isset($_GET['aiowpsec_do_log_out']))
         {
+            $nonce = isset($_GET['_wpnonce'])?$_GET['_wpnonce']:'';
+            if ( !wp_verify_nonce( $nonce, 'aio_logout' ) ) {
+                return; 
+            }
             wp_logout();
             if(isset($_GET['after_logout']))//Redirect to the after logout url directly
             {
