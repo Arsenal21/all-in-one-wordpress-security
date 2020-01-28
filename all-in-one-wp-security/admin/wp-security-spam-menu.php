@@ -527,7 +527,7 @@ class AIOWPSecurity_Spam_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_blue_box">
             <?php
             echo '<p>'.__('This feature will add a simple math captcha field in the BBPress new topic form.', 'all-in-one-wp-security-and-firewall').
-            '<br />'.__('Adding a captcha field in the this form is a simple way of greatly reducing SPAM submitted from bots.', 'all-in-one-wp-security-and-firewall').'</p>';
+            '<br />'.__('Adding a captcha field in this form is a simple way of greatly reducing SPAM submitted from bots.', 'all-in-one-wp-security-and-firewall').'</p>';
             ?>
         </div>
         <?php

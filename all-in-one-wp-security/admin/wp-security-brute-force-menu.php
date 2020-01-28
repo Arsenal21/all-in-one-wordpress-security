@@ -651,7 +651,11 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 </td>
             </tr>            
         </table>
-        </div></div>        
+        </div></div> 
+        <?php
+        // Only display woocommerce captcha settings if woo is active 
+        if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+        ?>
         <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('Woocommerce Forms Captcha Settings', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
         <div class="inside">
@@ -695,7 +699,11 @@ class AIOWPSecurity_Brute_Force_Menu extends AIOWPSecurity_Admin_Menu
                 </td>
             </tr>            
         </table>
-        </div></div>        
+        </div></div>
+        <?php
+        }        
+        ?>       
+                   
         <input type="submit" name="aiowpsec_save_captcha_settings" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         <?php

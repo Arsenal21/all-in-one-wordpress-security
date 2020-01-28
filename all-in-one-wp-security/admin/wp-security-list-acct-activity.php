@@ -152,7 +152,7 @@ class AIOWPSecurity_List_Account_Activity extends AIOWPSecurity_List_Table {
         /**
          * First, lets decide how many records per page to show
          */
-        $per_page = 20;
+        $per_page = 100;
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = $this->get_sortable_columns();
@@ -180,7 +180,7 @@ class AIOWPSecurity_List_Account_Activity extends AIOWPSecurity_List_Table {
         if(empty($search)) {
             $data = $wpdb->get_results("SELECT * FROM $login_activity_table ORDER BY $orderby $order", ARRAY_A);
         } else {
-            $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $login_activity_table WHERE `user_login` LIKE '%%%s%%' OR `login_ip` LIKE '%%%s%%' ORDER BY $orderby $order  LIMIT %d", $search, $search, 50), ARRAY_A);
+            $data = $wpdb->get_results($wpdb->prepare("SELECT * FROM $login_activity_table WHERE `user_login` LIKE '%%%s%%' OR `login_ip` LIKE '%%%s%%' ORDER BY $orderby $order  LIMIT %d", $search, $search, 100), ARRAY_A);
         }
         
         if (!$ignore_pagination) {

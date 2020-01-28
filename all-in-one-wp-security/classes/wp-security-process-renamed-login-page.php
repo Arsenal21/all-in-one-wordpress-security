@@ -209,6 +209,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
                 AIOWPSecurity_Utility::redirect_to_url(AIOWPSEC_WP_URL."/wp-admin");
             }else{
                 global $wp_version;
+                do_action('aiowps_rename_login_load');
                 status_header( 200 );
                 if ( version_compare( $wp_version, '5.2', '>=' ) ) {
                     require_once(AIO_WP_SECURITY_PATH . '/other-includes/wp-security-rename-login-feature.php' );

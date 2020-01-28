@@ -1,10 +1,10 @@
 === All In One WP Security & Firewall ===
-Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution, chesio
+Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 4.7
-Tested up to: 5.2
-Stable tag: trunk
+Tested up to: 5.3
+Stable tag: 4.4.3
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -183,6 +183,13 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= 4.4.3 =
+- Improved file change detection feature to address DB backups failing silently in some cases due to very large serialized data stored in a single row.
+- Added new action hook (aiowps_rename_login_load) just before renamed login page is loaded.
+- Added a check to ensure that woocommerce captcha settings are displayed only if woocommerce plugin is installed/active.
+- Fixed recaptcha bugs.
+- Added configurable item for max file upload size in basic firewall rules.
 
 = 4.4.2 =
 - Fixed vulnerability related to open redirect and exposure of hidden login page for specific case. (Thanks to Erwan (wpscanteam) for letting us know)

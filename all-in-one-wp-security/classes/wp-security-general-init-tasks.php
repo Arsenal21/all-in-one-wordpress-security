@@ -677,6 +677,7 @@ class AIOWPSecurity_General_Init_Tasks
         // Do NOT enqueue if this is the main woocommerce account login page because for woocommerce page we "explicitly" render the recaptcha widget
         $is_woo = false;
         
+        // We don't want to load for woo account page because we have a special function for this
         if ( function_exists('is_account_page') ) {
             // Check if this a woocommerce account page
             $is_woo = is_account_page(); 

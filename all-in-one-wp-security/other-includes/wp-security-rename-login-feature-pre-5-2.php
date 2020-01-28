@@ -440,7 +440,11 @@ if ( SITECOOKIEPATH != COOKIEPATH )
     setcookie( TEST_COOKIE, 'WP Cookie check', 0, SITECOOKIEPATH, COOKIE_DOMAIN, $secure );
 
 $lang            = ! empty( $_GET['wp_lang'] ) ? sanitize_text_field( $_GET['wp_lang'] ) : '';
-$switched_locale = switch_to_locale( $lang );
+$switched_locale = false;
+
+if ( function_exists( 'switch_to_locale' ) ) {
+        $switched_locale = switch_to_locale( $lang );
+}
 
 /**
  * Fires when the login form is initialized.

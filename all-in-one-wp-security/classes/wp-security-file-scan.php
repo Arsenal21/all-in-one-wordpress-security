@@ -15,21 +15,51 @@ class AIOWPSecurity_Scan
      * This function will recursively scan through all directories starting from the specified location
      * It will store the path/filename, last_modified and filesize values in a multi-dimensional associative array
      */
+    
+    /**
+     * Will recursively scan through all directories starting from ABSPATH.
+     * Will return array with the path/filename, last_modified and filesize values
+     * @global AIO_WP_Security $aio_wp_security
+     * @return boolean|array
+     */
     function execute_file_change_detection_scan() 
     {
         global $aio_wp_security;
         $scan_result = array();
-        if($this->has_scan_data()){
-            $scanned_data = $this->do_file_change_scan(); //Scan the filesystem and get details
-            $last_scan_data = $this->get_last_scan_data();
-            $scan_result = $this->compare_scan_data($last_scan_data,$scanned_data);
+        $fcd_filename = $aio_wp_security->configs->get_value('aiowps_fcd_filename');
+        if (empty($fcd_filename)) {
+            // means that we haven't done a scan before, or, 
+            // the fcd file containing the results doesn't exist
+            $random_suffix = AIOWPSecurity_Utility::generate_alpha_numeric_random_string(10);
+            $fcd_filename = 'aiowps_fcd_data_' . $random_suffix;
+            $aio_wp_security->configs->set_value('aiowps_fcd_filename', $fcd_filename);
+            $aio_wp_security->configs->save_config();
+        }
+        
+        $fcd_data = self::get_fcd_data(); // get previous scan data if any
+
+        if ($fcd_data === false) {
+            // an error occurred so return
+            return false;
+        }
+        
+        $scanned_data = $this->do_file_change_scan();
+        
+        if(empty($fcd_data)){
+            $this->save_fcd_data($scanned_data);
+            $scan_result['initial_scan'] = '1';
+            return $scan_result;
+        } else {
+          
+            $scan_result = $this->compare_scan_data($fcd_data['file_scan_data'], $scanned_data);
+            
             $scan_result['initial_scan'] = '';
-            $this->save_scan_data_to_db($scanned_data, 'update', $scan_result);
+            $this->save_fcd_data($scanned_data, $scan_result);
             if (!empty($scan_result['files_added']) || !empty($scan_result['files_removed']) || !empty($scan_result['files_changed'])){
                 //This means there was a change detected
                 $aio_wp_security->configs->set_value('aiowps_fcds_change_detected', TRUE);
                 $aio_wp_security->configs->save_config();
-                $aio_wp_security->debug_logger->log_debug("File Change Detection Feature: change to filesystem detected!");
+                $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - change to filesystem detected!");
 
                 $this->aiowps_send_file_change_alert_email($scan_result); //Send file change scan results via email if applicable
             } else {
@@ -37,12 +67,6 @@ class AIOWPSecurity_Scan
                 $aio_wp_security->configs->set_value('aiowps_fcds_change_detected', FALSE);
                 $aio_wp_security->configs->save_config();
             }
-            return $scan_result;
-        }
-        else{
-            $scanned_data = $this->do_file_change_scan();
-            $this->save_scan_data_to_db($scanned_data);
-            $scan_result['initial_scan'] = '1';
             return $scan_result;
         }
     }
@@ -74,7 +98,7 @@ class AIOWPSecurity_Scan
             // If no explicit email address(es) are given, send email to site admin.
             $to = empty( $addresses ) ? array( get_site_option('admin_email') ) : explode(PHP_EOL, $addresses);
             if ( !wp_mail( $to, $subject, $message, $headers ) ) {
-                $aio_wp_security->debug_logger->log_debug("File change notification email failed to send.",4);
+                $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - File change notification email failed to send.",4);
             }
 
         }
@@ -85,7 +109,7 @@ class AIOWPSecurity_Scan
         global $aio_wp_security;
         if($aio_wp_security->configs->get_value('aiowps_enable_automated_fcd_scan')=='1')
         {
-            $aio_wp_security->debug_logger->log_debug_cron("Filescan - Scheduled fcd_scan is enabled. Checking now to see if scan needs to be done...");
+            $aio_wp_security->debug_logger->log_debug_cron(__METHOD__ . " - Scheduled fcd_scan is enabled. Checking now to see if scan needs to be done...");
             $time_now = current_time( 'mysql' );
             $current_time = strtotime($time_now);
             $fcd_scan_frequency = $aio_wp_security->configs->get_value('aiowps_fcd_scan_frequency'); //Number of hours or days or months interval
@@ -102,25 +126,24 @@ class AIOWPSecurity_Scan
                     $interval = 'weeks';
                     break;
             }
-            $last_fcd_scan_time = $aio_wp_security->configs->get_value('aiowps_last_fcd_scan_time');
-            if ($last_fcd_scan_time != NULL)
+            $last_fcd_scan_time_string = $aio_wp_security->configs->get_value('aiowps_last_fcd_scan_time');
+            if ($last_fcd_scan_time_string != NULL)
             {
-                $last_fcd_scan_time = strtotime($aio_wp_security->configs->get_value('aiowps_last_fcd_scan_time'));
+                $last_fcd_scan_time = strtotime($last_fcd_scan_time_string);
                 $next_fcd_scan_time = strtotime("+".abs($fcd_scan_frequency).$interval, $last_fcd_scan_time);
                 if ($next_fcd_scan_time <= $current_time)
                 {
                     //It's time to do a filescan
-                    $result = $this->execute_file_change_detection_scan(ABSPATH);
-//                    if ($result)
-//                    {
+                    $result = $this->execute_file_change_detection_scan();
+                    if ($result === false)
+                    {
+                        $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - Scheduled filescan operation failed!",4);
+                    } 
+                    else
+                    {
                         $aio_wp_security->configs->set_value('aiowps_last_fcd_scan_time', $time_now);
                         $aio_wp_security->configs->save_config();
-                        $aio_wp_security->debug_logger->log_debug_cron("Filescan - Scheduled filescan was successfully completed.");
-//                    } 
-//                    else
-//                    {
-//                        $aio_wp_security->debug_logger->log_debug_cron("Filescan - Scheduled filescan operation failed!",4);
-//                    }
+                    }
                 }
             }
             else
@@ -132,63 +155,53 @@ class AIOWPSecurity_Scan
         }
     }
     
-    /* Returns true if there is at least one previous scaned data in the DB. False otherwise */
-    function has_scan_data()
+    /**
+     * Get the last filechange detection data which is stored in the special file.
+     * @global AIO_WP_Security $aio_wp_security
+     * @return bool|array - false on failure, array on success
+     */
+    static function get_fcd_data()
     {
-        global $wpdb;
-        //For scanned data the meta_key1 column valu is 'file_change_detection', meta_value1 column value is 'file_scan_data'. Then the data is stored in meta_value4 column.
-        $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
-        $sql = $wpdb->prepare("SELECT * FROM $aiowps_global_meta_tbl_name WHERE meta_key1=%s AND meta_value1=%s", 'file_change_detection', 'file_scan_data');
-        $resultset = $wpdb->get_row($sql, OBJECT);
-        if($resultset){
-            $scan_data = maybe_unserialize($resultset->meta_value4);
-            if(!empty($scan_data)){
-                return true;
+        global $aio_wp_security;
+        $aiowps_backup_dir = WP_CONTENT_DIR.'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
+        
+        $fcd_filename = $aio_wp_security->configs->get_value('aiowps_fcd_filename');
+        $results_file = $aiowps_backup_dir. '/'. $fcd_filename;
+        
+        if(!file_exists($results_file)) {
+            $fp = @fopen($results_file, 'w'); //open for write - will create file if doesn't exist
+            return array();
+        }
+        
+        if(empty(filesize($results_file))) {
+            return array(); // if newly created file return empty array
+        }
+        
+        $fp = @fopen($results_file, 'r'); //open for read and write - will create file if doesn't exist
+        if($fp === false) {
+            // Error
+            $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - fopen returned false when opening fcd data file");
+            return false;
+        }
+        
+        $contents = fread($fp, filesize($results_file));
+        fclose($fp);
+        if($contents === false){
+            // Error
+            $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - fread returned false when reading fcd data file");
+            return false;
+        } else {
+            
+            $fcd_file_contents = json_decode($contents, TRUE);
+            if(isset($fcd_file_contents['file_scan_data'])) {
+                return $fcd_file_contents;
+            } else {
+                return array();
             }
-        }
-        return false;
-    }
-    
-    function get_last_scan_data()
-    {
-        global $wpdb;
-        //For scanned data the meta_key1 column valu is 'file_change_detection', meta_value1 column value is 'file_scan_data'. Then the data is stored in meta_value4 column.
-        $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
-        $sql = $wpdb->prepare("SELECT * FROM $aiowps_global_meta_tbl_name WHERE meta_key1=%s AND meta_value1=%s", 'file_change_detection', 'file_scan_data');
-        $resultset = $wpdb->get_row($sql, OBJECT);
-        if($resultset){
-            $scan_data = maybe_unserialize($resultset->meta_value4);
-            return $scan_data;
-        }
-        return array(); //return empty array if no old scan data
-    }
-    
-    function save_scan_data_to_db($scanned_data, $save_type = 'insert', $scan_result = array())
-    {
-        global $wpdb, $aio_wp_security;
-        $result = '';
-        //For scanned data the meta_key1 column value is 'file_change_detection', meta_value1 column value is 'file_scan_data'. Then the data is stored in meta_value4 column.
-        $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
-        $payload = maybe_serialize($scanned_data);
-        $scan_result = maybe_serialize($scan_result);
-        $date_time = current_time( 'mysql' );
-        $data = array('date_time' => $date_time, 'meta_key1' => 'file_change_detection', 'meta_value1' => 'file_scan_data', 'meta_value4' => $payload, 'meta_key5' => 'last_scan_result', 'meta_value5' => $scan_result);
-        if($save_type == 'insert'){
-            $result = $wpdb->insert($aiowps_global_meta_tbl_name, $data);
-        }
-        else{
-            $where = array('meta_key1' => 'file_change_detection', 'meta_value1' => 'file_scan_data');
-            $result = $wpdb->update($aiowps_global_meta_tbl_name, $data, $where);
             
         }
-        if ($result === false){
-            $aio_wp_security->debug_logger->log_debug("save_scan_data_to_db() - Error inserting data to DB!",4);
-            return false;
-        }else{
-            return true;
-        }
     }
-
+    
     /**
      * Recursively scan the entire $start_dir directory and return file size
      * and last modified date of every regular file. Ignore files and file
@@ -298,7 +311,7 @@ class AIOWPSecurity_Scan
         $scan_db_data = $wpdb->get_row($sql_prep, ARRAY_A);
         if ($scan_db_data === NULL)
         {
-            $aio_wp_security->debug_logger->log_debug("display_last_scan_results() - DB query for scan results data from global meta table returned NULL!",4);
+            $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - DB query for scan results data from global meta table returned NULL!",4);
             return FALSE;
         }
         $date_last_scan = $scan_db_data['date_time'];
@@ -347,4 +360,34 @@ class AIOWPSecurity_Scan
         return $scan_summary;
     }
 
+    /**
+     * Saves file change detection data into a special file
+     * @global AIO_WP_Security $aio_wp_security
+     * @param type $scanned_data
+     * @param type $scan_result
+     * @return boolean
+     */
+    function save_fcd_data($scanned_data, $scan_result = array())
+    {
+        global $aio_wp_security;
+
+        $date_time = current_time( 'mysql' );
+        $data = array('date_time' => $date_time, 'file_scan_data' => $scanned_data, 'last_scan_result' => $scan_result);
+        
+        $fcd_filename = $aio_wp_security->configs->get_value('aiowps_fcd_filename');
+        $aiowps_backup_dir = WP_CONTENT_DIR.'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
+        
+        if (!AIOWPSecurity_Utility_File::create_dir($aiowps_backup_dir))
+        {
+            $aio_wp_security->debug_logger->log_debug(__METHOD__ . " - Creation of DB backup directory failed!",4);
+            return false;
+        }
+        $results_file = $aiowps_backup_dir. '/'. $fcd_filename;
+        $fp=fopen($results_file,'w');
+        fwrite($fp, json_encode($data));
+        fclose($fp);
+       
+    }
+    
 }
+ 

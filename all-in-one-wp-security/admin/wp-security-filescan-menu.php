@@ -79,7 +79,6 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
         if (isset($_POST['fcd_scan_info']))
         {
             //Display scan file change info and clear the global alert variable
-            //TODO: display file change details
             
             //Clear the global variable
             $aio_wp_security->configs->set_value('aiowps_fcds_change_detected', FALSE);
@@ -107,10 +106,15 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             }
 
             $result = $aio_wp_security->scan_obj->execute_file_change_detection_scan();
+            if ($result === false) {
+                // error case
+                $this->show_msg_error(__('There was an error during the file change detection scan. Please check the aiowps logs.','all-in-one-wp-security-and-firewall'));
+            }
+            
             //If this is first scan display special message
             if ($result['initial_scan'] == 1)
             {
-                $this->show_msg_updated(__('The plugin has detected that this is your first file change detection scan. The file details from this scan will be used to detect file changes for future scans!','all-in-one-wp-security-and-firewall'));
+                $this->show_msg_updated(__('The plugin has detected that this is your first file change detection scan. The file details from this scan will be used to detect file changes for future scans.','all-in-one-wp-security-and-firewall'));
             }else if(!$aio_wp_security->configs->get_value('aiowps_fcds_change_detected')){
                 $this->show_msg_updated(__('Scan Complete - There were no file changes detected!', 'all-in-one-wp-security-and-firewall'));
             }
@@ -398,10 +402,11 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
      */
     function display_last_scan_results()
     {
-        $scan_results_unserialized = AIOWPSecurity_Scan::get_file_change_data();
-        if (!$scan_results_unserialized)
+        $fcd_data = AIOWPSecurity_Scan::get_fcd_data();
+        if (!$fcd_data || !isset($fcd_data['last_scan_result']))
         {
-            return FALSE;
+            // no fcd data found
+            return false;
         }
         ?>
         <div class="postbox">
@@ -411,7 +416,8 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
         $files_added_output = "";
         $files_removed_output = "";
         $files_changed_output = "";
-        if (!empty($scan_results_unserialized['files_added']))
+        $last_scan_results = $fcd_data['last_scan_result'];
+        if (!empty($last_scan_results['files_added']))
         {
             //Output table of files added
             echo '<div class="aio_info_with_icon aio_spacer_10_tb">'.__('The following files were added to your host.', 'all-in-one-wp-security-and-firewall').'</div>';
@@ -421,7 +427,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             $files_added_output .= '<th>'.__('File Size','all-in-one-wp-security-and-firewall').'</th>';
             $files_added_output .= '<th>'.__('File Modified','all-in-one-wp-security-and-firewall').'</th>';
             $files_added_output .= '</tr>';
-            foreach ($scan_results_unserialized['files_added'] as $key=>$value) {
+            foreach ($last_scan_results['files_added'] as $key=>$value) {
                 $files_added_output .= '<tr>';
                 $files_added_output .= '<td>'.$key.'</td>';
                 $files_added_output .= '<td>'.$value['filesize'].'</td>';
@@ -432,7 +438,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             echo $files_added_output;
         }
         echo '<div class="aio_spacer_15"></div>';
-        if (!empty($scan_results_unserialized['files_removed']))
+        if (!empty($last_scan_results['files_removed']))
         {
             //Output table of files removed
             echo '<div class="aio_info_with_icon aio_spacer_10_tb">'.__('The following files were removed from your host.', 'all-in-one-wp-security-and-firewall').'</div>';
@@ -442,7 +448,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             $files_removed_output .= '<th>'.__('File Size','all-in-one-wp-security-and-firewall').'</th>';
             $files_removed_output .= '<th>'.__('File Modified','all-in-one-wp-security-and-firewall').'</th>';
             $files_removed_output .= '</tr>';
-            foreach ($scan_results_unserialized['files_removed'] as $key=>$value) {
+            foreach ($last_scan_results['files_removed'] as $key=>$value) {
                 $files_removed_output .= '<tr>';
                 $files_removed_output .= '<td>'.$key.'</td>';
                 $files_removed_output .= '<td>'.$value['filesize'].'</td>';
@@ -456,7 +462,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
 
         echo '<div class="aio_spacer_15"></div>';
 
-        if (!empty($scan_results_unserialized['files_changed']))
+        if (!empty($last_scan_results['files_changed']))
         {
             //Output table of files changed
             echo '<div class="aio_info_with_icon aio_spacer_10_tb">'.__('The following files were changed on your host.', 'all-in-one-wp-security-and-firewall').'</div>';
@@ -466,7 +472,7 @@ class AIOWPSecurity_Filescan_Menu extends AIOWPSecurity_Admin_Menu
             $files_changed_output .= '<th>'.__('File Size','all-in-one-wp-security-and-firewall').'</th>';
             $files_changed_output .= '<th>'.__('File Modified','all-in-one-wp-security-and-firewall').'</th>';
             $files_changed_output .= '</tr>';
-            foreach ($scan_results_unserialized['files_changed'] as $key=>$value) {
+            foreach ($last_scan_results['files_changed'] as $key=>$value) {
                 $files_changed_output .= '<tr>';
                 $files_changed_output .= '<td>'.$key.'</td>';
                 $files_changed_output .= '<td>'.$value['filesize'].'</td>';

@@ -12,7 +12,7 @@ class AIOWPSecurity_Cronjob_Handler {
     
     function aiowps_hourly_cron_event_handler()
     {
-        //Do stuff that needs checking every hours
+        //Do stuff that needs checking hourly
         do_action('aiowps_perform_scheduled_backup_tasks');
         do_action('aiowps_perform_fcd_scan_tasks');
         do_action('aiowps_perform_db_cleanup_tasks');

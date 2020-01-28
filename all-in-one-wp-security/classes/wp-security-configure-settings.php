@@ -82,6 +82,7 @@ class AIOWPSecurity_Configure_Settings
 
         //Firewall features
         $aio_wp_security->configs->set_value('aiowps_enable_basic_firewall','');//Checkbox
+        $aio_wp_security->configs->set_value('aiowps_max_file_upload_size','10'); //Default 10MB
         $aio_wp_security->configs->set_value('aiowps_enable_pingback_firewall','');//Checkbox - blocks all access to XMLRPC
         $aio_wp_security->configs->set_value('aiowps_disable_xmlrpc_pingback_methods','');//Checkbox - Disables only pingback methods in XMLRPC functionality
         $aio_wp_security->configs->set_value('aiowps_block_debug_log_file_access','');//Checkbox
@@ -234,6 +235,7 @@ class AIOWPSecurity_Configure_Settings
 
         //Firewall features
         $aio_wp_security->configs->add_value('aiowps_enable_basic_firewall','');//Checkbox
+        $aio_wp_security->configs->add_value('aiowps_max_file_upload_size','10');
         $aio_wp_security->configs->add_value('aiowps_enable_pingback_firewall','');//Checkbox - blocks all access to XMLRPC
         $aio_wp_security->configs->add_value('aiowps_disable_xmlrpc_pingback_methods','');//Checkbox - Disables only pingback methods in XMLRPC functionality
         $aio_wp_security->configs->add_value('aiowps_block_debug_log_file_access','');//Checkbox

@@ -564,7 +564,7 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
         <div class="aio_blue_box">
             <?php
             echo '<p>'.__('This tab displays the activity for accounts registered with your site that have logged in using the WordPress login form.', 'all-in-one-wp-security-and-firewall').'
-            <br />'.__('The information below can be handy if you need to do security investigations because it will show you the last 50 recent login events by username, IP address and time/date.', 'all-in-one-wp-security-and-firewall').'
+            <br />'.__('The information below can be handy if you need to do security investigations because it will show you the last 100 recent login events by username, IP address and time/date.', 'all-in-one-wp-security-and-firewall').'
             </p>';
             ?>
         </div>

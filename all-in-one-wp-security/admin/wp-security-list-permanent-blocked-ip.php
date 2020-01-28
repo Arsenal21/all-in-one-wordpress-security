@@ -149,7 +149,7 @@ class AIOWPSecurity_List_Blocked_IP extends AIOWPSecurity_List_Table
         /**
          * First, lets decide how many records per page to show
          */
-        $per_page = 20;
+        $per_page = 100;
         $columns = $this->get_columns();
         $hidden = array();
         $sortable = $this->get_sortable_columns();

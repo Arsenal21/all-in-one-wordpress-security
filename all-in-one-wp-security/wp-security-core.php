@@ -7,7 +7,7 @@ if ( !defined('ABSPATH') ) {
 if (!class_exists('AIO_WP_Security')){
 
 class AIO_WP_Security{
-    var $version = '4.4.2';
+    var $version = '4.4.3';
     var $db_version = '1.9';
     var $plugin_url;
     var $plugin_path;
@@ -32,25 +32,25 @@ class AIO_WP_Security{
         add_action('wp_loaded',array(&$this, 'aiowps_wp_loaded_handler'));
         do_action('aiowpsecurity_loaded');
     }
-    
+
     function plugin_url()
-    { 
+    {
         if ($this->plugin_url) return $this->plugin_url;
         return $this->plugin_url = plugins_url( basename( plugin_dir_path(__FILE__) ), basename( __FILE__ ) );
     }
 
     function plugin_path()
-    { 	
-        if ($this->plugin_path) return $this->plugin_path;		
+    {
+        if ($this->plugin_path) return $this->plugin_path;
         return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
     }
-    
+
     function load_configs()
     {
         include_once('classes/wp-security-config.php');
         $this->configs = AIOWPSecurity_Config::get_instance();
     }
-    
+
     function define_constants()
     {
         define('AIO_WP_SECURITY_VERSION', $this->version);
@@ -81,7 +81,7 @@ class AIO_WP_Security{
         define('AIOWPSEC_FILESCAN_MENU_SLUG', 'aiowpsec_filescan');
         define('AIOWPSEC_BRUTE_FORCE_MENU_SLUG', 'aiowpsec_brute_force');
         define('AIOWPSEC_MISC_MENU_SLUG', 'aiowpsec_misc');
-        
+
         global $wpdb;
         define('AIOWPSEC_TBL_LOGIN_LOCKDOWN', $wpdb->prefix . 'aiowps_login_lockdown');
         define('AIOWPSEC_TBL_FAILED_LOGINS', $wpdb->prefix . 'aiowps_failed_logins');
@@ -102,7 +102,7 @@ class AIO_WP_Security{
         include_once('classes/wp-security-utility-file.php');
         include_once('classes/wp-security-general-init-tasks.php');
         include_once('classes/wp-security-wp-loaded-tasks.php');
-        
+
         include_once('classes/wp-security-user-login.php');
         include_once('classes/wp-security-user-registration.php');
         include_once('classes/wp-security-captcha.php');
@@ -113,12 +113,12 @@ class AIO_WP_Security{
         include_once('classes/grade-system/wp-security-feature-item-manager.php');
         include_once('classes/wp-security-wp-footer-content.php');
         include_once('classes/wp-security-blocking.php');
-        
+
         if (is_admin()){ //Load admin side only files
             include_once('classes/wp-security-configure-settings.php');
             include_once('admin/wp-security-admin-init.php');
             include_once('admin/general/wp-security-list-table.php');
-            
+
         }
         else{ //Load front end side only files
         }
@@ -127,11 +127,11 @@ class AIO_WP_Security{
     function loader_operations()
     {
         add_action('plugins_loaded',array(&$this, 'plugins_loaded_handler'));//plugins loaded hook
-        
+
         $debug_config = $this->configs->get_value('aiowps_enable_debug');
         $debug_enabled = empty($debug_config) ? false : true;
         $this->debug_logger = new AIOWPSecurity_Logger($debug_enabled);
-        
+
         if(is_admin()){
             $this->admin_init = new AIOWPSecurity_Admin_Init();
         }
@@ -145,7 +145,7 @@ class AIO_WP_Security{
         AIOWPSecurity_Installer::run_installer($networkwide);
         AIOWPSecurity_Installer::set_cron_tasks_upon_activation($networkwide);
     }
-    
+
     static function deactivate_handler($networkwide)
     {
         //Only runs with the pluign is deactivated
@@ -153,7 +153,7 @@ class AIO_WP_Security{
         AIOWPSecurity_Deactivation::run_deactivation_tasks($networkwide);
         do_action('aiowps_deactivation_complete');
     }
-    
+
     function db_upgrade_handler()
     {
         if(is_admin()){//Check if DB needs to be upgraded
@@ -163,7 +163,7 @@ class AIO_WP_Security{
             }
         }
     }
-    
+
     function plugins_loaded_handler()
     {
         //Runs when plugins_loaded action gets fired
@@ -173,7 +173,7 @@ class AIO_WP_Security{
         }
         $this->do_additional_plugins_loaded_tasks();
     }
-    
+
     function wp_security_plugin_init()
     {
         //Set up localisation. First loaded overrides strings present in later loaded file
@@ -181,27 +181,27 @@ class AIO_WP_Security{
         load_textdomain( 'all-in-one-wp-security-and-firewall', WP_LANG_DIR . "/all-in-one-wp-security-and-firewall-$locale.mo" );
 	load_plugin_textdomain('all-in-one-wp-security-and-firewall', false, dirname(plugin_basename(__FILE__ )) . '/languages/');
 
-        //Actions, filters, shortcodes goes here       
+        //Actions, filters, shortcodes goes here
         $this->user_login_obj = new AIOWPSecurity_User_Login();//Do the user login operation tasks
         $this->user_registration_obj = new AIOWPSecurity_User_Registration();//Do the user login operation tasks
         $this->captcha_obj = new AIOWPSecurity_Captcha();//Do the captcha tasks
         $this->backup_obj = new AIOWPSecurity_Backup();//Object to handle backup tasks
-        $this->scan_obj = new AIOWPSecurity_Scan();//Object to handle scan tasks 
+        $this->scan_obj = new AIOWPSecurity_Scan();//Object to handle scan tasks
         $this->cron_handler = new AIOWPSecurity_Cronjob_Handler();
-        
+
         add_action('login_enqueue_scripts',array(&$this, 'aiowps_login_enqueue'));
         add_action('wp_footer',array(&$this, 'aiowps_footer_content'));
-        
+
         add_action('wp_login', array('AIOWPSecurity_User_Login', 'wp_login_action_handler'), 10, 2);
         do_action('aiowps_force_logout_check');
         new AIOWPSecurity_General_Init_Tasks();
     }
-    
+
     function aiowps_wp_loaded_handler()
     {
         new AIOWPSecurity_WP_Loaded_Tasks();
     }
-    
+
     /**
      * Enqueues the Google recaptcha v2 api URL for the standard WP login page
      * @global type $aio_wp_security
@@ -210,9 +210,11 @@ class AIO_WP_Security{
     {
         global $aio_wp_security;
         if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
-            wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js', false );
-            // below is needed to provide some space for the google reCaptcha form (otherwise it appears partially hidden on RHS)
-            wp_add_inline_script( 'google-recaptcha', 'document.addEventListener("DOMContentLoaded", ()=>{document.getElementById("login").style.width = "340px";});' );
+            if($aio_wp_security->configs->get_value('aiowps_enable_login_captcha') == '1' || $aio_wp_security->configs->get_value('aiowps_enable_registration_page_captcha') == '1') {
+                wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js', false );
+                // below is needed to provide some space for the google reCaptcha form (otherwise it appears partially hidden on RHS)
+                wp_add_inline_script( 'google-recaptcha', 'document.addEventListener("DOMContentLoaded", ()=>{document.getElementById("login").style.width = "340px";});' );
+            }
         }
     }
 
@@ -220,7 +222,7 @@ class AIO_WP_Security{
     {
         new AIOWPSecurity_WP_Footer_Content();
     }
-    
+
     function do_additional_plugins_loaded_tasks()
     {
         global $aio_wp_security;
@@ -228,7 +230,7 @@ class AIO_WP_Security{
         {
             $nonce = isset($_GET['_wpnonce'])?$_GET['_wpnonce']:'';
             if ( !wp_verify_nonce( $nonce, 'aio_logout' ) ) {
-                return; 
+                return;
             }
             wp_logout();
             if(isset($_GET['after_logout']))//Redirect to the after logout url directly
@@ -265,8 +267,8 @@ class AIO_WP_Security{
                 }
             }
         }
-    }    
-    
+    }
+
 }//End of class
 
 }//End of class not exists check

@@ -91,17 +91,22 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed on enable basic firewall settings!",4);
                 die("Nonce check failed on enable basic firewall settings!");
             }
-
-            //Save settings
-            if(isset($_POST['aiowps_enable_basic_firewall']))
-            {
-                $aio_wp_security->configs->set_value('aiowps_enable_basic_firewall','1');
-            } 
-            else
-            {
-                $aio_wp_security->configs->set_value('aiowps_enable_basic_firewall','');
+            
+            // Max file upload size in basic rules
+            $upload_size = absint($_POST['aiowps_max_file_upload_size']);
+            
+            $max_allowed = apply_filters( 'aiowps_max_allowed_upload_config', 250 ); // Set a filterable limit of 250MB
+            $max_allowed = absint($max_allowed);
+            
+            if($upload_size > $max_allowed) {
+                $upload_size = $max_allowed;
+            } else if(empty ($upload_size)) {
+                $upload_size = 10;
             }
-
+            
+            //Save settings
+            $aio_wp_security->configs->set_value('aiowps_enable_basic_firewall',isset($_POST["aiowps_enable_basic_firewall"])?'1':'');
+            $aio_wp_security->configs->set_value('aiowps_max_file_upload_size',$upload_size);
             $aio_wp_security->configs->set_value('aiowps_enable_pingback_firewall',isset($_POST["aiowps_enable_pingback_firewall"])?'1':''); //this disables all xmlrpc functionality
             $aio_wp_security->configs->set_value('aiowps_disable_xmlrpc_pingback_methods',isset($_POST["aiowps_disable_xmlrpc_pingback_methods"])?'1':''); //this disables only pingback methods of xmlrpc but leaves other methods so that Jetpack and other apps will still work
             $aio_wp_security->configs->set_value('aiowps_block_debug_log_file_access',isset($_POST["aiowps_block_debug_log_file_access"])?'1':'');
@@ -183,7 +188,14 @@ class AIOWPSecurity_Firewall_Menu extends AIOWPSecurity_Admin_Menu
                         ?>
                 </div>
                 </td>
-            </tr>            
+            </tr>
+            <tr valign="top">
+                <th scope="row"><?php _e('Max File Upload Size (MB)', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td><input type="number" min="0" step="1" name="aiowps_max_file_upload_size" value="<?php echo esc_html($aio_wp_security->configs->get_value('aiowps_max_file_upload_size')); ?>" />
+                <span class="description"><?php _e('The value for the maximum file upload size used in the .htaccess file. (Defaults to 10MB if left blank)', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td> 
+            </tr>
+            
         </table>
         </div></div>
         
