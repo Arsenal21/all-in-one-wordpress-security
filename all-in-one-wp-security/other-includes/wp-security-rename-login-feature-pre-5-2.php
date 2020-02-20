@@ -131,7 +131,7 @@ $login_title = apply_filters( 'login_title', $login_title, $title );
      *
      * @param string $login_header_title Login header logo title attribute.
      */
-    $login_header_title = apply_filters( 'login_headertitle', $login_header_title );
+    $login_header_title = apply_filters( 'login_headertext', $login_header_title );
 
     /*
      * To match the URL/title set above, Multisite sites have the blog name,
