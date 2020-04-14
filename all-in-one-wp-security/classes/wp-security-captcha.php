@@ -24,7 +24,7 @@ class AIOWPSecurity_Captcha
             do_action( 'bp_aiowps-captcha-answer_errors' );
         }
         $site_key = esc_html( $aio_wp_security->configs->get_value('aiowps_recaptcha_site_key') );
-        $cap_form = '<div class="g-recaptcha-wrap" style="padding:10px 0 10px 0"><div class="g-recaptcha" data-sitekey="'.$site_key.'"></div></div>';
+        $cap_form = '<div class="g-recaptcha-wrap" style="padding:10px 0 10px 0"><div id="aiowps_recaptcha_field" class="g-recaptcha" data-sitekey="'.$site_key.'"></div></div>';
         echo $cap_form;
     }
 
