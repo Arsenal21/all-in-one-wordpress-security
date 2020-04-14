@@ -527,7 +527,7 @@ class AIOWPSecurity_General_Init_Tasks
         }
 
         //Don't do captcha for pingback/trackback
-        if ($comment['comment_type'] != '' && $comment['comment_type'] != 'comment') {
+        if ($comment['comment_type'] != '' && $comment['comment_type'] != 'comment' && $comment['comment_type'] != 'review') {
             return $comment;
         }
         
