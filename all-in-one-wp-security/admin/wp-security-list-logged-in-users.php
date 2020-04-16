@@ -86,19 +86,16 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for force user logout operation!",4);
                 die(__('Nonce check failed for force user logout operation!','all-in-one-wp-security-and-firewall'));
             }
-            //Force single user logout
+            // Force single user logout
             $user_id = absint($user_id);
             $manager = WP_Session_Tokens::get_instance( $user_id );
             $manager->destroy_all();
-            //
-            $aio_wp_security->user_login_obj->update_user_online_transient($user_id, $ip_addr);
-//            if($result != NULL)
-//            {
-                $success_msg = '<div id="message" class="updated fade"><p><strong>';
-                $success_msg .= __('The selected user was logged out successfully!','all-in-one-wp-security-and-firewall');
-                $success_msg .= '</strong></p></div>';
-                _e($success_msg);
-//            }
+
+            $aio_wp_security->user_login_obj->cleanup_users_online_transient($user_id, $ip_addr);
+            $success_msg = '<div id="message" class="updated fade"><p><strong>';
+            $success_msg .= __('The selected user was logged out successfully!','all-in-one-wp-security-and-firewall');
+            $success_msg .= '</strong></p></div>';
+            _e($success_msg);
         }
     }
     
@@ -117,19 +114,10 @@ class AIOWPSecurity_List_Logged_In_Users extends AIOWPSecurity_List_Table {
 
         if (AIOWPSecurity_Utility::is_multisite_install()) {
             $current_blog_id = get_current_blog_id();
-            $is_main = is_main_site($current_blog_id);
-            if(empty($is_main)) {
-                // subsite - only get logged in users for this blog_id
-                $logged_in_users = AIOWPSecurity_User_Login::get_subsite_logged_in_users($current_blog_id);
-            } else {
-                // main site - get sitewide users
-                $logged_in_users = get_site_transient('users_online');
-            }
-            
+            $logged_in_users = AIOWPSecurity_User_Login::get_subsite_logged_in_users($current_blog_id);
         } else {
             $logged_in_users = get_transient('users_online');
         }
-        
         if(empty($logged_in_users)){
             $logged_in_users = array(); //If no transient found set to empty array
         }else{

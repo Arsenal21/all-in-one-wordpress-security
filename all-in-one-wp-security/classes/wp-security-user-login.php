@@ -504,7 +504,7 @@ class AIOWPSecurity_User_Login
         $ip_addr = AIOWPSecurity_Utility_IP::get_user_ip_address();
         $user_id = $current_user->ID;
         //Clean up transients table
-        $this->update_user_online_transient($user_id, $ip_addr);
+        $this->cleanup_users_online_transient($user_id, $ip_addr);
         $login_activity_table = AIOWPSEC_TBL_USER_LOGIN_ACTIVITY;
         $logout_date_time = current_time( 'mysql' );
         $data = array('logout_date' => $logout_date_time);
@@ -517,29 +517,93 @@ class AIOWPSecurity_User_Login
             $aio_wp_security->debug_logger->log_debug("Error inserting record into ".$login_activity_table,4);//Log the highly unlikely event of DB error
         }
     }
+    
     /**
-     * This will clean up the "users_online" transient entry for the current user. 
-     *
+     * Update the 'users_online' transient
+     * @return void
      */
-    function update_user_online_transient($user_id, $ip_addr) 
+    function update_users_online_transient()
+    {
+        if(is_user_logged_in()){
+            $is_multi_site = AIOWPSecurity_Utility::is_multisite_install();
+            $current_user_ip = AIOWPSecurity_Utility_IP::get_user_ip_address();
+            // get the logged in users list from transients entry
+            $logged_in_users = ($is_multi_site ? get_site_transient('users_online') : get_transient('users_online'));
+            $current_user = wp_get_current_user();
+            $current_user = $current_user->ID;  
+            $current_time = current_time('timestamp');
+            $current_user_info = array();
+
+            // Store last activity time and ip address in transient entry
+            if($is_multi_site) {
+                $current_blog_id = get_current_blog_id();
+                // For multi-sites also store blog_id
+                $current_user_info = array("user_id" => $current_user, "last_activity" => $current_time, "ip_address" => $current_user_ip, "blog_id" => $current_blog_id);
+            } else {
+                $current_user_info = array("user_id" => $current_user, "last_activity" => $current_time, "ip_address" => $current_user_ip, "blog_id" => false);                
+            }
+            
+            if(empty($logged_in_users))
+            {
+                // case when "users_online" transient has been deleted after expiry or is empty
+                $logged_in_users = array();
+                $logged_in_users[] = $current_user_info;
+                $is_multi_site ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+            }
+            else
+            {
+                $key = 0;
+                $update_existing = false;
+                $item_index = 0;
+                foreach ($logged_in_users as $value)
+                {
+                    $value_minus_activity = $value;
+                    unset($value_minus_activity['last_activity']);
+                    $current_user_minus_activity = $current_user_info;
+                    unset($current_user_minus_activity['last_activity']);
+                    // Check if current user we're looking at has an entry in the 'users_online' transient
+                    if(empty(array_diff($current_user_minus_activity, $value_minus_activity)))
+                    {
+                        if ($value['last_activity'] < ($current_time - (15 * 60)))
+                        {
+                            $update_existing = true;
+                            $item_index = $key;
+                            break;
+                        }else{
+                            return; // do nothing and just return
+                        }
+                    }
+                    $key++;
+                }
+
+                if($update_existing) {
+                    // Update transient if the last activity was over 15 min ago for this user
+                    $logged_in_users[$item_index] = $current_user_info;
+                    AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+                } else {
+                    $logged_in_users[] = $current_user_info;
+                    AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+                }
+            }
+        }
+    }
+    
+    /**
+     * This will clean up the "users_online" transient entry for the current user when a logout occurs 
+     * @return void
+     */
+    function cleanup_users_online_transient($user_id, $ip_addr) 
     {
         global $aio_wp_security;
         $is_multi_site = AIOWPSecurity_Utility::is_multisite_install();
         if ($is_multi_site) {
             $current_blog_id = get_current_blog_id();
-            $is_main = is_main_site($current_blog_id);
-            if($is_main) {
-                $logged_in_users = get_site_transient('users_online');
-            } else {
-                switch_to_blog($current_blog_id);
-                $logged_in_users = get_transient('users_online');
-            }
+            $logged_in_users = AIOWPSecurity_User_Login::get_subsite_logged_in_users($current_blog_id);
         } else {
             $logged_in_users = get_transient('users_online');
         }
         
-        //$logged_in_users = get_transient('users_online');
-        if ($logged_in_users === false || $logged_in_users == NULL)
+        if (empty($logged_in_users))
         {
             return;
         }
@@ -553,11 +617,10 @@ class AIOWPSecurity_User_Login
             }
             $j++;
         }
-        //Save the transient
         
-//        AIOWPSecurity_Utility::is_multisite_install() ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+        // Save the transient
         if ($is_multi_site) {
-            ($is_main) ? set_site_transient('users_online', $logged_in_users, 30 * 60) : set_transient('users_online', $logged_in_users, 30 * 60);
+            set_site_transient('users_online', $logged_in_users, 30 * 60);
         } else {
             set_transient('users_online', $logged_in_users, 30 * 60);
         }
@@ -631,7 +694,7 @@ class AIOWPSecurity_User_Login
      * Returns all logged in users for specific subsite of multisite installation
      * Checks the aiowps transient 'users_online'
      * @param type $blog_id
-     * @return array
+     * @return array|bool
      */
     static function get_subsite_logged_in_users($blog_id=0) {
         if(empty($blog_id)) return false;
@@ -640,9 +703,11 @@ class AIOWPSecurity_User_Login
         if (AIOWPSecurity_Utility::is_multisite_install()) {
             // this contains all logged in users sitewide across subsites
             $users_online = get_site_transient('users_online');
-            $logged_in_users = empty($users_online)?array():$users_online;
-            // Subsite - extract only logged in users for current blog
-            foreach($logged_in_users as $user) {
+            if(empty($users_online)) {
+                return array();
+            }
+            // Extract only logged in users for current subsite
+            foreach($users_online as $user) {
                 if (isset($user['blog_id']) && $user['blog_id'] == $blog_id) {
                     $subsite_logged_in_users[] = $user;
                 }
@@ -650,4 +715,5 @@ class AIOWPSecurity_User_Login
         }
         return $subsite_logged_in_users;
     }
+
 }
