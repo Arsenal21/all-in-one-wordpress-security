@@ -144,9 +144,6 @@ class AIOWPSecurity_General_Init_Tasks
             if(!is_user_logged_in()) {
                 add_action('woocommerce_lostpassword_form', array(&$this, 'insert_captcha_question_form'));
             }
-            if(isset($_POST['woocommerce-lost-password-nonce'])) {
-                add_action('lostpassword_post', array(&$this, 'process_woo_lost_password_form_post'));
-            }
         }
 
         //For bbpress new topic form captcha
@@ -272,6 +269,12 @@ class AIOWPSecurity_General_Init_Tasks
             if(isset($_POST['woocommerce-register-nonce'])) {
                 add_filter('woocommerce_process_registration_errors', array(&$this, 'aiowps_validate_woo_ip_lockdown'), 10, 3);
             }
+        }
+
+        // Woocommerce Lost Password Form Process
+        // Happens here as form post action handles a number of scenarios
+        if(isset($_POST['woocommerce-lost-password-nonce'])) {
+            add_action('lostpassword_post', array(&$this, 'process_woo_lost_password_form_post'));
         }
 
         //Add more tasks that need to be executed at init time
@@ -578,6 +581,12 @@ class AIOWPSecurity_General_Init_Tasks
         //Insert an error just before the password reset process kicks in
         return new WP_Error('aiowps_captcha_error',__('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
     }
+
+    function add_lostpassword_ip_lockdown_error_msg()
+    {
+        //Insert an error just before the password reset process kicks in
+        return new WP_Error('aiowps_ip_lockdown_error', apply_filters('aiowps_ip_blocked_error_msg', __('<strong>ERROR</strong>: Your IP address is currently locked please contact the administrator!', 'all-in-one-wp-security-and-firewall')));
+    }
     
     function check_404_event()
     {
@@ -632,9 +641,20 @@ class AIOWPSecurity_General_Init_Tasks
         global $aio_wp_security;
 
         if(isset($_POST['woocommerce-lost-password-nonce'])) {
-            $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
-            if ( $verify_captcha === false ) {
-                add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
+            // IP Lockdown
+            if($aio_wp_security->configs->get_value('aiowps_enable_login_lockdown') == '1') {
+                $locked = $aio_wp_security->user_login_obj->check_locked_user();
+                if (!empty($locked)) {
+                    add_filter('allow_password_reset', array(&$this, 'add_lostpassword_ip_lockdown_error_msg'));
+                }
+            }
+
+            // Captcha
+            if($aio_wp_security->configs->get_value('aiowps_enable_woo_lostpassword_captcha') == '1') {
+                $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
+                if ( $verify_captcha === false ) {
+                    add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
+                }
             }
         }
     }
