@@ -262,6 +262,16 @@ class AIOWPSecurity_General_Init_Tasks
         // For Login Lockdown
         if($aio_wp_security->configs->get_value('aiowps_enable_login_lockdown') == '1'){
             add_filter( 'aiowps_ip_blocked_error_msg', array(&$this, 'process_aiowps_ip_blocked_error_msg') );
+
+            // Woocommerce Login Form
+            if(isset($_POST['woocommerce-login-nonce'])) {
+                add_filter('woocommerce_process_login_errors', array(&$this, 'aiowps_validate_woo_ip_lockdown'), 10, 3);
+            }
+
+            // Woocommerce Register Form
+            if(isset($_POST['woocommerce-register-nonce'])) {
+                add_filter('woocommerce_process_registration_errors', array(&$this, 'aiowps_validate_woo_ip_lockdown'), 10, 3);
+            }
         }
 
         //Add more tasks that need to be executed at init time
@@ -592,19 +602,25 @@ class AIOWPSecurity_General_Init_Tasks
 
     function aiowps_validate_woo_login_or_reg_captcha( $errors, $username, $password ) {
         global $aio_wp_security;
-        $locked = $aio_wp_security->user_login_obj->check_locked_user();
-        if (!empty($locked)) {
-            $errors->add('authentication_failed', do_filter('aiowps_ip_blocked_error_msg', __('<strong>ERROR</strong>: Your IP address is currently locked please contact the administrator!', 'all-in-one-wp-security-and-firewall')));
-            return $errors;
-        }
 
         $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
         if($verify_captcha === false) {
             // wrong answer was entered
             $errors->add('authentication_failed', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
         }
-        return $errors;
 
+        return $errors;
+    }
+
+    function aiowps_validate_woo_ip_lockdown ($errors) {
+        global $aio_wp_security;
+
+        $locked = $aio_wp_security->user_login_obj->check_locked_user();
+        if (!empty($locked)) {
+            $errors->add('authentication_failed', apply_filters('aiowps_ip_blocked_error_msg', __('<strong>ERROR</strong>: Your IP address is currently locked please contact the administrator!', 'all-in-one-wp-security-and-firewall')));
+        }
+
+        return $errors;
     }
 
     /**
