@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: All In One WP Security
-Version: 4.4.3
+Version: 4.4.4
 Plugin URI: https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 Author: Tips and Tricks HQ, Peter Petreski, Ruhul, Ivy
 Author URI: https://www.tipsandtricks-hq.com/
@@ -29,17 +29,20 @@ function aiowps_show_plugin_settings_link($links, $file)
 }
 add_filter('plugin_action_links', 'aiowps_show_plugin_settings_link', 10, 2 );
 
-function aiowps_ms_handle_new_blog_creation($blog_id, $user_id, $domain, $path, $site_id, $meta ){
+function aiowps_ms_handle_new_site($new_site){
     global $wpdb;
-    if (is_plugin_active_for_network(__FILE__))
+    $plugin_basename = plugin_basename( __FILE__ );
+    if (is_plugin_active_for_network($plugin_basename))
     {
         if(!class_exists('AIOWPSecurity_Installer')){
             include_once('classes/wp-security-installer.php');
         }
         $old_blog = $wpdb->blogid;
-        switch_to_blog($blog_id);
+        switch_to_blog($new_site->blog_id);
         AIOWPSecurity_Installer::create_db_tables();
         switch_to_blog($old_blog);
     }
+
+
 }
-add_action('wpmu_new_blog', 'aiowps_ms_handle_new_blog_creation', 10, 6);
+add_action('wp_insert_site', 'aiowps_ms_handle_new_site', 10, 1);
