@@ -452,7 +452,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
 	foreach ($config_contents as $line_num => $line) {
             $no_ws_line = preg_replace( '/\s+/', '', $line ); //Strip white spaces
             if(strpos($no_ws_line, $prefix_match_string) !== FALSE){
-                $config_contents[$line_num] = str_replace($table_old_prefix, $table_new_prefix, $line);
+                $prefix_parts = explode("=",$config_contents[$line_num]);
+                $prefix_parts[1] = str_replace($table_old_prefix, $table_new_prefix, $prefix_parts[1]);
+                $config_contents[$line_num] = implode("=",$prefix_parts);
                 break;
             }
 	}
