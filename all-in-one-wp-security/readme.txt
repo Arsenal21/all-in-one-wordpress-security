@@ -186,6 +186,7 @@ None
 
 = WIP 4.4.5 =
 - Added Korean language translation files. Thanks to Jonghyun Cho.
+- Reworked the code for the "Generate New DB Table Prefix" feature to make it more robust. Thanks to @baddiedev.
 
 = 4.4.4 =
 - Fixed bugs and improved functionality related to "logged in users" functionality.
