@@ -3,7 +3,7 @@ Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrso
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 4.7
-Tested up to: 5.4
+Tested up to: 5.5
 Stable tag: 4.4.4
 License: GPLv3
 
@@ -183,6 +183,9 @@ https://www.tipsandtricks-hq.com/wordpress-security-and-firewall-plugin
 None
 
 == Changelog ==
+
+= WIP 4.4.5 =
+- Added Korean language translation files. Thanks to Jonghyun Cho.
 
 = 4.4.4 =
 - Fixed bugs and improved functionality related to "logged in users" functionality.
