@@ -82,7 +82,7 @@ class AIOWPSecurity_Installer
         id bigint(20) NOT NULL AUTO_INCREMENT,
         user_id bigint(20) NOT NULL,
         user_login VARCHAR(150) NOT NULL,
-        failed_login_date datetime NOT NULL DEFAULT '1000-10-00 10:00:00',
+        failed_login_date datetime NOT NULL DEFAULT '1000-10-10 10:00:00',
         login_attempt_ip varchar(100) NOT NULL DEFAULT '',
         PRIMARY KEY  (id)
         )" . $charset_collate . ";";
@@ -92,8 +92,8 @@ class AIOWPSecurity_Installer
         id bigint(20) NOT NULL AUTO_INCREMENT,
         user_id bigint(20) NOT NULL,
         user_login VARCHAR(150) NOT NULL,
-        login_date datetime NOT NULL DEFAULT '1000-10-00 10:00:00',
-        logout_date datetime NOT NULL DEFAULT '1000-10-00 10:00:00',
+        login_date datetime NOT NULL DEFAULT '1000-10-10 10:00:00',
+        logout_date datetime NOT NULL DEFAULT '1000-10-10 10:00:00',
         login_ip varchar(100) NOT NULL DEFAULT '',
         login_country varchar(150) NOT NULL DEFAULT '',
         browser_type varchar(150) NOT NULL DEFAULT '',

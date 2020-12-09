@@ -335,7 +335,7 @@ class AIOWPSecurity_User_Accounts_Menu extends AIOWPSecurity_Admin_Menu
                     $account_output .= '<td>'.$entry->user_login.'</td>';
                 }
                 $user_acct_edit_link = admin_url('user-edit.php?user_id=' . $entry->ID);
-                $account_output .= '<td><a href="'.$user_acct_edit_link.'" target="_blank">Edit User</a></td>';
+                $account_output .= '<td><a href="'.$user_acct_edit_link.'" target="_blank">'.__('Edit User', 'all-in-one-wp-security-and-firewall').'</a></td>';
                 $account_output .= '</tr>';
             }
             $account_output .= '</table>';

@@ -2,9 +2,9 @@
 Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrsolution
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
-Requires at least: 4.7
-Tested up to: 5.5
-Stable tag: 4.4.4
+Requires at least: 5.0
+Tested up to: 5.6
+Stable tag: 4.4.5
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -184,9 +184,11 @@ None
 
 == Changelog ==
 
-= WIP 4.4.5 =
+= 4.4.5 =
+- Fixed default DateTime to prevent DB error.
 - Added Korean language translation files. Thanks to Jonghyun Cho.
 - Reworked the code for the "Generate New DB Table Prefix" feature to make it more robust. Thanks to @baddiedev.
+- Added translation ability to some strings.  
 
 = 4.4.4 =
 - Fixed bugs and improved functionality related to "logged in users" functionality.
