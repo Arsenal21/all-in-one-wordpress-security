@@ -6,27 +6,27 @@ if(!defined('ABSPATH')){
 class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_BLACKLIST_MENU_SLUG;
-    
+
     /* Specify all the tabs of this menu in the following array */
     var $menu_tabs;
 
     var $menu_tabs_handler = array(
         'tab1' => 'render_tab1',
         );
-    
-    function __construct() 
+
+    function __construct()
     {
         $this->render_menu_page();
     }
-    
-    function set_menu_tabs() 
+
+    function set_menu_tabs()
     {
         $this->menu_tabs = array(
         'tab1' => __('Ban Users', 'all-in-one-wp-security-and-firewall'),
         );
     }
-    
-    function get_current_tab() 
+
+    function get_current_tab()
     {
         $tab_keys = array_keys($this->menu_tabs);
         $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
@@ -36,32 +36,32 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
     /*
      * Renders our tabs of this menu as nav items
      */
-    function render_menu_tabs() 
+    function render_menu_tabs()
     {
         $current_tab = $this->get_current_tab();
 
         echo '<h2 class="nav-tab-wrapper">';
-        foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
+        foreach ( $this->menu_tabs as $tab_key => $tab_caption )
         {
             $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
-            echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
+            echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';
         }
         echo '</h2>';
     }
-    
+
     /*
      * The menu rendering goes here
      */
-    function render_menu_page() 
+    function render_menu_page()
     {
         echo '<div class="wrap">';
         echo '<h2>'.__('Blacklist Manager','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
         $this->render_menu_tabs();
-        ?>        
+        ?>
         <div id="poststuff"><div id="post-body">
-        <?php 
+        <?php
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -69,8 +69,8 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
         </div><!-- end of wrap -->
         <?php
     }
-    
-    function render_tab1() 
+
+    function render_tab1()
     {
         global $aio_wp_security;
         global $aiowps_feature_mgr;
@@ -83,7 +83,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for save blacklist settings!",4);
                 die(__('Nonce check failed for save blacklist settings!','all-in-one-wp-security-and-firewall'));
             }
-            
+
             if (isset($_POST["aiowps_enable_blacklisting"]) && empty($_POST['aiowps_banned_ip_addresses']) && empty($_POST['aiowps_banned_user_agents']))
             {
                 $this->show_msg_error('You must submit at least one IP address or one User Agent value or both!','all-in-one-wp-security-and-firewall');
@@ -108,7 +108,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                         $error_msg = $payload[1][0];
                         $this->show_msg_error($error_msg);
                     }
-                    
+
                 }
                 else
                 {
@@ -122,15 +122,15 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                     //clear the user agent list
                     $aio_wp_security->configs->set_value('aiowps_banned_user_agents','');
                 }
-                
+
                 if ($result == 1)
                 {
                     $aio_wp_security->configs->set_value('aiowps_enable_blacklisting',isset($_POST["aiowps_enable_blacklisting"])?'1':'');
                     $aio_wp_security->configs->save_config(); //Save the configuration
-                    
+
                     //Recalculate points after the feature status/options have been altered
                     $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
-                    
+
                     $this->show_msg_settings_updated();
 
                     $write_result = AIOWPSecurity_Utility_Htaccess::write_to_htaccess(); //now let's write to the .htaccess file
@@ -171,7 +171,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
         //Display security info badge
         global $aiowps_feature_mgr;
         $aiowps_feature_mgr->output_feature_details_badge("blacklist-manager-ip-user-agent-blacklisting");
-        ?>    
+        ?>
         <form action="" method="POST">
         <?php wp_nonce_field('aiowpsec-blacklist-settings-nonce'); ?>
         <div class="aio_orange_box">
@@ -181,7 +181,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
             echo sprintf(__('This feature can lock you out of admin if it doesn\'t work correctly on your site. You %s before activating this feature.', 'all-in-one-wp-security-and-firewall'), $read_link);
             ?>
             </p>
-        </div>            
+        </div>
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Enable IP or User Agent Blacklisting', 'all-in-one-wp-security-and-firewall')?>:</th>
@@ -189,7 +189,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                 <input name="aiowps_enable_blacklisting" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_blacklisting')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want to enable the banning (or blacklisting) of selected IP addresses and/or user agents specified in the settings below', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
-            </tr>            
+            </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Enter IP Addresses:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
@@ -198,7 +198,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                     <span class="description"><?php _e('Enter one or more IP addresses or IP ranges.','all-in-one-wp-security-and-firewall');?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                     <div class="aiowps_more_info_body">
-                            <?php 
+                            <?php
                             echo '<p class="description">'.__('Each IP address must be on a new line.', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('To specify an IP range use a wildcard "*" character. Acceptable ways to use wildcards is shown in the examples below:', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 1: 195.47.89.*', 'all-in-one-wp-security-and-firewall').'</p>';
@@ -212,13 +212,13 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
             <tr valign="top">
                 <th scope="row"><?php _e('Enter User Agents:', 'all-in-one-wp-security-and-firewall')?></th>
                 <td>
-                    <textarea name="aiowps_banned_user_agents" rows="5" cols="50"><?php echo ($result == -1)?$_POST['aiowps_banned_user_agents']:$aio_wp_security->configs->get_value('aiowps_banned_user_agents'); ?></textarea>
+                    <textarea name="aiowps_banned_user_agents" rows="5" cols="50"><?php echo ($result == -1)?htmlspecialchars($_POST['aiowps_banned_user_agents']):htmlspecialchars($aio_wp_security->configs->get_value('aiowps_banned_user_agents')); ?></textarea>
                     <br />
                     <span class="description">
                         <?php _e('Enter one or more user agent strings.','all-in-one-wp-security-and-firewall');?></span>
                     <span class="aiowps_more_info_anchor"><span class="aiowps_more_info_toggle_char">+</span><span class="aiowps_more_info_toggle_text"><?php _e('More Info', 'all-in-one-wp-security-and-firewall'); ?></span></span>
                     <div class="aiowps_more_info_body">
-                            <?php 
+                            <?php
                             echo '<p class="description">'.__('Each user agent string must be on a new line.', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">'.__('Example 1 - A single user agent string to block:', 'all-in-one-wp-security-and-firewall').'</p>';
                             echo '<p class="description">SquigglebotBot</p>';
@@ -235,7 +235,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
         </div></div>
         <?php
     }
-    
+
     function validate_user_agent_list()
     {
         global $aio_wp_security;
@@ -244,7 +244,7 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
 
         $submitted_agents = explode(PHP_EOL, $_POST['aiowps_banned_user_agents']);
 	$agents = array();
-	if (!empty($submitted_agents)) 
+	if (!empty($submitted_agents))
         {
             foreach ($submitted_agents as $agent)
             {
@@ -252,13 +252,13 @@ class AIOWPSecurity_Blacklist_Menu extends AIOWPSecurity_Admin_Menu
                 $agents[] = $text;
             }
         }
-        
+
         if (sizeof($agents) > 1)
         {
             sort( $agents );
             $agents = array_unique($agents, SORT_STRING);
         }
-        
+
         $banned_user_agent_data = implode(PHP_EOL, $agents);
         $aio_wp_security->configs->set_value('aiowps_banned_user_agents',$banned_user_agent_data);
         $_POST['aiowps_banned_user_agents'] = ''; //Clear the post variable for the banned address list
