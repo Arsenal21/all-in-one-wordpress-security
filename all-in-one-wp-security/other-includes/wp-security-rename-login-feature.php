@@ -599,7 +599,7 @@ switch ( $action ) {
 		 */
 		do_action( 'lost_password', $errors );
 
-		login_header( __( 'Lost Password' ), '<p class="message">' . __( 'Please enter your username or email address. You will receive a link to create a new password via email.' ) . '</p>', $errors );
+		login_header( __( 'Lost Password' ), '<p class="message">' . __( 'Please enter your username or email address. You will receive a link to create a new password via email.','all-in-one-wp-security-and-firewall' ) . '</p>', $errors );
 
 		$user_login = '';
 
@@ -1022,19 +1022,19 @@ switch ( $action ) {
 		} else {
 			// Some parts of this script use the main login form to display a message.
 			if ( isset( $_GET['loggedout'] ) && true == $_GET['loggedout'] ) {
-				$errors->add( 'loggedout', __( 'You are now logged out.' ), 'message' );
+				$errors->add( 'loggedout', __( 'You are now logged out.','all-in-one-wp-security-and-firewall' ), 'message' );
 			} elseif ( isset( $_GET['registration'] ) && 'disabled' == $_GET['registration'] ) {
-				$errors->add( 'registerdisabled', __( 'User registration is currently not allowed.' ) );
+				$errors->add( 'registerdisabled', __( 'User registration is currently not allowed.','all-in-one-wp-security-and-firewall' ) );
 			} elseif ( isset( $_GET['checkemail'] ) && 'confirm' == $_GET['checkemail'] ) {
-				$errors->add( 'confirm', __( 'Check your email for the confirmation link.' ), 'message' );
+				$errors->add( 'confirm', __( 'Check your email for the confirmation link.','all-in-one-wp-security-and-firewall' ), 'message' );
 			} elseif ( isset( $_GET['checkemail'] ) && 'newpass' == $_GET['checkemail'] ) {
-				$errors->add( 'newpass', __( 'Check your email for your new password.' ), 'message' );
+				$errors->add( 'newpass', __( 'Check your email for your new password.','all-in-one-wp-security-and-firewall' ), 'message' );
 			} elseif ( isset( $_GET['checkemail'] ) && 'registered' == $_GET['checkemail'] ) {
-				$errors->add( 'registered', __( 'Registration complete. Please check your email.' ), 'message' );
+				$errors->add( 'registered', __( 'Registration complete. Please check your email.','all-in-one-wp-security-and-firewall' ), 'message' );
 			} elseif ( strpos( $redirect_to, 'about.php?updated' ) ) {
-				$errors->add( 'updated', __( '<strong>You have successfully updated WordPress!</strong> Please log back in to see what&#8217;s new.' ), 'message' );
+				$errors->add( 'updated', __( '<strong>You have successfully updated WordPress!</strong> Please log back in to see what&#8217;s new.','all-in-one-wp-security-and-firewall' ), 'message' );
 			} elseif ( WP_Recovery_Mode_Link_Service::LOGIN_ACTION_ENTERED === $action ) {
-				$errors->add( 'enter_recovery_mode', __( 'Recovery Mode Initialized. Please log in to continue.' ), 'message' );
+				$errors->add( 'enter_recovery_mode', __( 'Recovery Mode Initialized. Please log in to continue.','all-in-one-wp-security-and-firewall' ), 'message' );
 			}
 		}
 
