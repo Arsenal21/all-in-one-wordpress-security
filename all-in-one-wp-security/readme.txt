@@ -184,8 +184,11 @@ None
 
 == Changelog ==
 
+= WIP 4.4.7 =
+- Translation string fix in the rename login feature.
+
 = 4.4.6 =
-- Fixed potential vulnerability with the Banned User Agents feature (in the blacklist menu).
+- Fixed potential vulnerability with the Banned User Agents feature (in the blacklist menu). Thanks to WonTae Jang.
 
 = 4.4.5 =
 - Fixed default DateTime to prevent DB error.
