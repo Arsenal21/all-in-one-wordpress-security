@@ -185,7 +185,10 @@ None
 == Changelog ==
 
 = WIP 4.4.7 =
+- Updated the renamed login page code to reflect the latest WordPress wp-login.php code. 
+- Cleaned up/improved repeated code.
 - Translation string fix in the rename login feature.
+- Added action hook "aiowps_site_lockout_settings_saved" that is triggered after the site lockout configuration is saved.
 
 = 4.4.6 =
 - Fixed potential vulnerability with the Banned User Agents feature (in the blacklist menu). Thanks to WonTae Jang.

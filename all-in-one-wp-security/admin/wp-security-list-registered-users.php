@@ -134,7 +134,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
 
     function approve_selected_accounts($entries)
     {
-        global $wpdb, $aio_wp_security;
+        global $aio_wp_security;
         $meta_key = 'aiowps_account_status';
         $meta_value = 'approved'; //set account status
         $failed_accts = ''; //string to store comma separated accounts which failed to update
@@ -155,22 +155,7 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
                     if($user === false){
                         //don't send mail
                     }else{
-                        $email_msg = '';
-                        $to_email_address = $user->user_email;
-                        $subject = '['.get_option('siteurl').'] '. __('Your account is now active','all-in-one-wp-security-and-firewall');
-                        $email_msg .= __('Your account with user ID:','all-in-one-wp-security-and-firewall').$user->ID.__(' is now active','all-in-one-wp-security-and-firewall')."\n";
-                        $site_title = get_bloginfo( 'name' );
-                        $from_name = empty($site_title)?'WordPress':$site_title;
-                        $subject = apply_filters( 'aiowps_register_approval_email_subject', $subject );
-                        $email_msg = apply_filters( 'aiowps_register_approval_email_msg', $email_msg, $user ); //also pass the WP_User object
-                        $from_name = apply_filters( 'aiowps_register_approval_email_from_name', $from_name );
-
-                        $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
-                        $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
-                        if(FALSE === $sendMail){
-                            $aio_wp_security->debug_logger->log_debug("Manual account approval notification email failed to send to ".$to_email_address,4);
-                        }
-
+                        $sendMail = $this->send_email_upon_account_activation($user);
                     }
                 }
             }
@@ -189,27 +174,37 @@ class AIOWPSecurity_List_Registered_Users extends AIOWPSecurity_List_Table {
             {
                 AIOWPSecurity_Admin_Menu::show_msg_updated_st(__('The selected account was approved successfully!','all-in-one-wp-security-and-firewall'));
                 $user = get_user_by('id', $entries);
-                $to_email_address = $user->user_email;
-                $email_msg = '';
-                $subject = '['.get_option('siteurl').'] '. __('Your account is now active','all-in-one-wp-security-and-firewall');
-                $email_msg .= __('Your account with username: ','all-in-one-wp-security-and-firewall').$user->user_login.__(' is now active','all-in-one-wp-security-and-firewall')."\n";
-                $site_title = get_bloginfo( 'name' );
-                $from_name = empty($site_title)?'WordPress':$site_title;
-                $subject = apply_filters( 'aiowps_register_approval_email_subject', $subject );
-                $email_msg = apply_filters( 'aiowps_register_approval_email_msg', $email_msg, $user ); //also pass the WP_User object
-                $from_name = apply_filters( 'aiowps_register_approval_email_from_name', $from_name );
-                
-                $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
-                $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
-                if(FALSE === $sendMail){
-                    $aio_wp_security->debug_logger->log_debug("Manual account approval notification email failed to send to ".$to_email_address,4);
-                }
+                $sendMail = $this->send_email_upon_account_activation($user);
 
-                
             }else if($result === false){
                 $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_List_Registered_Users::approve_selected_accounts() - could not approve account ID: $user_id",4);
             }
         }
+    }
+
+    function send_email_upon_account_activation($user)
+    {
+        global $aio_wp_security;
+        if (!($user instanceof WP_User)) {
+            return false;
+        }
+        
+        $to_email_address = $user->user_email;
+        $email_msg = '';
+        $subject = '['.get_option('siteurl').'] '. __('Your account is now active','all-in-one-wp-security-and-firewall');
+        $email_msg .= __('Your account with username: ','all-in-one-wp-security-and-firewall').$user->user_login.__(' is now active','all-in-one-wp-security-and-firewall')."\n";
+        $site_title = get_bloginfo( 'name' );
+        $from_name = empty($site_title)?'WordPress':$site_title;
+        $subject = apply_filters( 'aiowps_register_approval_email_subject', $subject );
+        $email_msg = apply_filters( 'aiowps_register_approval_email_msg', $email_msg, $user ); //also pass the WP_User object
+        $from_name = apply_filters( 'aiowps_register_approval_email_from_name', $from_name );
+        
+        $email_header = 'From: '.$from_name.' <'.get_bloginfo('admin_email').'>' . "\r\n\\";
+        $sendMail = wp_mail($to_email_address, $subject, $email_msg, $email_header);
+        if(FALSE === $sendMail){
+            $aio_wp_security->debug_logger->log_debug("Manual account approval notification email failed to send to ".$to_email_address,4);
+        }
+        return $sendMail;
     }
 
     function delete_selected_accounts($entries)
