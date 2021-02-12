@@ -61,6 +61,9 @@ class AIOWPSecurity_Utility_Htaccess
     public static $custom_rules_marker_start = '#AIOWPS_CUSTOM_RULES_START';
     public static $custom_rules_marker_end = '#AIOWPS_CUSTOM_RULES_END';
 
+    public static $environment_rules_marker_start = '#AIOWPS_ENVIRONMENT_RULES_START';
+    public static $environment_rules_marker_end = '#AIOWPS_ENVIRONMENT_RULES_END';
+
     // TODO - enter more markers as new .htaccess features are added
 
     function __construct()
@@ -92,6 +95,7 @@ class AIOWPSecurity_Utility_Htaccess
         if ( !function_exists( 'get_home_path' ) ) require_once( ABSPATH. '/wp-admin/includes/file.php' );
         $home_path = get_home_path();
         $htaccess = $home_path . '.htaccess';
+        $htaccess_env = $home_path . '.htaccess.env';
 
         if (!$f = @fopen($htaccess, 'a+')) {
             @chmod($htaccess, 0644);
@@ -104,7 +108,7 @@ class AIOWPSecurity_Utility_Htaccess
         @ini_set('auto_detect_line_endings', true);
         $ht = explode(PHP_EOL, implode('', file($htaccess))); //parse each line of file into array
 
-        $rules = AIOWPSecurity_Utility_Htaccess::getrules();
+        $rules = AIOWPSecurity_Utility_Htaccess::getrules($htaccess_env);
 
         $rulesarray = explode(PHP_EOL, $rules);
         $rulesarray = apply_filters('aiowps_htaccess_rules_before_writing', $rulesarray);
@@ -195,7 +199,7 @@ class AIOWPSecurity_Utility_Htaccess
         return 1;
     }
 
-    static function getrules()
+    static function getrules($htaccess_env_file)
     {
         global $aio_wp_security;
         $rules = "";
@@ -215,6 +219,7 @@ class AIOWPSecurity_Utility_Htaccess
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_block_spambots();
         $rules .= AIOWPSecurity_Utility_Htaccess::getrules_enable_login_whitelist_v2();
         $rules .= AIOWPSecurity_Utility_Htaccess::prevent_image_hotlinks();
+        $rules .= AIOWPSecurity_Utility_Htaccess::getrules_environment_rules($htaccess_env_file);
         $custom_rules = AIOWPSecurity_Utility_Htaccess::getrules_custom_rules();
         if($aio_wp_security->configs->get_value('aiowps_place_custom_rules_at_top')=='1'){
             $rules = $custom_rules . $rules;
@@ -1151,6 +1156,28 @@ class AIOWPSecurity_Utility_Htaccess
         }
 
         return $rules;
+    }
+
+    /**
+     * This function will write any environment htaccess rules set in .htaccess.env into the server's .htaccess file
+     * @return string
+     */
+    static function getrules_environment_rules($htaccess_env_file)
+    {
+        if (!is_file($htaccess_env_file)) {
+            return '';
+        }
+
+        $environment_rules = file_get_contents($htaccess_env_file);
+
+        if (empty($environment_rules)) {
+            return '';
+        }
+
+        return
+            AIOWPSecurity_Utility_Htaccess::$environment_rules_marker_start . PHP_EOL . //Add feature marker start
+            $environment_rules . PHP_EOL .
+            AIOWPSecurity_Utility_Htaccess::$environment_rules_marker_end . PHP_EOL; //Add feature marker end
     }
 
 
