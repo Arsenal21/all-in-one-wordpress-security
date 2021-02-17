@@ -5,10 +5,10 @@ if(!defined('ABSPATH')){
 
 class AIOWPSecurity_Utility_File
 {
-    
+
     /* This variable will be an array which will contain all of the files and/or directories we wish to check permissions for */
     public $files_and_dirs_to_check;
-    
+
     function __construct(){
          /* Let's initiliaze our class variable array with all of the files and/or directories we wish to check permissions for.
          * NOTE: we can add to this list in future if we wish
@@ -18,7 +18,7 @@ class AIOWPSecurity_Utility_File
         if ( !function_exists( 'get_home_path' ) ) require_once( ABSPATH. '/wp-admin/includes/file.php' );
         $wp_config_path = AIOWPSecurity_Utility_File::get_wp_config_file_path();
         $home_path = get_home_path();
-        
+
         $this->files_and_dirs_to_check = array(
             array('name'=>'root directory','path'=>ABSPATH,'permissions'=>'0755'),
             array('name'=>'wp-includes/','path'=>ABSPATH."wp-includes",'permissions'=>'0755'),
@@ -34,19 +34,19 @@ class AIOWPSecurity_Utility_File
         );
 
     }
-    
+
     static function get_wp_config_file_path()
     {
         $wp_config_file = ABSPATH . 'wp-config.php';
         if(file_exists($wp_config_file)){
             return $wp_config_file;
         }
-        else if (file_exists(dirname( ABSPATH ) . '/wp-config.php')){       
+        else if (file_exists(dirname( ABSPATH ) . '/wp-config.php')){
             return dirname( ABSPATH ) . '/wp-config.php';
         }
         return $wp_config_file;
     }
-    
+
     static function write_content_to_file($file_path, $new_contents)
     {
         @chmod($file_path, 0777);
@@ -63,7 +63,7 @@ class AIOWPSecurity_Utility_File
             return false;
 	}
     }
-    
+
     static function backup_a_file($src_file_path, $suffix = 'backup')
     {
         $backup_file_path = $src_file_path . '.' . $suffix;
@@ -77,7 +77,7 @@ class AIOWPSecurity_Utility_File
     static function backup_and_rename_wp_config($src_file_path, $prefix = 'backup')
     {
         global $aio_wp_security;
-        
+
         //Check to see if the main "backups" directory exists - create it otherwise
         $aiowps_backup_dir = WP_CONTENT_DIR.'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
         if (!AIOWPSecurity_Utility_File::create_dir($aiowps_backup_dir))
@@ -85,10 +85,10 @@ class AIOWPSecurity_Utility_File
             $aio_wp_security->debug_logger->log_debug("backup_and_rename_wp_config - Creation of backup directory failed!",4);
             return false;
         }
-        
+
         $src_parts = pathinfo($src_file_path);
         $backup_file_name = $prefix . '.' . $src_parts['basename'];
-        
+
         $backup_file_path = $aiowps_backup_dir . '/' . $backup_file_name;
         if (!copy($src_file_path, $backup_file_path)) {
             //Failed to make a backup copy
@@ -96,11 +96,11 @@ class AIOWPSecurity_Utility_File
         }
         return true;
     }
-    
+
     static function backup_and_rename_htaccess($src_file_path, $suffix = 'backup')
     {
         global $aio_wp_security;
-        
+
         //Check to see if the main "backups" directory exists - create it otherwise
         $aiowps_backup_dir = WP_CONTENT_DIR.'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
         if (!AIOWPSecurity_Utility_File::create_dir($aiowps_backup_dir))
@@ -108,10 +108,10 @@ class AIOWPSecurity_Utility_File
             $aio_wp_security->debug_logger->log_debug("backup_and_rename_htaccess - Creation of backup directory failed!",4);
             return false;
         }
-        
+
         $src_parts = pathinfo($src_file_path);
         $backup_file_name = $src_parts['basename'] . '.' . $suffix;
-        
+
         $backup_file_path = $aiowps_backup_dir . '/' . $backup_file_name;
         if (!copy($src_file_path, $backup_file_path)) {
             //Failed to make a backup copy
@@ -125,14 +125,14 @@ class AIOWPSecurity_Utility_File
     {
         global $wpdb, $aio_wp_security;
         $file_contents = AIOWPSecurity_Utility_File::get_file_contents($src_file_path);
-        
+
         $payload = serialize($file_contents);
         $date_time = current_time( 'mysql' );
         $data = array('date_time' => $date_time, 'meta_key1' => $key_description, 'meta_value2' => $payload);
 
         //First check if a backup entry already exists in the global_meta table
         $aiowps_global_meta_tbl_name = AIOWPSEC_TBL_GLOBAL_META_DATA;
-        $resultset = $wpdb->get_row("SELECT * FROM $aiowps_global_meta_tbl_name WHERE meta_key1 = '$key_description'", OBJECT);
+        $resultset = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $aiowps_global_meta_tbl_name WHERE meta_key1 = '%s'", $key_description) );
         if($resultset){
             $where = array('meta_key1' => $key_description);
             $res = $wpdb->update($aiowps_global_meta_tbl_name, $data, $where);
@@ -146,8 +146,8 @@ class AIOWPSecurity_Utility_File
         }
         return;
     }
-    
-    
+
+
     static function recursive_file_search($pattern='*', $flags = 0, $path='')
     {
         $paths=glob($path.'*', GLOB_MARK|GLOB_ONLYDIR|GLOB_NOSORT);
@@ -161,13 +161,13 @@ class AIOWPSecurity_Utility_File
         foreach ($paths as $path) { $files=array_merge($files,AIOWPSecurity_Utility_File::recursive_file_search($pattern, $flags, $path)); }
         return $files;
     }
-    
+
     /*
      * Useful when wanting to echo file contents to screen with <br /> tags
      */
     static function get_file_contents_with_br($src_file)
     {
-        $file_contents = file_get_contents($src_file);        
+        $file_contents = file_get_contents($src_file);
         return nl2br($file_contents);
     }
 
@@ -176,20 +176,20 @@ class AIOWPSecurity_Utility_File
      */
     static function get_file_contents($src_file)
     {
-        $file_contents = file_get_contents($src_file);        
+        $file_contents = file_get_contents($src_file);
         return $file_contents;
     }
-    
+
     /*
      * Returns the file's permission value eg, "0755"
      */
     static function get_file_permission($filepath)
     {
-        if (!function_exists('fileperms')) 
+        if (!function_exists('fileperms'))
         {
             $perms = '-1';
         }
-        else 
+        else
         {
             clearstatcache();
             $perms = substr(sprintf("%o", @fileperms($filepath)), -4);
@@ -207,7 +207,7 @@ class AIOWPSecurity_Utility_File
         if ($write_result === false)
         {
             return false;
-        } 
+        }
         else
         {
             return true;
@@ -232,7 +232,7 @@ class AIOWPSecurity_Utility_File
         readfile($file);
         exit;
     }
-    
+
     static function download_content_to_a_file($output, $file_name = '')
     {
         if(empty($file_name)){$file_name = "aiowps_" . date("Y-m-d_H-i", time()).".txt";}
@@ -247,7 +247,7 @@ class AIOWPSecurity_Utility_File
         echo $output;
         exit;
     }
-    
+
     /*
      * This function will compare the current permission value for a file or dir with the recommended value.
      * It will compare the individual "execute", "write" and "read" bits for the "public", "group" and "owner" permissions.
@@ -275,7 +275,7 @@ class AIOWPSecurity_Utility_File
             //The "execute" bit is switched on for the actual value - meaning it is less secure
             $result = 0*$result;
         }
-        
+
         //Compare the "write" bit values for the public actual versus the recommended
         if (substr($pva_bin,-2,1)<=substr($pvr_bin,-2,1))
         {
@@ -336,7 +336,7 @@ class AIOWPSecurity_Utility_File
             //The "read" bit is switched on for the actual value - meaning it is less secure
             $result = 0*$result;
         }
-        
+
         //Check "owner" permissions
         $owner_value_actual = substr($actual,-3,1);
         $owner_value_rec = substr($recommended,-3,1);
