@@ -232,7 +232,7 @@ class AIOWPSecurity_Utility_Htaccess
             $rules = "# BEGIN All In One WP Security" . PHP_EOL . $rules . "# END All In One WP Security" . PHP_EOL;
         }
 
-        return apply_filters('mod_rewrite_rules', $rules);;
+        return apply_filters('mod_rewrite_rules', $rules);
     }
 
     /*
