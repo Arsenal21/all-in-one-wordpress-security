@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 5.0
 Tested up to: 5.6
-Stable tag: 4.4.6
+Stable tag: 4.4.7
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -184,11 +184,12 @@ None
 
 == Changelog ==
 
-= WIP 4.4.7 =
+= 4.4.7 =
 - Updated the renamed login page code to reflect the latest WordPress wp-login.php code. 
 - Cleaned up/improved repeated code.
 - Translation string fix in the rename login feature.
 - Added action hook "aiowps_site_lockout_settings_saved" that is triggered after the site lockout configuration is saved.
+- Updated some queries to use $wpdb->prepare() or esc_sql() wherever possible.
 
 = 4.4.6 =
 - Fixed potential vulnerability with the Banned User Agents feature (in the blacklist menu). Thanks to WonTae Jang.
