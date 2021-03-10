@@ -6,7 +6,7 @@ if(!defined('ABSPATH')){
 class AIOWPSecurity_Process_Renamed_Login_Page
 {
 
-    function __construct() 
+    function __construct()
     {
         add_action('login_init', array(&$this, 'aiowps_login_init'));
         add_filter('site_url', array(&$this, 'aiowps_site_url'), 10, 2);
@@ -15,10 +15,10 @@ class AIOWPSecurity_Process_Renamed_Login_Page
         add_filter('register', array(&$this, 'register_link'));
         add_filter('user_request_action_email_content', array(&$this, 'aiowps_user_request_email_content'), 10, 2);
         remove_action('template_redirect', 'wp_redirect_admin_locations', 1000); //To prevent redirect to login page when people type "login" at end of home URL
-        
+
     }
-    
-    function aiowps_login_init() 
+
+    function aiowps_login_init()
     {
         if (strpos($_SERVER['REQUEST_URI'], 'wp-login') !== false){
             $referer = wp_get_referer();
@@ -34,14 +34,14 @@ class AIOWPSecurity_Process_Renamed_Login_Page
                             die;
                         }
                     }
-                }                
+                }
             }
             AIOWPSecurity_Process_Renamed_Login_Page::aiowps_set_404();
         }
 
     }
-    
-    function aiowps_site_url($url, $path) 
+
+    function aiowps_site_url($url, $path)
     {
         return $this->aiowps_filter_wp_login_file($url);
     }
@@ -56,7 +56,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
     {
         return $this->aiowps_filter_wp_login_file($registration_url);
     }
-    
+
     // Filter confirm link so we hide the secret login slug in the export_personal_data email
     function aiowps_user_request_email_content($email_text, $email_data)
     {
@@ -71,7 +71,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
                     $search_pattern = '?'.$login_slug.'&action';
                     $new_confirm_url = str_replace( $search_pattern, '/wp-login.php/?action', $confirm_url );
                 }
-                
+
                 $email_text_modified = str_replace( '###CONFIRM_URL###', esc_url_raw( $new_confirm_url ), $email_text );
                 return $email_text_modified;
             }
@@ -86,7 +86,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
             $args = explode( '?', $url );
             if (isset($args[1])){
                 if (strpos($args[1], 'action=postpass') !== FALSE){
-                    return $url; //Don't reveal the secret URL in the post password action url 
+                    return $url; //Don't reveal the secret URL in the post password action url
                 }
                 parse_str($args[1], $args);
                 $url = esc_url(add_query_arg($args, AIOWPSecurity_Process_Renamed_Login_Page::new_login_url()));
@@ -103,7 +103,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
         global $aio_wp_security;
 
         //The following will process the native wordpress post password protection form
-        //Normally this is done by wp-login.php file but we cannot use that since the login page has been renamed 
+        //Normally this is done by wp-login.php file but we cannot use that since the login page has been renamed
         $action = isset($_GET['action'])?strip_tags($_GET['action']):'';
         if(isset($_POST['post_password']) && $action == 'postpass'){
             require_once ABSPATH . 'wp-includes/class-phpass.php';
@@ -125,8 +125,8 @@ class AIOWPSecurity_Process_Renamed_Login_Page
             wp_safe_redirect( wp_get_referer() );
             exit();
         }
-        
-        //case where someone attempting to reach wp-admin 
+
+        //case where someone attempting to reach wp-admin
         if (is_admin() && !is_user_logged_in() && !defined('DOING_AJAX') && basename( $_SERVER["SCRIPT_FILENAME"] ) !== 'admin-post.php'){
             //Fix to prevent fatal error caused by some themes and Yoast SEO
             do_action('aiowps_before_wp_die_renamed_login');
@@ -135,7 +135,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
 
         //case where someone attempting to reach wp-login
         if(isset($_SERVER['REQUEST_URI']) && strpos( $_SERVER['REQUEST_URI'], 'wp-login.php' ) && !is_user_logged_in()){
-            
+
             // Handle export personal data request for rename login case
             if(isset($_GET['request_id'])) {
                 $request_id = (int) $_GET['request_id'];
@@ -157,7 +157,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
                     exit;
                 }
             }
-           
+
             //Check if the maintenance (lockout) mode is active - if so prevent access to site by not displaying 404 page!
             if($aio_wp_security->configs->get_value('aiowps_site_lockout') == '1'){
                 AIOWPSecurity_WP_Loaded_Tasks::site_lockout_tasks();
@@ -165,7 +165,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
                 AIOWPSecurity_Process_Renamed_Login_Page::aiowps_set_404();
             }
         }
-        
+
         //case where someone attempting to reach the standard register or signup pages
         if(isset( $_SERVER['REQUEST_URI'] ) && strpos( $_SERVER['REQUEST_URI'], 'wp-register.php' ) ||
             isset( $_SERVER['REQUEST_URI'] ) && strpos( $_SERVER['REQUEST_URI'], 'wp-signup.php' )){
@@ -181,7 +181,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
 
         $login_slug = $aio_wp_security->configs->get_value('aiowps_login_page_slug');
         $home_url_with_slug = home_url($login_slug, 'relative');
-        
+
         /*
          * Compatibility fix for WPML plugin
          */
@@ -211,17 +211,19 @@ class AIOWPSecurity_Process_Renamed_Login_Page
                 global $wp_version;
                 do_action('aiowps_rename_login_load');
                 status_header( 200 );
-                if ( version_compare( $wp_version, '5.2', '>=' ) ) {
+                if ( version_compare( $wp_version, '5.7', '>=' ) ) {
                     require_once(AIO_WP_SECURITY_PATH . '/other-includes/wp-security-rename-login-feature.php' );
+                } else if ( version_compare( $wp_version, '5.2', '>=' ) ) {
+                    require_once(AIO_WP_SECURITY_PATH . '/other-includes/wp-security-rename-login-feature-pre-5-7.php' );
                 } else {
                     require_once(AIO_WP_SECURITY_PATH . '/other-includes/wp-security-rename-login-feature-pre-5-2.php' );
                 }
-                
+
                 die;
             }
-        }        
+        }
     }
-    
+
     static function new_login_url()
     {
         global $aio_wp_security;
@@ -233,7 +235,7 @@ class AIOWPSecurity_Process_Renamed_Login_Page
         }
     }
 
-    static function aiowps_set_404() 
+    static function aiowps_set_404()
     {
         global $wp_query;
         do_action('aiopws_before_set_404'); //This hook is for themes which produce a fatal error when the rename login feature is enabled and someone visits "wp-admin" slug directly
@@ -246,5 +248,5 @@ class AIOWPSecurity_Process_Renamed_Login_Page
         }
         die;
     }
-    
+
 }
