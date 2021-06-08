@@ -435,7 +435,7 @@ msgid "Login Page URL"
 msgstr ""
 
 #: admin/wp-security-brute-force-menu.php:224
-msgid "Enter a string which will represent your secure login page slug. You are enouraged to choose something which is hard to guess and only you will remember."
+msgid "Enter a string which will represent your secure login page slug. You are encouraged to choose something which is hard to guess and only you will remember."
 msgstr ""
 
 #: admin/wp-security-brute-force-menu.php:257
@@ -2641,7 +2641,7 @@ msgid "It is useful for when you want to tweak our existing firewall rules or wh
 msgstr ""
 
 #: admin/wp-security-firewall-menu.php:1082
-msgid "NOTE: This feature can only used if your site is hosted in an apache or similar web server."
+msgid "NOTE: This feature can only be used if your site is hosted in an apache or similar web server."
 msgstr ""
 
 #: admin/wp-security-firewall-menu.php:1088

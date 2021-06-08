@@ -8,8 +8,8 @@ class AIOWPSecurity_Backup
     var $last_backup_file_name;//Stores the name of the last backup file when execute_backup function is called
     var $last_backup_file_path;
     var $last_backup_file_dir_multisite;
-    
-    function __construct() 
+
+    function __construct()
     {
         add_action('aiowps_perform_scheduled_backup_tasks', array(&$this, 'aiowps_scheduled_backup_handler'));
         add_action('aiowps_perform_db_cleanup_tasks', array(&$this, 'aiowps_scheduled_db_cleanup_handler'));
@@ -95,13 +95,15 @@ class AIOWPSecurity_Backup
     /**
      * This function will perform a database backup
      */
-    function execute_backup() 
+    function execute_backup()
     {
         global $wpdb, $aio_wp_security;
         $is_multi_site = function_exists('is_multisite') && is_multisite();
 
         @ini_set( 'auto_detect_line_endings', true );
-        @ini_set( 'memory_limit', '512M' );
+        $execute_backup_memory_limit = apply_filters( 'aiowps_execute_backup_set_memory_limit', '512M' );
+        @ini_set( 'memory_limit', $execute_backup_memory_limit );
+
         if ( $is_multi_site )
         {
             //Let's get the current site's table prefix
@@ -121,7 +123,7 @@ class AIOWPSecurity_Backup
         }
 
         //Check to see if the main "backups" directory exists - create it otherwise
-        
+
         $aiowps_backup_dir = WP_CONTENT_DIR.'/'.AIO_WP_SECURITY_BACKUPS_DIR_NAME;
         if (!AIOWPSecurity_Utility_File::create_dir($aiowps_backup_dir))
         {
@@ -140,13 +142,13 @@ class AIOWPSecurity_Backup
             $site_name = get_bloginfo('name');
 
             $site_name = strtolower($site_name);
-            
+
             //make alphanumeric
             $site_name = preg_replace("/[^a-z0-9_\s-]/", "", $site_name);
-            
+
             //Cleanup multiple instances of dashes or whitespaces
             $site_name = preg_replace("/[\s-]+/", " ", $site_name);
-            
+
             //Convert whitespaces and underscore to dash
             $site_name = preg_replace("/[\s_]/", "-", $site_name);
 
@@ -192,7 +194,7 @@ class AIOWPSecurity_Backup
         }
 
         //zip the file
-        if ( class_exists( 'ZipArchive' ) ) 
+        if ( class_exists( 'ZipArchive' ) )
         {
             $zip = new ZipArchive();
             $archive = $zip->open($dirpath . '/' . $file . '.zip', ZipArchive::CREATE);
@@ -202,7 +204,7 @@ class AIOWPSecurity_Backup
             //delete .sql and keep zip
             @unlink( $dirpath . '/' . $file . '.sql' );
             $fileext = '.zip';
-        } else 
+        } else
         {
             $fileext = '.sql';
         }
@@ -210,23 +212,23 @@ class AIOWPSecurity_Backup
         $this->last_backup_file_path = $dirpath . '/' . $file . $fileext;
         if ($is_multi_site)
         {
-            $this->last_backup_file_dir_multisite = $aiowps_backup_dir . '/blogid_' . $blog_id; 
+            $this->last_backup_file_dir_multisite = $aiowps_backup_dir . '/blogid_' . $blog_id;
         }
-        
+
         $this->aiowps_send_backup_email(); //Send backup file via email if applicable
         return true;
     }
-    
+
     function aiowps_send_backup_email()
     {
         global $aio_wp_security;
-        if ( $aio_wp_security->configs->get_value('aiowps_send_backup_email_address') == '1' ) 
+        if ( $aio_wp_security->configs->get_value('aiowps_send_backup_email_address') == '1' )
         {
             //Get the right email address.
-            if ( is_email( $aio_wp_security->configs->get_value('aiowps_backup_email_address') ) ) 
+            if ( is_email( $aio_wp_security->configs->get_value('aiowps_backup_email_address') ) )
             {
                     $toaddress = $aio_wp_security->configs->get_value('aiowps_backup_email_address');
-            } else 
+            } else
             {
                     $toaddress = get_site_option( 'admin_email' );
             }
@@ -234,7 +236,7 @@ class AIOWPSecurity_Backup
             $to = $toaddress;
             $site_title = get_bloginfo( 'name' );
             $from_name = empty($site_title)?'WordPress':$site_title;
-            
+
             $headers = 'From: ' . $from_name . ' <' . get_option('admin_email') . '>' . PHP_EOL;
             $subject = __( 'All In One WP Security - Site Database Backup', 'all-in-one-wp-security-and-firewall' ) . ' ' . date( 'l, F jS, Y \a\\t g:i a', current_time( 'timestamp' ) );
             $attachment = array( $this->last_backup_file_path );
@@ -274,7 +276,7 @@ class AIOWPSecurity_Backup
             $aio_wp_security->debug_logger->log_debug('DB Backup - Backup configuration prevents removal of old backup files!', 3);
         }
     }
-    
+
     function aiowps_scheduled_backup_handler()
     {
         global $aio_wp_security;
@@ -295,8 +297,8 @@ class AIOWPSecurity_Backup
                     break;
                 case '2':
                     $interval = 'weeks';
-                    break;                    
-                default: 
+                    break;
+                default:
                     // Fall back to default value, if config is corrupted for some reason.
                     $interval = 'weeks';
                     break;
@@ -315,13 +317,13 @@ class AIOWPSecurity_Backup
                         $aio_wp_security->configs->set_value('aiowps_last_backup_time', $time_now);
                         $aio_wp_security->configs->save_config();
                         $aio_wp_security->debug_logger->log_debug_cron("DB Backup - Scheduled backup was successfully completed.");
-                    } 
+                    }
                     else
                     {
                         $aio_wp_security->debug_logger->log_debug_cron("DB Backup - Scheduled backup operation failed!",4);
                     }
                 }
-            } 
+            }
             else
             {
                 //Set the last backup time to now so it can trigger for the next scheduled period

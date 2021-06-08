@@ -184,6 +184,13 @@ None
 
 == Changelog ==
 
+= TODO: 4.4.9 =
+- Added Polish language translation file to the plugin. Thanks to Dariusz for submitting the language files.
+- Fixed a typo in the help text.
+- Allow the "redirect_to" parameter to be used on renamed login page when logged in. Thanks to @tvartom.
+- Fixed a Typo in the help text located in the "Custom Rules tab".
+- Added a new filter hook (aiowps_execute_backup_set_memory_limit) to allow overriding of the PHP memory limit setting when executing a backup.
+
 = 4.4.8 =
 - Fixed an issue with the rename login page feature on WordPress v5.7.
 
