@@ -3,8 +3,8 @@ Contributors: Tips and Tricks HQ, wpsolutions, Peter Petreski, Ruhul Amin, mbrso
 Donate link: https://www.tipsandtricks-hq.com
 Tags: security, secure, Anti Virus, antivirus, ban, ban hacker, virus, firewall, firewall security, login, lockdown, htaccess, hack, malware, vulnerability, protect, protection, phishing, database, backup, plugin, sql injection, ssl, restrict, login captcha, bot, hotlink, 404 detection, admin, rename, all in one, scan, scanner, iframe,
 Requires at least: 5.0
-Tested up to: 5.7
-Stable tag: 4.4.8
+Tested up to: 5.8
+Stable tag: 4.4.9
 License: GPLv3
 
 A comprehensive, user-friendly, all in one WordPress security and firewall plugin for your site.
@@ -184,12 +184,13 @@ None
 
 == Changelog ==
 
-= TODO: 4.4.9 =
+= 4.4.9 =
 - Added Polish language translation file to the plugin. Thanks to Dariusz for submitting the language files.
 - Fixed a typo in the help text.
 - Allow the "redirect_to" parameter to be used on renamed login page when logged in. Thanks to @tvartom.
 - Fixed a Typo in the help text located in the "Custom Rules tab".
 - Added a new filter hook (aiowps_execute_backup_set_memory_limit) to allow overriding of the PHP memory limit setting when executing a backup.
+- WordPress 5.8
 
 = 4.4.8 =
 - Fixed an issue with the rename login page feature on WordPress v5.7.
