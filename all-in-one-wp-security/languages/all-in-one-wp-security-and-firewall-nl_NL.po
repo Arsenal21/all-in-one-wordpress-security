@@ -3313,7 +3313,7 @@ msgid "Set the value for how often you would like an automated backup to occur"
 msgstr "Stel hier in hoe vaak u een geautomatiseerde back-up wilt laten maken"
 
 #: admin/wp-security-database-menu.php:345
-msgid "Thie field allows you to choose the number of backup files you would like to keep in the backup directory"
+msgid "This field allows you to choose the number of backup files you would like to keep in the backup directory"
 msgstr "Dit veld maakt het mogelijk dat u het aantal back-ups kunt kiezen, welke u wilt bewaren in de backup-map"
 
 #: admin/wp-security-dashboard-menu.php:174

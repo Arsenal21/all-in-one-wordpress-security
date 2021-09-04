@@ -1289,7 +1289,7 @@ msgid "Number of Backup Files To Keep"
 msgstr "Número de arquivos de backup para manter"
 
 #: ../../plugins/all-in-one-wp-security-and-firewall/admin/wp-security-database-menu.php:341
-msgid "Thie field allows you to choose the number of backup files you would like to keep in the backup directory"
+msgid "This field allows you to choose the number of backup files you would like to keep in the backup directory"
 msgstr "O campo permite que você escolha o número de arquivos de backup que você gostaria de manter no diretório de backup"
 
 #: ../../plugins/all-in-one-wp-security-and-firewall/admin/wp-security-database-menu.php:345
