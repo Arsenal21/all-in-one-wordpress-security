@@ -6,21 +6,15 @@ if(!defined('ABSPATH')){
 class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
 {
     var $menu_page_slug = AIOWPSEC_DB_SEC_MENU_SLUG;
-    
     /* Specify all the tabs of this menu in the following array */
     var $menu_tabs;
 
     var $menu_tabs_handler = array(
-        'tab1' => 'render_tab1', 
         'tab2' => 'render_tab2',
         );
-    
-    function __construct() 
     {
         $this->render_menu_page();
     }
-    
-    function set_menu_tabs() 
     {
         if (AIOWPSecurity_Utility::is_multisite_install() && get_current_blog_id() != 1){
             //Suppress the DB prefix change tab if site is a multi site AND not the main site
@@ -34,10 +28,7 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             'tab2' => __('DB Backup', 'all-in-one-wp-security-and-firewall'),
             );
         }
-        
     }
-    
-    function get_current_tab() 
     {
         $tab_keys = array_keys($this->menu_tabs);
         $tab = isset( $_GET['tab'] ) ? sanitize_text_field($_GET['tab']) : $tab_keys[0];
@@ -47,32 +38,25 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
     /*
      * Renders our tabs of this menu as nav items
      */
-    function render_menu_tabs() 
     {
         $current_tab = $this->get_current_tab();
 
         echo '<h2 class="nav-tab-wrapper">';
-        foreach ( $this->menu_tabs as $tab_key => $tab_caption ) 
         {
             $active = $current_tab == $tab_key ? 'nav-tab-active' : '';
-            echo '<a class="nav-tab ' . $active . '" href="?page=' . $this->menu_page_slug . '&tab=' . $tab_key . '">' . $tab_caption . '</a>';	
         }
         echo '</h2>';
     }
-    
     /*
      * The menu rendering goes here
      */
-    function render_menu_page() 
     {
         echo '<div class="wrap">';
         echo '<h2>'.__('Database Security','all-in-one-wp-security-and-firewall').'</h2>';//Interface title
         $this->set_menu_tabs();
         $tab = $this->get_current_tab();
         $this->render_menu_tabs();
-        ?>        
         <div id="poststuff"><div id="post-body">
-        <?php 
         //$tab_keys = array_keys($this->menu_tabs);
         call_user_func(array(&$this, $this->menu_tabs_handler[$tab]));
         ?>
@@ -80,14 +64,11 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         </div><!-- end of wrap -->
         <?php
     }
-    
-    function render_tab1() 
     {
         global $wpdb, $aio_wp_security;
         $old_db_prefix = $wpdb->prefix;
         $new_db_prefix = '';
         $perform_db_change = false;
-        
         if (isset($_POST['aiowps_db_prefix_change']))//Do form submission tasks
         {
             $nonce=$_REQUEST['_wpnonce'];
@@ -96,7 +77,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 $aio_wp_security->debug_logger->log_debug("Nonce check failed for DB prefix change operation!",4);
                 die(__('Nonce check failed for DB prefix change operation!','all-in-one-wp-security-and-firewall'));
             }
-            
             //Let's first check if user's system allows writing to wp-config.php file. If plugin cannot write to wp-config we will not do the prefix change.
             $config_file = AIOWPSecurity_Utility_File::get_wp_config_file_path();
             $file_write = AIOWPSecurity_Utility_File::is_file_writable($config_file);
@@ -106,12 +86,10 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             }
             else
             {
-                if( isset($_POST['aiowps_enable_random_prefix'])) 
                 {//User has elected to generate a random DB prefix
                     $string = AIOWPSecurity_Utility::generate_alpha_random_string('5');
                     $new_db_prefix = $string . '_';
                     $perform_db_change = true;
-                }else 
                 {
                     if (empty($_POST['aiowps_new_manual_db_prefix']))
                     {
@@ -171,11 +149,8 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                     <?php
                     //now let's display a warning notification if default prefix is used
                     if ($old_db_prefix == 'wp_') {
-                        echo '&nbsp;&nbsp;&nbsp;<span class="aio_error_with_icon">'.__('Your site is currently using the default WordPress DB prefix value of "wp_". 
                             To increase your site\'s security you should consider changing the DB prefix value to another value.', 'all-in-one-wp-security-and-firewall').'</span>';
                     }
-                    ?>                    
-                </td> 
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Generate New DB Table Prefix', 'all-in-one-wp-security-and-firewall')?>:</th>
@@ -186,7 +161,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 <br /><input type="text" size="10" name="aiowps_new_manual_db_prefix" value="<?php //echo $aio_wp_security->configs->get_value('aiowps_new_manual_db_prefix'); ?>" />
                 <span class="description"><?php _e('Choose your own DB prefix by specifying a string which contains letters and/or numbers and/or underscores. Example: xyz_', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
-            </tr>            
         </table>
         <input type="submit" name="aiowps_db_prefix_change" value="<?php _e('Change DB Prefix', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
@@ -195,10 +169,8 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         if ($perform_db_change)
         {
             //Do the DB prefix change operations
-            $this->change_db_prefix($old_db_prefix,$new_db_prefix); 
         }
     }
-    
     function render_tab2()
     {
         global $aio_wp_security;
@@ -216,7 +188,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             if ($result)
             {
                 $backup_file_name = $aio_wp_security->backup_obj->last_backup_file_name;
-                if (function_exists('is_multisite') && is_multisite()) 
                 {
                     $aiowps_backup_file_path = $aio_wp_security->backup_obj->last_backup_file_dir_multisite . '/' . $backup_file_name;
                 }
@@ -231,7 +202,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 _e('Your DB Backup File location: ');
                 echo '<strong>'.$aiowps_backup_file_path.'</strong>';
                 echo '</p></div>';
-            } 
             else
             {
                 $aio_wp_security->debug_logger->log_debug("DB Backup - Backup operation failed!",4);
@@ -255,7 +225,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 $error .= '<br />'.__('You entered a non numeric value for the "backup time interval" field. It has been set to the default value.','all-in-one-wp-security-and-firewall');
                 $backup_frequency = '4';//Set it to the default value for this field
             }
-            
             $files_to_keep = sanitize_text_field($_POST['aiowps_backup_files_stored']);
             if(!is_numeric($files_to_keep))
             {
@@ -283,11 +252,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             $aio_wp_security->configs->set_value('aiowps_send_backup_email_address',isset($_POST["aiowps_send_backup_email_address"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_backup_email_address',$email_address);
             $aio_wp_security->configs->save_config();
-            
             //Recalculate points after the feature status/options have been altered
             $aiowps_feature_mgr->check_feature_status_and_recalculate_points();
             $this->show_msg_settings_updated();
-            
             //Let's check if backup interval was set to less than 24 hours
             if (isset($_POST["aiowps_enable_automated_backups"]) && ($backup_frequency < 24) && $_POST["aiowps_db_backup_interval"]==0)
             {
@@ -296,7 +263,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 $this->show_msg_updated_st(__($alert_user_msg, 'all-in-one-wp-security-and-firewall'));
             }
         }
-        
         ?>
         <div class="postbox">
         <h3 class="hndle"><label for="title"><?php _e('Manual Backup', 'all-in-one-wp-security-and-firewall'); ?></label></h3>
@@ -327,7 +293,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                 <input name="aiowps_enable_automated_backups" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_automated_backups')=='1') echo ' checked="checked"'; ?> value="1"/>
                 <span class="description"><?php _e('Check this if you want the system to automatically generate backups periodically based on the settings below', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td>
-            </tr>            
             <tr valign="top">
                 <th scope="row"><?php _e('Backup Time Interval', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><input type="text" size="5" name="aiowps_db_backup_frequency" value="<?php echo $aio_wp_security->configs->get_value('aiowps_db_backup_frequency'); ?>" />
@@ -337,13 +302,11 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                         <option value="2" <?php selected( $aio_wp_security->configs->get_value('aiowps_db_backup_interval'), '2' ); ?>><?php _e( 'Weeks', 'all-in-one-wp-security-and-firewall' ); ?></option>
                     </select>
                 <span class="description"><?php _e('Set the value for how often you would like an automated backup to occur', 'all-in-one-wp-security-and-firewall'); ?></span>
-                </td> 
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Number of Backup Files To Keep', 'all-in-one-wp-security-and-firewall')?>:</th>
                 <td><input type="text" size="5" name="aiowps_backup_files_stored" value="<?php echo $aio_wp_security->configs->get_value('aiowps_backup_files_stored'); ?>" />
-                <span class="description"><?php _e('Thie field allows you to choose the number of backup files you would like to keep in the backup directory', 'all-in-one-wp-security-and-firewall'); ?></span>
-                </td> 
+                <span class="description"><?php _e('This field allows you to choose the number of backup files you would like to keep in the backup directory', 'all-in-one-wp-security-and-firewall'); ?></span>
             </tr>
             <tr valign="top">
                 <th scope="row"><?php _e('Send Backup File Via Email', 'all-in-one-wp-security-and-firewall')?>:</th>
@@ -358,10 +321,8 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         <input type="submit" name="aiowps_schedule_backups" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />
         </form>
         </div></div>
-        
         <?php
     }
-    
     /*
      * Changes the DB prefix
      */
@@ -387,7 +348,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         }
         $table_count = 0;
         $info_msg_string = '<p class="aio_info_with_icon">'.__('Starting DB prefix change operations.....', 'all-in-one-wp-security-and-firewall').'</p>';
-        
         $info_msg_string .= '<p class="aio_info_with_icon">'.sprintf( __('Your WordPress system has a total of %s tables and your new DB prefix will be: %s', 'all-in-one-wp-security-and-firewall'), '<strong>'.$num_rows.'</strong>', '<strong>'.$table_new_prefix.'</strong>').'</p>';
         echo ($info_msg_string);
 
@@ -400,7 +360,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         else{
             echo '<p class="aio_success_with_icon">'.__('A backup copy of your wp-config.php file was created successfully!', 'all-in-one-wp-security-and-firewall').'</p>';
         }
-        
         //Get multisite blog_ids if applicable
         if (AIOWPSecurity_Utility::is_multisite_install()) {
             $blog_ids = AIOWPSecurity_Utility::get_blog_ids();
@@ -410,13 +369,10 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         foreach ($result as $db_table)
         {
             //Get table name with old prefix
-            $table_old_name = $db_table; 
 
-            if ( strpos( $table_old_name, $table_old_prefix ) === 0 ) 
             {
                 //Get table name with new prefix
                 $table_new_name = $table_new_prefix . substr( $table_old_name, $old_prefix_length );
-                
                 //Write query to rename tables name
                 $sql = "RENAME TABLE `".$table_old_name."` TO `".$table_new_name."`";
                 //$sql = "RENAME TABLE %s TO %s";
@@ -438,7 +394,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         if ( $error == 1 )
         {
             echo '<p class="aio_error_with_icon">'.sprintf( __('Please change the prefix manually for the above tables to: %s', 'all-in-one-wp-security-and-firewall'), '<strong>'.$table_new_prefix.'</strong>').'</p>';
-        } else 
         {
             echo '<p class="aio_success_with_icon">'.sprintf( __('%s tables had their prefix updated successfully!', 'all-in-one-wp-security-and-firewall'), '<strong>'.$table_count.'</strong>').'</p>';
         }
@@ -464,21 +419,16 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             echo '<p class="aio_success_with_icon">'. __('wp-config.php file was updated successfully!', 'all-in-one-wp-security-and-firewall').'</p>';
         }else
         {
-            echo '<p class="aio_error_with_icon">'.sprintf( __('The "wp-config.php" file was not able to be modified. Please modify this file manually using your favourite editor and search 
                     for variable "$table_prefix" and assign the following value to that variable: %s', 'all-in-one-wp-security-and-firewall'), '<strong>'.$table_new_prefix.'</strong>').'</p>';
             $aio_wp_security->debug_logger->log_debug("DB Security Feature - Unable to modify wp-config.php",4);
         }
-        
         //Now let's update the options table
         $update_option_table_query = $wpdb->prepare("UPDATE " . $table_new_prefix . "options
-                                                                  SET option_name = '".$table_new_prefix ."user_roles' 
                                                                   WHERE option_name = %s LIMIT 1", $table_old_prefix."user_roles");
 
-        if ( false === $wpdb->query($update_option_table_query) ) 
         {
             echo '<p class="aio_error_with_icon">'.sprintf( __('Update of table %s failed: unable to change %s to %s', 'all-in-one-wp-security-and-firewall'),$table_new_prefix.'options', $table_old_prefix.'user_roles', $table_new_prefix.'user_roles').'</p>';
             $aio_wp_security->debug_logger->log_debug("DB Security Feature - Error when updating the options table",4);//Log the highly unlikely event of DB error
-        } else 
         {
             echo '<p class="aio_success_with_icon">'.sprintf( __('The options table records which had references to the old DB prefix were updated successfully!', 'all-in-one-wp-security-and-firewall')).'</p>';
         }
@@ -493,11 +443,9 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
                     $update_ms_option_table_query = $wpdb->prepare("UPDATE " . $new_pref_and_site_id . "options
                                                                             SET option_name = '".$new_pref_and_site_id."user_roles'
                                                                             WHERE option_name = %s LIMIT 1", $old_pref_and_site_id."user_roles");
-                    if ( false === $wpdb->query($update_ms_option_table_query) ) 
                     {
                         echo '<p class="aio_error_with_icon">'.sprintf( __('Update of table %s failed: unable to change %s to %s', 'all-in-one-wp-security-and-firewall'),$new_pref_and_site_id.'options', $old_pref_and_site_id.'user_roles', $new_pref_and_site_id.'user_roles').'</p>';
                         $aio_wp_security->debug_logger->log_debug("DB change prefix feature - Error when updating the subsite options table: ".$new_pref_and_site_id.'options',4);//Log the highly unlikely event of DB error
-                    } else 
                     {
                         echo '<p class="aio_success_with_icon">'.sprintf( __('The %s table records which had references to the old DB prefix were updated successfully!', 'all-in-one-wp-security-and-firewall'),$new_pref_and_site_id.'options').'</p>';
                     }
@@ -505,13 +453,8 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
 
             }
         }
-        
         //Now let's update the user meta table
-        $custom_sql = "SELECT user_id, meta_key 
-                        FROM " . $table_new_prefix . "usermeta 
-                        WHERE meta_key 
                         LIKE '" . $table_old_prefix . "%'";
-		
         $meta_keys = $wpdb->get_results( $custom_sql );
 
         $error_update_usermeta = '';
@@ -522,7 +465,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
             $new_meta_key = $table_new_prefix . substr( $meta_key->meta_key, $old_prefix_length );
 
             $update_user_meta_sql = $wpdb->prepare("UPDATE " . $table_new_prefix . "usermeta
-                                                            SET meta_key='" . $new_meta_key . "' 
                                                             WHERE meta_key=%s AND user_id=%s", $meta_key->meta_key, $meta_key->user_id);
 
             if (false === $wpdb->query($update_user_meta_sql))
@@ -536,8 +478,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         //Display tasks finished message
         $tasks_finished_msg_string = '<p class="aio_info_with_icon">'. __('DB prefix change tasks have been completed.', 'all-in-one-wp-security-and-firewall').'</p>';
         echo ($tasks_finished_msg_string);
-    } 
-    
     /**
     * This is an alternative to the deprecated "mysql_list_tables"
     * Returns an array of table names
@@ -548,28 +488,22 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         $tables = array();
         $list_tables_sql = "SHOW TABLES FROM `{$database}`;";
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-        
         if ($mysqli->connect_errno) {
             $aio_wp_security->debug_logger->log_debug("AIOWPSecurity_Database_Menu->get_mysql_tables() - DB connection error.",4);
             return false;
         }
-        
         if ($result = $mysqli->query($list_tables_sql, MYSQLI_USE_RESULT)) {
             //Alternative way to get the tables
             while ($row = $result->fetch_assoc()) {
                 foreach( $row  AS $value ) {
                     $tables[] = $value;
                 }
-            }            
             $result->close();
         }
-        $mysqli->close();        
         return $tables;
     }
-    
     /**
      * Will modify existing table view definitions to reflect the new DB prefix change
-     * 
      * @param type $old_prefix
      * @param type $new_prefix
      */
@@ -580,7 +514,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         $db_name = $wpdb->dbname;
         $info_msg_string = '<p class="aio_info_with_icon">'.__('Checking for MySQL tables of type "view".....', 'all-in-one-wp-security-and-firewall').'</p>';
         echo ($info_msg_string);
-        
         //get tables which are views
         $query = "SELECT * FROM INFORMATION_SCHEMA.VIEWS WHERE TABLE_SCHEMA LIKE '".$db_name."'";
         $res = $wpdb->get_results($query);
@@ -604,8 +537,6 @@ class AIOWPSecurity_Database_Menu extends AIOWPSecurity_Admin_Menu
         if($view_count > 0){
             echo '<p class="aio_success_with_icon">'.sprintf( __('%s view definitions were updated successfully!', 'all-in-one-wp-security-and-firewall'), '<strong>'.$view_count.'</strong>').'</p>';
         }
-        
         return;
     }
-    
-} //end class
+

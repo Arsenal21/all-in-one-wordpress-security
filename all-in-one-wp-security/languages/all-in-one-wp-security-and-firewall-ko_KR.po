@@ -1776,10 +1776,10 @@ msgstr "보관할 백업 파일 수"
 # @ all-in-one-wp-security-and-firewall
 #: admin/wp-security-database-menu.php:342
 msgid ""
-"Thie field allows you to choose the number of backup files you would like to "
+"This field allows you to choose the number of backup files you would like to "
 "keep in the backup directory"
 msgstr ""
-"Thie 필드를 사용하면 백업 디렉터리에 보관할 백업 파일 수를 선택할 수 있습니"
+"This 필드를 사용하면 백업 디렉터리에 보관할 백업 파일 수를 선택할 수 있습니"
 "다."
 
 # @ all-in-one-wp-security-and-firewall

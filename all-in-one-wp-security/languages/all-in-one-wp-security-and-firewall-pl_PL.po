@@ -1424,7 +1424,7 @@ msgstr ""
 
 # @ all-in-one-wp-security-and-firewall
 #: admin/wp-security-database-menu.php:343
-msgid "Thie field allows you to choose the number of backup files you would like to keep in the backup directory"
+msgid "This field allows you to choose the number of backup files you would like to keep in the backup directory"
 msgstr ""
 
 # @ all-in-one-wp-security-and-firewall

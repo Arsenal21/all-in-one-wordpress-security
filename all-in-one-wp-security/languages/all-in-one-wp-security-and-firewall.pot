@@ -1281,7 +1281,6 @@ msgstr ""
 
 #: admin/wp-security-database-menu.php:174
 msgid ""
-"Your site is currently using the default WordPress DB prefix value of \"wp_\". 
 \n"
 "                            To increase your site's security you should consider changing the DB prefix value to another value."
 msgstr ""
@@ -1385,7 +1384,7 @@ msgid "Number of Backup Files To Keep"
 msgstr ""
 
 #: admin/wp-security-database-menu.php:345
-msgid "Thie field allows you to choose the number of backup files you would like to keep in the backup directory"
+msgid "This field allows you to choose the number of backup files you would like to keep in the backup directory"
 msgstr ""
 
 #: admin/wp-security-database-menu.php:349
@@ -1440,7 +1439,6 @@ msgstr ""
 
 #: admin/wp-security-database-menu.php:467
 msgid ""
-"The \"wp-config.php\" file was not able to be modified. Please modify this file manually using your favourite editor and search 
 \n"
 "                    for variable \"$table_prefix\" and assign the following value to that variable: %s"
 msgstr ""
