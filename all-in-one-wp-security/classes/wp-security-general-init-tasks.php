@@ -76,7 +76,7 @@ class AIOWPSecurity_General_Init_Tasks
         
         // REST API security
         if( $aio_wp_security->configs->get_value('aiowps_disallow_unauthorized_rest_requests') == 1) {
-            add_action('rest_api_init', array(&$this, 'check_rest_api_requests'), 10 ,1);
+            add_action('rest_authentication_errors', array(&$this, 'check_rest_api_requests'), 10 ,1);
         }
         
         // For user unlock request feature
