@@ -29,7 +29,7 @@ class AIOWPSecurity_WP_Loaded_Tasks {
                 if(!in_array($GLOBALS['pagenow'], array('wp-login.php'))){
                     self::site_lockout_tasks();
                 }
-            }else if(is_user_logged_in() && !current_user_can('manage_options') && !is_admin() && !in_array($GLOBALS['pagenow'], array('wp-login.php')) ){
+            }else if(is_user_logged_in() && !current_user_can(AIOWPSEC_MANAGEMENT_PERMISSION) && !is_admin() && !in_array($GLOBALS['pagenow'], array('wp-login.php')) ){
                 self::site_lockout_tasks();
             }
         }

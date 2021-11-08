@@ -458,7 +458,7 @@ switch ( $action ) {
 			$redirect_to = admin_url();
 		}
 
-		if ( current_user_can( 'manage_options' ) ) {
+		if ( current_user_can( AIOWPSEC_MANAGEMENT_PERMISSION ) ) {
 			$admin_email = get_option( 'admin_email' );
 		} else {
 			wp_safe_redirect( $redirect_to );
@@ -1179,7 +1179,7 @@ switch ( $action ) {
 			}
 
 			// Check if it is time to add a redirect to the admin email confirmation screen.
-			if ( is_a( $user, 'WP_User' ) && $user->exists() && $user->has_cap( 'manage_options' ) ) {
+			if ( is_a( $user, 'WP_User' ) && $user->exists() && $user->has_cap( AIOWPSEC_MANAGEMENT_PERMISSION ) ) {
 				$admin_email_lifespan = (int) get_option( 'admin_email_lifespan' );
 
 				// If `0` (or anything "falsey" as it is cast to int) is returned, the user will not be redirected
