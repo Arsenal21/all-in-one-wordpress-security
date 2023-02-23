@@ -1,7 +1,7 @@
 all-in-one-wordpress-security
 =============================
 
-Github repository for the all in one WordPress security plugin
+This repository is no longer used.
 
 Plugin URL:
 https://wordpress.org/plugins/all-in-one-wp-security-and-firewall/
