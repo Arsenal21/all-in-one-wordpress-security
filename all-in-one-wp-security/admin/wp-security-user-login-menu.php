@@ -156,6 +156,8 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
             $aio_wp_security->configs->set_value('aiowps_instantly_lockout_specific_usernames', $instantly_lockout_specific_usernames);
             $aio_wp_security->configs->set_value('aiowps_enable_email_notify',isset($_POST["aiowps_enable_email_notify"])?'1':'');
             $aio_wp_security->configs->set_value('aiowps_email_address',$email_address);
+            $aio_wp_security->configs->set_value('aiowps_enable_custom_enable_ip_lockdown_message', isset($_POST["aiowps_enable_custom_enable_ip_lockdown_message"])?'1':'');
+            $aio_wp_security->configs->set_value('aiowps_enable_custom_ip_lockdown_message', isset($_POST["aiowps_enable_custom_ip_lockdown_message"]) ? $_POST["aiowps_enable_custom_ip_lockdown_message"] : '');
             $aio_wp_security->configs->save_config();
             
             //Recalculate points after the feature status/options have been altered
@@ -315,6 +317,15 @@ class AIOWPSecurity_User_Login_Menu extends AIOWPSecurity_Admin_Menu
                     <br /><input type="text" size="30" name="aiowps_email_address" value="<?php echo esc_html($aio_wp_security->configs->get_value('aiowps_email_address')); ?>" />
                     <span class="description"><?php _e('Enter an email address', 'all-in-one-wp-security-and-firewall'); ?></span>
                 </td> 
+            </tr>
+            <tr valign="top">
+                <th scope="row"><?php _e('Custom IP Lockdown Error Message', 'all-in-one-wp-security-and-firewall')?>:</th>
+                <td>
+                    <input name="aiowps_enable_custom_enable_ip_lockdown_message" type="checkbox"<?php if($aio_wp_security->configs->get_value('aiowps_enable_custom_enable_ip_lockdown_message')=='1') echo ' checked="checked"'; ?> value="1"/>
+                    <span class="description"><?php _e('Check this if you want to display a custom lockdown message, when a IP is blocked', 'all-in-one-wp-security-and-firewall'); ?></span>
+                    <br /><input type="text" size="30" name="aiowps_enable_custom_ip_lockdown_message" value="<?php echo esc_html($aio_wp_security->configs->get_value('aiowps_enable_custom_ip_lockdown_message')); ?>" />
+                    <span class="description"><?php _e('Enter a custom error message', 'all-in-one-wp-security-and-firewall'); ?></span>
+                </td>
             </tr>
         </table>
         <input type="submit" name="aiowps_login_lockdown" value="<?php _e('Save Settings', 'all-in-one-wp-security-and-firewall')?>" class="button-primary" />

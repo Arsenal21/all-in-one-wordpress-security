@@ -142,9 +142,6 @@ class AIOWPSecurity_General_Init_Tasks
             if(!is_user_logged_in()) {
                 add_action('woocommerce_lostpassword_form', array(&$this, 'insert_captcha_question_form'));
             }
-            if(isset($_POST['woocommerce-lost-password-nonce'])) {
-                add_action('lostpassword_post', array(&$this, 'process_woo_lost_password_form_post'));
-            }
         }
 
         // For bbpress new topic form captcha
@@ -235,15 +232,13 @@ class AIOWPSecurity_General_Init_Tasks
                 }
             }
         }
-        
+
         // For buddypress registration captcha feature
         if($aio_wp_security->configs->get_value('aiowps_enable_bp_register_captcha') == '1'){
             add_action('bp_account_details_fields', array(&$this, 'insert_captcha_question_form'));
             add_action('bp_signup_validate', array(&$this, 'buddy_press_signup_validate_captcha'));
         }
-        
-        
-        // For feature which displays logged in users
+
         $aio_wp_security->user_login_obj->update_users_online_transient();
         
         // For block fake googlebots feature
@@ -251,22 +246,43 @@ class AIOWPSecurity_General_Init_Tasks
             include_once(AIO_WP_SECURITY_PATH.'/classes/wp-security-bot-protection.php');
             AIOWPSecurity_Fake_Bot_Protection::block_fake_googlebots();
         }
-        
+
         // For 404 event logging
         if($aio_wp_security->configs->get_value('aiowps_enable_404_logging') == '1'){
             add_action('wp_head', array(&$this, 'check_404_event'));
         }
 
+        // For Login Lockdown
+        if($aio_wp_security->configs->get_value('aiowps_enable_login_lockdown') == '1'){
+            add_filter( 'aiowps_ip_blocked_error_msg', array(&$this, 'process_aiowps_ip_blocked_error_msg') );
+
+            // Woocommerce Login Form
+            if(isset($_POST['woocommerce-login-nonce'])) {
+                add_filter('woocommerce_process_login_errors', array(&$this, 'aiowps_validate_woo_ip_lockdown'), 10, 3);
+            }
+
+            // Woocommerce Register Form
+            if(isset($_POST['woocommerce-register-nonce'])) {
+                add_filter('woocommerce_process_registration_errors', array(&$this, 'aiowps_validate_woo_ip_lockdown'), 10, 3);
+            }
+        }
+
+        // Woocommerce Lost Password Form Process
+        // Happens here as form post action handles a number of scenarios
+        if(isset($_POST['woocommerce-lost-password-nonce'])) {
+            add_action('lostpassword_post', array(&$this, 'process_woo_lost_password_form_post'));
+        }
+      
         // Add more tasks that need to be executed at init time
-        
+
     } // end _construct()
-    
+
     function aiowps_disable_xmlrpc_pingback_methods( $methods ) {
        unset( $methods['pingback.ping'] );
        unset( $methods['pingback.extensions.getPingbacks'] );
        return $methods;
     }
-    
+
     function aiowps_remove_x_pingback_header( $headers ) {
        unset( $headers['X-Pingback'] );
        return $headers;
@@ -499,6 +515,12 @@ class AIOWPSecurity_General_Init_Tasks
         //Insert an error just before the password reset process kicks in
         return new WP_Error('aiowps_captcha_error',__('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
     }
+
+    function add_lostpassword_ip_lockdown_error_msg()
+    {
+        //Insert an error just before the password reset process kicks in
+        return new WP_Error('aiowps_ip_lockdown_error', apply_filters('aiowps_ip_blocked_error_msg', __('<strong>ERROR</strong>: Your IP address is currently locked please contact the administrator!', 'all-in-one-wp-security-and-firewall')));
+    }
     
     function check_404_event()
     {
@@ -520,41 +542,58 @@ class AIOWPSecurity_General_Init_Tasks
         }
         return;
     }
-    
+
     function aiowps_validate_woo_login_or_reg_captcha( $errors, $username, $password ) {
         global $aio_wp_security;
-        $locked = $aio_wp_security->user_login_obj->check_locked_user();
-        if(!empty($locked)){
-            $errors->add('authentication_failed', __('<strong>ERROR</strong>: Your IP address is currently locked please contact the administrator!', 'all-in-one-wp-security-and-firewall'));
-            return $errors;
-        }
 
         $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
         if($verify_captcha === false) {
             // wrong answer was entered
             $errors->add('authentication_failed', __('<strong>ERROR</strong>: Your answer was incorrect - please try again.', 'all-in-one-wp-security-and-firewall'));
-        }        
+        }
+
         return $errors;
-        
     }
-    
+
+    function aiowps_validate_woo_ip_lockdown ($errors) {
+        global $aio_wp_security;
+
+        $locked = $aio_wp_security->user_login_obj->check_locked_user();
+        if (!empty($locked)) {
+            $errors->add('authentication_failed', apply_filters('aiowps_ip_blocked_error_msg', __('<strong>ERROR</strong>: Your IP address is currently locked please contact the administrator!', 'all-in-one-wp-security-and-firewall')));
+        }
+
+        return $errors;
+    }
+
     /**
      * Process the woocommerce lost password login form post
      * Called by wp hook "lostpassword_post"
      */
-    function process_woo_lost_password_form_post() 
+    function process_woo_lost_password_form_post()
     {
         global $aio_wp_security;
-        
-        if(isset($_POST['woocommerce-lost-password-nonce'])) { 
-            $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
-            if ( $verify_captcha === false ) {
-                add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
+
+        if(isset($_POST['woocommerce-lost-password-nonce'])) {
+            // IP Lockdown
+            if($aio_wp_security->configs->get_value('aiowps_enable_login_lockdown') == '1') {
+                $locked = $aio_wp_security->user_login_obj->check_locked_user();
+                if (!empty($locked)) {
+                    add_filter('allow_password_reset', array(&$this, 'add_lostpassword_ip_lockdown_error_msg'));
+                }
+            }
+
+            // Captcha
+            if($aio_wp_security->configs->get_value('aiowps_enable_woo_lostpassword_captcha') == '1') {
+                $verify_captcha = $aio_wp_security->captcha_obj->verify_captcha_submit();
+                if ( $verify_captcha === false ) {
+                    add_filter('allow_password_reset', array(&$this, 'add_lostpassword_captcha_error_msg'));
+                }
             }
         }
     }
-    
-    
+
+
     /**
      * Displays a notice message if the plugin was reactivated after being initially deactivated
      * Gives users option of re-applying the aiowps rules which were deleted from the .htaccess after deactivation.
@@ -565,7 +604,7 @@ class AIOWPSecurity_General_Init_Tasks
             echo '<div class="updated"><p>'.__('Would you like All In One WP Security & Firewall to re-insert the security rules in your .htaccess file which were cleared when you deactivated the plugin?', 'all-in-one-wp-security-and-firewall').'&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=1" class="button-primary">'.__('Yes', 'all-in-one-wp-security-and-firewall').'</a>&nbsp;&nbsp;<a href="admin.php?page='.AIOWPSEC_MENU_SLUG_PREFIX.'&aiowps_reapply_htaccess=2" class="button-primary">'.__('No', 'all-in-one-wp-security-and-firewall').'</a></p></div>';
         }
     }
-    
+
     //This is a fix for cases when the password reset URL in the email was not decoding all html entities properly
     function decode_reset_pw_msg($message, $key, $user_login, $user_data)
     {
@@ -573,7 +612,7 @@ class AIOWPSecurity_General_Init_Tasks
         $message = html_entity_decode($message);
         return $message;
     }
-    
+
     function modify_registration_page_messages($errors, $redirect_to)
     {
         if( isset($_GET['checkemail']) && 'registered' == $_GET['checkemail'] ){
@@ -586,42 +625,62 @@ class AIOWPSecurity_General_Init_Tasks
         }
         return $errors;
     }
-    
+
     /*
      * Re-wrote code which checks for REST API requests
      * Below uses the "rest_api_init" action hook to check for REST requests.
-     * The code will block "unauthorized" requests whilst allowing genuine requests. 
+     * The code will block "unauthorized" requests whilst allowing genuine requests.
      * (P. Petreski June 2018)
      */
     function check_rest_api_requests($rest_server_object){
         $rest_user = wp_get_current_user();
         if(empty($rest_user->ID)){
             $error_message = apply_filters('aiowps_rest_api_error_message', __('You are not authorized to perform this action.', 'disable-wp-rest-api'));
-            wp_die($error_message); 
+            wp_die($error_message);
         }
     }
 
     /**
      * Enqueues the Google recaptcha api URL in the wp_head for general pages
      * Caters for scenarios when recaptcha used on wp comments or custom wp login form
-     * 
+     *
      */
     function add_recaptcha_script()
     {
-        // Enqueue the recaptcha api url 
-        
+        // Enqueue the recaptcha api url
+
         // Do NOT enqueue if this is the main woocommerce account login page because for woocommerce page we "explicitly" render the recaptcha widget
         $is_woo = false;
-        
+
         // We don't want to load for woo account page because we have a special function for this
         if ( function_exists('is_account_page') ) {
             // Check if this a woocommerce account page
-            $is_woo = is_account_page(); 
+            $is_woo = is_account_page();
         }
-                         
+
         if ( empty( $is_woo ) ) {
             //only enqueue when not a woocommerce page
             wp_enqueue_script( 'google-recaptcha', 'https://www.google.com/recaptcha/api.js', false );
-        } 
+        }
+    }
+
+    /**
+     * Show custom error message for blocked IP
+     *
+     * @param $message
+     *
+     * @return mixed
+     */
+    function process_aiowps_ip_blocked_error_msg ($message) {
+        global $aio_wp_security;
+
+        // Custom Enable IP Lockdown Message
+        if ($aio_wp_security->configs->get_value('aiowps_enable_custom_enable_ip_lockdown_message') == '1') {
+            // Base message
+            $message = $aio_wp_security->configs->get_value('aiowps_enable_custom_ip_lockdown_message');
+            return $message;
+        }
+
+        return $message;
     }
 }
