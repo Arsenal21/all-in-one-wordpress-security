@@ -14,14 +14,26 @@ class AIOWPSecurity_WP_Footer_Content {
         if($aio_wp_security->configs->get_value('aiowps_default_recaptcha')) {
             // For Woocommerce forms. 
             // Only proceed if woocommerce installed and active 
-            if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) 
+            if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) && is_account_page() )
             {
                 if($aio_wp_security->configs->get_value('aiowps_enable_woo_login_captcha') == '1' || 
                         $aio_wp_security->configs->get_value('aiowps_enable_woo_register_captcha') == '1' ||
                         $aio_wp_security->configs->get_value('aiowps_enable_woo_lostpassword_captcha') == '1')
                 {
-                    $this->print_recaptcha_api_woo();
+                    $this->print_recaptcha_api_trigger(array(
+                        'woo_recaptcha_1',
+                        'woo_recaptcha_2'
+                    ));
                 }
+            }
+
+            // ContactForm7 Conflict
+            // Only proceed if contact form 7 installed and active
+            elseif ( in_array( 'contact-form-7/wp-contact-form-7.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) )
+            {
+                $this->print_recaptcha_api_trigger(array(
+                    'aiowps_recaptcha_field',
+                ));
             }
             
             // For custom wp login form
@@ -41,38 +53,37 @@ class AIOWPSecurity_WP_Footer_Content {
         
         //TODO - add other footer output content here
     }
-    
+
     /**
-     * For Woocommerce my account page - display two separate Google reCaptcha forms "explicitly"
+     * For Woocommerce my account page / Contactfrom7 - display multiple separate Google reCaptcha forms "explicitly" or single form for compatibility reasons
      * @global type $aio_wp_security
      */
-    function print_recaptcha_api_woo() {
+    function print_recaptcha_api_trigger($recaptureNames = array()) {
         global $aio_wp_security;
-        $is_woo = false;
-        $is_woo = is_account_page();
-        if(!$is_woo) {
-            return; // if current page is not woo account page don't do anything
-        }
         $site_key = esc_html( $aio_wp_security->configs->get_value('aiowps_recaptcha_site_key') );
-            ?>
-    <script type="text/javascript">
+
+        // Build JS logic
+        $logicJs = '';
+        foreach ($recaptureNames as $name) {
+            $logicJs .= '
+        		if ( jQuery("#' . $name . '").length ) {
+                    grecaptcha.render("' . $name . '", {
+                    	"sitekey" : "' . $site_key . '",
+                    });
+                }
+        	';
+        }
+
+        ?>
+        <script type="text/javascript">
             var verifyCallback = function(response) {
                 alert(response);
             };
             var onloadCallback = function() {
-                if ( jQuery('#woo_recaptcha_1').length ) {
-                    grecaptcha.render('woo_recaptcha_1', {
-                      'sitekey' : '<?php echo $site_key; ?>',
-                    });
-                }
-                if ( jQuery('#woo_recaptcha_2').length ) {
-                    grecaptcha.render('woo_recaptcha_2', {
-                      'sitekey' : '<?php echo $site_key; ?>',
-                    });
-                }
+                <?php echo $logicJs; ?>
             };
-    </script>
-    <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>
+        </script>
+        <script src='https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit' async defer></script>
 <?php
     }
 
